@@ -1,0 +1,50 @@
+# THROWAWAY DIAGNOSTIC - not part of the regression suite.
+# Authenticates, clears the post-login contact prompt with Back (never "Update email"), then waits
+# for the NPS survey so its rating row and the post-rating confirmation can be inspected live.
+appId: fi.iwa.sakani
+env:
+  NATIONAL_ID: '${typeof NATIONAL_ID === "undefined" ? "1012204739" : String(NATIONAL_ID)}'
+---
+- launchApp:
+    clearState: true
+- runFlow:
+    file: ../../.maestro/subflows/clear-overlays.yaml
+    env:
+      ANCHOR: "(?s).*Login / Sign up.*"
+- extendedWaitUntil:
+    visible: "(?s).*Login / Sign up.*"
+    timeout: 120000
+- tapOn: "(?s).*Login / Sign up.*"
+- extendedWaitUntil:
+    visible: "Continue with N[ae]fath"
+    timeout: 45000
+- tapOn: "Enter your ID, phone number,? or email"
+- inputText: ${NATIONAL_ID}
+- tapOn: "Continue"
+- extendedWaitUntil:
+    visible: "Login with nafath"
+    timeout: 45000
+- tapOn: "Confirm"
+# Clear whatever post-login prompt lands, WITHOUT dismissing the survey, until NPS shows.
+- repeat:
+    times: 20
+    while:
+      notVisible: "(?s).*would you recommend benefiting from Sakani.*"
+    commands:
+      - runFlow:
+          when:
+            visible: "(?s)(Update your contact information|Number and Email Already Linked|Update email)"
+          commands:
+            - back
+            - waitForAnimationToEnd:
+                timeout: 3000
+      - runFlow:
+          when:
+            visible: "Maybe Later"
+          commands:
+            - tapOn: "Maybe Later"
+            - waitForAnimationToEnd:
+                timeout: 3000
+      - waitForAnimationToEnd:
+          timeout: 4000
+- takeScreenshot: nps-on-screen

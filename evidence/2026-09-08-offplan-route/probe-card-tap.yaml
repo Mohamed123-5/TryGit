@@ -1,0 +1,9 @@
+appId: fi.iwa.sakani
+name: PROBE - destination card tap target
+---
+- assertVisible: "NHC Destinations"
+- tapOn:
+    containsChild: '(?s)(Few units left|More than \d+\+? available units|\d+ units left).*'
+    index: 0
+- waitForAnimationToEnd:
+    timeout: 10000

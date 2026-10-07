@@ -1,0 +1,30 @@
+# READ-ONLY probe: account 1000011487 My bookings state before the zero-fee journey.
+appId: fi.iwa.sakani
+name: PROBE - My bookings before zero-fee journey (read-only)
+---
+- launchApp:
+    clearState: true
+- runFlow:
+    file: D:/Automation/Maestro-Mobile/.maestro/subflows/login.yaml
+    env:
+      NATIONAL_ID: "1000011487"
+- runFlow:
+    file: D:/Automation/Maestro-Mobile/.maestro/subflows/open-account-tab.yaml
+    env:
+      DESTINATION: "My bookings"
+- runFlow:
+    file: D:/Automation/Maestro-Mobile/.maestro/subflows/tap-until-destination.yaml
+    env:
+      TARGET: "My bookings"
+      DESTINATION: 'Active\s*Tab 2 of 4'
+- tapOn: 'Active\s*Tab 2 of 4'
+- extendedWaitUntil:
+    visible: "(?s).*(\nActive\n.*Unit code|don.t have any active booking).*"
+    timeout: 60000
+- takeScreenshot: probe-active-tab
+- tapOn: "All"
+- waitForAnimationToEnd:
+    timeout: 5000
+- takeScreenshot: probe-all-tab
+# Deliberate end marker so the hierarchy of the All tab is saved in debug output.
+- assertVisible: "PROBE-END-MARKER-NOT-PRESENT"

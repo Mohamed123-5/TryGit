@@ -1,0 +1,187 @@
+@@@TARGET .maestro/subflows/login.yaml
+@@@OLD
+- assertVisible: ${NATIONAL_ID}
+- tapOn: "Confirm"
+@@@NEW
+- assertVisible: ${NATIONAL_ID}
+# Record the ID this helper has just proven on the Nafath screen. The Full Journey compares it
+# with the ID it resolved at the start before any destructive stage runs (the identity gate at
+# the end of its STAGE 1). A caller that never reaches this line has no record, and that gate
+# fails.
+- evalScript: ${output.loginNationalId = String(NATIONAL_ID)}
+- tapOn: "Confirm"
+@@@END
+@@@TARGET .maestro/subflows/login.yaml
+@@@OLD
+# authentication, in any order and not on every run.
+- runFlow:
+    file: clear-overlays.yaml
+    env:
+      ANCHOR: '(?si)(Hello|Good (morning|afternoon|evening)),\s*\S.*'
+@@@NEW
+# authentication, in any order and not on every run.
+#
+# This is the ONE caller that opts out of the helper's exit contract (its final wait for
+# ANCHOR): the full-screen weekly-deal promo handled just below can legitimately still cover
+# Home when the helper returns, and this caller recovers from it itself with a relaunch. The
+# opt-out is an explicit `output` flag, set immediately before this single call and cleared
+# immediately after it, so it cannot apply to any other caller.
+- evalScript: ${output.anchorOptional = true}
+- runFlow:
+    file: clear-overlays.yaml
+    env:
+      ANCHOR: '(?si)(Hello|Good (morning|afternoon|evening)),\s*\S.*'
+- evalScript: ${output.anchorOptional = false}
+@@@END
+@@@TARGET .maestro/full-journey.yaml
+@@@OLD
+# ==========================================================================================
+# STAGE 0 - Release any booking the account is already holding
+@@@NEW
+# --- IDENTITY GATE - the last check before anything destructive. STAGE 0 can cancel a
+# booking and STAGE 4 pays a fee, so before either runs this proves the account that signed
+# in is the one this run resolved. The login helper records the ID it has just matched on the
+# Nafath screen (output.loginNationalId); it must equal the ID resolved at the top of this
+# flow (output.targetNationalId), which must still equal NATIONAL_ID. A missing record fails.
+# Dollar-free on purpose - see the fail-fast guard at the top of this stage.
+- assertTrue: ${output.loginNationalId === output.targetNationalId && output.targetNationalId === String(NATIONAL_ID)}
+
+# ==========================================================================================
+# STAGE 0 - Release any booking the account is already holding
+@@@END
+@@@TARGET .maestro/login.yaml
+@@@OLD
+appId: fi.iwa.sakani
+name: Sakani login with National ID
+---
+- launchApp:
+    clearState: true
+@@@NEW
+appId: fi.iwa.sakani
+name: Sakani login with National ID
+env:
+  # The account this flow signs in as. Default (no override): 1000011485, the account this
+  # flow has always used. Override with:
+  #   maestro test -e NATIONAL_ID=<10-digit National ID / Iqama> .maestro/login.yaml
+  # A self-referencing default, NOT a literal: on Maestro 2.9.0 a literal here silently beats
+  # `-e NATIONAL_ID=...`. Single-quoted because the expression contains ": ".
+  NATIONAL_ID: '${typeof NATIONAL_ID === "undefined" ? "1000011485" : String(NATIONAL_ID)}'
+---
+# Fail fast, before the app is touched, on an empty or malformed override. Dollar-free on
+# purpose: a "$" inside ${...} makes Maestro 2.9.0 skip evaluation and pass the assert.
+- evalScript: ${console.log('LOGIN.YAML TARGET NATIONAL_ID = [' + NATIONAL_ID + ']')}
+- assertTrue: ${String(NATIONAL_ID).length === 10 && !/[^0-9]/.test(String(NATIONAL_ID)) && (String(NATIONAL_ID).charAt(0) === "1" || String(NATIONAL_ID).charAt(0) === "2")}
+- launchApp:
+    clearState: true
+@@@END
+@@@TARGET .maestro/login.yaml
+@@@OLD
+- inputText: "1000011485"
+- assertVisible: "1000011485"
+@@@NEW
+- inputText: ${NATIONAL_ID}
+- assertVisible: ${NATIONAL_ID}
+@@@END
+@@@TARGET .maestro/login.yaml
+@@@OLD
+- assertVisible: "Confirm"
+- tapOn: "Confirm"
+@@@NEW
+- assertVisible: "Confirm"
+# The Nafath screen must carry EXACTLY the requested ID before the session is created. Text
+# selectors are full-match, so any other ID - including a default that silently won over an
+# override - fails here, before authentication.
+- assertVisible: ${NATIONAL_ID}
+- tapOn: "Confirm"
+@@@END
+@@@TARGET .maestro/_explore.yaml
+@@@OLD
+appId: fi.iwa.sakani
+name: PRE-FLIGHT - booking state for 1119880062
+---
+- launchApp:
+    clearState: true
+@@@NEW
+appId: fi.iwa.sakani
+name: PRE-FLIGHT - booking state for NATIONAL_ID (default 1119880062)
+env:
+  # Configurable, never forced. This file used to pass a literal "1119880062" straight into
+  # the login helper, so reusing it for any other account silently signed in as the old user.
+  #   maestro test -e NATIONAL_ID=<10-digit National ID / Iqama> .maestro/_explore.yaml
+  # A self-referencing default, NOT a literal: on Maestro 2.9.0 a literal beats `-e`.
+  NATIONAL_ID: '${typeof NATIONAL_ID === "undefined" ? "1119880062" : String(NATIONAL_ID)}'
+---
+# Read-only: signs in and opens My Bookings. It never opens a booking and never cancels.
+# Fail fast, before the app is touched, on an empty or malformed override (dollar-free).
+- evalScript: ${console.log('EXPLORE TARGET NATIONAL_ID = [' + NATIONAL_ID + ']')}
+- assertTrue: ${String(NATIONAL_ID).length === 10 && !/[^0-9]/.test(String(NATIONAL_ID)) && (String(NATIONAL_ID).charAt(0) === "1" || String(NATIONAL_ID).charAt(0) === "2")}
+- launchApp:
+    clearState: true
+@@@END
+@@@TARGET .maestro/_explore.yaml
+@@@OLD
+      NATIONAL_ID: "1119880062"
+@@@NEW
+      NATIONAL_ID: ${NATIONAL_ID}
+@@@END
+@@@TARGET .maestro/subflows/clear-overlays.yaml
+@@@OLD
+# Records whether THIS call had to recover the NPS survey, so the check at the end can prove
+# the caller's screen is reachable after a recovery. Reset on every call because `output` is
+# shared across the whole run.
+- evalScript: ${output.npsRecovered = false}
+@@@NEW
+@@@END
+@@@TARGET .maestro/subflows/clear-overlays.yaml
+@@@OLD
+                  - waitForAnimationToEnd:
+                      timeout: 4000
+                  - evalScript: ${output.npsRecovered = true}
+@@@NEW
+                  - waitForAnimationToEnd:
+                      timeout: 4000
+@@@END
+@@@TARGET .maestro/subflows/clear-overlays.yaml
+@@@OLD
+            - waitForAnimationToEnd:
+                timeout: 4000
+            - evalScript: ${output.npsRecovered = true}
+@@@NEW
+            - waitForAnimationToEnd:
+                timeout: 4000
+@@@END
+@@@TARGET .maestro/subflows/clear-overlays.yaml
+@@@OLD
+# After a recovery, prove the caller's screen is actually reachable before handing back.
+# Skipped entirely when no NPS was met, so every other caller's behaviour is unchanged.
+- runFlow:
+    when:
+      true: ${output.npsRecovered === true}
+    commands:
+      - extendedWaitUntil:
+          visible: ${ANCHOR}
+          timeout: 30000
+@@@NEW
+# ==========================================================================================
+# EXIT CONTRACT - hand back only once the caller's screen is reachable
+# ==========================================================================================
+#
+# The helper returns only when ANCHOR - the caller's "we have arrived" selector - is visible,
+# with the NPS survey confirmed gone just above. Without this a caller could carry on after
+# the loop ran out, or after an NPS recovery, against a screen it cannot actually see.
+#
+# 120s is deliberate: it is the LONGEST wait any caller already applies straight after this
+# helper (login's "Login / Sign up"), so the contract is never stricter than the waits it
+# sits in front of. When the anchor is already on screen it returns at once.
+#
+# OPT-OUT, for ONE documented caller: subflows/login.yaml's post-authentication call sets
+# output.anchorOptional around itself, because a full-screen promo can still cover Home when
+# this returns and that caller recovers with its own relaunch. No flag = the contract applies.
+- runFlow:
+    when:
+      true: ${output.anchorOptional !== true}
+    commands:
+      - extendedWaitUntil:
+          visible: ${ANCHOR}
+          timeout: 120000
+@@@END

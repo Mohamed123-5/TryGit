@@ -1,0 +1,168 @@
+# PRJ-001 — Project card opens the Available Units list.
+#
+# Scope: PRJ-001 only. Per the automation triage in exploration-report.md this case
+# absorbs PRJ-002 (project summary header), so the flow asserts the Available Units
+# screen rendered its sort controls and summary, not merely that navigation occurred.
+#
+# Precondition is "Results": no authentication required. The marketplace needs a
+# location before it will return anything - with none set, Explore sits on skeleton
+# loaders indefinitely - so the flow sets one explicitly rather than depending on
+# whatever location the account happens to have persisted.
+appId: fi.iwa.sakani
+name: PRJ-001 Project opens Available Units list
+---
+- launchApp
+
+- waitForAnimationToEnd:
+    timeout: 20000
+- repeat:
+    times: 4
+    commands:
+      - runFlow:
+          when:
+            visible: "Skip"
+          commands:
+            - tapOn: "Skip"
+      - runFlow:
+          when:
+            visible: "Dismiss"
+          commands:
+            - tapOn: "Dismiss"
+      - runFlow:
+          when:
+            visible: "Ok"
+          commands:
+            - tapOn: "Ok"
+      - runFlow:
+          when:
+            visible: "Marketplace Day"
+          commands:
+            - back
+      - runFlow:
+          when:
+            visible: "Start comparing properties"
+          commands:
+            - back
+      - waitForAnimationToEnd:
+          timeout: 5000
+
+- extendedWaitUntil:
+    visible: 'Explore\s*Tab 2 of 4'
+    timeout: 30000
+- tapOn: 'Explore\s*Tab 2 of 4'
+
+# Wait for the Explore header to actually exist before acting on it. A fixed settling delay
+# was not enough: the taps below could land before the header laid out and open the wrong
+# surface. PRE-4.7.5-1279 used "Looking for?"; STG-4.7.5-1278 removed that container label,
+# so the anchor is now the static filter-chip label "Registered Interests", present in both
+# the map-first landing and the results view. Same guard as search.yaml.
+- extendedWaitUntil:
+    visible: "Registered Interests"
+    timeout: 45000
+
+# STG-4.7.5-1278 lands Explore on a map-first destinations view and only renders the
+# Projects/Units sub-tabs once a search has actually been run. The construction-status filter
+# chip is the entry that works on both a cold and a warm Explore - see marketplace.yaml for
+# why the "Find more Sakani products..." banner and the category chip do not. Applying a
+# filter is UI-only and changes no account or business state.
+#
+# The location search that PRE needed (Shaqra) is gone from this route: STG returns project
+# inventory for the default location, and the "List view" toggle no longer exists. The
+# section is conditional and exits as soon as the sub-tabs appear.
+#
+# The chip opens one of two sheets depending on whether a category has been chosen before:
+# "Select category" (Buy/Rent + construction status, confirmed with "Start searching") on a
+# freshly cleared install, or the "Construction Status" filter sheet (confirmed with "Apply")
+# once one has. Both are handled so the flow does not depend on leftover state.
+# Open the sheet once, confirm whichever variant appeared, then wait for the list. This is
+# deliberately linear rather than a poll: a retry loop oscillates, because the search can take
+# longer than any per-iteration wait and the next pass simply reopens the sheet it just closed.
+- runFlow:
+    when:
+      notVisible: '[Uu]nits\s*Tab 2 of 2'
+    commands:
+      - tapOn: "(Construction Status|Ready Units|Readymade|Offplan|Land)"
+      - waitForAnimationToEnd:
+          timeout: 8000
+      - runFlow:
+          when:
+            visible: "Start searching"
+          commands:
+            - tapOn: "Buy"
+            - tapOn: "Ready(made| Units)"
+            - tapOn: "Start searching"
+      - runFlow:
+          when:
+            visible: "Apply"
+          commands:
+            - tapOn: "Ready(made| Units)"
+            - tapOn: "Apply"
+
+- extendedWaitUntil:
+    visible: '[Uu]nits\s*Tab 2 of 2'
+    timeout: 90000
+
+- extendedWaitUntil:
+    visible: 'Projects\s*Tab 1 of 2'
+    timeout: 60000
+- tapOn: 'Projects\s*Tab 1 of 2'
+- waitForAnimationToEnd:
+    timeout: 10000
+
+# The project cards render directly beneath the sub-tab row. Card labels embed the project
+# name, price and unit counts - all dynamic - so the first card is targeted by position
+# relative to the static sub-tab label, the same idiom PRE used against "Projects for sale".
+- tapOn:
+    below:
+      text: 'Projects\s*Tab 1 of 2'
+
+# The compare coach mark can land on top of the Project details screen the first time it is
+# opened, scrimming everything underneath it.
+- waitForAnimationToEnd:
+    timeout: 8000
+- runFlow:
+    when:
+      visible: "Start comparing properties"
+    commands:
+      - back
+      - waitForAnimationToEnd:
+          timeout: 5000
+
+# --- PRJ-002: the project summary. STG interposes a "Project details" screen between the
+# results list and the units list, and that is where the summary now lives, so the summary
+# assertions move here from the Available Units header. Confirmed intended by product.
+#
+# The project name, price and counts are live data, so each is asserted by shape or by its
+# static label rather than by value.
+- extendedWaitUntil:
+    visible: "View units"
+    timeout: 45000
+- assertVisible: "About this project"
+- assertVisible: "(?s).*Prices start from.*"
+- assertVisible: '\d+ - \d+'
+- assertVisible: '(?s).*\d+ - \d+ m.*'
+- assertVisible: "(?s).*available units.*"
+# --- end PRJ-002
+
+# --- PRJ-001: the project opens its Available Units list.
+- tapOn: "View units"
+
+# Available Units reached. The sort controls are static; the project name, unit codes,
+# prices and unit counts are dynamic and deliberately not asserted by value.
+# STG renames two of the four sorts - PRE "Area" is now "Area size" and PRE "Bathroom" is
+# now "Block" - and replaces the "Prices" summary label with a live unit count. PRE-4.7.6-1283
+# carries "Area size" too but keeps "Bathroom", so both labels are matched.
+#
+# The leading (price) sort chip is NOT asserted. On PRE-4.7.6-1283 it renders as an
+# icon-only View at [42,641][236,736] with no text and no contentDescription, while the
+# other three chips still expose theirs - so there is no label left to assert. That missing
+# label is recorded as a defect rather than papered over; the remaining three sorts plus the
+# live unit count still prove PRJ-002, that the Available Units screen rendered its sort
+# controls and summary.
+- extendedWaitUntil:
+    visible: "(?s).*Unit list.*"
+    timeout: 45000
+- assertVisible: "Area size"
+- assertVisible: "(Block|Bathroom)"
+- assertVisible: "Bedroom"
+- assertVisible: "(?s).*available units.*"

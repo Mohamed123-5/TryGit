@@ -1,0 +1,10 @@
+===== G RETRY: _explore.yaml -e NATIONAL_ID=1000011487 (read-only) =====
+  exit=1
+  log: C:/Users/Mohammed Elkatry/.maestro/tests/2026-09-10_114320/maestro.log
+  resolved: TARGET NATIONAL_ID = [1000011487] 
+  typed: 1000011487 
+  exact-ID assertions:       2 textRegex=1000011487 
+  FAILED: Assert that "(?si)(Hello|Good (morning|afternoon|evening)),\s*\S.*" is visible FAILED|Run subflows/login.yaml FAILED|
+  screen title: 
+  bookings on screen (read-only, All tab):
+  booking count: 0

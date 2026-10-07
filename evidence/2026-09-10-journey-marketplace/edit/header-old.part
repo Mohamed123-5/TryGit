@@ -1,0 +1,3 @@
+#   Login -> Offplan Project -> Module -> Unit -> Reserve -> Pay booking fee
+#         -> Payment method + schedule -> Sales Contract -> Approve + OTP
+#         -> Price quotation issued -> signed state persisted

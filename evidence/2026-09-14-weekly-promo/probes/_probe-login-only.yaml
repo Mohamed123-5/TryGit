@@ -1,0 +1,38 @@
+# PROBE (temporary) - log in through subflows/login.yaml exactly as the journeys do, and stop.
+# It exists to validate the promo handling in that helper: Nafath login -> the promo appears ->
+# it is dismissed -> the app is still running -> authenticated Home -> the app is usable.
+#
+# Nothing is tapped beyond login and overlay handling. No booking, payment, contract, OTP or
+# survey Submit, and the promo's "Go to the weekly deal" CTA is never tapped.
+appId: fi.iwa.sakani
+name: PROBE - login only, through subflows/login.yaml
+env:
+  NATIONAL_ID: '${typeof NATIONAL_ID === "undefined" ? "" : String(NATIONAL_ID)}'
+---
+- assertTrue: ${String(NATIONAL_ID).length === 10 && !/[^0-9]/.test(String(NATIONAL_ID)) && (String(NATIONAL_ID).charAt(0) === "1" || String(NATIONAL_ID).charAt(0) === "2")}
+- launchApp:
+    clearState: true
+- runFlow:
+    file: subflows/login.yaml
+    env:
+      NATIONAL_ID: ${NATIONAL_ID}
+
+# The helper's own postcondition is the greeting; these are the caller's checks that the app is
+# still running and usable afterwards - the promo is gone and the journey could continue.
+- assertVisible: '(?si)(Hello|Good (morning|afternoon|evening)),\s*\S.*'
+- assertNotVisible: "Go to the weekly (offer|deal)"
+- assertNotVisible: "(?s).*Login / Sign up.*"
+- assertVisible: 'Explore\s*Tab 2 of 4'
+- assertVisible: 'Account\s*Tab 4 of 4'
+- takeScreenshot: probe-login-home
+- evalScript: "${console.log('PROBE LOGIN - authenticated Home reached, promo gone, tab bar usable')}"
+
+# ... and the journey can continue: Explore opens from here.
+- tapOn: 'Explore\s*Tab 2 of 4'
+- runFlow:
+    file: subflows/clear-overlays.yaml
+    env:
+      ANCHOR: "Registered Interests"
+- assertVisible: "Registered Interests"
+- takeScreenshot: probe-login-explore
+- evalScript: "${console.log('PROBE LOGIN - Explore reached; the journey can continue')}"

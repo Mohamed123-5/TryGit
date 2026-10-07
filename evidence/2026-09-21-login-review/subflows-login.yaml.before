@@ -1,0 +1,210 @@
+# Reusable helper — authenticate through the Nafath happy path and land on an
+# authenticated Home.
+#
+# CONTRACT
+#   NATIONAL_ID - the National ID / Iqama to sign in with.
+# Precondition: the app is running and unauthenticated (a cleared launch, or after a
+# logout). Postcondition: Home greets the account holder by name.
+#
+# SCOPE
+# This is the happy path only. The AUTH-002 input-validation cases and the AUTH-009
+# restart check stay owned by login.yaml and are deliberately not duplicated here - this
+# helper exists so journey flows stop re-inlining the sign-in sequence, not to take those
+# cases over. login.yaml is unchanged.
+appId: fi.iwa.sakani
+name: Login with National ID
+---
+# SAFETY GUARD - never type an unresolved or malformed ID. Without this, a caller that forgot
+# to pass NATIONAL_ID would type the literal text "undefined" into the login field.
+# Dollar-free on purpose - see the fail-fast guard in full-journey-with-fee.yaml: a "$" inside ${...}
+# makes Maestro 2.9.0 skip evaluation and pass the assert unconditionally.
+- assertTrue: ${typeof NATIONAL_ID !== "undefined" && String(NATIONAL_ID).length === 10 && !/[^0-9]/.test(String(NATIONAL_ID)) && (String(NATIONAL_ID).charAt(0) === "1" || String(NATIONAL_ID).charAt(0) === "2")}
+# Get to the guest Home. A cleared launch replays onboarding and this build interposes a
+# "Marketplace Day" sheet whose scrim hides the sign-in entry entirely.
+- runFlow:
+    file: clear-overlays.yaml
+    env:
+      ANCHOR: "(?s).*Login / Sign up.*"
+
+- extendedWaitUntil:
+    visible: "(?s).*Login / Sign up.*"
+    timeout: 120000
+- tapOn: "(?s).*Login / Sign up.*"
+
+# Build PRE-4.7.5-1279 spells this "Nefath" on the button and STG-4.7.5-1278 spells it
+# "Nafath" (defect D-14), so both are matched.
+- extendedWaitUntil:
+    visible: "Continue with N[ae]fath"
+    timeout: 45000
+
+# The field hint carries a comma before "or" in this build.
+- tapOn: "Enter your ID, phone number,? or email"
+- inputText: ${NATIONAL_ID}
+- assertVisible: ${NATIONAL_ID}
+- tapOn: "Continue"
+
+# SAFETY VALIDATION - the Nafath screen must carry EXACTLY the requested ID before the session
+# is created. Maestro text selectors are full-match regexes, so a different ID - including a
+# stale default that silently won over an override - cannot satisfy this line. This is the
+# last point at which a wrong account can be stopped before it is authenticated.
+- extendedWaitUntil:
+    visible: "Login with nafath"
+    timeout: 45000
+- assertVisible: ${NATIONAL_ID}
+# Record the ID this helper has just proven on the Nafath screen. The Full Journey compares it
+# with the ID it resolved at the start before any destructive stage runs (the identity gate at
+# the end of its STAGE 1). A caller that never reaches this line has no record, and that gate
+# fails.
+- evalScript: ${output.loginNationalId = String(NATIONAL_ID)}
+- tapOn: "Confirm"
+
+- extendedWaitUntil:
+    notVisible: "Login with nafath"
+    timeout: 90000
+
+# The promo sheet, the biometrics prompt and the contact-details prompt all land after
+# authentication, in any order and not on every run.
+#
+# This is the ONE caller that opts out of the helper's exit contract (its final wait for
+# ANCHOR): the weekly-deal promo handled just below can legitimately still cover Home when
+# the helper returns, and this caller recovers from it itself with a relaunch. The opt-out
+# is an explicit `output` flag, set immediately before this single call and cleared
+# immediately after it, so it cannot apply to any other caller.
+#
+# THE ANCHOR ALSO STOPS ON THE PROMO (10/09/2026). The helper loops `while notVisible:
+# ANCHOR`, and nothing inside that loop can clear the promo on this build: its Back handler
+# does not close it, and while the keyboard covers it no handler matches at all. With the
+# greeting as the only anchor, the loop spent all 20 passes (~5 minutes) doing nothing
+# before the recovery below got its turn. Full-journey run 2026-09-10_150206 (1119880062)
+# sat on exactly that stack from its Nafath "Confirm" until it was stopped at 15:07:16 -
+# the moment the loop ran out. With the promo's title and its control as alternatives, the
+# helper hands back as soon as the promo is up and the keyboard guard and relaunch below
+# engage at once. The greeting is still the real destination: it is asserted by name at
+# the end of this file, and nothing after this call trusts the anchor alone.
+- evalScript: ${output.anchorOptional = true}
+- runFlow:
+    file: clear-overlays.yaml
+    env:
+      ANCHOR: '(?si)((Hello|Good (morning|afternoon|evening)),\s*\S.*|New service|Go to the weekly (offer|deal))'
+- evalScript: ${output.anchorOptional = false}
+# The "Sakani sharrai / Weekly deal" promo exposes NO dismiss control: its only clickable node
+# is the "Go to the weekly deal" CTA (re-checked live on 14/09/2026, PRE-4.7.6-1283 - the whole
+# sheet is "New service", "Sakani sharrai", its two lines of copy and that CTA, and unlike the
+# NPS sheet it has neither a close "X" nor a clickable scrim). It has been seen both as a
+# FULL-SCREEN interstitial (bounds [0,132]-[1080,2337]) and as a "New service" bottom sheet over
+# the contact screen - same content, same single control.
+#
+# ANDROID BACK DOES CLOSE IT on this build, so it is dismissed rather than relaunched around
+# (14/09/2026). Captured live with the sheet on screen and no automation running: one Back left
+# the app in the foreground with the sheet gone and the contact screen - which the helper below
+# clears - underneath (evidence/2026-09-14-weekly-promo: promo-sheet.xml, after-01-back.xml).
+# The earlier note here said Back did not work; that was the keyboard-covered state handled just
+# above, where the first Back only closes the keyboard. The CTA is NEVER tapped - that would
+# navigate into the offer instead of dismissing it.
+#
+# Bounded at three Backs, each one guarded by the promo still being visible, and the promo must
+# be gone afterwards: no relaunch, and no app restart is caused by this popup at all. The only
+# launchApp left in this file is the login-page recovery further down, which is a different case.
+# KEYBOARD-COVERED PROMO - the post-login deadlock, reproduced live on 10/09/2026 (1000011487).
+# The "Number and Email Already Linked" screen mounts with its phone field focused, the promo
+# sheet is shown on top of it, and the soft keyboard - raised by that focused field, and drawn
+# above every app window - covers the sheet, hiding the promo's only control, "Go to the weekly
+# deal". In screen frames taken every 3s, all three appeared together 8-12s after Confirm. The
+# contact screen's own handler cannot match either, because the modal sheet removes that screen
+# from the hierarchy. Nothing could fire, and the greeting wait below simply ran out.
+#
+# One Android Back closes the keyboard and exposes the control (verified: before - sheet plus
+# keyboard; after one Back - the sheet with "Go to the weekly deal" visible), so the relaunch
+# recovery below can engage as designed. Guarded to exactly that state - the promo's title is
+# visible and its control is not - so it cannot fire anywhere else. Escape does NOT close this
+# keyboard (tried: no change). "Update information" is never touched.
+- runFlow:
+    when:
+      visible: "New service"
+    commands:
+      - runFlow:
+          when:
+            notVisible: "Go to the weekly (offer|deal)"
+          commands:
+            - back
+            - waitForAnimationToEnd:
+                timeout: 3000
+- runFlow:
+    when:
+      visible: "Go to the weekly (offer|deal)"
+    commands:
+      - evalScript: "${console.log('LOGIN - weekly-deal promo is up; closing it with Back, no relaunch')}"
+      - repeat:
+          times: 3
+          while:
+            visible: "Go to the weekly (offer|deal)"
+          commands:
+            - back
+            - waitForAnimationToEnd:
+                timeout: 4000
+      - assertNotVisible: "Go to the weekly (offer|deal)"
+      # WHERE THAT BACK LANDS (14/09/2026). Usually on Home, or on the contact prompt that the
+      # helper call below clears. But the promo can sit on the LOGIN ROUTE this subflow typed
+      # into - the same stack described under CONTACT PROMPT below - and then Back reveals the
+      # login page, National ID still in the field, while the session is already authenticated.
+      # Seen live on a full-journey run with the default account.
+      #
+      # Clearing overlays against the greeting from THERE can never arrive: the helper would
+      # spend its 20 passes and then fail its exit contract INSIDE this handler, before the
+      # login-page recovery below ever got its turn - which is exactly how that run stopped,
+      # waiting for a Home that the login page could not become.
+      #
+      # So the overlay clearing is skipped exactly when the login page is what came back, and
+      # that page is left to the recovery below: relaunch with the session kept, no clearState,
+      # no re-entry of the National ID, no second Nafath login. Home visible instead -> nothing
+      # here restarts anything, and the greeting assertion at the end of this file still has to
+      # pass either way.
+      - runFlow:
+          when:
+            notVisible: "Continue with N[ae]fath"
+          commands:
+            - runFlow:
+                file: clear-overlays.yaml
+                env:
+                  ANCHOR: '(?si)(Hello|Good (morning|afternoon|evening)),\s*\S.*'
+
+# CONTACT PROMPT OVER THE LOGIN PAGE - back on the login page while signed in (13/09/2026).
+# After Nafath "Confirm" the contact-details prompt ("Update your contact information" /
+# "Number and Email Already Linked") is not always stacked on Home. When the weekly promo has
+# already appeared, Home is underneath and the helper's dismissal of the prompt reveals it
+# (7 of 7 runs). When the promo has NOT appeared yet, the prompt can sit directly on the login
+# page this subflow typed into, and the same guarded dismissal reveals THAT page - its own back
+# arrow, "Continue with Nafath", the National ID still in the field - although the session is
+# already authenticated (3 of 3 runs: 2026-09-10_095858 and 2026-09-10_113110 for 1000011487,
+# 2026-09-13_094738 for 1119880044). No handler matches that page, so the helper spent its 20
+# passes and the greeting wait its 90 s on a static screen - about 5 minutes that looked like a
+# hang - and the run then failed on the greeting.
+#
+# Relaunch recovers it - verified live from that exact screen on 13/09/2026: launchApp without
+# clearState, the CSAT survey (its "Dismiss" is handled by clear-overlays; Submit is never
+# tapped), then "Hello, <name>". Safe for the same reason as the promo recovery above: it runs
+# only here, straight after this subflow's own authentication, and relaunch keeps the session
+# that was just established, so it cannot switch accounts - the caller still proves the
+# account by National ID afterwards. It runs at most once, and the login form is never
+# re-submitted: if the session did not survive, the greeting wait below fails on the login page.
+- runFlow:
+    when:
+      visible: "Continue with N[ae]fath"
+    commands:
+      - evalScript: "${console.log('LOGIN RECOVERY - back on the login page after authentication, relaunching with state kept')}"
+      - launchApp
+      - runFlow:
+          file: clear-overlays.yaml
+          env:
+            ANCHOR: '(?si)(Hello|Good (morning|afternoon|evening)),\s*\S.*'
+
+
+# Authenticated. Home must greet the user BY NAME: STG-4.7.5-1278 renders "Hello, <name>"
+# where PRE-4.7.5-1279 rendered "Good Morning, <name>", so both are matched. The ",\s*\S"
+# tail is load-bearing and is deliberately not relaxed to a bare "Hello" - the greeting has
+# to be followed by an actual name, which is what separates an authenticated header from a
+# guest one, since the guest Account renders "Hello" with nothing after it.
+- extendedWaitUntil:
+    visible: '(?si)(Hello|Good (morning|afternoon|evening)),\s*\S.*'
+    timeout: 90000
+- assertNotVisible: "(?s).*Login / Sign up.*"

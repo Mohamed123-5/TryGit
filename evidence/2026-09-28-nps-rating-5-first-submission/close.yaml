@@ -1,0 +1,9 @@
+appId: fi.iwa.sakani
+name: NPS probe - close thank-you
+---
+- assertVisible: "Thank you for your feedback"
+- tapOn:
+    leftOf: "Rate our App"
+- waitForAnimationToEnd:
+    timeout: 4000
+- assertNotVisible: "Thank you for your feedback"

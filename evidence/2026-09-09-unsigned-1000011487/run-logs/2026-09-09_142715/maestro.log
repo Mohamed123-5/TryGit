@@ -1,0 +1,107 @@
+14:27:15.063 [ INFO] maestro.cli.report.TestDebugReporter.logSystemInfo: Debug output path: C:\Users\Mohammed Elkatry\.maestro\tests\2026-09-09_142715
+14:27:15.066 [ INFO] MAESTRO.logSystemInfo: ---- System Info ----
+14:27:15.067 [ INFO] MAESTRO.logSystemInfo: Maestro Version: 2.9.0
+14:27:15.067 [ INFO] MAESTRO.logSystemInfo: CI: Undefined
+14:27:15.068 [ INFO] MAESTRO.logSystemInfo: OS Name: Windows 11
+14:27:15.068 [ INFO] MAESTRO.logSystemInfo: OS Version: 10.0
+14:27:15.068 [ INFO] MAESTRO.logSystemInfo: Architecture: amd64
+14:27:15.069 [ INFO] MAESTRO.logSystemInfo: Java Version: 26
+14:27:15.072 [ INFO] MAESTRO.logSystemInfo: Xcode Version: null
+14:27:15.077 [ INFO] MAESTRO.logSystemInfo: Flutter Version: Undefined
+14:27:15.080 [ INFO] MAESTRO.logSystemInfo: Flutter Channel: Undefined
+14:27:15.080 [ INFO] MAESTRO.logSystemInfo: ---------------------
+14:27:16.186 [ INFO] maestro.cli.command.TestCommand.runShardSuite: [shard 1] Selected device emulator-5554 using port 62177 with execution plan ExecutionPlan(flowsToRun=[D:\Automation\Maestro-Mobile\.maestro\_check.yaml], sequence=FlowSequence(flows=[], continueOnFailure=true), workspaceConfig=WorkspaceConfig(flows=null, includeTags=null, excludeTags=null, executionOrder=null, baselineBranch=null, notifications=null, disableRetries=false, platform=PlatformConfiguration(android=AndroidConfiguration(disableAnimations=false), ios=IOSConfiguration(disableAnimations=false, snapshotKeyHonorModalViews=null)), testOutputDir=null))
+14:27:16.298 [ERROR] maestro.cli.session.MaestroSessionManager.newSession$lambda$0: Failed to record heartbeat
+java.io.IOException: The process cannot access the file because another process has locked a portion of the file
+	at java.base/java.io.FileOutputStream.writeBytes(Native Method)
+	at java.base/java.io.FileOutputStream.write(FileOutputStream.java:332)
+	at kotlin.io.FilesKt__FileReadWriteKt.writeTextImpl(FileReadWrite.kt:160)
+	at kotlin.io.FilesKt__FileReadWriteKt.writeText(FileReadWrite.kt:145)
+	at kotlin.io.FilesKt__FileReadWriteKt.writeText$default(FileReadWrite.kt:144)
+	at maestro.cli.db.KeyValueStore.commit(KeyValueStore.kt:50)
+	at maestro.cli.db.KeyValueStore.set$lambda$3$lambda$2(KeyValueStore.kt:23)
+	at maestro.cli.db.KeyValueStore.withFileLock(KeyValueStore.kt:62)
+	at maestro.cli.db.KeyValueStore.set(KeyValueStore.kt:20)
+	at maestro.cli.session.SessionStore.heartbeat(SessionStore.kt:12)
+	at maestro.cli.session.MaestroSessionManager.newSession$lambda$0(MaestroSessionManager.kt:98)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:545)
+	at java.base/java.util.concurrent.FutureTask.runAndReset(FutureTask.java:371)
+	at java.base/java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:310)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1090)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:614)
+	at java.base/java.lang.Thread.run(Thread.java:1516)
+14:27:16.330 [DEBUG] io.micrometer.common.util.internal.logging.InternalLoggerFactory.newDefaultFactory: Using SLF4J as the default logging framework
+14:27:20.138 [ INFO] maestro.cli.runner.TestRunner.runSingle: Running flow _check.yaml...
+14:27:20.163 [ INFO] maestro.Maestro.cachedDeviceInfo_delegate$lambda$0: Getting device info
+14:27:20.395 [ INFO] maestro.Maestro.cachedDeviceInfo_delegate$lambda$0: Got device info: DeviceInfo(platform=ANDROID, widthPixels=1080, heightPixels=2400, widthGrid=1080, heightGrid=2400)
+14:27:20.489 [ INFO] maestro.cli.runner.MaestroCommandRunner.runCommands$lambda$0: Define variables RUNNING
+14:27:20.498 [ INFO] maestro.cli.runner.MaestroCommandRunner.runCommands$lambda$11: Define variables metadata CommandMetadata(numberOfRuns=null, evaluatedCommand=MaestroCommand(defineVariablesCommand=DefineVariablesCommand(env={MAESTRO_FILENAME=_check, MAESTRO_DEVICE_UDID=emulator-5554, MAESTRO_SHARD_ID=1, MAESTRO_SHARD_INDEX=0}, label=null, optional=false)), logMessages=[], insight=Insight(message=, level=NONE), aiReasoning=null, labeledCommand=null)
+14:27:20.501 [ INFO] maestro.cli.runner.MaestroCommandRunner.runCommands$lambda$2: Define variables COMPLETED
+14:27:20.503 [ INFO] maestro.cli.runner.MaestroCommandRunner.runCommands$lambda$0: Apply configuration RUNNING
+14:27:20.525 [ INFO] maestro.cli.runner.MaestroCommandRunner.runCommands$lambda$11: Apply configuration metadata CommandMetadata(numberOfRuns=null, evaluatedCommand=MaestroCommand(applyConfigurationCommand=ApplyConfigurationCommand(config=MaestroConfig(appId=fi.iwa.sakani, name=CHECK - final booking state, unsigned, tags=[], ext={}, onFlowStart=null, onFlowComplete=null, properties={}), label=null, optional=false)), logMessages=[], insight=Insight(message=, level=NONE), aiReasoning=null, labeledCommand=null)
+14:27:20.526 [ INFO] maestro.cli.runner.MaestroCommandRunner.runCommands$lambda$2: Apply configuration COMPLETED
+14:27:20.526 [ INFO] maestro.cli.runner.MaestroCommandRunner.runCommands$lambda$0: Tap on point (7%,9%) RUNNING
+14:27:20.529 [ INFO] maestro.cli.runner.MaestroCommandRunner.runCommands$lambda$11: Tap on point (7%,9%) metadata CommandMetadata(numberOfRuns=null, evaluatedCommand=MaestroCommand(tapOnPointV2Command=TapOnPointV2Command(point=7%,9%, retryIfNoChange=false, longPress=false, repeat=null, waitToSettleTimeoutMs=null, label=null, optional=false)), logMessages=[], insight=Insight(message=, level=NONE), aiReasoning=null, labeledCommand=null)
+14:27:20.546 [ INFO] maestro.Maestro.hierarchyBasedTap-ogj28Uc: Tapping at (75, 216) using hierarchy based logic for wait
+14:27:21.297 [ERROR] maestro.cli.session.MaestroSessionManager.newSession$lambda$0: Failed to record heartbeat
+java.io.IOException: The process cannot access the file because another process has locked a portion of the file
+	at java.base/java.io.FileOutputStream.writeBytes(Native Method)
+	at java.base/java.io.FileOutputStream.write(FileOutputStream.java:332)
+	at kotlin.io.FilesKt__FileReadWriteKt.writeTextImpl(FileReadWrite.kt:160)
+	at kotlin.io.FilesKt__FileReadWriteKt.writeText(FileReadWrite.kt:145)
+	at kotlin.io.FilesKt__FileReadWriteKt.writeText$default(FileReadWrite.kt:144)
+	at maestro.cli.db.KeyValueStore.commit(KeyValueStore.kt:50)
+	at maestro.cli.db.KeyValueStore.set$lambda$3$lambda$2(KeyValueStore.kt:23)
+	at maestro.cli.db.KeyValueStore.withFileLock(KeyValueStore.kt:62)
+	at maestro.cli.db.KeyValueStore.set(KeyValueStore.kt:20)
+	at maestro.cli.session.SessionStore.heartbeat(SessionStore.kt:12)
+	at maestro.cli.session.MaestroSessionManager.newSession$lambda$0(MaestroSessionManager.kt:98)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:545)
+	at java.base/java.util.concurrent.FutureTask.runAndReset(FutureTask.java:371)
+	at java.base/java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:310)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1090)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:614)
+	at java.base/java.lang.Thread.run(Thread.java:1516)
+14:27:22.197 [ INFO] maestro.Maestro.hierarchyBasedTap-ogj28Uc: Something has changed in the UI judging by view hierarchy. Proceed.
+14:27:22.197 [ INFO] maestro.cli.runner.MaestroCommandRunner.runCommands$lambda$2: Tap on point (7%,9%) COMPLETED
+14:27:22.199 [ INFO] maestro.cli.runner.MaestroCommandRunner.runCommands$lambda$0: Wait for animation to end within 10000 ms RUNNING
+14:27:22.200 [ INFO] maestro.cli.runner.MaestroCommandRunner.runCommands$lambda$11: Wait for animation to end within 10000 ms metadata CommandMetadata(numberOfRuns=null, evaluatedCommand=MaestroCommand(waitForAnimationToEndCommand=WaitForAnimationToEndCommand(timeout=10000, label=null, optional=false)), logMessages=[], insight=Insight(message=, level=NONE), aiReasoning=null, labeledCommand=null)
+14:27:22.203 [ INFO] maestro.Maestro.waitForAnimationToEnd$lambda$53: Waiting for animation to end with timeout 10000
+14:27:22.207 [TRACE] maestro.utils.ScreenshotUtils.takeScreenshot: Taking screenshot to byte array
+14:27:22.208 [TRACE] maestro.utils.ScreenshotUtils.takeScreenshot: Taking screenshot to output sink
+14:27:22.566 [TRACE] maestro.utils.ScreenshotUtils.takeScreenshot: Taking screenshot to byte array
+14:27:22.567 [TRACE] maestro.utils.ScreenshotUtils.takeScreenshot: Taking screenshot to output sink
+14:27:23.010 [ INFO] maestro.cli.runner.MaestroCommandRunner.runCommands$lambda$2: Wait for animation to end within 10000 ms COMPLETED
+14:27:23.011 [ INFO] maestro.cli.runner.MaestroCommandRunner.runCommands$lambda$0: Assert that "Booking Details" is visible RUNNING
+14:27:23.017 [ INFO] maestro.cli.runner.MaestroCommandRunner.runCommands$lambda$11: Assert that "Booking Details" is visible metadata CommandMetadata(numberOfRuns=null, evaluatedCommand=MaestroCommand(assertConditionCommand=AssertConditionCommand(condition=Condition(platform=null, visible=ElementSelector(textRegex=Booking Details, idRegex=null, size=null, below=null, above=null, leftOf=null, rightOf=null, containsChild=null, containsDescendants=null, traits=null, index=null, enabled=null, optional=false, selected=null, checked=null, focused=null, childOf=null, css=null), notVisible=null, scriptCondition=null, label=null), timeout=45000, label=null, optional=false)), logMessages=[], insight=Insight(message=, level=NONE), aiReasoning=null, labeledCommand=null)
+14:27:23.198 [ INFO] maestro.cli.runner.MaestroCommandRunner.runCommands$lambda$2: Assert that "Booking Details" is visible COMPLETED
+14:27:23.199 [ INFO] maestro.cli.runner.MaestroCommandRunner.runCommands$lambda$0: Scrolling DOWN until "Documents" is visible with speed 40, visibility percentage 100%, timeout 30000 ms, with centering disabled RUNNING
+14:27:23.203 [ INFO] maestro.cli.runner.MaestroCommandRunner.runCommands$lambda$11: Scrolling DOWN until "Documents" is visible with speed 40, visibility percentage 100%, timeout 30000 ms, with centering disabled metadata CommandMetadata(numberOfRuns=null, evaluatedCommand=MaestroCommand(scrollUntilVisibleCommand=ScrollUntilVisibleCommand(selector=ElementSelector(textRegex=Documents, idRegex=null, size=null, below=null, above=null, leftOf=null, rightOf=null, containsChild=null, containsDescendants=null, traits=null, index=null, enabled=null, optional=false, selected=null, checked=null, focused=null, childOf=null, css=null), direction=DOWN, scrollDuration=601, visibilityPercentage=100, timeout=30000, waitToSettleTimeoutMs=null, centerElement=false, originalSpeedValue=40, label=null, optional=false)), logMessages=[], insight=Insight(message=, level=NONE), aiReasoning=null, labeledCommand=null)
+14:27:23.879 [ WARN] maestro.orchestra.Orchestra.scrollUntilVisible: Error: maestro.MaestroException$ElementNotFound: Element not found: Text matching regex: Documents
+14:27:23.898 [ INFO] maestro.Maestro.swipeFromCenter: Swiping UP from center
+14:27:25.889 [ INFO] maestro.orchestra.Orchestra.scrollUntilVisible: Scrolling try count: 0, DeviceWidth: 1080, DeviceWidth: 2400
+14:27:25.890 [ INFO] maestro.orchestra.Orchestra.scrollUntilVisible: Element bounds: Bounds(x=42, y=2182, width=234, height=71)
+14:27:25.891 [ INFO] maestro.orchestra.Orchestra.scrollUntilVisible: Visibility Percent: 1.0
+14:27:25.893 [ INFO] maestro.orchestra.Orchestra.scrollUntilVisible: Command centerElement: ScrollUntilVisibleCommand(selector=ElementSelector(textRegex=Documents, idRegex=null, size=null, below=null, above=null, leftOf=null, rightOf=null, containsChild=null, containsDescendants=null, traits=null, index=null, enabled=null, optional=false, selected=null, checked=null, focused=null, childOf=null, css=null), direction=DOWN, scrollDuration=601, visibilityPercentage=100, timeout=30000, waitToSettleTimeoutMs=null, centerElement=false, originalSpeedValue=40, label=null, optional=false).centerElement
+14:27:25.893 [ INFO] maestro.orchestra.Orchestra.scrollUntilVisible: visibilityPercentageNormalized: 1.0
+14:27:25.893 [ INFO] maestro.cli.runner.MaestroCommandRunner.runCommands$lambda$2: Scrolling DOWN until "Documents" is visible with speed 40, visibility percentage 100%, timeout 30000 ms, with centering disabled COMPLETED
+14:27:26.296 [ERROR] maestro.cli.session.MaestroSessionManager.newSession$lambda$0: Failed to record heartbeat
+java.io.IOException: The process cannot access the file because another process has locked a portion of the file
+	at java.base/java.io.FileOutputStream.writeBytes(Native Method)
+	at java.base/java.io.FileOutputStream.write(FileOutputStream.java:332)
+	at kotlin.io.FilesKt__FileReadWriteKt.writeTextImpl(FileReadWrite.kt:160)
+	at kotlin.io.FilesKt__FileReadWriteKt.writeText(FileReadWrite.kt:145)
+	at kotlin.io.FilesKt__FileReadWriteKt.writeText$default(FileReadWrite.kt:144)
+	at maestro.cli.db.KeyValueStore.commit(KeyValueStore.kt:50)
+	at maestro.cli.db.KeyValueStore.set$lambda$3$lambda$2(KeyValueStore.kt:23)
+	at maestro.cli.db.KeyValueStore.withFileLock(KeyValueStore.kt:62)
+	at maestro.cli.db.KeyValueStore.set(KeyValueStore.kt:20)
+	at maestro.cli.session.SessionStore.heartbeat(SessionStore.kt:12)
+	at maestro.cli.session.MaestroSessionManager.newSession$lambda$0(MaestroSessionManager.kt:98)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:545)
+	at java.base/java.util.concurrent.FutureTask.runAndReset(FutureTask.java:371)
+	at java.base/java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:310)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1090)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:614)
+	at java.base/java.lang.Thread.run(Thread.java:1516)
+14:27:26.736 [ INFO] maestro.cli.report.TestDebugReporter.deleteOldFiles: Performing purge of logs older than 14 days from C:\Users\Mohammed Elkatry\.maestro\tests

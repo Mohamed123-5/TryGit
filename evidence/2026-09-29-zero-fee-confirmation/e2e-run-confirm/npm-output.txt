@@ -1,0 +1,16 @@
+
+> Sakani-mobileapp@1.0.0 e2e:full-journey-without-fee
+> node report-dashboard/run-maestro.js --include-e2e --yes-i-understand-this-changes-business-data --flows full-journey-without-fee && npm run post-test
+
+Device emulator-5554 | 1 flow(s) | e2e INCLUDED
+
+full-journey-without-fee ... FAIL (exit 1, 389s)
+    Assert that "${DESTINATION}" is visible... FAILED
+
+0 passed, 1 failed, 0 blocked/unresolved
+Now run: npm run post-test
+npm notice
+npm notice New major version of npm available! 11.16.0 -> 12.1.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.1.0
+npm notice To update run: npm install -g npm@12.1.0
+npm notice

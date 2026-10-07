@@ -1,0 +1,698 @@
+forbidden-step pattern: tapOn: "(Reserve unit|Pay booking fee|Pay now|Approve|Reject|Select payment method|Save and continue|Sign contract|Sign sales contract|Submit|View booking|No, return project|Other reason)"|inputText
+check-syntax .maestro/cancel-booking.yaml: OK
+check-syntax .maestro/subflows/login.yaml: OK
+check-syntax .maestro/subflows/clear-overlays.yaml: OK
+check-syntax .maestro/subflows/verify-signed-in-account.yaml: OK
+START 14:45:47  maestro test -e NATIONAL_ID=1000011487 .maestro/cancel-booking.yaml
+14:45:54.892 >> Run ${console.log('CANCEL BOOKING TARGET NATIONAL_ID = [' + NATIONAL_ID + ']')}
+14:45:54.932    COMPLETED  Run ${console.log('CANCEL BOOKING TARGET NATIONAL_ID = [' + NATIONAL_ID + ']')}
+14:45:54.937 >> Run ${output.targetNationalId = String(NATIONAL_ID)}
+14:45:54.974    COMPLETED  Run ${output.targetNationalId = String(NATIONAL_ID)}
+14:45:54.979 >> Assert that ${String(NATIONAL_ID).length === 10 && !/[^0-9]/.test(String(NATIONAL_ID)) && (String(NATIONAL_ID).charAt(0) === "1" || String(NATIONAL_ID).charAt(0) === "2")} is true
+14:45:55.064    COMPLETED  Assert that ${String(NATIONAL_ID).length === 10 && !/[^0-9]/.test(String(NATIONAL_ID)) && (String(NATIONAL_ID).charAt(0) === "1" || String(NATIONAL_ID).charAt(0) === "2")} is true
+14:45:55.068 >> Launch app "fi.iwa.sakani" with clear state
+14:45:59.637    COMPLETED  Launch app "fi.iwa.sakani" with clear state
+14:45:59.638 >> Run subflows/login.yaml
+14:45:59.687 >> Assert that ${typeof NATIONAL_ID !== "undefined" && String(NATIONAL_ID).length === 10 && !/[^0-9]/.test(String(NATIONAL_ID)) && (String(NATIONAL_ID).charAt(0) === "1" || String(NATIONAL_ID).charAt(0) === "2")} is true
+14:45:59.695    COMPLETED  Assert that ${typeof NATIONAL_ID !== "undefined" && String(NATIONAL_ID).length === 10 && !/[^0-9]/.test(String(NATIONAL_ID)) && (String(NATIONAL_ID).charAt(0) === "1" || String(NATIONAL_ID).charAt(0) === "2")} is true
+14:45:59.697 >> Run clear-overlays.yaml
+14:45:59.710 >> Repeat while "${ANCHOR}" is not visible (up to 20 times)
+14:46:00.538 >> Run flow when "Don.t allow" is visible
+14:46:07.106    SKIPPED  Run flow when "Don.t allow" is visible
+14:46:07.108 >> Run flow when "Skip" is visible
+14:46:07.273 >> Tap on "Skip"
+14:46:10.474    COMPLETED  Tap on "Skip"
+14:46:10.475 >> Wait for animation to end within 3000 ms
+14:46:15.171    COMPLETED  Wait for animation to end within 3000 ms
+14:46:15.172    COMPLETED  Run flow when "Skip" is visible
+14:46:15.174 >> Run flow when "Dismiss" is visible
+14:46:22.442    SKIPPED  Run flow when "Dismiss" is visible
+14:46:22.444 >> Run flow when "Ok" is visible
+14:46:22.712    SKIPPED  Run flow when "Ok" is visible
+14:46:22.714 >> Run flow when "Marketplace Day" is visible
+14:46:23.001    SKIPPED  Run flow when "Marketplace Day" is visible
+14:46:23.004 >> Run flow when "Start comparing properties" is visible
+14:46:23.142 >> Press back
+14:46:24.303    COMPLETED  Press back
+14:46:24.305 >> Wait for animation to end within 3000 ms
+14:46:25.526    COMPLETED  Wait for animation to end within 3000 ms
+14:46:25.528    COMPLETED  Run flow when "Start comparing properties" is visible
+14:46:25.530 >> Run flow when "Go to the weekly (offer|deal)" is visible
+14:46:32.681    SKIPPED  Run flow when "Go to the weekly (offer|deal)" is visible
+14:46:32.682 >> Run flow when "Update email" is visible
+14:46:32.937    SKIPPED  Run flow when "Update email" is visible
+14:46:32.940 >> Run flow when "Number and Email Already Linked" is visible
+14:46:33.296    SKIPPED  Run flow when "Number and Email Already Linked" is visible
+14:46:33.297 >> Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible
+14:46:33.552    SKIPPED  Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible
+14:46:33.553 >> Run flow when "Maybe Later" is visible
+14:46:33.819    SKIPPED  Run flow when "Maybe Later" is visible
+14:46:33.821 >> Run flow when "Reject cookies" is visible
+14:46:34.042    SKIPPED  Run flow when "Reject cookies" is visible
+14:46:34.043 >> Run flow when "${ANCHOR}" is not visible
+14:46:34.207    SKIPPED  Run flow when "${ANCHOR}" is not visible
+14:46:35.016    COMPLETED  Repeat while "${ANCHOR}" is not visible (up to 20 times)
+14:46:35.017 >> Run flow when ${output.npsLeftToCaller !== true} is true
+14:46:35.032 >> Repeat while "(?s).*would you recommend benefiting from Sakani.*" is visible (up to 3 times)
+14:46:43.090    SKIPPED  Repeat while "(?s).*would you recommend benefiting from Sakani.*" is visible (up to 3 times)
+14:46:43.092 >> Assert that "(?s).*would you recommend benefiting from Sakani.*" is not visible
+14:46:43.817    COMPLETED  Assert that "(?s).*would you recommend benefiting from Sakani.*" is not visible
+14:46:43.818    COMPLETED  Run flow when ${output.npsLeftToCaller !== true} is true
+14:46:43.819 >> Run flow when ${output.anchorOptional !== true} is true
+14:46:43.830 >> Repeat while "${ANCHOR}" is not visible (up to 6 times)
+14:46:43.971    SKIPPED  Repeat while "${ANCHOR}" is not visible (up to 6 times)
+14:46:43.972 >> Repeat while "(?s).*would you recommend benefiting from Sakani.*" is visible (up to 3 times)
+14:46:44.303    SKIPPED  Repeat while "(?s).*would you recommend benefiting from Sakani.*" is visible (up to 3 times)
+14:46:44.303 >> Assert that "(?s).*would you recommend benefiting from Sakani.*" is not visible
+14:46:44.926    COMPLETED  Assert that "(?s).*would you recommend benefiting from Sakani.*" is not visible
+14:46:44.926 >> Assert that "${ANCHOR}" is visible
+14:46:45.053    COMPLETED  Assert that "${ANCHOR}" is visible
+14:46:45.056    COMPLETED  Run flow when ${output.anchorOptional !== true} is true
+14:46:45.057    COMPLETED  Run clear-overlays.yaml
+14:46:45.059 >> Assert that "(?s).*Login / Sign up.*" is visible
+14:46:45.222    COMPLETED  Assert that "(?s).*Login / Sign up.*" is visible
+14:46:45.224 >> Tap on "(?s).*Login / Sign up.*"
+14:46:49.135    COMPLETED  Tap on "(?s).*Login / Sign up.*"
+14:46:49.135 >> Assert that "Continue with N[ae]fath" is visible
+14:46:49.180    COMPLETED  Assert that "Continue with N[ae]fath" is visible
+14:46:49.181 >> Tap on "Enter your ID, phone number,? or email"
+14:46:52.086    COMPLETED  Tap on "Enter your ID, phone number,? or email"
+14:46:52.088 >> Input text ${NATIONAL_ID}
+14:46:54.429    COMPLETED  Input text ${NATIONAL_ID}
+14:46:54.430 >> Assert that "${NATIONAL_ID}" is visible
+14:46:54.581    COMPLETED  Assert that "${NATIONAL_ID}" is visible
+14:46:54.584 >> Tap on "Continue"
+14:46:57.363    COMPLETED  Tap on "Continue"
+14:46:57.364 >> Assert that "Login with nafath" is visible
+14:46:57.484    COMPLETED  Assert that "Login with nafath" is visible
+14:46:57.485 >> Assert that "${NATIONAL_ID}" is visible
+14:46:57.548    COMPLETED  Assert that "${NATIONAL_ID}" is visible
+14:46:57.550 >> Run ${output.loginNationalId = String(NATIONAL_ID)}
+14:46:57.557    COMPLETED  Run ${output.loginNationalId = String(NATIONAL_ID)}
+14:46:57.559 >> Tap on "Confirm"
+14:47:00.009    COMPLETED  Tap on "Confirm"
+14:47:00.012 >> Assert that "Login with nafath" is not visible
+14:47:11.402    COMPLETED  Assert that "Login with nafath" is not visible
+14:47:11.403 >> Run ${output.anchorOptional = true}
+14:47:11.409    COMPLETED  Run ${output.anchorOptional = true}
+14:47:11.410 >> Run clear-overlays.yaml
+14:47:11.423 >> Repeat while "${ANCHOR}" is not visible (up to 20 times)
+14:47:18.470    SKIPPED  Repeat while "${ANCHOR}" is not visible (up to 20 times)
+14:47:18.472 >> Run flow when ${output.npsLeftToCaller !== true} is true
+14:47:18.478 >> Repeat while "(?s).*would you recommend benefiting from Sakani.*" is visible (up to 3 times)
+14:47:18.706    SKIPPED  Repeat while "(?s).*would you recommend benefiting from Sakani.*" is visible (up to 3 times)
+14:47:18.707 >> Assert that "(?s).*would you recommend benefiting from Sakani.*" is not visible
+14:47:19.311    COMPLETED  Assert that "(?s).*would you recommend benefiting from Sakani.*" is not visible
+14:47:19.312    COMPLETED  Run flow when ${output.npsLeftToCaller !== true} is true
+14:47:19.313 >> Run flow when ${output.anchorOptional !== true} is true
+14:47:19.318    SKIPPED  Run flow when ${output.anchorOptional !== true} is true
+14:47:19.320    COMPLETED  Run clear-overlays.yaml
+14:47:19.321 >> Run ${output.anchorOptional = false}
+14:47:19.326    COMPLETED  Run ${output.anchorOptional = false}
+14:47:19.327 >> Run flow when "New service" is visible
+14:47:19.380 >> Run flow when "Go to the weekly (offer|deal)" is not visible
+14:47:26.378    SKIPPED  Run flow when "Go to the weekly (offer|deal)" is not visible
+14:47:26.379    COMPLETED  Run flow when "New service" is visible
+14:47:26.380 >> Run flow when "Go to the weekly (offer|deal)" is visible
+14:47:26.454 >> Launch app "fi.iwa.sakani"
+14:47:32.749    COMPLETED  Launch app "fi.iwa.sakani"
+14:47:32.750 >> Run clear-overlays.yaml
+14:47:32.768 >> Repeat while "${ANCHOR}" is not visible (up to 20 times)
+14:47:43.762 >> Run flow when "Don.t allow" is visible
+14:47:43.963    SKIPPED  Run flow when "Don.t allow" is visible
+14:47:43.964 >> Run flow when "Skip" is visible
+14:47:44.076    SKIPPED  Run flow when "Skip" is visible
+14:47:44.076 >> Run flow when "Dismiss" is visible
+14:47:44.219    SKIPPED  Run flow when "Dismiss" is visible
+14:47:44.219 >> Run flow when "Ok" is visible
+14:47:44.374    SKIPPED  Run flow when "Ok" is visible
+14:47:44.375 >> Run flow when "Marketplace Day" is visible
+14:47:44.533    SKIPPED  Run flow when "Marketplace Day" is visible
+14:47:44.534 >> Run flow when "Start comparing properties" is visible
+14:47:44.694    SKIPPED  Run flow when "Start comparing properties" is visible
+14:47:44.694 >> Run flow when "Go to the weekly (offer|deal)" is visible
+14:47:44.807    SKIPPED  Run flow when "Go to the weekly (offer|deal)" is visible
+14:47:44.809 >> Run flow when "Update email" is visible
+14:47:44.965    SKIPPED  Run flow when "Update email" is visible
+14:47:44.965 >> Run flow when "Number and Email Already Linked" is visible
+14:47:45.166    SKIPPED  Run flow when "Number and Email Already Linked" is visible
+14:47:45.167 >> Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible
+14:47:45.324    SKIPPED  Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible
+14:47:45.325 >> Run flow when "Maybe Later" is visible
+14:47:45.487    SKIPPED  Run flow when "Maybe Later" is visible
+14:47:45.487 >> Run flow when "Reject cookies" is visible
+14:47:45.683    SKIPPED  Run flow when "Reject cookies" is visible
+14:47:45.683 >> Run flow when "${ANCHOR}" is not visible
+14:47:46.286 >> Wait for animation to end within 5000 ms
+14:47:46.883    COMPLETED  Wait for animation to end within 5000 ms
+14:47:46.884    COMPLETED  Run flow when "${ANCHOR}" is not visible
+14:47:47.481 >> Run flow when "Don.t allow" is visible
+14:47:54.068    SKIPPED  Run flow when "Don.t allow" is visible
+14:47:54.068 >> Run flow when "Skip" is visible
+14:47:54.246    SKIPPED  Run flow when "Skip" is visible
+14:47:54.246 >> Run flow when "Dismiss" is visible
+14:47:54.377    SKIPPED  Run flow when "Dismiss" is visible
+14:47:54.378 >> Run flow when "Ok" is visible
+14:47:54.614    SKIPPED  Run flow when "Ok" is visible
+14:47:54.614 >> Run flow when "Marketplace Day" is visible
+14:47:54.828    SKIPPED  Run flow when "Marketplace Day" is visible
+14:47:54.828 >> Run flow when "Start comparing properties" is visible
+14:47:55.093    SKIPPED  Run flow when "Start comparing properties" is visible
+14:47:55.094 >> Run flow when "Go to the weekly (offer|deal)" is visible
+14:47:55.307    SKIPPED  Run flow when "Go to the weekly (offer|deal)" is visible
+14:47:55.308 >> Run flow when "Update email" is visible
+14:47:55.434    SKIPPED  Run flow when "Update email" is visible
+14:47:55.434 >> Run flow when "Number and Email Already Linked" is visible
+14:47:55.579    SKIPPED  Run flow when "Number and Email Already Linked" is visible
+14:47:55.580 >> Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible
+14:47:55.846    SKIPPED  Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible
+14:47:55.846 >> Run flow when "Maybe Later" is visible
+14:47:56.062    SKIPPED  Run flow when "Maybe Later" is visible
+14:47:56.063 >> Run flow when "Reject cookies" is visible
+14:47:56.226    SKIPPED  Run flow when "Reject cookies" is visible
+14:47:56.227 >> Run flow when "${ANCHOR}" is not visible
+14:47:56.906 >> Wait for animation to end within 5000 ms
+14:47:57.575    COMPLETED  Wait for animation to end within 5000 ms
+14:47:57.576    COMPLETED  Run flow when "${ANCHOR}" is not visible
+14:47:58.213 >> Run flow when "Don.t allow" is visible
+14:48:04.735    SKIPPED  Run flow when "Don.t allow" is visible
+14:48:04.736 >> Run flow when "Skip" is visible
+14:48:04.889    SKIPPED  Run flow when "Skip" is visible
+14:48:04.889 >> Run flow when "Dismiss" is visible
+14:48:05.052    SKIPPED  Run flow when "Dismiss" is visible
+14:48:05.053 >> Run flow when "Ok" is visible
+14:48:05.209    SKIPPED  Run flow when "Ok" is visible
+14:48:05.209 >> Run flow when "Marketplace Day" is visible
+14:48:05.273    SKIPPED  Run flow when "Marketplace Day" is visible
+14:48:05.273 >> Run flow when "Start comparing properties" is visible
+14:48:05.426    SKIPPED  Run flow when "Start comparing properties" is visible
+14:48:05.426 >> Run flow when "Go to the weekly (offer|deal)" is visible
+14:48:05.580    SKIPPED  Run flow when "Go to the weekly (offer|deal)" is visible
+14:48:05.580 >> Run flow when "Update email" is visible
+14:48:05.734    SKIPPED  Run flow when "Update email" is visible
+14:48:05.735 >> Run flow when "Number and Email Already Linked" is visible
+14:48:05.845    SKIPPED  Run flow when "Number and Email Already Linked" is visible
+14:48:05.845 >> Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible
+14:48:05.915    SKIPPED  Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible
+14:48:05.916 >> Run flow when "Maybe Later" is visible
+14:48:06.021    SKIPPED  Run flow when "Maybe Later" is visible
+14:48:06.021 >> Run flow when "Reject cookies" is visible
+14:48:06.169    SKIPPED  Run flow when "Reject cookies" is visible
+14:48:06.170 >> Run flow when "${ANCHOR}" is not visible
+14:48:06.815 >> Wait for animation to end within 5000 ms
+14:48:07.466    COMPLETED  Wait for animation to end within 5000 ms
+14:48:07.468    COMPLETED  Run flow when "${ANCHOR}" is not visible
+14:48:08.064 >> Run flow when "Don.t allow" is visible
+14:48:14.574    SKIPPED  Run flow when "Don.t allow" is visible
+14:48:14.575 >> Run flow when "Skip" is visible
+14:48:14.741    SKIPPED  Run flow when "Skip" is visible
+14:48:14.741 >> Run flow when "Dismiss" is visible
+14:48:14.939    SKIPPED  Run flow when "Dismiss" is visible
+14:48:14.939 >> Run flow when "Ok" is visible
+14:48:15.083    SKIPPED  Run flow when "Ok" is visible
+14:48:15.083 >> Run flow when "Marketplace Day" is visible
+14:48:15.194    SKIPPED  Run flow when "Marketplace Day" is visible
+14:48:15.194 >> Run flow when "Start comparing properties" is visible
+14:48:15.290    SKIPPED  Run flow when "Start comparing properties" is visible
+14:48:15.291 >> Run flow when "Go to the weekly (offer|deal)" is visible
+14:48:15.436    SKIPPED  Run flow when "Go to the weekly (offer|deal)" is visible
+14:48:15.436 >> Run flow when "Update email" is visible
+14:48:15.579    SKIPPED  Run flow when "Update email" is visible
+14:48:15.580 >> Run flow when "Number and Email Already Linked" is visible
+14:48:15.691    SKIPPED  Run flow when "Number and Email Already Linked" is visible
+14:48:15.692 >> Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible
+14:48:15.896    SKIPPED  Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible
+14:48:15.896 >> Run flow when "Maybe Later" is visible
+14:48:16.054    SKIPPED  Run flow when "Maybe Later" is visible
+14:48:16.054 >> Run flow when "Reject cookies" is visible
+14:48:16.170    SKIPPED  Run flow when "Reject cookies" is visible
+14:48:16.170 >> Run flow when "${ANCHOR}" is not visible
+14:48:16.752 >> Wait for animation to end within 5000 ms
+14:48:17.372    COMPLETED  Wait for animation to end within 5000 ms
+14:48:17.373    COMPLETED  Run flow when "${ANCHOR}" is not visible
+14:48:18.011 >> Run flow when "Don.t allow" is visible
+14:48:24.484    SKIPPED  Run flow when "Don.t allow" is visible
+14:48:24.484 >> Run flow when "Skip" is visible
+14:48:24.630    SKIPPED  Run flow when "Skip" is visible
+14:48:24.630 >> Run flow when "Dismiss" is visible
+14:48:24.735    SKIPPED  Run flow when "Dismiss" is visible
+14:48:24.735 >> Run flow when "Ok" is visible
+14:48:24.932    SKIPPED  Run flow when "Ok" is visible
+14:48:24.932 >> Run flow when "Marketplace Day" is visible
+14:48:25.147    SKIPPED  Run flow when "Marketplace Day" is visible
+14:48:25.147 >> Run flow when "Start comparing properties" is visible
+14:48:25.290    SKIPPED  Run flow when "Start comparing properties" is visible
+14:48:25.290 >> Run flow when "Go to the weekly (offer|deal)" is visible
+14:48:25.439    SKIPPED  Run flow when "Go to the weekly (offer|deal)" is visible
+14:48:25.439 >> Run flow when "Update email" is visible
+14:48:25.583    SKIPPED  Run flow when "Update email" is visible
+14:48:25.583 >> Run flow when "Number and Email Already Linked" is visible
+14:48:25.690    SKIPPED  Run flow when "Number and Email Already Linked" is visible
+14:48:25.691 >> Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible
+14:48:25.804    SKIPPED  Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible
+14:48:25.806 >> Run flow when "Maybe Later" is visible
+14:48:25.961    SKIPPED  Run flow when "Maybe Later" is visible
+14:48:25.962 >> Run flow when "Reject cookies" is visible
+14:48:26.109    SKIPPED  Run flow when "Reject cookies" is visible
+14:48:26.109 >> Run flow when "${ANCHOR}" is not visible
+14:48:27.248 >> Wait for animation to end within 5000 ms
+14:48:27.860    COMPLETED  Wait for animation to end within 5000 ms
+14:48:27.861    COMPLETED  Run flow when "${ANCHOR}" is not visible
+14:48:28.495 >> Run flow when "Don.t allow" is visible
+14:48:34.981    SKIPPED  Run flow when "Don.t allow" is visible
+14:48:34.981 >> Run flow when "Skip" is visible
+14:48:35.148    SKIPPED  Run flow when "Skip" is visible
+14:48:35.149 >> Run flow when "Dismiss" is visible
+14:48:35.344    SKIPPED  Run flow when "Dismiss" is visible
+14:48:35.346 >> Run flow when "Ok" is visible
+14:48:35.451    SKIPPED  Run flow when "Ok" is visible
+14:48:35.453 >> Run flow when "Marketplace Day" is visible
+14:48:35.564    SKIPPED  Run flow when "Marketplace Day" is visible
+14:48:35.565 >> Run flow when "Start comparing properties" is visible
+14:48:35.741    SKIPPED  Run flow when "Start comparing properties" is visible
+14:48:35.742 >> Run flow when "Go to the weekly (offer|deal)" is visible
+14:48:35.975    SKIPPED  Run flow when "Go to the weekly (offer|deal)" is visible
+14:48:35.976 >> Run flow when "Update email" is visible
+14:48:36.171    SKIPPED  Run flow when "Update email" is visible
+14:48:36.172 >> Run flow when "Number and Email Already Linked" is visible
+14:48:36.313    SKIPPED  Run flow when "Number and Email Already Linked" is visible
+14:48:36.314 >> Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible
+14:48:36.495    SKIPPED  Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible
+14:48:36.496 >> Run flow when "Maybe Later" is visible
+14:48:36.622    SKIPPED  Run flow when "Maybe Later" is visible
+14:48:36.623 >> Run flow when "Reject cookies" is visible
+14:48:36.798    SKIPPED  Run flow when "Reject cookies" is visible
+14:48:36.799 >> Run flow when "${ANCHOR}" is not visible
+14:48:37.382 >> Wait for animation to end within 5000 ms
+14:48:38.459    COMPLETED  Wait for animation to end within 5000 ms
+14:48:38.461    COMPLETED  Run flow when "${ANCHOR}" is not visible
+14:48:39.155 >> Run flow when "Don.t allow" is visible
+14:48:45.560    SKIPPED  Run flow when "Don.t allow" is visible
+14:48:45.562 >> Run flow when "Skip" is visible
+14:48:45.620    SKIPPED  Run flow when "Skip" is visible
+14:48:45.621 >> Run flow when "Dismiss" is visible
+14:48:45.775    SKIPPED  Run flow when "Dismiss" is visible
+14:48:45.775 >> Run flow when "Ok" is visible
+14:48:45.996    SKIPPED  Run flow when "Ok" is visible
+14:48:45.998 >> Run flow when "Marketplace Day" is visible
+14:48:46.165    SKIPPED  Run flow when "Marketplace Day" is visible
+14:48:46.167 >> Run flow when "Start comparing properties" is visible
+14:48:46.334    SKIPPED  Run flow when "Start comparing properties" is visible
+14:48:46.334 >> Run flow when "Go to the weekly (offer|deal)" is visible
+14:48:46.391    SKIPPED  Run flow when "Go to the weekly (offer|deal)" is visible
+14:48:46.391 >> Run flow when "Update email" is visible
+14:48:46.442    SKIPPED  Run flow when "Update email" is visible
+14:48:46.443 >> Run flow when "Number and Email Already Linked" is visible
+14:48:46.589    SKIPPED  Run flow when "Number and Email Already Linked" is visible
+14:48:46.591 >> Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible
+14:48:46.703    SKIPPED  Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible
+14:48:46.705 >> Run flow when "Maybe Later" is visible
+14:48:46.863    SKIPPED  Run flow when "Maybe Later" is visible
+14:48:46.865 >> Run flow when "Reject cookies" is visible
+14:48:46.980    SKIPPED  Run flow when "Reject cookies" is visible
+14:48:46.980 >> Run flow when "${ANCHOR}" is not visible
+14:48:47.583 >> Wait for animation to end within 5000 ms
+14:48:48.371    COMPLETED  Wait for animation to end within 5000 ms
+14:48:48.371    COMPLETED  Run flow when "${ANCHOR}" is not visible
+14:48:49.025 >> Run flow when "Don.t allow" is visible
+14:48:55.453    SKIPPED  Run flow when "Don.t allow" is visible
+14:48:55.453 >> Run flow when "Skip" is visible
+14:48:55.656    SKIPPED  Run flow when "Skip" is visible
+14:48:55.656 >> Run flow when "Dismiss" is visible
+14:48:55.711    SKIPPED  Run flow when "Dismiss" is visible
+14:48:55.711 >> Run flow when "Ok" is visible
+14:48:55.817    SKIPPED  Run flow when "Ok" is visible
+14:48:55.818 >> Run flow when "Marketplace Day" is visible
+14:48:55.876    SKIPPED  Run flow when "Marketplace Day" is visible
+14:48:55.877 >> Run flow when "Start comparing properties" is visible
+14:48:56.030    SKIPPED  Run flow when "Start comparing properties" is visible
+14:48:56.031 >> Run flow when "Go to the weekly (offer|deal)" is visible
+14:48:56.195    SKIPPED  Run flow when "Go to the weekly (offer|deal)" is visible
+14:48:56.196 >> Run flow when "Update email" is visible
+14:48:56.362    SKIPPED  Run flow when "Update email" is visible
+14:48:56.363 >> Run flow when "Number and Email Already Linked" is visible
+14:48:56.532    SKIPPED  Run flow when "Number and Email Already Linked" is visible
+14:48:56.533 >> Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible
+14:48:57.133    SKIPPED  Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible
+14:48:57.133 >> Run flow when "Maybe Later" is visible
+14:48:57.293    SKIPPED  Run flow when "Maybe Later" is visible
+14:48:57.293 >> Run flow when "Reject cookies" is visible
+14:48:57.424    SKIPPED  Run flow when "Reject cookies" is visible
+14:48:57.424 >> Run flow when "${ANCHOR}" is not visible
+14:48:58.005 >> Wait for animation to end within 5000 ms
+14:48:58.589    COMPLETED  Wait for animation to end within 5000 ms
+14:48:58.590    COMPLETED  Run flow when "${ANCHOR}" is not visible
+14:48:59.184 >> Run flow when "Don.t allow" is visible
+14:49:05.770    SKIPPED  Run flow when "Don.t allow" is visible
+14:49:05.771 >> Run flow when "Skip" is visible
+14:49:05.912    SKIPPED  Run flow when "Skip" is visible
+14:49:05.913 >> Run flow when "Dismiss" is visible
+14:49:06.083    SKIPPED  Run flow when "Dismiss" is visible
+14:49:06.083 >> Run flow when "Ok" is visible
+14:49:06.222    SKIPPED  Run flow when "Ok" is visible
+14:49:06.222 >> Run flow when "Marketplace Day" is visible
+14:49:06.326    SKIPPED  Run flow when "Marketplace Day" is visible
+14:49:06.326 >> Run flow when "Start comparing properties" is visible
+14:49:06.473    SKIPPED  Run flow when "Start comparing properties" is visible
+14:49:06.474 >> Run flow when "Go to the weekly (offer|deal)" is visible
+14:49:06.638    SKIPPED  Run flow when "Go to the weekly (offer|deal)" is visible
+14:49:06.639 >> Run flow when "Update email" is visible
+14:49:06.794    SKIPPED  Run flow when "Update email" is visible
+14:49:06.795 >> Run flow when "Number and Email Already Linked" is visible
+14:49:06.937    SKIPPED  Run flow when "Number and Email Already Linked" is visible
+14:49:06.938 >> Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible
+14:49:07.079    SKIPPED  Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible
+14:49:07.080 >> Run flow when "Maybe Later" is visible
+14:49:07.180    SKIPPED  Run flow when "Maybe Later" is visible
+14:49:07.180 >> Run flow when "Reject cookies" is visible
+14:49:07.363    SKIPPED  Run flow when "Reject cookies" is visible
+14:49:07.365 >> Run flow when "${ANCHOR}" is not visible
+14:49:07.947 >> Wait for animation to end within 5000 ms
+14:49:08.659    COMPLETED  Wait for animation to end within 5000 ms
+14:49:08.659    COMPLETED  Run flow when "${ANCHOR}" is not visible
+14:49:09.317 >> Run flow when "Don.t allow" is visible
+14:49:15.793    SKIPPED  Run flow when "Don.t allow" is visible
+14:49:15.793 >> Run flow when "Skip" is visible
+14:49:15.998    SKIPPED  Run flow when "Skip" is visible
+14:49:15.999 >> Run flow when "Dismiss" is visible
+14:49:16.144    SKIPPED  Run flow when "Dismiss" is visible
+14:49:16.145 >> Run flow when "Ok" is visible
+14:49:16.290    SKIPPED  Run flow when "Ok" is visible
+14:49:16.291 >> Run flow when "Marketplace Day" is visible
+14:49:16.481    SKIPPED  Run flow when "Marketplace Day" is visible
+14:49:16.482 >> Run flow when "Start comparing properties" is visible
+14:49:16.586    SKIPPED  Run flow when "Start comparing properties" is visible
+14:49:16.586 >> Run flow when "Go to the weekly (offer|deal)" is visible
+14:49:16.689    SKIPPED  Run flow when "Go to the weekly (offer|deal)" is visible
+14:49:16.689 >> Run flow when "Update email" is visible
+14:49:16.785    SKIPPED  Run flow when "Update email" is visible
+14:49:16.786 >> Run flow when "Number and Email Already Linked" is visible
+14:49:16.887    SKIPPED  Run flow when "Number and Email Already Linked" is visible
+14:49:16.888 >> Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible
+14:49:17.043    SKIPPED  Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible
+14:49:17.043 >> Run flow when "Maybe Later" is visible
+14:49:17.142    SKIPPED  Run flow when "Maybe Later" is visible
+14:49:17.143 >> Run flow when "Reject cookies" is visible
+14:49:17.299    SKIPPED  Run flow when "Reject cookies" is visible
+14:49:17.299 >> Run flow when "${ANCHOR}" is not visible
+14:49:17.923 >> Wait for animation to end within 5000 ms
+14:49:18.593    COMPLETED  Wait for animation to end within 5000 ms
+14:49:18.593    COMPLETED  Run flow when "${ANCHOR}" is not visible
+14:49:19.305 >> Run flow when "Don.t allow" is visible
+14:49:25.702    SKIPPED  Run flow when "Don.t allow" is visible
+14:49:25.703 >> Run flow when "Skip" is visible
+14:49:25.912    SKIPPED  Run flow when "Skip" is visible
+14:49:25.913 >> Run flow when "Dismiss" is visible
+14:49:26.053    SKIPPED  Run flow when "Dismiss" is visible
+14:49:26.053 >> Run flow when "Ok" is visible
+14:49:26.208    SKIPPED  Run flow when "Ok" is visible
+14:49:26.208 >> Run flow when "Marketplace Day" is visible
+14:49:26.360    SKIPPED  Run flow when "Marketplace Day" is visible
+14:49:26.360 >> Run flow when "Start comparing properties" is visible
+14:49:26.495    SKIPPED  Run flow when "Start comparing properties" is visible
+14:49:26.495 >> Run flow when "Go to the weekly (offer|deal)" is visible
+14:49:26.640    SKIPPED  Run flow when "Go to the weekly (offer|deal)" is visible
+14:49:26.641 >> Run flow when "Update email" is visible
+14:49:26.739    SKIPPED  Run flow when "Update email" is visible
+14:49:26.739 >> Run flow when "Number and Email Already Linked" is visible
+14:49:26.838    SKIPPED  Run flow when "Number and Email Already Linked" is visible
+14:49:26.839 >> Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible
+14:49:27.048    SKIPPED  Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible
+14:49:27.050 >> Run flow when "Maybe Later" is visible
+14:49:27.308    SKIPPED  Run flow when "Maybe Later" is visible
+14:49:27.310 >> Run flow when "Reject cookies" is visible
+14:49:27.492    SKIPPED  Run flow when "Reject cookies" is visible
+14:49:27.493 >> Run flow when "${ANCHOR}" is not visible
+14:49:28.097 >> Wait for animation to end within 5000 ms
+14:49:28.682    COMPLETED  Wait for animation to end within 5000 ms
+14:49:28.683    COMPLETED  Run flow when "${ANCHOR}" is not visible
+14:49:29.380 >> Run flow when "Don.t allow" is visible
+14:49:35.828    SKIPPED  Run flow when "Don.t allow" is visible
+14:49:35.829 >> Run flow when "Skip" is visible
+14:49:36.042    SKIPPED  Run flow when "Skip" is visible
+14:49:36.042 >> Run flow when "Dismiss" is visible
+14:49:36.110    SKIPPED  Run flow when "Dismiss" is visible
+14:49:36.111 >> Run flow when "Ok" is visible
+14:49:36.263    SKIPPED  Run flow when "Ok" is visible
+14:49:36.263 >> Run flow when "Marketplace Day" is visible
+14:49:36.406    SKIPPED  Run flow when "Marketplace Day" is visible
+14:49:36.406 >> Run flow when "Start comparing properties" is visible
+14:49:36.556    SKIPPED  Run flow when "Start comparing properties" is visible
+14:49:36.557 >> Run flow when "Go to the weekly (offer|deal)" is visible
+14:49:36.677    SKIPPED  Run flow when "Go to the weekly (offer|deal)" is visible
+14:49:36.677 >> Run flow when "Update email" is visible
+14:49:36.842    SKIPPED  Run flow when "Update email" is visible
+14:49:36.843 >> Run flow when "Number and Email Already Linked" is visible
+14:49:36.998    SKIPPED  Run flow when "Number and Email Already Linked" is visible
+14:49:36.998 >> Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible
+14:49:37.078    SKIPPED  Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible
+14:49:37.078 >> Run flow when "Maybe Later" is visible
+14:49:37.235    SKIPPED  Run flow when "Maybe Later" is visible
+14:49:37.235 >> Run flow when "Reject cookies" is visible
+14:49:37.395    SKIPPED  Run flow when "Reject cookies" is visible
+14:49:37.396 >> Run flow when "${ANCHOR}" is not visible
+14:49:37.941 >> Wait for animation to end within 5000 ms
+14:49:38.622    COMPLETED  Wait for animation to end within 5000 ms
+14:49:38.623    COMPLETED  Run flow when "${ANCHOR}" is not visible
+14:49:39.274 >> Run flow when "Don.t allow" is visible
+14:49:45.772    SKIPPED  Run flow when "Don.t allow" is visible
+14:49:45.773 >> Run flow when "Skip" is visible
+14:49:45.980    SKIPPED  Run flow when "Skip" is visible
+14:49:45.980 >> Run flow when "Dismiss" is visible
+14:49:46.080    SKIPPED  Run flow when "Dismiss" is visible
+14:49:46.080 >> Run flow when "Ok" is visible
+14:49:46.222    SKIPPED  Run flow when "Ok" is visible
+14:49:46.223 >> Run flow when "Marketplace Day" is visible
+14:49:46.428    SKIPPED  Run flow when "Marketplace Day" is visible
+14:49:46.429 >> Run flow when "Start comparing properties" is visible
+14:49:46.611    SKIPPED  Run flow when "Start comparing properties" is visible
+14:49:46.611 >> Run flow when "Go to the weekly (offer|deal)" is visible
+14:49:46.757    SKIPPED  Run flow when "Go to the weekly (offer|deal)" is visible
+14:49:46.758 >> Run flow when "Update email" is visible
+14:49:46.866    SKIPPED  Run flow when "Update email" is visible
+14:49:46.866 >> Run flow when "Number and Email Already Linked" is visible
+14:49:47.016    SKIPPED  Run flow when "Number and Email Already Linked" is visible
+14:49:47.018 >> Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible
+14:49:47.269    SKIPPED  Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible
+14:49:47.270 >> Run flow when "Maybe Later" is visible
+14:49:47.539    SKIPPED  Run flow when "Maybe Later" is visible
+14:49:47.540 >> Run flow when "Reject cookies" is visible
+14:49:47.703    SKIPPED  Run flow when "Reject cookies" is visible
+14:49:47.703 >> Run flow when "${ANCHOR}" is not visible
+14:49:48.268 >> Wait for animation to end within 5000 ms
+14:49:48.887    COMPLETED  Wait for animation to end within 5000 ms
+14:49:48.887    COMPLETED  Run flow when "${ANCHOR}" is not visible
+14:49:49.612 >> Run flow when "Don.t allow" is visible
+14:49:55.967    SKIPPED  Run flow when "Don.t allow" is visible
+14:49:55.967 >> Run flow when "Skip" is visible
+14:49:56.106    SKIPPED  Run flow when "Skip" is visible
+14:49:56.106 >> Run flow when "Dismiss" is visible
+14:49:56.243    SKIPPED  Run flow when "Dismiss" is visible
+14:49:56.244 >> Run flow when "Ok" is visible
+14:49:56.357    SKIPPED  Run flow when "Ok" is visible
+14:49:56.358 >> Run flow when "Marketplace Day" is visible
+14:49:56.505    SKIPPED  Run flow when "Marketplace Day" is visible
+14:49:56.505 >> Run flow when "Start comparing properties" is visible
+14:49:56.565    SKIPPED  Run flow when "Start comparing properties" is visible
+14:49:56.565 >> Run flow when "Go to the weekly (offer|deal)" is visible
+14:49:56.702    SKIPPED  Run flow when "Go to the weekly (offer|deal)" is visible
+14:49:56.704 >> Run flow when "Update email" is visible
+14:49:56.856    SKIPPED  Run flow when "Update email" is visible
+14:49:56.856 >> Run flow when "Number and Email Already Linked" is visible
+14:49:57.055    SKIPPED  Run flow when "Number and Email Already Linked" is visible
+14:49:57.056 >> Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible
+14:49:57.186    SKIPPED  Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible
+14:49:57.187 >> Run flow when "Maybe Later" is visible
+14:49:57.352    SKIPPED  Run flow when "Maybe Later" is visible
+14:49:57.353 >> Run flow when "Reject cookies" is visible
+14:49:57.566    SKIPPED  Run flow when "Reject cookies" is visible
+14:49:57.568 >> Run flow when "${ANCHOR}" is not visible
+14:49:58.183 >> Wait for animation to end within 5000 ms
+14:49:59.009    COMPLETED  Wait for animation to end within 5000 ms
+14:49:59.010    COMPLETED  Run flow when "${ANCHOR}" is not visible
+14:49:59.643 >> Run flow when "Don.t allow" is visible
+14:50:06.139    SKIPPED  Run flow when "Don.t allow" is visible
+14:50:06.141 >> Run flow when "Skip" is visible
+14:50:06.306    SKIPPED  Run flow when "Skip" is visible
+14:50:06.307 >> Run flow when "Dismiss" is visible
+14:50:06.559    SKIPPED  Run flow when "Dismiss" is visible
+14:50:06.561 >> Run flow when "Ok" is visible
+14:50:06.708    SKIPPED  Run flow when "Ok" is visible
+14:50:06.709 >> Run flow when "Marketplace Day" is visible
+14:50:06.941    SKIPPED  Run flow when "Marketplace Day" is visible
+14:50:06.943 >> Run flow when "Start comparing properties" is visible
+14:50:07.020    SKIPPED  Run flow when "Start comparing properties" is visible
+14:50:07.020 >> Run flow when "Go to the weekly (offer|deal)" is visible
+14:50:07.181    SKIPPED  Run flow when "Go to the weekly (offer|deal)" is visible
+14:50:07.182 >> Run flow when "Update email" is visible
+14:50:07.371    SKIPPED  Run flow when "Update email" is visible
+14:50:07.372 >> Run flow when "Number and Email Already Linked" is visible
+14:50:07.512    SKIPPED  Run flow when "Number and Email Already Linked" is visible
+14:50:07.515 >> Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible
+14:50:07.734    SKIPPED  Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible
+14:50:07.736 >> Run flow when "Maybe Later" is visible
+14:50:07.914    SKIPPED  Run flow when "Maybe Later" is visible
+14:50:07.916 >> Run flow when "Reject cookies" is visible
+14:50:08.069    SKIPPED  Run flow when "Reject cookies" is visible
+14:50:08.070 >> Run flow when "${ANCHOR}" is not visible
+14:50:08.738 >> Wait for animation to end within 5000 ms
+14:50:09.738    COMPLETED  Wait for animation to end within 5000 ms
+14:50:09.740    COMPLETED  Run flow when "${ANCHOR}" is not visible
+14:50:10.395 >> Run flow when "Don.t allow" is visible
+14:50:16.886    SKIPPED  Run flow when "Don.t allow" is visible
+14:50:16.887 >> Run flow when "Skip" is visible
+14:50:17.085    SKIPPED  Run flow when "Skip" is visible
+14:50:17.086 >> Run flow when "Dismiss" is visible
+14:50:17.268    SKIPPED  Run flow when "Dismiss" is visible
+14:50:17.270 >> Run flow when "Ok" is visible
+14:50:17.443    SKIPPED  Run flow when "Ok" is visible
+14:50:17.445 >> Run flow when "Marketplace Day" is visible
+14:50:17.621    SKIPPED  Run flow when "Marketplace Day" is visible
+14:50:17.623 >> Run flow when "Start comparing properties" is visible
+14:50:17.785    SKIPPED  Run flow when "Start comparing properties" is visible
+14:50:17.785 >> Run flow when "Go to the weekly (offer|deal)" is visible
+14:50:17.965    SKIPPED  Run flow when "Go to the weekly (offer|deal)" is visible
+14:50:17.967 >> Run flow when "Update email" is visible
+14:50:18.210    SKIPPED  Run flow when "Update email" is visible
+14:50:18.211 >> Run flow when "Number and Email Already Linked" is visible
+14:50:18.400    SKIPPED  Run flow when "Number and Email Already Linked" is visible
+14:50:18.400 >> Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible
+14:50:18.568    SKIPPED  Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible
+14:50:18.569 >> Run flow when "Maybe Later" is visible
+14:50:18.680    SKIPPED  Run flow when "Maybe Later" is visible
+14:50:18.681 >> Run flow when "Reject cookies" is visible
+14:50:18.867    SKIPPED  Run flow when "Reject cookies" is visible
+14:50:18.868 >> Run flow when "${ANCHOR}" is not visible
+14:50:19.514 >> Wait for animation to end within 5000 ms
+14:50:20.393    COMPLETED  Wait for animation to end within 5000 ms
+14:50:20.393    COMPLETED  Run flow when "${ANCHOR}" is not visible
+14:50:21.018 >> Run flow when "Don.t allow" is visible
+14:50:27.518    SKIPPED  Run flow when "Don.t allow" is visible
+14:50:27.519 >> Run flow when "Skip" is visible
+14:50:27.675    SKIPPED  Run flow when "Skip" is visible
+14:50:27.676 >> Run flow when "Dismiss" is visible
+14:50:27.890    SKIPPED  Run flow when "Dismiss" is visible
+14:50:27.891 >> Run flow when "Ok" is visible
+14:50:28.044    SKIPPED  Run flow when "Ok" is visible
+14:50:28.045 >> Run flow when "Marketplace Day" is visible
+14:50:28.205    SKIPPED  Run flow when "Marketplace Day" is visible
+14:50:28.206 >> Run flow when "Start comparing properties" is visible
+14:50:28.405    SKIPPED  Run flow when "Start comparing properties" is visible
+14:50:28.406 >> Run flow when "Go to the weekly (offer|deal)" is visible
+14:50:28.574    SKIPPED  Run flow when "Go to the weekly (offer|deal)" is visible
+14:50:28.575 >> Run flow when "Update email" is visible
+14:50:28.698    SKIPPED  Run flow when "Update email" is visible
+14:50:28.699 >> Run flow when "Number and Email Already Linked" is visible
+14:50:28.793    SKIPPED  Run flow when "Number and Email Already Linked" is visible
+14:50:28.793 >> Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible
+14:50:28.883    SKIPPED  Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible
+14:50:28.884 >> Run flow when "Maybe Later" is visible
+14:50:28.997    SKIPPED  Run flow when "Maybe Later" is visible
+14:50:28.998 >> Run flow when "Reject cookies" is visible
+14:50:29.116    SKIPPED  Run flow when "Reject cookies" is visible
+14:50:29.117 >> Run flow when "${ANCHOR}" is not visible
+14:50:29.717 >> Wait for animation to end within 5000 ms
+14:50:30.646    COMPLETED  Wait for animation to end within 5000 ms
+14:50:30.648    COMPLETED  Run flow when "${ANCHOR}" is not visible
+14:50:31.303 >> Run flow when "Don.t allow" is visible
+14:50:37.694    SKIPPED  Run flow when "Don.t allow" is visible
+14:50:37.695 >> Run flow when "Skip" is visible
+14:50:37.803    SKIPPED  Run flow when "Skip" is visible
+14:50:37.804 >> Run flow when "Dismiss" is visible
+14:50:37.969    SKIPPED  Run flow when "Dismiss" is visible
+14:50:37.971 >> Run flow when "Ok" is visible
+14:50:38.040    SKIPPED  Run flow when "Ok" is visible
+14:50:38.040 >> Run flow when "Marketplace Day" is visible
+14:50:38.179    SKIPPED  Run flow when "Marketplace Day" is visible
+14:50:38.180 >> Run flow when "Start comparing properties" is visible
+14:50:38.248    SKIPPED  Run flow when "Start comparing properties" is visible
+14:50:38.248 >> Run flow when "Go to the weekly (offer|deal)" is visible
+14:50:38.395    SKIPPED  Run flow when "Go to the weekly (offer|deal)" is visible
+14:50:38.396 >> Run flow when "Update email" is visible
+14:50:38.506    SKIPPED  Run flow when "Update email" is visible
+14:50:38.508 >> Run flow when "Number and Email Already Linked" is visible
+14:50:38.666    SKIPPED  Run flow when "Number and Email Already Linked" is visible
+14:50:38.667 >> Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible
+14:50:38.836    SKIPPED  Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible
+14:50:38.838 >> Run flow when "Maybe Later" is visible
+14:50:39.007    SKIPPED  Run flow when "Maybe Later" is visible
+14:50:39.008 >> Run flow when "Reject cookies" is visible
+14:50:39.120    SKIPPED  Run flow when "Reject cookies" is visible
+14:50:39.122 >> Run flow when "${ANCHOR}" is not visible
+14:50:39.766 >> Wait for animation to end within 5000 ms
+14:50:40.655    COMPLETED  Wait for animation to end within 5000 ms
+14:50:40.656    COMPLETED  Run flow when "${ANCHOR}" is not visible
+14:50:41.220 >> Run flow when "Don.t allow" is visible
+14:50:47.764    SKIPPED  Run flow when "Don.t allow" is visible
+14:50:47.764 >> Run flow when "Skip" is visible
+14:50:47.844    SKIPPED  Run flow when "Skip" is visible
+14:50:47.844 >> Run flow when "Dismiss" is visible
+14:50:47.948    SKIPPED  Run flow when "Dismiss" is visible
+14:50:47.948 >> Run flow when "Ok" is visible
+14:50:48.065    SKIPPED  Run flow when "Ok" is visible
+14:50:48.067 >> Run flow when "Marketplace Day" is visible
+14:50:48.170    SKIPPED  Run flow when "Marketplace Day" is visible
+14:50:48.171 >> Run flow when "Start comparing properties" is visible
+14:50:48.326    SKIPPED  Run flow when "Start comparing properties" is visible
+14:50:48.327 >> Run flow when "Go to the weekly (offer|deal)" is visible
+14:50:48.541    SKIPPED  Run flow when "Go to the weekly (offer|deal)" is visible
+14:50:48.543 >> Run flow when "Update email" is visible
+14:50:48.671    SKIPPED  Run flow when "Update email" is visible
+14:50:48.673 >> Run flow when "Number and Email Already Linked" is visible
+14:50:48.799    SKIPPED  Run flow when "Number and Email Already Linked" is visible
+14:50:48.800 >> Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible
+14:50:48.921    SKIPPED  Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible
+14:50:48.921 >> Run flow when "Maybe Later" is visible
+14:50:49.038    SKIPPED  Run flow when "Maybe Later" is visible
+14:50:49.040 >> Run flow when "Reject cookies" is visible
+14:50:49.201    SKIPPED  Run flow when "Reject cookies" is visible
+14:50:49.202 >> Run flow when "${ANCHOR}" is not visible
+14:50:49.840 >> Wait for animation to end within 5000 ms
+14:50:50.774    COMPLETED  Wait for animation to end within 5000 ms
+14:50:50.775    COMPLETED  Run flow when "${ANCHOR}" is not visible
+14:50:51.434 >> Run flow when "Don.t allow" is visible
+14:50:57.882    SKIPPED  Run flow when "Don.t allow" is visible
+14:50:57.883 >> Run flow when "Skip" is visible
+14:50:58.046    SKIPPED  Run flow when "Skip" is visible
+14:50:58.047 >> Run flow when "Dismiss" is visible
+14:50:58.184    SKIPPED  Run flow when "Dismiss" is visible
+14:50:58.185 >> Run flow when "Ok" is visible
+14:50:58.364    SKIPPED  Run flow when "Ok" is visible
+14:50:58.364 >> Run flow when "Marketplace Day" is visible
+14:50:58.530    SKIPPED  Run flow when "Marketplace Day" is visible
+14:50:58.531 >> Run flow when "Start comparing properties" is visible
+14:50:58.621    SKIPPED  Run flow when "Start comparing properties" is visible
+14:50:58.621 >> Run flow when "Go to the weekly (offer|deal)" is visible
+14:50:58.733    SKIPPED  Run flow when "Go to the weekly (offer|deal)" is visible
+14:50:58.734 >> Run flow when "Update email" is visible
+14:50:58.903    SKIPPED  Run flow when "Update email" is visible
+14:50:58.904 >> Run flow when "Number and Email Already Linked" is visible
+14:50:59.058    SKIPPED  Run flow when "Number and Email Already Linked" is visible
+14:50:59.059 >> Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible
+14:50:59.174    SKIPPED  Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible
+14:50:59.175 >> Run flow when "Maybe Later" is visible
+14:50:59.260    SKIPPED  Run flow when "Maybe Later" is visible
+14:50:59.262 >> Run flow when "Reject cookies" is visible
+14:50:59.409    SKIPPED  Run flow when "Reject cookies" is visible
+14:50:59.410 >> Run flow when "${ANCHOR}" is not visible
+14:50:59.980 >> Wait for animation to end within 5000 ms
+14:51:00.805    COMPLETED  Wait for animation to end within 5000 ms
+14:51:00.807    COMPLETED  Run flow when "${ANCHOR}" is not visible
+14:51:01.380    COMPLETED  Repeat while "${ANCHOR}" is not visible (up to 20 times)
+14:51:01.381 >> Run flow when ${output.npsLeftToCaller !== true} is true
+14:51:01.388 >> Repeat while "(?s).*would you recommend benefiting from Sakani.*" is visible (up to 3 times)
+14:51:08.470    SKIPPED  Repeat while "(?s).*would you recommend benefiting from Sakani.*" is visible (up to 3 times)
+14:51:08.471 >> Assert that "(?s).*would you recommend benefiting from Sakani.*" is not visible
+14:51:09.097    COMPLETED  Assert that "(?s).*would you recommend benefiting from Sakani.*" is not visible
+14:51:09.099    COMPLETED  Run flow when ${output.npsLeftToCaller !== true} is true
+14:51:09.101 >> Run flow when ${output.anchorOptional !== true} is true
+14:51:09.110 >> Repeat while "${ANCHOR}" is not visible (up to 6 times)
+14:51:09.643 >> Assert that "(?s)(?:${ANCHOR}|.*would you recommend benefiting from Sakani.*)" is visible
+14:53:02.237    FAILED  Assert that "(?s)(?:${ANCHOR}|.*would you recommend benefiting from Sakani.*)" is visible
+14:53:02.475    FAILED  Repeat while "${ANCHOR}" is not visible (up to 6 times)
+14:53:02.671    FAILED  Run flow when ${output.anchorOptional !== true} is true
+14:53:02.869    FAILED  Run clear-overlays.yaml
+14:53:03.072    FAILED  Run flow when "Go to the weekly (offer|deal)" is visible
+14:53:03.353    FAILED  Run subflows/login.yaml
+EXIT exit=1 failed=6 first_failed=[14:53:02.237 Assert that "(?s)(?:${ANCHOR}|.*would you recommend benefiting from Sakani.*)" is visible FAILED]
+DONE 14:53:09

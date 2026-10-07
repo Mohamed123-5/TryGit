@@ -1,0 +1,18 @@
+{
+  "flow": "check-eligibility",
+  "file": ".maestro/e2e/check-eligibility.yaml",
+  "suite": "e2e",
+  "tags": [
+    "e2e",
+    "eligibility"
+  ],
+  "startedAt": "2026-10-05T06:25:03.544Z",
+  "durationMs": 754656,
+  "logPath": "report-dashboard/maestro-output/check-eligibility/maestro.log",
+  "status": "FAIL",
+  "exitCode": 1,
+  "failedSteps": 2,
+  "firstFailure": "Repeat while ${output.dobEmptyPasses < 2} is true (up to 12 times)... FAILED",
+  "envReason": null,
+  "npsAppearances": 0
+}

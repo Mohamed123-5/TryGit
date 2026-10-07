@@ -1,0 +1,25 @@
+{
+  "startedAt": "2026-09-28T09:51:43.175Z",
+  "finishedAt": "2026-09-28T10:23:58.398Z",
+  "device": "emulator-5554",
+  "includeE2e": false,
+  "results": [
+    {
+      "flow": "login",
+      "file": ".maestro/regression-readonly/login.yaml",
+      "suite": "regression-readonly",
+      "tags": [
+        "health-check"
+      ],
+      "startedAt": "2026-09-28T09:51:43.553Z",
+      "durationMs": 1934835,
+      "logPath": "report-dashboard/maestro-output/login/maestro.log",
+      "status": "FAIL",
+      "exitCode": 1,
+      "failedSteps": 3,
+      "firstFailure": "Assert that \"${ANCHOR}\" is visible... FAILED",
+      "envReason": null,
+      "npsAppearances": 6
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "flow": "check elgibilty",
+  "file": ".maestro/e2e/check elgibilty.yaml",
+  "suite": "e2e",
+  "tags": [
+    "e2e",
+    "eligibility"
+  ],
+  "startedAt": "2026-10-04T07:46:50.212Z",
+  "durationMs": 401269,
+  "logPath": "report-dashboard/maestro-output/check elgibilty/maestro.log",
+  "status": "FAIL",
+  "exitCode": 1,
+  "failedSteps": 2,
+  "firstFailure": "Repeat while ${output.deedEmptyPasses < 2} is true (up to 12 times)... FAILED",
+  "envReason": null,
+  "npsAppearances": 0
+}

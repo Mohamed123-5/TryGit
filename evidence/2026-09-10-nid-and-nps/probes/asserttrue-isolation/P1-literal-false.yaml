@@ -1,0 +1,4 @@
+appId: fi.iwa.sakani
+name: P1-literal-false
+---
+- assertTrue: false

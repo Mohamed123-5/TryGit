@@ -1,0 +1,625 @@
+check-syntax .maestro/_resume-after-payment.yaml: OK
+check-syntax .maestro/subflows/login.yaml: OK
+check-syntax .maestro/subflows/clear-overlays.yaml: OK
+check-syntax .maestro/subflows/verify-signed-in-account.yaml: OK
+START 12:53:49  maestro test -e NATIONAL_ID=1119880072 .maestro/_resume-after-payment.yaml
+12:54:03.593 >> Assert that ${String(NATIONAL_ID).length === 10 && !/[^0-9]/.test(String(NATIONAL_ID)) && (String(NATIONAL_ID).charAt(0) === "1" || String(NATIONAL_ID).charAt(0) === "2")} is true
+12:54:03.707    COMPLETED  Assert that ${String(NATIONAL_ID).length === 10 && !/[^0-9]/.test(String(NATIONAL_ID)) && (String(NATIONAL_ID).charAt(0) === "1" || String(NATIONAL_ID).charAt(0) === "2")} is true
+12:54:03.709 >> Run ${console.log('FULL JOURNEY TARGET NATIONAL_ID = [' + NATIONAL_ID + ']')}
+12:54:03.727    COMPLETED  Run ${console.log('FULL JOURNEY TARGET NATIONAL_ID = [' + NATIONAL_ID + ']')}
+12:54:03.728 >> Run ${output.targetNationalId = String(NATIONAL_ID)}
+12:54:03.755    COMPLETED  Run ${output.targetNationalId = String(NATIONAL_ID)}
+12:54:03.757 >> Run subflows/clear-overlays.yaml
+12:54:03.795 >> Repeat while "${ANCHOR}" is not visible (up to 20 times)
+12:54:04.885 >> Run flow when "Don.t allow" is visible
+12:54:11.022    SKIPPED  Run flow when "Don.t allow" is visible
+12:54:11.023 >> Run flow when "Skip" is visible
+12:54:11.411    SKIPPED  Run flow when "Skip" is visible
+12:54:11.412 >> Run flow when "Dismiss" is visible
+12:54:11.778    SKIPPED  Run flow when "Dismiss" is visible
+12:54:11.779 >> Run flow when "Ok" is visible
+12:54:12.156    SKIPPED  Run flow when "Ok" is visible
+12:54:12.158 >> Run flow when "Marketplace Day" is visible
+12:54:12.661    SKIPPED  Run flow when "Marketplace Day" is visible
+12:54:12.662 >> Run flow when "Start comparing properties" is visible
+12:54:13.046    SKIPPED  Run flow when "Start comparing properties" is visible
+12:54:13.047 >> Run flow when "Go to the weekly (offer|deal)" is visible
+12:54:13.546    SKIPPED  Run flow when "Go to the weekly (offer|deal)" is visible
+12:54:13.548 >> Run flow when "Update email" is visible
+12:54:13.893    SKIPPED  Run flow when "Update email" is visible
+12:54:13.894 >> Run flow when "Number and Email Already Linked" is visible
+12:54:14.478    SKIPPED  Run flow when "Number and Email Already Linked" is visible
+12:54:14.481 >> Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible
+12:54:14.791 >> Run flow when "(?s)(.*There.s something wrong.*|.*the service is down.*|Error!)" is not visible
+12:54:15.658 >> Run flow when "Submit" is visible
+12:54:15.828 >> Tap on point (73,1434)
+12:54:17.322    COMPLETED  Tap on point (73,1434)
+12:54:17.323 >> Wait for animation to end within 3000 ms
+12:54:19.106    COMPLETED  Wait for animation to end within 3000 ms
+12:54:19.107    COMPLETED  Run flow when "Submit" is visible
+12:54:19.108 >> Run flow when "(?s).*would you recommend benefiting from Sakani.*" is not visible
+12:54:20.394 >> Run ${console.log('NPS - gone after the close-X step')}
+12:54:20.401    COMPLETED  Run ${console.log('NPS - gone after the close-X step')}
+12:54:20.402    COMPLETED  Run flow when "(?s).*would you recommend benefiting from Sakani.*" is not visible
+12:54:20.403 >> Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible
+12:54:26.949 >> Run ${console.log('NPS - still visible after the close X, drag fallback')}
+12:54:26.958    COMPLETED  Run ${console.log('NPS - still visible after the close X, drag fallback')}
+12:54:26.958 >> Swipe from (50%,58%) to (50%,99%) in 400 ms
+12:54:29.516    COMPLETED  Swipe from (50%,58%) to (50%,99%) in 400 ms
+12:54:29.516 >> Wait for animation to end within 4000 ms
+12:54:30.592    COMPLETED  Wait for animation to end within 4000 ms
+12:54:30.593 >> Run flow when "(?s).*would you recommend benefiting from Sakani.*" is not visible
+12:54:31.317 >> Run ${console.log('NPS - gone after the drag fallback')}
+12:54:31.325    COMPLETED  Run ${console.log('NPS - gone after the drag fallback')}
+12:54:31.326    COMPLETED  Run flow when "(?s).*would you recommend benefiting from Sakani.*" is not visible
+12:54:31.326    COMPLETED  Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible
+12:54:31.326    COMPLETED  Run flow when "(?s)(.*There.s something wrong.*|.*the service is down.*|Error!)" is not visible
+12:54:31.327    COMPLETED  Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible
+12:54:31.328 >> Run flow when "Maybe Later" is visible
+12:54:38.450    SKIPPED  Run flow when "Maybe Later" is visible
+12:54:38.451 >> Run flow when "Reject cookies" is visible
+12:54:38.795    SKIPPED  Run flow when "Reject cookies" is visible
+12:54:38.797 >> Run flow when "${ANCHOR}" is not visible
+12:54:39.536 >> Wait for animation to end within 5000 ms
+12:54:42.327    COMPLETED  Wait for animation to end within 5000 ms
+12:54:42.328    COMPLETED  Run flow when "${ANCHOR}" is not visible
+12:54:43.008 >> Run flow when "Don.t allow" is visible
+12:54:49.473    SKIPPED  Run flow when "Don.t allow" is visible
+12:54:49.473 >> Run flow when "Skip" is visible
+12:54:49.792    SKIPPED  Run flow when "Skip" is visible
+12:54:49.793 >> Run flow when "Dismiss" is visible
+12:54:50.021    SKIPPED  Run flow when "Dismiss" is visible
+12:54:50.021 >> Run flow when "Ok" is visible
+12:54:50.318    SKIPPED  Run flow when "Ok" is visible
+12:54:50.318 >> Run flow when "Marketplace Day" is visible
+12:54:50.679    SKIPPED  Run flow when "Marketplace Day" is visible
+12:54:50.679 >> Run flow when "Start comparing properties" is visible
+12:54:50.977    SKIPPED  Run flow when "Start comparing properties" is visible
+12:54:50.978 >> Run flow when "Go to the weekly (offer|deal)" is visible
+12:54:51.209    SKIPPED  Run flow when "Go to the weekly (offer|deal)" is visible
+12:54:51.210 >> Run flow when "Update email" is visible
+12:54:51.515    SKIPPED  Run flow when "Update email" is visible
+12:54:51.516 >> Run flow when "Number and Email Already Linked" is visible
+12:54:51.870    SKIPPED  Run flow when "Number and Email Already Linked" is visible
+12:54:51.870 >> Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible
+12:54:52.009 >> Run flow when "(?s)(.*There.s something wrong.*|.*the service is down.*|Error!)" is not visible
+12:54:52.743 >> Run flow when "Submit" is visible
+12:54:52.875 >> Tap on point (73,1434)
+12:54:54.119    COMPLETED  Tap on point (73,1434)
+12:54:54.120 >> Wait for animation to end within 3000 ms
+12:54:54.946    COMPLETED  Wait for animation to end within 3000 ms
+12:54:54.946    COMPLETED  Run flow when "Submit" is visible
+12:54:54.946 >> Run flow when "(?s).*would you recommend benefiting from Sakani.*" is not visible
+12:54:55.720 >> Run ${console.log('NPS - gone after the close-X step')}
+12:54:55.727    COMPLETED  Run ${console.log('NPS - gone after the close-X step')}
+12:54:55.728    COMPLETED  Run flow when "(?s).*would you recommend benefiting from Sakani.*" is not visible
+12:54:55.728 >> Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible
+12:55:02.923    SKIPPED  Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible
+12:55:02.924    COMPLETED  Run flow when "(?s)(.*There.s something wrong.*|.*the service is down.*|Error!)" is not visible
+12:55:02.924    COMPLETED  Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible
+12:55:02.924 >> Run flow when "Maybe Later" is visible
+12:55:10.105    SKIPPED  Run flow when "Maybe Later" is visible
+12:55:10.105 >> Run flow when "Reject cookies" is visible
+12:55:10.343    SKIPPED  Run flow when "Reject cookies" is visible
+12:55:10.343 >> Run flow when "${ANCHOR}" is not visible
+12:55:11.000 >> Wait for animation to end within 5000 ms
+12:55:11.993    COMPLETED  Wait for animation to end within 5000 ms
+12:55:11.995    COMPLETED  Run flow when "${ANCHOR}" is not visible
+12:55:12.773 >> Run flow when "Don.t allow" is visible
+12:55:19.159    SKIPPED  Run flow when "Don.t allow" is visible
+12:55:19.159 >> Run flow when "Skip" is visible
+12:55:19.469    SKIPPED  Run flow when "Skip" is visible
+12:55:19.469 >> Run flow when "Dismiss" is visible
+12:55:19.743    SKIPPED  Run flow when "Dismiss" is visible
+12:55:19.743 >> Run flow when "Ok" is visible
+12:55:20.065    SKIPPED  Run flow when "Ok" is visible
+12:55:20.065 >> Run flow when "Marketplace Day" is visible
+12:55:20.337    SKIPPED  Run flow when "Marketplace Day" is visible
+12:55:20.338 >> Run flow when "Start comparing properties" is visible
+12:55:20.558    SKIPPED  Run flow when "Start comparing properties" is visible
+12:55:20.558 >> Run flow when "Go to the weekly (offer|deal)" is visible
+12:55:20.847    SKIPPED  Run flow when "Go to the weekly (offer|deal)" is visible
+12:55:20.847 >> Run flow when "Update email" is visible
+12:55:21.188    SKIPPED  Run flow when "Update email" is visible
+12:55:21.189 >> Run flow when "Number and Email Already Linked" is visible
+12:55:21.390    SKIPPED  Run flow when "Number and Email Already Linked" is visible
+12:55:21.391 >> Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible
+12:55:21.515 >> Run flow when "(?s)(.*There.s something wrong.*|.*the service is down.*|Error!)" is not visible
+12:55:22.161 >> Run flow when "Submit" is visible
+12:55:22.283 >> Tap on point (73,1434)
+12:55:23.494    COMPLETED  Tap on point (73,1434)
+12:55:23.495 >> Wait for animation to end within 3000 ms
+12:55:24.197    COMPLETED  Wait for animation to end within 3000 ms
+12:55:24.197    COMPLETED  Run flow when "Submit" is visible
+12:55:24.197 >> Run flow when "(?s).*would you recommend benefiting from Sakani.*" is not visible
+12:55:25.236 >> Run ${console.log('NPS - gone after the close-X step')}
+12:55:25.240    COMPLETED  Run ${console.log('NPS - gone after the close-X step')}
+12:55:25.240    COMPLETED  Run flow when "(?s).*would you recommend benefiting from Sakani.*" is not visible
+12:55:25.241 >> Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible
+12:55:33.440    SKIPPED  Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible
+12:55:33.440    COMPLETED  Run flow when "(?s)(.*There.s something wrong.*|.*the service is down.*|Error!)" is not visible
+12:55:33.441    COMPLETED  Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible
+12:55:33.441 >> Run flow when "Maybe Later" is visible
+12:55:40.662    SKIPPED  Run flow when "Maybe Later" is visible
+12:55:40.662 >> Run flow when "Reject cookies" is visible
+12:55:40.937    SKIPPED  Run flow when "Reject cookies" is visible
+12:55:40.937 >> Run flow when "${ANCHOR}" is not visible
+12:55:41.541 >> Wait for animation to end within 5000 ms
+12:55:42.625    COMPLETED  Wait for animation to end within 5000 ms
+12:55:42.625    COMPLETED  Run flow when "${ANCHOR}" is not visible
+12:55:43.328 >> Run flow when "Don.t allow" is visible
+12:55:49.838    SKIPPED  Run flow when "Don.t allow" is visible
+12:55:49.838 >> Run flow when "Skip" is visible
+12:55:50.041    SKIPPED  Run flow when "Skip" is visible
+12:55:50.041 >> Run flow when "Dismiss" is visible
+12:55:50.272    SKIPPED  Run flow when "Dismiss" is visible
+12:55:50.273 >> Run flow when "Ok" is visible
+12:55:50.573    SKIPPED  Run flow when "Ok" is visible
+12:55:50.573 >> Run flow when "Marketplace Day" is visible
+12:55:50.792    SKIPPED  Run flow when "Marketplace Day" is visible
+12:55:50.794 >> Run flow when "Start comparing properties" is visible
+12:55:50.989    SKIPPED  Run flow when "Start comparing properties" is visible
+12:55:50.989 >> Run flow when "Go to the weekly (offer|deal)" is visible
+12:55:51.237    SKIPPED  Run flow when "Go to the weekly (offer|deal)" is visible
+12:55:51.237 >> Run flow when "Update email" is visible
+12:55:51.488    SKIPPED  Run flow when "Update email" is visible
+12:55:51.489 >> Run flow when "Number and Email Already Linked" is visible
+12:55:51.652    SKIPPED  Run flow when "Number and Email Already Linked" is visible
+12:55:51.652 >> Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible
+12:55:51.709 >> Run flow when "(?s)(.*There.s something wrong.*|.*the service is down.*|Error!)" is not visible
+12:55:52.420 >> Run flow when "Submit" is visible
+12:55:52.606 >> Tap on point (73,1434)
+12:55:53.794    COMPLETED  Tap on point (73,1434)
+12:55:53.795 >> Wait for animation to end within 3000 ms
+12:55:54.880    COMPLETED  Wait for animation to end within 3000 ms
+12:55:54.881    COMPLETED  Run flow when "Submit" is visible
+12:55:54.881 >> Run flow when "(?s).*would you recommend benefiting from Sakani.*" is not visible
+12:55:55.589 >> Run ${console.log('NPS - gone after the close-X step')}
+12:55:55.592    COMPLETED  Run ${console.log('NPS - gone after the close-X step')}
+12:55:55.593    COMPLETED  Run flow when "(?s).*would you recommend benefiting from Sakani.*" is not visible
+12:55:55.593 >> Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible
+12:56:02.873    SKIPPED  Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible
+12:56:02.873    COMPLETED  Run flow when "(?s)(.*There.s something wrong.*|.*the service is down.*|Error!)" is not visible
+12:56:02.873    COMPLETED  Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible
+12:56:02.873 >> Run flow when "Maybe Later" is visible
+12:56:09.991    SKIPPED  Run flow when "Maybe Later" is visible
+12:56:09.992 >> Run flow when "Reject cookies" is visible
+12:56:10.186    SKIPPED  Run flow when "Reject cookies" is visible
+12:56:10.187 >> Run flow when "${ANCHOR}" is not visible
+12:56:10.945 >> Wait for animation to end within 5000 ms
+12:56:12.027    COMPLETED  Wait for animation to end within 5000 ms
+12:56:12.027    COMPLETED  Run flow when "${ANCHOR}" is not visible
+12:56:12.681 >> Run flow when "Don.t allow" is visible
+12:56:19.369    SKIPPED  Run flow when "Don.t allow" is visible
+12:56:19.370 >> Run flow when "Skip" is visible
+12:56:19.620    SKIPPED  Run flow when "Skip" is visible
+12:56:19.621 >> Run flow when "Dismiss" is visible
+12:56:19.867    SKIPPED  Run flow when "Dismiss" is visible
+12:56:19.867 >> Run flow when "Ok" is visible
+12:56:20.165    SKIPPED  Run flow when "Ok" is visible
+12:56:20.165 >> Run flow when "Marketplace Day" is visible
+12:56:20.570    SKIPPED  Run flow when "Marketplace Day" is visible
+12:56:20.570 >> Run flow when "Start comparing properties" is visible
+12:56:20.827    SKIPPED  Run flow when "Start comparing properties" is visible
+12:56:20.827 >> Run flow when "Go to the weekly (offer|deal)" is visible
+12:56:21.076    SKIPPED  Run flow when "Go to the weekly (offer|deal)" is visible
+12:56:21.076 >> Run flow when "Update email" is visible
+12:56:21.405    SKIPPED  Run flow when "Update email" is visible
+12:56:21.405 >> Run flow when "Number and Email Already Linked" is visible
+12:56:21.728    SKIPPED  Run flow when "Number and Email Already Linked" is visible
+12:56:21.728 >> Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible
+12:56:21.841 >> Run flow when "(?s)(.*There.s something wrong.*|.*the service is down.*|Error!)" is not visible
+12:56:22.477 >> Run flow when "Submit" is visible
+12:56:22.607 >> Tap on point (73,1434)
+12:56:25.540    COMPLETED  Tap on point (73,1434)
+12:56:25.541 >> Wait for animation to end within 3000 ms
+12:56:26.648    COMPLETED  Wait for animation to end within 3000 ms
+12:56:26.649    COMPLETED  Run flow when "Submit" is visible
+12:56:26.649 >> Run flow when "(?s).*would you recommend benefiting from Sakani.*" is not visible
+12:56:27.492 >> Run ${console.log('NPS - gone after the close-X step')}
+12:56:27.496    COMPLETED  Run ${console.log('NPS - gone after the close-X step')}
+12:56:27.496    COMPLETED  Run flow when "(?s).*would you recommend benefiting from Sakani.*" is not visible
+12:56:27.497 >> Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible
+12:56:33.703 >> Run ${console.log('NPS - still visible after the close X, drag fallback')}
+12:56:33.707    COMPLETED  Run ${console.log('NPS - still visible after the close X, drag fallback')}
+12:56:33.707 >> Swipe from (50%,58%) to (50%,99%) in 400 ms
+12:56:34.953    COMPLETED  Swipe from (50%,58%) to (50%,99%) in 400 ms
+12:56:34.953 >> Wait for animation to end within 4000 ms
+12:56:35.938    COMPLETED  Wait for animation to end within 4000 ms
+12:56:35.938 >> Run flow when "(?s).*would you recommend benefiting from Sakani.*" is not visible
+12:56:37.165 >> Run ${console.log('NPS - gone after the drag fallback')}
+12:56:37.170    COMPLETED  Run ${console.log('NPS - gone after the drag fallback')}
+12:56:37.171    COMPLETED  Run flow when "(?s).*would you recommend benefiting from Sakani.*" is not visible
+12:56:37.171    COMPLETED  Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible
+12:56:37.171    COMPLETED  Run flow when "(?s)(.*There.s something wrong.*|.*the service is down.*|Error!)" is not visible
+12:56:37.171    COMPLETED  Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible
+12:56:37.171 >> Run flow when "Maybe Later" is visible
+12:56:45.002    SKIPPED  Run flow when "Maybe Later" is visible
+12:56:45.002 >> Run flow when "Reject cookies" is visible
+12:56:45.257    SKIPPED  Run flow when "Reject cookies" is visible
+12:56:45.257 >> Run flow when "${ANCHOR}" is not visible
+12:56:45.910 >> Wait for animation to end within 5000 ms
+12:56:46.642    COMPLETED  Wait for animation to end within 5000 ms
+12:56:46.642    COMPLETED  Run flow when "${ANCHOR}" is not visible
+12:56:47.477 >> Run flow when "Don.t allow" is visible
+12:56:53.838    SKIPPED  Run flow when "Don.t allow" is visible
+12:56:53.838 >> Run flow when "Skip" is visible
+12:56:54.137    SKIPPED  Run flow when "Skip" is visible
+12:56:54.137 >> Run flow when "Dismiss" is visible
+12:56:54.477    SKIPPED  Run flow when "Dismiss" is visible
+12:56:54.477 >> Run flow when "Ok" is visible
+12:56:54.724    SKIPPED  Run flow when "Ok" is visible
+12:56:54.724 >> Run flow when "Marketplace Day" is visible
+12:56:55.086    SKIPPED  Run flow when "Marketplace Day" is visible
+12:56:55.086 >> Run flow when "Start comparing properties" is visible
+12:56:55.600    SKIPPED  Run flow when "Start comparing properties" is visible
+12:56:55.601 >> Run flow when "Go to the weekly (offer|deal)" is visible
+12:56:55.976    SKIPPED  Run flow when "Go to the weekly (offer|deal)" is visible
+12:56:55.977 >> Run flow when "Update email" is visible
+12:56:56.318    SKIPPED  Run flow when "Update email" is visible
+12:56:56.319 >> Run flow when "Number and Email Already Linked" is visible
+12:56:56.757    SKIPPED  Run flow when "Number and Email Already Linked" is visible
+12:56:56.758 >> Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible
+12:56:56.927 >> Run flow when "(?s)(.*There.s something wrong.*|.*the service is down.*|Error!)" is not visible
+12:56:57.732 >> Run flow when "Submit" is visible
+12:56:57.938 >> Tap on point (73,1434)
+12:56:59.631    COMPLETED  Tap on point (73,1434)
+12:56:59.632 >> Wait for animation to end within 3000 ms
+12:57:04.288    COMPLETED  Wait for animation to end within 3000 ms
+12:57:04.289    COMPLETED  Run flow when "Submit" is visible
+12:57:04.289 >> Run flow when "(?s).*would you recommend benefiting from Sakani.*" is not visible
+12:57:05.329 >> Run ${console.log('NPS - gone after the close-X step')}
+12:57:05.336    COMPLETED  Run ${console.log('NPS - gone after the close-X step')}
+12:57:05.336    COMPLETED  Run flow when "(?s).*would you recommend benefiting from Sakani.*" is not visible
+12:57:05.336 >> Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible
+12:57:08.398 >> Run ${console.log('NPS - still visible after the close X, drag fallback')}
+12:57:08.403    COMPLETED  Run ${console.log('NPS - still visible after the close X, drag fallback')}
+12:57:08.405 >> Swipe from (50%,58%) to (50%,99%) in 400 ms
+12:57:09.637    COMPLETED  Swipe from (50%,58%) to (50%,99%) in 400 ms
+12:57:09.637 >> Wait for animation to end within 4000 ms
+12:57:11.159    COMPLETED  Wait for animation to end within 4000 ms
+12:57:11.161 >> Run flow when "(?s).*would you recommend benefiting from Sakani.*" is not visible
+12:57:11.847 >> Run ${console.log('NPS - gone after the drag fallback')}
+12:57:11.853    COMPLETED  Run ${console.log('NPS - gone after the drag fallback')}
+12:57:11.853    COMPLETED  Run flow when "(?s).*would you recommend benefiting from Sakani.*" is not visible
+12:57:11.854    COMPLETED  Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible
+12:57:11.854    COMPLETED  Run flow when "(?s)(.*There.s something wrong.*|.*the service is down.*|Error!)" is not visible
+12:57:11.855    COMPLETED  Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible
+12:57:11.855 >> Run flow when "Maybe Later" is visible
+12:57:19.773    SKIPPED  Run flow when "Maybe Later" is visible
+12:57:19.775 >> Run flow when "Reject cookies" is visible
+12:57:20.110    SKIPPED  Run flow when "Reject cookies" is visible
+12:57:20.110 >> Run flow when "${ANCHOR}" is not visible
+12:57:20.759 >> Wait for animation to end within 5000 ms
+12:57:22.522    COMPLETED  Wait for animation to end within 5000 ms
+12:57:22.522    COMPLETED  Run flow when "${ANCHOR}" is not visible
+12:57:23.296 >> Run flow when "Don.t allow" is visible
+12:57:29.668    SKIPPED  Run flow when "Don.t allow" is visible
+12:57:29.668 >> Run flow when "Skip" is visible
+12:57:29.909    SKIPPED  Run flow when "Skip" is visible
+12:57:29.909 >> Run flow when "Dismiss" is visible
+12:57:30.137    SKIPPED  Run flow when "Dismiss" is visible
+12:57:30.138 >> Run flow when "Ok" is visible
+12:57:30.375    SKIPPED  Run flow when "Ok" is visible
+12:57:30.375 >> Run flow when "Marketplace Day" is visible
+12:57:30.622    SKIPPED  Run flow when "Marketplace Day" is visible
+12:57:30.622 >> Run flow when "Start comparing properties" is visible
+12:57:30.929    SKIPPED  Run flow when "Start comparing properties" is visible
+12:57:30.929 >> Run flow when "Go to the weekly (offer|deal)" is visible
+12:57:31.103    SKIPPED  Run flow when "Go to the weekly (offer|deal)" is visible
+12:57:31.103 >> Run flow when "Update email" is visible
+12:57:31.283    SKIPPED  Run flow when "Update email" is visible
+12:57:31.283 >> Run flow when "Number and Email Already Linked" is visible
+12:57:31.541    SKIPPED  Run flow when "Number and Email Already Linked" is visible
+12:57:31.542 >> Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible
+12:57:31.686 >> Run flow when "(?s)(.*There.s something wrong.*|.*the service is down.*|Error!)" is not visible
+12:57:32.357 >> Run flow when "Submit" is visible
+12:57:32.442 >> Tap on point (73,1434)
+12:57:33.625    COMPLETED  Tap on point (73,1434)
+12:57:33.625 >> Wait for animation to end within 3000 ms
+12:57:34.623    COMPLETED  Wait for animation to end within 3000 ms
+12:57:34.623    COMPLETED  Run flow when "Submit" is visible
+12:57:34.625 >> Run flow when "(?s).*would you recommend benefiting from Sakani.*" is not visible
+12:57:35.413 >> Run ${console.log('NPS - gone after the close-X step')}
+12:57:35.420    COMPLETED  Run ${console.log('NPS - gone after the close-X step')}
+12:57:35.421    COMPLETED  Run flow when "(?s).*would you recommend benefiting from Sakani.*" is not visible
+12:57:35.421 >> Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible
+12:57:42.602    SKIPPED  Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible
+12:57:42.602    COMPLETED  Run flow when "(?s)(.*There.s something wrong.*|.*the service is down.*|Error!)" is not visible
+12:57:42.602    COMPLETED  Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible
+12:57:42.602 >> Run flow when "Maybe Later" is visible
+12:57:49.827    SKIPPED  Run flow when "Maybe Later" is visible
+12:57:49.827 >> Run flow when "Reject cookies" is visible
+12:57:50.045    SKIPPED  Run flow when "Reject cookies" is visible
+12:57:50.045 >> Run flow when "${ANCHOR}" is not visible
+12:57:50.760 >> Wait for animation to end within 5000 ms
+12:57:51.975    COMPLETED  Wait for animation to end within 5000 ms
+12:57:51.975    COMPLETED  Run flow when "${ANCHOR}" is not visible
+12:57:52.560 >> Run flow when "Don.t allow" is visible
+12:57:59.113    SKIPPED  Run flow when "Don.t allow" is visible
+12:57:59.113 >> Run flow when "Skip" is visible
+12:57:59.383    SKIPPED  Run flow when "Skip" is visible
+12:57:59.383 >> Run flow when "Dismiss" is visible
+12:57:59.608    SKIPPED  Run flow when "Dismiss" is visible
+12:57:59.608 >> Run flow when "Ok" is visible
+12:57:59.837    SKIPPED  Run flow when "Ok" is visible
+12:57:59.837 >> Run flow when "Marketplace Day" is visible
+12:58:00.060    SKIPPED  Run flow when "Marketplace Day" is visible
+12:58:00.060 >> Run flow when "Start comparing properties" is visible
+12:58:00.225    SKIPPED  Run flow when "Start comparing properties" is visible
+12:58:00.225 >> Run flow when "Go to the weekly (offer|deal)" is visible
+12:58:00.403    SKIPPED  Run flow when "Go to the weekly (offer|deal)" is visible
+12:58:00.403 >> Run flow when "Update email" is visible
+12:58:00.699    SKIPPED  Run flow when "Update email" is visible
+12:58:00.699 >> Run flow when "Number and Email Already Linked" is visible
+12:58:00.989    SKIPPED  Run flow when "Number and Email Already Linked" is visible
+12:58:00.989 >> Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible
+12:58:01.086 >> Run flow when "(?s)(.*There.s something wrong.*|.*the service is down.*|Error!)" is not visible
+12:58:01.801 >> Run flow when "Submit" is visible
+12:58:02.400 >> Tap on point (73,1434)
+12:58:03.586    COMPLETED  Tap on point (73,1434)
+12:58:03.586 >> Wait for animation to end within 3000 ms
+12:58:05.991    COMPLETED  Wait for animation to end within 3000 ms
+12:58:05.992    COMPLETED  Run flow when "Submit" is visible
+12:58:05.992 >> Run flow when "(?s).*would you recommend benefiting from Sakani.*" is not visible
+12:58:06.595 >> Run ${console.log('NPS - gone after the close-X step')}
+12:58:06.601    COMPLETED  Run ${console.log('NPS - gone after the close-X step')}
+12:58:06.601    COMPLETED  Run flow when "(?s).*would you recommend benefiting from Sakani.*" is not visible
+12:58:06.601 >> Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible
+12:58:13.480 >> Run ${console.log('NPS - still visible after the close X, drag fallback')}
+12:58:13.484    COMPLETED  Run ${console.log('NPS - still visible after the close X, drag fallback')}
+12:58:13.484 >> Swipe from (50%,58%) to (50%,99%) in 400 ms
+12:58:14.697    COMPLETED  Swipe from (50%,58%) to (50%,99%) in 400 ms
+12:58:14.697 >> Wait for animation to end within 4000 ms
+12:58:15.797    COMPLETED  Wait for animation to end within 4000 ms
+12:58:15.797 >> Run flow when "(?s).*would you recommend benefiting from Sakani.*" is not visible
+12:58:17.166 >> Run ${console.log('NPS - gone after the drag fallback')}
+12:58:17.170    COMPLETED  Run ${console.log('NPS - gone after the drag fallback')}
+12:58:17.170    COMPLETED  Run flow when "(?s).*would you recommend benefiting from Sakani.*" is not visible
+12:58:17.170    COMPLETED  Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible
+12:58:17.170    COMPLETED  Run flow when "(?s)(.*There.s something wrong.*|.*the service is down.*|Error!)" is not visible
+12:58:17.170    COMPLETED  Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible
+12:58:17.170 >> Run flow when "Maybe Later" is visible
+12:58:24.940    SKIPPED  Run flow when "Maybe Later" is visible
+12:58:24.940 >> Run flow when "Reject cookies" is visible
+12:58:25.164    SKIPPED  Run flow when "Reject cookies" is visible
+12:58:25.165 >> Run flow when "${ANCHOR}" is not visible
+12:58:25.915 >> Wait for animation to end within 5000 ms
+12:58:26.812    COMPLETED  Wait for animation to end within 5000 ms
+12:58:26.813    COMPLETED  Run flow when "${ANCHOR}" is not visible
+12:58:27.487 >> Run flow when "Don.t allow" is visible
+12:58:34.001    SKIPPED  Run flow when "Don.t allow" is visible
+12:58:34.001 >> Run flow when "Skip" is visible
+12:58:34.208    SKIPPED  Run flow when "Skip" is visible
+12:58:34.209 >> Run flow when "Dismiss" is visible
+12:58:34.347    SKIPPED  Run flow when "Dismiss" is visible
+12:58:34.347 >> Run flow when "Ok" is visible
+12:58:34.569    SKIPPED  Run flow when "Ok" is visible
+12:58:34.569 >> Run flow when "Marketplace Day" is visible
+12:58:34.766    SKIPPED  Run flow when "Marketplace Day" is visible
+12:58:34.766 >> Run flow when "Start comparing properties" is visible
+12:58:35.021    SKIPPED  Run flow when "Start comparing properties" is visible
+12:58:35.021 >> Run flow when "Go to the weekly (offer|deal)" is visible
+12:58:35.322    SKIPPED  Run flow when "Go to the weekly (offer|deal)" is visible
+12:58:35.322 >> Run flow when "Update email" is visible
+12:58:35.568    SKIPPED  Run flow when "Update email" is visible
+12:58:35.568 >> Run flow when "Number and Email Already Linked" is visible
+12:58:35.813    SKIPPED  Run flow when "Number and Email Already Linked" is visible
+12:58:35.814 >> Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible
+12:58:35.964 >> Run flow when "(?s)(.*There.s something wrong.*|.*the service is down.*|Error!)" is not visible
+12:58:36.649 >> Run flow when "Submit" is visible
+12:58:36.817 >> Tap on point (73,1434)
+12:58:38.110    COMPLETED  Tap on point (73,1434)
+12:58:38.110 >> Wait for animation to end within 3000 ms
+12:58:38.850    COMPLETED  Wait for animation to end within 3000 ms
+12:58:38.850    COMPLETED  Run flow when "Submit" is visible
+12:58:38.851 >> Run flow when "(?s).*would you recommend benefiting from Sakani.*" is not visible
+12:58:39.572 >> Run ${console.log('NPS - gone after the close-X step')}
+12:58:39.575    COMPLETED  Run ${console.log('NPS - gone after the close-X step')}
+12:58:39.575    COMPLETED  Run flow when "(?s).*would you recommend benefiting from Sakani.*" is not visible
+12:58:39.576 >> Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible
+12:58:46.724    SKIPPED  Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible
+12:58:46.724    COMPLETED  Run flow when "(?s)(.*There.s something wrong.*|.*the service is down.*|Error!)" is not visible
+12:58:46.724    COMPLETED  Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible
+12:58:46.724 >> Run flow when "Maybe Later" is visible
+12:58:53.850    SKIPPED  Run flow when "Maybe Later" is visible
+12:58:53.850 >> Run flow when "Reject cookies" is visible
+12:58:54.057    SKIPPED  Run flow when "Reject cookies" is visible
+12:58:54.057 >> Run flow when "${ANCHOR}" is not visible
+12:58:54.817 >> Wait for animation to end within 5000 ms
+12:58:55.760    COMPLETED  Wait for animation to end within 5000 ms
+12:58:55.760    COMPLETED  Run flow when "${ANCHOR}" is not visible
+12:58:56.541 >> Run flow when "Don.t allow" is visible
+12:59:02.877    SKIPPED  Run flow when "Don.t allow" is visible
+12:59:02.877 >> Run flow when "Skip" is visible
+12:59:03.086    SKIPPED  Run flow when "Skip" is visible
+12:59:03.086 >> Run flow when "Dismiss" is visible
+12:59:03.313    SKIPPED  Run flow when "Dismiss" is visible
+12:59:03.314 >> Run flow when "Ok" is visible
+12:59:03.511    SKIPPED  Run flow when "Ok" is visible
+12:59:03.512 >> Run flow when "Marketplace Day" is visible
+12:59:03.836    SKIPPED  Run flow when "Marketplace Day" is visible
+12:59:03.836 >> Run flow when "Start comparing properties" is visible
+12:59:04.112    SKIPPED  Run flow when "Start comparing properties" is visible
+12:59:04.112 >> Run flow when "Go to the weekly (offer|deal)" is visible
+12:59:04.312    SKIPPED  Run flow when "Go to the weekly (offer|deal)" is visible
+12:59:04.312 >> Run flow when "Update email" is visible
+12:59:04.503    SKIPPED  Run flow when "Update email" is visible
+12:59:04.503 >> Run flow when "Number and Email Already Linked" is visible
+12:59:04.830    SKIPPED  Run flow when "Number and Email Already Linked" is visible
+12:59:04.830 >> Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible
+12:59:04.989 >> Run flow when "(?s)(.*There.s something wrong.*|.*the service is down.*|Error!)" is not visible
+12:59:05.582 >> Run flow when "Submit" is visible
+12:59:05.690 >> Tap on point (73,1434)
+12:59:06.849    COMPLETED  Tap on point (73,1434)
+12:59:06.850 >> Wait for animation to end within 3000 ms
+12:59:07.657    COMPLETED  Wait for animation to end within 3000 ms
+12:59:07.657    COMPLETED  Run flow when "Submit" is visible
+12:59:07.657 >> Run flow when "(?s).*would you recommend benefiting from Sakani.*" is not visible
+12:59:09.139 >> Run ${console.log('NPS - gone after the close-X step')}
+12:59:09.143    COMPLETED  Run ${console.log('NPS - gone after the close-X step')}
+12:59:09.143    COMPLETED  Run flow when "(?s).*would you recommend benefiting from Sakani.*" is not visible
+12:59:09.143 >> Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible
+12:59:16.852 >> Run ${console.log('NPS - still visible after the close X, drag fallback')}
+12:59:16.855    COMPLETED  Run ${console.log('NPS - still visible after the close X, drag fallback')}
+12:59:16.856 >> Swipe from (50%,58%) to (50%,99%) in 400 ms
+12:59:18.073    COMPLETED  Swipe from (50%,58%) to (50%,99%) in 400 ms
+12:59:18.074 >> Wait for animation to end within 4000 ms
+12:59:19.102    COMPLETED  Wait for animation to end within 4000 ms
+12:59:19.102 >> Run flow when "(?s).*would you recommend benefiting from Sakani.*" is not visible
+12:59:20.012 >> Run ${console.log('NPS - gone after the drag fallback')}
+12:59:20.017    COMPLETED  Run ${console.log('NPS - gone after the drag fallback')}
+12:59:20.017    COMPLETED  Run flow when "(?s).*would you recommend benefiting from Sakani.*" is not visible
+12:59:20.017    COMPLETED  Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible
+12:59:20.017    COMPLETED  Run flow when "(?s)(.*There.s something wrong.*|.*the service is down.*|Error!)" is not visible
+12:59:20.018    COMPLETED  Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible
+12:59:20.018 >> Run flow when "Maybe Later" is visible
+12:59:27.152    SKIPPED  Run flow when "Maybe Later" is visible
+12:59:27.152 >> Run flow when "Reject cookies" is visible
+12:59:27.477    SKIPPED  Run flow when "Reject cookies" is visible
+12:59:27.477 >> Run flow when "${ANCHOR}" is not visible
+12:59:28.278 >> Wait for animation to end within 5000 ms
+12:59:30.456    COMPLETED  Wait for animation to end within 5000 ms
+12:59:30.457    COMPLETED  Run flow when "${ANCHOR}" is not visible
+12:59:31.179 >> Run flow when "Don.t allow" is visible
+12:59:37.642    SKIPPED  Run flow when "Don.t allow" is visible
+12:59:37.643 >> Run flow when "Skip" is visible
+12:59:37.967    SKIPPED  Run flow when "Skip" is visible
+12:59:37.967 >> Run flow when "Dismiss" is visible
+12:59:38.221    SKIPPED  Run flow when "Dismiss" is visible
+12:59:38.221 >> Run flow when "Ok" is visible
+12:59:38.455    SKIPPED  Run flow when "Ok" is visible
+12:59:38.456 >> Run flow when "Marketplace Day" is visible
+12:59:38.652    SKIPPED  Run flow when "Marketplace Day" is visible
+12:59:38.652 >> Run flow when "Start comparing properties" is visible
+12:59:38.879    SKIPPED  Run flow when "Start comparing properties" is visible
+12:59:38.879 >> Run flow when "Go to the weekly (offer|deal)" is visible
+12:59:39.123    SKIPPED  Run flow when "Go to the weekly (offer|deal)" is visible
+12:59:39.125 >> Run flow when "Update email" is visible
+12:59:39.500    SKIPPED  Run flow when "Update email" is visible
+12:59:39.501 >> Run flow when "Number and Email Already Linked" is visible
+12:59:39.692    SKIPPED  Run flow when "Number and Email Already Linked" is visible
+12:59:39.692 >> Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible
+12:59:39.838 >> Run flow when "(?s)(.*There.s something wrong.*|.*the service is down.*|Error!)" is not visible
+12:59:40.512 >> Run flow when "Submit" is visible
+12:59:40.653 >> Tap on point (73,1434)
+12:59:41.785    COMPLETED  Tap on point (73,1434)
+12:59:41.786 >> Wait for animation to end within 3000 ms
+12:59:42.829    COMPLETED  Wait for animation to end within 3000 ms
+12:59:42.829    COMPLETED  Run flow when "Submit" is visible
+12:59:42.830 >> Run flow when "(?s).*would you recommend benefiting from Sakani.*" is not visible
+12:59:43.522 >> Run ${console.log('NPS - gone after the close-X step')}
+12:59:43.529    COMPLETED  Run ${console.log('NPS - gone after the close-X step')}
+12:59:43.529    COMPLETED  Run flow when "(?s).*would you recommend benefiting from Sakani.*" is not visible
+12:59:43.530 >> Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible
+12:59:50.753    SKIPPED  Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible
+12:59:50.754    COMPLETED  Run flow when "(?s)(.*There.s something wrong.*|.*the service is down.*|Error!)" is not visible
+12:59:50.754    COMPLETED  Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible
+12:59:50.754 >> Run flow when "Maybe Later" is visible
+12:59:58.049    SKIPPED  Run flow when "Maybe Later" is visible
+12:59:58.050 >> Run flow when "Reject cookies" is visible
+12:59:58.278    SKIPPED  Run flow when "Reject cookies" is visible
+12:59:58.278 >> Run flow when "${ANCHOR}" is not visible
+12:59:59.040 >> Wait for animation to end within 5000 ms
+12:59:59.977    COMPLETED  Wait for animation to end within 5000 ms
+12:59:59.978    COMPLETED  Run flow when "${ANCHOR}" is not visible
+13:00:00.693 >> Run flow when "Don.t allow" is visible
+13:00:07.153    SKIPPED  Run flow when "Don.t allow" is visible
+13:00:07.153 >> Run flow when "Skip" is visible
+13:00:07.362    SKIPPED  Run flow when "Skip" is visible
+13:00:07.363 >> Run flow when "Dismiss" is visible
+13:00:07.606    SKIPPED  Run flow when "Dismiss" is visible
+13:00:07.606 >> Run flow when "Ok" is visible
+13:00:07.826    SKIPPED  Run flow when "Ok" is visible
+13:00:07.826 >> Run flow when "Marketplace Day" is visible
+13:00:07.961    SKIPPED  Run flow when "Marketplace Day" is visible
+13:00:07.961 >> Run flow when "Start comparing properties" is visible
+13:00:08.141    SKIPPED  Run flow when "Start comparing properties" is visible
+13:00:08.141 >> Run flow when "Go to the weekly (offer|deal)" is visible
+13:00:08.324    SKIPPED  Run flow when "Go to the weekly (offer|deal)" is visible
+13:00:08.324 >> Run flow when "Update email" is visible
+13:00:08.532    SKIPPED  Run flow when "Update email" is visible
+13:00:08.533 >> Run flow when "Number and Email Already Linked" is visible
+13:00:08.638    SKIPPED  Run flow when "Number and Email Already Linked" is visible
+13:00:08.638 >> Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible
+13:00:08.707 >> Run flow when "(?s)(.*There.s something wrong.*|.*the service is down.*|Error!)" is not visible
+13:00:09.367 >> Run flow when "Submit" is visible
+13:00:09.540 >> Tap on point (73,1434)
+13:00:10.690    COMPLETED  Tap on point (73,1434)
+13:00:10.690 >> Wait for animation to end within 3000 ms
+13:00:12.046    COMPLETED  Wait for animation to end within 3000 ms
+13:00:12.046    COMPLETED  Run flow when "Submit" is visible
+13:00:12.046 >> Run flow when "(?s).*would you recommend benefiting from Sakani.*" is not visible
+13:00:13.257 >> Run ${console.log('NPS - gone after the close-X step')}
+13:00:13.261    COMPLETED  Run ${console.log('NPS - gone after the close-X step')}
+13:00:13.261    COMPLETED  Run flow when "(?s).*would you recommend benefiting from Sakani.*" is not visible
+13:00:13.261 >> Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible
+13:00:20.640 >> Run ${console.log('NPS - still visible after the close X, drag fallback')}
+13:00:20.643    COMPLETED  Run ${console.log('NPS - still visible after the close X, drag fallback')}
+13:00:20.643 >> Swipe from (50%,58%) to (50%,99%) in 400 ms
+13:00:21.752    COMPLETED  Swipe from (50%,58%) to (50%,99%) in 400 ms
+13:00:21.752 >> Wait for animation to end within 4000 ms
+13:00:22.690    COMPLETED  Wait for animation to end within 4000 ms
+13:00:22.690 >> Run flow when "(?s).*would you recommend benefiting from Sakani.*" is not visible
+13:00:23.347 >> Run ${console.log('NPS - gone after the drag fallback')}
+13:00:23.350    COMPLETED  Run ${console.log('NPS - gone after the drag fallback')}
+13:00:23.350    COMPLETED  Run flow when "(?s).*would you recommend benefiting from Sakani.*" is not visible
+13:00:23.350    COMPLETED  Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible
+13:00:23.350    COMPLETED  Run flow when "(?s)(.*There.s something wrong.*|.*the service is down.*|Error!)" is not visible
+13:00:23.351    COMPLETED  Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible
+13:00:23.351 >> Run flow when "Maybe Later" is visible
+13:00:30.472    SKIPPED  Run flow when "Maybe Later" is visible
+13:00:30.472 >> Run flow when "Reject cookies" is visible
+13:00:30.706    SKIPPED  Run flow when "Reject cookies" is visible
+13:00:30.706 >> Run flow when "${ANCHOR}" is not visible
+13:00:30.825    SKIPPED  Run flow when "${ANCHOR}" is not visible
+13:00:30.939    COMPLETED  Repeat while "${ANCHOR}" is not visible (up to 20 times)
+13:00:30.939 >> Repeat while "(?s).*would you recommend benefiting from Sakani.*" is visible (up to 3 times)
+13:00:31.938 >> Run flow when "(?s)(.*There.s something wrong.*|.*the service is down.*|Error!)" is not visible
+13:00:32.594 >> Run flow when "Submit" is visible
+13:00:32.694 >> Tap on point (73,1434)
+13:00:33.905    COMPLETED  Tap on point (73,1434)
+13:00:33.906 >> Wait for animation to end within 3000 ms
+13:00:34.883    COMPLETED  Wait for animation to end within 3000 ms
+13:00:34.883    COMPLETED  Run flow when "Submit" is visible
+13:00:34.883 >> Run flow when "(?s).*would you recommend benefiting from Sakani.*" is not visible
+13:00:35.588 >> Run ${console.log('NPS - gone after the close-X step')}
+13:00:35.592    COMPLETED  Run ${console.log('NPS - gone after the close-X step')}
+13:00:35.592    COMPLETED  Run flow when "(?s).*would you recommend benefiting from Sakani.*" is not visible
+13:00:35.592 >> Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible
+13:00:42.758    SKIPPED  Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible
+13:00:42.758    COMPLETED  Run flow when "(?s)(.*There.s something wrong.*|.*the service is down.*|Error!)" is not visible
+13:00:43.822 >> Run flow when "(?s)(.*There.s something wrong.*|.*the service is down.*|Error!)" is not visible
+13:00:44.456 >> Run flow when "Submit" is visible
+13:00:44.509 >> Tap on point (73,1434)
+13:00:45.754    COMPLETED  Tap on point (73,1434)
+13:00:45.754 >> Wait for animation to end within 3000 ms
+13:00:46.754    COMPLETED  Wait for animation to end within 3000 ms
+13:00:46.754    COMPLETED  Run flow when "Submit" is visible
+13:00:46.754 >> Run flow when "(?s).*would you recommend benefiting from Sakani.*" is not visible
+13:00:47.468 >> Run ${console.log('NPS - gone after the close-X step')}
+13:00:47.472    COMPLETED  Run ${console.log('NPS - gone after the close-X step')}
+13:00:47.472    COMPLETED  Run flow when "(?s).*would you recommend benefiting from Sakani.*" is not visible
+13:00:47.472 >> Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible
+13:00:54.630    SKIPPED  Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible
+13:00:54.630    COMPLETED  Run flow when "(?s)(.*There.s something wrong.*|.*the service is down.*|Error!)" is not visible
+13:00:55.632 >> Run flow when "(?s)(.*There.s something wrong.*|.*the service is down.*|Error!)" is not visible
+13:00:56.315 >> Run flow when "Submit" is visible
+13:00:56.439 >> Tap on point (73,1434)
+13:00:57.569    COMPLETED  Tap on point (73,1434)
+13:00:57.569 >> Wait for animation to end within 3000 ms
+13:00:58.399    COMPLETED  Wait for animation to end within 3000 ms
+13:00:58.400    COMPLETED  Run flow when "Submit" is visible
+13:00:58.400 >> Run flow when "(?s).*would you recommend benefiting from Sakani.*" is not visible
+13:00:59.039 >> Run ${console.log('NPS - gone after the close-X step')}
+13:00:59.044    COMPLETED  Run ${console.log('NPS - gone after the close-X step')}
+13:00:59.044    COMPLETED  Run flow when "(?s).*would you recommend benefiting from Sakani.*" is not visible
+13:00:59.044 >> Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible
+13:01:06.119    SKIPPED  Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible
+13:01:06.119    COMPLETED  Run flow when "(?s)(.*There.s something wrong.*|.*the service is down.*|Error!)" is not visible
+13:01:07.503    COMPLETED  Repeat while "(?s).*would you recommend benefiting from Sakani.*" is visible (up to 3 times)
+13:01:07.503 >> Assert that "(?s).*would you recommend benefiting from Sakani.*" is not visible
+13:01:25.471    FAILED  Assert that "(?s).*would you recommend benefiting from Sakani.*" is not visible
+13:01:25.863    FAILED  Run subflows/clear-overlays.yaml
+EXIT exit=1 failed=2 first_failed=[13:01:25.471 Assert that "(?s).*would you recommend benefiting from Sakani.*" is not visible FAILED]
+DONE 13:01:32

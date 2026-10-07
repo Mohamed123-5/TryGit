@@ -1,0 +1,30 @@
+===== LIVE 2 RETRY: -e NATIONAL_ID=1000011487 =====
+  exit=0
+  maestro.log: C:/Users/Mohammed Elkatry/.maestro/tests/2026-09-10_101238/maestro.log
+  resolved target: NATIONAL_ID = [1000011487]
+  typed: InputTextCommand(text=1000011487 
+  ID assertions:       2 textRegex=1000011487 
+  eligibility: COMPLETED
+  FAILED steps: 
+  logcat lines captured: 6631
+  app-process errors/auth hits:
+    09-10 10:13:05.569 26026 26026 I HomeWidgets: [Native][HomeWidgets][SaveWidget]: sakani_home_widget_app_token
+    09-10 10:13:05.571 26026 26026 I HomeWidgets: [Native][HomeWidgets][SaveWidget]: sakani_home_widget_refresh_token
+    09-10 10:13:05.641 26026 26296 D Adjust  : Making request to url: https://app.adjust.com/attribution?initiated_by=sdk&gps_adid_attempt=1&api_level=34&event_buffering_enab
+    09-10 10:13:06.403 26026 26162 V Adjust  : Post body: gps_adid_attempt=1&country=US&api_level=34&event_buffering_enabled=0&hardware_name=UE1A.230829.036.A4&app_version=4.
+    09-10 10:14:10.122   562  1131 D ContentCapturePerUserService: Notified activity assist data for activity: Token{dac9383 ActivityRecord{499e23d u0 fi.iwa.sakani/com.ad.sa
+    09-10 10:14:30.234 26026 26026 I HomeWidgets: [Native][HomeWidgets][SaveWidget]: sakani_home_widget_app_token
+    09-10 10:14:30.387 26026 26026 I HomeWidgets: [Native][HomeWidgets][SaveWidget]: sakani_home_widget_refresh_token
+    09-10 10:14:31.990   562  2978 D ContentCapturePerUserService: Notified activity assist data for activity: Token{dac9383 ActivityRecord{499e23d u0 fi.iwa.sakani/com.ad.sa
+===== LIVE 3 RETRY: NPS recovery (tab navigation only) =====
+  exit=0
+  maestro.log: C:/Users/Mohammed Elkatry/.maestro/tests/2026-09-10_101550/maestro.log
+  NPS sheet met (handler condition true): 0
+  EXECUTED recovery drags at 58%: 0
+  EXECUTED element taps (not definitions):
+          4 Tap on "Account\s*Tab 4 of 4" COMPLETED
+          4 Tap on "Home\s*Tab 1 of 4" COMPLETED
+  EXECUTED taps on Submit or a 0-10 rating: 0
+  final sweep:      12 COMPLETED 
+  post-recovery anchor proof: ran=0 skipped=12
+  FAILED steps: 

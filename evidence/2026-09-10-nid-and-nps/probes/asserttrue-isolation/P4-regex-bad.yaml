@@ -1,0 +1,4 @@
+appId: fi.iwa.sakani
+name: P4-regex-bad
+---
+- assertTrue: ${/^[12][0-9]+$/.test("12345")}

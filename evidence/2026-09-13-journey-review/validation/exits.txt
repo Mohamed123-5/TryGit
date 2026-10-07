@@ -1,0 +1,29 @@
+START 09:31:55
+check-syntax .maestro/full-journey.yaml: OK
+check-syntax .maestro/_journey-until-reserve.yaml: OK
+check-syntax .maestro/_journey-final-checks.yaml: OK
+check-syntax .maestro/_probe-identity-gate.yaml: OK
+check-syntax .maestro/subflows/clear-overlays.yaml: OK
+R1-no-national-id exit=1 failed=1 appLaunches=0 start=09:32:13 end=09:32:28 run=2026-09-13_093215 first_failed=[Assert that ${String(NATIONAL_ID).length === 10 && !/[^0-9]/.test(String(NATIONAL_ID)) && (String(NATIONAL_ID)]
+R2-empty-national-id exit=1 failed=1 appLaunches=0 start=09:32:28 end=09:32:40 run=2026-09-13_093230 first_failed=[Assert that ${String(NATIONAL_ID).length === 10 && !/[^0-9]/.test(String(NATIONAL_ID)) && (String(NATIONAL_ID)]
+R3-malformed-national-id exit=1 failed=1 appLaunches=0 start=09:32:40 end=09:32:49 run=2026-09-13_093241 first_failed=[Assert that ${String(NATIONAL_ID).length === 10 && !/[^0-9]/.test(String(NATIONAL_ID)) && (String(NATIONAL_ID)]
+R4-H1-until-reserve exit=0 failed=0 appLaunches=2 start=09:32:50 end=09:37:05 run=2026-09-13_093251 first_failed=[]
+R5-identity-negative exit=1 failed=2 appLaunches=2 start=09:37:05 end=09:39:50 run=2026-09-13_093708 first_failed=[Assert that "${NATIONAL_ID}" is visible FAILED]
+R6-H2-final-checks exit=1 failed=1 appLaunches=2 start=09:39:50 end=09:44:16 run=2026-09-13_093951 first_failed=[Assert that "Documents" is visible FAILED]
+END 09:44:16
+R6b-H2-final-checks exit=1 failed=2 run=2026-09-13_094738
+r6c exit=0 failed=0 start=10:13:40 end=10:17:51 dir=D:/Automation/Maestro-Mobile/evidence/2026-09-13-journey-review/validation/r6c-101318 first_failed=[]
+resume-nps exit=1 failed=2 start=12:53:49 end=13:01:32 dir=D:/Automation/Maestro-Mobile/evidence/2026-09-13-journey-review/validation/resume-nps-125328 first_failed=[13:01:25.471 Assert that "(?s).*would you recommend benefiting from Sakani.*" is not visible FAILED]
+resume-account exit=0 failed=0 start=13:10:11 end=13:10:59 dir=D:/Automation/Maestro-Mobile/evidence/2026-09-13-journey-review/validation/resume-account-130952 first_failed=[]
+contract exit=1 failed=3 start=13:24:27 end=13:29:45 dir=D:/Automation/Maestro-Mobile/evidence/2026-09-13-journey-review/validation/contract-132414 first_failed=[13:29:38.551 Assert that "(?s).*would you recommend benefiting from Sakani.*" is not visible FAILED]
+stage8 exit=0 failed=0 start=13:32:33 end=13:35:05 dir=D:/Automation/Maestro-Mobile/evidence/2026-09-13-journey-review/validation/stage8-133215 first_failed=[]
+paidend exit=0 failed=0 start=13:47:56 end=13:49:48 dir=D:/Automation/Maestro-Mobile/evidence/2026-09-13-journey-review/validation/paidend-134742 first_failed=[]
+probe-1119880072 exit=1 failed=1 start=14:21:25 end=14:25:17 dir=D:/Automation/Maestro-Mobile/evidence/2026-09-13-journey-review/validation/probe-1119880072-142112 first_failed=[14:25:12.778 Assert that "Invoice number" is visible FAILED]
+probe-1119880062 exit=1 failed=1 start=14:25:31 end=14:29:20 dir=D:/Automation/Maestro-Mobile/evidence/2026-09-13-journey-review/validation/probe-1119880062-142517 first_failed=[14:29:15.228 Assert that "Invoice number" is visible FAILED]
+probe-1000011487 exit=1 failed=1 start=14:29:33 end=14:33:23 dir=D:/Automation/Maestro-Mobile/evidence/2026-09-13-journey-review/validation/probe-1000011487-142920 first_failed=[14:33:17.737 Assert that ${output.cancelAllowed === true} is true FAILED]
+probe2-1000011487 exit=0 failed=0 start=14:35:31 end=14:39:02 dir=D:/Automation/Maestro-Mobile/evidence/2026-09-13-journey-review/validation/probe2-1000011487-143519 first_failed=[]
+probe2-1119880072 exit=1 failed=1 start=14:39:16 end=14:43:02 dir=D:/Automation/Maestro-Mobile/evidence/2026-09-13-journey-review/validation/probe2-1119880072-143902 first_failed=[14:42:57.335 Assert that ${output.cancelAllowed === true} is true FAILED]
+cancel exit=1 failed=6 start=14:45:47 end=14:53:09 dir=D:/Automation/Maestro-Mobile/evidence/2026-09-13-journey-review/validation/cancel-144534 first_failed=[14:53:02.237 Assert that "(?s)(?:${ANCHOR}|.*would you recommend benefiting from Sakani.*)" is visible FAILED]
+cancel2 exit=1 failed=5 start=14:55:13 end=15:00:41 dir=D:/Automation/Maestro-Mobile/evidence/2026-09-13-journey-review/validation/cancel2-145459 first_failed=[15:00:36.309 Assert that "(?s)(?:${ANCHOR}|.*would you recommend benefiting from Sakani.*)" is visible FAILED]
+cancel3 exit=0 failed=0 start=15:22:58 end=15:28:42 dir=D:/Automation/Maestro-Mobile/evidence/2026-09-13-journey-review/validation/cancel3-152245 first_failed=[]
+cancel-top exit=0 failed=0 start=11:49:52 end=11:54:53 dir=D:/Automation/Maestro-Mobile/evidence/2026-09-13-journey-review/validation/cancel-top-114939 first_failed=[]

@@ -1,0 +1,14 @@
+  # The project this journey books. It is FOUND through Marketplace search, by name - never by
+  # its position in a list. See the STAGE 2 header for why THIS project is the default.
+  #   PROJECT        - matched against the search result; must identify exactly one project.
+  #   PROJECT_SEARCH - what is typed into search.
+  # Both are overridable, with the same self-referencing form as NATIONAL_ID and for the same
+  # reason (a literal here would silently beat `-e`):
+  #   maestro test -e PROJECT=<exact name> -e PROJECT_SEARCH=<term> -e MODULE=<module> .maestro/full-journey.yaml
+  # Arabic defaults are kept here, in this UTF-8 file: Arabic passed through `maestro.bat -e`
+  # crosses the Windows console code page.
+  PROJECT: '${typeof PROJECT === "undefined" ? "مساكن طيبة المدائن EN" : String(PROJECT)}'
+  PROJECT_SEARCH: '${typeof PROJECT_SEARCH === "undefined" ? "طيبة" : String(PROJECT_SEARCH)}'
+  # The module (property type) to book inside that project. MODULE must match the project's
+  # inventory - the default project sells Apartments.
+  MODULE: '${typeof MODULE === "undefined" ? "Apartment" : String(MODULE)}'

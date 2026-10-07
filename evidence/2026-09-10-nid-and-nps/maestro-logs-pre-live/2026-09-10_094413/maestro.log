@@ -1,0 +1,87 @@
+09:44:13.303 [ INFO] maestro.cli.report.TestDebugReporter.logSystemInfo: Debug output path: C:\Users\Mohammed Elkatry\.maestro\tests\2026-09-10_094413
+09:44:13.307 [ INFO] MAESTRO.logSystemInfo: ---- System Info ----
+09:44:13.308 [ INFO] MAESTRO.logSystemInfo: Maestro Version: 2.9.0
+09:44:13.310 [ INFO] MAESTRO.logSystemInfo: CI: Undefined
+09:44:13.310 [ INFO] MAESTRO.logSystemInfo: OS Name: Windows 11
+09:44:13.310 [ INFO] MAESTRO.logSystemInfo: OS Version: 10.0
+09:44:13.310 [ INFO] MAESTRO.logSystemInfo: Architecture: amd64
+09:44:13.311 [ INFO] MAESTRO.logSystemInfo: Java Version: 26
+09:44:13.313 [ INFO] MAESTRO.logSystemInfo: Xcode Version: null
+09:44:13.315 [ INFO] MAESTRO.logSystemInfo: Flutter Version: Undefined
+09:44:13.320 [ INFO] MAESTRO.logSystemInfo: Flutter Channel: Undefined
+09:44:13.321 [ INFO] MAESTRO.logSystemInfo: ---------------------
+09:44:14.217 [ INFO] maestro.cli.command.TestCommand.runShardSuite: [shard 1] Selected device emulator-5554 using port 51560 with execution plan ExecutionPlan(flowsToRun=[C:\Users\Mohammed Elkatry\AppData\Local\Temp\claude\d--Automation-Maestro-Mobile\28e891c4-d342-4645-8a23-a5196b13181c\scratchpad\asserttrue\P5-length-bad.yaml], sequence=FlowSequence(flows=[], continueOnFailure=true), workspaceConfig=WorkspaceConfig(flows=null, includeTags=null, excludeTags=null, executionOrder=null, baselineBranch=null, notifications=null, disableRetries=false, platform=PlatformConfiguration(android=AndroidConfiguration(disableAnimations=false), ios=IOSConfiguration(disableAnimations=false, snapshotKeyHonorModalViews=null)), testOutputDir=null))
+09:44:14.316 [ERROR] maestro.cli.session.MaestroSessionManager.newSession$lambda$0: Failed to record heartbeat
+java.io.IOException: The process cannot access the file because another process has locked a portion of the file
+	at java.base/java.io.FileOutputStream.writeBytes(Native Method)
+	at java.base/java.io.FileOutputStream.write(FileOutputStream.java:332)
+	at kotlin.io.FilesKt__FileReadWriteKt.writeTextImpl(FileReadWrite.kt:160)
+	at kotlin.io.FilesKt__FileReadWriteKt.writeText(FileReadWrite.kt:145)
+	at kotlin.io.FilesKt__FileReadWriteKt.writeText$default(FileReadWrite.kt:144)
+	at maestro.cli.db.KeyValueStore.commit(KeyValueStore.kt:50)
+	at maestro.cli.db.KeyValueStore.set$lambda$3$lambda$2(KeyValueStore.kt:23)
+	at maestro.cli.db.KeyValueStore.withFileLock(KeyValueStore.kt:62)
+	at maestro.cli.db.KeyValueStore.set(KeyValueStore.kt:20)
+	at maestro.cli.session.SessionStore.heartbeat(SessionStore.kt:12)
+	at maestro.cli.session.MaestroSessionManager.newSession$lambda$0(MaestroSessionManager.kt:98)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:545)
+	at java.base/java.util.concurrent.FutureTask.runAndReset(FutureTask.java:371)
+	at java.base/java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:310)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1090)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:614)
+	at java.base/java.lang.Thread.run(Thread.java:1516)
+09:44:14.337 [DEBUG] io.micrometer.common.util.internal.logging.InternalLoggerFactory.newDefaultFactory: Using SLF4J as the default logging framework
+09:44:16.457 [ INFO] maestro.cli.runner.TestRunner.runSingle: Running flow P5-length-bad.yaml...
+09:44:16.517 [ INFO] maestro.Maestro.cachedDeviceInfo_delegate$lambda$0: Getting device info
+09:44:16.993 [ INFO] maestro.Maestro.cachedDeviceInfo_delegate$lambda$0: Got device info: DeviceInfo(platform=ANDROID, widthPixels=1080, heightPixels=2400, widthGrid=1080, heightGrid=2400)
+09:44:17.195 [ INFO] maestro.cli.runner.MaestroCommandRunner.runCommands$lambda$0: Define variables RUNNING
+09:44:17.217 [ INFO] maestro.cli.runner.MaestroCommandRunner.runCommands$lambda$11: Define variables metadata CommandMetadata(numberOfRuns=null, evaluatedCommand=MaestroCommand(defineVariablesCommand=DefineVariablesCommand(env={MAESTRO_FILENAME=P5-length-bad, MAESTRO_DEVICE_UDID=emulator-5554, MAESTRO_SHARD_ID=1, MAESTRO_SHARD_INDEX=0}, label=null, optional=false)), logMessages=[], insight=Insight(message=, level=NONE), aiReasoning=null, labeledCommand=null)
+09:44:17.221 [ INFO] maestro.cli.runner.MaestroCommandRunner.runCommands$lambda$2: Define variables COMPLETED
+09:44:17.234 [ INFO] maestro.cli.runner.MaestroCommandRunner.runCommands$lambda$0: Apply configuration RUNNING
+09:44:17.239 [ INFO] maestro.cli.runner.MaestroCommandRunner.runCommands$lambda$11: Apply configuration metadata CommandMetadata(numberOfRuns=null, evaluatedCommand=MaestroCommand(applyConfigurationCommand=ApplyConfigurationCommand(config=MaestroConfig(appId=fi.iwa.sakani, name=P5-length-bad, tags=[], ext={}, onFlowStart=null, onFlowComplete=null, properties={}), label=null, optional=false)), logMessages=[], insight=Insight(message=, level=NONE), aiReasoning=null, labeledCommand=null)
+09:44:17.240 [ INFO] maestro.cli.runner.MaestroCommandRunner.runCommands$lambda$2: Apply configuration COMPLETED
+09:44:17.240 [ INFO] maestro.cli.runner.MaestroCommandRunner.runCommands$lambda$0: Assert that ${String("12345").length === 10} is true RUNNING
+09:44:19.329 [ERROR] maestro.cli.session.MaestroSessionManager.newSession$lambda$0: Failed to record heartbeat
+java.io.IOException: The process cannot access the file because another process has locked a portion of the file
+	at java.base/java.io.FileOutputStream.writeBytes(Native Method)
+	at java.base/java.io.FileOutputStream.write(FileOutputStream.java:332)
+	at kotlin.io.FilesKt__FileReadWriteKt.writeTextImpl(FileReadWrite.kt:160)
+	at kotlin.io.FilesKt__FileReadWriteKt.writeText(FileReadWrite.kt:145)
+	at kotlin.io.FilesKt__FileReadWriteKt.writeText$default(FileReadWrite.kt:144)
+	at maestro.cli.db.KeyValueStore.commit(KeyValueStore.kt:50)
+	at maestro.cli.db.KeyValueStore.set$lambda$3$lambda$2(KeyValueStore.kt:23)
+	at maestro.cli.db.KeyValueStore.withFileLock(KeyValueStore.kt:62)
+	at maestro.cli.db.KeyValueStore.set(KeyValueStore.kt:20)
+	at maestro.cli.session.SessionStore.heartbeat(SessionStore.kt:12)
+	at maestro.cli.session.MaestroSessionManager.newSession$lambda$0(MaestroSessionManager.kt:98)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:545)
+	at java.base/java.util.concurrent.FutureTask.runAndReset(FutureTask.java:371)
+	at java.base/java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:310)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1090)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:614)
+	at java.base/java.lang.Thread.run(Thread.java:1516)
+09:44:19.445 [ INFO] maestro.cli.runner.MaestroCommandRunner.runCommands$lambda$11: Assert that ${String("12345").length === 10} is true metadata CommandMetadata(numberOfRuns=null, evaluatedCommand=MaestroCommand(assertConditionCommand=AssertConditionCommand(condition=Condition(platform=null, visible=null, notVisible=null, scriptCondition=false, label=null), timeout=null, label=null, optional=false)), logMessages=[], insight=Insight(message=, level=NONE), aiReasoning=null, labeledCommand=null)
+09:44:19.787 [ERROR] maestro.orchestra.Orchestra.executeCommands: [Command execution] CommandFailed: Assertion is false: false is true
+09:44:20.820 [ INFO] maestro.Maestro.takeScreenshot: Taking screenshot
+09:44:20.825 [TRACE] maestro.utils.ScreenshotUtils.takeScreenshot: Taking screenshot to output sink
+09:44:21.231 [ INFO] maestro.cli.runner.MaestroCommandRunner.runCommands$lambda$4: Assert that ${String("12345").length === 10} is true FAILED
+09:44:23.225 [ INFO] maestro.cli.report.TestDebugReporter.deleteOldFiles: Performing purge of logs older than 14 days from C:\Users\Mohammed Elkatry\.maestro\tests
+09:44:24.329 [ERROR] maestro.cli.session.MaestroSessionManager.newSession$lambda$0: Failed to record heartbeat
+java.io.IOException: The process cannot access the file because another process has locked a portion of the file
+	at java.base/java.io.FileOutputStream.writeBytes(Native Method)
+	at java.base/java.io.FileOutputStream.write(FileOutputStream.java:332)
+	at kotlin.io.FilesKt__FileReadWriteKt.writeTextImpl(FileReadWrite.kt:160)
+	at kotlin.io.FilesKt__FileReadWriteKt.writeText(FileReadWrite.kt:145)
+	at kotlin.io.FilesKt__FileReadWriteKt.writeText$default(FileReadWrite.kt:144)
+	at maestro.cli.db.KeyValueStore.commit(KeyValueStore.kt:50)
+	at maestro.cli.db.KeyValueStore.set$lambda$3$lambda$2(KeyValueStore.kt:23)
+	at maestro.cli.db.KeyValueStore.withFileLock(KeyValueStore.kt:62)
+	at maestro.cli.db.KeyValueStore.set(KeyValueStore.kt:20)
+	at maestro.cli.session.SessionStore.heartbeat(SessionStore.kt:12)
+	at maestro.cli.session.MaestroSessionManager.newSession$lambda$0(MaestroSessionManager.kt:98)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:545)
+	at java.base/java.util.concurrent.FutureTask.runAndReset(FutureTask.java:371)
+	at java.base/java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:310)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1090)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:614)
+	at java.base/java.lang.Thread.run(Thread.java:1516)

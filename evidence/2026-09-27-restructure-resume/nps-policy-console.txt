@@ -1,0 +1,8 @@
+=== 11:40:12 START login (NPS before launch: 0) ===
+=== 11:47:26 END login exit=1 ===
+=== 11:47:29 START unit (NPS before launch: 0) ===
+=== 11:48:53 END unit exit=1 ===
+cmd: Can't find service: activity
+cmd: Can't find service: package
+=== 11:48:53 START wallet (NPS before launch: 0) ===
+=== 11:48:58 END wallet exit=1 ===

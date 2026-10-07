@@ -1,0 +1,673 @@
+# DESTRUCTIVE: creates ONE real booking on the PAID booking-fee path ("Pay booking fee") and PAYS
+# its booking fee at the PRE payment gateway with the approved mada TEST card. Explicit run
+# authorization required. First matching unit only. Inventory with a fee of 0 is unsuitable test data
+# and fails before anything is committed - it never falls back to the zero-fee path (full-journey.yaml).
+# PASS only when the new Active + Paid booking of the SAME unit is opened on Booking Details.
+#
+# NEVER RE-RUN AUTOMATICALLY once "Pay now" has been tapped: a payment may have succeeded. Any later
+# failure is investigated read-only on the existing booking.
+appId: fi.iwa.sakani
+name: Full Journey - paid booking fee
+tags:
+  - critical
+env:
+
+  NATIONAL_ID: '${typeof NATIONAL_ID === "undefined" ? "1000011487" : String(NATIONAL_ID)}'
+  PROJECT: '${typeof PROJECT === "undefined" ? "مساكن طيبة المدائن EN" : String(PROJECT)}'
+  PROJECT_SEARCH: '${typeof PROJECT_SEARCH === "undefined" ? "طيبة" : String(PROJECT_SEARCH)}'
+  MODULE: '${typeof MODULE === "undefined" ? "Apartment" : String(MODULE)}'
+  # APPROVED PRE TEST payment card (user, 30/09/2026) - a TEST instrument for the staging gateway
+  # only; never a real card. Declared ONCE here and referenced by name; overridable with -e.
+  # Never log PAYMENT_CARD_NUMBER or PAYMENT_CARD_CVV - only the masked form (scheme + last 4).
+  PAYMENT_CARD_SCHEME: '${typeof PAYMENT_CARD_SCHEME === "undefined" ? "mada" : String(PAYMENT_CARD_SCHEME)}'
+  PAYMENT_CARD_NUMBER: '${typeof PAYMENT_CARD_NUMBER === "undefined" ? "4464040000000007" : String(PAYMENT_CARD_NUMBER)}'
+  # MM/YY; the gateway inserts its own separator, so only the four digits are typed (see Stage 5b).
+  PAYMENT_CARD_EXPIRY: '${typeof PAYMENT_CARD_EXPIRY === "undefined" ? "10/52" : String(PAYMENT_CARD_EXPIRY)}'
+  PAYMENT_CARD_CVV: '${typeof PAYMENT_CARD_CVV === "undefined" ? "222" : String(PAYMENT_CARD_CVV)}'
+  # The gateway marks Card Holder as required and no holder name came with the test card. "TEST USER"
+  # is the holder text typed in the PAID runs of 09/09/2026 (evidence) - it is not card data.
+  PAYMENT_CARD_HOLDER: '${typeof PAYMENT_CARD_HOLDER === "undefined" ? "TEST USER" : String(PAYMENT_CARD_HOLDER)}'
+---
+- evalScript: ${console.log('FULL JOURNEY TARGET NATIONAL_ID = [' + NATIONAL_ID + ']')}
+# Payment variables resolved and well-formed BEFORE anything else runs; only the masked card is logged.
+- evalScript: ${output.cardExpiryDigits = String(PAYMENT_CARD_EXPIRY).replace(/[^0-9]/g, '')}
+- evalScript: ${output.cardMasked = String(PAYMENT_CARD_SCHEME) + ' ****' + String(PAYMENT_CARD_NUMBER).slice(-4)}
+- assertTrue:
+    # Dollar-free on purpose (a second dollar sign inside the expression makes Maestro 2.9.0 skip it).
+    condition: ${String(PAYMENT_CARD_NUMBER).length >= 12 && !/[^0-9]/.test(String(PAYMENT_CARD_NUMBER)) && output.cardExpiryDigits.length === 4 && String(PAYMENT_CARD_CVV).length >= 3 && String(PAYMENT_CARD_CVV).length <= 4 && !/[^0-9]/.test(String(PAYMENT_CARD_CVV))}
+    label: "PAYMENT DATA - PAYMENT_CARD_NUMBER / PAYMENT_CARD_EXPIRY / PAYMENT_CARD_CVV are missing or malformed"
+- evalScript: "${console.log('PAYMENT CARD - ' + output.cardMasked + ' (test card)')}"
+- assertTrue: ${String(NATIONAL_ID).length === 10 && !/[^0-9]/.test(String(NATIONAL_ID)) && (String(NATIONAL_ID).charAt(0) === "1" || String(NATIONAL_ID).charAt(0) === "2")}
+
+# The shared login helper owns authentication and its proof; the journey starts straight after it.
+- launchApp:
+    clearState: true
+- runFlow:
+    file: ../subflows/login.yaml
+    env:
+      NATIONAL_ID: ${NATIONAL_ID}
+
+- tapOn: 'Explore\s*Tab 2 of 4'
+- runFlow:
+    file: ../subflows/clear-overlays.yaml
+    env:
+      ANCHOR: "Registered Interests"
+# (clear-overlays itself ends with assertVisible on its ANCHOR - no second wait for it here.)
+
+- tapOn: "(Construction Status|Ready Units|Readymade|Offplan|Land)"
+- waitForAnimationToEnd:
+    timeout: 8000
+
+# The two filter sheets are alternatives: in all 14 saved runs "Start searching" appeared and
+# "Apply" never did, and the absence check for "Apply" cost ~7 s every time. It now runs only when
+# the "Start searching" sheet did not.
+- evalScript: ${output.startSearchingSheet = false}
+- runFlow:
+    when:
+      visible: "Start searching"
+    commands:
+      - evalScript: ${output.startSearchingSheet = true}
+      - tapOn: "Buy"
+      - assertVisible: "Offplan"
+      - tapOn: "Offplan"
+      - tapOn: "Start searching"
+
+- runFlow:
+    when:
+      true: ${output.startSearchingSheet !== true}
+    commands:
+      - runFlow:
+          when:
+            visible: "Apply"
+          commands:
+            - tapOn: "Clear"
+            - waitForAnimationToEnd:
+                timeout: 5000
+            - assertVisible: "Offplan"
+            - tapOn: "Offplan"
+            - tapOn: "Apply"
+
+- waitForAnimationToEnd:
+    timeout: 20000
+
+- extendedWaitUntil:
+    visible: "Offplan"
+    timeout: 45000
+- extendedWaitUntil:
+    visible: 'Projects\s*Tab 1 of 2'
+    timeout: 45000
+- takeScreenshot: journey-2-marketplace
+# FAST PATH: we are on the results list (Projects tab proven above), where the search sheet is not
+# open - one tap on the search bar, then wait for its sheet. Run 30/09 14:48: the old loop spent
+# 4.3 s on the tap and 7.1 s more only to find "Popular locations" already there. The original
+# guarded loop stays as the fallback when the sheet does not open.
+- evalScript: ${output.searchSheetOpen = false}
+- runFlow:
+    optional: true
+    commands:
+      - tapOn:
+          point: "55%,11%"
+      - extendedWaitUntil:
+          visible: "Popular locations"
+          timeout: 10000
+      - evalScript: ${output.searchSheetOpen = true}
+- runFlow:
+    when:
+      true: ${output.searchSheetOpen !== true}
+    commands:
+      - repeat:
+          times: 3
+          commands:
+            - runFlow:
+                when:
+                  notVisible: "Popular locations"
+                commands:
+                  - tapOn:
+                      point: "55%,11%"
+                  - waitForAnimationToEnd:
+                      timeout: 8000
+- extendedWaitUntil:
+    visible: "Popular locations"
+    timeout: 30000
+- tapOn: "Enter Region, City, Neighborhood, Street, Project, Developer, Building Number, Block Number"
+- inputText: ${PROJECT_SEARCH}
+
+# Results arrive grouped - Location, Property, Developer. Projects are listed under "Property";
+# a "Location" row can also contain the search term (a land-plan "Project ..."), so the tap is
+# constrained to the full project name AND to rows below the "Property" header.
+- extendedWaitUntil:
+    visible: "Property"
+    timeout: 30000
+- takeScreenshot: journey-2-search-results
+- tapOn:
+    text: "(?s).*${PROJECT}.*"
+    below:
+      text: "Property"
+
+# Opening a project raises the one-off "Start comparing properties" coach mark over it on a
+# fresh install (seen 10/09/2026); the helper closes it with Back - never its CTA - and stops at
+# the project page.
+- runFlow:
+    file: ../subflows/clear-overlays.yaml
+    env:
+      ANCHOR: "About this project"
+
+# --- Destination check: Project Details, and it is a bookable Offplan project.
+- extendedWaitUntil:
+    visible: "View units"
+    timeout: 45000
+- assertVisible: "About this project"
+- assertVisible: "Bookings open"
+- assertVisible: "(?s).*available units.*"
+
+# The project-type assertion this whole flow exists for. "Units under construction" is STG's
+# label for Offplan; a Ready Units project renders "Ready Units" here and fails this line
+# immediately, which is the intended behaviour.
+- scrollUntilVisible:
+    element:
+      text: "Project type"
+    direction: DOWN
+    timeout: 45000
+- assertVisible: "Units under construction"
+- runFlow:
+    when:
+      visible: "Target audience"
+    commands:
+      - assertVisible: "For all"
+
+- assertVisible: "Payment methods"
+- assertVisible: "Cash"
+
+# ==========================================================================================
+# STAGE 3 - Module inside the project, then a unit inside that module
+# ==========================================================================================
+
+- tapOn: "View units"
+- extendedWaitUntil:
+    visible: "(?s).*Unit list.*"
+    timeout: 45000
+- runFlow:
+    when:
+      visible: "Property type"
+    commands:
+      - tapOn: "Property type"
+      - extendedWaitUntil:
+          visible: "Apply"
+          timeout: 20000
+      - assertVisible: ${MODULE}
+      - tapOn: ${MODULE}
+      - tapOn: "Apply"
+      - extendedWaitUntil:
+          visible: "(?s).*Unit list.*"
+          timeout: 45000
+
+- assertNotVisible: "Scrim"
+
+- extendedWaitUntil:
+    visible: "(?s).*(Available|matched).*"
+    timeout: 45000
+- tapOn: "(?s).*${MODULE}s? (Available|matched).*"
+
+# Destination check: inside the module, listing its units.
+- extendedWaitUntil:
+    visible: "Eligibility type"
+    timeout: 45000
+- assertVisible: "(?s).*Prices.*"
+
+# Preserve the selected card for the same-booking proof. Observed 29/09/2026: the card title
+# "Apartment 999-182" is <block>-<unit number> of the unit on the booking summary.
+- copyTextFrom:
+    text: '(?s)${MODULE} [0-9A-Za-z-]+\n.*'
+    index: 0
+- evalScript: ${output.selectedUnitCard = String(maestro.copiedText)}
+- tapOn:
+    text: '(?s)${MODULE} [0-9A-Za-z-]+\n.*'
+    index: 0
+
+# Destination check: Unit Details for a unit of the selected module, and it is reservable.
+- extendedWaitUntil:
+    visible: "Mortgage Calculator"
+    timeout: 45000
+- assertVisible: "(?s).*Unit Price.*"
+- assertVisible: "Reserve unit"
+- takeScreenshot: journey-3-unit-details
+
+# ==========================================================================================
+# STAGE 4 - Reserve the unit
+# ==========================================================================================
+
+- tapOn: "Reserve unit"
+
+# OPTIONAL "reserving another unit" dialog - shown only when the account already holds a pending
+# booking on ANOTHER unit (observed 29/09 15:29, 16:51 and 30/09 14:53, PRE-4.7.6-1283):
+#   "Are you sure?" / "You are reserving another unit in project <project>. Click here to view
+#   current booking. Click 'Yes' to discard current booking and continue reserve this unit. ..."
+#   buttons No / Yes.
+# DECIDED BEHAVIOUR (user, 30/09/2026): ALWAYS "Yes" - discard the earlier pending booking and
+# reserve the unit THIS journey selected. Never "No", never "Click here". Matched on its own
+# message, so no other "Are you sure?" dialog can take this tap.
+- extendedWaitUntil:
+    visible: "(?s)(Booking summary|You are reserving another unit.*)"
+    timeout: 45000
+- runFlow:
+    when:
+      visible: "(?s)You are reserving another unit.*"
+    commands:
+      - assertVisible: "Are you sure?"
+      - evalScript: "${console.log('RESERVE - pending booking on another unit; discarding it with Yes and reserving this unit')}"
+      - takeScreenshot: journey-4-reserve-another-unit-dialog
+      - tapOn:
+          text: "^Yes$"
+          retryTapIfNoChange: false
+      - extendedWaitUntil:
+          notVisible: "Are you sure?"
+          timeout: 15000
+          label: "RESERVE - pending booking confirmation dialog did not close after Yes"
+
+- extendedWaitUntil:
+    visible: "Booking summary"
+    timeout: 45000
+- assertVisible: "Please check your reservation details below and click Confirm booking."
+- extendedWaitUntil:
+    visible: "Booking Details"
+    timeout: 30000
+
+- scrollUntilVisible:
+    element:
+      text: "Project Type"
+    direction: DOWN
+    timeout: 30000
+
+# Second project-type gate, at the last point before the reservation is committed. This
+# screen spells it "Off-plan", hyphenated, where Project Details spells the same fact
+# "Units under construction"; each is matched where it is actually rendered.
+- assertVisible: "Project Type"
+- assertVisible: "(?s).*Off-?plan.*"
+
+# Read the fee label, then enforce the business-path and numeric-fee gates below.
+- scrollUntilVisible:
+    element:
+      text: "Booking Fee"
+    direction: DOWN
+    timeout: 30000
+- assertVisible: "Booking Fee"
+- takeScreenshot: journey-4-booking-summary
+
+# PAID PATH ONLY. The fee is read from the rendered summary and must be a number above 0. A fee
+# of 0 is unsuitable test data for THIS journey and stops it here, before anything is committed -
+# it never falls back to the zero-fee path (that is full-journey.yaml). The fee is not hardcoded:
+# it has been SAR 8,855 on this project (09-13/09/2026) but may differ per unit/project.
+- assertVisible: "Unit booking"
+- copyTextFrom:
+    text: '[0-9][0-9,]*(\.[0-9]+)?'
+    below: "Booking Fee"
+    above: "Booking disclaimer"
+# Normalised: currency text/symbols, commas and spaces removed; only digits and a decimal point kept.
+- evalScript: ${output.bookingFee = Number(String(maestro.copiedText).replace(/[^0-9.]/g, ""))}
+- evalScript: "${console.log('BOOKING SUMMARY - Booking Fee rendered as [' + maestro.copiedText + '] = ' + output.bookingFee)}"
+- assertTrue:
+    condition: ${output.bookingFee > 0}
+    label: "PAID JOURNEY - Booking Fee is zero; paid test data is not active"
+- assertNotVisible:
+    text: "Confirm booking"
+    label: "TEST DATA - summary offers Confirm booking (zero-fee path): unit unsuitable for the PAID journey"
+- assertVisible:
+    text: "Pay booking fee"
+    label: "PRECONDITION - paid summary must expose Pay booking fee"
+
+# Unit identity for the same-booking proof - identical to full-journey.yaml.
+- copyTextFrom:
+    text: '[0-9]+'
+    below: "Block"
+- evalScript: ${output.unitBlock = String(maestro.copiedText)}
+- copyTextFrom:
+    text: '[0-9]+'
+    below:
+      text: "${MODULE}"
+      index: 0
+- evalScript: ${output.unitNumber = String(maestro.copiedText)}
+- evalScript: "${console.log('PAID UNIT - card [' + String(output.selectedUnitCard).replace(/\\n/g, ' | ') + '] block [' + output.unitBlock + '] ' + MODULE + ' [' + output.unitNumber + '] fee [' + output.bookingFee + ']')}"
+- assertTrue:
+    condition: ${String(output.selectedUnitCard).indexOf(output.unitBlock + '-' + output.unitNumber) >= 0}
+    label: "PRECONDITION - booking summary is not for the selected unit card"
+
+# ==========================================================================================
+# STAGE 5 - Acknowledge the booking disclaimer, then Pay booking fee
+# ==========================================================================================
+- scrollUntilVisible:
+    element:
+      text: "I have read and understood the Booking disclaimer"
+    direction: DOWN
+    timeout: 30000
+- assertVisible: "Booking disclaimer"
+- assertVisible: "I have read and understood the Booking disclaimer"
+- waitForAnimationToEnd:
+    timeout: 5000
+
+# CHECKBOX STATE - same widget and same proof as full-journey.yaml: it exposes no semantic state
+# (checked/selected identical ticked and unticked, probe 2026-09-29_164304), so it is proven by its
+# own pixels against the ticked reference captured on this device. The ONLY difference on the paid
+# summary is the button below it: "Pay booking fee" instead of "Confirm booking", so the selector's
+# `above` relation names that button. Tapped only when it does not match the ticked reference, at
+# most once; the ticked state is then REQUIRED before Pay booking fee.
+# NOT YET OBSERVED LIVE on a paid summary: if the checkbox renders differently there, the required
+# assertion below stops the run BEFORE any payment step.
+- evalScript: ${output.disclaimerTicked = false}
+- runFlow:
+    optional: true
+    commands:
+      - assertScreenshot:
+          path: ../reference-screenshots/booking/disclaimer-ticked.png
+          cropOn:
+            leftOf: "I have read and understood the Booking disclaimer"
+            below: "Read all"
+            above: "Pay booking fee"
+          thresholdPercentage: 95
+      - evalScript: ${output.disclaimerTicked = true}
+- runFlow:
+    when:
+      true: ${output.disclaimerTicked !== true}
+    commands:
+      - evalScript: "${console.log('DISCLAIMER - checkbox does not match the ticked reference; ticking it once')}"
+      - tapOn:
+          leftOf: "I have read and understood the Booking disclaimer"
+          below: "Read all"
+          above: "Pay booking fee"
+          retryTapIfNoChange: false
+      - waitForAnimationToEnd:
+          timeout: 5000
+- assertScreenshot:
+    path: ../reference-screenshots/booking/disclaimer-ticked.png
+    cropOn:
+      leftOf: "I have read and understood the Booking disclaimer"
+      below: "Read all"
+      above: "Pay booking fee"
+    thresholdPercentage: 95
+    label: "DISCLAIMER - the Booking disclaimer checkbox is not ticked"
+- evalScript: "${console.log('DISCLAIMER - acknowledgement proven by the ticked checkbox pixels (already ticked on arrival=' + output.disclaimerTicked + ')')}"
+- takeScreenshot: journey-paid-5-before-pay
+
+# ONE tap, no Maestro-level re-tap. "Pay booking fee" exposes no reliable enabled state (Flutter
+# reports enabled=true on the disabled CTA), so its actionability is proven by the destination:
+# the payment gateway must open.
+- tapOn:
+    text: "Pay booking fee"
+    retryTapIfNoChange: false
+- assertNotVisible:
+    text: '(?s)(.*There.s something wrong.*|.*the service is down.*|Error!)'
+    label: "PAY - the product reported an error after Pay booking fee"
+
+# ==========================================================================================
+# STAGE 5b - Payment gateway (observed 09-13/09/2026, PAID with this card; steps as proven then)
+# ==========================================================================================
+# "Pay booking fee" opens the NHC "Immediate Payment" gateway in a WebView. The gateway loads
+# slowly in PRE (hence its longer waits). It renders in Arabic by default and is switched to
+# English first so every selector below is stable text.
+- extendedWaitUntil:
+    visible: "Payment Gate"
+    timeout: 60000
+    label: "PAY - the payment gateway did not open after Pay booking fee"
+- extendedWaitUntil:
+    visible: "(?s).*(Immediate Payment|الدفع اللحظي).*"
+    timeout: 90000
+- runFlow:
+    when:
+      visible: "English"
+    commands:
+      - tapOn: "English"
+      - waitForAnimationToEnd:
+          timeout: 8000
+
+# These labels identify the gateway; they do not assert its numeric payable amount.
+- assertVisible: "Wanted Amount To Be Paid"
+- assertVisible: "Payment Methods"
+- takeScreenshot: journey-paid-6-gateway
+
+# Mada, not Visa: the supplied test card's BIN (446404) is a mada BIN.
+- tapOn: "Pay With Mada"
+
+# The form paints its fields while a spinner is still over them, and typing into it during that
+# window fails SILENTLY (text appended to the card number). Wait for the labels to be exposed
+# individually, then let the form settle. Labels are matched with an optional space before a
+# LITERAL asterisk: the same gateway has rendered both "Card Holder*" and "Card Holder *".
+- extendedWaitUntil:
+    visible: 'Card Number ?\*'
+    timeout: 90000
+- extendedWaitUntil:
+    visible: 'Card Holder ?\*'
+    timeout: 60000
+- waitForAnimationToEnd:
+    timeout: 10000
+
+# Each field is addressed by the label above it and cleared first: the gateway keeps what an
+# earlier attempt left and silently APPENDS otherwise.
+# Card fields - approved mada TEST card, referenced ONLY by variable name. No screenshot is taken
+# while card data is on screen, and nothing here logs the card number or CVV.
+- tapOn:
+    below:
+      text: 'Card Number ?\*'
+- eraseText:
+    charactersToErase: 30
+- inputText: ${PAYMENT_CARD_NUMBER}
+- hideKeyboard
+- tapOn:
+    below:
+      text: 'Expiry Date ?\*'
+- eraseText:
+    charactersToErase: 10
+# Four digits only (MMYY from PAYMENT_CARD_EXPIRY): the gateway inserts its own separator; typing
+# "12/52" was re-formatted a second time (09/09/2026).
+- inputText: ${output.cardExpiryDigits}
+- hideKeyboard
+- tapOn:
+    below:
+      text: 'Card Holder ?\*'
+# Card Holder is a required gateway field (label ends in "*"). No holder name came with the test
+# card, so PAYMENT_CARD_HOLDER (default "TEST USER", the text used in the PAID runs of 09/09/2026)
+# is typed - never the CVV, which would put CVV text in a visible field.
+- eraseText:
+    charactersToErase: 30
+- inputText: ${PAYMENT_CARD_HOLDER}
+- hideKeyboard
+
+# CVV is below the fold; its label sits close to the WebView's bottom edge, hence 60%.
+- scrollUntilVisible:
+    element:
+      text: 'CVV ?\*'
+    direction: DOWN
+    visibilityPercentage: 60
+    timeout: 30000
+- tapOn:
+    below:
+      text: 'CVV ?\*'
+- inputText: ${PAYMENT_CARD_CVV}
+- hideKeyboard
+- evalScript: "${console.log('PAYMENT - card fields filled with ' + output.cardMasked + ' (number/CVV not logged)')}"
+- assertVisible: "Pay now"
+
+# PAYMENT SAFETY GATE - checked on the LIVE gateway, BEFORE paying. After "Pay now" the terminal
+# state is detected partly by the app leaving the foreground (the environment ribbon disappearing),
+# which is only meaningful if the ribbon IS on screen while the gateway is processing. The gateway
+# is an in-app WebView inside MainActivity (logcat 10/09/2026), but no saved hierarchy proves the
+# ribbon over it - so it is proven HERE, and without it nothing is paid.
+- evalScript: ${output.ribbonOnGateway = false}
+- runFlow:
+    when:
+      visible: 'PRE-[0-9]+(\.[0-9]+)*-[0-9]+'
+    commands:
+      - evalScript: ${output.ribbonOnGateway = true}
+- assertTrue:
+    condition: ${output.ribbonOnGateway === true}
+    label: "PAY SAFETY - the app ribbon is not visible on the gateway, so payment completion cannot be detected safely - STOPPED BEFORE Pay now (nothing paid)"
+
+# ONE tap - never re-sent, never retried: a second submission could charge twice. From here on the
+# journey must NEVER be re-run automatically.
+- tapOn:
+    text: "Pay now"
+    retryTapIfNoChange: false
+- evalScript: "${console.log('PAY NOW SUBMITTED ONCE - ' + output.cardMasked + ', fee [' + output.bookingFee + ']. Do NOT re-run this journey automatically from here.')}"
+
+# PAYMENT TERMINAL STATE - state-driven, never a blind timer, never a relaunch while processing.
+# Evidence (run 2026-09-10_170119, logcat): "Pay now" 17:07:50 -> the app logged
+# booking_fee_payment_completed at 17:08:03.7 -> it left the WebView at 17:08:04.4 -> the process died
+# at 17:08:06.5 (SIGFPE in the emulator GL library, the same crash as 29-30/09). So the evidenced
+# terminal states are:
+#   app-left-foreground - the ribbon (proven on the gateway above) is gone: the app process is no
+#                         longer on screen, which in the evidence happened only AFTER completion;
+#   sakani-screen       - the app is back on a known Sakani screen (Account tab / Booking Details).
+# While the gateway is still showing (ribbon present, no Sakani screen) it is still processing: the
+# loop keeps waiting - each pass waits up to ~7 s for the ribbon to go and ~7 s for a Sakani screen,
+# 12 passes (~170 s) against an observed completion of 13.6 s. No terminal state -> FAIL WITHOUT
+# relaunching, so nothing can interrupt a payment that is still in flight.
+- evalScript: ${output.payTerminal = ''}
+- repeat:
+    times: 12
+    commands:
+      - runFlow:
+          when:
+            true: ${output.payTerminal === ''}
+          commands:
+            - runFlow:
+                when:
+                  notVisible: 'PRE-[0-9]+(\.[0-9]+)*-[0-9]+'
+                commands:
+                  - evalScript: ${output.payTerminal = 'app-left-foreground'}
+                  # CONFIRMED, not a single read: if the ribbon comes back within the next lookup
+                  # (a transient hierarchy gap during a WebView transition), it was not terminal.
+                  - runFlow:
+                      when:
+                        visible: 'PRE-[0-9]+(\.[0-9]+)*-[0-9]+'
+                      commands:
+                        - evalScript: ${output.payTerminal = ''}
+            - runFlow:
+                when:
+                  true: ${output.payTerminal === ''}
+                commands:
+                  - runFlow:
+                      when:
+                        visible: '(Account\s*Tab 4 of 4|Booking Details\s*Tab 1 of 2)'
+                      commands:
+                        - evalScript: ${output.payTerminal = 'sakani-screen'}
+- takeScreenshot: journey-paid-8-payment-terminal
+- evalScript: "${console.log('PAYMENT TERMINAL STATE - [' + (output.payTerminal || 'none') + ']')}"
+- assertTrue:
+    condition: ${output.payTerminal !== ''}
+    label: "PAY - no terminal state after Pay now (gateway may still be processing) - NOT relaunched; do NOT re-run, investigate the booking read-only"
+
+# FOREGROUND EVIDENCE - informational only, as in full-journey.yaml (not a PASS/FAIL condition).
+- evalScript: ${output.appInForegroundAfterPayment = output.payTerminal === 'sakani-screen'}
+- runFlow:
+    when:
+      true: ${output.appInForegroundAfterPayment !== true}
+    commands:
+      - evalScript: "${console.log('APP LEFT FOREGROUND after payment (see device logcat); relaunching to reach the persisted booking')}"
+
+
+# ==========================================================================================
+# STAGE 6 - Prove the booking in the product's own record: My bookings -> Active
+# ==========================================================================================
+# Baseline (read-only probe, 29/09/2026): this account had no Active booking before the run.
+# Leave the post-confirm screen through the Account tab when it is there; otherwise a warm
+# relaunch (session kept - proven 29/09/2026 and after payment 09-13/09/2026) returns to Home.
+- runFlow:
+    when:
+      notVisible: '(?s)(Account\s*Tab 4 of 4|.*would you recommend benefiting from Sakani.*)'
+    commands:
+      - evalScript: "${console.log('AFTER PAYMENT - no Account tab on screen; warm relaunch to Home')}"
+      - launchApp
+# Observed 29/09/2026: after the relaunch Home is covered by the satisfaction survey (D-12,
+# "Overall, how satisfied are you...") which hides the tab bar; the shared helper dismisses it.
+- runFlow:
+    file: ../subflows/clear-overlays.yaml
+    env:
+      ANCHOR: 'Account\s*Tab 4 of 4'
+# FAST PATH FIRST, shared helpers as the fallback (same pattern as cancel-booking.yaml, measured
+# 44 s -> 4.8 s). Each helper pass pays ~7 s for the NPS absence check plus ~7 s for its exit check
+# (probe 29/09 11:36: Account 22.5 s, My bookings -> Active 19.0 s). The helper runs only if the
+# direct tap did not reach its destination - NPS covering the tab included - and it still asserts
+# the same destination.
+- evalScript: ${output.accountReached = false}
+- runFlow:
+    optional: true
+    commands:
+      - tapOn:
+          text: 'Account\s*Tab 4 of 4'
+          retryTapIfNoChange: false
+      - extendedWaitUntil:
+          visible: "My bookings"
+          timeout: 15000
+      - evalScript: ${output.accountReached = true}
+- runFlow:
+    when:
+      true: ${output.accountReached !== true}
+    commands:
+      - runFlow:
+          file: ../subflows/open-account-tab.yaml
+          env:
+            DESTINATION: "My bookings"
+- evalScript: ${output.bookingsReached = false}
+- runFlow:
+    optional: true
+    commands:
+      - tapOn:
+          text: "My bookings"
+          retryTapIfNoChange: false
+      - extendedWaitUntil:
+          visible: 'Active\s*Tab 2 of 4'
+          timeout: 15000
+      - evalScript: ${output.bookingsReached = true}
+- runFlow:
+    when:
+      true: ${output.bookingsReached !== true}
+    commands:
+      - runFlow:
+          file: ../subflows/tap-until-destination.yaml
+          env:
+            TARGET: "My bookings"
+            DESTINATION: 'Active\s*Tab 2 of 4'
+- evalScript: "${console.log('STAGE 6 NAVIGATION - Account fast path=' + output.accountReached + ' | My bookings fast path=' + output.bookingsReached)}"
+- tapOn: 'Active\s*Tab 2 of 4'
+# Active list observed loaded in < 1 s (probes 29/09, 30/09); 30 s still covers a slow PRE backend.
+- extendedWaitUntil:
+    visible: "(?s).*(\nActive\n.*Unit code|don.t have any active booking).*"
+    timeout: 30000
+- takeScreenshot: journey-paid-my-bookings-active
+- assertNotVisible:
+    text: "(?s).*don.t have any active booking.*"
+    label: "BOOKING - no Active booking exists after payment"
+
+# Same unit. Observed 29/09/2026: Block 999 / Apartment 182 was booked as unit code
+# 01-01-0504-999-182 - the code ends in <block>-<unit number> read from the summary. The card is
+# located BY that identity, never by position: with several Active bookings the first card may be
+# an older one. Observed card text: "<project>\nActive\nUnit Type\nApartment\nUnit code\n<code>\n
+# Booking date\n<date>".
+- scrollUntilVisible:
+    element:
+      text: "(?s).*\nActive\n.*\nUnit code\n[0-9]{2}(-[0-9]+)*-${output.unitBlock}-${output.unitNumber}\n.*"
+    direction: DOWN
+    timeout: 30000
+    label: "BOOKING - no Active booking for the booked unit (block ${output.unitBlock}, unit ${output.unitNumber})"
+- copyTextFrom:
+    text: "(?s).*\nActive\n.*\nUnit code\n[0-9]{2}(-[0-9]+)*-${output.unitBlock}-${output.unitNumber}\n.*"
+- evalScript: ${output.activeCard = String(maestro.copiedText)}
+- evalScript: '${output.unitCode = (output.activeCard.match(/Unit code\s*([0-9]{2}(-[0-9]+)+)/) || ["", ""])[1]}'
+- evalScript: "${console.log('PAID BOOKING - Active card [' + output.activeCard.replace(/\\n/g, ' | ') + '] unit code [' + output.unitCode + ']')}"
+- assertTrue:
+    condition: ${output.unitCode.length > 0 && output.unitCode.slice(-(output.unitBlock.length + output.unitNumber.length + 2)) === '-' + output.unitBlock + '-' + output.unitNumber}
+    label: "BOOKING - the Active booking's unit code is not the booked unit"
+# PAYMENT PROOF on the SAME card: a paid booking reads "Active" then "Paid" (full-journey-with-fee,
+# verified 13/09/2026 with invoice 2609130000101982); the zero-fee card has no "Paid" line.
+- assertTrue:
+    condition: ${output.activeCard.indexOf('\nActive\nPaid\n') >= 0}
+    label: "PAYMENT - the booked unit's Active card is not marked Paid"
+- tapOn: "(?s).*\nActive\n.*\nUnit code\n${output.unitCode}\n.*"
+
+
+# END OF THE PAID JOURNEY: the paid booking created by this run, found under My bookings -> Active
+# by its unit identity, is opened. The only final proof is that its Booking Details opened; Unit
+# Details and contract signing are not part of this journey.
+- extendedWaitUntil:
+    visible: 'Booking Details\s*Tab 1 of 2'
+    timeout: 30000
+- takeScreenshot: journey-paid-final-booking-details
+- evalScript: "${console.log('FULL JOURNEY PAID END - paid booking created and opened successfully, unit code [' + output.unitCode + '], block [' + output.unitBlock + '], unit [' + output.unitNumber + '], fee [' + output.bookingFee + '] paid with ' + output.cardMasked + ' | payment terminal state [' + output.payTerminal + '] | app stayed in foreground after payment=' + output.appInForegroundAfterPayment + ' (informational)')}"

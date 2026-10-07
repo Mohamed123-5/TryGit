@@ -1,0 +1,122 @@
+# PROBE: register a new generated user (contact data generated, OTP 1234 per user decision),
+# reach Home via shared post-login.yaml, then Account -> Eligibility Checker -> Check your
+# eligibility, and capture the form. NOTHING on the eligibility form is filled or submitted.
+appId: fi.iwa.sakani
+name: PROBE - register (welcome handled) and discover eligibility form
+---
+- evalScript: ${output.generatedNationalId = String(Math.floor(1000000000 + Math.random() * 1000000000))}
+- evalScript: ${output.generatedPhone = String(Math.floor(500000000 + Math.random() * 10000000))}
+- evalScript: ${output.generatedEmail = 'elig.' + output.generatedNationalId + '@example.com'}
+- evalScript: "${console.log('PROBE NEW USER - id [' + output.generatedNationalId + '] phone [+966' + output.generatedPhone + '] email [' + output.generatedEmail + ']')}"
+- launchApp:
+    clearState: true
+- runFlow:
+    file: D:/Automation/Maestro-Mobile/.maestro/subflows/clear-overlays.yaml
+    env:
+      ANCHOR: "(?s).*Login / Sign up.*"
+- tapOn: "(?s).*Login / Sign up.*"
+- extendedWaitUntil:
+    visible: "Continue with N[ae]fath"
+    timeout: 45000
+- tapOn: "Enter your ID, phone number,? or email"
+- inputText: ${output.generatedNationalId}
+- tapOn: "Continue"
+- extendedWaitUntil:
+    visible: "Login with nafath"
+    timeout: 45000
+- tapOn: "Confirm"
+- extendedWaitUntil:
+    visible: "Personal information"
+    timeout: 90000
+- tapOn: "Continue"
+- extendedWaitUntil:
+    visible: "(?s).*Please fill in your mobile number detail and email address.*"
+    timeout: 45000
+- tapOn: "Enter your phone number"
+- inputText: ${output.generatedPhone}
+- hideKeyboard
+- tapOn: "Enter your email"
+- inputText: ${output.generatedEmail}
+- hideKeyboard
+- waitForAnimationToEnd:
+    timeout: 3000
+- assertVisible: "(?s).*Please fill in your mobile number detail and email address.*"
+- tapOn:
+    point: "50%,93%"
+    retryTapIfNoChange: false
+- extendedWaitUntil:
+    visible: "Verification Code"
+    timeout: 45000
+- tapOn:
+    text: "X"
+    index: 0
+- inputText: "1234"
+- waitForAnimationToEnd:
+    timeout: 5000
+- takeScreenshot: probe6-1-otp-entered
+- runFlow:
+    optional: true
+    commands:
+      - assertVisible: "DUMP-AFTER-OTP"
+- runFlow:
+    file: D:/Automation/Maestro-Mobile/.maestro/subflows/clear-overlays.yaml
+    env:
+      ANCHOR: "Welcome! Your account is all set."
+- assertVisible: "Welcome! Your account is all set."
+- tapOn:
+    text: "Continue"
+    retryTapIfNoChange: false
+- runFlow:
+    file: D:/Automation/Maestro-Mobile/.maestro/subflows/post-login.yaml
+- takeScreenshot: probe6-2-home
+- runFlow:
+    file: D:/Automation/Maestro-Mobile/.maestro/subflows/open-account-tab.yaml
+    env:
+      DESTINATION: "My bookings"
+- takeScreenshot: probe6-3-account
+- runFlow:
+    optional: true
+    commands:
+      - assertVisible: "DUMP-ACCOUNT"
+- evalScript: ${output.accountService = "(?s)Eligibility checker status.*"}
+- runFlow:
+    file: D:/Automation/Maestro-Mobile/.maestro/subflows/open-account-service.yaml
+- extendedWaitUntil:
+    visible: "Check your eligibility"
+    timeout: 30000
+- takeScreenshot: probe6-4-eligibility-intro
+- runFlow:
+    optional: true
+    commands:
+      - assertVisible: "DUMP-ELIG-INTRO"
+- tapOn: "Check your eligibility"
+- waitForAnimationToEnd:
+    timeout: 8000
+- takeScreenshot: probe6-5-form-1
+- runFlow:
+    optional: true
+    commands:
+      - assertVisible: "DUMP-FORM-1"
+- swipe:
+    start: "50%,80%"
+    end: "50%,35%"
+    duration: 700
+- waitForAnimationToEnd:
+    timeout: 4000
+- takeScreenshot: probe6-6-form-2
+- runFlow:
+    optional: true
+    commands:
+      - assertVisible: "DUMP-FORM-2"
+- swipe:
+    start: "50%,80%"
+    end: "50%,35%"
+    duration: 700
+- waitForAnimationToEnd:
+    timeout: 4000
+- takeScreenshot: probe6-7-form-3
+- runFlow:
+    optional: true
+    commands:
+      - assertVisible: "DUMP-FORM-3"
+- assertVisible: "PROBE-END-MARKER-NOT-PRESENT"

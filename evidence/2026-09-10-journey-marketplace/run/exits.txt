@@ -1,0 +1,7 @@
+START 17:01:04 NATIONAL_ID=1119880044
+check-syntax .maestro/full-journey.yaml: OK
+check-syntax .maestro/subflows/login.yaml: OK
+check-syntax .maestro/subflows/clear-overlays.yaml: OK
+check-syntax .maestro/subflows/verify-signed-in-account.yaml: OK
+journey exit=1 failed_steps=1 run_dir=2026-09-10_170119
+END 17:11:48

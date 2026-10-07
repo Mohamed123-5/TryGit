@@ -1,0 +1,32 @@
+# THROWAWAY DIAGNOSTIC - not part of the regression suite.
+# Authenticates and then STOPS, deliberately without calling post-login.yaml, so the NPS survey
+# is left on screen for live inspection. It must never be added to .maestro/.
+appId: fi.iwa.sakani
+env:
+  NATIONAL_ID: '${typeof NATIONAL_ID === "undefined" ? "1012204739" : String(NATIONAL_ID)}'
+---
+- launchApp:
+    clearState: true
+- runFlow:
+    file: ../../.maestro/subflows/clear-overlays.yaml
+    env:
+      ANCHOR: "(?s).*Login / Sign up.*"
+- extendedWaitUntil:
+    visible: "(?s).*Login / Sign up.*"
+    timeout: 120000
+- tapOn: "(?s).*Login / Sign up.*"
+- extendedWaitUntil:
+    visible: "Continue with N[ae]fath"
+    timeout: 45000
+- tapOn: "Enter your ID, phone number,? or email"
+- inputText: ${NATIONAL_ID}
+- tapOn: "Continue"
+- extendedWaitUntil:
+    visible: "Login with nafath"
+    timeout: 45000
+- tapOn: "Confirm"
+# Stop here. Let whatever appears next (contact prompts, promo, NPS) stay on screen.
+- extendedWaitUntil:
+    visible: "(?s).*would you recommend benefiting from Sakani.*"
+    timeout: 180000
+- takeScreenshot: nps-on-screen

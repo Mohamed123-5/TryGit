@@ -1,0 +1,30 @@
+appId: fi.iwa.sakani
+name: EXP-C or-default
+env:
+  NATIONAL_ID: ${NATIONAL_ID || "1119880062"}
+---
+- evalScript: "${console.log(\"PROBE typeof=\" + (typeof NATIONAL_ID) + \" value=[\" + (typeof NATIONAL_ID === \"undefined\" ? \"<undefined>\" : NATIONAL_ID) + \"]\")}"
+- runFlow:
+    label: "RESOLVED-IS-1000011487"
+    when:
+      true: "${typeof NATIONAL_ID !== \"undefined\" && String(NATIONAL_ID) === \"1000011487\"}"
+    commands:
+      - evalScript: "${1}"
+- runFlow:
+    label: "RESOLVED-IS-1119880062"
+    when:
+      true: "${typeof NATIONAL_ID !== \"undefined\" && String(NATIONAL_ID) === \"1119880062\"}"
+    commands:
+      - evalScript: "${1}"
+- runFlow:
+    label: "RESOLVED-IS-UNDEFINED"
+    when:
+      true: "${typeof NATIONAL_ID === \"undefined\"}"
+    commands:
+      - evalScript: "${1}"
+- runFlow:
+    label: "RESOLVED-IS-EMPTY-STRING"
+    when:
+      true: "${typeof NATIONAL_ID !== \"undefined\" && String(NATIONAL_ID) === \"\"}"
+    commands:
+      - evalScript: "${1}"

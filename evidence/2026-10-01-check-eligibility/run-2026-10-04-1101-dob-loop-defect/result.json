@@ -1,0 +1,18 @@
+{
+  "flow": "check elgibilty",
+  "file": ".maestro/e2e/check elgibilty.yaml",
+  "suite": "e2e",
+  "tags": [
+    "e2e",
+    "eligibility"
+  ],
+  "startedAt": "2026-10-04T08:01:50.557Z",
+  "durationMs": 475192,
+  "logPath": "report-dashboard/maestro-output/check elgibilty/maestro.log",
+  "status": "FAIL",
+  "exitCode": 1,
+  "failedSteps": 1,
+  "firstFailure": "Scrolling DOWN until \"Family Information\" is visible with speed 40, visibility percentage 100%, timeout 15000 ms, with centering disabled... FAILED",
+  "envReason": null,
+  "npsAppearances": 0
+}

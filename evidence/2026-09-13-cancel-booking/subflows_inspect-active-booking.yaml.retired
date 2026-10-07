@@ -1,0 +1,148 @@
+# Read-only inspection of ONE Active booking, identified by its unit code - used by
+# cancel-booking.yaml, first to survey every Active booking, then to re-verify the chosen one
+# immediately before it is cancelled. The same checks are therefore applied both times.
+#
+# INPUTS (env from the caller)
+#   UNIT_CODE       the unit code read from the booking's own Active card - digits and hyphens
+#                   only (the caller extracts it with a digits/hyphens pattern), so it is safe
+#                   inside the selectors below.
+#   RETURN_TO_LIST  "true"  - come back to My Bookings -> Active afterwards (survey);
+#                   "false" - stay on the booking, at its bottom next to "Cancel booking" when
+#                             it is eligible (re-verification, right before the cancellation).
+# PRECONDITION  My Bookings -> Active is on screen.
+# OUTPUTS       output.inspectFound, inspectInvoice, inspectPreSignature, inspectSigned,
+#               inspectContractRow, inspectUnsignedDocument, inspectEligible.
+#
+# NOT SIGNED - all of these, read from the booking itself:
+#   * its progress card shows "2..9 steps left" (unpaid 4, paid 3, payment method chosen 2);
+#   * no signed marker: not "1 steps left" (only the first installment left), no "Extend PQ
+#     Period" price-quotation banner, no "Signed" and no "Price quotation" in its Documents
+#     (PRE issues the quotation only at signature; "Signed" is a full match, so "Unsigned" can
+#     never satisfy it);
+#   * its Sales contract row is either NOT SHOWN YET (no contract drafted) or reads "Unsigned".
+#     A contract row that is shown WITHOUT "Unsigned" is refused - an unknown state is not
+#     treated as unsigned. ("Pay first installment" is not a signed marker: an unsigned booking
+#     lists it as a future step.)
+#
+# READ-ONLY: it taps the booking card (pinned to UNIT_CODE, never by position), scrolls, copies
+# text, and presses a guarded Back. It never taps "Cancel booking" or anything else.
+appId: fi.iwa.sakani
+name: Inspect one Active booking (read-only)
+---
+- evalScript: ${output.inspectFound = false}
+- evalScript: ${output.inspectInvoice = ""}
+- evalScript: ${output.inspectPreSignature = false}
+- evalScript: ${output.inspectSigned = false}
+- evalScript: ${output.inspectContractRow = false}
+- evalScript: ${output.inspectUnsignedDocument = false}
+- evalScript: ${output.inspectEligible = false}
+
+# The card reads "<project>\nActive\nPaid\nUnit Type\n...\nUnit code\n<code>\nBooking fees...";
+# the code is pinned between newlines, so a longer code sharing the prefix never matches.
+- scrollUntilVisible:
+    element:
+      text: "(?s).*\nActive\n.*\nUnit code\n${UNIT_CODE}\n.*"
+    direction: DOWN
+    timeout: 20000
+    optional: true
+- runFlow:
+    when:
+      visible: "(?s).*\nActive\n.*\nUnit code\n${UNIT_CODE}\n.*"
+    commands:
+      - evalScript: ${output.inspectFound = true}
+      - tapOn:
+          text: "(?s).*\nActive\n.*\nUnit code\n${UNIT_CODE}\n.*"
+      - extendedWaitUntil:
+          visible: "Booking Details"
+          timeout: 45000
+      # The progress card paints first, at the top - it is read before anything is scrolled.
+      - extendedWaitUntil:
+          visible: "(?s).*steps? left.*"
+          timeout: 45000
+      - takeScreenshot: inspect-${UNIT_CODE}-1-progress
+      - runFlow:
+          when:
+            visible: "[2-9] steps left"
+          commands:
+            - evalScript: ${output.inspectPreSignature = true}
+      - runFlow:
+          when:
+            visible: "1 steps? left"
+          commands:
+            - evalScript: ${output.inspectSigned = true}
+      - runFlow:
+          when:
+            visible: "Extend PQ Period"
+          commands:
+            - evalScript: ${output.inspectSigned = true}
+
+      # The invoice number sits in Booking Details, below the progress card - and below the fold
+      # when that card is long (a signed booking lists every step).
+      - scrollUntilVisible:
+          element:
+            text: "Invoice number"
+          direction: DOWN
+          timeout: 30000
+      - copyTextFrom:
+          text: "[0-9]{10,}"
+          below:
+            text: "Invoice number"
+      - evalScript: '${output.inspectInvoice = String(maestro.copiedText)}'
+
+      # Only a booking that already looks unsigned is scrolled to its bottom, where Documents and
+      # "Cancel booking" sit together (09/09/2026 dump docs.xml).
+      - runFlow:
+          when:
+            true: ${output.inspectPreSignature === true && output.inspectSigned !== true}
+          commands:
+            - scrollUntilVisible:
+                element:
+                  text: "Cancel booking"
+                direction: DOWN
+                timeout: 30000
+            - runFlow:
+                when:
+                  visible: "Signed"
+                commands:
+                  - evalScript: ${output.inspectSigned = true}
+            - runFlow:
+                when:
+                  visible: "Price quotation"
+                commands:
+                  - evalScript: ${output.inspectSigned = true}
+            - runFlow:
+                when:
+                  visible: "Sales contract"
+                commands:
+                  - evalScript: ${output.inspectContractRow = true}
+            - runFlow:
+                when:
+                  visible:
+                    text: "Unsigned"
+                    below:
+                      text: "Sales contract"
+                commands:
+                  - evalScript: ${output.inspectUnsignedDocument = true}
+            - takeScreenshot: inspect-${UNIT_CODE}-2-documents
+
+      - evalScript: ${output.inspectEligible = output.inspectFound === true && output.inspectPreSignature === true && output.inspectSigned !== true && /^[0-9]{10,}/.test(output.inspectInvoice) && (output.inspectContractRow !== true || output.inspectUnsignedDocument === true)}
+      - evalScript: "${console.log('INSPECT unit [' + UNIT_CODE + '] invoice [' + output.inspectInvoice + '] preSignatureSteps=' + output.inspectPreSignature + ' signedEvidence=' + output.inspectSigned + ' contractRow=' + output.inspectContractRow + ' unsignedDocument=' + output.inspectUnsignedDocument + ' -> ELIGIBLE=' + output.inspectEligible)}"
+
+      # Back to My Bookings -> Active, for the survey. Back is pressed only while the booking's
+      # own tabs are on screen, so it can never pop anything else.
+      - runFlow:
+          when:
+            true: ${RETURN_TO_LIST === "true"}
+          commands:
+            - runFlow:
+                when:
+                  visible: 'Booking Details\s*Tab 1 of 2'
+                commands:
+                  - back
+            - extendedWaitUntil:
+                visible: "My Bookings"
+                timeout: 30000
+            - tapOn: 'Active\s*Tab 2 of 4'
+            - extendedWaitUntil:
+                visible: "(?s).*(\nActive\n.*Unit code|don.t have any active booking).*"
+                timeout: 45000

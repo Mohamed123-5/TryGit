@@ -1,0 +1,66 @@
+appId: fi.iwa.sakani
+name: RESUME C - verify the signed state on the product records (read-only)
+env:
+  UNIT_CODE: '${typeof UNIT_CODE === "undefined" ? "01-01-0504-999-368" : String(UNIT_CODE)}'
+  INVOICE: '${typeof INVOICE === "undefined" ? "2609100000101946" : String(INVOICE)}'
+---
+# READ-ONLY. The same checks full-journey.yaml's STAGE 8 makes, re-read from a fresh launch.
+- launchApp
+- runFlow:
+    file: ../../../.maestro/subflows/clear-overlays.yaml
+    env:
+      ANCHOR: 'Account\s*Tab 4 of 4'
+- tapOn: 'Account\s*Tab 4 of 4'
+- runFlow:
+    file: ../../../.maestro/subflows/clear-overlays.yaml
+    env:
+      ANCHOR: "My bookings"
+- tapOn: "My bookings"
+- extendedWaitUntil:
+    visible: 'Active\s*Tab 2 of 4'
+    timeout: 45000
+- tapOn: 'Active\s*Tab 2 of 4'
+- extendedWaitUntil:
+    visible: "Ready to sign"
+    timeout: 30000
+
+# The booking has LEFT the signable set.
+- tapOn: "Ready to sign"
+- extendedWaitUntil:
+    visible: "(?s).*(don.t have any booking|\nActive\n.*Unit code).*"
+    timeout: 45000
+- takeScreenshot: C-1-ready-to-sign-after
+- assertNotVisible: "(?s).*\nActive\n.*${UNIT_CODE}.*"
+- assertVisible: "(?s).*don.t have any booking.*"
+
+# The booking still exists, and carries the signed contract and the price quotation.
+- tapOn: "All"
+- extendedWaitUntil:
+    visible: "(?s).*\nActive\n.*${UNIT_CODE}.*"
+    timeout: 45000
+- tapOn: "(?s).*\nActive\n.*${UNIT_CODE}.*"
+- extendedWaitUntil:
+    visible: "(?s).*steps? left.*"
+    timeout: 45000
+- takeScreenshot: C-2-booking-steps-after
+- scrollUntilVisible:
+    element:
+      text: "Price quotation"
+    direction: DOWN
+    timeout: 30000
+- assertVisible: "Sales contract"
+- assertVisible: "Signed"
+- assertVisible: "Price quotation"
+- assertNotVisible: "(?s)Sign sales contract\nYour booking will not be complete.*"
+- takeScreenshot: C-3-documents-signed
+
+# Fee still settled, same invoice.
+- scrollUntilVisible:
+    element:
+      text: "Invoice number"
+    direction: UP
+    timeout: 30000
+- assertVisible: "Booking fee status"
+- assertVisible: "Paid"
+- assertVisible: ${INVOICE}
+- takeScreenshot: C-4-paid-invoice

@@ -1,0 +1,464 @@
+--------- beginning of main
+09-27 13:44:04.293 D/StatusBarIconController(  773): ignoring old pipeline callbacks, because the new mobile icons are enabled
+09-27 13:44:04.535 E/adbd    (  432): failed to connect to socket 'tcp:59554': Connection refused
+09-27 13:44:04.555 E/adbd    (  432): failed to connect to socket 'tcp:59554': Connection refused
+--------- beginning of system
+09-27 13:44:05.144 I/ActivityManager(  549): Force stopping dev.mobile.maestro appid=10194 user=-1: deletePackageX
+09-27 13:44:05.144 E/libprocessgroup(  549): No such cgroup attribute: /sys/fs/cgroup/uid_4294877490/cgroup.freeze
+09-27 13:44:05.144 W/libprocessgroup(  549): Failed to apply Frozen process profile: No such file or directory
+09-27 13:44:05.146 D/DisplayManagerService(  549): Drop pending events for gone uid 10194
+09-27 13:44:05.152 I/ActivityManager(  549): Killing 15115:dev.mobile.maestro/u0a194 (adj 0): stop dev.mobile.maestro due to deletePackageX
+09-27 13:44:05.155 W/ActivityManager(  549): Crash of app dev.mobile.maestro running instrumentation ComponentInfo{dev.mobile.maestro.test/androidx.test.runner.AndroidJUnitRunner}
+09-27 13:44:05.155 I/ActivityManager(  549): Force stopping dev.mobile.maestro appid=10194 user=0: finished inst
+09-27 13:44:05.157 I/app_process(15086): System.exit called, status: 0
+09-27 13:44:05.157 I/AndroidRuntime(15086): VM exiting with result code 0.
+09-27 13:44:05.174 I/Zygote  (  353): Process 15115 exited due to signal 9 (Killed)
+09-27 13:44:05.178 W/ProcessStats(  549): Tracking association SourceState{acc3851 com.google.android.googlequicksearchbox:search/10132 BTop #7225} whose proc state 2 is better than process ProcessState{c65e453 com.google.android.googlequicksearchbox:interactor/10132 pkg=com.google.android.googlequicksearchbox} proc state 4 (892 skipped)
+09-27 13:44:05.178 W/WindowMagnificationMgr(  549): requestConnection duplicated request: connect=false, mConnectionState=DISCONNECTED
+09-27 13:44:05.179 W/WindowMagnificationMgr(  549): requestConnection duplicated request: connect=false, mConnectionState=DISCONNECTED
+09-27 13:44:05.184 W/WindowMagnificationMgr(  549): requestConnection duplicated request: connect=false, mConnectionState=DISCONNECTED
+09-27 13:44:05.184 V/UiAutomationManager(  549): UiAutomation service owner died
+09-27 13:44:05.189 E/libprocessgroup(  549): No such cgroup attribute: /sys/fs/cgroup/uid_4294877490/cgroup.freeze
+09-27 13:44:05.189 W/libprocessgroup(  549): Failed to apply Unfrozen process profile: No such file or directory
+09-27 13:44:05.189 V/ActivityManager(  549): Got obituary of 15115:dev.mobile.maestro
+09-27 13:44:05.191 I/AiAiEcho( 1364): Settings changed for uri: content://settings/secure/accessibility_enabled
+09-27 13:44:05.193 I/AiAiEcho( 1364): Predicting[0]: 
+09-27 13:44:05.195 E/IPCThreadState(  549): Binder transaction failure: 1864438/29189/-22
+09-27 13:44:05.196 W/ActivityManager(  549): Error shutting down UiAutomationConnection
+09-27 13:44:05.197 D/BatterySaverPolicy(  549): accessibility changed to false, updating policy.
+09-27 13:44:05.204 I/AiAiEcho( 1364): Settings changed for uri: content://settings/secure/accessibility_enabled
+09-27 13:44:05.205 I/AiAiEcho( 1364): EchoTargets: 
+09-27 13:44:05.205 I/AiAiEcho( 1364): Filtered by AiAi flag check: 
+09-27 13:44:05.205 I/AiAiEcho( 1364): Ranked targets strategy: SORT, count: 0, ranking metadata: 
+09-27 13:44:05.206 I/AiAiEcho( 1364): Predicting[0]: 
+09-27 13:44:05.206 I/AiAiEcho( 1364): EchoTargets: 
+09-27 13:44:05.206 I/AiAiEcho( 1364): Filtered by AiAi flag check: 
+09-27 13:44:05.206 I/AiAiEcho( 1364): Ranked targets strategy: SORT, count: 0, ranking metadata: 
+09-27 13:44:05.207 I/AiAiEcho( 1364): Predicting[0]: 
+09-27 13:44:05.207 I/A       ( 1545): NGA enabled in interactor.
+09-27 13:44:05.207 I/A       ( 1545): Nga state changed to NgaStateDetails{state=ENABLED, isSpecialExperience=false}
+09-27 13:44:05.207 I/AiAiEcho( 1364): EchoTargets: 
+09-27 13:44:05.207 I/AiAiEcho( 1364): Filtered by AiAi flag check: 
+09-27 13:44:05.207 I/AiAiEcho( 1364): Ranked targets strategy: SORT, count: 0, ranking metadata: 
+09-27 13:44:05.209 I/A       ( 1371): Initializing all components
+09-27 13:44:05.209 I/AiAiEcho( 1364): Predicting[0]: 
+09-27 13:44:05.210 I/AiAiEcho( 1364): EchoTargets: 
+09-27 13:44:05.210 I/AiAiEcho( 1364): Filtered by AiAi flag check: 
+09-27 13:44:05.210 I/A       ( 1371): APA or Classic session decision: SessionDecision(sessionVariance=CLASSIC, platformVariance=CLASSIC, justification=CURRENT_PLATFORM_VARIANCE).
+09-27 13:44:05.211 I/A       ( 1371): onIsEnabledChanged, isEnabled: false
+09-27 13:44:05.211 W/A       ( 1371): Disposing empty manager. Did you forgot to subscribe observables?
+09-27 13:44:05.211 W/A       ( 1371): Disposing empty manager. Did you forgot to subscribe observables?
+09-27 13:44:05.211 I/A       ( 1371): State changed: IDLE => IDLE by NGA_STATE_CHANGED and N/A with Optional.empty
+09-27 13:44:05.212 W/A       ( 1371): Disposing empty manager. Did you forgot to subscribe observables?
+09-27 13:44:05.212 W/A       ( 1371): Disposing empty manager. Did you forgot to subscribe observables?
+09-27 13:44:05.212 W/A       ( 1371): Disposing empty manager. Did you forgot to subscribe observables?
+09-27 13:44:05.212 W/A       ( 1371): Disposing empty manager. Did you forgot to subscribe observables?
+09-27 13:44:05.212 W/A       ( 1371): Disposing empty manager. Did you forgot to subscribe observables?
+09-27 13:44:05.212 W/A       ( 1371): Disposing empty manager. Did you forgot to subscribe observables?
+09-27 13:44:05.212 I/A       ( 1371): [Memory] eligibility: StashEligibility{6}
+09-27 13:44:05.213 I/AiAiEcho( 1364): Ranked targets strategy: SORT, count: 0, ranking metadata: 
+09-27 13:44:05.214 I/AiAiEcho( 1364): Predicting[0]: 
+09-27 13:44:05.214 I/AiAiEcho( 1364): EchoTargets: 
+09-27 13:44:05.214 I/AiAiEcho( 1364): Filtered by AiAi flag check: 
+09-27 13:44:05.214 I/AiAiEcho( 1364): Ranked targets strategy: SORT, count: 0, ranking metadata: 
+09-27 13:44:05.214 I/AiAiEcho( 1364): Predicting[0]: 
+09-27 13:44:05.214 I/AiAiEcho( 1364): EchoTargets: 
+09-27 13:44:05.214 I/AiAiEcho( 1364): Filtered by AiAi flag check: 
+09-27 13:44:05.214 I/AiAiEcho( 1364): Ranked targets strategy: SORT, count: 0, ranking metadata: 
+09-27 13:44:05.216 I/A       ( 1371): Recognizer choice: (recognizer_type: 1, recognizer_mode: 1, choice_reason: 4)
+09-27 13:44:05.216 W/A       ( 1371): Disposing empty manager. Did you forgot to subscribe observables?
+09-27 13:44:05.217 W/A       ( 1371): Disposing empty manager. Did you forgot to subscribe observables?
+09-27 13:44:05.217 I/A       ( 1371): onOpaVisibilityChanged: false
+09-27 13:44:05.217 W/A       ( 1371): Disposing empty manager. Did you forgot to subscribe observables?
+09-27 13:44:05.217 W/A       ( 1371): Disposing empty manager. Did you forgot to subscribe observables?
+09-27 13:44:05.217 W/A       ( 1371): Disposing empty manager. Did you forgot to subscribe observables?
+09-27 13:44:05.218 W/A       ( 1371): Disposing empty manager. Did you forgot to subscribe observables?
+09-27 13:44:05.218 W/A       ( 1371): Disposing empty manager. Did you forgot to subscribe observables?
+09-27 13:44:05.218 W/A       ( 1371): Disposing empty manager. Did you forgot to subscribe observables?
+09-27 13:44:05.218 I/A       ( 1371): Setting session to type: NO_SESSION
+09-27 13:44:05.218 W/A       ( 1371): Disposing empty manager. Did you forgot to subscribe observables?
+09-27 13:44:05.219 W/A       ( 1371): Disposing empty manager. Did you forgot to subscribe observables?
+09-27 13:44:05.219 W/A       ( 1371): Disposing empty manager. Did you forgot to subscribe observables?
+09-27 13:44:05.219 W/A       ( 1371): Disposing empty manager. Did you forgot to subscribe observables?
+09-27 13:44:05.219 W/A       ( 1371): Disposing empty manager. Did you forgot to subscribe observables?
+09-27 13:44:05.219 W/A       ( 1371): Disposing empty manager. Did you forgot to subscribe observables?
+09-27 13:44:05.219 W/A       ( 1371): Disposing empty manager. Did you forgot to subscribe observables?
+09-27 13:44:05.219 W/A       ( 1371): Disposing empty manager. Did you forgot to subscribe observables?
+09-27 13:44:05.220 I/A       ( 1371): setNavBarVisible: GestureNavBarVisible{navbarVisible=true}
+09-27 13:44:05.221 W/A       ( 1371): Disposing empty manager. Did you forgot to subscribe observables?
+09-27 13:44:05.221 W/A       ( 1371): Disposing empty manager. Did you forgot to subscribe observables?
+09-27 13:44:05.221 W/A       ( 1371): Disposing empty manager. Did you forgot to subscribe observables?
+09-27 13:44:05.222 W/A       ( 1371): Disposing empty manager. Did you forgot to subscribe observables?
+09-27 13:44:05.222 W/A       ( 1371): Disposing empty manager. Did you forgot to subscribe observables?
+09-27 13:44:05.223 W/A       ( 1371): Disposing empty manager. Did you forgot to subscribe observables?
+09-27 13:44:05.225 I/A       ( 1371): onActiveStateChangeEvent: IDLE => IDLE
+09-27 13:44:05.225 I/A       ( 1371): onDisabled. Registered: false
+09-27 13:44:05.226 I/A       ( 1371): #onActiveStateChangeEvent, newState: IDLE, previousState: IDLE.
+09-27 13:44:05.227 I/AiAiEcho( 1364): #postPredictionTargets: Sending updates to UISurface lockscreen with targets# 0 (types=[])
+09-27 13:44:05.229 I/AiAiEcho( 1364): #postPredictionTargets: Sending updates to UISurface media_data_manager with targets# 0 (types=[])
+09-27 13:44:05.229 W/PageIndicator(  773): Total number of pages invalid: 0. Assuming 1 page.
+09-27 13:44:05.231 I/AiAiEcho( 1364): #postPredictionTargets: Sending updates to UISurface home with targets# 0 (types=[])
+09-27 13:44:05.232 I/AiAiEcho( 1364): #postPredictionTargets: Sending updates to UISurface lockscreen with targets# 0 (types=[])
+09-27 13:44:05.233 I/AiAiEcho( 1364): #postPredictionTargets: Sending updates to UISurface media_data_manager with targets# 0 (types=[])
+09-27 13:44:05.233 I/AiAiEcho( 1364): #postPredictionTargets: Sending updates to UISurface home with targets# 0 (types=[])
+09-27 13:44:05.234 D/SsMediaDataProvider(  773): Forwarding Smartspace updates []
+09-27 13:44:05.235 W/PageIndicator(  773): Total number of pages invalid: 0. Assuming 1 page.
+09-27 13:44:05.236 D/SsMediaDataProvider(  773): Forwarding Smartspace updates []
+09-27 13:44:05.350 W/Looper  (  549): Slow dispatch took 126ms android.fg h=android.os.Handler c=<recycled PooledLambda@45da29a> m=0
+09-27 13:44:05.352 I/A       ( 1371): Initialize
+09-27 13:44:05.353 I/A       ( 1371): stopListening(NGA_PAUSED_UNKNOWN_REASON, NGA_CREATE), idleOverride=NOT_LISTENING
+09-27 13:44:05.354 I/A       ( 1371): on opa visibility changed false
+09-27 13:44:05.354 I/A       ( 1371): on opa visibility changed false
+09-27 13:44:05.355 E/TaskPersister(  549): File error accessing recents directory (directory doesn't exist?).
+09-27 13:44:05.363 I/NgaEntryPointEventSendr( 1371): setupConnection
+09-27 13:44:05.364 E/GsaVoiceSerConnection( 1371): gsaVis null binding
+09-27 13:44:05.376 I/A       ( 1371): Successfully initialized all components
+09-27 13:44:05.377 I/A       ( 1545): Creating pss binder().
+09-27 13:44:05.381 I/NgaEntryPointEventSendr( 1371): State changed: Disconnected => Connecting
+09-27 13:44:05.387 I/NgaEntryPointEventSendr( 1371): onServiceConnected
+09-27 13:44:05.387 I/A       ( 1545): Calling beginBinderSession().
+09-27 13:44:05.391 I/A       ( 1545): beginBinderSession(): calling binder
+09-27 13:44:05.393 I/NgaEntryPointEventSendr( 1371): State changed: Connecting => Ready
+09-27 13:44:05.397 I/ActivityManager(  549): Force stopping dev.mobile.maestro appid=10194 user=0: pkg removed
+09-27 13:44:05.432 W/ActivityManager(  549): Unable to start service Intent { cmp=com.google.android.apps.tachyon/.clientapi.ClientApiService } U=0: not found
+09-27 13:44:05.465 W/Looper  (  549): Slow dispatch took 102ms android.fg h=android.os.Handler c=<recycled PooledLambda@45da29a> m=0
+09-27 13:44:05.490 W/A       ( 1545): UiCallbackStub-onGenericEvent[ServiceEvent = 60] task was not run. Callback from Service received after client was disposed.
+09-27 13:44:05.494 I/PBSessionCacheImpl( 1545): Deleted sessionId[6796772363504755] from persistence.
+09-27 13:44:05.503 W/SearchServiceCore( 1545): Abort, client detached.
+09-27 13:44:05.556 I/system_server(  549): Background concurrent copying GC freed 635043(26MB) AllocSpace objects, 42(1104KB) LOS objects, 44% free, 29MB/53MB, paused 817us,193us total 199.752ms
+09-27 13:44:05.631 W/Looper  (  549): Slow dispatch took 134ms android.fg h=android.os.Handler c=<recycled PooledLambda@f45de76> m=0
+09-27 13:44:05.632 W/Looper  (  549): Slow delivery took 282ms android.fg h=android.os.Handler c=<recycled PooledLambda@fcbdc77> m=0
+09-27 13:44:05.636 E/TaskPersister(  549): File error accessing recents directory (directory doesn't exist?).
+09-27 13:44:05.638 D/CarrierSvcBindHelper(  964): onPackageRemoved: dev.mobile.maestro
+09-27 13:44:05.652 D/CarrierSvcBindHelper(  964): No carrier app for: 0
+09-27 13:44:05.667 V/MediaPlayerList(  905): mPackageChangedBroadcastReceiver: action: android.intent.action.PACKAGE_REMOVED
+09-27 13:44:05.668 V/MediaPlayerList(  905): mPackageChangedBroadcastReceiver: action: android.intent.action.PACKAGE_REMOVED
+09-27 13:44:05.669 I/ActivityManager(  549): Force stopping dev.mobile.maestro.test appid=10195 user=-1: deletePackageX
+09-27 13:44:05.669 E/libprocessgroup(  549): No such cgroup attribute: /sys/fs/cgroup/uid_4294877491/cgroup.freeze
+09-27 13:44:05.669 W/libprocessgroup(  549): Failed to apply Frozen process profile: No such file or directory
+09-27 13:44:05.673 E/libprocessgroup(  549): No such cgroup attribute: /sys/fs/cgroup/uid_4294877491/cgroup.freeze
+09-27 13:44:05.673 W/libprocessgroup(  549): Failed to apply Unfrozen process profile: No such file or directory
+09-27 13:44:05.674 I/ActivityManager(  549): Force stopping dev.mobile.maestro.test appid=10195 user=0: pkg removed
+09-27 13:44:05.674 E/libprocessgroup(  549): No such cgroup attribute: /sys/fs/cgroup/uid_10195/cgroup.freeze
+09-27 13:44:05.674 W/libprocessgroup(  549): Failed to apply Frozen process profile: No such file or directory
+09-27 13:44:05.678 E/libprocessgroup(  549): No such cgroup attribute: /sys/fs/cgroup/uid_10195/cgroup.freeze
+09-27 13:44:05.678 W/libprocessgroup(  549): Failed to apply Unfrozen process profile: No such file or directory
+09-27 13:44:05.769 I/ActivityManager(  549): Force stopping fi.iwa.sakani appid=10214 user=0: clear data
+09-27 13:44:05.769 I/NgaEntryPointEventSendr( 1371): State changed: Ready => Disconnected (onOpaDisconnected)
+09-27 13:44:05.782 W/FileUtils(  549): Failed to chmod(AtomicFile[/data/system_de/0/system/game-manager-service.xml]): android.system.ErrnoException: chmod failed: ENOENT (No such file or directory)
+09-27 13:44:05.783 I/ActivityManager(  549): Force stopping fi.iwa.sakani appid=10214 user=-1: clearApplicationUserData
+09-27 13:44:05.783 E/libprocessgroup(  549): No such cgroup attribute: /sys/fs/cgroup/uid_4294877510/cgroup.freeze
+09-27 13:44:05.783 W/libprocessgroup(  549): Failed to apply Frozen process profile: No such file or directory
+09-27 13:44:05.793 E/libprocessgroup(  549): No such cgroup attribute: /sys/fs/cgroup/uid_4294877510/cgroup.freeze
+09-27 13:44:05.793 W/libprocessgroup(  549): Failed to apply Unfrozen process profile: No such file or directory
+09-27 13:44:05.801 D/CarrierSvcBindHelper(  964): onPackageRemoved: dev.mobile.maestro.test
+09-27 13:44:05.802 D/CarrierSvcBindHelper(  964): No carrier app for: 0
+09-27 13:44:05.803 W/MediaProvider( 1363): WorkProfileOwnerApps cache is empty
+09-27 13:44:05.814 I/system_server(  549): Background concurrent copying GC freed 74629(3576KB) AllocSpace objects, 8(220KB) LOS objects, 42% free, 32MB/56MB, paused 1.276ms,284us total 176.483ms
+09-27 13:44:05.846 E/AppOps  (  549): attributionTag VCN not declared in manifest of android
+09-27 13:44:05.847 W/WifiService(  549): Couldn't get PackageInfo for package:dev.mobile.maestro
+09-27 13:44:05.847 D/WifiService(  549): Remove settings for package:dev.mobile.maestro
+09-27 13:44:05.847 D/WifiConfigManager(  549): Remove all networks for app ApplicationInfo{68602c6 dev.mobile.maestro}
+09-27 13:44:05.865 V/StorageManagerService(  549): Package dev.mobile.maestro does not have legacy storage
+09-27 13:44:05.877 I/RollbackManager(  549): broadcast=ACTION_PACKAGE_FULLY_REMOVED pkg=dev.mobile.maestro
+09-27 13:44:05.878 I/InputReader(  549): Reconfiguring input devices, changes=KEYBOARD_LAYOUTS
+09-27 13:44:05.880 I/RoleService(  549): Granting default roles...
+09-27 13:44:05.882 I/Telecom (  549): CarModeTracker: Package dev.mobile.maestro is not tracked.: SSH.oR@Adc
+09-27 13:44:05.882 I/Telecom (  549): InCallController: updateCarModeForConnections: car mode apps: : SSH.oR@Adc
+09-27 13:44:05.883 I/Telecom (  549): InCallController: update carmode current:UserHandle{0} parent:null: SSH.oR@Adc
+09-27 13:44:05.902 I/ConditionProviders(  549): Disallowing condition provider dev.mobile.maestro (userSet: true)
+09-27 13:44:05.904 D/WifiConfigStore(  549): Writing to stores completed in 57 ms.
+09-27 13:44:05.904 I/PasspointManager(  549): No app ops listener found for dev.mobile.maestro
+09-27 13:44:05.905 W/WifiService(  549): Couldn't get PackageInfo for package:dev.mobile.maestro
+09-27 13:44:05.905 D/WifiService(  549): Remove settings for package:dev.mobile.maestro
+09-27 13:44:05.905 D/WifiConfigManager(  549): Remove all networks for app ApplicationInfo{5b5880a dev.mobile.maestro}
+09-27 13:44:05.916 W/WindowMagnificationMgr(  549): requestConnection duplicated request: connect=false, mConnectionState=DISCONNECTED
+09-27 13:44:05.933 D/ControlsListingControllerImpl(  773): ServiceConfig reloaded, count: 0
+09-27 13:44:05.945 D/WifiConfigStore(  549): Writing to stores completed in 20 ms.
+09-27 13:44:05.954 I/PasspointManager(  549): No app ops listener found for dev.mobile.maestro
+09-27 13:44:05.955 I/MediaProvider( 1363): Begin Intent { act=android.intent.action.PACKAGE_FULLY_REMOVED dat=package: flg=0x5000010 cmp=com.google.android.providers.media.module/com.android.providers.media.MediaService (has extras) }
+09-27 13:44:05.956 D/MediaProvider( 1363): Deleted 0 Android/media items belonging to dev.mobile.maestro on /data/user/0/com.google.android.providers.media.module/databases/external.db
+09-27 13:44:05.973 E/RoleControllerServiceImpl( 1271): Default/fallback role holder package doesn't qualify for the role, package: com.google.android.gms.supervision, role: android.app.role.SYSTEM_SUPERVISION
+09-27 13:44:05.999 D/MediaGrants( 1363): Removed 0 media_grants for 0 user for dev.mobile.maestro. Reason: Package orphaned
+09-27 13:44:06.027 I/Role    ( 1271): com.google.android.gms not qualified for android.app.role.SYSTEM_CALL_STREAMING due to missing RequiredComponent{mIntentFilterData=IntentFilterData{mAction='android.telecom.CallStreamingService', mCategories='[]', mDataScheme='null', mDataType='null'}, mMinTargetSdkVersion=1, mFlags='0', mPermission='android.permission.BIND_CALL_STREAMING_SERVICE', mQueryFlags=0, mMetaData=[]}
+09-27 13:44:06.027 E/RoleControllerServiceImpl( 1271): Default/fallback role holder package doesn't qualify for the role, package: com.google.android.gms, role: android.app.role.SYSTEM_CALL_STREAMING
+09-27 13:44:06.030 D/IntervalStats(  549): Unable to parse usage stats packages: [324, 326, 328, 329]
+09-27 13:44:06.031 D/IntervalStats(  549): Unable to parse event packages: [329]
+09-27 13:44:06.043 W/Role    ( 1271): Default holder doesn't have required signing certificate: com.google.android.apps.work.clouddpc:23962F4B43B9857638EA66F4D419518EAE282491ACDA4B94707BD59003C45E58
+09-27 13:44:06.063 D/IntervalStats(  549): Unable to parse usage stats packages: [331, 334, 337]
+09-27 13:44:06.072 D/CarrierSvcBindHelper(  964): onHandleForceStop: [fi.iwa.sakani]
+09-27 13:44:06.084 D/IntervalStats(  549): Unable to parse usage stats packages: [340, 341, 342]
+09-27 13:44:06.085 D/IntervalStats(  549): Unable to parse event packages: [342]
+09-27 13:44:06.089 D/AF::TrackHandle(  403): OpPlayAudio: track:57 usage:13 not muted
+09-27 13:44:06.095 D/AF::TrackHandle(  403): OpPlayAudio: track:57 usage:13 not muted
+09-27 13:44:06.095 D/CarrierSvcBindHelper(  964): No carrier app for: 0
+09-27 13:44:06.101 D/AF::TrackHandle(  403): OpPlayAudio: track:57 usage:13 not muted
+09-27 13:44:06.113 D/AF::TrackHandle(  403): OpPlayAudio: track:57 usage:13 not muted
+09-27 13:44:06.114 D/AF::TrackHandle(  403): OpPlayAudio: track:57 usage:13 not muted
+09-27 13:44:06.114 D/AF::TrackHandle(  403): OpPlayAudio: track:57 usage:13 not muted
+09-27 13:44:06.115 D/AF::TrackHandle(  403): OpPlayAudio: track:57 usage:13 not muted
+09-27 13:44:06.115 I/MediaProvider( 1363): End Intent { act=android.intent.action.PACKAGE_FULLY_REMOVED dat=package: flg=0x5000010 cmp=com.google.android.providers.media.module/com.android.providers.media.MediaService (has extras) }
+09-27 13:44:06.123 D/AF::TrackHandle(  403): OpPlayAudio: track:57 usage:13 not muted
+09-27 13:44:06.130 D/AF::TrackHandle(  403): OpPlayAudio: track:57 usage:13 not muted
+09-27 13:44:06.135 D/AF::TrackHandle(  403): OpPlayAudio: track:57 usage:13 not muted
+09-27 13:44:06.135 D/AF::TrackHandle(  403): OpPlayAudio: track:57 usage:13 not muted
+09-27 13:44:06.137 D/AF::TrackHandle(  403): OpPlayAudio: track:57 usage:13 not muted
+09-27 13:44:06.146 D/AF::TrackHandle(  403): OpPlayAudio: track:57 usage:13 not muted
+09-27 13:44:06.147 D/AF::TrackHandle(  403): OpPlayAudio: track:57 usage:13 not muted
+09-27 13:44:06.147 D/AF::TrackHandle(  403): OpPlayAudio: track:57 usage:13 not muted
+09-27 13:44:06.147 D/AF::TrackHandle(  403): OpPlayAudio: track:57 usage:13 not muted
+09-27 13:44:06.318 I/Finsky  ( 1511): [2] vny.g(0): vny - Received: android.intent.action.PACKAGE_REMOVED, [J6YIT9SGIgP7GQxJcJBfnm1QuMLfVbcm43perxYJPHg]
+09-27 13:44:06.333 I/Finsky  ( 1511): [2] von.t(5): Package no longer installed: dev.mobile.maestro
+09-27 13:44:06.475 I/Finsky  ( 1511): [197] oin.run(15): Frosting DB delete succeeded: true
+09-27 13:44:06.610 I/Finsky  ( 1511): [2] aguv.c(5): Do not start WearSupportService due to Wear service optimization
+09-27 13:44:06.612 I/Finsky  ( 1511): [198] aw.a(5): Asset module storage cleared for package dev.mobile.maestro.
+09-27 13:44:06.615 I/Finsky  ( 1511): [200] qcr.accept(22): IQ: handled package removed
+09-27 13:44:06.616 I/Finsky  ( 1511): [201] jvi.abQ(78): [ContentSync] finished, scheduled=false
+09-27 13:44:06.624 I/Finsky  ( 1511): [2] von.t(5): Package no longer installed: dev.mobile.maestro
+09-27 13:44:06.632 I/Finsky  ( 1511): [197] oin.run(15): Frosting DB delete succeeded: false
+09-27 13:44:06.664 D/StatusBarIconController(  773): ignoring old pipeline callbacks, because the new mobile icons are enabled
+09-27 13:44:06.682 W/Looper  (  549): Slow dispatch took 314ms android.fg h=android.os.Handler c=<recycled PooledLambda@e299fd3> m=0
+09-27 13:44:06.715 I/Finsky  ( 1511): [65] jlf.a(5): AIM: AppInfoManager-Perf > OnDeviceAppInfo > cacheHitCount=0, cacheMissCount=1. Missed  in cache (limit 10) : [dev.mobile.maestro]
+09-27 13:44:06.725 I/Finsky  ( 1511): [2] aacd.f(8): Clearing split related stale data.
+09-27 13:44:06.730 I/Finsky  ( 1511): [2] vny.g(0): vny - Received: android.intent.action.PACKAGE_FULLY_REMOVED, [J6YIT9SGIgP7GQxJcJBfnm1QuMLfVbcm43perxYJPHg]
+09-27 13:44:06.741 I/Finsky  ( 1511): [65] jiv.apply(110): AIM: Got app ownership map. App counts: . Unique apps: 0
+09-27 13:44:06.790 I/Finsky  ( 1511): [2] von.t(5): Package no longer installed: dev.mobile.maestro
+09-27 13:44:06.794 I/Finsky  ( 1511): [2] vny.g(0): vny - Deduping intent android.intent.action.PACKAGE_FULLY_REMOVED
+09-27 13:44:06.827 I/Finsky  ( 1511): [61] jlc.a(11): AIM: AppInfoManager-Perf > ItemModel > CacheSize=0, cacheHitCount=0, cacheMissCount=1, total appsWithNoServerDataCount=0. Missed  in cache (limit 10) : [dev.mobile.maestro]
+09-27 13:44:06.828 I/Finsky  ( 1511): [61] jle.n(3): AIM: AppInfoManager-Perf > ItemModel > ItemStore Called 1 apps cacheOptions = USE_CACHE
+09-27 13:44:06.829 I/Finsky  ( 1511): [61] jlc.a(98): AIM: ItemModel fetch - unauth(1), auth()
+09-27 13:44:06.829 I/Finsky  ( 1511): [61] rom.apply(5): ItemStore: Not cached: dev.mobile.maestro
+09-27 13:44:06.847 I/Finsky  ( 1511): [197] oin.run(15): Frosting DB delete succeeded: false
+09-27 13:44:06.870 D/SafetySourceDataValidator(  549): Package com.android.vending has expected signature
+09-27 13:44:06.980 I/BlockstoreStorage( 1537): (REDACTED) Clearing all the Blockstore Data for package %s
+09-27 13:44:06.980 I/BlockstoreStorage( 1537): (REDACTED) Clearing all the Blockstore Data for %s packages
+09-27 13:44:07.002 D/IntervalStats(  549): Unable to parse usage stats packages: [324, 326, 328, 329]
+09-27 13:44:07.002 D/IntervalStats(  549): Unable to parse event packages: [329]
+09-27 13:44:07.005 D/IntervalStats(  549): Unable to parse usage stats packages: [331, 334, 337]
+09-27 13:44:07.009 D/IntervalStats(  549): Unable to parse usage stats packages: [340, 341, 342]
+09-27 13:44:07.009 D/IntervalStats(  549): Unable to parse event packages: [342]
+09-27 13:44:07.057 I/ProximityAuth( 1489): [RecentAppsMediator] Package removed: (user=UserHandle{0}) dev.mobile.maestro
+09-27 13:44:07.062 I/InputMethodManagerService(  549): Input method uninstalled, disabling: ComponentInfo{dev.mobile.maestro/dev.mobile.maestro.input.MaestroInputMethodService}
+09-27 13:44:07.122 I/AiAiEcho( 1364): AppFetcherImplV2 onPackageRemoved dev.mobile.maestro.
+09-27 13:44:07.153 D/Launcher.Model( 1021): package removed received dev.mobile.maestro
+09-27 13:44:07.159 D/PackageUpdatedTask( 1021): Removing app icondev.mobile.maestro
+09-27 13:44:07.223 W/Looper  (  549): Slow dispatch took 294ms android.fg h=android.os.Handler c=<recycled PooledLambda@9f1c09f> m=0
+09-27 13:44:07.231 D/ModelWriter( 1021): removing items from db . Reason: [removed because the corresponding package or component is removed. mOp=3 removedPackages=[dev.mobile.maestro] removedComponents=[]]
+09-27 13:44:07.241 I/Fitness ( 1489): (REDACTED) FitCleanupIntentOperation received Intent %s
+09-27 13:44:07.270 D/EGL_emulation( 1021): app_time_stats: avg=7031.68ms min=7031.68ms max=7031.68ms count=1
+09-27 13:44:07.391 I/id.ext.services( 1043): Background concurrent copying GC freed 60329(2063KB) AllocSpace objects, 0(0B) LOS objects, 49% free, 2059KB/4119KB, paused 62.186ms,99us total 376.026ms
+09-27 13:44:07.439 D/StatusBarIconController(  773): ignoring old pipeline callbacks, because the new mobile icons are enabled
+09-27 13:44:07.450 W/SQLiteLog( 1537): (28) double-quoted string literal: "dev.mobile.maestro"
+09-27 13:44:07.535 I/Icing   ( 1537): doRemovePackageData dev.mobile.maestro
+09-27 13:44:07.538 I/AiAiEcho( 1364): [pnb-agg] Reload pnb aggregation on events deleted
+09-27 13:44:07.538 I/AiAiEcho( 1364): [pnb-agg] pnb aggregation disabled.
+09-27 13:44:07.558 I/Icing   ( 1537): Indexing com.google.android.gms-apps from com.google.android.gms
+09-27 13:44:07.571 D/BoundBrokerSvc( 1537): onBind: Intent { act=com.google.android.gms.common.BIND_SHARED_PREFS pkg=com.google.android.gms }
+09-27 13:44:07.571 D/BoundBrokerSvc( 1537): Loading bound service for intent: Intent { act=com.google.android.gms.common.BIND_SHARED_PREFS pkg=com.google.android.gms }
+09-27 13:44:07.605 I/AiAiEcho( 1364): EchoSearch: WidgetFetcherImpl is initialized with [28] widgets [reason=package removed for userId: 0]
+09-27 13:44:07.636 I/Icing   ( 1537): Indexing done com.google.android.gms-apps
+09-27 13:44:07.684 D/BoundBrokerSvc( 1537): onUnbind: Intent { act=com.google.android.gms.common.BIND_SHARED_PREFS pkg=com.google.android.gms }
+09-27 13:44:07.699 E/AppOps  (  549): attributionTag VCN not declared in manifest of android
+09-27 13:44:07.706 W/WifiService(  549): Couldn't get PackageInfo for package:dev.mobile.maestro.test
+09-27 13:44:07.706 D/WifiService(  549): Remove settings for package:dev.mobile.maestro.test
+09-27 13:44:07.706 D/WifiConfigManager(  549): Remove all networks for app ApplicationInfo{5492bfa dev.mobile.maestro.test}
+09-27 13:44:07.743 I/RoleService(  549): Granting default roles...
+09-27 13:44:07.747 D/WifiConfigStore(  549): Writing to stores completed in 41 ms.
+09-27 13:44:07.755 I/PasspointManager(  549): No app ops listener found for dev.mobile.maestro.test
+09-27 13:44:07.755 D/SafetySourceDataValidator(  549): No cert check requested for package com.google.android.permissioncontroller
+09-27 13:44:07.793 I/ConditionProviders(  549): Disallowing condition provider dev.mobile.maestro.test (userSet: true)
+09-27 13:44:07.816 V/MediaPlayerList(  905): mPackageChangedBroadcastReceiver: action: android.intent.action.PACKAGE_REMOVED
+09-27 13:44:07.822 V/MediaPlayerList(  905): mPackageChangedBroadcastReceiver: action: android.intent.action.PACKAGE_REMOVED
+09-27 13:44:07.822 V/MediaPlayerList(  905): mPackageChangedBroadcastReceiver: action: android.intent.action.PACKAGE_DATA_CLEARED
+09-27 13:44:07.822 V/MediaPlayerList(  905): mPackageChangedBroadcastReceiver: action: android.intent.action.PACKAGE_DATA_CLEARED
+09-27 13:44:07.839 W/MediaProvider( 1363): WorkProfileOwnerApps cache is empty
+09-27 13:44:07.848 W/Looper  (  549): Slow dispatch took 105ms main h=com.android.server.notification.NotificationManagerService$WorkerHandler c=null m=8
+09-27 13:44:07.861 D/IntervalStats(  549): Unable to parse usage stats packages: [324, 326, 328, 329]
+09-27 13:44:07.861 D/IntervalStats(  549): Unable to parse event packages: [329]
+09-27 13:44:07.866 D/AF::TrackHandle(  403): OpPlayAudio: track:57 usage:13 not muted
+09-27 13:44:07.869 D/IntervalStats(  549): Unable to parse usage stats packages: [331, 334, 337]
+09-27 13:44:07.870 D/IntervalStats(  549): Unable to parse usage stats packages: [340, 341, 342]
+09-27 13:44:07.870 D/IntervalStats(  549): Unable to parse event packages: [342]
+09-27 13:44:07.881 D/PersistedStoragePackageUninstalledReceiver( 1271): Received android.intent.action.PACKAGE_FULLY_REMOVED for dev.mobile.maestro for u0
+09-27 13:44:07.887 D/AF::TrackHandle(  403): OpPlayAudio: track:57 usage:13 not muted
+09-27 13:44:07.900 D/AF::TrackHandle(  403): OpPlayAudio: track:57 usage:13 not muted
+09-27 13:44:07.902 D/AF::TrackHandle(  403): OpPlayAudio: track:57 usage:13 not muted
+09-27 13:44:07.903 D/AF::TrackHandle(  403): OpPlayAudio: track:57 usage:13 not muted
+09-27 13:44:07.907 D/AF::TrackHandle(  403): OpPlayAudio: track:57 usage:13 not muted
+09-27 13:44:07.925 V/StorageManagerService(  549): Package dev.mobile.maestro.test does not have legacy storage
+09-27 13:44:07.932 I/InputReader(  549): Reconfiguring input devices, changes=KEYBOARD_LAYOUTS
+09-27 13:44:07.933 I/RollbackManager(  549): broadcast=ACTION_PACKAGE_FULLY_REMOVED pkg=dev.mobile.maestro.test
+09-27 13:44:07.944 W/WifiService(  549): Couldn't get PackageInfo for package:dev.mobile.maestro.test
+09-27 13:44:07.960 D/WifiService(  549): Remove settings for package:dev.mobile.maestro.test
+09-27 13:44:07.967 D/WifiConfigManager(  549): Remove all networks for app ApplicationInfo{7d9230a dev.mobile.maestro.test}
+09-27 13:44:07.985 D/AF::TrackHandle(  403): OpPlayAudio: track:57 usage:13 not muted
+09-27 13:44:07.987 D/AF::TrackHandle(  403): OpPlayAudio: track:57 usage:13 not muted
+09-27 13:44:07.995 D/AF::TrackHandle(  403): OpPlayAudio: track:57 usage:13 not muted
+09-27 13:44:07.997 D/AF::TrackHandle(  403): OpPlayAudio: track:57 usage:13 not muted
+09-27 13:44:08.031 W/Looper  (  549): Slow dispatch took 102ms main h=android.app.PropertyInvalidatedCache$AutoCorker$1 c=null m=0
+09-27 13:44:08.032 D/AF::TrackHandle(  403): OpPlayAudio: track:57 usage:13 not muted
+09-27 13:44:08.032 D/WifiConfigStore(  549): Writing to stores completed in 59 ms.
+09-27 13:44:08.041 D/AF::TrackHandle(  403): OpPlayAudio: track:57 usage:13 not muted
+09-27 13:44:08.048 I/PasspointManager(  549): No app ops listener found for dev.mobile.maestro.test
+09-27 13:44:08.048 D/AF::TrackHandle(  403): OpPlayAudio: track:57 usage:13 not muted
+09-27 13:44:08.050 D/AF::TrackHandle(  403): OpPlayAudio: track:57 usage:13 not muted
+09-27 13:44:08.053 D/AF::TrackHandle(  403): OpPlayAudio: track:57 usage:13 not muted
+09-27 13:44:08.053 D/AF::TrackHandle(  403): OpPlayAudio: track:57 usage:13 not muted
+09-27 13:44:08.056 W/WindowMagnificationMgr(  549): requestConnection duplicated request: connect=false, mConnectionState=DISCONNECTED
+09-27 13:44:08.094 I/Telecom (  549): CarModeTracker: Package dev.mobile.maestro.test is not tracked.: SSH.oR@Ado
+09-27 13:44:08.103 I/Telecom (  549): InCallController: updateCarModeForConnections: car mode apps: : SSH.oR@Ado
+09-27 13:44:08.104 I/Telecom (  549): InCallController: update carmode current:UserHandle{0} parent:null: SSH.oR@Ado
+09-27 13:44:08.138 D/ControlsListingControllerImpl(  773): ServiceConfig reloaded, count: 0
+09-27 13:44:08.183 D/SafetySourceDataValidator(  549): No cert check requested for package com.google.android.permissioncontroller
+09-27 13:44:08.231 W/Looper  (  549): Drained
+09-27 13:44:08.277 W/Looper  (  549): Slow dispatch took 138ms main h=android.app.ActivityThread$H c=null m=113
+09-27 13:44:08.284 W/Looper  (  549): Slow delivery took 272ms main h=com.android.server.power.Notifier$NotifierHandler c=null m=7
+09-27 13:44:08.360 I/MediaProvider( 1363): Begin Intent { act=android.intent.action.PACKAGE_FULLY_REMOVED dat=package: flg=0x5000010 cmp=com.google.android.providers.media.module/com.android.providers.media.MediaService (has extras) }
+09-27 13:44:08.363 D/MediaProvider( 1363): Deleted 0 Android/media items belonging to dev.mobile.maestro.test on /data/user/0/com.google.android.providers.media.module/databases/external.db
+09-27 13:44:08.381 D/MediaGrants( 1363): Removed 0 media_grants for 0 user for dev.mobile.maestro.test. Reason: Package orphaned
+09-27 13:44:08.389 I/MediaProvider( 1363): End Intent { act=android.intent.action.PACKAGE_FULLY_REMOVED dat=package: flg=0x5000010 cmp=com.google.android.providers.media.module/com.android.providers.media.MediaService (has extras) }
+09-27 13:44:08.427 D/StatusBarIconController(  773): ignoring old pipeline callbacks, because the new mobile icons are enabled
+09-27 13:44:08.477 D/IntervalStats(  549): Unable to parse usage stats packages: [324, 326, 328, 329]
+09-27 13:44:08.477 W/Looper  (  549): Drained
+09-27 13:44:08.478 D/IntervalStats(  549): Unable to parse event packages: [329]
+09-27 13:44:08.563 D/IntervalStats(  549): Unable to parse usage stats packages: [331, 334, 337]
+09-27 13:44:08.586 D/TrafficStats( 1511): tagSocket(109) with statsTag=0x4be64f9b, statsUid=-1
+09-27 13:44:08.596 D/IntervalStats(  549): Unable to parse usage stats packages: [340, 341, 342]
+09-27 13:44:08.596 D/IntervalStats(  549): Unable to parse event packages: [342]
+09-27 13:44:08.678 D/PersistedStoragePackageUninstalledReceiver( 1271): Received android.intent.action.PACKAGE_FULLY_REMOVED for dev.mobile.maestro.test for u0
+09-27 13:44:08.710 I/BlockstoreStorage( 1537): (REDACTED) Clearing all the Blockstore Data for package %s
+09-27 13:44:08.711 I/BlockstoreStorage( 1537): (REDACTED) Clearing all the Blockstore Data for %s packages
+09-27 13:44:08.738 I/ProximityAuth( 1489): [RecentAppsMediator] Package removed: (user=UserHandle{0}) dev.mobile.maestro.test
+09-27 13:44:08.796 D/BoundBrokerSvc( 1537): onBind: Intent { act=com.google.android.gms.common.BIND_SHARED_PREFS pkg=com.google.android.gms }
+09-27 13:44:08.810 D/BoundBrokerSvc( 1537): Loading bound service for intent: Intent { act=com.google.android.gms.common.BIND_SHARED_PREFS pkg=com.google.android.gms }
+09-27 13:44:08.822 I/AiAiEcho( 1364): AppFetcherImplV2 onPackageRemoved dev.mobile.maestro.test.
+09-27 13:44:08.849 D/Launcher.Model( 1021): package removed received dev.mobile.maestro.test
+09-27 13:44:08.858 D/PackageUpdatedTask( 1021): Removing app icondev.mobile.maestro.test
+09-27 13:44:08.919 D/ModelWriter( 1021): removing items from db . Reason: [removed because the corresponding package or component is removed. mOp=3 removedPackages=[dev.mobile.maestro.test] removedComponents=[]]
+09-27 13:44:08.956 D/EGL_emulation( 1021): app_time_stats: avg=1685.80ms min=1685.80ms max=1685.80ms count=1
+09-27 13:44:09.070 I/AiAiEcho( 1364): EchoSearch: WidgetFetcherImpl is initialized with [28] widgets [reason=package removed for userId: 0]
+09-27 13:44:09.503 D/StatusBarIconController(  773): ignoring old pipeline callbacks, because the new mobile icons are enabled
+09-27 13:44:09.655 D/BoundBrokerSvc( 1537): onUnbind: Intent { act=com.google.android.gms.common.BIND_SHARED_PREFS pkg=com.google.android.gms }
+09-27 13:44:09.658 I/AiAiEcho( 1364): [pnb-agg] Reload pnb aggregation on events deleted
+09-27 13:44:09.669 I/AiAiEcho( 1364): [pnb-agg] pnb aggregation disabled.
+09-27 13:44:09.887 W/SQLiteLog( 1537): (28) double-quoted string literal: "dev.mobile.maestro.test"
+09-27 13:44:09.910 I/Finsky  ( 1511): [2] vny.g(0): vny - Received: android.intent.action.PACKAGE_REMOVED, [MYj7VLvKPEmotMuBErnMuc0J5AsMppGVZopwnzfDGWY]
+09-27 13:44:09.917 I/Finsky  ( 1511): [2] von.t(5): Package no longer installed: dev.mobile.maestro.test
+09-27 13:44:09.965 I/Finsky  ( 1511): [197] oin.run(15): Frosting DB delete succeeded: true
+09-27 13:44:09.967 I/Finsky  ( 1511): [2] aguv.c(5): Do not start WearSupportService due to Wear service optimization
+09-27 13:44:09.969 I/Finsky  ( 1511): [198] aw.a(5): Asset module storage cleared for package dev.mobile.maestro.test.
+09-27 13:44:09.982 I/Finsky  ( 1511): [201] jvi.abQ(78): [ContentSync] finished, scheduled=false
+09-27 13:44:09.982 I/Finsky  ( 1511): [200] qcr.accept(22): IQ: handled package removed
+09-27 13:44:09.986 I/Finsky  ( 1511): [2] von.t(5): Package no longer installed: dev.mobile.maestro.test
+09-27 13:44:09.995 I/Finsky  ( 1511): [197] oin.run(15): Frosting DB delete succeeded: false
+09-27 13:44:10.018 I/Icing   ( 1537): doRemovePackageData dev.mobile.maestro.test
+09-27 13:44:10.020 I/Finsky  ( 1511): [59] jlf.a(5): AIM: AppInfoManager-Perf > OnDeviceAppInfo > cacheHitCount=0, cacheMissCount=1. Missed  in cache (limit 10) : [dev.mobile.maestro.test]
+09-27 13:44:10.020 I/Finsky  ( 1511): [59] jiv.apply(110): AIM: Got app ownership map. App counts: . Unique apps: 0
+09-27 13:44:10.023 I/Finsky  ( 1511): [2] aacd.f(8): Clearing split related stale data.
+09-27 13:44:10.025 I/Finsky  ( 1511): [2] vny.g(0): vny - Received: android.intent.action.PACKAGE_FULLY_REMOVED, [MYj7VLvKPEmotMuBErnMuc0J5AsMppGVZopwnzfDGWY]
+09-27 13:44:10.027 I/Finsky  ( 1511): [2] von.t(5): Package no longer installed: dev.mobile.maestro.test
+09-27 13:44:10.030 I/Fitness ( 1489): (REDACTED) FitCleanupIntentOperation received Intent %s
+09-27 13:44:10.033 I/Finsky  ( 1511): [197] oin.run(15): Frosting DB delete succeeded: false
+09-27 13:44:10.040 I/Finsky  ( 1511): [2] vny.g(0): vny - Deduping intent android.intent.action.PACKAGE_FULLY_REMOVED
+09-27 13:44:10.091 I/Icing   ( 1537): Indexing com.google.android.gms-apps from com.google.android.gms
+09-27 13:44:10.094 I/Icing   ( 1537): Indexing done com.google.android.gms-apps
+09-27 13:44:10.181 I/Finsky  ( 1511): [65] jlc.a(11): AIM: AppInfoManager-Perf > ItemModel > CacheSize=0, cacheHitCount=0, cacheMissCount=1, total appsWithNoServerDataCount=0. Missed  in cache (limit 10) : [dev.mobile.maestro.test]
+09-27 13:44:10.181 I/Finsky  ( 1511): [65] jle.n(3): AIM: AppInfoManager-Perf > ItemModel > ItemStore Called 1 apps cacheOptions = USE_CACHE
+09-27 13:44:10.186 I/Finsky  ( 1511): [55] rom.apply(5): ItemStore: Not cached: dev.mobile.maestro.test
+09-27 13:44:10.196 I/Finsky  ( 1511): [65] jlc.a(98): AIM: ItemModel fetch - unauth(1), auth()
+09-27 13:44:10.241 W/AiAiEcho( 1364): LyftNotificationParser Ridesharing ETA not enabled
+09-27 13:44:10.241 W/AiAiEcho( 1364): SmartspaceNotificationPredictor no parser can handle this notification or notification is invalid
+09-27 13:44:10.249 D/SafetySourceDataValidator(  549): Package com.android.vending has expected signature
+09-27 13:44:10.282 I/system_server(  549): Background young concurrent copying GC freed 438491(23MB) AllocSpace objects, 60(2120KB) LOS objects, 43% free, 31MB/55MB, paused 926us,1.432ms total 398.933ms
+09-27 13:44:10.293 D/EGL_emulation(  773): app_time_stats: avg=2536.86ms min=52.18ms max=9586.16ms count=4
+09-27 13:44:10.419 D/StatusBarIconController(  773): ignoring old pipeline callbacks, because the new mobile icons are enabled
+09-27 13:44:10.476 E/adservices(14452): Measurement Delete Packages Receiver is disabled
+09-27 13:44:10.481 E/adservices(14452): Topics API is disabled
+09-27 13:44:10.647 E/adservices(14452): Measurement Delete Packages Receiver is disabled
+09-27 13:44:10.682 E/adservices(14452): Topics API is disabled
+09-27 13:44:10.686 D/TrafficStats( 1511): tagSocket(121) with statsTag=0x4be64f9b, statsUid=-1
+09-27 13:44:10.709 E/adservices(14452): Measurement Delete Packages Receiver is disabled
+09-27 13:44:11.111 W/ziparchive(14985): Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/00000004/DynamiteModulesC.dm': No such file or directory
+09-27 13:44:11.111 W/ziparchive(14985): Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/00000004/DynamiteModulesC.dm': No such file or directory
+09-27 13:44:11.116 W/ziparchive(14985): Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/00000001/CronetDynamite.dm': No such file or directory
+09-27 13:44:11.116 W/ziparchive(14985): Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/00000001/CronetDynamite.dm': No such file or directory
+09-27 13:44:11.122 W/ziparchive(14985): Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/00000002/DynamiteLoader.dm': No such file or directory
+09-27 13:44:11.122 W/ziparchive(14985): Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/00000002/DynamiteLoader.dm': No such file or directory
+09-27 13:44:11.132 W/ziparchive(14985): Unable to open '/data/user/0/com.google.android.gms/app_fb/f.dm': No such file or directory
+09-27 13:44:11.132 W/ziparchive(14985): Unable to open '/data/user/0/com.google.android.gms/app_fb/f.dm': No such file or directory
+09-27 13:44:11.134 W/ziparchive(14985): Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/00000005/GoogleCertificates.dm': No such file or directory
+09-27 13:44:11.134 W/ziparchive(14985): Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/00000005/GoogleCertificates.dm': No such file or directory
+09-27 13:44:11.138 W/ziparchive(14985): Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/00000009/dl-TfliteDynamiteDynamite.integ_262730502100800.dm': No such file or directory
+09-27 13:44:11.138 W/ziparchive(14985): Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/00000009/dl-TfliteDynamiteDynamite.integ_262730502100800.dm': No such file or directory
+09-27 13:44:11.150 W/ziparchive(14985): Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/00000000/AdsDynamite.dm': No such file or directory
+09-27 13:44:11.150 W/ziparchive(14985): Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/00000000/AdsDynamite.dm': No such file or directory
+09-27 13:44:11.172 W/ziparchive(14985): Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/00000008/dl-VisionOcrDynamite.integ_231602402100000.dm': No such file or directory
+09-27 13:44:11.172 W/ziparchive(14985): Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/00000008/dl-VisionOcrDynamite.integ_231602402100000.dm': No such file or directory
+09-27 13:44:11.182 W/ziparchive(14985): Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/0000000c/dl-MlkitBarcodeUi.optional_231818100000.dm': No such file or directory
+09-27 13:44:11.182 W/ziparchive(14985): Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/0000000c/dl-MlkitBarcodeUi.optional_231818100000.dm': No such file or directory
+09-27 13:44:11.205 I/Icing   ( 1537): doRemovePackageData fi.iwa.sakani
+09-27 13:44:11.227 W/ziparchive(14985): Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/0000000a/dl-MlkitOcrCommon.optional_231818100800.dm': No such file or directory
+09-27 13:44:11.227 W/ziparchive(14985): Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/0000000a/dl-MlkitOcrCommon.optional_231818100800.dm': No such file or directory
+09-27 13:44:11.232 I/GsaVoiceInteractionSrv( 1371): O received Intent { act=android.intent.action.PACKAGE_REMOVED dat=package: flg=0x4000010 (has extras) }
+09-27 13:44:11.249 W/ziparchive(14985): Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/00000007/MeasurementDynamite.dm': No such file or directory
+09-27 13:44:11.249 W/ziparchive(14985): Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/00000007/MeasurementDynamite.dm': No such file or directory
+09-27 13:44:11.360 W/.gms.persistent( 1489): No such thread id for suspend: 76
+09-27 13:44:11.482 D/SafetySourceDataValidator(  549): No cert check requested for package com.google.android.permissioncontroller
+09-27 13:44:11.483 I/GsaVoiceInteractionSrv( 1371): O received Intent { act=android.intent.action.PACKAGE_REMOVED dat=package: flg=0x4000010 (has extras) }
+09-27 13:44:11.580 D/StatusBarIconController(  773): ignoring old pipeline callbacks, because the new mobile icons are enabled
+09-27 13:44:11.615 W/Looper  (  549): Slow dispatch took 443ms android.perm h=android.os.Handler c=com.android.internal.infra.ServiceConnector$Impl$$ExternalSyntheticLambda1@c4083eb m=0
+09-27 13:44:11.630 W/SearchServiceCore( 1545): Abort, client detached.
+09-27 13:44:11.670 D/TileServices(  773): Couldn't find tile for ComponentInfo{com.google.android.apps.wellbeing/com.google.android.apps.wellbeing.focusmode.quicksettings.FocusModeTileService}(0)
+09-27 13:44:11.697 I/Fitness ( 1489): (REDACTED) FitCleanupIntentOperation received Intent %s
+09-27 13:44:11.755 I/MediaProvider( 1363): Begin Intent { act=android.intent.action.PACKAGE_DATA_CLEARED dat=package: flg=0x5000010 cmp=com.google.android.providers.media.module/com.android.providers.media.MediaService (has extras) }
+09-27 13:44:11.766 D/MediaProvider( 1363): Deleted 0 Android/media items belonging to fi.iwa.sakani on /data/user/0/com.google.android.providers.media.module/databases/external.db
+09-27 13:44:11.777 D/MediaGrants( 1363): Removed 0 media_grants for 0 user for fi.iwa.sakani. Reason: Package orphaned
+09-27 13:44:11.791 I/MediaProvider( 1363): End Intent { act=android.intent.action.PACKAGE_DATA_CLEARED dat=package: flg=0x5000010 cmp=com.google.android.providers.media.module/com.android.providers.media.MediaService (has extras) }
+09-27 13:44:11.822 E/RoleControllerServiceImpl( 1271): Default/fallback role holder package doesn't qualify for the role, package: com.google.android.gms.supervision, role: android.app.role.SYSTEM_SUPERVISION
+09-27 13:44:11.890 I/Role    ( 1271): com.google.android.gms not qualified for android.app.role.SYSTEM_CALL_STREAMING due to missing RequiredComponent{mIntentFilterData=IntentFilterData{mAction='android.telecom.CallStreamingService', mCategories='[]', mDataScheme='null', mDataType='null'}, mMinTargetSdkVersion=1, mFlags='0', mPermission='android.permission.BIND_CALL_STREAMING_SERVICE', mQueryFlags=0, mMetaData=[]}
+09-27 13:44:11.893 E/RoleControllerServiceImpl( 1271): Default/fallback role holder package doesn't qualify for the role, package: com.google.android.gms, role: android.app.role.SYSTEM_CALL_STREAMING
+09-27 13:44:11.923 W/Role    ( 1271): Default holder doesn't have required signing certificate: com.google.android.apps.work.clouddpc:23962F4B43B9857638EA66F4D419518EAE282491ACDA4B94707BD59003C45E58
+09-27 13:44:11.927 D/PersistedStoragePackageUninstalledReceiver( 1271): Received android.intent.action.PACKAGE_DATA_CLEARED for fi.iwa.sakani for u0
+09-27 13:44:12.025 I/ContentMaintenance( 1537): Internal cache bytes used: 0; limit: 100000000; download size: 0
+09-27 13:44:12.197 I/RealtimeCacheCleanup( 1537): Beginning Realtime garbage collection.
+09-27 13:44:12.206 I/RealtimeCacheCleanup( 1537): Finished Realtime garbage collection.
+09-27 13:44:12.302 I/.apps.wellbeing(14234): Background young concurrent copying GC freed 68978(2969KB) AllocSpace objects, 0(0B) LOS objects, 35% free, 5269KB/8142KB, paused 1.123ms,88us total 385.020ms
+09-27 13:44:12.361 D/BoundBrokerSvc( 1489): onUnbind: Intent { act=com.google.android.gms.gmscompliance.service.START dat=chimera-action:/... cmp=com.google.android.gms/.chimera.PersistentBoundBrokerService }
+09-27 13:44:12.504 D/BoundBrokerSvc( 1537): onUnbind: Intent { act=com.google.android.gms.feedback.internal.IFeedbackService dat=chimera-action:/... cmp=com.google.android.gms/.chimera.GmsBoundBrokerService }
+09-27 13:44:12.512 D/TileServices(  773): Couldn't find tile for ComponentInfo{com.google.android.apps.wellbeing/com.google.android.apps.wellbeing.focusmode.quicksettings.FocusModeTileService}(0)
+09-27 13:44:12.536 D/StatusBarIconController(  773): ignoring old pipeline callbacks, because the new mobile icons are enabled
+09-27 13:44:13.186 D/StatusBarIconController(  773): ignoring old pipeline callbacks, because the new mobile icons are enabled
+09-27 13:44:13.201 D/EGL_emulation(  773): app_time_stats: avg=968.38ms min=165.00ms max=2405.08ms count=3
+09-27 13:44:13.526 D/StatusBarIconController(  773): ignoring old pipeline callbacks, because the new mobile icons are enabled
+09-27 13:44:13.616 E/Finsky  ( 1511): [55] rou.a(16): ItemStore: getItems RPC failed.
+09-27 13:44:13.616 E/Finsky  ( 1511): [55] rou.a(16): ItemStore: getItems RPC failed.
+09-27 13:44:13.616 E/Finsky  ( 1511): [55] rou.a(16): ItemStore: getItems RPC failed.
+09-27 13:44:13.616 E/Finsky  ( 1511): [55] rou.a(16): ItemStore: getItems RPC failed.
+09-27 13:44:13.616 E/Finsky  ( 1511): [61] rou.a(16): ItemStore: getItems RPC failed.
+09-27 13:44:13.617 E/Finsky  ( 1511): [59] rou.a(16): ItemStore: getItems RPC failed.
+09-27 13:44:13.617 E/Finsky  ( 1511): [65] rou.a(16): ItemStore: getItems RPC failed.
+09-27 13:44:13.840 I/ActivityManager(  549): Force stopping fi.iwa.sakani appid=10214 user=0: from pid 15464
+09-27 13:44:13.858 D/CarrierSvcBindHelper(  964): onHandleForceStop: [fi.iwa.sakani]
+09-27 13:44:13.858 D/CarrierSvcBindHelper(  964): No carrier app for: 0
+09-27 13:44:13.885 E/adbd    (  432): failed to connect to socket 'tcp:59671': Connection refused
+09-27 13:44:13.893 E/adbd    (  432): failed to connect to socket 'tcp:59671': Connection refused
+09-27 13:44:14.202 I/NetworkScheduler.Stats( 1489): (REDACTED) Task %s/%s started execution. cause:%s exec_start_elapsed_seconds: %s
+09-27 13:44:14.203 V/NFC     ( 1489): this device does not have NFC support
+09-27 13:44:14.204 W/TapAndPay( 1489): NfcAdapter is null while obtaining CardEmulation instance. [CONTEXT service_id=79 ]
+09-27 13:44:14.204 W/TapAndPay( 1489): java.lang.NullPointerException: NfcAdapter is null
+09-27 13:44:14.204 W/TapAndPay( 1489): 	at android.nfc.cardemulation.CardEmulation.getInstance(CardEmulation.java:152)
+09-27 13:44:14.204 W/TapAndPay( 1489): 	at cdoy.<init>(:com.google.android.gms@231818047@23.18.18 (190800-535401451):0)
+09-27 13:44:14.204 W/TapAndPay( 1489): 	at com.google.android.gms.tapandpay.hce.task.TapAndPayAidRegistrationTaskOperation.a(:com.google.android.gms@231818047@23.18.18 (190800-535401451):5)
+09-27 13:44:14.204 W/TapAndPay( 1489): 	at com.google.android.gms.tapandpay.gcmtask.TapAndPayGcmTaskChimeraService.a(:com.google.android.gms@231818047@23.18.18 (190800-535401451):4)
+09-27 13:44:14.204 W/TapAndPay( 1489): 	at avzs.call(:com.google.android.gms@231818047@23.18.18 (190800-535401451):4)
+09-27 13:44:14.204 W/TapAndPay( 1489): 	at java.util.concurrent.FutureTask.run(FutureTask.java:264)
+09-27 13:44:14.204 W/TapAndPay( 1489): 	at aced.c(:com.google.android.gms@231818047@23.18.18 (190800-535401451):6)
+09-27 13:44:14.204 W/TapAndPay( 1489): 	at aced.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):7)
+09-27 13:44:14.204 W/TapAndPay( 1489): 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+09-27 13:44:14.204 W/TapAndPay( 1489): 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:644)
+09-27 13:44:14.204 W/TapAndPay( 1489): 	at acjn.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):0)
+09-27 13:44:14.204 W/TapAndPay( 1489): 	at java.lang.Thread.run(Thread.java:1012)
+09-27 13:44:14.234 I/NetworkScheduler.Stats( 1489): (REDACTED) Task %s/%s finished executing. cause:%s result: %s elapsed_millis: %s uptime_millis: %s exec_start_elapsed_seconds: %s
+09-27 13:44:14.545 D/StatusBarIconController(  773): ignoring old pipeline callbacks, because the new mobile icons are enabled
+09-27 13:44:14.699 E/adbd    (  432): failed to connect to socket 'tcp:59671': Connection refused
+09-27 13:44:14.715 E/adbd    (  432): failed to connect to socket 'tcp:59671': Connection refused

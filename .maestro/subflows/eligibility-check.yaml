@@ -1,0 +1,741 @@
+# Eligibility & Appeal Journey - check eligibility for THE registered user (called once by
+# e2e/check-eligibility.yaml right after the single registration).
+#
+# The user's real profile is completed, never screened out: spouse (Husband/Wife/Spouse), Father,
+# Mother, Guardian and other family DOB / ID fields are filled by the generic DOB and ID engines; divorce
+# fields by the divorce handling; "Deed information" by the preserved, live-proven deed engine
+# (eligibility-fill-deeds.yaml). A required field none of them can fill fails the run as an AUTOMATION
+# gap - another user is never tried.
+# Output: output.eligibilityOutcome = 'not-eligible' | 'eligible' | 'unknown' (unknown stops the run).
+appId: fi.iwa.sakani
+name: Eligibility - form, family, deeds and the real result for the registered user
+---
+# ==========================================================================================
+# 2-5. ACCOUNT -> ELIGIBILITY CHECKER -> STEP 1 -> STEP 2 -> STEP 3 base fields + Rented house
+# ==========================================================================================
+# Account opened: proven by the shared helper's destination ("My bookings").
+- runFlow:
+    file: open-account-tab.yaml
+    env:
+      DESTINATION: "My bookings"
+- evalScript: "${console.log('ELIGIBILITY - Account opened')}"
+- evalScript: ${output.accountService = "(?s)Eligibility checker status.*"}
+- runFlow:
+    file: open-account-service.yaml
+# Eligibility Checker opened (its introduction, observed 01/10/2026).
+- extendedWaitUntil:
+    visible: "Check your eligibility"
+    timeout: 30000
+- assertVisible: "Eligibility"
+- assertVisible: "Housing options, picked for you"
+- takeScreenshot: elig-1-eligibility-checker
+- tapOn: "Check your eligibility"
+
+# Check your eligibility opened - Step 1 of 3, Terms and Conditions.
+- extendedWaitUntil:
+    visible: "Step 1 of 3"
+    timeout: 30000
+- assertVisible: "Terms and Conditions"
+- takeScreenshot: elig-2-step1-terms
+
+# ==========================================================================================
+# 3. STEP 1 - Terms and Conditions (mandatory acknowledgement)
+# ==========================================================================================
+# "Accept and continue" is not actionable until the acknowledgement is ticked; reaching Step 2 is
+# the proof that the acknowledgement was accepted.
+# Step 1 can still be under a loading spinner while "Step 1 of 3" is already visible behind it (a tap
+# then is ignored), so the screen must stop moving before the acknowledgement is touched.
+- waitForAnimationToEnd:
+    timeout: 15000
+- tapOn: "I have read and understood the terms and conditions of the contract.*"
+- tapOn:
+    text: "Accept and continue"
+    retryTapIfNoChange: false
+- extendedWaitUntil:
+    visible: "Step 2 of 3"
+    timeout: 30000
+    label: "STEP 1 - Terms were not accepted (Step 2 did not open)"
+
+# ==========================================================================================
+# 4. STEP 2 - Acknowledgement: every mandatory Yes/No question answered "No"
+# ==========================================================================================
+# Observed 01/10/2026: three questions, all on one screen. Each radio is an unlabelled clickable
+# 63x63 control LEFT of its "Yes"/"No" text (the text itself is not clickable). Each "No" radio is
+# addressed INSIDE ITS OWN QUESTION: 63x63, below that question's text and above the next
+# question (or "Continue"), second radio = "No" (the first is "Yes").
+# Selection proof: radios expose no checked/selected state, so each "No" radio is compared with the
+# selected-radio reference captured on this device (selected vs unselected: 26.2% equal pixels;
+# unselected vs unselected: 100%). Reaching Step 3 then proves the step accepted the answers.
+- assertVisible: "Acknowledgement"
+- assertVisible: "1\\. Have you or any of your dependents resided outside.*"
+- assertVisible: "2\\. Do you or your family have financial assets.*"
+- assertVisible: "3\\. Did you or any of your dependents own a house title.*"
+
+# Q1 - resided outside KSA > 365 days in the past five years -> No
+- tapOn:
+    width: 63
+    height: 63
+    tolerance: 3
+    below: "1\\. Have you or any of your dependents resided outside.*"
+    above: "2\\. Do you or your family have financial assets.*"
+    index: 1
+    retryTapIfNoChange: false
+# Settle first: the reference was captured on a settled radio (selection animation finished).
+- waitForAnimationToEnd:
+    timeout: 3000
+- assertScreenshot:
+    path: ../reference-screenshots/eligibility/radio-selected.png
+    cropOn:
+      width: 63
+      height: 63
+      tolerance: 3
+      below: "1\\. Have you or any of your dependents resided outside.*"
+      above: "2\\. Do you or your family have financial assets.*"
+      index: 1
+    thresholdPercentage: 95
+    label: "STEP 2 - Q1 (resided outside KSA) is not answered No"
+
+# Q2 - financial assets above five million SAR -> No
+- tapOn:
+    width: 63
+    height: 63
+    tolerance: 3
+    below: "2\\. Do you or your family have financial assets.*"
+    above: "3\\. Did you or any of your dependents own a house title.*"
+    index: 1
+    retryTapIfNoChange: false
+# Settle first: the reference was captured on a settled radio (selection animation finished).
+- waitForAnimationToEnd:
+    timeout: 3000
+- assertScreenshot:
+    path: ../reference-screenshots/eligibility/radio-selected.png
+    cropOn:
+      width: 63
+      height: 63
+      tolerance: 3
+      below: "2\\. Do you or your family have financial assets.*"
+      above: "3\\. Did you or any of your dependents own a house title.*"
+      index: 1
+    thresholdPercentage: 95
+    label: "STEP 2 - Q2 (financial assets) is not answered No"
+
+# Q3 - owned a house title within the past year -> No
+- tapOn:
+    width: 63
+    height: 63
+    tolerance: 3
+    below: "3\\. Did you or any of your dependents own a house title.*"
+    above: "Continue"
+    index: 1
+    retryTapIfNoChange: false
+# Settle first: the reference was captured on a settled radio (selection animation finished).
+- waitForAnimationToEnd:
+    timeout: 3000
+- assertScreenshot:
+    path: ../reference-screenshots/eligibility/radio-selected.png
+    cropOn:
+      width: 63
+      height: 63
+      tolerance: 3
+      below: "3\\. Did you or any of your dependents own a house title.*"
+      above: "Continue"
+      index: 1
+    thresholdPercentage: 95
+    label: "STEP 2 - Q3 (house title) is not answered No"
+- evalScript: "${console.log('STEP 2 - all three mandatory Yes/No questions answered No (pixel-proven)')}"
+- takeScreenshot: elig-3-step2-all-no
+- tapOn:
+    text: "Continue"
+    retryTapIfNoChange: false
+- extendedWaitUntil:
+    visible: "Step 3 of 3"
+    timeout: 30000
+    label: "STEP 2 - answers were not accepted (Step 3 did not open)"
+
+# ==========================================================================================
+# 5. STEP 3 - Family and Preferences information
+# ==========================================================================================
+- assertVisible: "Family and Preferences information"
+
+# Region / City pickers open a full-screen searchable list. The options are full-width 1080x147
+# rows below "Search" (the search icon and a partly visible last row are excluded by that size).
+# Current Region -> first option
+- tapOn:
+    text: "Select region"
+    index: 0
+- extendedWaitUntil:
+    visible: "Search"
+    timeout: 15000
+- copyTextFrom:
+    below: "Search"
+    width: 1080
+    height: 147
+    tolerance: 4
+    index: 0
+- evalScript: ${output.currentRegion = String(maestro.copiedText)}
+- tapOn:
+    below: "Search"
+    width: 1080
+    height: 147
+    tolerance: 4
+    index: 0
+# Current City -> first option
+- tapOn:
+    text: "Select city"
+    index: 0
+- extendedWaitUntil:
+    visible: "Search"
+    timeout: 15000
+- copyTextFrom:
+    below: "Search"
+    width: 1080
+    height: 147
+    tolerance: 4
+    index: 0
+- evalScript: ${output.currentCity = String(maestro.copiedText)}
+- tapOn:
+    below: "Search"
+    width: 1080
+    height: 147
+    tolerance: 4
+    index: 0
+# Preferred Region -> first option (the current one now shows its value, so index 0 is this one)
+- tapOn:
+    text: "Select region"
+    index: 0
+- extendedWaitUntil:
+    visible: "Search"
+    timeout: 15000
+- copyTextFrom:
+    below: "Search"
+    width: 1080
+    height: 147
+    tolerance: 4
+    index: 0
+- evalScript: ${output.preferredRegion = String(maestro.copiedText)}
+- tapOn:
+    below: "Search"
+    width: 1080
+    height: 147
+    tolerance: 4
+    index: 0
+# Preferred City -> first option
+- tapOn:
+    text: "Select city"
+    index: 0
+- extendedWaitUntil:
+    visible: "Search"
+    timeout: 15000
+- copyTextFrom:
+    below: "Search"
+    width: 1080
+    height: 147
+    tolerance: 4
+    index: 0
+- evalScript: ${output.preferredCity = String(maestro.copiedText)}
+- tapOn:
+    below: "Search"
+    width: 1080
+    height: 147
+    tolerance: 4
+    index: 0
+# Preferred District (appears once a preferred city is chosen) -> first option that is not the
+# "UNKNOWN" placeholder the product lists first (observed 01/10/2026).
+- scrollUntilVisible:
+    element:
+      text: "Select District"
+    direction: DOWN
+    timeout: 15000
+- tapOn: "Select District"
+- extendedWaitUntil:
+    visible: "Search"
+    timeout: 15000
+- copyTextFrom:
+    below: "Search"
+    width: 1080
+    height: 147
+    tolerance: 4
+    index: 0
+- evalScript: ${output.firstDistrictIsPlaceholder = String(maestro.copiedText).trim().toUpperCase() === 'UNKNOWN'}
+- runFlow:
+    when:
+      true: ${output.firstDistrictIsPlaceholder !== true}
+    commands:
+      - evalScript: ${output.preferredDistrict = String(maestro.copiedText)}
+      - tapOn:
+          below: "Search"
+          width: 1080
+          height: 147
+          tolerance: 4
+          index: 0
+- runFlow:
+    when:
+      true: ${output.firstDistrictIsPlaceholder === true}
+    commands:
+      - copyTextFrom:
+          below: "Search"
+          width: 1080
+          height: 147
+          tolerance: 4
+          index: 1
+      - evalScript: ${output.preferredDistrict = String(maestro.copiedText)}
+      - tapOn:
+          below: "Search"
+          width: 1080
+          height: 147
+          tolerance: 4
+          index: 1
+- evalScript: "${console.log('STEP 3 - current [' + output.currentRegion + ' / ' + output.currentCity + '] preferred [' + output.preferredRegion + ' / ' + output.preferredCity + ' / ' + output.preferredDistrict + ']')}"
+
+# Current housing status -> Rented house (mandatory for this scenario), then proven on the form.
+- scrollUntilVisible:
+    element:
+      text: "Select an option"
+    direction: DOWN
+    timeout: 15000
+- tapOn: "Select an option"
+- extendedWaitUntil:
+    visible: "Rented house"
+    timeout: 15000
+- tapOn: "Rented house"
+- extendedWaitUntil:
+    visible:
+      text: "Rented house"
+      below: "Current housing status.*"
+    timeout: 15000
+    label: "STEP 3 - Current housing status is not Rented house"
+- evalScript: "${console.log('STEP 3 - Current housing status = Rented house')}"
+
+# Rented house is mandatory: the field must not show an ownership status.
+- assertNotVisible:
+    text: "(?i)(Owned house|Owned|Property owner)"
+    below: "Current housing status.*"
+    label: "STEP 3 - Current housing status shows an ownership value - must be Rented house"
+
+# ==========================================================================================
+# 5-6. FAMILY INFORMATION - divorce fields, then every required person DOB / ID (spouse included)
+# ==========================================================================================
+# Divorce fields - only when PRE's mock profile for this ID is divorced. Same generated user;
+# a past Hijri date picked in the app's own date picker (day 1 of the month it opens on, i.e. on
+# or before today) and a deed number derived from the generated ID.
+- runFlow:
+    when:
+      visible: "Divorce date.*"
+    commands:
+      - scrollUntilVisible:
+          element:
+            text: "Enter the number of the divorce deed"
+          direction: DOWN
+          timeout: 15000
+      - tapOn: "Hijri"
+      - extendedWaitUntil:
+          visible: "[0-9]{4} AH"
+          timeout: 10000
+      - tapOn: "[A-Za-z]{3},1 .*"
+      - tapOn: "OK"
+      - extendedWaitUntil:
+          visible:
+            text: "[0-9]{2}-[0-9]{2}-[0-9]{4}"
+            below: "Divorce date.*"
+          timeout: 10000
+          label: "STEP 3 - divorce date was not set by the Hijri picker"
+      - copyTextFrom:
+          text: "[0-9]{2}-[0-9]{2}-[0-9]{4}"
+          below: "Divorce date.*"
+      - evalScript: ${output.divorceDate = String(maestro.copiedText)}
+      - tapOn: "Enter the number of the divorce deed"
+      - inputText: ${output.generatedNationalId}
+      - hideKeyboard
+      - assertVisible:
+          text: ${output.generatedNationalId}
+          below: "Divorce number.*"
+      - evalScript: "${console.log('STEP 3 - divorce fields filled: date [' + output.divorceDate + '] deed number [' + output.generatedNationalId + ']')}"
+
+# PERSON DATE OF BIRTH - GENERIC DOB RULE - ANY empty mandatory person DOB field under Family
+# Information (Guardian, Mother, Husband, Wife, any other person) is handled the same way, with NO
+# role lookup:
+#     EMPTY DOB -> fill ONCE -> PROVE it is filled -> never touch it again -> next empty DOB
+# DOB VALUE: the app's own Hijri picker; header year (e.g. "1448 AH") opens the YEAR GRID; target
+# year = picker year - 31; tap it; day 1; OK; the displayed date must be in the target year.
+#
+# HOW AN EMPTY DOB IS FOUND (no labels, no `above`):
+#   empty DOB  = EditText whose hint is "Enter DOB"; the first one is {text "Enter DOB", index 0}
+#                (`index` orders by on-screen position -> the topmost EMPTY field).
+#   its picker = {text "Hijri", below {text "Enter DOB", index 0}, rightOf {same}}. A field's own toggle
+#                sits on its row 1 px lower than the field (EditText [76,1759][835,1822] / Hijri
+#                [850,1760][1004,1820]; same offset in every hierarchy), so `below` excludes every row ABOVE
+#                the empty field and the same-row toggle is both the nearest and the topmost one left.
+#                `rightOf` alone is NOT enough: it picks the topmost toggle, i.e. an already filled field.
+# HOW A FILLED DOB IS EXCLUDED: a populated field no longer has the "Enter DOB" hint, so it is never
+#   picked. Each pass PROVES it with the field's own state: the number of empty DOB fields on screen
+#   must drop by exactly one after OK, and a date in the target year must be displayed. A field that
+#   stays empty (date not committed) or a toggle that re-opened a filled field leaves the count
+#   unchanged -> STOP; no second date is ever tried. (A date "below the person label" is not proof: it
+#   can be visible while the field itself still shows "Enter DOB".)
+# MULTIPLE DOBs: each pass takes the topmost EMPTY field; filled ones have left the empty set, so the
+#   loop moves forward and never returns to the first. Fields below the fold are reached by swiping;
+#   the loop ends after two consecutive screens without an empty DOB. Bound 12 = fields + scroll
+#   passes, never a second attempt at a field.
+# Values are stored and logged generically: output.generatedAdditionalDob1, 2, 3 ... with a
+# screenshot per field (elig-dob-<n>) showing which field received which date.
+- evalScript: ${output.familyDobs = ''}
+- evalScript: ${output.familyDobCount = 0}
+- evalScript: ${output.dobEmptyPasses = 0}
+- runFlow:
+    when:
+      notVisible: "Family Information"
+    commands:
+      - scrollUntilVisible:
+          element:
+            text: "Family Information"
+          direction: UP
+          timeout: 15000
+          optional: true
+- runFlow:
+    when:
+      notVisible: "Family Information"
+    commands:
+      - scrollUntilVisible:
+          element:
+            text: "Family Information"
+          direction: DOWN
+          timeout: 15000
+          label: "FAMILY DOB - the Family Information section was not found above or below"
+# Speed: every count ends with one ~7 s "absent" check, so the previous pass's AFTER count is reused as
+# the next BEFORE count while nothing has touched the screen since it was taken (dobCountFresh), and
+# dobProcessedThisPass decides whether to scroll (no ~7 s "is Enter DOB gone?" wait). Proofs unchanged.
+- evalScript: ${output.dobCountFresh = false}
+- repeat:
+    times: 12
+    while:
+      true: ${output.dobEmptyPasses < 2}
+    commands:
+      - evalScript: ${output.dobProcessedThisPass = false}
+      - runFlow:
+          when:
+            visible: "Enter DOB"
+          commands:
+            - evalScript: ${output.dobEmptyPasses = 0}
+            # BEFORE: empty DOB fields on screen (the target is the topmost of them) - counted fresh unless
+            # the previous pass's AFTER count still describes this unchanged screen.
+            - runFlow:
+                when:
+                  true: ${output.dobCountFresh !== true}
+                commands:
+                  - runFlow:
+                      file: count-empty-dob-fields.yaml
+            - evalScript: ${output.dobEmptyBefore = output.dobEmptyNow}
+            - evalScript: ${output.familyDobCount = output.familyDobCount + 1}
+            # Open THAT field's own Hijri picker.
+            - tapOn:
+                text: "Hijri"
+                below:
+                  text: "Enter DOB"
+                  index: 0
+                rightOf:
+                  text: "Enter DOB"
+                  index: 0
+                retryTapIfNoChange: false
+            - extendedWaitUntil:
+                visible: "[0-9]{4} AH"
+                timeout: 10000
+                label: "FAMILY DOB - the Hijri date picker did not open"
+            - copyTextFrom:
+                text: "[0-9]{4} AH"
+            - evalScript: ${output.pickerYear = Number(String(maestro.copiedText).replace(/[^0-9]/g, ''))}
+            - evalScript: ${output.dobTargetYear = String(output.pickerYear - 31)}
+            - assertTrue:
+                condition: ${output.pickerYear > 1400 && Number(output.dobTargetYear) === output.pickerYear - 31}
+                label: "FAMILY DOB - could not read the Hijri picker's current year"
+            # Year grid: tap the header year, scroll the grid to the target year, tap it.
+            - tapOn: "[0-9]{4} AH"
+            - extendedWaitUntil:
+                visible: ${String(output.pickerYear)}
+                timeout: 10000
+                label: "FAMILY DOB - the year grid did not open"
+            - scrollUntilVisible:
+                element:
+                  text: ${output.dobTargetYear}
+                direction: DOWN
+                timeout: 30000
+                label: "FAMILY DOB - the target year was not found in the year grid"
+            - tapOn: ${output.dobTargetYear}
+            # Back on the day grid of the target year: day 1, then OK.
+            - extendedWaitUntil:
+                visible: "${output.dobTargetYear} AH"
+                timeout: 10000
+                label: "FAMILY DOB - the picker did not move to the adult year"
+            - tapOn: "[A-Za-z]{3},1 .*"
+            - tapOn: "OK"
+            - extendedWaitUntil:
+                notVisible: "[0-9]{4} AH"
+                timeout: 10000
+                label: "FAMILY DOB - the date picker did not close"
+            # PROOF (field state, not labels): a date in the target year is displayed ...
+            - extendedWaitUntil:
+                visible: "[0-9]{2}-[0-9]{2}-${output.dobTargetYear}"
+                timeout: 10000
+                label: "FAMILY DOB - no date in the adult year is displayed after OK"
+            - waitForAnimationToEnd:
+                timeout: 3000
+            # ... and exactly one empty DOB field has become populated.
+            - runFlow:
+                file: count-empty-dob-fields.yaml
+            - assertTrue:
+                condition: ${output.dobEmptyNow === output.dobEmptyBefore - 1}
+                label: "FAMILY DOB - the field still shows 'Enter DOB' after OK (date not committed, or a filled field was re-opened) - STOPPED, no other date tried"
+            - assertNotVisible:
+                text: "(?i).*(invalid|not valid|incorrect).*"
+                label: "FAMILY DOB - PRE rejected the date of birth (not retried; see the screen)"
+            - copyTextFrom:
+                text: "[0-9]{2}-[0-9]{2}-${output.dobTargetYear}"
+            - evalScript: ${output['generatedAdditionalDob' + output.familyDobCount] = String(maestro.copiedText)}
+            - evalScript: ${output.familyDobs = output.familyDobs + 'generatedAdditionalDob' + output.familyDobCount + '=' + String(maestro.copiedText) + ' '}
+            - takeScreenshot: elig-dob-${output.familyDobCount}
+            - evalScript: "${console.log('FAMILY TEST DATA - additional DOB ' + output.familyDobCount + ' [' + String(maestro.copiedText) + '] (output.generatedAdditionalDob' + output.familyDobCount + '; Hijri, picker year ' + output.pickerYear + ' minus 31); empty DOB fields ' + output.dobEmptyBefore + ' -> ' + output.dobEmptyNow)}"
+            # This field is proven. Only read-only steps followed the AFTER count, so it still describes
+            # the screen and becomes the next pass's BEFORE count; no scroll is needed in this pass.
+            - evalScript: ${output.dobCountFresh = true}
+            - evalScript: ${output.dobProcessedThisPass = true}
+      # Scroll only when this pass found no empty DOB field (replaces the ~7 s "Enter DOB gone?" wait).
+      - runFlow:
+          when:
+            true: ${output.dobProcessedThisPass !== true}
+          commands:
+            - evalScript: ${output.dobEmptyPasses = output.dobEmptyPasses + 1}
+            - swipe:
+                start: "50%,70%"
+                end: "50%,40%"
+                duration: 600
+            - waitForAnimationToEnd:
+                timeout: 3000
+            - evalScript: ${output.dobCountFresh = false}
+- evalScript: "${console.log('STEP 3 - person DOB fields filled: ' + output.familyDobCount + (output.familyDobs ? ' [' + output.familyDobs.trim() + ']' : ''))}"
+
+# ADDITIONAL PERSON-ID FIELDS - GENERIC ID RULE
+# ANY empty mandatory person-ID input (Guardian / Husband / Wife / Spouse / Dependent / family member /
+# any other) is handled automatically, never waiting for a decision:
+#     GENERATE -> VALIDATE -> ENTER -> VERIFY -> CONTINUE
+#   * generated only when an empty ID input is on screen, ONE ID and ONE input action per field;
+#   * exactly 10 digits, starting with 1, digits only (^1[0-9]{9}$), different from the registered
+#     user's National ID and from every ID already generated in this run - checked BEFORE typing;
+#   * never regenerated: if PRE explicitly rejects the ID the run STOPS with the product message.
+# The ROLE IS NOT LOOKED UP: a label lookup through `above` is unreliable (it returns the topmost
+# label), and the role is only needed for logging. Each ID is stored and logged generically as output.generatedAdditionalId1, 2, 3 ... with a screenshot of its field
+# (elig-id-<n>), so an ambiguous label can never block the flow.
+# An empty field is recognised only by its placeholder "Enter ID number" - deed numbers, dates and
+# phones use other placeholders and keep their own rules.
+# FILLED FIELDS ARE NEVER PROCESSED AGAIN: a filled input no longer shows the placeholder, and every pass additionally PROVES it - the count of empty ID inputs must drop by one
+# after the fill, otherwise the run stops before any second input could reach that field.
+# Position: start at the "Family Information" header from whichever side it is on, then scan down;
+# the loop ends after two consecutive screens without an empty ID input. Bound 12 = fields + scroll
+# passes, never a second attempt at a field.
+- evalScript: ${output.usedIds = ',' + output.generatedNationalId + ','}
+- evalScript: ${output.generatedAdditionalIds = ''}
+- evalScript: ${output.additionalIdCount = 0}
+- evalScript: ${output.idEmptyPasses = 0}
+- runFlow:
+    when:
+      notVisible: "Family Information"
+    commands:
+      - scrollUntilVisible:
+          element:
+            text: "Family Information"
+          direction: UP
+          timeout: 15000
+          optional: true
+- runFlow:
+    when:
+      notVisible: "Family Information"
+    commands:
+      - scrollUntilVisible:
+          element:
+            text: "Family Information"
+          direction: DOWN
+          timeout: 15000
+          label: "ADDITIONAL ID - the Family Information section was not found above or below"
+# Speed: same pattern as the DOB loop - the previous AFTER count is reused while the screen is unchanged
+# (idCountFresh) and idProcessedThisPass decides whether to scroll. Proofs unchanged.
+- evalScript: ${output.idCountFresh = false}
+- repeat:
+    times: 12
+    while:
+      true: ${output.idEmptyPasses < 2}
+    commands:
+      - evalScript: ${output.idProcessedThisPass = false}
+      - runFlow:
+          when:
+            visible: "Enter ID number"
+          commands:
+            - evalScript: ${output.idEmptyPasses = 0}
+            # How many empty ID inputs are on screen BEFORE this fill - counted fresh unless the previous
+            # pass's AFTER count still describes this unchanged screen.
+            - runFlow:
+                when:
+                  true: ${output.idCountFresh !== true}
+                commands:
+                  - runFlow:
+                      file: count-empty-id-fields.yaml
+            - evalScript: ${output.idEmptyBefore = output.idEmptyNow}
+            # GENERATE once for this field, VALIDATE format + uniqueness before anything is typed.
+            - evalScript: ${output.newId = String(Math.floor(1000000000 + Math.random() * 1000000000))}
+            - assertTrue:
+                # Dollar-free on purpose (a second dollar sign inside the expression makes Maestro skip it).
+                # Equivalent to ^1[0-9]{9}$ plus "not used yet".
+                condition: ${output.newId.length === 10 && output.newId.charAt(0) === '1' && !/[^0-9]/.test(output.newId) && output.usedIds.indexOf(',' + output.newId + ',') < 0}
+                label: "TEST DATA - generated additional ID does not match 1 + 9 digits or was already used in this run"
+            - evalScript: ${output.additionalIdCount = output.additionalIdCount + 1}
+            - evalScript: ${output.idVar = 'generatedAdditionalId' + output.additionalIdCount}
+            - evalScript: ${output[output.idVar] = output.newId}
+            - evalScript: ${output.usedIds = output.usedIds + output.newId + ','}
+            # ENTER: the first EMPTY ID input on screen, one input action.
+            - tapOn:
+                text: "Enter ID number"
+                index: 0
+                retryTapIfNoChange: false
+            - inputText: ${output.newId}
+            - hideKeyboard
+            - waitForAnimationToEnd:
+                timeout: 3000
+            # VERIFY: the field shows exactly this ID ...
+            - assertVisible:
+                text: ${output.newId}
+                label: "ADDITIONAL ID - the field did not take the generated ID (not retried)"
+            # ... PRE did not reject it ...
+            - assertNotVisible:
+                text: "(?i).*(invalid|not valid|incorrect|already (used|exists|registered)).*"
+                label: "ADDITIONAL ID - PRE rejected the generated ID (not retried; see the screen for the exact message)"
+            # ... and the filled field has left the empty set, so it can never be processed again.
+            - runFlow:
+                file: count-empty-id-fields.yaml
+            - assertTrue:
+                condition: ${output.idEmptyNow === output.idEmptyBefore - 1}
+                label: "ADDITIONAL ID - the empty-ID count did not drop after the fill; a filled field may still look empty - STOPPED before any second input"
+            - takeScreenshot: elig-id-${output.additionalIdCount}
+            - evalScript: ${output.generatedAdditionalIds = output.generatedAdditionalIds + output.idVar + '=' + output.newId + ' '}
+            - evalScript: "${console.log('ELIGIBILITY TEST DATA - additional ID ' + output.additionalIdCount + ' [' + output.newId + '] (output.' + output.idVar + ') - 1 + 9 digits, unique in this run; empty ID fields ' + output.idEmptyBefore + ' -> ' + output.idEmptyNow)}"
+            # This field is proven; the AFTER count (taken after hideKeyboard + settle, followed only by
+            # read-only steps) becomes the next BEFORE count; no scroll is needed in this pass.
+            - evalScript: ${output.idCountFresh = true}
+            - evalScript: ${output.idProcessedThisPass = true}
+      # Scroll only when this pass found no empty ID field (replaces the ~7 s "Enter ID number gone?" wait).
+      - runFlow:
+          when:
+            true: ${output.idProcessedThisPass !== true}
+          commands:
+            - evalScript: ${output.idEmptyPasses = output.idEmptyPasses + 1}
+            - swipe:
+                start: "50%,70%"
+                end: "50%,40%"
+                duration: 600
+            - waitForAnimationToEnd:
+                timeout: 3000
+            - evalScript: ${output.idCountFresh = false}
+- evalScript: "${console.log('STEP 3 - additional person-ID fields filled: ' + output.additionalIdCount + (output.generatedAdditionalIds ? ' [' + output.generatedAdditionalIds.trim() + ']' : ''))}"
+- takeScreenshot: elig-4-step3-filled
+
+# ==========================================================================================
+# 6. SUBMIT - Confirm once, then capture the product's real result
+# ==========================================================================================
+- scrollUntilVisible:
+    element:
+      text: "Confirm"
+    direction: DOWN
+    timeout: 15000
+- tapOn:
+    text: "Confirm"
+    retryTapIfNoChange: false
+# NO completion is inferred here: during the transition to "Deed information" the form can vanish for
+# one hierarchy read, so a `notVisible` check here would be a false PASS. Destinations are evaluated
+# only on a settled screen, and the journey is complete only at the RESULT GATE below.
+- waitForAnimationToEnd:
+    timeout: 15000
+- assertNotVisible:
+    text: '(?s)(.*There.s something wrong.*|.*the service is down.*|Error!)'
+    label: "SUBMIT - the product reported an error after Confirm"
+- takeScreenshot: elig-5-after-family-confirm
+
+# ==========================================================================================
+# 7. DEED INFORMATION - completed with the live-proven deed engine
+# ==========================================================================================
+# Runs only when "Deed information" is shown; every deed: Deed Type "Housing" + Construction Status
+# "Completed constructing", each proven on its own deed; then Confirm ONCE.
+# A deed it cannot complete stops the run with its own label (AUTOMATION gap), never another user.
+- runFlow:
+    file: eligibility-fill-deeds.yaml
+
+# ==========================================================================================
+# 8. RESULT GATE - the ONLY place the journey can be declared complete
+# ==========================================================================================
+# Complete ONLY when, on a SETTLED screen: an eligibility result BODY message is present (a node that
+# mentions eligibility and is NOT just the "Eligibility" page title) AND no form page is showing -
+# no "Step N of 3", no "Deed information", no Eligibility intro ("Check your eligibility"). The body
+# is required BEFORE and AGAIN AFTER an extra settle, so a single hierarchy read during a transition
+# can never pass it. Any other page (another mandatory form, a page with no result body) fails here
+# with its screenshot - it is reported, never treated as PASS. The result is recorded, not assumed.
+- takeScreenshot: elig-7-destination
+- extendedWaitUntil:
+    visible: '(?si).*\beligible for\b.*'
+    timeout: 60000
+    label: "RESULT - no eligibility result message on screen (another required page, or no result) - NOT a PASS"
+- waitForAnimationToEnd:
+    timeout: 10000
+- assertNotVisible:
+    text: "Step [0-9] of 3"
+    label: "RESULT - still on an eligibility form step - another required page, NOT a result"
+- assertNotVisible:
+    text: "Deed information"
+    label: "RESULT - still on Deed information - NOT a result"
+- assertNotVisible:
+    text: "Check your eligibility"
+    label: "RESULT - back on the Eligibility introduction - NOT a result"
+- assertVisible:
+    text: '(?si).*\beligible for\b.*'
+    label: "RESULT - the result message did not stay on screen"
+- copyTextFrom:
+    text: '(?si).*\beligible for\b.*'
+- evalScript: ${output.eligibilityResult = String(maestro.copiedText)}
+- takeScreenshot: elig-8-final-result
+- evalScript: "${console.log('ELIGIBILITY END - new user [' + output.generatedNationalId + '] result [' + output.eligibilityResult.replace(/\\n/g, ' | ') + ']')}"
+
+# Previous ineligibility reasons - REPORTED, never asserted: the product decides the result.
+- evalScript: ${output.reasonOwnsDeed = 'absent'}
+- evalScript: ${output.reasonUnder24 = 'absent'}
+- evalScript: ${output.reasonHusband = 'absent'}
+- runFlow:
+    when:
+      visible: "(?si).*own a housing deed.*"
+    commands:
+      - evalScript: ${output.reasonOwnsDeed = 'PRESENT'}
+- runFlow:
+    when:
+      visible: "(?si).*under 24.*"
+    commands:
+      - evalScript: ${output.reasonUnder24 = 'PRESENT'}
+- runFlow:
+    when:
+      visible: "(?si).*husband has already submitted an application.*"
+    commands:
+      - evalScript: ${output.reasonHusband = 'PRESENT'}
+- evalScript: "${console.log('PREVIOUS REASONS - owns a housing deed [' + output.reasonOwnsDeed + '] under 24 [' + output.reasonUnder24 + '] husband already applied [' + output.reasonHusband + ']')}"
+
+# ==========================================================================================
+# 9. ELIGIBILITY OUTCOME - from explicit result evidence only (negative checked first)
+# ==========================================================================================
+# not-eligible : the result message says "not eligible for ..." (live: "Sorry, you are not eligible for
+#                support"; persisted: "You're not eligible for Housing Support").
+# eligible     : NO positive result screen has been observed yet, so no positive marker exists and
+#                'eligible' is never inferred (in particular not from the absence of a negative message).
+#                It is added only from real evidence.
+# unknown      : anything else -> the run stops: UNKNOWN ELIGIBILITY RESULT.
+- evalScript: ${output.eligibilityOutcome = 'unknown'}
+- runFlow:
+    when:
+      visible: '(?si).*\bnot eligible for\b.*'
+    commands:
+      - evalScript: ${output.eligibilityOutcome = 'not-eligible'}
+- takeScreenshot: elig-9-outcome
+- evalScript: "${console.log('ELIGIBILITY OUTCOME [' + output.eligibilityOutcome + '] for [' + output.generatedNationalId + '] - result text [' + output.eligibilityResult.replace(/\\n/g, ' | ') + ']')}"
+- assertTrue:
+    condition: ${output.eligibilityOutcome !== 'unknown'}
+    label: "UNKNOWN ELIGIBILITY RESULT - the result screen shows neither a known negative nor a proven positive message (see elig-8-final-result / elig-9-outcome) - NOT a PASS"

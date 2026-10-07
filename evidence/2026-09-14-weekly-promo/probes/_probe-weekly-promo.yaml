@@ -1,0 +1,63 @@
+# PROBE (temporary, read-only) - log in and STOP the moment the "Sakani sharrai / Weekly deal /
+# New service" promo is on screen, so it can be inspected as it really is on this build. It does
+# NOT use subflows/login.yaml after "Confirm": that helper is the thing being changed, and its
+# relaunch would clear the very screen wanted.
+#
+# Nothing is tapped except the login controls and, if the soft keyboard from the contact screen
+# covers the sheet, one guarded Back (the same one login.yaml uses) to expose it. The promo's
+# "Go to the weekly deal" CTA is NEVER tapped, and no booking, payment, contract or survey
+# control is touched.
+appId: fi.iwa.sakani
+name: PROBE - the post-login promo, left on screen for inspection
+env:
+  NATIONAL_ID: '${typeof NATIONAL_ID === "undefined" ? "" : String(NATIONAL_ID)}'
+---
+- assertTrue: ${String(NATIONAL_ID).length === 10 && !/[^0-9]/.test(String(NATIONAL_ID)) && (String(NATIONAL_ID).charAt(0) === "1" || String(NATIONAL_ID).charAt(0) === "2")}
+- launchApp:
+    clearState: true
+- runFlow:
+    file: subflows/clear-overlays.yaml
+    env:
+      ANCHOR: "(?s).*Login / Sign up.*"
+- extendedWaitUntil:
+    visible: "(?s).*Login / Sign up.*"
+    timeout: 120000
+- tapOn: "(?s).*Login / Sign up.*"
+- extendedWaitUntil:
+    visible: "Continue with N[ae]fath"
+    timeout: 45000
+- tapOn: "Enter your ID, phone number,? or email"
+- inputText: ${NATIONAL_ID}
+- assertVisible: ${NATIONAL_ID}
+- tapOn: "Continue"
+- extendedWaitUntil:
+    visible: "Login with nafath"
+    timeout: 45000
+- assertVisible: ${NATIONAL_ID}
+- tapOn: "Confirm"
+- extendedWaitUntil:
+    notVisible: "Login with nafath"
+    timeout: 90000
+- evalScript: "${console.log('PROBE - authenticated; waiting for the promo, dismissing nothing')}"
+
+# Wait for the promo. If the contact screen's keyboard covers the sheet, one guarded Back exposes
+# it - exactly as login.yaml does today. Bounded at 10 rounds.
+- repeat:
+    times: 10
+    while:
+      notVisible: "Go to the weekly (offer|deal)"
+    commands:
+      - runFlow:
+          when:
+            visible: "New service"
+          commands:
+            - runFlow:
+                when:
+                  notVisible: "Go to the weekly (offer|deal)"
+                commands:
+                  - back
+      - waitForAnimationToEnd:
+          timeout: 4000
+- assertVisible: "Go to the weekly (offer|deal)"
+- takeScreenshot: promo-on-screen
+- evalScript: "${console.log('PROBE - the promo is on screen and is being left there')}"

@@ -1,0 +1,7 @@
+appId: fi.iwa.sakani
+name: PROBE - clear compare coach mark
+---
+- runFlow:
+    file: ../../../../../../../../D:/Automation/Maestro-Mobile/.maestro/subflows/clear-overlays.yaml
+    env:
+      ANCHOR: "About this project"

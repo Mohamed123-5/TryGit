@@ -1,0 +1,48 @@
+10-01 13:54:14.549 F/libc    (32553): Fatal signal 6 (SIGABRT), code -1 (SI_QUEUE) in tid 32625 (1.raster), pid 32553 (fi.iwa.sakani)
+10-01 13:54:14.686 F/DEBUG   (32655): *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** ***
+10-01 13:54:14.686 F/DEBUG   (32655): Build fingerprint: 'google/sdk_gphone64_x86_64/emu64xa:14/UE1A.230829.036.A4/12096271:user/release-keys'
+10-01 13:54:14.686 F/DEBUG   (32655): Revision: '0'
+10-01 13:54:14.686 F/DEBUG   (32655): ABI: 'x86_64'
+10-01 13:54:14.686 F/DEBUG   (32655): Timestamp: 2026-10-01 13:54:14.583409000+0300
+10-01 13:54:14.686 F/DEBUG   (32655): Process uptime: 2s
+10-01 13:54:14.686 F/DEBUG   (32655): Cmdline: fi.iwa.sakani
+10-01 13:54:14.686 F/DEBUG   (32655): pid: 32553, tid: 32625, name: 1.raster  >>> fi.iwa.sakani <<<
+10-01 13:54:14.686 F/DEBUG   (32655): uid: 10214
+10-01 13:54:14.686 F/DEBUG   (32655): signal 6 (SIGABRT), code -1 (SI_QUEUE), fault addr --------
+10-01 13:54:14.686 F/DEBUG   (32655): Abort message: 'bad_alloc was thrown in -fno-exceptions mode'
+10-01 13:54:14.686 F/DEBUG   (32655):     rax 0000000000000000  rbx 0000770d80a00c88  rcx 00007710946bd610  rdx 0000000000000006
+10-01 13:54:14.686 F/DEBUG   (32655):     r8  0000000000000000  r9  0000000000000000  r10 0000770d80a00c90  r11 0000000000000203
+10-01 13:54:14.686 F/DEBUG   (32655):     r12 0000770d80a00e60  r13 0000003000000008  r14 0000000000007f29  r15 0000000000007f71
+10-01 13:54:14.686 F/DEBUG   (32655):     rdi 0000000000007f29  rsi 0000000000007f71
+10-01 13:54:14.686 F/DEBUG   (32655):     rbp 0000000000000002  rsp 0000770d80a00c80  rip 00007710946bd610
+10-01 13:54:14.686 F/DEBUG   (32655): 29 total frames
+10-01 13:54:14.686 F/DEBUG   (32655): backtrace:
+10-01 13:54:14.686 F/DEBUG   (32655):       #00 pc 0000000000061610  /apex/com.android.runtime/lib64/bionic/libc.so (abort+192) (BuildId: fa337969c798946280caa45e2d71a2e7)
+10-01 13:54:14.686 F/DEBUG   (32655):       #01 pc 00000000004f3e2d  /data/app/~~GQjY21_z-vevzxS6pIXsdQ==/fi.iwa.sakani-qwS6_FSa8LqNHxCo9DiskQ==/base.apk!libflutter.so (offset 0xd540000) (BuildId: 8dd691bfce800ce28ff255cf85f470791e637361)
+10-01 13:54:14.686 F/DEBUG   (32655):       #02 pc 00000000004f1d83  /data/app/~~GQjY21_z-vevzxS6pIXsdQ==/fi.iwa.sakani-qwS6_FSa8LqNHxCo9DiskQ==/base.apk!libflutter.so (offset 0xd540000) (BuildId: 8dd691bfce800ce28ff255cf85f470791e637361)
+10-01 13:54:14.686 F/DEBUG   (32655):       #03 pc 0000000000b6bbd4  /data/app/~~GQjY21_z-vevzxS6pIXsdQ==/fi.iwa.sakani-qwS6_FSa8LqNHxCo9DiskQ==/base.apk!libflutter.so (offset 0xd540000) (BuildId: 8dd691bfce800ce28ff255cf85f470791e637361)
+10-01 13:54:14.687 F/DEBUG   (32655):       #04 pc 00000000004b4b7b  /data/app/~~GQjY21_z-vevzxS6pIXsdQ==/fi.iwa.sakani-qwS6_FSa8LqNHxCo9DiskQ==/base.apk!libflutter.so (offset 0xd540000) (BuildId: 8dd691bfce800ce28ff255cf85f470791e637361)
+10-01 13:54:14.687 F/DEBUG   (32655):       #05 pc 00000000004f319e  /data/app/~~GQjY21_z-vevzxS6pIXsdQ==/fi.iwa.sakani-qwS6_FSa8LqNHxCo9DiskQ==/base.apk!libflutter.so (offset 0xd540000) (BuildId: 8dd691bfce800ce28ff255cf85f470791e637361)
+10-01 13:54:14.687 F/DEBUG   (32655):       #06 pc 00000000008da8c3  /data/app/~~GQjY21_z-vevzxS6pIXsdQ==/fi.iwa.sakani-qwS6_FSa8LqNHxCo9DiskQ==/base.apk!libflutter.so (offset 0xd540000) (BuildId: 8dd691bfce800ce28ff255cf85f470791e637361)
+10-01 13:54:14.687 F/DEBUG   (32655):       #07 pc 00000000008d9574  /data/app/~~GQjY21_z-vevzxS6pIXsdQ==/fi.iwa.sakani-qwS6_FSa8LqNHxCo9DiskQ==/base.apk!libflutter.so (offset 0xd540000) (BuildId: 8dd691bfce800ce28ff255cf85f470791e637361)
+10-01 13:54:14.687 F/DEBUG   (32655):       #08 pc 00000000008e09ca  /data/app/~~GQjY21_z-vevzxS6pIXsdQ==/fi.iwa.sakani-qwS6_FSa8LqNHxCo9DiskQ==/base.apk!libflutter.so (offset 0xd540000) (BuildId: 8dd691bfce800ce28ff255cf85f470791e637361)
+10-01 13:54:14.687 F/DEBUG   (32655):       #09 pc 00000000008e0116  /data/app/~~GQjY21_z-vevzxS6pIXsdQ==/fi.iwa.sakani-qwS6_FSa8LqNHxCo9DiskQ==/base.apk!libflutter.so (offset 0xd540000) (BuildId: 8dd691bfce800ce28ff255cf85f470791e637361)
+10-01 13:54:14.687 F/DEBUG   (32655):       #10 pc 00000000008d7c10  /data/app/~~GQjY21_z-vevzxS6pIXsdQ==/fi.iwa.sakani-qwS6_FSa8LqNHxCo9DiskQ==/base.apk!libflutter.so (offset 0xd540000) (BuildId: 8dd691bfce800ce28ff255cf85f470791e637361)
+10-01 13:54:14.687 F/DEBUG   (32655):       #11 pc 00000000008ab690  /data/app/~~GQjY21_z-vevzxS6pIXsdQ==/fi.iwa.sakani-qwS6_FSa8LqNHxCo9DiskQ==/base.apk!libflutter.so (offset 0xd540000) (BuildId: 8dd691bfce800ce28ff255cf85f470791e637361)
+10-01 13:54:14.687 F/DEBUG   (32655):       #12 pc 00000000008a9f5d  /data/app/~~GQjY21_z-vevzxS6pIXsdQ==/fi.iwa.sakani-qwS6_FSa8LqNHxCo9DiskQ==/base.apk!libflutter.so (offset 0xd540000) (BuildId: 8dd691bfce800ce28ff255cf85f470791e637361)
+10-01 13:54:14.687 F/DEBUG   (32655):       #13 pc 000000000089ae81  /data/app/~~GQjY21_z-vevzxS6pIXsdQ==/fi.iwa.sakani-qwS6_FSa8LqNHxCo9DiskQ==/base.apk!libflutter.so (offset 0xd540000) (BuildId: 8dd691bfce800ce28ff255cf85f470791e637361)
+10-01 13:54:14.687 F/DEBUG   (32655):       #14 pc 000000000092894d  /data/app/~~GQjY21_z-vevzxS6pIXsdQ==/fi.iwa.sakani-qwS6_FSa8LqNHxCo9DiskQ==/base.apk!libflutter.so (offset 0xd540000) (BuildId: 8dd691bfce800ce28ff255cf85f470791e637361)
+10-01 13:54:14.687 F/DEBUG   (32655):       #15 pc 00000000004c592e  /data/app/~~GQjY21_z-vevzxS6pIXsdQ==/fi.iwa.sakani-qwS6_FSa8LqNHxCo9DiskQ==/base.apk!libflutter.so (offset 0xd540000) (BuildId: 8dd691bfce800ce28ff255cf85f470791e637361)
+10-01 13:54:14.687 F/DEBUG   (32655):       #16 pc 00000000004c560f  /data/app/~~GQjY21_z-vevzxS6pIXsdQ==/fi.iwa.sakani-qwS6_FSa8LqNHxCo9DiskQ==/base.apk!libflutter.so (offset 0xd540000) (BuildId: 8dd691bfce800ce28ff255cf85f470791e637361)
+10-01 13:54:14.687 F/DEBUG   (32655):       #17 pc 00000000004c502a  /data/app/~~GQjY21_z-vevzxS6pIXsdQ==/fi.iwa.sakani-qwS6_FSa8LqNHxCo9DiskQ==/base.apk!libflutter.so (offset 0xd540000) (BuildId: 8dd691bfce800ce28ff255cf85f470791e637361)
+10-01 13:54:14.687 F/DEBUG   (32655):       #18 pc 00000000004cdd23  /data/app/~~GQjY21_z-vevzxS6pIXsdQ==/fi.iwa.sakani-qwS6_FSa8LqNHxCo9DiskQ==/base.apk!libflutter.so (offset 0xd540000) (BuildId: 8dd691bfce800ce28ff255cf85f470791e637361)
+10-01 13:54:14.687 F/DEBUG   (32655):       #19 pc 00000000009281d9  /data/app/~~GQjY21_z-vevzxS6pIXsdQ==/fi.iwa.sakani-qwS6_FSa8LqNHxCo9DiskQ==/base.apk!libflutter.so (offset 0xd540000) (BuildId: 8dd691bfce800ce28ff255cf85f470791e637361)
+10-01 13:54:14.687 F/DEBUG   (32655):       #20 pc 00000000004f79e9  /data/app/~~GQjY21_z-vevzxS6pIXsdQ==/fi.iwa.sakani-qwS6_FSa8LqNHxCo9DiskQ==/base.apk!libflutter.so (offset 0xd540000) (BuildId: 8dd691bfce800ce28ff255cf85f470791e637361)
+10-01 13:54:14.687 F/DEBUG   (32655):       #21 pc 00000000004fc3e3  /data/app/~~GQjY21_z-vevzxS6pIXsdQ==/fi.iwa.sakani-qwS6_FSa8LqNHxCo9DiskQ==/base.apk!libflutter.so (offset 0xd540000) (BuildId: 8dd691bfce800ce28ff255cf85f470791e637361)
+10-01 13:54:14.687 F/DEBUG   (32655):       #22 pc 000000000000fb84  /system/lib64/libutils.so (android::Looper::pollOnce(int, int*, int*, void**)+532) (BuildId: c777bd164e6d4a5c070cb5e2d9bb92e0)
+10-01 13:54:14.687 F/DEBUG   (32655):       #23 pc 0000000000019a0f  /system/lib64/libandroid.so (ALooper_pollOnce+95) (BuildId: 094d5e744838e61070f3b00f0a8d3c31)
+10-01 13:54:14.687 F/DEBUG   (32655):       #24 pc 00000000004fc4f5  /data/app/~~GQjY21_z-vevzxS6pIXsdQ==/fi.iwa.sakani-qwS6_FSa8LqNHxCo9DiskQ==/base.apk!libflutter.so (offset 0xd540000) (BuildId: 8dd691bfce800ce28ff255cf85f470791e637361)
+10-01 13:54:14.687 F/DEBUG   (32655):       #25 pc 00000000004f9d06  /data/app/~~GQjY21_z-vevzxS6pIXsdQ==/fi.iwa.sakani-qwS6_FSa8LqNHxCo9DiskQ==/base.apk!libflutter.so (offset 0xd540000) (BuildId: 8dd691bfce800ce28ff255cf85f470791e637361)
+10-01 13:54:14.687 F/DEBUG   (32655):       #26 pc 00000000004f9ade  /data/app/~~GQjY21_z-vevzxS6pIXsdQ==/fi.iwa.sakani-qwS6_FSa8LqNHxCo9DiskQ==/base.apk!libflutter.so (offset 0xd540000) (BuildId: 8dd691bfce800ce28ff255cf85f470791e637361)
+10-01 13:54:14.687 F/DEBUG   (32655):       #27 pc 00000000000cd06a  /apex/com.android.runtime/lib64/bionic/libc.so (__pthread_start(void*)+58) (BuildId: fa337969c798946280caa45e2d71a2e7)
+10-01 13:54:14.687 F/DEBUG   (32655):       #28 pc 0000000000062d88  /apex/com.android.runtime/lib64/bionic/libc.so (__start_thread+56) (BuildId: fa337969c798946280caa45e2d71a2e7)

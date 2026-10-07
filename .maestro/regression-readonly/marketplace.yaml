@@ -1,0 +1,99 @@
+# MKT-001 - Explore loads the marketplace. Absorbs MKT-005 (result count displayed).
+#
+# Asserts that Explore rendered real marketplace content - the result count, both sub-tabs
+# and at least one listing card - not merely that the Explore tab is selectable.
+#
+# READ-ONLY: the only interaction beyond navigation is choosing a Buy / Ready Units search
+# filter, a UI preference that changes no account, project, unit or booking data.
+#
+# Precondition is "Any": MKT-001 needs no session, so this flow neither clears state nor signs
+# in, and runs as a guest or as whoever the device is signed in as. If an authenticated
+# Marketplace case is ever added, sign in through subflows/login.yaml (the shared login that
+# login.yaml also uses) - never inline.
+appId: fi.iwa.sakani
+name: MKT-001 Explore loads marketplace (MKT-005 result count)
+tags:
+  - health-check
+---
+- launchApp
+
+# Launched WITHOUT clearState, so the app starts from whatever the device holds: onboarding
+# after another flow's state wipe, the survey that reappears on every launch (D-12), the
+# intermittent error dialog, or - when signed in - the post-login promos and prompts. The
+# shared helper clears whichever is on top and returns as soon as the tab bar is reachable; on a
+# clean launch that is a single hierarchy read.
+- runFlow:
+    file: ../subflows/clear-overlays.yaml
+    env:
+      ANCHOR: 'Explore\s*Tab 2 of 4'
+# Open Explore through the shared helper: when the device is signed in the NPS survey can
+# re-present between the helper above and this tap, so it is handled (subflows/dismiss-nps.yaml),
+# the tap retried, and arrival proven by Explore's static "Registered Interests" header chip.
+- runFlow:
+    file: ../subflows/tap-until-destination.yaml
+    env:
+      TARGET: 'Explore\s*Tab 2 of 4'
+      DESTINATION: "Registered Interests"
+- extendedWaitUntil:
+    visible:
+      text: 'Explore\s*Tab 2 of 4'
+      selected: true
+    timeout: 30000
+
+# CATEGORY GATE. Explore lists the marketplace only once a category has been chosen: the
+# Projects/Units sub-tabs and the result count do not exist before that. The gate is entered
+# through the construction-status chip, present both on a cold Explore ("Construction Status")
+# and a warm one (the applied value). The "Find more Sakani products..." banner is not used: it
+# disappears once a category is persisted, and its sheet leads back to destinations instead.
+#
+# The chip opens "Select category" (Buy/Rent + status, confirmed with "Start searching") on a
+# fresh install, or the "Construction Status" filter sheet (confirmed with "Apply") once a
+# category exists. Both are handled. Linear on purpose: a retry loop oscillates, because the
+# search can outlast any per-pass wait and the next pass reopens the sheet it just closed.
+# The whole block is skipped when the sub-tabs are already up.
+- runFlow:
+    when:
+      notVisible: '[Uu]nits\s*Tab 2 of 2'
+    commands:
+      - tapOn: "(Construction Status|Ready Units|Readymade|Offplan|Land)"
+      # Transition proof: one of the two sheets opened (not just "the tap completed").
+      - extendedWaitUntil:
+          visible: "(Start searching|Apply)"
+          timeout: 15000
+      - runFlow:
+          when:
+            visible: "Start searching"
+          commands:
+            - tapOn: "Buy"
+            - tapOn: "Ready(made| Units)"
+            - tapOn: "Start searching"
+      - runFlow:
+          when:
+            visible: "Apply"
+          commands:
+            - tapOn: "Ready(made| Units)"
+            - tapOn: "Apply"
+
+# The search returned. The shell (search bar, chips) renders even when a search never
+# resolves, so only content that appears after results is accepted.
+- extendedWaitUntil:
+    visible: '[Uu]nits\s*Tab 2 of 2'
+    timeout: 90000
+
+# MKT-005 result count - "N Units for Sale" (PRE-4.7.6-1283, live 21/09/2026: 580); "Sale" or
+# "sale" is matched for older builds. Both sub-tabs present.
+- extendedWaitUntil:
+    visible: "(?s).*[0-9][0-9,]* Units for [Ss]ale.*"
+    timeout: 60000
+- assertVisible: 'Projects\s*Tab 1 of 2'
+- assertVisible: '[Uu]nits\s*Tab 2 of 2'
+# The gate's outcome, not its taps: the chip now carries the applied construction status.
+- assertVisible: "Ready(made| Units)"
+
+# At least one listing card renders under the sub-tabs. Every card carries a price label followed
+# by "SAR" on the next line - "Starting price" on project-style cards, "Price" on single-unit cards
+# (both live 21/09/2026). Names, locations and amounts are test data and deliberately not asserted.
+- assertVisible:
+    text: "(?s).*[Pp]rice\nSAR\n.*"
+    below:
+      text: '[Uu]nits\s*Tab 2 of 2'

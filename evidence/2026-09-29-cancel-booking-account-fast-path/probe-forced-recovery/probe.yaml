@@ -1,0 +1,39 @@
+# READ-ONLY probe: forces the Account fast path to miss so the shared recovery runs.
+appId: fi.iwa.sakani
+name: PROBE - Account recovery path (read-only)
+---
+- launchApp:
+    clearState: true
+- runFlow:
+    file: D:/Automation/Maestro-Mobile/.maestro/subflows/login.yaml
+    env:
+      NATIONAL_ID: "1000011487"
+- evalScript: ${output.accountReached = false}
+- runFlow:
+    optional: true
+    commands:
+      - tapOn:
+          text: 'FORCED-FAST-PATH-MISS'
+          retryTapIfNoChange: false
+      - extendedWaitUntil:
+          visible: "My bookings"
+          timeout: 15000
+      - evalScript: ${output.accountReached = true}
+# RECOVERY ONLY when the fast path did not arrive: the shared state-driven helper - on every pass
+# the shared NPS handler (rating 5 -> Submit -> close the thank-you, product-error guard kept),
+# then the same Account tap, bounded at 6 passes, arrival asserted on "My bookings".
+- runFlow:
+    when:
+      true: ${output.accountReached !== true}
+    commands:
+      - evalScript: "${console.log('LEAVE HOME (after login) - Account fast path did not reach My bookings; shared recovery')}"
+      - runFlow:
+          file: D:/Automation/Maestro-Mobile/.maestro/subflows/tap-until-destination.yaml
+          env:
+            TARGET: 'Account\s*Tab 4 of 4'
+            DESTINATION: "My bookings"
+- evalScript: "${console.log('LEAVE HOME (after login) - My bookings reached, fast path=' + output.accountReached)}"
+- extendedWaitUntil:
+    visible: "My bookings"
+    timeout: 60000
+

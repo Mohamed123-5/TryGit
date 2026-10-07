@@ -1,0 +1,65 @@
+# Destination check: the Offplan filter is applied and the Marketplace results are showing.
+- extendedWaitUntil:
+    visible: "Offplan"
+    timeout: 45000
+- extendedWaitUntil:
+    visible: 'Projects\s*Tab 1 of 2'
+    timeout: 45000
+- takeScreenshot: journey-2-marketplace
+
+# --- SEARCH for the project, by name.
+#
+# The project is found through Marketplace search, never by its position in a list: staging
+# carries dozens of half-built test projects, and "the first Offplan project" lands on one of
+# them - of four Offplan projects walked to a unit page on this build, two ("AF.private 1",
+# "Test Private Offplan 11June PQ") expose no "Reserve unit" CTA at all. If ${PROJECT} is not in
+# the current environment, search does not return it and the flow stops at the tap below, at a
+# named step, instead of booking something else.
+#
+# WHY THIS DEFAULT. ${PROJECT} is the project on this build where the complete lifecycle -
+# reserve, pay, sign, price quotation - has been executed end to end (09/09/2026, unit
+# 01-01-0504-999-288, evidence/2026-09-09-full-journey-signed), with "Reserve unit" present. It
+# was re-confirmed in THIS environment on 10/09/2026: Marketplace search for "${PROJECT_SEARCH}"
+# lists it under "Property", and the result opens its project page
+# (evidence/2026-09-10-journey-marketplace/discovery).
+#
+# OPENING SEARCH IS A POINT TAP, deliberately and already proven (search.yaml): the Explore
+# location field exposes no text, label or id and is not itself clickable, and relative
+# selectors mis-target it. 55%,11% resolves inside the field, from the Marketplace results view
+# as well as from the Explore landing (verified 10/09/2026).
+- repeat:
+    times: 3
+    commands:
+      - runFlow:
+          when:
+            notVisible: "Popular locations"
+          commands:
+            - tapOn:
+                point: "55%,11%"
+            - waitForAnimationToEnd:
+                timeout: 8000
+- extendedWaitUntil:
+    visible: "Popular locations"
+    timeout: 30000
+- tapOn: "Enter Region, City, Neighborhood, Street, Project, Developer, Building Number, Block Number"
+- inputText: ${PROJECT_SEARCH}
+
+# Results arrive grouped - Location, Property, Developer. Projects are listed under "Property";
+# a "Location" row can also contain the search term (a land-plan "Project ..."), so the tap is
+# constrained to the full project name AND to rows below the "Property" header.
+- extendedWaitUntil:
+    visible: "Property"
+    timeout: 30000
+- takeScreenshot: journey-2-search-results
+- tapOn:
+    text: "(?s).*${PROJECT}.*"
+    below:
+      text: "Property"
+
+# Opening a project raises the one-off "Start comparing properties" coach mark over it on a
+# fresh install (seen 10/09/2026); the helper closes it with Back - never its CTA - and stops at
+# the project page.
+- runFlow:
+    file: subflows/clear-overlays.yaml
+    env:
+      ANCHOR: "About this project"

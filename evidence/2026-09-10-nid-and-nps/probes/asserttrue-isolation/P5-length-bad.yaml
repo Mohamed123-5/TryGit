@@ -1,0 +1,4 @@
+appId: fi.iwa.sakani
+name: P5-length-bad
+---
+- assertTrue: ${String("12345").length === 10}

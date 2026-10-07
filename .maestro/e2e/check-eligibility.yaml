@@ -1,0 +1,86 @@
+# Eligibility & Appeal Journey - E2E.
+#
+# ONE business journey for ONE brand-new PRE user:
+#   1. Register ONE adult new user (subflows/register-adult-new-user.yaml). PRE's mock applicant age
+#      follows the clock minute, so the run only starts between minute 25 and 55 (otherwise TEST DATA
+#      BLOCKER before any ID); ONE National ID, and the real DOB on "Personal information" must prove an
+#      age above 24 before phone/email/OTP - otherwise TEST DATA BLOCKER, no account. Never a second ID.
+#   2. Eligibility for that user (subflows/eligibility-check.yaml): Account -> Eligibility Checker ->
+#      Step 1 Terms -> Step 2 three questions "No" (pixel-proven) -> Step 3 regions + Rented house -> the
+#      user's REAL family profile (spouse, parents, guardian, divorce - completed, never rejected) ->
+#      Confirm once -> Deed information when shown -> the real result.
+#   3. Eligible     -> PASS and end (no Appeal).
+#      Not Eligible -> same user, same session: Account -> persisted status page -> ONE Appeal with the
+#                      synthetic documents -> reference + status proven (subflows/submit-appeal.yaml,
+#                      shared with e2e/appeal request.yaml) -> PASS.
+#      Unknown      -> FAIL (UNKNOWN ELIGIBILITY RESULT).
+# Never uses an existing account; no booking, reservation, cancellation, payment or contract.
+#
+# TEST DATA: phone 50 + 7 random digits, email elig.<generatedId>@example.com (reserved domain),
+# registration OTP 1234 (PRE test value); a divorced mock profile gets a synthetic divorce date from the
+# app's Hijri picker and a deed number derived from the generated ID. Region/City/District: the first
+# option the product lists (District: the first that is not the "UNKNOWN" placeholder). All values logged.
+appId: fi.iwa.sakani
+name: Eligibility & Appeal Journey
+tags:
+  - e2e
+  - eligibility
+  - critical
+env:
+  REGISTRATION_OTP: '${typeof REGISTRATION_OTP === "undefined" ? "1234" : String(REGISTRATION_OTP)}'
+  APPEAL_TEXT: "Automation test appeal - PRE environment"
+---
+# ==========================================================================================
+# 1. ONE ADULT NEW USER - minute window, one ID, real age proof, one registration
+# ==========================================================================================
+- runFlow:
+    file: ../subflows/register-adult-new-user.yaml
+    env:
+      REGISTRATION_OTP: ${REGISTRATION_OTP}
+
+# ==========================================================================================
+# 2. ELIGIBILITY for THE registered user (sets output.eligibilityOutcome; unknown stops the run)
+# ==========================================================================================
+- runFlow:
+    file: ../subflows/eligibility-check.yaml
+
+# ==========================================================================================
+# 3. RESULT BRANCH - the two branches are mutually exclusive
+# ==========================================================================================
+- runFlow:
+    when:
+      true: ${output.eligibilityOutcome === 'eligible'}
+    commands:
+      - takeScreenshot: journey-final-eligible
+      - evalScript: "${console.log('JOURNEY END - ELIGIBLE - user [' + output.generatedNationalId + '] result [' + output.eligibilityResult.replace(/\\n/g, ' | ') + '] - no Appeal')}"
+- runFlow:
+    when:
+      true: ${output.eligibilityOutcome === 'not-eligible'}
+    commands:
+      # "Eligibility status" on the result screen opens ACCOUNT (row "Eligibility checker status /
+      # Not Eligible"); from there the persisted status page is opened exactly as in
+      # e2e/appeal request.yaml, then ONE Appeal.
+      - evalScript: "${console.log('JOURNEY - NOT ELIGIBLE - user [' + output.generatedNationalId + '] continues into the Appeal')}"
+      - tapOn:
+          text: "Eligibility status"
+          retryTapIfNoChange: false
+      - extendedWaitUntil:
+          visible: "(?s)Eligibility checker status.*"
+          timeout: 30000
+          label: "APPEAL - Account (Eligibility checker status) did not open from the result screen"
+      - evalScript: ${output.accountService = "(?s)Eligibility checker status.*"}
+      - runFlow:
+          file: ../subflows/open-account-service.yaml
+      - waitForAnimationToEnd:
+          timeout: 15000
+      - extendedWaitUntil:
+          visible: "Checked on"
+          timeout: 30000
+          label: "APPEAL - the persisted Eligibility status page did not open"
+      - waitForAnimationToEnd:
+          timeout: 10000
+      - runFlow:
+          file: ../subflows/submit-appeal.yaml
+          env:
+            APPEAL_TEXT: ${APPEAL_TEXT}
+      - evalScript: "${console.log('JOURNEY END - NOT ELIGIBLE + APPEAL - user [' + output.generatedNationalId + '] appeal reference [' + output.appealReference + '] status [' + output.appealStatus + ']')}"

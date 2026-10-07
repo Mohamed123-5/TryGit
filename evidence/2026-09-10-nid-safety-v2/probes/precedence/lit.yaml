@@ -1,0 +1,6 @@
+appId: fi.iwa.sakani
+name: PREC literal env
+env:
+  NATIONAL_ID: "1119880062"
+---
+- assertTrue: ${String(NATIONAL_ID) === "1000011487"}

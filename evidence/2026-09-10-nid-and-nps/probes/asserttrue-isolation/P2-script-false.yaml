@@ -1,0 +1,4 @@
+appId: fi.iwa.sakani
+name: P2-script-false
+---
+- assertTrue: ${false}

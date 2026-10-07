@@ -1,0 +1,137 @@
+WARNING: Final field parent in class maestro.cli.command.TestCommand has been mutated reflectively by class picocli.CommandLine$Model$FieldBinding in unnamed module @2d9d4f9d (file:/D:/Automation-Tool/maestro/lib/picocli-4.6.3.jar)
+WARNING: Use --enable-final-field-mutation=ALL-UNNAMED to avoid a warning
+WARNING: Mutating final fields will be blocked in a future release unless final field mutation is enabled
+Running on Pixel_8
+ > Flow BKG-001 guest Reserve redirects to login, BKG-004 My Bookings lists reservations
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::arrayBaseOffset has been called by com.google.protobuf.UnsafeUtil$MemoryAccessor (file:/D:/Automation-Tool/maestro/lib/protobuf-java-3.21.9.jar)
+WARNING: Please consider reporting this to the maintainers of class com.google.protobuf.UnsafeUtil$MemoryAccessor
+WARNING: sun.misc.Unsafe::arrayBaseOffset will be removed in a future release
+Run ${console.log('BOOKING.YAML TARGET NATIONAL_ID = [' + NATIONAL_ID + ']')}... COMPLETED
+Assert that ${String(NATIONAL_ID).length === 10 && !/[^0-9]/.test(String(NATIONAL_ID)) && (String(NATIONAL_ID).charAt(0) === "1" || String(NATIONAL_ID).charAt(0) === "2")} is true... COMPLETED
+Launch app "fi.iwa.sakani" with clear state... COMPLETED
+Wait for animation to end within 20000 ms... COMPLETED
+Repeat 5 times...
+  Run flow when "Skip" is visible...
+    Tap on "Skip"... COMPLETED
+  Run flow when "Skip" is visible... COMPLETED
+  Run flow when "Dismiss" is visible...
+  Run flow when "Dismiss" is visible... SKIPPED
+  Run flow when "Ok" is visible...
+  Run flow when "Ok" is visible... SKIPPED
+  Run flow when "Marketplace Day" is visible...
+  Run flow when "Marketplace Day" is visible... SKIPPED
+  Run flow when "Start comparing properties" is visible...
+    Press back... COMPLETED
+  Run flow when "Start comparing properties" is visible... COMPLETED
+  Wait for animation to end within 5000 ms... COMPLETED
+Repeat 5 times... COMPLETED
+Assert that "(?s).*Login / Sign up.*" is visible... COMPLETED
+Assert that "Explore\s*Tab 2 of 4" is visible... COMPLETED
+Tap on "Explore\s*Tab 2 of 4"... COMPLETED
+Assert that "Registered Interests" is visible... COMPLETED
+Run flow when "[Uu]nits\s*Tab 2 of 2" is not visible...
+  Tap on "(Construction Status|Ready Units|Readymade|Offplan|Land)"... COMPLETED
+  Wait for animation to end within 8000 ms... COMPLETED
+  Run flow when "Start searching" is visible...
+    Tap on "Buy"... COMPLETED
+    Tap on "Ready(made| Units)"... COMPLETED
+    Tap on "Start searching"... COMPLETED
+  Run flow when "Start searching" is visible... COMPLETED
+  Run flow when "Apply" is visible...
+  Run flow when "Apply" is visible... SKIPPED
+Run flow when "[Uu]nits\s*Tab 2 of 2" is not visible... COMPLETED
+Assert that "[Uu]nits\s*Tab 2 of 2" is visible... COMPLETED
+Tap on "Projects\s*Tab 1 of 2"... COMPLETED
+Wait for animation to end within 10000 ms... COMPLETED
+Tap on Below "Projects\s*Tab 1 of 2"... COMPLETED
+Wait for animation to end within 8000 ms... COMPLETED
+Run flow when "Start comparing properties" is visible...
+  Press back... COMPLETED
+  Wait for animation to end within 5000 ms... COMPLETED
+Run flow when "Start comparing properties" is visible... COMPLETED
+Assert that "View units" is visible... COMPLETED
+Tap on "View units"... COMPLETED
+Assert that "(?s).*Unit list.*" is visible... COMPLETED
+Tap on Below "Area size"... COMPLETED
+Assert that "Mortgage Calculator" is visible... COMPLETED
+Assert that "Reserve unit" is not visible... COMPLETED
+Assert that "You are not logged in" is visible... COMPLETED
+Assert that "(?s).*Logged in.*Eligible.*Financial Recommendations.*partner bank.*" is visible... COMPLETED
+Launch app "fi.iwa.sakani"... COMPLETED
+Wait for animation to end within 20000 ms... COMPLETED
+Repeat 8 times...
+  Run flow when "Dismiss" is visible...
+    Tap on "Dismiss"... COMPLETED
+  Run flow when "Dismiss" is visible... COMPLETED
+  Run flow when "Ok" is visible...
+  Run flow when "Ok" is visible... SKIPPED
+  Run flow when "Marketplace Day" is visible...
+  Run flow when "Marketplace Day" is visible... SKIPPED
+  Run flow when "Start comparing properties" is visible...
+  Run flow when "Start comparing properties" is visible... SKIPPED
+  Run flow when "Account\s*Tab 4 of 4" is not visible...
+  Run flow when "Account\s*Tab 4 of 4" is not visible... SKIPPED
+Repeat 8 times... COMPLETED
+Assert that "Account\s*Tab 4 of 4" is visible... COMPLETED
+Tap on "Account\s*Tab 4 of 4"... COMPLETED
+Assert that "Log in" is visible... COMPLETED
+Tap on "Log in"... COMPLETED
+Assert that "Continue with N[ae]fath" is visible... COMPLETED
+Tap on "Enter your ID, phone number,? or email"... COMPLETED
+Input text ${NATIONAL_ID}... COMPLETED
+Tap on "Continue"... COMPLETED
+Assert that "Login with nafath" is visible... COMPLETED
+Assert that "Confirm" is visible... COMPLETED
+Assert that "${NATIONAL_ID}" is visible... COMPLETED
+Tap on "Confirm"... COMPLETED
+Assert that "Login with nafath" is not visible... COMPLETED
+Repeat 12 times...
+  Run flow when "Go to the weekly (offer|deal)" is visible...
+    Press back... COMPLETED
+    Wait for animation to end within 3000 ms... COMPLETED
+  Run flow when "Go to the weekly (offer|deal)" is visible... COMPLETED
+  Run flow when "Maybe Later" is not visible...
+  Run flow when "Maybe Later" is not visible... SKIPPED
+Repeat 12 times... COMPLETED
+Repeat 4 times...
+  Run flow when "Go to the weekly (offer|deal)" is visible...
+  Run flow when "Go to the weekly (offer|deal)" is visible... SKIPPED
+  Run flow when "Maybe Later" is visible...
+    Tap on "Maybe Later"... COMPLETED
+    Wait for animation to end within 3000 ms... COMPLETED
+  Run flow when "Maybe Later" is visible... COMPLETED
+Repeat 4 times... COMPLETED
+Tap on "Account\s*Tab 4 of 4"... COMPLETED
+Assert that "My bookings" is visible... COMPLETED
+Assert that "Log in" is not visible... COMPLETED
+Tap on "My bookings"... COMPLETED
+Assert that "My Bookings" is visible... COMPLETED
+Assert that "All\s*Tab 1 of 4" is visible... COMPLETED
+Assert that "Active\s*Tab 2 of 4" is visible... COMPLETED
+Assert that "Completed\s*Tab 3 of 4" is visible... COMPLETED
+Assert that "Cancelled\s*Tab 4 of 4" is visible... COMPLETED
+Assert that "Unpaid" is visible... COMPLETED
+Assert that "Ready to sign" is visible... COMPLETED
+Assert that "(?s).*Unit code.*" is visible... COMPLETED
+Tap on "Completed\s*Tab 3 of 4"... COMPLETED
+Assert that "(?s).*
+Completed
+.*Unit code.*" is visible... FAILED
+
+Assertion is false: "(?s).*
+Completed
+.*Unit code.*" is visible
+
+            Assertion '"(?s).*
+Completed
+.*Unit code.*" is visible' failed. Check the UI hierarchy in debug artifacts to verify the element state and properties.
+            
+            Possible causes:
+            - Element selector may be incorrect - check if there are similar elements with slightly different names/properties.
+            - Element may be temporarily unavailable due to loading state
+            - This could be a real regression that needs to be addressed
+
+==== Debug output (logs & screenshots) ====
+
+C:\Users\Mohammed Elkatry\.maestro\tests\2026-09-10_131255

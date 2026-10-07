@@ -1,0 +1,6 @@
+appId: fi.iwa.sakani
+name: P6-exact-journey-expr
+env:
+  NATIONAL_ID: '\''${typeof NATIONAL_ID === "undefined" ? "1119880062" : String(NATIONAL_ID)}'\''
+---
+- assertTrue: ${/^[12][0-9]+$/.test(String(NATIONAL_ID)) && String(NATIONAL_ID).length === 10}

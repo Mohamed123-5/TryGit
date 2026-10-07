@@ -1,0 +1,4 @@
+appId: fi.iwa.sakani
+name: A3 regex with dollar end-anchor (false)
+---
+- assertTrue: ${/^x$/.test("abc")}

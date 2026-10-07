@@ -1,0 +1,32 @@
+appId: fi.iwa.sakani
+name: DISCOVER - booking detail steps card (read-only, current session)
+---
+# READ-ONLY. Opens the booking from Ready to sign and waits for the steps card to finish loading.
+# It taps nothing inside the booking.
+- launchApp
+- runFlow:
+    file: ../../../.maestro/subflows/clear-overlays.yaml
+    env:
+      ANCHOR: 'Account\s*Tab 4 of 4'
+- tapOn: 'Account\s*Tab 4 of 4'
+- runFlow:
+    file: ../../../.maestro/subflows/clear-overlays.yaml
+    env:
+      ANCHOR: "My bookings"
+- tapOn: "My bookings"
+- extendedWaitUntil:
+    visible: 'Active\s*Tab 2 of 4'
+    timeout: 45000
+- tapOn: 'Active\s*Tab 2 of 4'
+- extendedWaitUntil:
+    visible: "Ready to sign"
+    timeout: 30000
+- tapOn: "Ready to sign"
+- extendedWaitUntil:
+    visible: "(?s).*\nActive\n.*01-01-0504-999-368.*"
+    timeout: 45000
+- tapOn: "(?s).*\nActive\n.*01-01-0504-999-368.*"
+- extendedWaitUntil:
+    visible: "(?s).*steps? left.*"
+    timeout: 45000
+- takeScreenshot: discover-booking-steps

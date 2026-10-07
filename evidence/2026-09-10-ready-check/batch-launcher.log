@@ -1,0 +1,13 @@
+check-syntax .maestro/subflows/verify-signed-in-account.yaml: OK
+check-syntax .maestro/_probe-identity-gate.yaml: OK
+check-syntax .maestro/full-journey.yaml: OK
+check-syntax .maestro/subflows/login.yaml: OK
+check-syntax .maestro/subflows/clear-overlays.yaml: OK
+check-syntax .maestro/_explore.yaml: OK
+check-syntax .maestro/home.yaml: OK
+label=home-default exit=0 failed_steps=0 run_dir=2026-09-10_154920 start=15:49:19 end=15:52:49
+label=identity-positive-1119880044 exit=0 failed_steps=0 run_dir=2026-09-10_155251 start=15:52:49 end=15:55:36
+label=identity-negative-44-as-62 exit=1 failed_steps=2 run_dir=2026-09-10_155538 start=15:55:37 end=15:58:38
+label=explore-1000011487-a exit=0 failed_steps=0 run_dir=2026-09-10_155840 start=15:58:38 end=16:01:22
+label=explore-1000011487-b exit=0 failed_steps=0 run_dir=2026-09-10_160124 start=16:01:22 end=16:04:22
+label=explore-1000011487-c exit=0 failed_steps=0 run_dir=2026-09-10_160424 start=16:04:22 end=16:07:17

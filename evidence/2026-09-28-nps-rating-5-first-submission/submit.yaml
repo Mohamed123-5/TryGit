@@ -1,0 +1,7 @@
+appId: fi.iwa.sakani
+name: NPS probe - submit rating 5
+---
+- assertVisible: "Submit"
+- tapOn: "Submit"
+- waitForAnimationToEnd:
+    timeout: 5000

@@ -1,0 +1,51 @@
+# PROBE: new generated user -> pre-filled Personal information -> Continue -> contact details
+# screen: hide keyboard, capture the whole screen, then Continue with the fields EMPTY to learn
+# whether phone/email are mandatory. No phone number or email is typed.
+appId: fi.iwa.sakani
+name: PROBE - are contact details mandatory (no data entered)
+---
+- evalScript: ${output.generatedNationalId = String(Math.floor(1000000000 + Math.random() * 1000000000))}
+- evalScript: "${console.log('PROBE GENERATED NATIONAL ID = [' + output.generatedNationalId + ']')}"
+- launchApp:
+    clearState: true
+- runFlow:
+    file: D:/Automation/Maestro-Mobile/.maestro/subflows/clear-overlays.yaml
+    env:
+      ANCHOR: "(?s).*Login / Sign up.*"
+- tapOn: "(?s).*Login / Sign up.*"
+- extendedWaitUntil:
+    visible: "Continue with N[ae]fath"
+    timeout: 45000
+- tapOn: "Enter your ID, phone number,? or email"
+- inputText: ${output.generatedNationalId}
+- tapOn: "Continue"
+- extendedWaitUntil:
+    visible: "Login with nafath"
+    timeout: 45000
+- tapOn: "Confirm"
+- extendedWaitUntil:
+    visible: "Personal information"
+    timeout: 90000
+- tapOn: "Continue"
+- extendedWaitUntil:
+    visible: "(?s).*Please fill in your mobile number detail and email address.*"
+    timeout: 45000
+- hideKeyboard
+- waitForAnimationToEnd:
+    timeout: 3000
+- takeScreenshot: probe4-1-contact-screen
+- runFlow:
+    optional: true
+    commands:
+      - assertVisible: "DUMP-CONTACT"
+- tapOn:
+    text: "Continue"
+    retryTapIfNoChange: false
+- waitForAnimationToEnd:
+    timeout: 5000
+- takeScreenshot: probe4-2-continue-empty
+- runFlow:
+    optional: true
+    commands:
+      - assertVisible: "DUMP-AFTER-EMPTY-CONTINUE"
+- assertVisible: "PROBE-END-MARKER-NOT-PRESENT"

@@ -1,0 +1,178 @@
+# Login regression - the complete Login test. Safe: signs in only, changes no account data.
+#
+#   AUTH-002        Continue refuses empty, too-short and non-numeric input (never reaches Nafath)
+#   AUTH-012        the alternate "Continue with Nafath" entry opens the Nafath screen, inertly
+#   AUTH-006        sign-in with NATIONAL_ID: exact ID on the Nafath screen, then Confirm
+#   AUTH-007/008    the biometrics prompt is offered after sign-in and "Maybe Later" declines it
+#   AUTH-010        authenticated Home: guest entry gone, greeting followed by a real name
+#   AUTH-009        the session survives an app restart
+#
+# ONE AUTHENTICATION IMPLEMENTATION. This file drives the login screen itself, because that
+# screen IS the subject of AUTH-002/012/006. Everything after the Nafath "Confirm" - contact
+# prompts, the Sharrai/weekly-deal promo, biometrics, the survey, the login-page bounce
+# recovery and the named-greeting exit - is subflows/post-login.yaml, the same file the shared
+# subflows/login.yaml uses for every other flow. First-run overlays go through
+# subflows/clear-overlays.yaml. Do not re-inline any of those handlers here.
+appId: fi.iwa.sakani
+name: Login - AUTH-002 input validation, AUTH-012 Nafath entry, AUTH-006 sign-in, AUTH-007/008 biometrics, AUTH-010 authenticated Home, AUTH-009 restart
+env:
+  # The account this flow signs in as. Default (no override): 1000011487, standardised across
+  # the suite on 14/09/2026 (it was 1000011485 before). Override with:
+  #   maestro test -e NATIONAL_ID=<10-digit National ID / Iqama> .maestro/login.yaml
+  # A self-referencing default, NOT a literal: on Maestro 2.9.0 a literal here silently beats
+  # `-e NATIONAL_ID=...`. Single-quoted because the expression contains ": ".
+  NATIONAL_ID: '${typeof NATIONAL_ID === "undefined" ? "1000011487" : String(NATIONAL_ID)}'
+---
+# Fail fast, before the app is touched, on an empty or malformed override. Dollar-free on
+# purpose: a "$" inside ${...} makes Maestro 2.9.0 skip evaluation and pass the assert.
+- evalScript: ${console.log('LOGIN.YAML TARGET NATIONAL_ID = [' + NATIONAL_ID + ']')}
+- assertTrue: ${String(NATIONAL_ID).length === 10 && !/[^0-9]/.test(String(NATIONAL_ID)) && (String(NATIONAL_ID).charAt(0) === "1" || String(NATIONAL_ID).charAt(0) === "2")}
+- launchApp:
+    clearState: true
+
+# Guest Home through the shared first-run handling (onboarding, notification permission,
+# Marketplace Day, compare coach mark, survey, error dialog) - the same call and anchor the
+# shared login makes. It polls, so a cold start that takes over a minute to paint is fine.
+- runFlow:
+    file: subflows/clear-overlays.yaml
+    env:
+      ANCHOR: "(?s).*Login / Sign up.*"
+- tapOn: "(?s).*Login / Sign up.*"
+
+# Build PRE-4.7.5-1279 spells this "Nefath" and STG spelled it "Nafath" (defect D-14).
+- extendedWaitUntil:
+    visible: "Continue with N[ae]fath"
+    timeout: 30000
+- assertVisible: "Enter your ID, phone number,? or email"
+
+# --- AUTH-002: Continue must not proceed on empty, too-short or non-numeric input.
+# The button reports enabled="true" even when it is visually disabled - only
+# "clickable" flips - so Maestro cannot assert the attribute. Assert the behaviour
+# instead: tapping Continue must not reach the Nafath screen.
+- tapOn: "Continue"
+- waitForAnimationToEnd:
+    timeout: 3000
+- assertNotVisible: "Login with nafath"
+
+- tapOn: "Enter your ID, phone number,? or email"
+- inputText: "123"
+- tapOn: "Continue"
+- waitForAnimationToEnd:
+    timeout: 3000
+- assertNotVisible: "Login with nafath"
+
+- tapOn: "123"
+- eraseText
+- inputText: "abcdefghij"
+- tapOn: "Continue"
+- waitForAnimationToEnd:
+    timeout: 3000
+- assertNotVisible: "Login with nafath"
+
+- tapOn: "abcdefghij"
+- eraseText
+# --- end AUTH-002
+
+# --- AUTH-012: the alternate "Continue with N[ae]fath" entry opens the Nafath path.
+# Runs from the empty field AUTH-002 leaves behind. Scoped to navigation only: the
+# screen is asserted, nothing is submitted, and no external Nafath approval is
+# involved - the case is "Nafath path opens", not "Nafath authenticates" (AUTH-006).
+# "Confirm" is present but inert here because no ID has been supplied, which is also
+# why this cannot accidentally authenticate.
+- tapOn: "Continue with N[ae]fath"
+- extendedWaitUntil:
+    visible: "Login with nafath"
+    timeout: 30000
+- assertVisible: "Use your nafath information to login"
+- assertVisible: "National ID / Iqama number"
+- assertVisible: "Confirm"
+
+# Return to the login screen so the happy path below starts from a known state.
+# Back from the Nafath screen unwinds the whole login stack to the guest Home rather
+# than to the login screen it was opened from, so the login entry has to be re-opened
+# instead of assuming a single step back.
+- back
+- extendedWaitUntil:
+    visible: "(?s).*Login / Sign up.*"
+    timeout: 30000
+- tapOn: "(?s).*Login / Sign up.*"
+- extendedWaitUntil:
+    visible: "Continue with N[ae]fath"
+    timeout: 30000
+- assertVisible: "Enter your ID, phone number,? or email"
+- assertNotVisible: "Login with nafath"
+
+# Re-focus the ID field. AUTH-002 left it focused; re-opening the login screen above
+# does not, and the happy path below types straight into it.
+- tapOn: "Enter your ID, phone number,? or email"
+# --- end AUTH-012
+
+# --- AUTH-006: sign in with NATIONAL_ID.
+- inputText: ${NATIONAL_ID}
+- assertVisible: ${NATIONAL_ID}
+- tapOn: "Continue"
+# Transition proof: Continue reached the Nafath screen.
+- extendedWaitUntil:
+    visible: "Login with nafath"
+    timeout: 30000
+- assertVisible: "Confirm"
+# The Nafath screen must carry EXACTLY the requested ID before the session is created. Text
+# selectors are full-match, so any other ID - including a default that silently won over an
+# override - fails here, before authentication.
+- assertVisible: ${NATIONAL_ID}
+
+# AUTH-007/008 evidence is recorded by the shared biometrics handler; start from a clean slate
+# so nothing from an earlier call can satisfy the assertions below.
+- evalScript: ${output.biometricsOffered = false}
+- evalScript: ${output.biometricsDismissed = false}
+- tapOn: "Confirm"
+
+# Everything after Confirm has one owner, shared with every other flow. It returns only on a
+# Home that greets the account holder by name with the guest entry gone.
+- runFlow:
+    file: subflows/post-login.yaml
+
+# Snapshot what the post-login handling saw, before AUTH-009's relaunch can add to it.
+- evalScript: ${output.auth007Offered = output.biometricsOffered === true}
+- evalScript: ${output.auth008Dismissed = output.biometricsDismissed === true}
+- evalScript: "${console.log('AUTH-007/008 EVIDENCE - biometrics offered=[' + output.auth007Offered + '] dismissed via Maybe Later=[' + output.auth008Dismissed + ']')}"
+# --- end AUTH-006
+
+# --- AUTH-010: authenticated Home. Asserted here in its own right even though post-login
+# proves the same exit: this is the case under test. The ",\s*\S" tail is load-bearing - a
+# guest surface renders a bare "Hello", so the greeting must be followed by an actual name.
+- assertVisible:
+    text: 'Home\s*Tab 1 of 4'
+    selected: true
+- assertVisible: '(?si)(Hello|Good (morning|afternoon|evening)),\s*\S.*'
+- assertNotVisible: "(?s).*Login / Sign up.*"
+# --- end AUTH-010
+
+# --- AUTH-009: the session survives an app restart. launchApp WITHOUT clearState stops and
+# relaunches the app. The relaunch overlays (the survey reappears on every launch - D-12 - and
+# the intermittent error dialog) are cleared by the shared helper until the tab bar is up.
+- launchApp
+- runFlow:
+    file: subflows/clear-overlays.yaml
+    env:
+      ANCHOR: 'Account\s*Tab 4 of 4'
+- assertVisible: 'Home\s*Tab 1 of 4'
+- assertNotVisible: "(?s).*Login / Sign up.*"
+# The name arrives after the header paints ("Hello, " briefly), so wait for it by shape.
+- extendedWaitUntil:
+    visible: '(?si)(Hello|Good (morning|afternoon|evening)),\s*\S.*'
+    timeout: 60000
+# --- end AUTH-009
+
+# --- AUTH-007 / AUTH-008 verdict. Asserted last so a missing prompt cannot hide the AUTH-010
+# and AUTH-009 results; it still fails the run. Evidence recorded by clear-overlays.yaml:
+# "offered" only while "Enable Biometrics" was on screen after sign-in, "dismissed" only once
+# "Maybe Later" was gone after its tap. The app offers enrolment only when Android reports an
+# enrolled biometric: on 21/09/2026 the emulator had none (canAuthenticate result 11) and no
+# prompt was shown - an environment precondition, not a reason to make this case optional.
+- assertTrue:
+    condition: ${output.auth007Offered === true}
+    label: "AUTH-007 - biometrics prompt not offered after sign-in. PRECONDITION: the device needs an enrolled fingerprint/face (Android canAuthenticate result 11 = none enrolled suppresses the offer)"
+- assertTrue:
+    condition: ${output.auth008Dismissed === true}
+    label: "AUTH-008 - Maybe Later did not dismiss the biometrics prompt"

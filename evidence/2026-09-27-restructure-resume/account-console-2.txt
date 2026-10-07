@@ -1,0 +1,3 @@
+=== 14:32:36 START account (NPS before launch: 0) ===
+=== 14:47:15 END account exit=1 ===
+fatal signals during run: 0

@@ -1,0 +1,137 @@
+# Reusable helper - sign up a BRAND-NEW user on PRE and land on an authenticated Home.
+#
+# subflows/login.yaml serves EXISTING accounts. A National ID PRE has never seen goes through
+# registration instead (PRE-4.7.6-1283):
+#   Nafath Confirm -> "Personal information" (National ID, Full Name, Date of Birth, Nationality - all
+#   pre-filled by PRE, nothing to type) -> Continue -> mobile number + email (both mandatory) ->
+#   Continue -> "Verification Code" (4 boxes) -> biometrics prompt -> "Welcome! Your account is all
+#   set." -> Continue -> Home, proven by the shared post-login.yaml.
+#
+# CONTRACT
+#   NATIONAL_ID - the new 10-digit ID (caller generates it).
+#   PHONE       - 9-digit Saudi mobile without +966. The app rejects numbers starting "52".
+#   EMAIL       - email address for the new account.
+#   OTP         - registration verification code (PRE test value 1234).
+#   MIN_AGE_HIJRI_YEARS - OPTIONAL. When set, the applicant shown on Personal information must be OLDER
+#                 than this many Hijri years; otherwise the run stops there - before phone, email and
+#                 OTP, so no account is created.
+# Precondition: the app is running and unauthenticated (a cleared launch).
+# Postcondition: authenticated Home, greeting by name (asserted by post-login.yaml).
+# Exposes: output.applicantDobHijri (Date of Birth exactly as PRE shows it - a disabled field, only
+#   read), output.applicantAgeHijri (completed Hijri years, -1 if unreadable), output.todayHijri.
+appId: fi.iwa.sakani
+name: Register a new user (Nafath + contact details + OTP)
+---
+- assertTrue: ${typeof NATIONAL_ID !== "undefined" && String(NATIONAL_ID).length === 10 && !/[^0-9]/.test(String(NATIONAL_ID))}
+# Returns only once "Login / Sign up" is visible (the helper asserts its anchor).
+- runFlow:
+    file: clear-overlays.yaml
+    env:
+      ANCHOR: "(?s).*Login / Sign up.*"
+- tapOn: "(?s).*Login / Sign up.*"
+- extendedWaitUntil:
+    visible: "Continue with N[ae]fath"
+    timeout: 45000
+- tapOn: "Enter your ID, phone number,? or email"
+- inputText: ${NATIONAL_ID}
+- assertVisible: ${NATIONAL_ID}
+- tapOn: "Continue"
+- extendedWaitUntil:
+    visible: "Login with nafath"
+    timeout: 45000
+# Same identity gate as login.yaml: the Nafath screen must carry exactly this ID.
+- assertVisible: ${NATIONAL_ID}
+- tapOn: "Confirm"
+
+# REGISTRATION 1 - Personal information, pre-filled by PRE; it must be this ID.
+- extendedWaitUntil:
+    visible: "Personal information"
+    timeout: 90000
+- assertVisible: "We populated the information based on your National ID/Iqama and DOB."
+- assertVisible:
+    text: ${NATIONAL_ID}
+    below: "National ID.*"
+
+# The applicant's real Date of Birth - read only, never tapped or edited - and its Hijri age.
+- evalScript: ${output.applicantDobHijri = ''}
+- runFlow:
+    when:
+      visible:
+        text: "[0-9]{4}-[0-9]{1,2}-[0-9]{1,2}"
+        below: "Date of Birth.*"
+    commands:
+      - copyTextFrom:
+          text: "[0-9]{4}-[0-9]{1,2}-[0-9]{1,2}"
+          below: "Date of Birth.*"
+      - evalScript: ${output.applicantDobHijri = String(maestro.copiedText).trim()}
+- runScript: ../scripts/hijri-age.js
+- evalScript: "${console.log('REGISTRATION - applicant Date of Birth [' + output.applicantDobHijri + '] = ' + output.applicantAgeHijri + ' Hijri years (today ' + output.todayHijri + ')')}"
+
+# AGE PROOF (only when the caller requires a minimum age): checked on this screen, so a too-young
+# applicant never reaches phone, email or OTP and no account exists.
+- runFlow:
+    when:
+      true: ${typeof MIN_AGE_HIJRI_YEARS !== "undefined"}
+    commands:
+      - assertTrue:
+          condition: ${output.applicantAgeHijri >= 0}
+          label: "REGISTRATION - the applicant Date of Birth could not be read on Personal information"
+      - runFlow:
+          when:
+            true: ${!(output.applicantAgeHijri > Number(MIN_AGE_HIJRI_YEARS))}
+          commands:
+            - evalScript: "${console.log('TEST DATA BLOCKER - PRE returned applicant age [' + output.applicantAgeHijri + '] (DOB ' + output.applicantDobHijri + ') although the journey started inside the supported minute window; it must be older than ' + MIN_AGE_HIJRI_YEARS + '. Stopped on Personal information - no account was created.')}"
+      - assertTrue:
+          condition: ${output.applicantAgeHijri > Number(MIN_AGE_HIJRI_YEARS)}
+          label: "TEST DATA BLOCKER - PRE returned an applicant age (logged above) that is not older than MIN_AGE_HIJRI_YEARS although the journey started inside the supported minute window. Stopped on Personal information - no account was created."
+- tapOn: "Continue"
+
+# REGISTRATION 2 - mandatory phone + email. "Continue" has no node of its own here (its text is merged
+# into the screen's root node), so it is tapped at its measured centre (540,2228 of 1080x2400) - only
+# after the screen is positively identified.
+- extendedWaitUntil:
+    visible: "(?s).*Please fill in your mobile number detail and email address.*"
+    timeout: 45000
+- tapOn: "Enter your phone number"
+- inputText: ${PHONE}
+- hideKeyboard
+- tapOn: "Enter your email"
+- inputText: ${EMAIL}
+- hideKeyboard
+- waitForAnimationToEnd:
+    timeout: 3000
+- assertVisible: ${PHONE}
+- assertVisible: ${EMAIL}
+- assertNotVisible:
+    text: "(?s).*can.t be started with.*"
+    label: "REGISTRATION - the app rejected the generated phone number"
+- assertVisible: "(?s).*Please fill in your mobile number detail and email address.*"
+- tapOn:
+    point: "50%,93%"
+    retryTapIfNoChange: false
+
+# REGISTRATION 3 - verification code: tap the first box, type all four digits.
+- extendedWaitUntil:
+    visible: "Verification Code"
+    timeout: 45000
+    label: "REGISTRATION - contact details were not accepted (no Verification Code screen)"
+- tapOn:
+    text: "X"
+    index: 0
+- inputText: ${OTP}
+
+# REGISTRATION 4 - the shared overlay helper declines the biometrics prompt ("Maybe Later") and stops on
+# the completion screen, whose Continue leads to Home.
+- runFlow:
+    file: clear-overlays.yaml
+    env:
+      ANCHOR: "Welcome! Your account is all set."
+- assertVisible: "Welcome! Your account is all set."
+- tapOn:
+    text: "Continue"
+    retryTapIfNoChange: false
+
+# Authenticated from here: the shared post-login state machine proves Home by name (overlays, NPS,
+# promo/contact prompts are all handled there).
+- runFlow:
+    file: post-login.yaml

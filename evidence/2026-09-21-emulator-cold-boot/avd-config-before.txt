@@ -1,0 +1,13 @@
+fastboot.chosenSnapshotFile=
+fastboot.forceChosenSnapshotBoot=no
+fastboot.forceColdBoot=no
+fastboot.forceFastBoot=yes
+hw.gpu.enabled=yes
+hw.gpu.mode=auto
+hw.lcd.density=420
+hw.lcd.height=2400
+hw.lcd.width=1080
+hw.ramSize=2048
+image.sysdir.1=system-images\android-34\google_apis_playstore\x86_64\
+vm.heapSize=228
+google/sdk_gphone64_x86_64/emu64xa:14/UE1A.230829.036.A4/12096271:user/release-keys

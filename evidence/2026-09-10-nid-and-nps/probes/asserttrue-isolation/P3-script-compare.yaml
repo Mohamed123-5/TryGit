@@ -1,0 +1,4 @@
+appId: fi.iwa.sakani
+name: P3-script-compare
+---
+- assertTrue: ${1 === 2}

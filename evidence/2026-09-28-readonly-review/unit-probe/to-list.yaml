@@ -1,0 +1,22 @@
+appId: fi.iwa.sakani
+name: unit probe - reach Place of featured units (read-only, no unit tapped)
+---
+- launchApp
+- extendedWaitUntil:
+    visible: 'Home\s*Tab 1 of 4'
+    timeout: 60000
+- tapOn: 'Home\s*Tab 1 of 4'
+- extendedWaitUntil:
+    visible: '(?si)(Hello|Good (morning|afternoon|evening)),\s*\S.*'
+    timeout: 45000
+- scrollUntilVisible:
+    element:
+      text: '(Discover featured unit in the market|Featured unit in mobile dashboard)\s*'
+    direction: DOWN
+    timeout: 45000
+- tapOn: "(View all|View Details)"
+- extendedWaitUntil:
+    visible: "(?s).*Place of featured units.*"
+    timeout: 45000
+- waitForAnimationToEnd:
+    timeout: 5000

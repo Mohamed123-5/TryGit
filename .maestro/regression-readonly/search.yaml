@@ -1,0 +1,202 @@
+# SRCH-003 — Search shows the no-results empty state.
+#
+# Scope: SRCH-003 (Smoke) plus the Phase 2 Regression cases SRCH-002, SRCH-008 and SRCH-009.
+# Per the automation triage in exploration-report.md SRCH-003 absorbs SRCH-004 (Cancel exits
+# search) and SRCH-009 absorbs SRCH-001 (popular locations listed) and SRCH-006 (selecting a
+# suggestion scopes the results), so those are asserted here too.
+#
+# No marketplace listing assertions are made anywhere in this flow - that is MKT-001's job,
+# and it is currently blocked by defect D-24. Every case below is deliberately asserted on
+# the search surface itself, or on the Explore *header*, never on the listing pipeline, so
+# D-24 cannot mask a search regression and does not block any case here.
+#
+# Precondition is "Search open"; reaching it needs no authentication.
+appId: fi.iwa.sakani
+name: SRCH-003 no-results empty state, SRCH-002 grouped autocomplete, SRCH-008 recent searches, SRCH-009 popular location scopes search
+tags:
+  - health-check
+---
+- launchApp
+
+# Launched WITHOUT clearState, so the app starts from whatever the device holds (onboarding
+# after another flow's state wipe, the survey that reappears on every launch - D-12 - the
+# intermittent error dialog, or post-login prompts). The shared helper clears whichever is on
+# top and returns once the tab bar is reachable.
+- runFlow:
+    file: ../subflows/clear-overlays.yaml
+    env:
+      ANCHOR: 'Explore\s*Tab 2 of 4'
+# Opened through the shared helper: when signed in, the NPS survey can re-present before this
+# tap lands, so it is handled (subflows/dismiss-nps.yaml), the tap retried, and arrival proven by
+# the Explore header (see the "Registered Interests" note just below).
+- runFlow:
+    file: ../subflows/tap-until-destination.yaml
+    env:
+      TARGET: 'Explore\s*Tab 2 of 4'
+      DESTINATION: "Registered Interests"
+
+# Wait for the Explore header to actually exist before tapping into it. A fixed settling
+# delay was not enough: on a freshly booted emulator the tap below could land before the
+# header laid out and open the wrong surface.
+#
+# PRE-4.7.5-1279 used "Looking for?", the accessibility label of the container holding the
+# location field. Build STG-4.7.5-1278 removed that container label, so the anchor is now
+# "Registered Interests" - a static filter-chip label in the same Explore header, present in
+# both the map-first landing and the results view, and present on PRE as well. It is the
+# header rendering that is being waited on; which string proves it is incidental, so the
+# case's intent is unchanged.
+- extendedWaitUntil:
+    visible: "Registered Interests"
+    timeout: 45000
+
+# Coordinate tap, deliberately, and re-verified against the live hierarchy on this build.
+# The Explore location field is the node [249,229][943,313]: it exposes no accessibilityText,
+# no hintText and no resource-id, its text is empty until a location is chosen, and it
+# reports clickable="false" - its parent handles the tap. The parent is no better: it is the
+# "Looking for?" container [0,229][1080,450], also clickable="false", and its centre falls in
+# the gap between the field row and the filter chips. Relative selectors were re-tested today
+# and still mis-target: `rightOf "Buy"` resolves to the Favorites heart and opens Favorites.
+# A percentage point is used rather than raw pixels so it scales across screen sizes; on this
+# 1080x2400 device it resolves to (594,264), inside the field.
+#
+# The first Explore visit can also raise a one-off "Select category" marketplace sheet, which
+# swallows the tap. Clear it and retry rather than failing on an overlay.
+- repeat:
+    times: 3
+    commands:
+      - runFlow:
+          when:
+            visible: "Select category"
+          commands:
+            - tapOn: "Cancel"
+            - waitForAnimationToEnd:
+                timeout: 5000
+      - runFlow:
+          when:
+            notVisible: "Popular locations"
+          commands:
+            - tapOn:
+                point: "55%,11%"
+            - waitForAnimationToEnd:
+                timeout: 8000
+
+- extendedWaitUntil:
+    visible: "Popular locations"
+    timeout: 30000
+
+- tapOn: "Enter Region, City, Neighborhood, Street, Project, Developer, Building Number, Block Number"
+- inputText: "zzzqqqxyz"
+
+# SRCH-003 assertion: the no-results empty state and its guidance line.
+- extendedWaitUntil:
+    visible: "No results were found for your search."
+    timeout: 30000
+- assertVisible: "Please try refining your search or explore nearby properties."
+
+# SRCH-004 (merged): Cancel leaves search and returns to Explore.
+- tapOn: "Cancel"
+- extendedWaitUntil:
+    visible: 'Explore\s*Tab 2 of 4'
+    timeout: 30000
+- assertNotVisible: "Popular locations"
+
+# --- SRCH-002: a partial term returns autocomplete results grouped by kind.
+#
+# This is the primary discovery mechanism, so the assertion is on the grouping itself - both
+# group headers plus the pagination affordance - not merely on "some result appeared".
+- tapOn:
+    point: "55%,11%"
+- extendedWaitUntil:
+    visible: "Popular locations"
+    timeout: 30000
+- tapOn: "Enter Region, City, Neighborhood, Street, Project, Developer, Building Number, Block Number"
+- inputText: "Riy"
+
+# "Show more results" sits between the two groups and is the last of them to render, so
+# waiting on it also settles the list.
+- extendedWaitUntil:
+    visible: "Show more results"
+    timeout: 30000
+
+# SRCH-002 asserts the GROUPING CONTRACT, not one particular group. Corrected 27/09/2026: this
+# case used to require a "Location" group and a "<place>, <region>, KSA" Location row for the
+# term "Riy". WHICH kinds a term returns is live index data - on 27/09/2026 "Riy" returned
+# "Property" and "Developer" groups with no Location group at all, and the captured hierarchy
+# confirms no KSA row was rendered. Requiring Location reported a search regression for a change
+# in the index, so no single group is hardcoded any more.
+#
+# If a business requirement is ever stated that a location term MUST always yield a Location
+# group, assert that group explicitly here - it is a product contract at that point, not an
+# assumption.
+- assertVisible: "(Location|Property|Developer|Project)"
+
+# RELEVANCE - a returned suggestion actually matches the typed term, so an empty or unrelated
+# result set still fails. The rows are live data, so the assertion is on the term followed by at
+# least one more letter ("Riyadh", "Riyadh Municipality Project", "Automation testing company
+# Riyadh"). That trailing letter matters: the search input itself holds exactly "Riy", so a bare
+# ".*Riy.*" would full-match the input field and pass without any result being returned.
+- assertVisible: "(?s).*Riy[A-Za-z]+.*"
+
+# NAVIGATION for this surface is covered without duplicating it here: SRCH-004 below proves
+# Cancel exits search back to Explore, and SRCH-009 proves selecting a suggestion scopes the
+# search and lands on the scoped Explore header.
+
+# Deliberately NOT asserted: the property-type labels in the Property group render as raw
+# enum keys ("apartment", "land", "floor_through") - that is defect D-06, owned by SRCH-005,
+# which is tracked as a known-failing case. Asserting localised labels here would fail this
+# case for a defect that belongs to another one.
+
+- tapOn: "Cancel"
+- extendedWaitUntil:
+    visible: 'Explore\s*Tab 2 of 4'
+    timeout: 30000
+# --- end SRCH-002
+
+# --- SRCH-008: searches from earlier in this session are listed when search is reopened.
+#
+# Self-contained: both terms asserted below were typed by this flow - "zzzqqqxyz" by SRCH-003
+# and "Riy" by SRCH-002 - so the case does not depend on state left behind by a previous run.
+- tapOn:
+    point: "55%,11%"
+- extendedWaitUntil:
+    visible: "Recent searches"
+    timeout: 30000
+- assertVisible: "zzzqqqxyz"
+- assertVisible: "Riy"
+# --- end SRCH-008
+
+# --- SRCH-009: a popular location can be selected and scopes the search.
+# Absorbs SRCH-001 (search opens with popular locations) and SRCH-006 (selecting a suggestion
+# scopes the results).
+#
+# SRCH-001: the four popular locations are listed. Each is one node combining the city and
+# the country across two lines, hence \s* between them.
+- assertVisible: "Popular locations"
+- assertVisible: 'Riyadh\s*Saudi Arabia'
+- assertVisible: 'MAKKAH AL MUKARRAMAH\s*Saudi Arabia'
+- assertVisible: 'JEDDAH\s*Saudi Arabia'
+- assertVisible: 'AL MADINAH AL MUNAWWARAH\s*Saudi Arabia'
+
+- tapOn: 'Riyadh\s*Saudi Arabia'
+
+# SRCH-009 / SRCH-006 expected result: the search is scoped to the selection. Asserted on the
+# Explore location field, which is empty until a location is chosen and afterwards carries
+# the chosen one - so this proves the selection was actually applied.
+#
+# It is deliberately NOT asserted against the unit listings: those are broken by defect D-24
+# independently of search, so asserting on them would report a search failure for a
+# marketplace defect. The header carries the scope regardless of whether the listing renders.
+#
+# Note the landing surface: choosing a location switches Explore to map view, and the bottom
+# tab bar is hidden there. So arrival is confirmed by the Explore header rather than by the
+# "Explore Tab 2 of 4" bottom-nav label used elsewhere in this flow, which does not exist on
+# this screen.
+- extendedWaitUntil:
+    visible: "Riyadh"
+    timeout: 30000
+- assertVisible: "Looking for?"
+
+# And the search surface genuinely closed rather than the selection being a no-op.
+- assertNotVisible: "Popular locations"
+- assertNotVisible: "Recent searches"
+# --- end SRCH-009

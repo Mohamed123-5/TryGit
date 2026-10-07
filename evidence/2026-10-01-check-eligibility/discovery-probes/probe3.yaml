@@ -1,0 +1,30 @@
+# PROBE (read-only): as a GUEST, what does Account offer - is there an Eligibility Checker entry?
+appId: fi.iwa.sakani
+name: PROBE - guest Account eligibility entry (read-only)
+---
+- launchApp:
+    clearState: true
+- runFlow:
+    file: D:/Automation/Maestro-Mobile/.maestro/subflows/clear-overlays.yaml
+    env:
+      ANCHOR: "(?s).*Login / Sign up.*"
+- tapOn: 'Account\s*Tab 4 of 4'
+- waitForAnimationToEnd:
+    timeout: 5000
+- takeScreenshot: probe3-guest-account
+- runFlow:
+    optional: true
+    commands:
+      - assertVisible: "DUMP-GUEST-ACCOUNT"
+- swipe:
+    start: "50%,80%"
+    end: "50%,35%"
+    duration: 700
+- waitForAnimationToEnd:
+    timeout: 3000
+- takeScreenshot: probe3-guest-account-scrolled
+- runFlow:
+    optional: true
+    commands:
+      - assertVisible: "DUMP-GUEST-ACCOUNT-SCROLLED"
+- assertVisible: "PROBE-END-MARKER-NOT-PRESENT"

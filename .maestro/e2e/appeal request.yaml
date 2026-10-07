@@ -1,0 +1,99 @@
+# Appeal Request - Not Eligible User - E2E.
+#
+# Starts from an EXISTING registered PRE user whose Eligibility result is persisted as NOT ELIGIBLE
+# (test-data precondition - never manufactured here) and takes it through the real Appeal Request:
+#   login -> Account -> "Eligibility checker status" -> persisted result proven Not Eligible ->
+#   "Appeal request" -> Step 1 Terms -> Step 2 "Reply to Appeal Reasons" -> Step 3 "Upload your
+#   documents" -> Submit ONCE -> persisted Appeal proven.
+# Never registers a user, never re-runs or changes Eligibility, no booking/payment/contract. Its only
+# business write is ONE Appeal Request.
+#
+# LIVE FINDINGS (PRE-4.7.6-1283, 04/10/2026, read-only exploration with user 1533687096):
+#   * Account row "Eligibility checker status" shows the persisted status ("Not Eligible").
+#   * The persisted result page (title "Eligibility") shows Status "Complete", "Checked on", the
+#     message "You're not eligible for Housing Support", the reasons, and under "Other options" the
+#     card "Appeal request - If you feel that you should be eligible please click here to lodge an
+#     appeal." ("Sorry, you are not eligible for support" + "Create appeal" exist only on the result
+#     screen shown right after an eligibility submission, not on the persisted page.)
+#   * Step 1 "Terms and Conditions": mandatory acknowledgement; "Accept and continue" is not
+#     clickable until it is ticked; reaching Step 2 proves acceptance.
+#   * Step 2 "Reply to Appeal Reasons": one "Enter your reason" dropdown PER ineligibility reason.
+#     It opens a bottom sheet (title "Enter your reason", radio options, its own Continue; the page
+#     is hidden while it is open). Observed options: deed reason -> "Applicant does not own a house"
+#     / "Other"; husband reason -> "Other" only. "Other" adds a mandatory "Explain your reason here *"
+#     text box ("Write your comment here").
+#   * Step 3 "Upload your documents": MANDATORY "A copy of the national ID *" and "A copy of the
+#     family card *" (PDF/IMG, max 2 MB each); "Submit" stays disabled until they are provided.
+#   * hideKeyboard is used ONLY right after inputText into a text box (keyboard proven shown);
+#     without a keyboard it acts as Back and leaves the Appeal (seen live).
+#
+# Step 3 uses the two approved synthetic PDFs (.maestro/test-data/appeal/), Submit is tapped ONCE,
+# and the Appeal must then be visible on the persisted Eligibility status page (read-only proof).
+# Sections 3-10 (precondition .. persistence proof) live in subflows/submit-appeal.yaml, shared with
+# the Eligibility & Appeal Journey (e2e/check-eligibility.yaml).
+appId: fi.iwa.sakani
+name: Appeal Request - Not Eligible User
+tags:
+  - e2e
+  - eligibility
+  - appeal
+  - critical
+env:
+  # Existing PRE user with a persisted NOT ELIGIBLE result (test data). Override for another user.
+  NOT_ELIGIBLE_NATIONAL_ID: '${typeof NOT_ELIGIBLE_NATIONAL_ID === "undefined" ? "1533687096" : String(NOT_ELIGIBLE_NATIONAL_ID)}'
+  APPEAL_TEXT: "Automation test appeal - PRE environment"
+---
+- assertTrue:
+    condition: ${String(NOT_ELIGIBLE_NATIONAL_ID).length === 10 && !/[^0-9]/.test(String(NOT_ELIGIBLE_NATIONAL_ID))}
+    label: "TEST DATA - NOT_ELIGIBLE_NATIONAL_ID is not a 10-digit National ID"
+
+# ==========================================================================================
+# 1. LOGIN - existing user (shared helpers; never registers)
+# ==========================================================================================
+- launchApp:
+    clearState: true
+- runFlow:
+    file: ../subflows/login.yaml
+    env:
+      NATIONAL_ID: ${NOT_ELIGIBLE_NATIONAL_ID}
+# Authenticated Home is proven by the shared post-login state machine (greeting by name).
+- runFlow:
+    file: ../subflows/open-account-tab.yaml
+    env:
+      DESTINATION: "My bookings"
+# The session must belong to THIS user (the profile's own National ID).
+- runFlow:
+    file: ../subflows/verify-signed-in-account.yaml
+    env:
+      NATIONAL_ID: ${NOT_ELIGIBLE_NATIONAL_ID}
+- evalScript: "${console.log('APPEAL - signed in as the Not Eligible test user [' + output.profileNationalId + ']')}"
+
+# ==========================================================================================
+# 2. ELIGIBILITY CHECKER - the persisted result (never a new assessment)
+# ==========================================================================================
+- evalScript: ${output.accountService = "(?s)Eligibility checker status.*"}
+- runFlow:
+    file: ../subflows/open-account-service.yaml
+- waitForAnimationToEnd:
+    timeout: 15000
+# No completed Eligibility -> the checker opens its introduction instead of a result.
+- runFlow:
+    when:
+      visible: "Check your eligibility"
+    commands:
+      - takeScreenshot: appeal-00-no-eligibility-result
+      - assertTrue:
+          condition: ${false}
+          label: "TEST DATA UNSUITABLE - no completed Eligibility result exists (Eligibility is never run from this scenario)"
+- extendedWaitUntil:
+    visible: "Checked on"
+    timeout: 30000
+    label: "ELIGIBILITY - the persisted Eligibility status page did not open"
+
+# ==========================================================================================
+# 3-10. PRECONDITION, EXISTING-APPEAL CHECK, APPEAL STEPS 1-3, SUBMIT ONCE, PERSISTENCE PROOF
+# ==========================================================================================
+- runFlow:
+    file: ../subflows/submit-appeal.yaml
+    env:
+      APPEAL_TEXT: ${APPEAL_TEXT}

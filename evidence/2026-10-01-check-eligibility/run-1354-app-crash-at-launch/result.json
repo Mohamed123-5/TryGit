@@ -1,0 +1,18 @@
+{
+  "flow": "check elgibilty",
+  "file": ".maestro/e2e/check elgibilty.yaml",
+  "suite": "e2e",
+  "tags": [
+    "e2e",
+    "eligibility"
+  ],
+  "startedAt": "2026-10-01T10:54:00.542Z",
+  "durationMs": 366045,
+  "logPath": "report-dashboard/maestro-output/check elgibilty/maestro.log",
+  "status": "FAIL",
+  "exitCode": 1,
+  "failedSteps": 5,
+  "firstFailure": "Assert that \"(?s)(?:${ANCHOR}|.*would you recommend benefiting from Sakani.*|Thank you for your feedback)\" is visible... FAILED",
+  "envReason": null,
+  "npsAppearances": 0
+}

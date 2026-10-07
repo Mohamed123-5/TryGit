@@ -1,0 +1,18 @@
+{
+  "flow": "check elgibilty",
+  "file": ".maestro/e2e/check elgibilty.yaml",
+  "suite": "e2e",
+  "tags": [
+    "e2e",
+    "eligibility"
+  ],
+  "startedAt": "2026-10-04T06:47:01.032Z",
+  "durationMs": 315780,
+  "logPath": "report-dashboard/maestro-output/check elgibilty/maestro.log",
+  "status": "FAIL",
+  "exitCode": 1,
+  "failedSteps": 1,
+  "firstFailure": "STEP 1 - Terms were not accepted (Step 2 did not open)... FAILED",
+  "envReason": null,
+  "npsAppearances": 0
+}

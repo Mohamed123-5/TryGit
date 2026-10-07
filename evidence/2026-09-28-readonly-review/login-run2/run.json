@@ -1,0 +1,22 @@
+{
+  "startedAt": "2026-09-28T09:31:14.423Z",
+  "finishedAt": "2026-09-28T09:49:00.687Z",
+  "device": "emulator-5554",
+  "includeE2e": false,
+  "results": [
+    {
+      "flow": "login",
+      "file": ".maestro/regression-readonly/login.yaml",
+      "suite": "regression-readonly",
+      "startedAt": "2026-09-28T09:31:14.643Z",
+      "durationMs": 1066037,
+      "logPath": "report-dashboard/maestro-output/login/maestro.log",
+      "status": "FAIL",
+      "exitCode": 1,
+      "failedSteps": 1,
+      "firstFailure": "Assert that \"Home\\s*Tab 1 of 4\", selected is visible... FAILED",
+      "envReason": null,
+      "npsAppearances": 4
+    }
+  ]
+}

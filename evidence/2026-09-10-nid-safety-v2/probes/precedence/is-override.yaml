@@ -1,0 +1,6 @@
+appId: fi.iwa.sakani
+name: PREC typeof resolves to the override
+env:
+  NATIONAL_ID: '${typeof NATIONAL_ID === "undefined" ? "1119880062" : String(NATIONAL_ID)}'
+---
+- assertTrue: ${String(NATIONAL_ID) === "1000011487"}

@@ -1,0 +1,5 @@
+A-normal exit=0 wall=435s crashes=0
+B-html exit=0 wall=436s crashes=0
+C-detailed exit=0 wall=443s crashes=0
+D-login exit=0 wall=253s crashes=0
+E-marketplace exit=0 wall=90s crashes=0

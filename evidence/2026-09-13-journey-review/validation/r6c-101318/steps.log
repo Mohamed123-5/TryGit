@@ -1,0 +1,383 @@
+check-syntax .maestro/_journey-final-checks.yaml: OK
+check-syntax .maestro/subflows/login.yaml: OK
+check-syntax .maestro/subflows/clear-overlays.yaml: OK
+check-syntax .maestro/subflows/verify-signed-in-account.yaml: OK
+START 10:13:40  maestro test -e NATIONAL_ID=1119880044 .maestro/_journey-final-checks.yaml
+10:13:53.375 >> Run ${console.log('FULL JOURNEY TARGET NATIONAL_ID = [' + NATIONAL_ID + ']')}
+10:13:53.407    COMPLETED  Run ${console.log('FULL JOURNEY TARGET NATIONAL_ID = [' + NATIONAL_ID + ']')}
+10:13:53.409 >> Run ${output.targetNationalId = String(NATIONAL_ID)}
+10:13:53.438    COMPLETED  Run ${output.targetNationalId = String(NATIONAL_ID)}
+10:13:53.440 >> Assert that ${String(NATIONAL_ID).length === 10 && !/[^0-9]/.test(String(NATIONAL_ID)) && (String(NATIONAL_ID).charAt(0) === "1" || String(NATIONAL_ID).charAt(0) === "2")} is true
+10:13:53.580    COMPLETED  Assert that ${String(NATIONAL_ID).length === 10 && !/[^0-9]/.test(String(NATIONAL_ID)) && (String(NATIONAL_ID).charAt(0) === "1" || String(NATIONAL_ID).charAt(0) === "2")} is true
+10:13:53.583 >> Launch app "fi.iwa.sakani" with clear state
+10:13:59.563    COMPLETED  Launch app "fi.iwa.sakani" with clear state
+10:13:59.564 >> Run subflows/login.yaml
+10:13:59.615 >> Assert that ${typeof NATIONAL_ID !== "undefined" && String(NATIONAL_ID).length === 10 && !/[^0-9]/.test(String(NATIONAL_ID)) && (String(NATIONAL_ID).charAt(0) === "1" || String(NATIONAL_ID).charAt(0) === "2")} is true
+10:13:59.627    COMPLETED  Assert that ${typeof NATIONAL_ID !== "undefined" && String(NATIONAL_ID).length === 10 && !/[^0-9]/.test(String(NATIONAL_ID)) && (String(NATIONAL_ID).charAt(0) === "1" || String(NATIONAL_ID).charAt(0) === "2")} is true
+10:13:59.627 >> Run clear-overlays.yaml
+10:13:59.658 >> Repeat while "${ANCHOR}" is not visible (up to 20 times)
+10:14:00.483 >> Run flow when "Don.t allow" is visible
+10:14:06.810    SKIPPED  Run flow when "Don.t allow" is visible
+10:14:06.813 >> Run flow when "Skip" is visible
+10:14:06.901 >> Tap on "Skip"
+10:14:09.426    COMPLETED  Tap on "Skip"
+10:14:09.427 >> Wait for animation to end within 3000 ms
+10:14:15.214    COMPLETED  Wait for animation to end within 3000 ms
+10:14:15.216    COMPLETED  Run flow when "Skip" is visible
+10:14:15.220 >> Run flow when "Dismiss" is visible
+10:14:22.474    SKIPPED  Run flow when "Dismiss" is visible
+10:14:22.475 >> Run flow when "Ok" is visible
+10:14:22.746    SKIPPED  Run flow when "Ok" is visible
+10:14:22.747 >> Run flow when "Marketplace Day" is visible
+10:14:23.007    SKIPPED  Run flow when "Marketplace Day" is visible
+10:14:23.010 >> Run flow when "Start comparing properties" is visible
+10:14:23.318 >> Press back
+10:14:24.554    COMPLETED  Press back
+10:14:24.556 >> Wait for animation to end within 3000 ms
+10:14:26.343    COMPLETED  Wait for animation to end within 3000 ms
+10:14:26.345    COMPLETED  Run flow when "Start comparing properties" is visible
+10:14:26.346 >> Run flow when "Go to the weekly (offer|deal)" is visible
+10:14:34.311    SKIPPED  Run flow when "Go to the weekly (offer|deal)" is visible
+10:14:34.312 >> Run flow when "Update email" is visible
+10:14:35.012    SKIPPED  Run flow when "Update email" is visible
+10:14:35.013 >> Run flow when "Number and Email Already Linked" is visible
+10:14:35.176    SKIPPED  Run flow when "Number and Email Already Linked" is visible
+10:14:35.177 >> Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible
+10:14:35.348    SKIPPED  Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible
+10:14:35.349 >> Run flow when "Maybe Later" is visible
+10:14:35.641    SKIPPED  Run flow when "Maybe Later" is visible
+10:14:35.643 >> Run flow when "Reject cookies" is visible
+10:14:35.868    SKIPPED  Run flow when "Reject cookies" is visible
+10:14:35.869 >> Run flow when "${ANCHOR}" is not visible
+10:14:36.049    SKIPPED  Run flow when "${ANCHOR}" is not visible
+10:14:36.261    COMPLETED  Repeat while "${ANCHOR}" is not visible (up to 20 times)
+10:14:36.263 >> Repeat while "(?s).*would you recommend benefiting from Sakani.*" is visible (up to 3 times)
+10:14:43.385    SKIPPED  Repeat while "(?s).*would you recommend benefiting from Sakani.*" is visible (up to 3 times)
+10:14:43.386 >> Assert that "(?s).*would you recommend benefiting from Sakani.*" is not visible
+10:14:44.046    COMPLETED  Assert that "(?s).*would you recommend benefiting from Sakani.*" is not visible
+10:14:44.047 >> Run flow when ${output.anchorOptional !== true} is true
+10:14:44.060 >> Repeat while "${ANCHOR}" is not visible (up to 6 times)
+10:14:44.375    SKIPPED  Repeat while "${ANCHOR}" is not visible (up to 6 times)
+10:14:44.376 >> Repeat while "(?s).*would you recommend benefiting from Sakani.*" is visible (up to 3 times)
+10:14:44.670    SKIPPED  Repeat while "(?s).*would you recommend benefiting from Sakani.*" is visible (up to 3 times)
+10:14:44.671 >> Assert that "(?s).*would you recommend benefiting from Sakani.*" is not visible
+10:14:45.457    COMPLETED  Assert that "(?s).*would you recommend benefiting from Sakani.*" is not visible
+10:14:45.459 >> Assert that "${ANCHOR}" is visible
+10:14:46.155    COMPLETED  Assert that "${ANCHOR}" is visible
+10:14:46.155    COMPLETED  Run flow when ${output.anchorOptional !== true} is true
+10:14:46.156    COMPLETED  Run clear-overlays.yaml
+10:14:46.157 >> Assert that "(?s).*Login / Sign up.*" is visible
+10:14:46.893    COMPLETED  Assert that "(?s).*Login / Sign up.*" is visible
+10:14:46.894 >> Tap on "(?s).*Login / Sign up.*"
+10:14:49.410    COMPLETED  Tap on "(?s).*Login / Sign up.*"
+10:14:49.411 >> Assert that "Continue with N[ae]fath" is visible
+10:14:49.446    COMPLETED  Assert that "Continue with N[ae]fath" is visible
+10:14:49.447 >> Tap on "Enter your ID, phone number,? or email"
+10:14:52.157    COMPLETED  Tap on "Enter your ID, phone number,? or email"
+10:14:52.159 >> Input text ${NATIONAL_ID}
+10:14:54.194    COMPLETED  Input text ${NATIONAL_ID}
+10:14:54.195 >> Assert that "${NATIONAL_ID}" is visible
+10:14:54.374    COMPLETED  Assert that "${NATIONAL_ID}" is visible
+10:14:54.375 >> Tap on "Continue"
+10:14:57.091    COMPLETED  Tap on "Continue"
+10:14:57.093 >> Assert that "Login with nafath" is visible
+10:14:57.176    COMPLETED  Assert that "Login with nafath" is visible
+10:14:57.177 >> Assert that "${NATIONAL_ID}" is visible
+10:14:57.303    COMPLETED  Assert that "${NATIONAL_ID}" is visible
+10:14:57.304 >> Run ${output.loginNationalId = String(NATIONAL_ID)}
+10:14:57.309    COMPLETED  Run ${output.loginNationalId = String(NATIONAL_ID)}
+10:14:57.311 >> Tap on "Confirm"
+10:14:59.976    COMPLETED  Tap on "Confirm"
+10:14:59.978 >> Assert that "Login with nafath" is not visible
+10:15:11.477    COMPLETED  Assert that "Login with nafath" is not visible
+10:15:11.477 >> Run ${output.anchorOptional = true}
+10:15:11.484    COMPLETED  Run ${output.anchorOptional = true}
+10:15:11.486 >> Run clear-overlays.yaml
+10:15:11.503 >> Repeat while "${ANCHOR}" is not visible (up to 20 times)
+10:15:18.571    SKIPPED  Repeat while "${ANCHOR}" is not visible (up to 20 times)
+10:15:18.572 >> Repeat while "(?s).*would you recommend benefiting from Sakani.*" is visible (up to 3 times)
+10:15:18.808    SKIPPED  Repeat while "(?s).*would you recommend benefiting from Sakani.*" is visible (up to 3 times)
+10:15:18.808 >> Assert that "(?s).*would you recommend benefiting from Sakani.*" is not visible
+10:15:19.457    COMPLETED  Assert that "(?s).*would you recommend benefiting from Sakani.*" is not visible
+10:15:19.459 >> Run flow when ${output.anchorOptional !== true} is true
+10:15:19.471    SKIPPED  Run flow when ${output.anchorOptional !== true} is true
+10:15:19.472    COMPLETED  Run clear-overlays.yaml
+10:15:19.473 >> Run ${output.anchorOptional = false}
+10:15:19.480    COMPLETED  Run ${output.anchorOptional = false}
+10:15:19.482 >> Run flow when "New service" is visible
+10:15:19.633 >> Run flow when "Go to the weekly (offer|deal)" is not visible
+10:15:26.519    SKIPPED  Run flow when "Go to the weekly (offer|deal)" is not visible
+10:15:26.521    COMPLETED  Run flow when "New service" is visible
+10:15:26.522 >> Run flow when "Go to the weekly (offer|deal)" is visible
+10:15:26.634 >> Launch app "fi.iwa.sakani"
+10:15:32.022    COMPLETED  Launch app "fi.iwa.sakani"
+10:15:32.023 >> Run clear-overlays.yaml
+10:15:32.040 >> Repeat while "${ANCHOR}" is not visible (up to 20 times)
+10:15:35.360 >> Run flow when "Don.t allow" is visible
+10:15:39.209    SKIPPED  Run flow when "Don.t allow" is visible
+10:15:39.209 >> Run flow when "Skip" is visible
+10:15:39.457    SKIPPED  Run flow when "Skip" is visible
+10:15:39.458 >> Run flow when "Dismiss" is visible
+10:15:39.728    SKIPPED  Run flow when "Dismiss" is visible
+10:15:39.729 >> Run flow when "Ok" is visible
+10:15:40.016    SKIPPED  Run flow when "Ok" is visible
+10:15:40.017 >> Run flow when "Marketplace Day" is visible
+10:15:40.213    SKIPPED  Run flow when "Marketplace Day" is visible
+10:15:40.214 >> Run flow when "Start comparing properties" is visible
+10:15:40.856    SKIPPED  Run flow when "Start comparing properties" is visible
+10:15:40.857 >> Run flow when "Go to the weekly (offer|deal)" is visible
+10:15:41.129    SKIPPED  Run flow when "Go to the weekly (offer|deal)" is visible
+10:15:41.130 >> Run flow when "Update email" is visible
+10:15:41.455    SKIPPED  Run flow when "Update email" is visible
+10:15:41.460 >> Run flow when "Number and Email Already Linked" is visible
+10:15:41.838    SKIPPED  Run flow when "Number and Email Already Linked" is visible
+10:15:41.839 >> Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible
+10:15:42.283    SKIPPED  Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible
+10:15:42.284 >> Run flow when "Maybe Later" is visible
+10:15:44.645    SKIPPED  Run flow when "Maybe Later" is visible
+10:15:44.646 >> Run flow when "Reject cookies" is visible
+10:15:44.867    SKIPPED  Run flow when "Reject cookies" is visible
+10:15:44.868 >> Run flow when "${ANCHOR}" is not visible
+10:15:45.002    SKIPPED  Run flow when "${ANCHOR}" is not visible
+10:15:46.039    COMPLETED  Repeat while "${ANCHOR}" is not visible (up to 20 times)
+10:15:46.040 >> Repeat while "(?s).*would you recommend benefiting from Sakani.*" is visible (up to 3 times)
+10:15:46.973    SKIPPED  Repeat while "(?s).*would you recommend benefiting from Sakani.*" is visible (up to 3 times)
+10:15:46.974 >> Assert that "(?s).*would you recommend benefiting from Sakani.*" is not visible
+10:15:47.709    COMPLETED  Assert that "(?s).*would you recommend benefiting from Sakani.*" is not visible
+10:15:47.709 >> Run flow when ${output.anchorOptional !== true} is true
+10:15:47.718 >> Repeat while "${ANCHOR}" is not visible (up to 6 times)
+10:15:47.829    SKIPPED  Repeat while "${ANCHOR}" is not visible (up to 6 times)
+10:15:47.830 >> Repeat while "(?s).*would you recommend benefiting from Sakani.*" is visible (up to 3 times)
+10:15:48.020    SKIPPED  Repeat while "(?s).*would you recommend benefiting from Sakani.*" is visible (up to 3 times)
+10:15:48.020 >> Assert that "(?s).*would you recommend benefiting from Sakani.*" is not visible
+10:15:48.658    COMPLETED  Assert that "(?s).*would you recommend benefiting from Sakani.*" is not visible
+10:15:48.658 >> Assert that "${ANCHOR}" is visible
+10:15:48.784    COMPLETED  Assert that "${ANCHOR}" is visible
+10:15:48.785    COMPLETED  Run flow when ${output.anchorOptional !== true} is true
+10:15:48.786    COMPLETED  Run clear-overlays.yaml
+10:15:48.787    COMPLETED  Run flow when "Go to the weekly (offer|deal)" is visible
+10:15:48.788 >> Run flow when "Continue with N[ae]fath" is visible
+10:15:56.139    SKIPPED  Run flow when "Continue with N[ae]fath" is visible
+10:15:56.140 >> Assert that "(?si)(Hello|Good (morning|afternoon|evening)),\s*\S.*" is visible
+10:15:56.271    COMPLETED  Assert that "(?si)(Hello|Good (morning|afternoon|evening)),\s*\S.*" is visible
+10:15:56.273 >> Assert that "(?s).*Login / Sign up.*" is not visible
+10:15:56.938    COMPLETED  Assert that "(?s).*Login / Sign up.*" is not visible
+10:15:56.938    COMPLETED  Run subflows/login.yaml
+10:15:56.940 >> Tap on "Account\s*Tab 4 of 4"
+10:16:00.610    COMPLETED  Tap on "Account\s*Tab 4 of 4"
+10:16:00.611 >> Assert that "My bookings" is visible
+10:16:04.369    COMPLETED  Assert that "My bookings" is visible
+10:16:04.370 >> Run subflows/verify-signed-in-account.yaml
+10:16:04.386 >> Assert that ${typeof NATIONAL_ID !== "undefined" && String(NATIONAL_ID).length === 10 && !/[^0-9]/.test(String(NATIONAL_ID))} is true
+10:16:04.394    COMPLETED  Assert that ${typeof NATIONAL_ID !== "undefined" && String(NATIONAL_ID).length === 10 && !/[^0-9]/.test(String(NATIONAL_ID))} is true
+10:16:04.395 >> Tap on "Profile details"
+10:16:07.920    COMPLETED  Tap on "Profile details"
+10:16:07.920 >> Assert that "Personal Detail(s)?" is visible
+10:16:07.957    COMPLETED  Assert that "Personal Detail(s)?" is visible
+10:16:07.957 >> Assert that "National ID" is visible
+10:16:08.028    COMPLETED  Assert that "National ID" is visible
+10:16:08.030 >> Assert that "${NATIONAL_ID}" is visible
+10:16:08.063    COMPLETED  Assert that "${NATIONAL_ID}" is visible
+10:16:08.064 >> Run ${output.profileNationalId = String(NATIONAL_ID)}
+10:16:08.068    COMPLETED  Run ${output.profileNationalId = String(NATIONAL_ID)}
+10:16:08.069 >> Run flow when "Personal Detail(s)?" is visible
+10:16:08.135 >> Press back
+10:16:09.307    COMPLETED  Press back
+10:16:09.308    COMPLETED  Run flow when "Personal Detail(s)?" is visible
+10:16:09.309 >> Assert that "My bookings" is visible
+10:16:09.401    COMPLETED  Assert that "My bookings" is visible
+10:16:09.403    COMPLETED  Run subflows/verify-signed-in-account.yaml
+10:16:09.404 >> Scrolling DOWN until "(?s).*Eligibility checker status.*" is visible with speed 40, visibility percentage 100%, timeout 30000 ms, with centering disabled
+10:16:09.524    COMPLETED  Scrolling DOWN until "(?s).*Eligibility checker status.*" is visible with speed 40, visibility percentage 100%, timeout 30000 ms, with centering disabled
+10:16:09.525 >> Assert that "(?s).*Eligibility checker status\s*Eligible.*" is visible
+10:16:09.594    COMPLETED  Assert that "(?s).*Eligibility checker status\s*Eligible.*" is visible
+10:16:09.595 >> Assert that ${output.loginNationalId === output.targetNationalId && output.targetNationalId === String(NATIONAL_ID) && output.profileNationalId === output.targetNationalId} is true
+10:16:09.610    COMPLETED  Assert that ${output.loginNationalId === output.targetNationalId && output.targetNationalId === String(NATIONAL_ID) && output.profileNationalId === output.targetNationalId} is true
+10:16:09.611 >> Tap on "Account\s*Tab 4 of 4"
+10:16:11.783    COMPLETED  Tap on "Account\s*Tab 4 of 4"
+10:16:11.783 >> Run subflows/clear-overlays.yaml
+10:16:11.807 >> Repeat while "${ANCHOR}" is not visible (up to 20 times)
+10:16:18.875    SKIPPED  Repeat while "${ANCHOR}" is not visible (up to 20 times)
+10:16:18.881 >> Repeat while "(?s).*would you recommend benefiting from Sakani.*" is visible (up to 3 times)
+10:16:19.077    SKIPPED  Repeat while "(?s).*would you recommend benefiting from Sakani.*" is visible (up to 3 times)
+10:16:19.078 >> Assert that "(?s).*would you recommend benefiting from Sakani.*" is not visible
+10:16:19.780    COMPLETED  Assert that "(?s).*would you recommend benefiting from Sakani.*" is not visible
+10:16:19.782 >> Run flow when ${output.anchorOptional !== true} is true
+10:16:19.789 >> Repeat while "${ANCHOR}" is not visible (up to 6 times)
+10:16:19.917    SKIPPED  Repeat while "${ANCHOR}" is not visible (up to 6 times)
+10:16:19.918 >> Repeat while "(?s).*would you recommend benefiting from Sakani.*" is visible (up to 3 times)
+10:16:20.129    SKIPPED  Repeat while "(?s).*would you recommend benefiting from Sakani.*" is visible (up to 3 times)
+10:16:20.131 >> Assert that "(?s).*would you recommend benefiting from Sakani.*" is not visible
+10:16:20.797    COMPLETED  Assert that "(?s).*would you recommend benefiting from Sakani.*" is not visible
+10:16:20.798 >> Assert that "${ANCHOR}" is visible
+10:16:20.845    COMPLETED  Assert that "${ANCHOR}" is visible
+10:16:20.846    COMPLETED  Run flow when ${output.anchorOptional !== true} is true
+10:16:20.847    COMPLETED  Run subflows/clear-overlays.yaml
+10:16:20.848 >> Assert that "My bookings" is visible
+10:16:20.937    COMPLETED  Assert that "My bookings" is visible
+10:16:20.938 >> Tap on "My bookings"
+10:16:23.670    COMPLETED  Tap on "My bookings"
+10:16:23.671 >> Assert that "My Bookings" is visible
+10:16:23.739    COMPLETED  Assert that "My Bookings" is visible
+10:16:23.739 >> Tap on "Active\s*Tab 2 of 4"
+10:16:26.431    COMPLETED  Tap on "Active\s*Tab 2 of 4"
+10:16:26.478 >> Assert that "(?s).*don.t have any active booking.*" is not visible
+10:16:27.094    COMPLETED  Assert that "(?s).*don.t have any active booking.*" is not visible
+10:16:27.095 >> Launch app "fi.iwa.sakani"
+10:16:31.411    COMPLETED  Launch app "fi.iwa.sakani"
+10:16:31.413 >> Run subflows/clear-overlays.yaml
+10:16:31.433 >> Repeat while "${ANCHOR}" is not visible (up to 20 times)
+10:16:34.288 >> Run flow when "Don.t allow" is visible
+10:16:38.524    SKIPPED  Run flow when "Don.t allow" is visible
+10:16:38.524 >> Run flow when "Skip" is visible
+10:16:38.653    SKIPPED  Run flow when "Skip" is visible
+10:16:38.653 >> Run flow when "Dismiss" is visible
+10:16:38.716 >> Tap on "Dismiss"
+10:16:41.621    COMPLETED  Tap on "Dismiss"
+10:16:41.622 >> Wait for animation to end within 3000 ms
+10:16:42.565    COMPLETED  Wait for animation to end within 3000 ms
+10:16:42.566    COMPLETED  Run flow when "Dismiss" is visible
+10:16:42.567 >> Run flow when "Ok" is visible
+10:16:49.797    SKIPPED  Run flow when "Ok" is visible
+10:16:49.798 >> Run flow when "Marketplace Day" is visible
+10:16:50.013    SKIPPED  Run flow when "Marketplace Day" is visible
+10:16:50.014 >> Run flow when "Start comparing properties" is visible
+10:16:50.316    SKIPPED  Run flow when "Start comparing properties" is visible
+10:16:50.317 >> Run flow when "Go to the weekly (offer|deal)" is visible
+10:16:50.637    SKIPPED  Run flow when "Go to the weekly (offer|deal)" is visible
+10:16:50.638 >> Run flow when "Update email" is visible
+10:16:50.895    SKIPPED  Run flow when "Update email" is visible
+10:16:50.896 >> Run flow when "Number and Email Already Linked" is visible
+10:16:51.158    SKIPPED  Run flow when "Number and Email Already Linked" is visible
+10:16:51.159 >> Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible
+10:16:51.405    SKIPPED  Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible
+10:16:51.405 >> Run flow when "Maybe Later" is visible
+10:16:51.671    SKIPPED  Run flow when "Maybe Later" is visible
+10:16:51.671 >> Run flow when "Reject cookies" is visible
+10:16:51.939    SKIPPED  Run flow when "Reject cookies" is visible
+10:16:51.940 >> Run flow when "${ANCHOR}" is not visible
+10:16:53.156    SKIPPED  Run flow when "${ANCHOR}" is not visible
+10:16:53.475    COMPLETED  Repeat while "${ANCHOR}" is not visible (up to 20 times)
+10:16:53.476 >> Repeat while "(?s).*would you recommend benefiting from Sakani.*" is visible (up to 3 times)
+10:17:01.425    SKIPPED  Repeat while "(?s).*would you recommend benefiting from Sakani.*" is visible (up to 3 times)
+10:17:01.426 >> Assert that "(?s).*would you recommend benefiting from Sakani.*" is not visible
+10:17:02.517    COMPLETED  Assert that "(?s).*would you recommend benefiting from Sakani.*" is not visible
+10:17:02.518 >> Run flow when ${output.anchorOptional !== true} is true
+10:17:02.522 >> Repeat while "${ANCHOR}" is not visible (up to 6 times)
+10:17:02.600    SKIPPED  Repeat while "${ANCHOR}" is not visible (up to 6 times)
+10:17:02.600 >> Repeat while "(?s).*would you recommend benefiting from Sakani.*" is visible (up to 3 times)
+10:17:02.798    SKIPPED  Repeat while "(?s).*would you recommend benefiting from Sakani.*" is visible (up to 3 times)
+10:17:02.798 >> Assert that "(?s).*would you recommend benefiting from Sakani.*" is not visible
+10:17:03.481    COMPLETED  Assert that "(?s).*would you recommend benefiting from Sakani.*" is not visible
+10:17:03.483 >> Assert that "${ANCHOR}" is visible
+10:17:03.611    COMPLETED  Assert that "${ANCHOR}" is visible
+10:17:03.612    COMPLETED  Run flow when ${output.anchorOptional !== true} is true
+10:17:03.612    COMPLETED  Run subflows/clear-overlays.yaml
+10:17:03.613 >> Tap on "Account\s*Tab 4 of 4"
+10:17:06.431    COMPLETED  Tap on "Account\s*Tab 4 of 4"
+10:17:06.431 >> Run subflows/clear-overlays.yaml
+10:17:06.437 >> Repeat while "${ANCHOR}" is not visible (up to 20 times)
+10:17:07.083 >> Run flow when "Don.t allow" is visible
+10:17:13.601    SKIPPED  Run flow when "Don.t allow" is visible
+10:17:13.601 >> Run flow when "Skip" is visible
+10:17:13.777    SKIPPED  Run flow when "Skip" is visible
+10:17:13.778 >> Run flow when "Dismiss" is visible
+10:17:13.920    SKIPPED  Run flow when "Dismiss" is visible
+10:17:13.921 >> Run flow when "Ok" is visible
+10:17:14.077    SKIPPED  Run flow when "Ok" is visible
+10:17:14.078 >> Run flow when "Marketplace Day" is visible
+10:17:14.336    SKIPPED  Run flow when "Marketplace Day" is visible
+10:17:14.336 >> Run flow when "Start comparing properties" is visible
+10:17:14.540    SKIPPED  Run flow when "Start comparing properties" is visible
+10:17:14.541 >> Run flow when "Go to the weekly (offer|deal)" is visible
+10:17:14.769    SKIPPED  Run flow when "Go to the weekly (offer|deal)" is visible
+10:17:14.769 >> Run flow when "Update email" is visible
+10:17:14.968    SKIPPED  Run flow when "Update email" is visible
+10:17:14.969 >> Run flow when "Number and Email Already Linked" is visible
+10:17:15.156    SKIPPED  Run flow when "Number and Email Already Linked" is visible
+10:17:15.157 >> Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible
+10:17:15.481    SKIPPED  Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible
+10:17:15.481 >> Run flow when "Maybe Later" is visible
+10:17:15.656    SKIPPED  Run flow when "Maybe Later" is visible
+10:17:15.656 >> Run flow when "Reject cookies" is visible
+10:17:15.773    SKIPPED  Run flow when "Reject cookies" is visible
+10:17:15.773 >> Run flow when "${ANCHOR}" is not visible
+10:17:15.885    SKIPPED  Run flow when "${ANCHOR}" is not visible
+10:17:15.988    COMPLETED  Repeat while "${ANCHOR}" is not visible (up to 20 times)
+10:17:15.988 >> Repeat while "(?s).*would you recommend benefiting from Sakani.*" is visible (up to 3 times)
+10:17:16.180    SKIPPED  Repeat while "(?s).*would you recommend benefiting from Sakani.*" is visible (up to 3 times)
+10:17:16.181 >> Assert that "(?s).*would you recommend benefiting from Sakani.*" is not visible
+10:17:16.870    COMPLETED  Assert that "(?s).*would you recommend benefiting from Sakani.*" is not visible
+10:17:16.870 >> Run flow when ${output.anchorOptional !== true} is true
+10:17:16.873 >> Repeat while "${ANCHOR}" is not visible (up to 6 times)
+10:17:16.960    SKIPPED  Repeat while "${ANCHOR}" is not visible (up to 6 times)
+10:17:16.961 >> Repeat while "(?s).*would you recommend benefiting from Sakani.*" is visible (up to 3 times)
+10:17:17.257    SKIPPED  Repeat while "(?s).*would you recommend benefiting from Sakani.*" is visible (up to 3 times)
+10:17:17.257 >> Assert that "(?s).*would you recommend benefiting from Sakani.*" is not visible
+10:17:17.941    COMPLETED  Assert that "(?s).*would you recommend benefiting from Sakani.*" is not visible
+10:17:17.941 >> Assert that "${ANCHOR}" is visible
+10:17:17.990    COMPLETED  Assert that "${ANCHOR}" is visible
+10:17:17.990    COMPLETED  Run flow when ${output.anchorOptional !== true} is true
+10:17:17.990    COMPLETED  Run subflows/clear-overlays.yaml
+10:17:17.991 >> Assert that "My bookings" is visible
+10:17:18.106    COMPLETED  Assert that "My bookings" is visible
+10:17:18.106 >> Tap on "My bookings"
+10:17:20.660    COMPLETED  Tap on "My bookings"
+10:17:20.661 >> Assert that "My Bookings" is visible
+10:17:20.818    COMPLETED  Assert that "My Bookings" is visible
+10:17:20.819 >> Run subflows/clear-overlays.yaml
+10:17:20.823 >> Repeat while "${ANCHOR}" is not visible (up to 20 times)
+10:17:27.696    SKIPPED  Repeat while "${ANCHOR}" is not visible (up to 20 times)
+10:17:27.697 >> Repeat while "(?s).*would you recommend benefiting from Sakani.*" is visible (up to 3 times)
+10:17:27.791    SKIPPED  Repeat while "(?s).*would you recommend benefiting from Sakani.*" is visible (up to 3 times)
+10:17:27.792 >> Assert that "(?s).*would you recommend benefiting from Sakani.*" is not visible
+10:17:28.392    COMPLETED  Assert that "(?s).*would you recommend benefiting from Sakani.*" is not visible
+10:17:28.392 >> Run flow when ${output.anchorOptional !== true} is true
+10:17:28.398 >> Repeat while "${ANCHOR}" is not visible (up to 6 times)
+10:17:28.427    SKIPPED  Repeat while "${ANCHOR}" is not visible (up to 6 times)
+10:17:28.427 >> Repeat while "(?s).*would you recommend benefiting from Sakani.*" is visible (up to 3 times)
+10:17:28.579    SKIPPED  Repeat while "(?s).*would you recommend benefiting from Sakani.*" is visible (up to 3 times)
+10:17:28.580 >> Assert that "(?s).*would you recommend benefiting from Sakani.*" is not visible
+10:17:29.187    COMPLETED  Assert that "(?s).*would you recommend benefiting from Sakani.*" is not visible
+10:17:29.193 >> Assert that "${ANCHOR}" is visible
+10:17:29.267    COMPLETED  Assert that "${ANCHOR}" is visible
+10:17:29.267    COMPLETED  Run flow when ${output.anchorOptional !== true} is true
+10:17:29.269    COMPLETED  Run subflows/clear-overlays.yaml
+10:17:29.269 >> Tap on "Ready to sign"
+10:17:31.331    COMPLETED  Tap on "Ready to sign"
+10:17:31.331 >> Wait for animation to end within 12000 ms
+10:17:31.793    COMPLETED  Wait for animation to end within 12000 ms
+10:17:32.689 >> Assert that "(?s).*don.t have any booking.*" is visible
+10:17:32.760    COMPLETED  Assert that "(?s).*don.t have any booking.*" is visible
+10:17:32.761 >> Tap on "All"
+10:17:34.817    COMPLETED  Tap on "All"
+10:17:34.817 >> Assert that "(?s).*Unit code.*" is visible
+10:17:34.885    COMPLETED  Assert that "(?s).*Unit code.*" is visible
+10:17:37.509 >> Assert that "(?s).*steps? left.*" is visible
+10:17:38.989    COMPLETED  Assert that "(?s).*steps? left.*" is visible
+10:17:38.990 >> Scrolling DOWN until "Sales contract" is visible with speed 40, visibility percentage 100%, timeout 30000 ms, with centering disabled
+10:17:43.325    COMPLETED  Scrolling DOWN until "Sales contract" is visible with speed 40, visibility percentage 100%, timeout 30000 ms, with centering disabled
+10:17:43.325 >> Assert that "Documents" is visible
+10:17:43.351    COMPLETED  Assert that "Documents" is visible
+10:17:43.353 >> Assert that "Sales contract" is visible
+10:17:43.376    COMPLETED  Assert that "Sales contract" is visible
+10:17:43.377 >> Assert that "Signed" is visible
+10:17:43.440    COMPLETED  Assert that "Signed" is visible
+10:17:43.441 >> Scrolling DOWN until "Price quotation" is visible with speed 40, visibility percentage 100%, timeout 30000 ms, with centering disabled
+10:17:43.508    COMPLETED  Scrolling DOWN until "Price quotation" is visible with speed 40, visibility percentage 100%, timeout 30000 ms, with centering disabled
+10:17:43.509 >> Assert that "Price quotation" is visible
+10:17:43.576    COMPLETED  Assert that "Price quotation" is visible
+10:17:44.296 >> Take screenshot journey-8-documents-signed
+10:17:44.461    COMPLETED  Take screenshot journey-8-documents-signed
+10:17:44.461 >> Scrolling UP until "Invoice number" is visible with speed 40, visibility percentage 100%, timeout 30000 ms, with centering disabled
+10:17:46.425    COMPLETED  Scrolling UP until "Invoice number" is visible with speed 40, visibility percentage 100%, timeout 30000 ms, with centering disabled
+10:17:46.426 >> Assert that "Booking fee status" is visible
+10:17:46.460    COMPLETED  Assert that "Booking fee status" is visible
+10:17:46.461 >> Assert that "Paid" is visible
+10:17:46.556    COMPLETED  Assert that "Paid" is visible
+10:17:46.556 >> Assert that "Invoice number" is visible
+10:17:46.622    COMPLETED  Assert that "Invoice number" is visible
+10:17:46.623 >> Take screenshot journey-8-booking-paid-and-signed
+10:17:46.770    COMPLETED  Take screenshot journey-8-booking-paid-and-signed
+EXIT exit=0 failed=0 first_failed=[]
+DONE 10:17:51

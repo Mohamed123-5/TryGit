@@ -1,0 +1,160 @@
+# OUT-002 — Logging out clears the session.
+#
+# Scope: OUT-002 only. Per the automation triage in exploration-report.md this case
+# absorbs OUT-001 (logout asks for confirmation), OUT-003 (guest menu is reduced) and
+# ACC-021, so all three are asserted here.
+#
+# The flow authenticates itself rather than relying on a pre-existing session: it logs
+# out, so a second run would otherwise start as a guest and fail. It signs in through the shared
+# subflows/login.yaml (the one authentication implementation); login.yaml keeps ownership of
+# the Login regression cases.
+#
+# Security-relevant: an incomplete logout that leaves a stored token behind would be a
+# serious defect, so the final section relaunches the app and re-checks the guest state
+# rather than trusting the screen that was on top immediately after logging out.
+appId: fi.iwa.sakani
+name: OUT-002 Logout clears session
+env:
+  # The account this flow signs in as and then logs out - defined once, here. Default (no
+  # override): 1000011487.
+  #   maestro test -e NATIONAL_ID=<10-digit National ID / Iqama> .maestro/logout.yaml
+  # A self-referencing default, NOT a literal: on Maestro 2.9.0 a literal here silently beats
+  # `-e NATIONAL_ID=...`. Single-quoted because the expression contains ": ".
+  NATIONAL_ID: '${typeof NATIONAL_ID === "undefined" ? "1000011487" : String(NATIONAL_ID)}'
+---
+# Fail fast, before the app is touched, on an empty or malformed override. Dollar-free on
+# purpose: a "$" inside ${...} makes Maestro 2.9.0 skip evaluation and pass the assert.
+- evalScript: ${console.log('LOGOUT.YAML TARGET NATIONAL_ID = [' + NATIONAL_ID + ']')}
+- assertTrue: ${String(NATIONAL_ID).length === 10 && !/[^0-9]/.test(String(NATIONAL_ID)) && (String(NATIONAL_ID).charAt(0) === "1" || String(NATIONAL_ID).charAt(0) === "2")}
+- launchApp:
+    clearState: true
+
+# --- Establish the authenticated session this case starts from, through the shared login
+# (exactly as login.yaml, account.yaml and the Full Journey do). It owns onboarding, Nafath with
+# the exact-ID check, the contact prompts, the Sharrai/weekly-deal promo, the optional
+# biometrics prompt and the login-page bounce recovery, and returns only on a Home that greets
+# the account holder by name.
+- runFlow:
+    file: subflows/login.yaml
+    env:
+      NATIONAL_ID: ${NATIONAL_ID}
+
+- tapOn: 'Account\s*Tab 4 of 4'
+
+# --- Authenticated Account state, asserted on entries that exist only for a signed-in
+# user. "Hello" is deliberately not used: the guest Account shows "Hello" too, just
+# without a name, so it would pass either way.
+- extendedWaitUntil:
+    visible: "My bookings"
+    timeout: 60000
+- assertVisible: "Profile details"
+- assertVisible: "Preferences"
+- assertNotVisible: "Log in"
+
+# --- ACC-001: the Account screen loads for an authenticated user with name, sections
+# and activities. The three assertions above already cover two section entries, so only
+# the parts ACC-001 adds are asserted here.
+#
+# The account holder's name is dynamic (Arabic for this account), so it is matched
+# structurally rather than by value: "Hello" followed by at least one non-whitespace
+# character. That is exactly what separates the authenticated header from the guest one,
+# which renders "Hello" with no name after it.
+- assertVisible: '(?s)Hello\s*\S.*'
+
+# Section headers, not the rows beneath them - the rows are account-dependent.
+- assertVisible: "My Account"
+- assertVisible: "Personal Activities"
+
+# --- OUT-002 action: the real Logout entry, which sits below the fold under App settings.
+- scrollUntilVisible:
+    element:
+      text: "Log out"
+    direction: DOWN
+    timeout: 30000
+# --- ACC-001 (absorbing SET-001): the App settings section is present. The scroll above
+# already brought it into view, so this costs no extra navigation. Labels are matched as
+# the build actually renders them - "App appearance" carries a trailing space and
+# "Regulations and policies" is the full label, neither matching the shorthand in the
+# case description. Language is matched by its label only; its value is a user setting.
+- assertVisible: "App settings"
+- assertVisible: '(?s)Language\s*\S.*'
+- assertVisible: "Accessibility"
+- assertVisible: 'App appearance\s*'
+- assertVisible: "Regulations and policies"
+# --- end ACC-001
+
+- tapOn: "Log out"
+
+# OUT-001 (merged): logout asks for confirmation before acting.
+- extendedWaitUntil:
+    visible: "Are you sure you want to log out?"
+    timeout: 30000
+- assertVisible: "Cancel"
+
+# --- OUT-004: Cancel on the confirmation keeps the session. Deliberately placed before
+# OUT-002's "Yes, log out" so the dialog OUT-001 already raised serves both cases; the
+# dialog is re-opened afterwards so OUT-002 still acts on a freshly raised confirmation.
+- tapOn: "Cancel"
+- extendedWaitUntil:
+    notVisible: "Are you sure you want to log out?"
+    timeout: 30000
+
+# Still authenticated. Asserted on entries that exist only for a signed-in user, and on
+# the absence of the guest entry - the same discriminator OUT-002 uses below, so a
+# cancelled logout that silently dropped the session could not pass.
+- assertVisible: "My bookings"
+- assertVisible: "Log out"
+- assertNotVisible: "Log in"
+
+# Re-raise the confirmation so OUT-002 proceeds from the state it expects.
+- tapOn: "Log out"
+- extendedWaitUntil:
+    visible: "Are you sure you want to log out?"
+    timeout: 30000
+- assertVisible: "Cancel"
+# --- end OUT-004
+
+- tapOn: "Yes, log out"
+
+# The satisfaction survey (D-12) can land on top of the guest Account after the session is
+# cleared, at no fixed moment. The shared helper clears it (Dismiss - never Submit) and returns
+# once the guest entry "Log in" is up. No assertion below is relaxed.
+- runFlow:
+    file: subflows/clear-overlays.yaml
+    env:
+      ANCHOR: "Log in"
+
+# --- Session cleared. Positive guest assertion plus OUT-003's reduced menu...
+- extendedWaitUntil:
+    visible: "Log in"
+    timeout: 60000
+- assertVisible: "(?s).*create new account.*"
+# Build PRE-4.7.6-1283 renders this entry with an ampersand ("Help & Support") where
+# earlier builds spelled it out ("Help and Support"). Both are matched so the same
+# assertion holds on either build. OUT-003's intent is unchanged - the guest menu must
+# still offer the support entry; only the label's spelling moved.
+- assertVisible: "Help (and|&) Support"
+
+# ...and the negative counterpart: the authenticated-only entries are gone, and nobody is
+# greeted by name. A guest surface renders a bare "Hello"; the ",\s*\S" tail is what only a
+# signed-in greeting carries (the same pattern the shared login proves on sign-in).
+- assertNotVisible: "My bookings"
+- assertNotVisible: "Profile details"
+- assertNotVisible: "Preferences"
+- assertNotVisible: '(?si)(Hello|Good (morning|afternoon|evening)),\s*\S.*'
+
+# --- Prove the stored session was cleared, not just the current screen. Relaunch without
+# clearing state and without logging in; the app must still come up as a guest.
+- launchApp
+- runFlow:
+    file: subflows/clear-overlays.yaml
+    env:
+      ANCHOR: 'Account\s*Tab 4 of 4'
+- tapOn: 'Account\s*Tab 4 of 4'
+
+- extendedWaitUntil:
+    visible: "Log in"
+    timeout: 60000
+- assertNotVisible: "My bookings"
+- assertNotVisible: "Profile details"
+- assertNotVisible: '(?si)(Hello|Good (morning|afternoon|evening)),\s*\S.*'

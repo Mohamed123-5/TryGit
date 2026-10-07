@@ -1,0 +1,46 @@
+appId: fi.iwa.sakani
+name: unit probe A - which unit opens (read-only)
+---
+- launchApp
+- extendedWaitUntil:
+    visible: 'Home\s*Tab 1 of 4'
+    timeout: 60000
+- tapOn: 'Home\s*Tab 1 of 4'
+- extendedWaitUntil:
+    visible: '(?si)(Hello|Good (morning|afternoon|evening)),\s*\S.*'
+    timeout: 45000
+- repeat:
+    times: 3
+    commands:
+      - scrollUntilVisible:
+          element:
+            text: '(Discover featured unit in the market|Featured unit in mobile dashboard)\s*'
+          direction: DOWN
+          timeout: 45000
+      - tapOn: "(View all|View Details)"
+      - extendedWaitUntil:
+          visible: "(?s).*Place of featured units.*"
+          timeout: 45000
+
+      - tapOn: "(?s).*Villa B91-360.*"
+      - extendedWaitUntil:
+          visible: "Mortgage Calculator"
+          timeout: 30000
+      - runFlow:
+          when:
+            visible: "(?s).*Villa B91-360.*"
+          commands:
+            - takeScreenshot: probe-A-villa
+      - runFlow:
+          when:
+            notVisible: "(?s).*Villa B91-360.*"
+          commands:
+            - takeScreenshot: probe-A-WRONG
+      - back
+      - extendedWaitUntil:
+          visible: "(?s).*Place of featured units.*"
+          timeout: 30000
+      - back
+      - extendedWaitUntil:
+          visible: 'Home\s*Tab 1 of 4'
+          timeout: 30000

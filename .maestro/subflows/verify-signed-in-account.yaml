@@ -1,0 +1,45 @@
+# Reusable helper — prove, from the app itself, which account the current session belongs to.
+#
+# CONTRACT
+#   NATIONAL_ID - the National ID / Iqama the caller believes it signed in as.
+# Precondition: authenticated, on the Account tab ("My bookings" visible).
+# Postcondition: back on the Account tab, and output.profileNationalId holds the ID that the
+# signed-in profile itself displayed. It is written ONLY after that display was asserted, so a
+# caller that finds it missing or different knows the check did not pass.
+#
+# WHY THIS EXISTS
+# The login helper matches NATIONAL_ID on the Nafath screen before "Confirm", which proves which
+# ID was submitted for authentication - not which account the resulting session belongs to.
+# full-journey.yaml's identity gate used to compare NATIONAL_ID with a copy of itself, so it
+# could not fail for any real mismatch. This reads the answer from the product's own record of
+# the signed-in user - the profile's "National ID" field - the same field account.yaml pins.
+#
+# READ-ONLY: it opens the profile and returns. "Edit", "Save" and every profile field are never
+# touched. Back is guarded on the profile's own section header, so it cannot fire from Account.
+appId: fi.iwa.sakani
+name: Verify the signed-in account is NATIONAL_ID
+---
+# Dollar-free, like every guard in this suite: a "$" inside ${...} makes Maestro 2.9.0 skip the
+# evaluation and pass the assert unconditionally.
+- assertTrue: ${typeof NATIONAL_ID !== "undefined" && String(NATIONAL_ID).length === 10 && !/[^0-9]/.test(String(NATIONAL_ID))}
+
+- tapOn: "Profile details"
+# PRE-4.7.6-1283 renders "Personal Details" where earlier builds used the singular.
+- extendedWaitUntil:
+    visible: "Personal Detail(s)?"
+    timeout: 30000
+
+# THE CHECK. Selectors are full-match, so a profile belonging to any other ID cannot satisfy
+# the second line.
+- assertVisible: "National ID"
+- assertVisible: ${NATIONAL_ID}
+- evalScript: ${output.profileNationalId = String(NATIONAL_ID)}
+
+- runFlow:
+    when:
+      visible: "Personal Detail(s)?"
+    commands:
+      - back
+- extendedWaitUntil:
+    visible: "My bookings"
+    timeout: 30000

@@ -1,0 +1,56 @@
+09-10 17:08:06.548 F/libc    (13241): Fatal signal 8 (SIGFPE), code 1 (FPE_INTDIV), fault addr 0x711f2b2f48d0 in tid 13241 (fi.iwa.sakani), pid 13241 (fi.iwa.sakani)
+09-10 17:08:09.567 F/DEBUG   (15408): *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** ***
+09-10 17:08:09.568 F/DEBUG   (15408): Build fingerprint: 'google/sdk_gphone64_x86_64/emu64xa:14/UE1A.230829.036.A4/12096271:user/release-keys'
+09-10 17:08:09.568 F/DEBUG   (15408): Revision: '0'
+09-10 17:08:09.568 F/DEBUG   (15408): ABI: 'x86_64'
+09-10 17:08:09.568 F/DEBUG   (15408): Timestamp: 2026-09-10 17:08:07.236017742+0300
+09-10 17:08:09.568 F/DEBUG   (15408): Process uptime: 286s
+09-10 17:08:09.568 F/DEBUG   (15408): Cmdline: fi.iwa.sakani
+09-10 17:08:09.568 F/DEBUG   (15408): pid: 13241, tid: 13241, name: fi.iwa.sakani  >>> fi.iwa.sakani <<<
+09-10 17:08:09.568 F/DEBUG   (15408): uid: 10214
+09-10 17:08:09.568 F/DEBUG   (15408): signal 8 (SIGFPE), code 1 (FPE_INTDIV), fault addr 0x0000711f2b2f48d0
+09-10 17:08:09.568 F/DEBUG   (15408):     rax 0000000000000900  rbx 0000712131a9d290  rcx 0000000000000004  rdx 0000000000000000
+09-10 17:08:09.568 F/DEBUG   (15408):     r8  0000000000000900  r9  0000000000000080  r10 0000000000000000  r11 0000000000000213
+09-10 17:08:09.568 F/DEBUG   (15408):     r12 0000000000000000  r13 0000000000000004  r14 0000000000008a11  r15 0000000000000900
+09-10 17:08:09.568 F/DEBUG   (15408):     rdi 0000000000000000  rsi 0000000000000000
+09-10 17:08:09.568 F/DEBUG   (15408):     rbp 0000000000000080  rsp 00007fff1a274850  rip 0000711f2b2f48d0
+09-10 17:08:09.568 F/DEBUG   (15408): 38 total frames
+09-10 17:08:09.568 F/DEBUG   (15408): backtrace:
+09-10 17:08:09.568 F/DEBUG   (15408):       #00 pc 000000000004a8d0  /vendor/lib64/libGLESv2_enc.so (GL2Encoder::s_glBindBufferRange(void*, unsigned int, unsigned int, unsigned int, long, long)+880) (BuildId: 19cd8fb7555ffb946219a6d23d01aed9)
+09-10 17:08:09.568 F/DEBUG   (15408):       #01 pc 00000000008e2687  /data/app/~~GQjY21_z-vevzxS6pIXsdQ==/fi.iwa.sakani-qwS6_FSa8LqNHxCo9DiskQ==/base.apk!libflutter.so (offset 0xd540000) (BuildId: 8dd691bfce800ce28ff255cf85f470791e637361)
+09-10 17:08:09.568 F/DEBUG   (15408):       #02 pc 00000000008e09ca  /data/app/~~GQjY21_z-vevzxS6pIXsdQ==/fi.iwa.sakani-qwS6_FSa8LqNHxCo9DiskQ==/base.apk!libflutter.so (offset 0xd540000) (BuildId: 8dd691bfce800ce28ff255cf85f470791e637361)
+09-10 17:08:09.568 F/DEBUG   (15408):       #03 pc 000000000088b4e6  /data/app/~~GQjY21_z-vevzxS6pIXsdQ==/fi.iwa.sakani-qwS6_FSa8LqNHxCo9DiskQ==/base.apk!libflutter.so (offset 0xd540000) (BuildId: 8dd691bfce800ce28ff255cf85f470791e637361)
+09-10 17:08:09.568 F/DEBUG   (15408):       #04 pc 00000000008922d8  /data/app/~~GQjY21_z-vevzxS6pIXsdQ==/fi.iwa.sakani-qwS6_FSa8LqNHxCo9DiskQ==/base.apk!libflutter.so (offset 0xd540000) (BuildId: 8dd691bfce800ce28ff255cf85f470791e637361)
+09-10 17:08:09.568 F/DEBUG   (15408):       #05 pc 00000000009bf243  /data/app/~~GQjY21_z-vevzxS6pIXsdQ==/fi.iwa.sakani-qwS6_FSa8LqNHxCo9DiskQ==/base.apk!libflutter.so (offset 0xd540000) (BuildId: 8dd691bfce800ce28ff255cf85f470791e637361)
+09-10 17:08:09.568 F/DEBUG   (15408):       #06 pc 00000000007fcc5e  /data/app/~~GQjY21_z-vevzxS6pIXsdQ==/fi.iwa.sakani-qwS6_FSa8LqNHxCo9DiskQ==/base.apk!libflutter.so (offset 0xd540000) (BuildId: 8dd691bfce800ce28ff255cf85f470791e637361)
+09-10 17:08:09.568 F/DEBUG   (15408):       #07 pc 0000000000adea5c  /data/app/~~GQjY21_z-vevzxS6pIXsdQ==/fi.iwa.sakani-qwS6_FSa8LqNHxCo9DiskQ==/base.apk!libflutter.so (offset 0xd540000) (BuildId: 8dd691bfce800ce28ff255cf85f470791e637361)
+09-10 17:08:09.568 F/DEBUG   (15408):       #08 pc 0000000000ae0a8b  /data/app/~~GQjY21_z-vevzxS6pIXsdQ==/fi.iwa.sakani-qwS6_FSa8LqNHxCo9DiskQ==/base.apk!libflutter.so (offset 0xd540000) (BuildId: 8dd691bfce800ce28ff255cf85f470791e637361)
+09-10 17:08:09.568 F/DEBUG   (15408):       #09 pc 000000000092a06e  /data/app/~~GQjY21_z-vevzxS6pIXsdQ==/fi.iwa.sakani-qwS6_FSa8LqNHxCo9DiskQ==/base.apk!libflutter.so (offset 0xd540000) (BuildId: 8dd691bfce800ce28ff255cf85f470791e637361)
+09-10 17:08:09.568 F/DEBUG   (15408):       #10 pc 000000000092991b  /data/app/~~GQjY21_z-vevzxS6pIXsdQ==/fi.iwa.sakani-qwS6_FSa8LqNHxCo9DiskQ==/base.apk!libflutter.so (offset 0xd540000) (BuildId: 8dd691bfce800ce28ff255cf85f470791e637361)
+09-10 17:08:09.568 F/DEBUG   (15408):       #11 pc 000000000092b129  /data/app/~~GQjY21_z-vevzxS6pIXsdQ==/fi.iwa.sakani-qwS6_FSa8LqNHxCo9DiskQ==/base.apk!libflutter.so (offset 0xd540000) (BuildId: 8dd691bfce800ce28ff255cf85f470791e637361)
+09-10 17:08:09.568 F/DEBUG   (15408):       #12 pc 000000000092ab48  /data/app/~~GQjY21_z-vevzxS6pIXsdQ==/fi.iwa.sakani-qwS6_FSa8LqNHxCo9DiskQ==/base.apk!libflutter.so (offset 0xd540000) (BuildId: 8dd691bfce800ce28ff255cf85f470791e637361)
+09-10 17:08:09.568 F/DEBUG   (15408):       #13 pc 000000000093b165  /data/app/~~GQjY21_z-vevzxS6pIXsdQ==/fi.iwa.sakani-qwS6_FSa8LqNHxCo9DiskQ==/base.apk!libflutter.so (offset 0xd540000) (BuildId: 8dd691bfce800ce28ff255cf85f470791e637361)
+09-10 17:08:09.568 F/DEBUG   (15408):       #14 pc 00000000004f79e9  /data/app/~~GQjY21_z-vevzxS6pIXsdQ==/fi.iwa.sakani-qwS6_FSa8LqNHxCo9DiskQ==/base.apk!libflutter.so (offset 0xd540000) (BuildId: 8dd691bfce800ce28ff255cf85f470791e637361)
+09-10 17:08:09.568 F/DEBUG   (15408):       #15 pc 00000000004fc3e3  /data/app/~~GQjY21_z-vevzxS6pIXsdQ==/fi.iwa.sakani-qwS6_FSa8LqNHxCo9DiskQ==/base.apk!libflutter.so (offset 0xd540000) (BuildId: 8dd691bfce800ce28ff255cf85f470791e637361)
+09-10 17:08:09.568 F/DEBUG   (15408):       #16 pc 000000000000fb84  /system/lib64/libutils.so (android::Looper::pollOnce(int, int*, int*, void**)+532) (BuildId: c777bd164e6d4a5c070cb5e2d9bb92e0)
+09-10 17:08:09.568 F/DEBUG   (15408):       #17 pc 0000000000179ea3  /system/lib64/libandroid_runtime.so (android::android_os_MessageQueue_nativePollOnce(_JNIEnv*, _jobject*, long, int)+35) (BuildId: 58f47cb2665b829aa74415f458f1922a)
+09-10 17:08:09.568 F/DEBUG   (15408):       #18 pc 00000000001f8cc4  /system/framework/x86_64/boot-framework.oat (art_jni_trampoline+132) (BuildId: e4c2202f7e80276bcdbfa046249d896342205aa9)
+09-10 17:08:09.568 F/DEBUG   (15408):       #19 pc 00000000005cabe7  /system/framework/x86_64/boot-framework.oat (android.os.MessageQueue.next+327) (BuildId: e4c2202f7e80276bcdbfa046249d896342205aa9)
+09-10 17:08:09.568 F/DEBUG   (15408):       #20 pc 00000000005c8066  /system/framework/x86_64/boot-framework.oat (android.os.Looper.loopOnce+150) (BuildId: e4c2202f7e80276bcdbfa046249d896342205aa9)
+09-10 17:08:09.568 F/DEBUG   (15408):       #21 pc 00000000005c7f01  /system/framework/x86_64/boot-framework.oat (android.os.Looper.loop+481) (BuildId: e4c2202f7e80276bcdbfa046249d896342205aa9)
+09-10 17:08:09.568 F/DEBUG   (15408):       #22 pc 000000000033b44c  /system/framework/x86_64/boot-framework.oat (android.app.ActivityThread.main+1628) (BuildId: e4c2202f7e80276bcdbfa046249d896342205aa9)
+09-10 17:08:09.568 F/DEBUG   (15408):       #23 pc 0000000000378826  /apex/com.android.art/lib64/libart.so (art_quick_invoke_static_stub+806) (BuildId: b6dc79e02101ea00827a35a55ab6597a)
+09-10 17:08:09.568 F/DEBUG   (15408):       #24 pc 00000000003c538f  /apex/com.android.art/lib64/libart.so (art::ArtMethod::Invoke(art::Thread*, unsigned int*, unsigned int, art::JValue*, char const*)+255) (BuildId: b6dc79e02101ea00827a35a55ab6597a)
+09-10 17:08:09.568 F/DEBUG   (15408):       #25 pc 00000000007f07f4  /apex/com.android.art/lib64/libart.so (_jobject* art::InvokeMethod<(art::PointerSize)8>(art::ScopedObjectAccessAlreadyRunnable const&, _jobject*, _jobject*, _jobject*, unsigned long)+1476) (BuildId: b6dc79e02101ea00827a35a55ab6597a)
+09-10 17:08:09.568 F/DEBUG   (15408):       #26 pc 000000000075a387  /apex/com.android.art/lib64/libart.so (art::Method_invoke(_JNIEnv*, _jobject*, _jobject*, _jobjectArray*) (.__uniq.165753521025965369065708152063621506277)+39) (BuildId: b6dc79e02101ea00827a35a55ab6597a)
+09-10 17:08:09.568 F/DEBUG   (15408):       #27 pc 00000000000a3ac0  /system/framework/x86_64/boot.oat (art_jni_trampoline+128) (BuildId: c78b6b6270062f2e659e76e5f8dac6d757f47ca6)
+09-10 17:08:09.568 F/DEBUG   (15408):       #28 pc 00000000007e66a9  /system/framework/x86_64/boot-framework.oat (com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run+137) (BuildId: e4c2202f7e80276bcdbfa046249d896342205aa9)
+09-10 17:08:09.568 F/DEBUG   (15408):       #29 pc 00000000007f0848  /system/framework/x86_64/boot-framework.oat (com.android.internal.os.ZygoteInit.main+2872) (BuildId: e4c2202f7e80276bcdbfa046249d896342205aa9)
+09-10 17:08:09.568 F/DEBUG   (15408):       #30 pc 0000000000378826  /apex/com.android.art/lib64/libart.so (art_quick_invoke_static_stub+806) (BuildId: b6dc79e02101ea00827a35a55ab6597a)
+09-10 17:08:09.568 F/DEBUG   (15408):       #31 pc 00000000003c538f  /apex/com.android.art/lib64/libart.so (art::ArtMethod::Invoke(art::Thread*, unsigned int*, unsigned int, art::JValue*, char const*)+255) (BuildId: b6dc79e02101ea00827a35a55ab6597a)
+09-10 17:08:09.568 F/DEBUG   (15408):       #32 pc 00000000007f129f  /apex/com.android.art/lib64/libart.so (art::JValue art::InvokeWithVarArgs<art::ArtMethod*>(art::ScopedObjectAccessAlreadyRunnable const&, _jobject*, art::ArtMethod*, __va_list_tag*)+399) (BuildId: b6dc79e02101ea00827a35a55ab6597a)
+09-10 17:08:09.568 F/DEBUG   (15408):       #33 pc 00000000006a7edc  /apex/com.android.art/lib64/libart.so (art::JNI<true>::CallStaticVoidMethodV(_JNIEnv*, _jclass*, _jmethodID*, __va_list_tag*)+668) (BuildId: b6dc79e02101ea00827a35a55ab6597a)
+09-10 17:08:09.568 F/DEBUG   (15408):       #34 pc 00000000000df088  /system/lib64/libandroid_runtime.so (_JNIEnv::CallStaticVoidMethod(_jclass*, _jmethodID*, ...)+136) (BuildId: 58f47cb2665b829aa74415f458f1922a)
+09-10 17:08:09.568 F/DEBUG   (15408):       #35 pc 00000000000ebb30  /system/lib64/libandroid_runtime.so (android::AndroidRuntime::start(char const*, android::Vector<android::String8> const&, bool)+896) (BuildId: 58f47cb2665b829aa74415f458f1922a)
+09-10 17:08:09.568 F/DEBUG   (15408):       #36 pc 0000000000002fa6  /system/bin/app_process64 (main+1622) (BuildId: f11cda2b6bb6bff1e502077a2f3e6cf7)
+09-10 17:08:09.568 F/DEBUG   (15408):       #37 pc 00000000000529ef  /apex/com.android.runtime/lib64/bionic/libc.so (__libc_init+95) (BuildId: fa337969c798946280caa45e2d71a2e7)

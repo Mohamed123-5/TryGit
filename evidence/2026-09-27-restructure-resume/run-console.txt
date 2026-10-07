@@ -1,0 +1,8 @@
+=== 09:21:25 START project ===
+=== 09:24:06 END project exit=1 ===
+=== 09:24:06 START search ===
+=== 09:26:25 END search exit=1 ===
+=== 09:26:26 START unit ===
+=== 09:46:08 END unit exit=1 ===
+=== 09:46:08 START wallet ===
+=== 10:03:15 END wallet exit=1 ===

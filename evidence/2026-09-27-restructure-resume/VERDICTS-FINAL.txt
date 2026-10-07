@@ -1,0 +1,14 @@
+FLOW          EXIT  FAILED  VERDICT                NOTE
+--------------------------------------------------------------------------------------
+project       0     0       PASS                   clean guest start, NPS before=0
+search        0     0       PASS                   clean guest start, NPS before=0
+unit          1     5       BLOCKED-PRODUCT-NPS    product NPS defect blocks shared login
+wallet        1     5       BLOCKED-PRODUCT-NPS    product NPS defect blocks shared login
+
+Earlier six (22/09 run preserved no exit code - cannot be counted as PASS):
+account       -     -       NOT-RUN                pending NPS blocker resolution
+booking       -     -       NOT-RUN                pending NPS blocker resolution
+home          -     -       NOT-RUN                pending NPS blocker resolution
+login         1     4       FAIL                   pending NPS blocker resolution
+logout        -     -       NOT-RUN                pending NPS blocker resolution
+marketplace   -     -       NOT-RUN                pending NPS blocker resolution

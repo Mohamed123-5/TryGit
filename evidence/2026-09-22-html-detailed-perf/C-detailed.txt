@@ -1,0 +1,15 @@
+WARNING: Final field parent in class maestro.cli.command.TestCommand has been mutated reflectively by class picocli.CommandLine$Model$FieldBinding in unnamed module @2d9d4f9d (file:/D:/Automation-Tool/maestro/lib/picocli-4.6.3.jar)
+WARNING: Use --enable-final-field-mutation=ALL-UNNAMED to avoid a warning
+WARNING: Mutating final fields will be blocked in a future release unless final field mutation is enabled
+
+Waiting for flows to complete...
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::arrayBaseOffset has been called by com.google.protobuf.UnsafeUtil$MemoryAccessor (file:/D:/Automation-Tool/maestro/lib/protobuf-java-3.21.9.jar)
+WARNING: Please consider reporting this to the maintainers of class com.google.protobuf.UnsafeUtil$MemoryAccessor
+WARNING: sun.misc.Unsafe::arrayBaseOffset will be removed in a future release
+[Passed] Account services - read-only profile, wallet, preferences, eligibility, bookings and settings (7m 12s)
+
+1/1 Flow Passed in 7m 12s
+
+MAESTRO_EXIT=0 WALL=443s
+/c/Users/Mohammed Elkatry/.maestro/tests/2026-09-22_133436/

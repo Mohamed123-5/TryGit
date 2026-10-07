@@ -1,0 +1,17 @@
+# Count the EMPTY person-DOB inputs currently on screen into output.dobEmptyNow.
+# An empty DOB input is an EditText whose hint is "Enter DOB" (hierarchies 01/10 14:06, 04/10 10:33
+# and 11:01). A populated one shows its date instead of the hint.
+# Counts index 0, 1, 2 ... (`index` orders by on-screen position) until the first absent index. On a
+# settled screen an absent-element condition resolves in about 0.2-0.5 s (measured, run 10:33).
+appId: fi.iwa.sakani
+name: Count empty person-DOB fields
+---
+- evalScript: ${output.dobEmptyNow = 0}
+- repeat:
+    times: 8
+    while:
+      visible:
+        text: "Enter DOB"
+        index: ${output.dobEmptyNow}
+    commands:
+      - evalScript: ${output.dobEmptyNow = output.dobEmptyNow + 1}

@@ -1,0 +1,37 @@
+09-27 12:57:00.677 F/libc    ( 8635): Fatal signal 11 (SIGSEGV), code 1 (SEGV_MAPERR), fault addr 0x0 in tid 8707 (1.raster), pid 8635 (fi.iwa.sakani)
+09-27 12:57:02.867 F/DEBUG   ( 8920): *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** ***
+09-27 12:57:02.867 F/DEBUG   ( 8920): Build fingerprint: 'google/sdk_gphone64_x86_64/emu64xa:14/UE1A.230829.036.A4/12096271:user/release-keys'
+09-27 12:57:02.867 F/DEBUG   ( 8920): Revision: '0'
+09-27 12:57:02.867 F/DEBUG   ( 8920): ABI: 'x86_64'
+09-27 12:57:02.867 F/DEBUG   ( 8920): Timestamp: 2026-09-27 12:57:00.963086400+0300
+09-27 12:57:02.868 F/DEBUG   ( 8920): Process uptime: 18s
+09-27 12:57:02.868 F/DEBUG   ( 8920): Cmdline: fi.iwa.sakani
+09-27 12:57:02.868 F/DEBUG   ( 8920): pid: 8635, tid: 8707, name: 1.raster  >>> fi.iwa.sakani <<<
+09-27 12:57:02.868 F/DEBUG   ( 8920): uid: 10214
+09-27 12:57:02.868 F/DEBUG   ( 8920): signal 11 (SIGSEGV), code 1 (SEGV_MAPERR), fault addr 0x0000000000000000
+09-27 12:57:02.869 F/DEBUG   ( 8920): Cause: null pointer dereference
+09-27 12:57:02.869 F/DEBUG   ( 8920):     rax 00007075013fa8c0  rbx 00007075013fa8c0  rcx 00007075f903f6e0  rdx 000070760906e960
+09-27 12:57:02.869 F/DEBUG   ( 8920):     r8  000070781df8b480  r9  0000000000000015  r10 000000000063d93e  r11 0000000000000293
+09-27 12:57:02.869 F/DEBUG   ( 8920):     r12 00007075013fabf0  r13 00007075013fa8f0  r14 00007075013fab50  r15 00007075013fabe8
+09-27 12:57:02.869 F/DEBUG   ( 8920):     rdi 0000000000000000  rsi 000070767903d6f0
+09-27 12:57:02.869 F/DEBUG   ( 8920):     rbp 00007075f903f4d0  rsp 00007075013fa840  rip 000070750209144d
+09-27 12:57:02.869 F/DEBUG   ( 8920): 18 total frames
+09-27 12:57:02.869 F/DEBUG   ( 8920): backtrace:
+09-27 12:57:02.869 F/DEBUG   ( 8920):       #00 pc 000000000088f44d  /data/app/~~GQjY21_z-vevzxS6pIXsdQ==/fi.iwa.sakani-qwS6_FSa8LqNHxCo9DiskQ==/base.apk!libflutter.so (offset 0xd540000) (BuildId: 8dd691bfce800ce28ff255cf85f470791e637361)
+09-27 12:57:02.869 F/DEBUG   ( 8920):       #01 pc 000000000089222e  /data/app/~~GQjY21_z-vevzxS6pIXsdQ==/fi.iwa.sakani-qwS6_FSa8LqNHxCo9DiskQ==/base.apk!libflutter.so (offset 0xd540000) (BuildId: 8dd691bfce800ce28ff255cf85f470791e637361)
+09-27 12:57:02.869 F/DEBUG   ( 8920):       #02 pc 00000000009bf243  /data/app/~~GQjY21_z-vevzxS6pIXsdQ==/fi.iwa.sakani-qwS6_FSa8LqNHxCo9DiskQ==/base.apk!libflutter.so (offset 0xd540000) (BuildId: 8dd691bfce800ce28ff255cf85f470791e637361)
+09-27 12:57:02.869 F/DEBUG   ( 8920):       #03 pc 00000000007fcc5e  /data/app/~~GQjY21_z-vevzxS6pIXsdQ==/fi.iwa.sakani-qwS6_FSa8LqNHxCo9DiskQ==/base.apk!libflutter.so (offset 0xd540000) (BuildId: 8dd691bfce800ce28ff255cf85f470791e637361)
+09-27 12:57:02.869 F/DEBUG   ( 8920):       #04 pc 000000000092a08f  /data/app/~~GQjY21_z-vevzxS6pIXsdQ==/fi.iwa.sakani-qwS6_FSa8LqNHxCo9DiskQ==/base.apk!libflutter.so (offset 0xd540000) (BuildId: 8dd691bfce800ce28ff255cf85f470791e637361)
+09-27 12:57:02.869 F/DEBUG   ( 8920):       #05 pc 000000000092991b  /data/app/~~GQjY21_z-vevzxS6pIXsdQ==/fi.iwa.sakani-qwS6_FSa8LqNHxCo9DiskQ==/base.apk!libflutter.so (offset 0xd540000) (BuildId: 8dd691bfce800ce28ff255cf85f470791e637361)
+09-27 12:57:02.869 F/DEBUG   ( 8920):       #06 pc 000000000092b129  /data/app/~~GQjY21_z-vevzxS6pIXsdQ==/fi.iwa.sakani-qwS6_FSa8LqNHxCo9DiskQ==/base.apk!libflutter.so (offset 0xd540000) (BuildId: 8dd691bfce800ce28ff255cf85f470791e637361)
+09-27 12:57:02.869 F/DEBUG   ( 8920):       #07 pc 000000000092ab48  /data/app/~~GQjY21_z-vevzxS6pIXsdQ==/fi.iwa.sakani-qwS6_FSa8LqNHxCo9DiskQ==/base.apk!libflutter.so (offset 0xd540000) (BuildId: 8dd691bfce800ce28ff255cf85f470791e637361)
+09-27 12:57:02.869 F/DEBUG   ( 8920):       #08 pc 000000000093b165  /data/app/~~GQjY21_z-vevzxS6pIXsdQ==/fi.iwa.sakani-qwS6_FSa8LqNHxCo9DiskQ==/base.apk!libflutter.so (offset 0xd540000) (BuildId: 8dd691bfce800ce28ff255cf85f470791e637361)
+09-27 12:57:02.869 F/DEBUG   ( 8920):       #09 pc 00000000004f79e9  /data/app/~~GQjY21_z-vevzxS6pIXsdQ==/fi.iwa.sakani-qwS6_FSa8LqNHxCo9DiskQ==/base.apk!libflutter.so (offset 0xd540000) (BuildId: 8dd691bfce800ce28ff255cf85f470791e637361)
+09-27 12:57:02.869 F/DEBUG   ( 8920):       #10 pc 00000000004fc3e3  /data/app/~~GQjY21_z-vevzxS6pIXsdQ==/fi.iwa.sakani-qwS6_FSa8LqNHxCo9DiskQ==/base.apk!libflutter.so (offset 0xd540000) (BuildId: 8dd691bfce800ce28ff255cf85f470791e637361)
+09-27 12:57:02.869 F/DEBUG   ( 8920):       #11 pc 000000000000fb84  /system/lib64/libutils.so (android::Looper::pollOnce(int, int*, int*, void**)+532) (BuildId: c777bd164e6d4a5c070cb5e2d9bb92e0)
+09-27 12:57:02.869 F/DEBUG   ( 8920):       #12 pc 0000000000019a0f  /system/lib64/libandroid.so (ALooper_pollOnce+95) (BuildId: 094d5e744838e61070f3b00f0a8d3c31)
+09-27 12:57:02.869 F/DEBUG   ( 8920):       #13 pc 00000000004fc4f5  /data/app/~~GQjY21_z-vevzxS6pIXsdQ==/fi.iwa.sakani-qwS6_FSa8LqNHxCo9DiskQ==/base.apk!libflutter.so (offset 0xd540000) (BuildId: 8dd691bfce800ce28ff255cf85f470791e637361)
+09-27 12:57:02.869 F/DEBUG   ( 8920):       #14 pc 00000000004f9d06  /data/app/~~GQjY21_z-vevzxS6pIXsdQ==/fi.iwa.sakani-qwS6_FSa8LqNHxCo9DiskQ==/base.apk!libflutter.so (offset 0xd540000) (BuildId: 8dd691bfce800ce28ff255cf85f470791e637361)
+09-27 12:57:02.870 F/DEBUG   ( 8920):       #15 pc 00000000004f9ade  /data/app/~~GQjY21_z-vevzxS6pIXsdQ==/fi.iwa.sakani-qwS6_FSa8LqNHxCo9DiskQ==/base.apk!libflutter.so (offset 0xd540000) (BuildId: 8dd691bfce800ce28ff255cf85f470791e637361)
+09-27 12:57:02.870 F/DEBUG   ( 8920):       #16 pc 00000000000cd06a  /apex/com.android.runtime/lib64/bionic/libc.so (__pthread_start(void*)+58) (BuildId: fa337969c798946280caa45e2d71a2e7)
+09-27 12:57:02.870 F/DEBUG   ( 8920):       #17 pc 0000000000062d88  /apex/com.android.runtime/lib64/bionic/libc.so (__start_thread+56) (BuildId: fa337969c798946280caa45e2d71a2e7)

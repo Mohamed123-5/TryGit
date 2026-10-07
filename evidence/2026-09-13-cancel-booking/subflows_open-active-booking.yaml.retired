@@ -1,0 +1,65 @@
+# Open ONE Active booking, identified by its unit code, and read its invoice number - used by
+# cancel-booking.yaml to capture the booking's identity and to leave it on screen at its bottom,
+# where "Cancel booking" is.
+#
+# INPUTS (env from the caller)
+#   UNIT_CODE  the unit code read from the booking's own Active card - digits and hyphens only
+#              (the caller extracts it with a digits/hyphens pattern), so it is safe inside the
+#              selectors below. The card is matched with the code pinned between newlines, so a
+#              longer code sharing the prefix can never match.
+# PRECONDITION   My Bookings -> Active is on screen.
+# POSTCONDITION  the booking is open, scrolled to "Cancel booking" (asserted), when it was found.
+# OUTPUTS        output.openFound, output.openInvoice.
+#
+# It does NOT read, assert or branch on the sales contract status (14/09/2026, by request):
+# whether the contract is Signed or Unsigned is not this flow's business.
+#
+# It taps the booking card only - never "Cancel booking" itself, which belongs to the caller
+# after its safety gate - and nothing else.
+appId: fi.iwa.sakani
+name: Open one Active booking and read its invoice
+---
+- evalScript: ${output.openFound = false}
+- evalScript: ${output.openInvoice = ""}
+
+- scrollUntilVisible:
+    element:
+      text: "(?s).*\nActive\n.*\nUnit code\n${UNIT_CODE}\n.*"
+    direction: DOWN
+    timeout: 20000
+    optional: true
+- runFlow:
+    when:
+      visible: "(?s).*\nActive\n.*\nUnit code\n${UNIT_CODE}\n.*"
+    commands:
+      - evalScript: ${output.openFound = true}
+      - tapOn:
+          text: "(?s).*\nActive\n.*\nUnit code\n${UNIT_CODE}\n.*"
+      - extendedWaitUntil:
+          visible: "Booking Details"
+          timeout: 45000
+      - takeScreenshot: open-booking-${UNIT_CODE}-top
+
+      # The invoice number sits in Booking Details, below the progress card - and below the fold
+      # when that card is long, so it is scrolled to rather than waited for.
+      - scrollUntilVisible:
+          element:
+            text: "Invoice number"
+          direction: DOWN
+          timeout: 30000
+      - copyTextFrom:
+          text: "[0-9]{10,}"
+          below:
+            text: "Invoice number"
+      - evalScript: '${output.openInvoice = String(maestro.copiedText)}'
+
+      # Down to the bottom, where Documents and "Cancel booking" sit together (09/09/2026 dump
+      # docs.xml). The caller taps it after its own safety gate.
+      - scrollUntilVisible:
+          element:
+            text: "Cancel booking"
+          direction: DOWN
+          timeout: 30000
+      - assertVisible: "Cancel booking"
+      - takeScreenshot: open-booking-${UNIT_CODE}-cancel-button
+      - evalScript: "${console.log('OPEN BOOKING - unit [' + UNIT_CODE + '] invoice [' + output.openInvoice + '] - open, scrolled to Cancel booking')}"

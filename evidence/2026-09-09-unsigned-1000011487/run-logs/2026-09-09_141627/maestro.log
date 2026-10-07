@@ -1,0 +1,181 @@
+14:16:27.245 [ INFO] maestro.cli.report.TestDebugReporter.logSystemInfo: Debug output path: C:\Users\Mohammed Elkatry\.maestro\tests\2026-09-09_141627
+14:16:27.247 [ INFO] MAESTRO.logSystemInfo: ---- System Info ----
+14:16:27.247 [ INFO] MAESTRO.logSystemInfo: Maestro Version: 2.9.0
+14:16:27.248 [ INFO] MAESTRO.logSystemInfo: CI: Undefined
+14:16:27.248 [ INFO] MAESTRO.logSystemInfo: OS Name: Windows 11
+14:16:27.248 [ INFO] MAESTRO.logSystemInfo: OS Version: 10.0
+14:16:27.248 [ INFO] MAESTRO.logSystemInfo: Architecture: amd64
+14:16:27.248 [ INFO] MAESTRO.logSystemInfo: Java Version: 26
+14:16:27.251 [ INFO] MAESTRO.logSystemInfo: Xcode Version: null
+14:16:27.253 [ INFO] MAESTRO.logSystemInfo: Flutter Version: Undefined
+14:16:27.255 [ INFO] MAESTRO.logSystemInfo: Flutter Channel: Undefined
+14:16:27.255 [ INFO] MAESTRO.logSystemInfo: ---------------------
+14:16:28.244 [DEBUG] io.micrometer.common.util.internal.logging.InternalLoggerFactory.newDefaultFactory: Using SLF4J as the default logging framework
+14:16:28.283 [ INFO] maestro.cli.command.TestCommand.runShardSuite: [shard 1] Selected device emulator-5554 using port 58550 with execution plan ExecutionPlan(flowsToRun=[D:\Automation\Maestro-Mobile\.maestro\_check.yaml], sequence=FlowSequence(flows=[], continueOnFailure=true), workspaceConfig=WorkspaceConfig(flows=null, includeTags=null, excludeTags=null, executionOrder=null, baselineBranch=null, notifications=null, disableRetries=false, platform=PlatformConfiguration(android=AndroidConfiguration(disableAnimations=false), ios=IOSConfiguration(disableAnimations=false, snapshotKeyHonorModalViews=null)), testOutputDir=null))
+14:16:28.429 [ERROR] maestro.cli.session.MaestroSessionManager.newSession$lambda$0: Failed to record heartbeat
+java.io.IOException: The process cannot access the file because another process has locked a portion of the file
+	at java.base/java.io.FileOutputStream.writeBytes(Native Method)
+	at java.base/java.io.FileOutputStream.write(FileOutputStream.java:332)
+	at kotlin.io.FilesKt__FileReadWriteKt.writeTextImpl(FileReadWrite.kt:160)
+	at kotlin.io.FilesKt__FileReadWriteKt.writeText(FileReadWrite.kt:145)
+	at kotlin.io.FilesKt__FileReadWriteKt.writeText$default(FileReadWrite.kt:144)
+	at maestro.cli.db.KeyValueStore.commit(KeyValueStore.kt:50)
+	at maestro.cli.db.KeyValueStore.set$lambda$3$lambda$2(KeyValueStore.kt:23)
+	at maestro.cli.db.KeyValueStore.withFileLock(KeyValueStore.kt:62)
+	at maestro.cli.db.KeyValueStore.set(KeyValueStore.kt:20)
+	at maestro.cli.session.SessionStore.heartbeat(SessionStore.kt:12)
+	at maestro.cli.session.MaestroSessionManager.newSession$lambda$0(MaestroSessionManager.kt:98)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:545)
+	at java.base/java.util.concurrent.FutureTask.runAndReset(FutureTask.java:371)
+	at java.base/java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:310)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1090)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:614)
+	at java.base/java.lang.Thread.run(Thread.java:1516)
+14:16:31.666 [ INFO] maestro.cli.runner.TestRunner.runSingle: Running flow _check.yaml...
+14:16:31.703 [ INFO] maestro.Maestro.cachedDeviceInfo_delegate$lambda$0: Getting device info
+14:16:31.962 [ INFO] maestro.Maestro.cachedDeviceInfo_delegate$lambda$0: Got device info: DeviceInfo(platform=ANDROID, widthPixels=1080, heightPixels=2400, widthGrid=1080, heightGrid=2400)
+14:16:32.098 [ INFO] maestro.cli.runner.MaestroCommandRunner.runCommands$lambda$0: Define variables RUNNING
+14:16:32.105 [ INFO] maestro.cli.runner.MaestroCommandRunner.runCommands$lambda$11: Define variables metadata CommandMetadata(numberOfRuns=null, evaluatedCommand=MaestroCommand(defineVariablesCommand=DefineVariablesCommand(env={MAESTRO_FILENAME=_check, MAESTRO_DEVICE_UDID=emulator-5554, MAESTRO_SHARD_ID=1, MAESTRO_SHARD_INDEX=0}, label=null, optional=false)), logMessages=[], insight=Insight(message=, level=NONE), aiReasoning=null, labeledCommand=null)
+14:16:32.109 [ INFO] maestro.cli.runner.MaestroCommandRunner.runCommands$lambda$2: Define variables COMPLETED
+14:16:32.110 [ INFO] maestro.cli.runner.MaestroCommandRunner.runCommands$lambda$0: Define variables RUNNING
+14:16:32.132 [ INFO] maestro.cli.runner.MaestroCommandRunner.runCommands$lambda$11: Define variables metadata CommandMetadata(numberOfRuns=null, evaluatedCommand=MaestroCommand(defineVariablesCommand=DefineVariablesCommand(env={CARD_NUMBER=4464040000000007, CARD_EXPIRY=1252, CARD_CVV=222, CARD_HOLDER=TEST USER}, label=null, optional=false)), logMessages=[], insight=Insight(message=, level=NONE), aiReasoning=null, labeledCommand=null)
+14:16:32.133 [ INFO] maestro.cli.runner.MaestroCommandRunner.runCommands$lambda$2: Define variables COMPLETED
+14:16:32.134 [ INFO] maestro.cli.runner.MaestroCommandRunner.runCommands$lambda$0: Apply configuration RUNNING
+14:16:32.138 [ INFO] maestro.cli.runner.MaestroCommandRunner.runCommands$lambda$11: Apply configuration metadata CommandMetadata(numberOfRuns=null, evaluatedCommand=MaestroCommand(applyConfigurationCommand=ApplyConfigurationCommand(config=MaestroConfig(appId=fi.iwa.sakani, name=RESUME - fill card without hideKeyboard, tags=[], ext={}, onFlowStart=null, onFlowComplete=null, properties={}), label=null, optional=false)), logMessages=[], insight=Insight(message=, level=NONE), aiReasoning=null, labeledCommand=null)
+14:16:32.138 [ INFO] maestro.cli.runner.MaestroCommandRunner.runCommands$lambda$2: Apply configuration COMPLETED
+14:16:32.139 [ INFO] maestro.cli.runner.MaestroCommandRunner.runCommands$lambda$0: Tap on Below "Card Number*" RUNNING
+14:16:32.145 [ INFO] maestro.cli.runner.MaestroCommandRunner.runCommands$lambda$11: Tap on Below "Card Number*" metadata CommandMetadata(numberOfRuns=null, evaluatedCommand=MaestroCommand(tapOnElementCommand=TapOnElementCommand(selector=ElementSelector(textRegex=null, idRegex=null, size=null, below=ElementSelector(textRegex=Card Number*, idRegex=null, size=null, below=null, above=null, leftOf=null, rightOf=null, containsChild=null, containsDescendants=null, traits=null, index=null, enabled=null, optional=false, selected=null, checked=null, focused=null, childOf=null, css=null), above=null, leftOf=null, rightOf=null, containsChild=null, containsDescendants=null, traits=null, index=null, enabled=null, optional=false, selected=null, checked=null, focused=null, childOf=null, css=null), retryIfNoChange=false, waitUntilVisible=false, longPress=false, repeat=null, waitToSettleTimeoutMs=null, relativePoint=null, label=null, optional=false)), logMessages=[], insight=Insight(message=, level=NONE), aiReasoning=null, labeledCommand=null)
+14:16:32.572 [ INFO] maestro.Maestro.tap-HgV9Ck0: Tapping on element:  UiElement(treeNode=TreeNode(attributes={text=, accessibilityText=4, hintText=, ignoreBoundsFiltering=false, resource-id=com.google.android.inputmethod.latin:id/key_pos_number_line2_1, clickable=true, bounds=[5,1809][272,1964], enabled=true, focused=false, checked=false, scrollable=false, selected=false, class=android.widget.FrameLayout, important-for-accessibility=true, error=}, children=[TreeNode(attributes={text=, accessibilityText=, hintText=, ignoreBoundsFiltering=false, resource-id=, clickable=false, bounds=[11,1809][266,1949], enabled=true, focused=false, checked=false, scrollable=false, selected=false, class=android.widget.LinearLayout, important-for-accessibility=false, error=}, children=[TreeNode(attributes={text=, accessibilityText=, hintText=, ignoreBoundsFiltering=false, resource-id=, clickable=false, bounds=[11,1809][138,1949], enabled=true, focused=false, checked=false, scrollable=false, selected=false, class=android.widget.LinearLayout, important-for-accessibility=false, error=}, children=[TreeNode(attributes={text=, accessibilityText=, hintText=, ignoreBoundsFiltering=false, resource-id=com.google.android.inputmethod.latin:id/0_resource_name_obfuscated, clickable=false, bounds=[98,1809][138,1949], enabled=true, focused=false, checked=false, scrollable=false, selected=false, class=android.widget.TextView, important-for-accessibility=false, error=}, children=[], clickable=false, enabled=true, focused=false, checked=false, selected=false)], clickable=false, enabled=true, focused=false, checked=false, selected=false), TreeNode(attributes={text=GHI, accessibilityText=, hintText=, ignoreBoundsFiltering=false, resource-id=com.google.android.inputmethod.latin:id/0_resource_name_obfuscated, clickable=false, bounds=[138,1809][266,1949], enabled=true, focused=false, checked=false, scrollable=false, selected=false, class=android.widget.TextView, important-for-accessibility=false, error=}, children=[], clickable=false, enabled=true, focused=false, checked=false, selected=false)], clickable=false, enabled=true, focused=false, checked=false, selected=false)], clickable=true, enabled=true, focused=false, checked=false, selected=false), bounds=Bounds(x=5, y=1809, width=267, height=155))
+14:16:33.429 [ERROR] maestro.cli.session.MaestroSessionManager.newSession$lambda$0: Failed to record heartbeat
+java.io.IOException: The process cannot access the file because another process has locked a portion of the file
+	at java.base/java.io.FileOutputStream.writeBytes(Native Method)
+	at java.base/java.io.FileOutputStream.write(FileOutputStream.java:332)
+	at kotlin.io.FilesKt__FileReadWriteKt.writeTextImpl(FileReadWrite.kt:160)
+	at kotlin.io.FilesKt__FileReadWriteKt.writeText(FileReadWrite.kt:145)
+	at kotlin.io.FilesKt__FileReadWriteKt.writeText$default(FileReadWrite.kt:144)
+	at maestro.cli.db.KeyValueStore.commit(KeyValueStore.kt:50)
+	at maestro.cli.db.KeyValueStore.set$lambda$3$lambda$2(KeyValueStore.kt:23)
+	at maestro.cli.db.KeyValueStore.withFileLock(KeyValueStore.kt:62)
+	at maestro.cli.db.KeyValueStore.set(KeyValueStore.kt:20)
+	at maestro.cli.session.SessionStore.heartbeat(SessionStore.kt:12)
+	at maestro.cli.session.MaestroSessionManager.newSession$lambda$0(MaestroSessionManager.kt:98)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:545)
+	at java.base/java.util.concurrent.FutureTask.runAndReset(FutureTask.java:371)
+	at java.base/java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:310)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1090)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:614)
+	at java.base/java.lang.Thread.run(Thread.java:1516)
+14:16:34.110 [ INFO] maestro.Maestro.tap-HgV9Ck0: Tap aimed via settled hierarchy
+14:16:34.116 [ INFO] maestro.Maestro.hierarchyBasedTap-ogj28Uc: Tapping at (138, 1886) using hierarchy based logic for wait
+14:16:34.862 [ INFO] maestro.cli.runner.MaestroCommandRunner.runCommands$lambda$2: Tap on Below "Card Number*" COMPLETED
+14:16:34.863 [ INFO] maestro.cli.runner.MaestroCommandRunner.runCommands$lambda$0: Erase 40 characters RUNNING
+14:16:34.864 [ INFO] maestro.cli.runner.MaestroCommandRunner.runCommands$lambda$11: Erase 40 characters metadata CommandMetadata(numberOfRuns=null, evaluatedCommand=MaestroCommand(eraseTextCommand=EraseTextCommand(charactersToErase=40, label=null, optional=false)), logMessages=[], insight=Insight(message=, level=NONE), aiReasoning=null, labeledCommand=null)
+14:16:34.868 [ INFO] maestro.Maestro.eraseText$lambda$52: Erasing 40 characters
+14:16:37.105 [ INFO] maestro.cli.runner.MaestroCommandRunner.runCommands$lambda$2: Erase 40 characters COMPLETED
+14:16:37.105 [ INFO] maestro.cli.runner.MaestroCommandRunner.runCommands$lambda$0: Input text ${CARD_NUMBER} RUNNING
+14:16:38.158 [ INFO] maestro.cli.runner.MaestroCommandRunner.runCommands$lambda$11: Input text ${CARD_NUMBER} metadata CommandMetadata(numberOfRuns=null, evaluatedCommand=MaestroCommand(inputTextCommand=InputTextCommand(text=4464040000000007, label=null, optional=false)), logMessages=[], insight=Insight(message=, level=NONE), aiReasoning=null, labeledCommand=null)
+14:16:38.160 [ INFO] maestro.Maestro.inputText: Inputting text: 4464040000000007
+14:16:38.426 [ERROR] maestro.cli.session.MaestroSessionManager.newSession$lambda$0: Failed to record heartbeat
+java.io.IOException: The process cannot access the file because another process has locked a portion of the file
+	at java.base/java.io.FileOutputStream.writeBytes(Native Method)
+	at java.base/java.io.FileOutputStream.write(FileOutputStream.java:332)
+	at kotlin.io.FilesKt__FileReadWriteKt.writeTextImpl(FileReadWrite.kt:160)
+	at kotlin.io.FilesKt__FileReadWriteKt.writeText(FileReadWrite.kt:145)
+	at kotlin.io.FilesKt__FileReadWriteKt.writeText$default(FileReadWrite.kt:144)
+	at maestro.cli.db.KeyValueStore.commit(KeyValueStore.kt:50)
+	at maestro.cli.db.KeyValueStore.set$lambda$3$lambda$2(KeyValueStore.kt:23)
+	at maestro.cli.db.KeyValueStore.withFileLock(KeyValueStore.kt:62)
+	at maestro.cli.db.KeyValueStore.set(KeyValueStore.kt:20)
+	at maestro.cli.session.SessionStore.heartbeat(SessionStore.kt:12)
+	at maestro.cli.session.MaestroSessionManager.newSession$lambda$0(MaestroSessionManager.kt:98)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:545)
+	at java.base/java.util.concurrent.FutureTask.runAndReset(FutureTask.java:371)
+	at java.base/java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:310)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1090)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:614)
+	at java.base/java.lang.Thread.run(Thread.java:1516)
+14:16:41.080 [ INFO] maestro.cli.runner.MaestroCommandRunner.runCommands$lambda$2: Input text ${CARD_NUMBER} COMPLETED
+14:16:41.081 [ INFO] maestro.cli.runner.MaestroCommandRunner.runCommands$lambda$0: Tap on Below "Expiry Date*" RUNNING
+14:16:41.081 [ INFO] maestro.cli.runner.MaestroCommandRunner.runCommands$lambda$11: Tap on Below "Expiry Date*" metadata CommandMetadata(numberOfRuns=null, evaluatedCommand=MaestroCommand(tapOnElementCommand=TapOnElementCommand(selector=ElementSelector(textRegex=null, idRegex=null, size=null, below=ElementSelector(textRegex=Expiry Date*, idRegex=null, size=null, below=null, above=null, leftOf=null, rightOf=null, containsChild=null, containsDescendants=null, traits=null, index=null, enabled=null, optional=false, selected=null, checked=null, focused=null, childOf=null, css=null), above=null, leftOf=null, rightOf=null, containsChild=null, containsDescendants=null, traits=null, index=null, enabled=null, optional=false, selected=null, checked=null, focused=null, childOf=null, css=null), retryIfNoChange=false, waitUntilVisible=false, longPress=false, repeat=null, waitToSettleTimeoutMs=null, relativePoint=null, label=null, optional=false)), logMessages=[], insight=Insight(message=, level=NONE), aiReasoning=null, labeledCommand=null)
+14:16:41.331 [ INFO] maestro.Maestro.tap-HgV9Ck0: Tapping on element:  UiElement(treeNode=TreeNode(attributes={text=, accessibilityText=7, hintText=, ignoreBoundsFiltering=false, resource-id=com.google.android.inputmethod.latin:id/key_pos_number_line3_1, clickable=true, bounds=[5,1964][272,2119], enabled=true, focused=false, checked=false, scrollable=false, selected=false, class=android.widget.FrameLayout, important-for-accessibility=true, error=}, children=[TreeNode(attributes={text=, accessibilityText=, hintText=, ignoreBoundsFiltering=false, resource-id=, clickable=false, bounds=[11,1964][266,2104], enabled=true, focused=false, checked=false, scrollable=false, selected=false, class=android.widget.LinearLayout, important-for-accessibility=false, error=}, children=[TreeNode(attributes={text=, accessibilityText=, hintText=, ignoreBoundsFiltering=false, resource-id=, clickable=false, bounds=[11,1964][138,2104], enabled=true, focused=false, checked=false, scrollable=false, selected=false, class=android.widget.LinearLayout, important-for-accessibility=false, error=}, children=[TreeNode(attributes={text=, accessibilityText=, hintText=, ignoreBoundsFiltering=false, resource-id=com.google.android.inputmethod.latin:id/0_resource_name_obfuscated, clickable=false, bounds=[98,1964][138,2104], enabled=true, focused=false, checked=false, scrollable=false, selected=false, class=android.widget.TextView, important-for-accessibility=false, error=}, children=[], clickable=false, enabled=true, focused=false, checked=false, selected=false)], clickable=false, enabled=true, focused=false, checked=false, selected=false), TreeNode(attributes={text=PQRS, accessibilityText=, hintText=, ignoreBoundsFiltering=false, resource-id=com.google.android.inputmethod.latin:id/0_resource_name_obfuscated, clickable=false, bounds=[138,1964][266,2104], enabled=true, focused=false, checked=false, scrollable=false, selected=false, class=android.widget.TextView, important-for-accessibility=false, error=}, children=[], clickable=false, enabled=true, focused=false, checked=false, selected=false)], clickable=false, enabled=true, focused=false, checked=false, selected=false)], clickable=true, enabled=true, focused=false, checked=false, selected=false), bounds=Bounds(x=5, y=1964, width=267, height=155))
+14:16:42.696 [ INFO] maestro.Maestro.tap-HgV9Ck0: Tap aimed via settled hierarchy
+14:16:42.698 [ INFO] maestro.Maestro.hierarchyBasedTap-ogj28Uc: Tapping at (138, 2041) using hierarchy based logic for wait
+14:16:43.428 [ERROR] maestro.cli.session.MaestroSessionManager.newSession$lambda$0: Failed to record heartbeat
+java.io.IOException: The process cannot access the file because another process has locked a portion of the file
+	at java.base/java.io.FileOutputStream.writeBytes(Native Method)
+	at java.base/java.io.FileOutputStream.write(FileOutputStream.java:332)
+	at kotlin.io.FilesKt__FileReadWriteKt.writeTextImpl(FileReadWrite.kt:160)
+	at kotlin.io.FilesKt__FileReadWriteKt.writeText(FileReadWrite.kt:145)
+	at kotlin.io.FilesKt__FileReadWriteKt.writeText$default(FileReadWrite.kt:144)
+	at maestro.cli.db.KeyValueStore.commit(KeyValueStore.kt:50)
+	at maestro.cli.db.KeyValueStore.set$lambda$3$lambda$2(KeyValueStore.kt:23)
+	at maestro.cli.db.KeyValueStore.withFileLock(KeyValueStore.kt:62)
+	at maestro.cli.db.KeyValueStore.set(KeyValueStore.kt:20)
+	at maestro.cli.session.SessionStore.heartbeat(SessionStore.kt:12)
+	at maestro.cli.session.MaestroSessionManager.newSession$lambda$0(MaestroSessionManager.kt:98)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:545)
+	at java.base/java.util.concurrent.FutureTask.runAndReset(FutureTask.java:371)
+	at java.base/java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:310)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1090)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:614)
+	at java.base/java.lang.Thread.run(Thread.java:1516)
+14:16:43.920 [ INFO] maestro.Maestro.hierarchyBasedTap-ogj28Uc: Something has changed in the UI judging by view hierarchy. Proceed.
+14:16:43.921 [ INFO] maestro.cli.runner.MaestroCommandRunner.runCommands$lambda$2: Tap on Below "Expiry Date*" COMPLETED
+14:16:43.921 [ INFO] maestro.cli.runner.MaestroCommandRunner.runCommands$lambda$0: Erase 10 characters RUNNING
+14:16:43.921 [ INFO] maestro.cli.runner.MaestroCommandRunner.runCommands$lambda$11: Erase 10 characters metadata CommandMetadata(numberOfRuns=null, evaluatedCommand=MaestroCommand(eraseTextCommand=EraseTextCommand(charactersToErase=10, label=null, optional=false)), logMessages=[], insight=Insight(message=, level=NONE), aiReasoning=null, labeledCommand=null)
+14:16:43.924 [ INFO] maestro.Maestro.eraseText$lambda$52: Erasing 10 characters
+14:16:45.348 [ INFO] maestro.cli.runner.MaestroCommandRunner.runCommands$lambda$2: Erase 10 characters COMPLETED
+14:16:45.349 [ INFO] maestro.cli.runner.MaestroCommandRunner.runCommands$lambda$0: Input text ${CARD_EXPIRY} RUNNING
+14:16:45.354 [ INFO] maestro.cli.runner.MaestroCommandRunner.runCommands$lambda$11: Input text ${CARD_EXPIRY} metadata CommandMetadata(numberOfRuns=null, evaluatedCommand=MaestroCommand(inputTextCommand=InputTextCommand(text=1252, label=null, optional=false)), logMessages=[], insight=Insight(message=, level=NONE), aiReasoning=null, labeledCommand=null)
+14:16:45.355 [ INFO] maestro.Maestro.inputText: Inputting text: 1252
+14:16:46.859 [ INFO] maestro.cli.runner.MaestroCommandRunner.runCommands$lambda$2: Input text ${CARD_EXPIRY} COMPLETED
+14:16:46.859 [ INFO] maestro.cli.runner.MaestroCommandRunner.runCommands$lambda$0: Tap on Below "Card Holder*" RUNNING
+14:16:46.860 [ INFO] maestro.cli.runner.MaestroCommandRunner.runCommands$lambda$11: Tap on Below "Card Holder*" metadata CommandMetadata(numberOfRuns=null, evaluatedCommand=MaestroCommand(tapOnElementCommand=TapOnElementCommand(selector=ElementSelector(textRegex=null, idRegex=null, size=null, below=ElementSelector(textRegex=Card Holder*, idRegex=null, size=null, below=null, above=null, leftOf=null, rightOf=null, containsChild=null, containsDescendants=null, traits=null, index=null, enabled=null, optional=false, selected=null, checked=null, focused=null, childOf=null, css=null), above=null, leftOf=null, rightOf=null, containsChild=null, containsDescendants=null, traits=null, index=null, enabled=null, optional=false, selected=null, checked=null, focused=null, childOf=null, css=null), retryIfNoChange=false, waitUntilVisible=false, longPress=false, repeat=null, waitToSettleTimeoutMs=null, relativePoint=null, label=null, optional=false)), logMessages=[], insight=Insight(message=, level=NONE), aiReasoning=null, labeledCommand=null)
+14:16:47.120 [ INFO] maestro.Maestro.tap-HgV9Ck0: Tapping on element:  UiElement(treeNode=TreeNode(attributes={text=, accessibilityText=Back, hintText=, ignoreBoundsFiltering=false, resource-id=android:id/input_method_nav_back, clickable=true, bounds=[21,2274][204,2400], enabled=true, focused=false, checked=false, scrollable=false, selected=false, class=android.widget.ImageView, important-for-accessibility=true, error=}, children=[], clickable=true, enabled=true, focused=false, checked=false, selected=false), bounds=Bounds(x=21, y=2274, width=183, height=126))
+14:16:48.425 [ERROR] maestro.cli.session.MaestroSessionManager.newSession$lambda$0: Failed to record heartbeat
+java.io.IOException: The process cannot access the file because another process has locked a portion of the file
+	at java.base/java.io.FileOutputStream.writeBytes(Native Method)
+	at java.base/java.io.FileOutputStream.write(FileOutputStream.java:332)
+	at kotlin.io.FilesKt__FileReadWriteKt.writeTextImpl(FileReadWrite.kt:160)
+	at kotlin.io.FilesKt__FileReadWriteKt.writeText(FileReadWrite.kt:145)
+	at kotlin.io.FilesKt__FileReadWriteKt.writeText$default(FileReadWrite.kt:144)
+	at maestro.cli.db.KeyValueStore.commit(KeyValueStore.kt:50)
+	at maestro.cli.db.KeyValueStore.set$lambda$3$lambda$2(KeyValueStore.kt:23)
+	at maestro.cli.db.KeyValueStore.withFileLock(KeyValueStore.kt:62)
+	at maestro.cli.db.KeyValueStore.set(KeyValueStore.kt:20)
+	at maestro.cli.session.SessionStore.heartbeat(SessionStore.kt:12)
+	at maestro.cli.session.MaestroSessionManager.newSession$lambda$0(MaestroSessionManager.kt:98)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:545)
+	at java.base/java.util.concurrent.FutureTask.runAndReset(FutureTask.java:371)
+	at java.base/java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:310)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1090)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:614)
+	at java.base/java.lang.Thread.run(Thread.java:1516)
+14:16:48.514 [ INFO] maestro.Maestro.tap-HgV9Ck0: Tap aimed via settled hierarchy
+14:16:48.517 [ INFO] maestro.Maestro.hierarchyBasedTap-ogj28Uc: Tapping at (112, 2337) using hierarchy based logic for wait
+14:16:49.733 [ INFO] maestro.Maestro.hierarchyBasedTap-ogj28Uc: Something has changed in the UI judging by view hierarchy. Proceed.
+14:16:49.734 [ INFO] maestro.cli.runner.MaestroCommandRunner.runCommands$lambda$2: Tap on Below "Card Holder*" COMPLETED
+14:16:49.735 [ INFO] maestro.cli.runner.MaestroCommandRunner.runCommands$lambda$0: Input text ${CARD_HOLDER} RUNNING
+14:16:49.743 [ INFO] maestro.cli.runner.MaestroCommandRunner.runCommands$lambda$11: Input text ${CARD_HOLDER} metadata CommandMetadata(numberOfRuns=null, evaluatedCommand=MaestroCommand(inputTextCommand=InputTextCommand(text=TEST USER, label=null, optional=false)), logMessages=[], insight=Insight(message=, level=NONE), aiReasoning=null, labeledCommand=null)
+14:16:49.743 [ INFO] maestro.Maestro.inputText: Inputting text: TEST USER
+14:16:51.162 [ INFO] maestro.cli.runner.MaestroCommandRunner.runCommands$lambda$2: Input text ${CARD_HOLDER} COMPLETED
+14:16:52.042 [ INFO] maestro.cli.report.TestDebugReporter.deleteOldFiles: Performing purge of logs older than 14 days from C:\Users\Mohammed Elkatry\.maestro\tests
+14:16:53.426 [ERROR] maestro.cli.session.MaestroSessionManager.newSession$lambda$0: Failed to record heartbeat
+java.io.IOException: The process cannot access the file because another process has locked a portion of the file
+	at java.base/java.io.FileOutputStream.writeBytes(Native Method)
+	at java.base/java.io.FileOutputStream.write(FileOutputStream.java:332)
+	at kotlin.io.FilesKt__FileReadWriteKt.writeTextImpl(FileReadWrite.kt:160)
+	at kotlin.io.FilesKt__FileReadWriteKt.writeText(FileReadWrite.kt:145)
+	at kotlin.io.FilesKt__FileReadWriteKt.writeText$default(FileReadWrite.kt:144)
+	at maestro.cli.db.KeyValueStore.commit(KeyValueStore.kt:50)
+	at maestro.cli.db.KeyValueStore.set$lambda$3$lambda$2(KeyValueStore.kt:23)
+	at maestro.cli.db.KeyValueStore.withFileLock(KeyValueStore.kt:62)
+	at maestro.cli.db.KeyValueStore.set(KeyValueStore.kt:20)
+	at maestro.cli.session.SessionStore.heartbeat(SessionStore.kt:12)
+	at maestro.cli.session.MaestroSessionManager.newSession$lambda$0(MaestroSessionManager.kt:98)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:545)
+	at java.base/java.util.concurrent.FutureTask.runAndReset(FutureTask.java:371)
+	at java.base/java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:310)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1090)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:614)
+	at java.base/java.lang.Thread.run(Thread.java:1516)

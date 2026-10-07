@@ -1,0 +1,27 @@
+
+> Sakani-mobileapp@1.0.0 e2e:check-eligibility
+> node report-dashboard/run-maestro.js --include-e2e --yes-i-understand-this-changes-business-data --flows "check elgibilty" && npm run post-test
+
+Device emulator-5554 | 1 flow(s) | e2e INCLUDED
+
+check elgibilty ... BLOCKED_ENVIRONMENT (exit 1, 4s)
+    environment: no step executed
+
+0 passed, 0 failed, 1 blocked/unresolved
+Now run: npm run post-test
+
+> Sakani-mobileapp@1.0.0 post-test
+> npm run merge-results && npm run generate-report
+
+
+> Sakani-mobileapp@1.0.0 merge-results
+> node report-dashboard/merge-results.js
+
+Merged 2 flow(s): 0 pass, 0 fail, 1 blocked (environment), 1 unresolved
+
+-> test-results\merged-results.json
+
+> Sakani-mobileapp@1.0.0 generate-report
+> node report-dashboard/generate-dashboard.js
+
+-> report-dashboard\dashboard.html

@@ -1,0 +1,19 @@
+{
+  "flow": "check-eligibility",
+  "file": ".maestro/e2e/check-eligibility.yaml",
+  "suite": "e2e",
+  "tags": [
+    "e2e",
+    "eligibility",
+    "critical"
+  ],
+  "startedAt": "2026-10-06T06:33:15.603Z",
+  "durationMs": 744020,
+  "logPath": "report-dashboard/maestro-output/check-eligibility/maestro.log",
+  "status": "PASS",
+  "exitCode": 0,
+  "failedSteps": 0,
+  "firstFailure": null,
+  "envReason": null,
+  "npsAppearances": 0
+}

@@ -1,0 +1,2 @@
+.maestro/regression-readonly/project.yaml        OK
+.maestro/regression-readonly/search.yaml         OK

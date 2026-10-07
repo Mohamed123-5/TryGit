@@ -1,0 +1,4 @@
+appId: fi.iwa.sakani
+name: A2 same comparison without dollar (false)
+---
+- assertTrue: ${"ab" === "x"}

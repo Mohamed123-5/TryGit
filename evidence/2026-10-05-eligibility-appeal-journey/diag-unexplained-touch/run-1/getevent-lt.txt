@@ -1,0 +1,28 @@
+14:43:30.695 add device 1: /dev/input/event13
+14:43:30.775   name:     "qwerty2"
+14:43:30.847 add device 2: /dev/input/event12
+14:43:30.924   name:     "virtio_input_multi_touch_11"
+14:43:31.022 add device 3: /dev/input/event11
+14:43:31.097   name:     "virtio_input_multi_touch_10"
+14:43:31.172 add device 4: /dev/input/event10
+14:43:31.238   name:     "virtio_input_multi_touch_9"
+14:43:31.303 add device 5: /dev/input/event9
+14:43:31.376   name:     "virtio_input_multi_touch_8"
+14:43:31.453 add device 6: /dev/input/event8
+14:43:31.532   name:     "virtio_input_multi_touch_7"
+14:43:31.619 add device 7: /dev/input/event7
+14:43:31.687   name:     "virtio_input_multi_touch_6"
+14:43:31.771 add device 8: /dev/input/event6
+14:43:31.870   name:     "virtio_input_multi_touch_5"
+14:43:31.942 add device 9: /dev/input/event5
+14:43:32.019   name:     "virtio_input_multi_touch_4"
+14:43:32.103 add device 10: /dev/input/event4
+14:43:32.190   name:     "virtio_input_multi_touch_3"
+14:43:32.284 add device 11: /dev/input/event3
+14:43:32.376   name:     "virtio_input_multi_touch_2"
+14:43:32.456 add device 12: /dev/input/event2
+14:43:32.539   name:     "virtio_input_multi_touch_1"
+14:43:32.624 add device 13: /dev/input/event0
+14:43:32.716   name:     "Power Button"
+14:43:32.817 add device 14: /dev/input/event1
+14:43:32.908   name:     "AT Translated Set 2 keyboard"

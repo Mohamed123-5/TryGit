@@ -1,0 +1,62 @@
+======== 1. TEST FLOWS named in the keep list
+  .maestro/regression-readonly/account.yaml       509L 2026-09-22 13:16  refs->[../subflows/login.yaml, ../subflows/account-ready.yaml, ../subflows/account-ready.yaml, ../subflows/open-account-service.yaml, ../subflows/account-ready.yaml, ../subflows/open-account-service.yaml, ../subflows/account-ready.yaml, ../subflows/open-account-service.yaml, ../subflows/account-ready.yaml, ../subflows/open-account-service.yaml, ../subflows/account-ready.yaml, ../subflows/open-account-service.yaml, ../subflows/account-ready.yaml, ../subflows/open-account-service.yaml, ../subflows/account-ready.yaml, ../subflows/open-account-service.yaml, ../subflows/account-ready.yaml, ../subflows/open-account-service.yaml, ../subflows/account-ready.yaml, ../subflows/open-account-service.yaml, ../subflows/account-ready.yaml, ../subflows/open-account-service.yaml, ../subflows/account-ready.yaml, ../subflows/open-account-service.yaml, ../subflows/account-ready.yaml, ../subflows/open-account-service.yaml, ../subflows/account-ready.yaml, ../subflows/open-account-service.yaml, ../subflows/account-ready.yaml, ../subflows/open-account-service.yaml, ../subflows/account-ready.yaml, ../subflows/open-account-service.yaml, ../subflows/account-ready.yaml, ../subflows/account-ready.yaml, ../subflows/account-ready.yaml, ../subflows/account-ready.yaml, ../subflows/account-ready.yaml]  referencedBy=[NOTHING]
+  .maestro/regression-readonly/booking.yaml       325L 2026-09-22 13:16  refs->[../subflows/clear-overlays.yaml, ../subflows/login.yaml, ../subflows/verify-signed-in-account.yaml]  referencedBy=[NOTHING]
+  .maestro/regression-readonly/home.yaml          341L 2026-09-22 13:16  refs->[../subflows/clear-overlays.yaml, ../subflows/login.yaml, ../subflows/open-account-service.yaml]  referencedBy=[NOTHING]
+  .maestro/regression-readonly/login.yaml         160L 2026-09-22 13:16  refs->[../subflows/clear-overlays.yaml, ../subflows/post-login.yaml, ../subflows/clear-overlays.yaml]  referencedBy=[NOTHING]
+  .maestro/regression-readonly/logout.yaml        161L 2026-09-22 13:16  refs->[../subflows/login.yaml, ../subflows/clear-overlays.yaml, ../subflows/clear-overlays.yaml]  referencedBy=[NOTHING]
+  .maestro/regression-readonly/marketplace.yaml    91L 2026-09-22 13:16  refs->[../subflows/clear-overlays.yaml]  referencedBy=[NOTHING]
+  .maestro/regression-readonly/project.yaml       124L 2026-09-22 13:16  refs->[../subflows/clear-overlays.yaml, ../subflows/clear-overlays.yaml]  referencedBy=[NOTHING]
+  .maestro/regression-readonly/search.yaml        180L 2026-09-22 13:16  refs->[../subflows/clear-overlays.yaml]  referencedBy=[NOTHING]
+  .maestro/regression-readonly/unit.yaml          112L 2026-09-22 13:16  refs->[../subflows/login.yaml]  referencedBy=[NOTHING]
+  .maestro/regression-readonly/wallet.yaml        369L 2026-09-22 13:16  refs->[../subflows/login.yaml]  referencedBy=[NOTHING]
+  .maestro/e2e/cancel-booking.yaml                459L 2026-09-22 13:16  refs->[../subflows/login.yaml, ../subflows/clear-overlays.yaml, ../subflows/verify-signed-in-account.yaml, ../subflows/clear-overlays.yaml, ../subflows/clear-overlays.yaml, ../subflows/clear-overlays.yaml]  referencedBy=[NOTHING]  DESTRUCTIVE(2)
+  .maestro/e2e/full-journey-with-fee.yaml         427L 2026-09-22 13:16  refs->[../subflows/login.yaml, ../subflows/verify-signed-in-account.yaml, ../subflows/clear-overlays.yaml, ../subflows/clear-overlays.yaml, ../subflows/clear-overlays.yaml, ../subflows/clear-overlays.yaml]  referencedBy=[NOTHING]  DESTRUCTIVE(6)
+  .maestro/e2e/full-journey-without-fee.yaml      277L 2026-09-22 13:16  refs->[../subflows/login.yaml, ../subflows/verify-signed-in-account.yaml, ../subflows/clear-overlays.yaml, ../subflows/clear-overlays.yaml]  referencedBy=[NOTHING]  DESTRUCTIVE(1)
+
+======== 2. OTHER top-level YAML files (not in the keep list)
+
+======== 3. SUBFLOWS
+  .maestro/subflows/account-ready.yaml             11L 2026-09-21 06:04  refs->[-]  referencedBy=[account.yaml, open-account-service.yaml]
+      name: Prove Account screen is ready
+  .maestro/subflows/clear-overlays.yaml           518L 2026-09-22 06:30  refs->[-]  referencedBy=[cancel-booking.yaml, full-journey-with-fee.yaml, full-journey-without-fee.yaml, booking.yaml, home.yaml, login.yaml, logout.yaml, marketplace.yaml, project.yaml, search.yaml, login.yaml, post-login.yaml]
+      name: Clear first-run and promo overlays
+  .maestro/subflows/login.yaml                     67L 2026-09-21 08:23  refs->[clear-overlays.yaml, post-login.yaml]  referencedBy=[cancel-booking.yaml, full-journey-with-fee.yaml, full-journey-without-fee.yaml, account.yaml, booking.yaml, home.yaml, logout.yaml, unit.yaml, wallet.yaml]
+      name: Login with National ID
+  .maestro/subflows/open-account-service.yaml      49L 2026-09-21 06:04  refs->[account-ready.yaml]  referencedBy=[account.yaml, home.yaml]
+      name: Open a reachable Account service
+  .maestro/subflows/post-login.yaml               191L 2026-09-22 10:17  refs->[clear-overlays.yaml, clear-overlays.yaml, clear-overlays.yaml]  referencedBy=[login.yaml, login.yaml]
+      name: Post-authentication - from Nafath Confirm to authenticated Home
+  .maestro/subflows/verify-signed-in-account.yaml   46L 2026-09-20 08:50  refs->[-]  referencedBy=[cancel-booking.yaml, full-journey-with-fee.yaml, full-journey-without-fee.yaml, booking.yaml]
+      name: Verify the signed-in account is NATIONAL_ID
+
+======== 4. REACHABILITY from the keep list (what the retained tests actually need)
+  reachable: e2e/cancel-booking.yaml, e2e/full-journey-with-fee.yaml, e2e/full-journey-without-fee.yaml, regression-readonly/account.yaml, regression-readonly/booking.yaml, regression-readonly/home.yaml, regression-readonly/login.yaml, regression-readonly/logout.yaml, regression-readonly/marketplace.yaml, regression-readonly/project.yaml, regression-readonly/search.yaml, regression-readonly/unit.yaml, regression-readonly/wallet.yaml, subflows/account-ready.yaml, subflows/clear-overlays.yaml, subflows/login.yaml, subflows/open-account-service.yaml, subflows/post-login.yaml, subflows/verify-signed-in-account.yaml
+  NOT reachable from any keep-list test:
+
+======== 5. BROKEN runFlow references
+  none
+
+======== 6. NON-YAML files under .maestro
+  .maestro/reference-screenshots/favorites/land-selected.png  (2403 bytes, 2026-09-21 06:39)
+  .maestro/reference-screenshots/favorites/mega-projects-selected.png  (5997 bytes, 2026-09-21 06:39)
+  .maestro/reference-screenshots/favorites/mega-projects-unselected.png  (5614 bytes, 2026-09-21 06:39)
+  .maestro/reference-screenshots/favorites/projects-selected.png  (3711 bytes, 2026-09-21 06:39)
+  .maestro/reference-screenshots/favorites/projects-unselected.png  (3464 bytes, 2026-09-21 06:39)
+
+======== 7. RUNNABLE ENTRY POINTS per folder (alphabetical). .maestro has no top-level flow,
+           so the suite is invoked per folder - never as "maestro test .maestro".
+  maestro test .maestro/regression-readonly/   (10 flow(s))
+    account.yaml
+    booking.yaml
+    home.yaml
+    login.yaml
+    logout.yaml
+    marketplace.yaml
+    project.yaml
+    search.yaml
+    unit.yaml
+    wallet.yaml
+  maestro test .maestro/e2e/   (3 flow(s))   <-- CHANGES BUSINESS STATE, run only with explicit authorization
+    cancel-booking.yaml   DESTRUCTIVE(2)
+    full-journey-with-fee.yaml   DESTRUCTIVE(6)
+    full-journey-without-fee.yaml   DESTRUCTIVE(1)

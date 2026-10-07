@@ -1,0 +1,9 @@
+appId: fi.iwa.sakani
+name: D1 npsRecovered false - block must be SKIPPED
+---
+- evalScript: ${output.npsRecovered = false}
+- runFlow:
+    when:
+      true: ${output.npsRecovered === true}
+    commands:
+      - assertTrue: false

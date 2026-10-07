@@ -1,0 +1,65 @@
+A. NATIONAL_ID fail-fast guard; EXPECTED_* inputs removed
+  PASS  exactly 1 guard before launchApp (line 72)
+  PASS  NATIONAL_ID valid 1000011487 -> proceeds
+  PASS  NATIONAL_ID valid Iqama 2000000001 -> proceeds
+  PASS  NATIONAL_ID missing -> stops before launch
+  PASS  NATIONAL_ID empty -> stops before launch
+  PASS  NATIONAL_ID 12345 -> stops before launch
+  PASS  NATIONAL_ID 3000011487 -> stops before launch
+  PASS  NATIONAL_ID letters -> stops before launch
+  PASS  NATIONAL_ID 11 digits -> stops before launch
+  PASS  no EXPECTED_UNIT_CODE / EXPECTED_INVOICE anywhere in the flow
+  PASS  env block declares NATIONAL_ID only
+  PASS  header documents the NATIONAL_ID-only command
+B. inspection subflow: the eligible (not signed) rule
+  PASS  Active, 2 steps left, contract Unsigned -> ELIGIBLE
+  PASS  Active, 3 steps left, no contract row yet -> ELIGIBLE
+  PASS  Active, 4 steps left (unpaid), no contract row -> ELIGIBLE
+  PASS  contract row shown WITHOUT "Unsigned" -> refused
+  PASS  signed: 1 steps left -> refused
+  PASS  signed: Extend PQ Period / Signed / Price quotation -> refused
+  PASS  no pre-signature step count read -> refused
+  PASS  invoice not read -> refused
+  PASS  card not found -> refused
+C. selection and stop messages
+  PASS  4 selection stop messages (found 4)
+  PASS  no Active booking -> stop: "No active unsigned booking available for cancellation."
+  PASS  one Active booking, SIGNED -> stop: "No active unsigned booking available for cancellation."
+  PASS  one Active booking, unsigned -> SELECT 01-01-0504-999-205 / 2609090000101875
+  PASS  two Active: signed + unsigned (unsigned second) -> SELECT 01-01-0504-999-205 / 2609090000101875
+  PASS  two Active: unsigned + signed (unsigned first) -> SELECT 01-01-0504-999-205 / 2609090000101875
+  PASS  two Active, BOTH unsigned -> stop: "Multiple active unsigned bookings found. Cancellation is ambiguous"
+  PASS  two Active, both signed -> stop: "No active unsigned booking available for cancellation."
+  PASS  three or more Active cards -> stop: "Three or more Active bookings - they cannot all be inspected, so a"
+  PASS  list re-read returned the same card twice -> stop: "The Active list changed while it was being read. Cancellation is a"
+D. re-verification gate (immediately before Cancel)
+  PASS  all five re-verified -> CANCEL
+  PASS  account not proven -> stop
+  PASS  card no longer under Active -> stop
+  PASS  now signed / not eligible -> stop
+  PASS  card shows another unit -> stop
+  PASS  details show another invoice -> stop
+E. selectors against real card texts (saved dumps)
+  PASS  real Active and Cancelled cards available (8 distinct)
+  PASS  counting selector present
+  PASS  counting selector matches Active cards only (not Cancelled)
+  PASS  unit code extracted from a real Active card: 01-01-0504-999-288
+  PASS  subflow opens the card pinned to ${UNIT_CODE}
+  PASS  pinned selector matches its own Active card
+  PASS  pinned selector rejects a shorter / longer code
+  PASS  pinned selector rejects another unit
+  PASS  Cancelled-card assertion matches a real Cancelled card by its unit, with a date
+F. ordering and structure
+  PASS  selection gate (line 264) then safety gate (line 293)
+  PASS  all 6 cancellation taps are after the safety gate
+  PASS  the inspection subflow never taps "Cancel booking"
+  PASS  no tapOn uses a position index (cards are only counted by position)
+  PASS  booking cards are tapped only through unit-code-pinned selectors
+  PASS  no forbidden step in either file
+  PASS  no ${...} expression contains a second "$"
+  PASS  required stop message present: "No active unsigned booking available for cancellation."
+  PASS  required stop message present: "Multiple active unsigned bookings found. Cancellation is ambiguous."
+  PASS  referenced subflows exist: subflows/login.yaml, subflows/clear-overlays.yaml, subflows/verify-signed-in-account.yaml, subflows/inspect-active-booking.yaml
+  PASS  survey returns to the list; re-verification stays on the booking
+
+STATIC CHECK: 57 pass, 0 fail

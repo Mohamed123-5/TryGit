@@ -1,0 +1,5 @@
+screens containing an Ok/OK control: 7
+- C:\Users\Mohammed Elkatry\.maestro\tests\2026-08-31_161040\step\screen-hierarchy\step-003-tapOnElement-Account
+    Cellular, three bars | Sorry! | There's something wrong. Please try again later!
+- C:\Users\Mohammed Elkatry\.maestro\tests\2026-09-01_131952\Sakani login with National ID\screen-hierarchy\step
+    There's something wrong. Please try again later!

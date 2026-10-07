@@ -1,0 +1,9 @@
+appId: fi.iwa.sakani
+name: EXP-D parent
+env:
+  NATIONAL_ID: '${typeof NATIONAL_ID === "undefined" ? "1119880062" : String(NATIONAL_ID)}'
+---
+- runFlow:
+    file: expD-sub.yaml
+    env:
+      NATIONAL_ID: ${NATIONAL_ID}

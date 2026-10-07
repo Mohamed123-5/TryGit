@@ -1,0 +1,1195 @@
+10-04 15:57:15.020 10047 10100 D Maestro : Requesting view hierarchy
+10-04 15:57:15.021 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:15.021 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:15.082 10047 10100 D Maestro : View hierarchy received in 62 ms
+10-04 15:57:15.087 10377 10448 D EGL_emulation: app_time_stats: avg=16.76ms min=5.09ms max=32.55ms count=60
+10-04 15:57:15.148 10377 10441 D EGL_emulation: app_time_stats: avg=17.61ms min=8.40ms max=31.93ms count=56
+10-04 15:57:15.198 10047 10100 D Maestro : Requesting view hierarchy
+10-04 15:57:15.198 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:15.199 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:15.250 10047 10100 D Maestro : View hierarchy received in 52 ms
+10-04 15:57:15.319 10047 10100 D Maestro : Requesting view hierarchy
+10-04 15:57:15.320 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:15.321 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:15.411 10047 10100 D Maestro : View hierarchy received in 92 ms
+10-04 15:57:15.485   843 10726 D android.hardware.gnss-service.ranchu: GnssHwListener:consume:87 sz=64
+10-04 15:57:15.486 10047 10100 D Maestro : Requesting view hierarchy
+10-04 15:57:15.486 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:15.487 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:15.490   843 10726 D android.hardware.gnss-service.ranchu: GnssHwListener:consume:87 sz=64
+10-04 15:57:15.490   843 10726 D android.hardware.gnss-service.ranchu: Gnss:onGnssLocationCb:311
+10-04 15:57:15.490   843 10726 D android.hardware.gnss-service.ranchu: Gnss:onGnssLocationCb:321
+10-04 15:57:15.578 10047 10100 D Maestro : View hierarchy received in 92 ms
+10-04 15:57:15.632 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:15.634 10047 10100 D UiDevice: Waiting 500ms for window update of package fi.iwa.sakani.
+10-04 15:57:15.942   786   786 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+10-04 15:57:16.102 10377 10448 D EGL_emulation: app_time_stats: avg=16.87ms min=5.74ms max=34.94ms count=60
+10-04 15:57:16.136 10047 10100 W UiDevice: Timed out waiting 500ms on window update.
+10-04 15:57:16.136 10047 10100 W UiDevice: java.util.concurrent.TimeoutException: Expected event not received within: 500 ms among: []
+10-04 15:57:16.136 10047 10100 W UiDevice: 	at android.app.UiAutomation.executeAndWaitForEvent(UiAutomation.java:1071)
+10-04 15:57:16.136 10047 10100 W UiDevice: 	at androidx.test.uiautomator.UiDevice.waitForWindowUpdate(UiDevice.java:1253)
+10-04 15:57:16.136 10047 10100 W UiDevice: 	at dev.mobile.maestro.Service.isWindowUpdating(MaestroDriverService.kt:359)
+10-04 15:57:16.136 10047 10100 W UiDevice: 	at maestro_android.MaestroDriverGrpc$MethodHandlers.invoke(MaestroDriverGrpc.java:965)
+10-04 15:57:16.136 10047 10100 W UiDevice: 	at io.grpc.stub.ServerCalls$UnaryServerCallHandler$UnaryServerCallListener.onHalfClose(ServerCalls.java:182)
+10-04 15:57:16.136 10047 10100 W UiDevice: 	at io.grpc.internal.ServerCallImpl$ServerStreamListenerImpl.halfClosed(ServerCallImpl.java:355)
+10-04 15:57:16.136 10047 10100 W UiDevice: 	at io.grpc.internal.ServerImpl$JumpToApplicationThreadServerStreamListener$1HalfClosed.runInContext(ServerImpl.java:867)
+10-04 15:57:16.136 10047 10100 W UiDevice: 	at io.grpc.internal.ContextRunnable.run(ContextRunnable.java:37)
+10-04 15:57:16.136 10047 10100 W UiDevice: 	at io.grpc.internal.SerializingExecutor.run(SerializingExecutor.java:133)
+10-04 15:57:16.136 10047 10100 W UiDevice: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+10-04 15:57:16.136 10047 10100 W UiDevice: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:644)
+10-04 15:57:16.136 10047 10100 W UiDevice: 	at java.lang.Thread.run(Thread.java:1012)
+10-04 15:57:16.162 10377 10441 D EGL_emulation: app_time_stats: avg=16.77ms min=9.85ms max=27.92ms count=59
+10-04 15:57:16.192 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:16.196 10047 10100 D UiDevice: Waiting 500ms for window update of package fi.iwa.sakani.
+10-04 15:57:16.360   496 10644 D BufferPoolAccessor2.0: bufferpool2 0x7d2621cb0af8 : 2(1958400 size) total buffers - 1(979200 size) used buffers - 230/232 (recycle/alloc) - 2/231 (fetch/transfer)
+10-04 15:57:16.485   843 10726 D android.hardware.gnss-service.ranchu: GnssHwListener:consume:87 sz=64
+10-04 15:57:16.486   843 10726 D android.hardware.gnss-service.ranchu: GnssHwListener:consume:87 sz=64
+10-04 15:57:16.486   843 10726 D android.hardware.gnss-service.ranchu: Gnss:onGnssLocationCb:311
+10-04 15:57:16.486   843 10726 D android.hardware.gnss-service.ranchu: Gnss:onGnssLocationCb:321
+10-04 15:57:16.699 10047 10100 W UiDevice: Timed out waiting 500ms on window update.
+10-04 15:57:16.699 10047 10100 W UiDevice: java.util.concurrent.TimeoutException: Expected event not received within: 500 ms among: []
+10-04 15:57:16.699 10047 10100 W UiDevice: 	at android.app.UiAutomation.executeAndWaitForEvent(UiAutomation.java:1071)
+10-04 15:57:16.699 10047 10100 W UiDevice: 	at androidx.test.uiautomator.UiDevice.waitForWindowUpdate(UiDevice.java:1253)
+10-04 15:57:16.699 10047 10100 W UiDevice: 	at dev.mobile.maestro.Service.isWindowUpdating(MaestroDriverService.kt:359)
+10-04 15:57:16.699 10047 10100 W UiDevice: 	at maestro_android.MaestroDriverGrpc$MethodHandlers.invoke(MaestroDriverGrpc.java:965)
+10-04 15:57:16.699 10047 10100 W UiDevice: 	at io.grpc.stub.ServerCalls$UnaryServerCallHandler$UnaryServerCallListener.onHalfClose(ServerCalls.java:182)
+10-04 15:57:16.699 10047 10100 W UiDevice: 	at io.grpc.internal.ServerCallImpl$ServerStreamListenerImpl.halfClosed(ServerCallImpl.java:355)
+10-04 15:57:16.699 10047 10100 W UiDevice: 	at io.grpc.internal.ServerImpl$JumpToApplicationThreadServerStreamListener$1HalfClosed.runInContext(ServerImpl.java:867)
+10-04 15:57:16.699 10047 10100 W UiDevice: 	at io.grpc.internal.ContextRunnable.run(ContextRunnable.java:37)
+10-04 15:57:16.699 10047 10100 W UiDevice: 	at io.grpc.internal.SerializingExecutor.run(SerializingExecutor.java:133)
+10-04 15:57:16.699 10047 10100 W UiDevice: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+10-04 15:57:16.699 10047 10100 W UiDevice: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:644)
+10-04 15:57:16.699 10047 10100 W UiDevice: 	at java.lang.Thread.run(Thread.java:1012)
+10-04 15:57:16.762 10047 10100 D Maestro : Requesting view hierarchy
+10-04 15:57:16.763 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:16.763 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:16.929 10047 10100 D Maestro : View hierarchy received in 167 ms
+10-04 15:57:17.100 10377 10377 I flutter : [WebEngage] logEvent success: profile_category_viewed, parameters: {category_name: Eligibility checker status}
+10-04 15:57:17.102   419 13773 D audioserver: FGS Logger Transaction failed
+10-04 15:57:17.102   419 13773 D audioserver: -129
+10-04 15:57:17.103 10377 10377 I flutter : UXCamAnalyticsHelper: logEvent: Profile_Activities, parameters : {widget: Eligibility checker status}
+10-04 15:57:17.104   419   514 D AudioFlinger: mixer(0x70fe3a89a930) throttle end: throttle time(35)
+10-04 15:57:17.105 10377 10448 D EGL_emulation: app_time_stats: avg=16.98ms min=11.37ms max=32.82ms count=59
+10-04 15:57:17.107   559  2231 W ProcessStats: Tracking association SourceState{dfc0e7e com.google.android.gms/10127 BTop #34185} whose proc state 2 is better than process ProcessState{49a4909 com.google.android.gms.persistent/10127 pkg=com.google.android.gms} proc state 4 (34 skipped)
+10-04 15:57:17.122 10377 10377 W WindowOnBackDispatcher: OnBackInvokedCallback is not enabled for the application.
+10-04 15:57:17.122 10377 10377 W WindowOnBackDispatcher: Set 'android:enableOnBackInvokedCallback="true"' in the application manifest.
+10-04 15:57:17.179 10377 10441 D EGL_emulation: app_time_stats: avg=7.55ms min=1.79ms max=31.63ms count=59
+10-04 15:57:17.264   419   514 D audioserver: FGS Logger Transaction failed
+10-04 15:57:17.264   419   514 D audioserver: -129
+10-04 15:57:17.486   843 10726 D android.hardware.gnss-service.ranchu: GnssHwListener:consume:87 sz=64
+10-04 15:57:17.487   843 10726 D android.hardware.gnss-service.ranchu: GnssHwListener:consume:87 sz=64
+10-04 15:57:17.487   843 10726 D android.hardware.gnss-service.ranchu: Gnss:onGnssLocationCb:311
+10-04 15:57:17.487   843 10726 D android.hardware.gnss-service.ranchu: Gnss:onGnssLocationCb:321
+10-04 15:57:17.866 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:17.866 10047 10100 D Maestro : Requesting view hierarchy
+10-04 15:57:17.867 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:17.867 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:17.947 10047 10100 D Maestro : View hierarchy received in 81 ms
+10-04 15:57:18.002 10047 10100 D Maestro : Requesting view hierarchy
+10-04 15:57:18.003 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:18.003 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:18.067 10047 10100 D Maestro : View hierarchy received in 65 ms
+10-04 15:57:18.136 10377 10448 D EGL_emulation: app_time_stats: avg=17.19ms min=5.17ms max=32.59ms count=60
+10-04 15:57:18.140 10047 10100 D Maestro : Requesting view hierarchy
+10-04 15:57:18.141 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:18.141 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:18.198 10377 10441 D EGL_emulation: app_time_stats: avg=17.84ms min=5.30ms max=31.77ms count=56
+10-04 15:57:18.205 10047 10100 D Maestro : View hierarchy received in 64 ms
+10-04 15:57:18.273 10047 10100 D Maestro : Requesting view hierarchy
+10-04 15:57:18.274 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:18.274 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:18.356 11174 11176 W ziparchive: Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/00000004/DynamiteModulesC.dm': No such file or directory
+10-04 15:57:18.357 11174 11176 W ziparchive: Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/00000004/DynamiteModulesC.dm': No such file or directory
+10-04 15:57:18.358 11174 11176 W ziparchive: Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/00000001/CronetDynamite.dm': No such file or directory
+10-04 15:57:18.358 11174 11176 W ziparchive: Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/00000001/CronetDynamite.dm': No such file or directory
+10-04 15:57:18.359 11174 11176 W ziparchive: Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/00000002/DynamiteLoader.dm': No such file or directory
+10-04 15:57:18.359 11174 11176 W ziparchive: Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/00000002/DynamiteLoader.dm': No such file or directory
+10-04 15:57:18.361 11174 11176 W ziparchive: Unable to open '/data/user/0/com.google.android.gms/app_fb/f.dm': No such file or directory
+10-04 15:57:18.362 11174 11176 W ziparchive: Unable to open '/data/user/0/com.google.android.gms/app_fb/f.dm': No such file or directory
+10-04 15:57:18.365 11174 11176 W ziparchive: Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/00000005/GoogleCertificates.dm': No such file or directory
+10-04 15:57:18.365 11174 11176 W ziparchive: Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/00000005/GoogleCertificates.dm': No such file or directory
+10-04 15:57:18.366 11174 11176 W ziparchive: Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/00000009/dl-TfliteDynamiteDynamite.integ_262730502100800.dm': No such file or directory
+10-04 15:57:18.366 11174 11176 W ziparchive: Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/00000009/dl-TfliteDynamiteDynamite.integ_262730502100800.dm': No such file or directory
+10-04 15:57:18.367 11174 11176 W ziparchive: Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/00000000/AdsDynamite.dm': No such file or directory
+10-04 15:57:18.367 11174 11176 W ziparchive: Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/00000000/AdsDynamite.dm': No such file or directory
+10-04 15:57:18.368 11174 11176 W ziparchive: Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/00000008/dl-VisionOcrDynamite.integ_231602402100000.dm': No such file or directory
+10-04 15:57:18.368 11174 11176 W ziparchive: Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/00000008/dl-VisionOcrDynamite.integ_231602402100000.dm': No such file or directory
+10-04 15:57:18.370 11174 11176 W ziparchive: Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/0000000c/dl-MlkitBarcodeUi.optional_231818100000.dm': No such file or directory
+10-04 15:57:18.370 11174 11176 W ziparchive: Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/0000000c/dl-MlkitBarcodeUi.optional_231818100000.dm': No such file or directory
+10-04 15:57:18.376 11174 11176 W ziparchive: Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/0000000a/dl-MlkitOcrCommon.optional_231818100800.dm': No such file or directory
+10-04 15:57:18.376 11174 11176 W ziparchive: Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/0000000a/dl-MlkitOcrCommon.optional_231818100800.dm': No such file or directory
+10-04 15:57:18.379 11174 11176 W ziparchive: Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/00000007/MeasurementDynamite.dm': No such file or directory
+10-04 15:57:18.379 11174 11176 W ziparchive: Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/00000007/MeasurementDynamite.dm': No such file or directory
+10-04 15:57:18.430 10047 10100 D Maestro : View hierarchy received in 157 ms
+10-04 15:57:18.487   843 10726 D android.hardware.gnss-service.ranchu: GnssHwListener:consume:87 sz=64
+10-04 15:57:18.489   843 10726 D android.hardware.gnss-service.ranchu: GnssHwListener:consume:87 sz=64
+10-04 15:57:18.489   843 10726 D android.hardware.gnss-service.ranchu: Gnss:onGnssLocationCb:311
+10-04 15:57:18.489   843 10726 D android.hardware.gnss-service.ranchu: Gnss:onGnssLocationCb:321
+10-04 15:57:18.490 10047 10100 D Maestro : Requesting view hierarchy
+10-04 15:57:18.492 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:18.492 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:18.577   786   786 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+10-04 15:57:18.611 10047 10100 D Maestro : View hierarchy received in 121 ms
+10-04 15:57:18.633   559  2231 D WindowManager: captureDisplay
+10-04 15:57:18.804 10047 10100 D Maestro : Requesting view hierarchy
+10-04 15:57:18.805 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:18.806 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:18.885 10047 10100 D Maestro : View hierarchy received in 81 ms
+10-04 15:57:18.947 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:18.952 10047 10100 D UiDevice: Waiting 500ms for window update of package fi.iwa.sakani.
+10-04 15:57:19.152 10377 10448 D EGL_emulation: app_time_stats: avg=17.81ms min=7.52ms max=44.02ms count=57
+10-04 15:57:19.211 10377 10441 D EGL_emulation: app_time_stats: avg=19.09ms min=3.19ms max=34.95ms count=50
+10-04 15:57:19.454 10047 10100 W UiDevice: Timed out waiting 500ms on window update.
+10-04 15:57:19.454 10047 10100 W UiDevice: java.util.concurrent.TimeoutException: Expected event not received within: 500 ms among: []
+10-04 15:57:19.454 10047 10100 W UiDevice: 	at android.app.UiAutomation.executeAndWaitForEvent(UiAutomation.java:1071)
+10-04 15:57:19.454 10047 10100 W UiDevice: 	at androidx.test.uiautomator.UiDevice.waitForWindowUpdate(UiDevice.java:1253)
+10-04 15:57:19.454 10047 10100 W UiDevice: 	at dev.mobile.maestro.Service.isWindowUpdating(MaestroDriverService.kt:359)
+10-04 15:57:19.454 10047 10100 W UiDevice: 	at maestro_android.MaestroDriverGrpc$MethodHandlers.invoke(MaestroDriverGrpc.java:965)
+10-04 15:57:19.454 10047 10100 W UiDevice: 	at io.grpc.stub.ServerCalls$UnaryServerCallHandler$UnaryServerCallListener.onHalfClose(ServerCalls.java:182)
+10-04 15:57:19.454 10047 10100 W UiDevice: 	at io.grpc.internal.ServerCallImpl$ServerStreamListenerImpl.halfClosed(ServerCallImpl.java:355)
+10-04 15:57:19.454 10047 10100 W UiDevice: 	at io.grpc.internal.ServerImpl$JumpToApplicationThreadServerStreamListener$1HalfClosed.runInContext(ServerImpl.java:867)
+10-04 15:57:19.454 10047 10100 W UiDevice: 	at io.grpc.internal.ContextRunnable.run(ContextRunnable.java:37)
+10-04 15:57:19.454 10047 10100 W UiDevice: 	at io.grpc.internal.SerializingExecutor.run(SerializingExecutor.java:133)
+10-04 15:57:19.454 10047 10100 W UiDevice: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+10-04 15:57:19.454 10047 10100 W UiDevice: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:644)
+10-04 15:57:19.454 10047 10100 W UiDevice: 	at java.lang.Thread.run(Thread.java:1012)
+10-04 15:57:19.488   843 10726 D android.hardware.gnss-service.ranchu: GnssHwListener:consume:87 sz=64
+10-04 15:57:19.489   843 10726 D android.hardware.gnss-service.ranchu: GnssHwListener:consume:87 sz=64
+10-04 15:57:19.489   843 10726 D android.hardware.gnss-service.ranchu: Gnss:onGnssLocationCb:311
+10-04 15:57:19.489   843 10726 D android.hardware.gnss-service.ranchu: Gnss:onGnssLocationCb:321
+10-04 15:57:19.512 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:19.516 10047 10100 D UiDevice: Waiting 500ms for window update of package fi.iwa.sakani.
+10-04 15:57:19.575   786   786 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+10-04 15:57:19.960   559   696 I netstats_mobile_sample: [46652453,13121697,49008,27975,46625318,13110487,48413,27846,1791118641274]
+10-04 15:57:19.960   559   696 I netstats_wifi_sample: [0,0,0,0,0,0,0,0,1791118641274]
+10-04 15:57:20.019 10047 10100 W UiDevice: Timed out waiting 500ms on window update.
+10-04 15:57:20.019 10047 10100 W UiDevice: java.util.concurrent.TimeoutException: Expected event not received within: 500 ms among: []
+10-04 15:57:20.019 10047 10100 W UiDevice: 	at android.app.UiAutomation.executeAndWaitForEvent(UiAutomation.java:1071)
+10-04 15:57:20.019 10047 10100 W UiDevice: 	at androidx.test.uiautomator.UiDevice.waitForWindowUpdate(UiDevice.java:1253)
+10-04 15:57:20.019 10047 10100 W UiDevice: 	at dev.mobile.maestro.Service.isWindowUpdating(MaestroDriverService.kt:359)
+10-04 15:57:20.019 10047 10100 W UiDevice: 	at maestro_android.MaestroDriverGrpc$MethodHandlers.invoke(MaestroDriverGrpc.java:965)
+10-04 15:57:20.019 10047 10100 W UiDevice: 	at io.grpc.stub.ServerCalls$UnaryServerCallHandler$UnaryServerCallListener.onHalfClose(ServerCalls.java:182)
+10-04 15:57:20.019 10047 10100 W UiDevice: 	at io.grpc.internal.ServerCallImpl$ServerStreamListenerImpl.halfClosed(ServerCallImpl.java:355)
+10-04 15:57:20.019 10047 10100 W UiDevice: 	at io.grpc.internal.ServerImpl$JumpToApplicationThreadServerStreamListener$1HalfClosed.runInContext(ServerImpl.java:867)
+10-04 15:57:20.019 10047 10100 W UiDevice: 	at io.grpc.internal.ContextRunnable.run(ContextRunnable.java:37)
+10-04 15:57:20.019 10047 10100 W UiDevice: 	at io.grpc.internal.SerializingExecutor.run(SerializingExecutor.java:133)
+10-04 15:57:20.019 10047 10100 W UiDevice: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+10-04 15:57:20.019 10047 10100 W UiDevice: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:644)
+10-04 15:57:20.019 10047 10100 W UiDevice: 	at java.lang.Thread.run(Thread.java:1012)
+10-04 15:57:20.087 10047 10100 D Maestro : Requesting view hierarchy
+10-04 15:57:20.087 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:20.087 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:20.148 10047 10100 D Maestro : View hierarchy received in 61 ms
+10-04 15:57:20.154 10377 10448 D EGL_emulation: app_time_stats: avg=16.98ms min=5.96ms max=29.03ms count=59
+10-04 15:57:20.155   362  6645 D android.hardware.audio@7.1-impl.ranchu: threadLoop: entering standby, frames: 14212544
+10-04 15:57:20.213 10377 10441 D EGL_emulation: app_time_stats: avg=7.27ms min=1.64ms max=29.14ms count=58
+10-04 15:57:20.332 10377 10377 I flutter : [WebEngage] logEvent success: eligibility_check_initiated, parameters: null
+10-04 15:57:20.334   419 13773 D audioserver: FGS Logger Transaction failed
+10-04 15:57:20.334   419 13773 D audioserver: -129
+10-04 15:57:20.337   419   514 D AudioFlinger: mixer(0x70fe3a89a930) throttle end: throttle time(38)
+10-04 15:57:20.367 10377 10377 I flutter : UXCamAnalyticsHelper: logEvent: Eligibility check started, parameters : null
+10-04 15:57:20.369  1616  1616 D BoundBrokerSvc: onBind: Intent { act=com.google.android.gms.measurement.START pkg=com.google.android.gms }
+10-04 15:57:20.369  1616  1616 D BoundBrokerSvc: Loading bound service for intent: Intent { act=com.google.android.gms.measurement.START pkg=com.google.android.gms }
+10-04 15:57:20.489   843 10726 D android.hardware.gnss-service.ranchu: GnssHwListener:consume:87 sz=64
+10-04 15:57:20.496  1325  1325 D BoundBrokerSvc: onBind: Intent { act=com.google.android.gms.scheduler.ACTION_PROXY_SCHEDULE dat=chimera-action:/... cmp=com.google.android.gms/.chimera.PersistentApiService }
+10-04 15:57:20.496  1325  1325 D BoundBrokerSvc: Loading bound service for intent: Intent { act=com.google.android.gms.scheduler.ACTION_PROXY_SCHEDULE dat=chimera-action:/... cmp=com.google.android.gms/.chimera.PersistentApiService }
+10-04 15:57:20.496   419   514 D audioserver: FGS Logger Transaction failed
+10-04 15:57:20.496   419   514 D audioserver: -129
+10-04 15:57:20.503   843 10726 D android.hardware.gnss-service.ranchu: GnssHwListener:consume:87 sz=64
+10-04 15:57:20.503   843 10726 D android.hardware.gnss-service.ranchu: Gnss:onGnssLocationCb:311
+10-04 15:57:20.503   843 10726 D android.hardware.gnss-service.ranchu: Gnss:onGnssLocationCb:321
+10-04 15:57:20.596   786   786 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+10-04 15:57:21.293 10377 10441 D EGL_emulation: app_time_stats: avg=40.01ms min=4.53ms max=445.10ms count=26
+10-04 15:57:21.296 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:21.297 10047 10100 D Maestro : Requesting view hierarchy
+10-04 15:57:21.297 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:21.298 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:21.347 10047 10100 D Maestro : View hierarchy received in 50 ms
+10-04 15:57:21.404 10047 10100 D Maestro : Requesting view hierarchy
+10-04 15:57:21.405 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:21.405 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:21.463 10047 10100 D Maestro : View hierarchy received in 59 ms
+10-04 15:57:21.488   843 10726 D android.hardware.gnss-service.ranchu: GnssHwListener:consume:87 sz=64
+10-04 15:57:21.490   843 10726 D android.hardware.gnss-service.ranchu: GnssHwListener:consume:87 sz=64
+10-04 15:57:21.490   843 10726 D android.hardware.gnss-service.ranchu: Gnss:onGnssLocationCb:311
+10-04 15:57:21.490   843 10726 D android.hardware.gnss-service.ranchu: Gnss:onGnssLocationCb:321
+10-04 15:57:21.523 10047 10100 D Maestro : Requesting view hierarchy
+10-04 15:57:21.525 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:21.526 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:21.597 10047 10100 D Maestro : View hierarchy received in 74 ms
+10-04 15:57:21.654 10047 10100 D Maestro : Requesting view hierarchy
+10-04 15:57:21.654 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:21.654 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:21.695 10047 10100 D Maestro : View hierarchy received in 41 ms
+10-04 15:57:21.751   559  1907 D WindowManager: captureDisplay
+10-04 15:57:21.764 10024 10043 W System  : A resource was acquired at attached stack trace but never released. See java.io.Closeable for information on avoiding resource leaks.
+10-04 15:57:21.764 10024 10043 W System  : java.lang.Throwable: Explicit termination method 'HardwareBuffer.close' not called
+10-04 15:57:21.764 10024 10043 W System  : 	at dalvik.system.CloseGuard.openWithCallSite(CloseGuard.java:288)
+10-04 15:57:21.764 10024 10043 W System  : 	at dalvik.system.CloseGuard.open(CloseGuard.java:257)
+10-04 15:57:21.764 10024 10043 W System  : 	at android.hardware.HardwareBuffer.<init>(HardwareBuffer.java:266)
+10-04 15:57:21.764 10024 10043 W System  : A resource was acquired at attached stack trace but never released. See java.io.Closeable for information on avoiding resource leaks.
+10-04 15:57:21.764 10024 10043 W System  : java.lang.Throwable: Explicit termination method 'HardwareBuffer.close' not called
+10-04 15:57:21.764 10024 10043 W System  : 	at dalvik.system.CloseGuard.openWithCallSite(CloseGuard.java:288)
+10-04 15:57:21.764 10024 10043 W System  : 	at dalvik.system.CloseGuard.open(CloseGuard.java:257)
+10-04 15:57:21.764 10024 10043 W System  : 	at android.hardware.HardwareBuffer.<init>(HardwareBuffer.java:266)
+10-04 15:57:21.895   559  1907 D WindowManager: captureDisplay
+10-04 15:57:22.090   559  2402 D WindowManager: captureDisplay
+10-04 15:57:22.108 10024 10043 W System  : A resource was acquired at attached stack trace but never released. See java.io.Closeable for information on avoiding resource leaks.
+10-04 15:57:22.108 10024 10043 W System  : java.lang.Throwable: Explicit termination method 'HardwareBuffer.close' not called
+10-04 15:57:22.108 10024 10043 W System  : 	at dalvik.system.CloseGuard.openWithCallSite(CloseGuard.java:288)
+10-04 15:57:22.108 10024 10043 W System  : 	at dalvik.system.CloseGuard.open(CloseGuard.java:257)
+10-04 15:57:22.108 10024 10043 W System  : 	at android.hardware.HardwareBuffer.<init>(HardwareBuffer.java:266)
+10-04 15:57:22.108 10024 10043 W System  : A resource was acquired at attached stack trace but never released. See java.io.Closeable for information on avoiding resource leaks.
+10-04 15:57:22.108 10024 10043 W System  : java.lang.Throwable: Explicit termination method 'HardwareBuffer.close' not called
+10-04 15:57:22.108 10024 10043 W System  : 	at dalvik.system.CloseGuard.openWithCallSite(CloseGuard.java:288)
+10-04 15:57:22.108 10024 10043 W System  : 	at dalvik.system.CloseGuard.open(CloseGuard.java:257)
+10-04 15:57:22.108 10024 10043 W System  : 	at android.hardware.HardwareBuffer.<init>(HardwareBuffer.java:266)
+10-04 15:57:22.293 10377 10441 D EGL_emulation: app_time_stats: avg=1000.16ms min=1000.16ms max=1000.16ms count=1
+10-04 15:57:22.333   496 10644 D BufferPoolAccessor2.0: bufferpool2 0x7d2621cb0af8 : 2(1958400 size) total buffers - 1(979200 size) used buffers - 236/238 (recycle/alloc) - 2/237 (fetch/transfer)
+10-04 15:57:22.365 10047 10100 D Maestro : Requesting view hierarchy
+10-04 15:57:22.366 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:22.366 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:22.427 10047 10100 D Maestro : View hierarchy received in 62 ms
+10-04 15:57:22.481 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:22.483 10047 10100 D UiDevice: Waiting 500ms for window update of package fi.iwa.sakani.
+10-04 15:57:22.490   843 10726 D android.hardware.gnss-service.ranchu: GnssHwListener:consume:87 sz=64
+10-04 15:57:22.490   843 10726 D android.hardware.gnss-service.ranchu: GnssHwListener:consume:87 sz=64
+10-04 15:57:22.490   843 10726 D android.hardware.gnss-service.ranchu: Gnss:onGnssLocationCb:311
+10-04 15:57:22.490   843 10726 D android.hardware.gnss-service.ranchu: Gnss:onGnssLocationCb:321
+10-04 15:57:22.945 10377 10448 D EGL_emulation: app_time_stats: avg=84.55ms min=6.84ms max=2114.87ms count=33
+10-04 15:57:22.985 10047 10100 W UiDevice: Timed out waiting 500ms on window update.
+10-04 15:57:22.985 10047 10100 W UiDevice: java.util.concurrent.TimeoutException: Expected event not received within: 500 ms among: []
+10-04 15:57:22.985 10047 10100 W UiDevice: 	at android.app.UiAutomation.executeAndWaitForEvent(UiAutomation.java:1071)
+10-04 15:57:22.985 10047 10100 W UiDevice: 	at androidx.test.uiautomator.UiDevice.waitForWindowUpdate(UiDevice.java:1253)
+10-04 15:57:22.985 10047 10100 W UiDevice: 	at dev.mobile.maestro.Service.isWindowUpdating(MaestroDriverService.kt:359)
+10-04 15:57:22.985 10047 10100 W UiDevice: 	at maestro_android.MaestroDriverGrpc$MethodHandlers.invoke(MaestroDriverGrpc.java:965)
+10-04 15:57:22.985 10047 10100 W UiDevice: 	at io.grpc.stub.ServerCalls$UnaryServerCallHandler$UnaryServerCallListener.onHalfClose(ServerCalls.java:182)
+10-04 15:57:22.985 10047 10100 W UiDevice: 	at io.grpc.internal.ServerCallImpl$ServerStreamListenerImpl.halfClosed(ServerCallImpl.java:355)
+10-04 15:57:22.985 10047 10100 W UiDevice: 	at io.grpc.internal.ServerImpl$JumpToApplicationThreadServerStreamListener$1HalfClosed.runInContext(ServerImpl.java:867)
+10-04 15:57:22.985 10047 10100 W UiDevice: 	at io.grpc.internal.ContextRunnable.run(ContextRunnable.java:37)
+10-04 15:57:22.985 10047 10100 W UiDevice: 	at io.grpc.internal.SerializingExecutor.run(SerializingExecutor.java:133)
+10-04 15:57:22.985 10047 10100 W UiDevice: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+10-04 15:57:22.985 10047 10100 W UiDevice: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:644)
+10-04 15:57:22.985 10047 10100 W UiDevice: 	at java.lang.Thread.run(Thread.java:1012)
+10-04 15:57:23.043 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:23.045 10047 10100 D UiDevice: Waiting 500ms for window update of package fi.iwa.sakani.
+10-04 15:57:23.375   362  6645 D android.hardware.audio@7.1-impl.ranchu: threadLoop: entering standby, frames: 14361600
+10-04 15:57:23.490   843 10726 D android.hardware.gnss-service.ranchu: GnssHwListener:consume:87 sz=64
+10-04 15:57:23.491   843 10726 D android.hardware.gnss-service.ranchu: GnssHwListener:consume:87 sz=64
+10-04 15:57:23.491   843 10726 D android.hardware.gnss-service.ranchu: Gnss:onGnssLocationCb:311
+10-04 15:57:23.491   843 10726 D android.hardware.gnss-service.ranchu: Gnss:onGnssLocationCb:321
+10-04 15:57:23.548 10047 10100 W UiDevice: Timed out waiting 500ms on window update.
+10-04 15:57:23.548 10047 10100 W UiDevice: java.util.concurrent.TimeoutException: Expected event not received within: 500 ms among: []
+10-04 15:57:23.548 10047 10100 W UiDevice: 	at android.app.UiAutomation.executeAndWaitForEvent(UiAutomation.java:1071)
+10-04 15:57:23.548 10047 10100 W UiDevice: 	at androidx.test.uiautomator.UiDevice.waitForWindowUpdate(UiDevice.java:1253)
+10-04 15:57:23.548 10047 10100 W UiDevice: 	at dev.mobile.maestro.Service.isWindowUpdating(MaestroDriverService.kt:359)
+10-04 15:57:23.548 10047 10100 W UiDevice: 	at maestro_android.MaestroDriverGrpc$MethodHandlers.invoke(MaestroDriverGrpc.java:965)
+10-04 15:57:23.548 10047 10100 W UiDevice: 	at io.grpc.stub.ServerCalls$UnaryServerCallHandler$UnaryServerCallListener.onHalfClose(ServerCalls.java:182)
+10-04 15:57:23.548 10047 10100 W UiDevice: 	at io.grpc.internal.ServerCallImpl$ServerStreamListenerImpl.halfClosed(ServerCallImpl.java:355)
+10-04 15:57:23.548 10047 10100 W UiDevice: 	at io.grpc.internal.ServerImpl$JumpToApplicationThreadServerStreamListener$1HalfClosed.runInContext(ServerImpl.java:867)
+10-04 15:57:23.548 10047 10100 W UiDevice: 	at io.grpc.internal.ContextRunnable.run(ContextRunnable.java:37)
+10-04 15:57:23.548 10047 10100 W UiDevice: 	at io.grpc.internal.SerializingExecutor.run(SerializingExecutor.java:133)
+10-04 15:57:23.548 10047 10100 W UiDevice: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+10-04 15:57:23.548 10047 10100 W UiDevice: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:644)
+10-04 15:57:23.548 10047 10100 W UiDevice: 	at java.lang.Thread.run(Thread.java:1012)
+10-04 15:57:23.578   786   786 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+10-04 15:57:23.582 10377 10501 V Adjust  : Foreground timer fired
+10-04 15:57:23.583 10377 12047 D Adjust  : Wrote Activity state: ec:2 sc:1 ssc:1 sl:240.0 ts:240.0 la:11:12:13 uuid:350b3c05-5994-4f39-b0aa-5da2a2dd208b
+10-04 15:57:23.610 10047 10100 D Maestro : Requesting view hierarchy
+10-04 15:57:23.610 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:23.611 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:23.663 10047 10100 D Maestro : View hierarchy received in 53 ms
+10-04 15:57:23.859 10377 10441 D EGL_emulation: app_time_stats: avg=522.07ms min=331.21ms max=667.44ms count=3
+10-04 15:57:24.363 10047 10100 D Maestro : Requesting view hierarchy
+10-04 15:57:24.364 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:24.364 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:24.431 10047 10100 D Maestro : View hierarchy received in 68 ms
+10-04 15:57:24.486 10047 10654 D Maestro : Requesting view hierarchy
+10-04 15:57:24.487 10047 10654 W QueryController: Could not detect idle state.
+10-04 15:57:24.487 10047 10654 W QueryController: Could not detect idle state.
+10-04 15:57:24.491   843 10726 D android.hardware.gnss-service.ranchu: GnssHwListener:consume:87 sz=64
+10-04 15:57:24.492   843 10726 D android.hardware.gnss-service.ranchu: GnssHwListener:consume:87 sz=64
+10-04 15:57:24.492   843 10726 D android.hardware.gnss-service.ranchu: Gnss:onGnssLocationCb:311
+10-04 15:57:24.492   843 10726 D android.hardware.gnss-service.ranchu: Gnss:onGnssLocationCb:321
+10-04 15:57:24.546 10047 10654 D Maestro : View hierarchy received in 60 ms
+10-04 15:57:24.592   786   786 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+10-04 15:57:24.606 10047 10654 D Maestro : Requesting view hierarchy
+10-04 15:57:24.606 10047 10654 W QueryController: Could not detect idle state.
+10-04 15:57:24.607 10047 10654 W QueryController: Could not detect idle state.
+10-04 15:57:24.679 10047 10654 D Maestro : View hierarchy received in 73 ms
+10-04 15:57:24.733 10047 10654 W QueryController: Could not detect idle state.
+10-04 15:57:24.735 10047 10654 D UiDevice: Waiting 500ms for window update of package fi.iwa.sakani.
+10-04 15:57:25.238 10047 10654 W UiDevice: Timed out waiting 500ms on window update.
+10-04 15:57:25.238 10047 10654 W UiDevice: java.util.concurrent.TimeoutException: Expected event not received within: 500 ms among: []
+10-04 15:57:25.238 10047 10654 W UiDevice: 	at android.app.UiAutomation.executeAndWaitForEvent(UiAutomation.java:1071)
+10-04 15:57:25.238 10047 10654 W UiDevice: 	at androidx.test.uiautomator.UiDevice.waitForWindowUpdate(UiDevice.java:1253)
+10-04 15:57:25.238 10047 10654 W UiDevice: 	at dev.mobile.maestro.Service.isWindowUpdating(MaestroDriverService.kt:359)
+10-04 15:57:25.238 10047 10654 W UiDevice: 	at maestro_android.MaestroDriverGrpc$MethodHandlers.invoke(MaestroDriverGrpc.java:965)
+10-04 15:57:25.238 10047 10654 W UiDevice: 	at io.grpc.stub.ServerCalls$UnaryServerCallHandler$UnaryServerCallListener.onHalfClose(ServerCalls.java:182)
+10-04 15:57:25.238 10047 10654 W UiDevice: 	at io.grpc.internal.ServerCallImpl$ServerStreamListenerImpl.halfClosed(ServerCallImpl.java:355)
+10-04 15:57:25.238 10047 10654 W UiDevice: 	at io.grpc.internal.ServerImpl$JumpToApplicationThreadServerStreamListener$1HalfClosed.runInContext(ServerImpl.java:867)
+10-04 15:57:25.238 10047 10654 W UiDevice: 	at io.grpc.internal.ContextRunnable.run(ContextRunnable.java:37)
+10-04 15:57:25.238 10047 10654 W UiDevice: 	at io.grpc.internal.SerializingExecutor.run(SerializingExecutor.java:133)
+10-04 15:57:25.238 10047 10654 W UiDevice: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+10-04 15:57:25.238 10047 10654 W UiDevice: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:644)
+10-04 15:57:25.238 10047 10654 W UiDevice: 	at java.lang.Thread.run(Thread.java:1012)
+10-04 15:57:25.295 10377 10441 D EGL_emulation: app_time_stats: avg=477.90ms min=18.50ms max=1000.93ms count=3
+10-04 15:57:25.296 10047 10654 W QueryController: Could not detect idle state.
+10-04 15:57:25.298 10047 10654 D UiDevice: Waiting 500ms for window update of package fi.iwa.sakani.
+10-04 15:57:25.491   843 10726 D android.hardware.gnss-service.ranchu: GnssHwListener:consume:87 sz=64
+10-04 15:57:25.493   843 10726 D android.hardware.gnss-service.ranchu: GnssHwListener:consume:87 sz=64
+10-04 15:57:25.493   843 10726 D android.hardware.gnss-service.ranchu: Gnss:onGnssLocationCb:311
+10-04 15:57:25.493   843 10726 D android.hardware.gnss-service.ranchu: Gnss:onGnssLocationCb:321
+10-04 15:57:25.579   786   786 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+10-04 15:57:25.801 10047 10654 W UiDevice: Timed out waiting 500ms on window update.
+10-04 15:57:25.801 10047 10654 W UiDevice: java.util.concurrent.TimeoutException: Expected event not received within: 500 ms among: []
+10-04 15:57:25.801 10047 10654 W UiDevice: 	at android.app.UiAutomation.executeAndWaitForEvent(UiAutomation.java:1071)
+10-04 15:57:25.801 10047 10654 W UiDevice: 	at androidx.test.uiautomator.UiDevice.waitForWindowUpdate(UiDevice.java:1253)
+10-04 15:57:25.801 10047 10654 W UiDevice: 	at dev.mobile.maestro.Service.isWindowUpdating(MaestroDriverService.kt:359)
+10-04 15:57:25.801 10047 10654 W UiDevice: 	at maestro_android.MaestroDriverGrpc$MethodHandlers.invoke(MaestroDriverGrpc.java:965)
+10-04 15:57:25.801 10047 10654 W UiDevice: 	at io.grpc.stub.ServerCalls$UnaryServerCallHandler$UnaryServerCallListener.onHalfClose(ServerCalls.java:182)
+10-04 15:57:25.801 10047 10654 W UiDevice: 	at io.grpc.internal.ServerCallImpl$ServerStreamListenerImpl.halfClosed(ServerCallImpl.java:355)
+10-04 15:57:25.801 10047 10654 W UiDevice: 	at io.grpc.internal.ServerImpl$JumpToApplicationThreadServerStreamListener$1HalfClosed.runInContext(ServerImpl.java:867)
+10-04 15:57:25.801 10047 10654 W UiDevice: 	at io.grpc.internal.ContextRunnable.run(ContextRunnable.java:37)
+10-04 15:57:25.801 10047 10654 W UiDevice: 	at io.grpc.internal.SerializingExecutor.run(SerializingExecutor.java:133)
+10-04 15:57:25.801 10047 10654 W UiDevice: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+10-04 15:57:25.801 10047 10654 W UiDevice: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:644)
+10-04 15:57:25.801 10047 10654 W UiDevice: 	at java.lang.Thread.run(Thread.java:1012)
+10-04 15:57:25.863 10047 10654 D Maestro : Requesting view hierarchy
+10-04 15:57:25.864 10047 10654 W QueryController: Could not detect idle state.
+10-04 15:57:25.864 10047 10654 W QueryController: Could not detect idle state.
+10-04 15:57:25.944   786   786 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+10-04 15:57:25.946 10047 10654 D Maestro : View hierarchy received in 82 ms
+10-04 15:57:26.029 10377 10448 D EGL_emulation: app_time_stats: avg=1028.19ms min=13.97ms max=2165.32ms count=3
+10-04 15:57:26.115 10377 10377 I flutter : [WebEngage] logEvent success: eligibility_tnc_submitted, parameters: null
+10-04 15:57:26.116   419 13773 D audioserver: FGS Logger Transaction failed
+10-04 15:57:26.116   419 13773 D audioserver: -129
+10-04 15:57:26.119   419   514 D AudioFlinger: mixer(0x70fe3a89a930) throttle end: throttle time(34)
+10-04 15:57:26.278   419   514 D audioserver: FGS Logger Transaction failed
+10-04 15:57:26.278   419   514 D audioserver: -129
+10-04 15:57:26.311 10377 10441 D EGL_emulation: app_time_stats: avg=59.58ms min=15.16ms max=749.67ms count=17
+10-04 15:57:26.492   843 10726 D android.hardware.gnss-service.ranchu: GnssHwListener:consume:87 sz=64
+10-04 15:57:26.493   843 10726 D android.hardware.gnss-service.ranchu: GnssHwListener:consume:87 sz=64
+10-04 15:57:26.493   843 10726 D android.hardware.gnss-service.ranchu: Gnss:onGnssLocationCb:311
+10-04 15:57:26.494   843 10726 D android.hardware.gnss-service.ranchu: Gnss:onGnssLocationCb:321
+10-04 15:57:26.592   786   786 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+10-04 15:57:26.616 10047 10654 D Maestro : Requesting view hierarchy
+10-04 15:57:26.617 10047 10654 W QueryController: Could not detect idle state.
+10-04 15:57:26.618 10047 10654 W QueryController: Could not detect idle state.
+10-04 15:57:26.695 10047 10654 D Maestro : View hierarchy received in 79 ms
+10-04 15:57:26.753 10047 10654 D Maestro : Requesting view hierarchy
+10-04 15:57:26.753 10047 10654 W QueryController: Could not detect idle state.
+10-04 15:57:26.754 10047 10654 W QueryController: Could not detect idle state.
+10-04 15:57:26.830 10047 10654 D Maestro : View hierarchy received in 77 ms
+10-04 15:57:26.893 10047 10654 D Maestro : Requesting view hierarchy
+10-04 15:57:26.894 10047 10654 W QueryController: Could not detect idle state.
+10-04 15:57:26.894 10047 10654 W QueryController: Could not detect idle state.
+10-04 15:57:26.962 10047 10654 D Maestro : View hierarchy received in 69 ms
+10-04 15:57:27.019 10047 10654 D Maestro : Requesting view hierarchy
+10-04 15:57:27.019 10047 10654 W QueryController: Could not detect idle state.
+10-04 15:57:27.020 10047 10654 W QueryController: Could not detect idle state.
+10-04 15:57:27.027   559   696 I netstats_mobile_sample: [46685086,13131123,49054,28006,46657911,13119913,48458,27877,1791118648342]
+10-04 15:57:27.027   559   696 I netstats_wifi_sample: [0,0,0,0,0,0,0,0,1791118648342]
+10-04 15:57:27.032 10377 10448 D EGL_emulation: app_time_stats: avg=16.97ms min=11.88ms max=33.61ms count=59
+10-04 15:57:27.113 10047 10654 D Maestro : View hierarchy received in 94 ms
+10-04 15:57:27.129 10047 10654 D Maestro : Requesting view hierarchy
+10-04 15:57:27.131 10047 10654 W QueryController: Could not detect idle state.
+10-04 15:57:27.132 10047 10654 W QueryController: Could not detect idle state.
+10-04 15:57:27.196 10047 10654 D Maestro : View hierarchy received in 67 ms
+10-04 15:57:27.255 10047 10654 D Maestro : Requesting view hierarchy
+10-04 15:57:27.256 10047 10654 W QueryController: Could not detect idle state.
+10-04 15:57:27.256 10047 10654 W QueryController: Could not detect idle state.
+10-04 15:57:27.326 10377 10441 D EGL_emulation: app_time_stats: avg=3.08ms min=1.29ms max=30.42ms count=60
+10-04 15:57:27.353   496 10644 D BufferPoolAccessor2.0: bufferpool2 0x7d2621cb0af8 : 2(1958400 size) total buffers - 1(979200 size) used buffers - 241/243 (recycle/alloc) - 2/242 (fetch/transfer)
+10-04 15:57:27.380 10047 10654 D Maestro : View hierarchy received in 125 ms
+10-04 15:57:27.481 10047 10654 D Maestro : Requesting view hierarchy
+10-04 15:57:27.484 10047 10654 W QueryController: Could not detect idle state.
+10-04 15:57:27.484 10047 10654 W QueryController: Could not detect idle state.
+10-04 15:57:27.493   843 10726 D android.hardware.gnss-service.ranchu: GnssHwListener:consume:87 sz=64
+10-04 15:57:27.494   843 10726 D android.hardware.gnss-service.ranchu: GnssHwListener:consume:87 sz=64
+10-04 15:57:27.494   843 10726 D android.hardware.gnss-service.ranchu: Gnss:onGnssLocationCb:311
+10-04 15:57:27.494   843 10726 D android.hardware.gnss-service.ranchu: Gnss:onGnssLocationCb:321
+10-04 15:57:27.597 10047 10654 D Maestro : View hierarchy received in 116 ms
+10-04 15:57:27.659 10047 10654 D Maestro : Requesting view hierarchy
+10-04 15:57:27.662 10047 10654 W QueryController: Could not detect idle state.
+10-04 15:57:27.664 10047 10654 W QueryController: Could not detect idle state.
+10-04 15:57:27.746 10047 10654 D Maestro : View hierarchy received in 87 ms
+10-04 15:57:27.805 10047 10654 D Maestro : Requesting view hierarchy
+10-04 15:57:27.805 10047 10654 W QueryController: Could not detect idle state.
+10-04 15:57:27.806 10047 10654 W QueryController: Could not detect idle state.
+10-04 15:57:27.883 10047 10654 D Maestro : View hierarchy received in 78 ms
+10-04 15:57:27.938 10047 10654 D Maestro : Requesting view hierarchy
+10-04 15:57:27.941 10047 10654 W QueryController: Could not detect idle state.
+10-04 15:57:27.942 10047 10654 W QueryController: Could not detect idle state.
+10-04 15:57:28.029 10047 10654 D Maestro : View hierarchy received in 91 ms
+10-04 15:57:28.032 10377 10448 D EGL_emulation: app_time_stats: avg=16.95ms min=11.82ms max=32.15ms count=59
+10-04 15:57:28.087 10047 10654 D Maestro : Requesting view hierarchy
+10-04 15:57:28.088 10047 10654 W QueryController: Could not detect idle state.
+10-04 15:57:28.089 10047 10654 W QueryController: Could not detect idle state.
+10-04 15:57:28.150 10047 10654 D Maestro : View hierarchy received in 63 ms
+10-04 15:57:28.209 10047 10654 D Maestro : Requesting view hierarchy
+10-04 15:57:28.210 10047 10654 W QueryController: Could not detect idle state.
+10-04 15:57:28.211 10047 10654 W QueryController: Could not detect idle state.
+10-04 15:57:28.280 10047 10654 D Maestro : View hierarchy received in 71 ms
+10-04 15:57:28.305 10047 10654 D Maestro : Requesting view hierarchy
+10-04 15:57:28.310 10047 10654 W QueryController: Could not detect idle state.
+10-04 15:57:28.311 10047 10654 W QueryController: Could not detect idle state.
+10-04 15:57:28.335 10377 10441 D EGL_emulation: app_time_stats: avg=2.98ms min=1.47ms max=25.37ms count=60
+10-04 15:57:28.379 11174 11176 W ziparchive: Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/00000004/DynamiteModulesC.dm': No such file or directory
+10-04 15:57:28.379 11174 11176 W ziparchive: Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/00000004/DynamiteModulesC.dm': No such file or directory
+10-04 15:57:28.382 11174 11176 W ziparchive: Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/00000001/CronetDynamite.dm': No such file or directory
+10-04 15:57:28.382 11174 11176 W ziparchive: Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/00000001/CronetDynamite.dm': No such file or directory
+10-04 15:57:28.385 11174 11176 W ziparchive: Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/00000002/DynamiteLoader.dm': No such file or directory
+10-04 15:57:28.385 11174 11176 W ziparchive: Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/00000002/DynamiteLoader.dm': No such file or directory
+10-04 15:57:28.388 11174 11176 W ziparchive: Unable to open '/data/user/0/com.google.android.gms/app_fb/f.dm': No such file or directory
+10-04 15:57:28.388 11174 11176 W ziparchive: Unable to open '/data/user/0/com.google.android.gms/app_fb/f.dm': No such file or directory
+10-04 15:57:28.392 11174 11176 W ziparchive: Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/00000005/GoogleCertificates.dm': No such file or directory
+10-04 15:57:28.392 11174 11176 W ziparchive: Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/00000005/GoogleCertificates.dm': No such file or directory
+10-04 15:57:28.394 11174 11176 W ziparchive: Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/00000009/dl-TfliteDynamiteDynamite.integ_262730502100800.dm': No such file or directory
+10-04 15:57:28.394 11174 11176 W ziparchive: Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/00000009/dl-TfliteDynamiteDynamite.integ_262730502100800.dm': No such file or directory
+10-04 15:57:28.395 11174 11176 W ziparchive: Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/00000000/AdsDynamite.dm': No such file or directory
+10-04 15:57:28.395 11174 11176 W ziparchive: Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/00000000/AdsDynamite.dm': No such file or directory
+10-04 15:57:28.397 11174 11176 W ziparchive: Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/00000008/dl-VisionOcrDynamite.integ_231602402100000.dm': No such file or directory
+10-04 15:57:28.397 11174 11176 W ziparchive: Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/00000008/dl-VisionOcrDynamite.integ_231602402100000.dm': No such file or directory
+10-04 15:57:28.403 11174 11176 W ziparchive: Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/0000000c/dl-MlkitBarcodeUi.optional_231818100000.dm': No such file or directory
+10-04 15:57:28.403 11174 11176 W ziparchive: Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/0000000c/dl-MlkitBarcodeUi.optional_231818100000.dm': No such file or directory
+10-04 15:57:28.408 11174 11176 W ziparchive: Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/0000000a/dl-MlkitOcrCommon.optional_231818100800.dm': No such file or directory
+10-04 15:57:28.408 11174 11176 W ziparchive: Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/0000000a/dl-MlkitOcrCommon.optional_231818100800.dm': No such file or directory
+10-04 15:57:28.410 11174 11176 W ziparchive: Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/00000007/MeasurementDynamite.dm': No such file or directory
+10-04 15:57:28.410 11174 11176 W ziparchive: Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/00000007/MeasurementDynamite.dm': No such file or directory
+10-04 15:57:28.493   843 10726 D android.hardware.gnss-service.ranchu: GnssHwListener:consume:87 sz=64
+10-04 15:57:28.495   843 10726 D android.hardware.gnss-service.ranchu: GnssHwListener:consume:87 sz=64
+10-04 15:57:28.495   843 10726 D android.hardware.gnss-service.ranchu: Gnss:onGnssLocationCb:311
+10-04 15:57:28.495   843 10726 D android.hardware.gnss-service.ranchu: Gnss:onGnssLocationCb:321
+10-04 15:57:28.563 10047 10654 D Maestro : View hierarchy received in 257 ms
+10-04 15:57:28.575 10047 10654 D Maestro : Requesting view hierarchy
+10-04 15:57:28.575 10047 10654 W QueryController: Could not detect idle state.
+10-04 15:57:28.576 10047 10654 W QueryController: Could not detect idle state.
+10-04 15:57:28.593   786   786 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+10-04 15:57:28.645 10047 10654 D Maestro : View hierarchy received in 70 ms
+10-04 15:57:28.660 10047 10654 D Maestro : Requesting view hierarchy
+10-04 15:57:28.662 10047 10654 W QueryController: Could not detect idle state.
+10-04 15:57:28.662 10047 10654 W QueryController: Could not detect idle state.
+10-04 15:57:28.730 10047 10654 D Maestro : View hierarchy received in 70 ms
+10-04 15:57:28.746 10047 10654 D Maestro : Requesting view hierarchy
+10-04 15:57:28.748 10047 10654 W QueryController: Could not detect idle state.
+10-04 15:57:28.749 10047 10654 W QueryController: Could not detect idle state.
+10-04 15:57:28.812 10047 10654 D Maestro : View hierarchy received in 66 ms
+10-04 15:57:28.868 10047 10654 D Maestro : Requesting view hierarchy
+10-04 15:57:28.869 10047 10654 W QueryController: Could not detect idle state.
+10-04 15:57:28.870 10047 10654 W QueryController: Could not detect idle state.
+10-04 15:57:28.963 10047 10654 D Maestro : View hierarchy received in 95 ms
+10-04 15:57:29.022 10047 10654 D Maestro : Requesting view hierarchy
+10-04 15:57:29.023 10047 10654 W QueryController: Could not detect idle state.
+10-04 15:57:29.023 10047 10654 W QueryController: Could not detect idle state.
+10-04 15:57:29.035 10377 10448 D EGL_emulation: app_time_stats: avg=16.99ms min=11.55ms max=44.76ms count=59
+10-04 15:57:29.097 10047 10654 D Maestro : View hierarchy received in 75 ms
+10-04 15:57:29.163 10047 10654 D Maestro : Requesting view hierarchy
+10-04 15:57:29.164 10047 10654 W QueryController: Could not detect idle state.
+10-04 15:57:29.165 10047 10654 W QueryController: Could not detect idle state.
+10-04 15:57:29.171   362  6645 D android.hardware.audio@7.1-impl.ranchu: threadLoop: entering standby, frames: 14510656
+10-04 15:57:29.230 10047 10654 D Maestro : View hierarchy received in 67 ms
+10-04 15:57:29.248 10047 10654 D Maestro : Requesting view hierarchy
+10-04 15:57:29.248 10047 10654 W QueryController: Could not detect idle state.
+10-04 15:57:29.248 10047 10654 W QueryController: Could not detect idle state.
+10-04 15:57:29.315 10047 10654 D Maestro : View hierarchy received in 67 ms
+10-04 15:57:29.344 10377 10441 D EGL_emulation: app_time_stats: avg=2.69ms min=1.31ms max=16.93ms count=61
+10-04 15:57:29.383 10047 10654 D Maestro : Requesting view hierarchy
+10-04 15:57:29.385 10047 10654 W QueryController: Could not detect idle state.
+10-04 15:57:29.385 10047 10654 W QueryController: Could not detect idle state.
+10-04 15:57:29.432 10047 10654 D Maestro : View hierarchy received in 49 ms
+10-04 15:57:29.493 10047 10654 D Maestro : Requesting view hierarchy
+10-04 15:57:29.494   843 10726 D android.hardware.gnss-service.ranchu: GnssHwListener:consume:87 sz=64
+10-04 15:57:29.495 10047 10654 W QueryController: Could not detect idle state.
+10-04 15:57:29.495 10047 10654 W QueryController: Could not detect idle state.
+10-04 15:57:29.497   843 10726 D android.hardware.gnss-service.ranchu: GnssHwListener:consume:87 sz=64
+10-04 15:57:29.497   843 10726 D android.hardware.gnss-service.ranchu: Gnss:onGnssLocationCb:311
+10-04 15:57:29.497   843 10726 D android.hardware.gnss-service.ranchu: Gnss:onGnssLocationCb:321
+10-04 15:57:29.550 10047 10654 D Maestro : View hierarchy received in 57 ms
+10-04 15:57:29.566 10047 10654 D Maestro : Requesting view hierarchy
+10-04 15:57:29.566 10047 10654 W QueryController: Could not detect idle state.
+10-04 15:57:29.567 10047 10654 W QueryController: Could not detect idle state.
+10-04 15:57:29.631 10047 10654 D Maestro : View hierarchy received in 65 ms
+10-04 15:57:29.692 10047 10654 D Maestro : Requesting view hierarchy
+10-04 15:57:29.693 10047 10654 W QueryController: Could not detect idle state.
+10-04 15:57:29.694 10047 10654 W QueryController: Could not detect idle state.
+10-04 15:57:29.766 10047 10654 D Maestro : View hierarchy received in 74 ms
+10-04 15:57:29.863 10047 10654 D Maestro : Requesting view hierarchy
+10-04 15:57:29.866 10047 10654 W QueryController: Could not detect idle state.
+10-04 15:57:29.868 10047 10654 W QueryController: Could not detect idle state.
+10-04 15:57:29.947 10047 10654 D Maestro : View hierarchy received in 84 ms
+10-04 15:57:30.050 10377 10448 D EGL_emulation: app_time_stats: avg=16.91ms min=12.41ms max=31.05ms count=60
+10-04 15:57:30.487   559  1905 W ProcessStats: Tracking association SourceState{206c5e3 com.google.android.gms/10127 BTop #34222} whose proc state 2 is better than process ProcessState{49a4909 com.google.android.gms.persistent/10127 pkg=com.google.android.gms} proc state 4 (100 skipped)
+10-04 15:57:30.487  1616  1616 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.gms.measurement.START pkg=com.google.android.gms }
+10-04 15:57:30.494   843 10726 D android.hardware.gnss-service.ranchu: GnssHwListener:consume:87 sz=64
+10-04 15:57:30.495   843 10726 D android.hardware.gnss-service.ranchu: GnssHwListener:consume:87 sz=64
+10-04 15:57:30.495   843 10726 D android.hardware.gnss-service.ranchu: Gnss:onGnssLocationCb:311
+10-04 15:57:30.495   843 10726 D android.hardware.gnss-service.ranchu: Gnss:onGnssLocationCb:321
+10-04 15:57:30.513 10047 10654 W QueryController: Could not detect idle state.
+10-04 15:57:30.513 10047 10654 D Maestro : Requesting view hierarchy
+10-04 15:57:30.514 10047 10654 W QueryController: Could not detect idle state.
+10-04 15:57:30.514 10047 10654 W QueryController: Could not detect idle state.
+10-04 15:57:30.561 10047 10654 D Maestro : View hierarchy received in 48 ms
+10-04 15:57:30.594   984   984 D TelephonyManager: requestModemActivityInfo: Sending result to app: ModemActivityInfo{ mTimestamp=6009594 mSleepTimeMs=0 mIdleTimeMs=6009413 mActivityStatsTechSpecificInfo=[{mRat=UNKNOWN,mFrequencyRange=UNKNOWN,mTxTimeMs[]=[0, 0, 0, 0, 0],mRxTimeMs=0}]}
+10-04 15:57:30.594   786   786 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+10-04 15:57:30.614 10047 10654 D Maestro : Requesting view hierarchy
+10-04 15:57:30.615 10047 10654 W QueryController: Could not detect idle state.
+10-04 15:57:30.615 10047 10654 W QueryController: Could not detect idle state.
+10-04 15:57:30.726 10047 10654 D Maestro : View hierarchy received in 112 ms
+10-04 15:57:30.785 10047 10654 D Maestro : Requesting view hierarchy
+10-04 15:57:30.785 10047 10654 W QueryController: Could not detect idle state.
+10-04 15:57:30.786 10047 10654 W QueryController: Could not detect idle state.
+10-04 15:57:30.829 10047 10654 D Maestro : View hierarchy received in 44 ms
+10-04 15:57:30.839 10047 10654 D Maestro : Requesting view hierarchy
+10-04 15:57:30.839 10047 10654 W QueryController: Could not detect idle state.
+10-04 15:57:30.839 10047 10654 W QueryController: Could not detect idle state.
+10-04 15:57:30.927 10047 10654 D Maestro : View hierarchy received in 88 ms
+10-04 15:57:30.979 10047 10654 D Maestro : Requesting view hierarchy
+10-04 15:57:30.979 10047 10654 W QueryController: Could not detect idle state.
+10-04 15:57:30.979 10047 10654 W QueryController: Could not detect idle state.
+10-04 15:57:31.063 10047 10654 D Maestro : View hierarchy received in 84 ms
+10-04 15:57:31.116 10047 10654 D Maestro : Requesting view hierarchy
+10-04 15:57:31.117 10047 10654 W QueryController: Could not detect idle state.
+10-04 15:57:31.117 10047 10654 W QueryController: Could not detect idle state.
+10-04 15:57:31.163 10047 10654 D Maestro : View hierarchy received in 47 ms
+10-04 15:57:31.218 10047 10654 D Maestro : Requesting view hierarchy
+10-04 15:57:31.219 10047 10654 W QueryController: Could not detect idle state.
+10-04 15:57:31.220 10047 10654 W QueryController: Could not detect idle state.
+10-04 15:57:31.280 10047 10654 D Maestro : View hierarchy received in 62 ms
+10-04 15:57:31.293 10377 10441 D EGL_emulation: app_time_stats: avg=23.27ms min=1.48ms max=1000.06ms count=53
+10-04 15:57:31.340 10047 10654 D Maestro : Requesting view hierarchy
+10-04 15:57:31.340 10047 10654 W QueryController: Could not detect idle state.
+10-04 15:57:31.341 10047 10654 W QueryController: Could not detect idle state.
+10-04 15:57:31.411 10047 10654 D Maestro : View hierarchy received in 71 ms
+10-04 15:57:31.469 10047 10654 D Maestro : Requesting view hierarchy
+10-04 15:57:31.469 10047 10654 W QueryController: Could not detect idle state.
+10-04 15:57:31.470 10047 10654 W QueryController: Could not detect idle state.
+10-04 15:57:31.495   843 10726 D android.hardware.gnss-service.ranchu: GnssHwListener:consume:87 sz=64
+10-04 15:57:31.496   843 10726 D android.hardware.gnss-service.ranchu: GnssHwListener:consume:87 sz=64
+10-04 15:57:31.496   843 10726 D android.hardware.gnss-service.ranchu: Gnss:onGnssLocationCb:311
+10-04 15:57:31.496   843 10726 D android.hardware.gnss-service.ranchu: Gnss:onGnssLocationCb:321
+10-04 15:57:31.529 10047 10654 D Maestro : View hierarchy received in 59 ms
+10-04 15:57:31.593   786   786 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+10-04 15:57:31.633 10047 10654 D Maestro : Requesting view hierarchy
+10-04 15:57:31.633 10047 10654 W QueryController: Could not detect idle state.
+10-04 15:57:31.634 10047 10654 W QueryController: Could not detect idle state.
+10-04 15:57:31.695 10047 10654 D Maestro : View hierarchy received in 62 ms
+10-04 15:57:31.750 10047 10654 D Maestro : Requesting view hierarchy
+10-04 15:57:31.750 10047 10654 W QueryController: Could not detect idle state.
+10-04 15:57:31.751 10047 10654 W QueryController: Could not detect idle state.
+10-04 15:57:31.811 10047 10654 D Maestro : View hierarchy received in 61 ms
+10-04 15:57:31.867 10047 10654 D Maestro : Requesting view hierarchy
+10-04 15:57:31.868 10047 10654 W QueryController: Could not detect idle state.
+10-04 15:57:31.868 10047 10654 W QueryController: Could not detect idle state.
+10-04 15:57:31.944 10047 10654 D Maestro : View hierarchy received in 77 ms
+10-04 15:57:31.957 10047 10654 D Maestro : Requesting view hierarchy
+10-04 15:57:31.957 10047 10654 W QueryController: Could not detect idle state.
+10-04 15:57:31.958 10047 10654 W QueryController: Could not detect idle state.
+10-04 15:57:32.026 10047 10654 D Maestro : View hierarchy received in 69 ms
+10-04 15:57:32.039 10047 10654 D Maestro : Requesting view hierarchy
+10-04 15:57:32.040 10047 10654 W QueryController: Could not detect idle state.
+10-04 15:57:32.040 10047 10654 W QueryController: Could not detect idle state.
+10-04 15:57:32.080 10047 10654 D Maestro : View hierarchy received in 41 ms
+10-04 15:57:32.137 10047 10654 D Maestro : Requesting view hierarchy
+10-04 15:57:32.138 10047 10654 W QueryController: Could not detect idle state.
+10-04 15:57:32.139 10047 10654 W QueryController: Could not detect idle state.
+10-04 15:57:32.180 10047 10654 D Maestro : View hierarchy received in 43 ms
+10-04 15:57:32.237 10047 10654 D Maestro : Requesting view hierarchy
+10-04 15:57:32.237 10047 10654 W QueryController: Could not detect idle state.
+10-04 15:57:32.238 10047 10654 W QueryController: Could not detect idle state.
+10-04 15:57:32.293 10377 10441 D EGL_emulation: app_time_stats: avg=999.96ms min=999.96ms max=999.96ms count=1
+10-04 15:57:32.296 10047 10654 D Maestro : View hierarchy received in 59 ms
+10-04 15:57:32.355 10047 10654 D Maestro : Requesting view hierarchy
+10-04 15:57:32.356 10047 10654 W QueryController: Could not detect idle state.
+10-04 15:57:32.356 10047 10654 W QueryController: Could not detect idle state.
+10-04 15:57:32.410 10047 10654 D Maestro : View hierarchy received in 55 ms
+10-04 15:57:32.465 10047 10654 D Maestro : Requesting view hierarchy
+10-04 15:57:32.466 10047 10654 W QueryController: Could not detect idle state.
+10-04 15:57:32.466 10047 10654 W QueryController: Could not detect idle state.
+10-04 15:57:32.495   843 10726 D android.hardware.gnss-service.ranchu: GnssHwListener:consume:87 sz=64
+10-04 15:57:32.497   843 10726 D android.hardware.gnss-service.ranchu: GnssHwListener:consume:87 sz=64
+10-04 15:57:32.497   843 10726 D android.hardware.gnss-service.ranchu: Gnss:onGnssLocationCb:311
+10-04 15:57:32.497   843 10726 D android.hardware.gnss-service.ranchu: Gnss:onGnssLocationCb:321
+10-04 15:57:32.594 10047 10654 D Maestro : View hierarchy received in 129 ms
+10-04 15:57:32.648 10047 10654 D Maestro : Requesting view hierarchy
+10-04 15:57:32.649 10047 10654 W QueryController: Could not detect idle state.
+10-04 15:57:32.649 10047 10654 W QueryController: Could not detect idle state.
+10-04 15:57:32.712 10047 10654 D Maestro : View hierarchy received in 64 ms
+10-04 15:57:32.726 10047 10654 D Maestro : Requesting view hierarchy
+10-04 15:57:32.729 10047 10654 W QueryController: Could not detect idle state.
+10-04 15:57:32.729 10047 10654 W QueryController: Could not detect idle state.
+10-04 15:57:32.797 10047 10654 D Maestro : View hierarchy received in 71 ms
+10-04 15:57:32.809 10047 10654 D Maestro : Requesting view hierarchy
+10-04 15:57:32.810 10047 10654 W QueryController: Could not detect idle state.
+10-04 15:57:32.811 10047 10654 W QueryController: Could not detect idle state.
+10-04 15:57:32.877 10047 10654 D Maestro : View hierarchy received in 68 ms
+10-04 15:57:32.978 10047 10654 D Maestro : Requesting view hierarchy
+10-04 15:57:32.979 10047 10654 W QueryController: Could not detect idle state.
+10-04 15:57:32.979 10047 10654 W QueryController: Could not detect idle state.
+10-04 15:57:33.045 10047 10654 D Maestro : View hierarchy received in 67 ms
+10-04 15:57:33.142 10047 10654 D Maestro : Requesting view hierarchy
+10-04 15:57:33.142 10047 10654 W QueryController: Could not detect idle state.
+10-04 15:57:33.142 10047 10654 W QueryController: Could not detect idle state.
+10-04 15:57:33.212 10047 10654 D Maestro : View hierarchy received in 70 ms
+10-04 15:57:33.268 10047 10654 D Maestro : Requesting view hierarchy
+10-04 15:57:33.268 10047 10654 W QueryController: Could not detect idle state.
+10-04 15:57:33.268 10047 10654 W QueryController: Could not detect idle state.
+10-04 15:57:33.294 10377 10441 D EGL_emulation: app_time_stats: avg=1000.40ms min=1000.40ms max=1000.40ms count=1
+10-04 15:57:33.330 10047 10654 D Maestro : View hierarchy received in 62 ms
+10-04 15:57:33.338   496 10644 D BufferPoolAccessor2.0: bufferpool2 0x7d2621cb0af8 : 2(1958400 size) total buffers - 1(979200 size) used buffers - 247/249 (recycle/alloc) - 2/248 (fetch/transfer)
+10-04 15:57:33.349 10047 10654 D Maestro : Requesting view hierarchy
+10-04 15:57:33.350 10047 10654 W QueryController: Could not detect idle state.
+10-04 15:57:33.350 10047 10654 W QueryController: Could not detect idle state.
+10-04 15:57:33.396 10047 10654 D Maestro : View hierarchy received in 47 ms
+10-04 15:57:33.406 10047 10654 D Maestro : Requesting view hierarchy
+10-04 15:57:33.406 10047 10654 W QueryController: Could not detect idle state.
+10-04 15:57:33.407 10047 10654 W QueryController: Could not detect idle state.
+10-04 15:57:33.446 10047 10654 D Maestro : View hierarchy received in 40 ms
+10-04 15:57:33.496   843 10726 D android.hardware.gnss-service.ranchu: GnssHwListener:consume:87 sz=64
+10-04 15:57:33.498   843 10726 D android.hardware.gnss-service.ranchu: GnssHwListener:consume:87 sz=64
+10-04 15:57:33.498   843 10726 D android.hardware.gnss-service.ranchu: Gnss:onGnssLocationCb:311
+10-04 15:57:33.498   843 10726 D android.hardware.gnss-service.ranchu: Gnss:onGnssLocationCb:321
+10-04 15:57:33.504 10047 10654 D Maestro : Requesting view hierarchy
+10-04 15:57:33.505 10047 10654 W QueryController: Could not detect idle state.
+10-04 15:57:33.505 10047 10654 W QueryController: Could not detect idle state.
+10-04 15:57:33.563 10047 10654 D Maestro : View hierarchy received in 59 ms
+10-04 15:57:33.611   786   786 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+10-04 15:57:33.616 10047 10654 D Maestro : Requesting view hierarchy
+10-04 15:57:33.616 10047 10654 W QueryController: Could not detect idle state.
+10-04 15:57:33.616 10047 10654 W QueryController: Could not detect idle state.
+10-04 15:57:33.678 10047 10654 D Maestro : View hierarchy received in 62 ms
+10-04 15:57:33.733 10047 10654 D Maestro : Requesting view hierarchy
+10-04 15:57:33.733 10047 10654 W QueryController: Could not detect idle state.
+10-04 15:57:33.734 10047 10654 W QueryController: Could not detect idle state.
+10-04 15:57:33.795 10047 10654 D Maestro : View hierarchy received in 62 ms
+10-04 15:57:33.807 10047 10654 D Maestro : Requesting view hierarchy
+10-04 15:57:33.808 10047 10654 W QueryController: Could not detect idle state.
+10-04 15:57:33.809 10047 10654 W QueryController: Could not detect idle state.
+10-04 15:57:33.877 10047 10654 D Maestro : View hierarchy received in 70 ms
+10-04 15:57:33.932 10047 10654 D Maestro : Requesting view hierarchy
+10-04 15:57:33.932 10047 10654 W QueryController: Could not detect idle state.
+10-04 15:57:33.933 10047 10654 W QueryController: Could not detect idle state.
+10-04 15:57:34.010 10047 10654 D Maestro : View hierarchy received in 78 ms
+10-04 15:57:34.064 10047 10654 D Maestro : Requesting view hierarchy
+10-04 15:57:34.064 10047 10654 W QueryController: Could not detect idle state.
+10-04 15:57:34.065 10047 10654 W QueryController: Could not detect idle state.
+10-04 15:57:34.127 10047 10654 D Maestro : View hierarchy received in 63 ms
+10-04 15:57:34.201 10047 10100 D Maestro : Requesting view hierarchy
+10-04 15:57:34.202 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:34.202 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:34.262 10047 10100 D Maestro : View hierarchy received in 61 ms
+10-04 15:57:34.278   559   696 I netstats_mobile_sample: [46709429,13134625,49083,28024,46682174,13123415,48485,27895,1791118655593]
+10-04 15:57:34.278   559   696 I netstats_wifi_sample: [0,0,0,0,0,0,0,0,1791118655593]
+10-04 15:57:34.330 10047 10100 D Maestro : Requesting view hierarchy
+10-04 15:57:34.330 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:34.330 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:34.342   559   594 I UsageStatsService: User[0] Flushing usage stats to disk
+10-04 15:57:34.427 10047 10100 D Maestro : View hierarchy received in 97 ms
+10-04 15:57:34.481 10047 10100 D Maestro : Requesting view hierarchy
+10-04 15:57:34.481 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:34.481 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:34.496   843 10726 D android.hardware.gnss-service.ranchu: GnssHwListener:consume:87 sz=64
+10-04 15:57:34.498   843 10726 D android.hardware.gnss-service.ranchu: GnssHwListener:consume:87 sz=64
+10-04 15:57:34.499   843 10726 D android.hardware.gnss-service.ranchu: Gnss:onGnssLocationCb:311
+10-04 15:57:34.499   843 10726 D android.hardware.gnss-service.ranchu: Gnss:onGnssLocationCb:321
+10-04 15:57:34.544 10047 10100 D Maestro : View hierarchy received in 63 ms
+10-04 15:57:34.602 10047 10100 D Maestro : Requesting view hierarchy
+10-04 15:57:34.603 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:34.603 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:34.608   786   786 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+10-04 15:57:34.664 10047 10100 D Maestro : View hierarchy received in 62 ms
+10-04 15:57:34.675 10047 10100 D Maestro : Requesting view hierarchy
+10-04 15:57:34.675 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:34.676 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:34.745 10047 10100 D Maestro : View hierarchy received in 70 ms
+10-04 15:57:34.755 10047 10100 D Maestro : Requesting view hierarchy
+10-04 15:57:34.755 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:34.755 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:34.833 10047 10100 D Maestro : View hierarchy received in 77 ms
+10-04 15:57:34.887 10047 10100 D Maestro : Requesting view hierarchy
+10-04 15:57:34.888 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:34.888 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:34.929 10047 10100 D Maestro : View hierarchy received in 42 ms
+10-04 15:57:34.942 10047 10100 D Maestro : Requesting view hierarchy
+10-04 15:57:34.942 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:34.942 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:34.995 10047 10100 D Maestro : View hierarchy received in 53 ms
+10-04 15:57:35.050 10047 10100 D Maestro : Requesting view hierarchy
+10-04 15:57:35.050 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:35.051 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:35.112 10047 10100 D Maestro : View hierarchy received in 62 ms
+10-04 15:57:35.171 10047 10100 D Maestro : Requesting view hierarchy
+10-04 15:57:35.172 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:35.173 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:35.248 10047 10100 D Maestro : View hierarchy received in 77 ms
+10-04 15:57:35.294 10377 10441 D EGL_emulation: app_time_stats: avg=999.99ms min=999.69ms max=1000.29ms count=2
+10-04 15:57:35.314 10047 10100 D Maestro : Requesting view hierarchy
+10-04 15:57:35.315 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:35.315 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:35.431 10047 10100 D Maestro : View hierarchy received in 117 ms
+10-04 15:57:35.443 10047 10100 D Maestro : Requesting view hierarchy
+10-04 15:57:35.444 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:35.444 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:35.497   843 10726 D android.hardware.gnss-service.ranchu: GnssHwListener:consume:87 sz=64
+10-04 15:57:35.499   843 10726 D android.hardware.gnss-service.ranchu: GnssHwListener:consume:87 sz=64
+10-04 15:57:35.499   843 10726 D android.hardware.gnss-service.ranchu: Gnss:onGnssLocationCb:311
+10-04 15:57:35.499   843 10726 D android.hardware.gnss-service.ranchu: Gnss:onGnssLocationCb:321
+10-04 15:57:35.510 10047 10100 D Maestro : View hierarchy received in 67 ms
+10-04 15:57:35.520 10047 10100 D Maestro : Requesting view hierarchy
+10-04 15:57:35.521 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:35.521 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:35.544  1325  1325 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.gms.scheduler.ACTION_PROXY_SCHEDULE dat=chimera-action:/... cmp=com.google.android.gms/.chimera.PersistentApiService }
+10-04 15:57:35.582 10047 10100 D Maestro : View hierarchy received in 62 ms
+10-04 15:57:35.638 10047 10100 D Maestro : Requesting view hierarchy
+10-04 15:57:35.638 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:35.638 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:35.696 10047 10100 D Maestro : View hierarchy received in 58 ms
+10-04 15:57:35.752 10047 10100 D Maestro : Requesting view hierarchy
+10-04 15:57:35.755 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:35.755 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:35.830 10047 10100 D Maestro : View hierarchy received in 78 ms
+10-04 15:57:35.884 10047 10100 D Maestro : Requesting view hierarchy
+10-04 15:57:35.884 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:35.884 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:35.944   786   786 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+10-04 15:57:35.946 10047 10100 D Maestro : View hierarchy received in 62 ms
+10-04 15:57:35.959 10047 10100 D Maestro : Requesting view hierarchy
+10-04 15:57:35.960 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:35.960 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:36.027 10047 10100 D Maestro : View hierarchy received in 68 ms
+10-04 15:57:36.081 10047 10100 D Maestro : Requesting view hierarchy
+10-04 15:57:36.082 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:36.082 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:36.146 10047 10100 D Maestro : View hierarchy received in 65 ms
+10-04 15:57:36.198 10047 10100 D Maestro : Requesting view hierarchy
+10-04 15:57:36.199 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:36.199 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:36.261 10047 10100 D Maestro : View hierarchy received in 63 ms
+10-04 15:57:36.273 10047 10100 D Maestro : Requesting view hierarchy
+10-04 15:57:36.274 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:36.274 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:36.334 10047 10100 D Maestro : View hierarchy received in 61 ms
+10-04 15:57:36.387 10047 10100 D Maestro : Requesting view hierarchy
+10-04 15:57:36.388 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:36.388 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:36.428 10047 10100 D Maestro : View hierarchy received in 41 ms
+10-04 15:57:36.485 10047 10100 D Maestro : Requesting view hierarchy
+10-04 15:57:36.485 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:36.486 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:36.497   843 10726 D android.hardware.gnss-service.ranchu: GnssHwListener:consume:87 sz=64
+10-04 15:57:36.498   843 10726 D android.hardware.gnss-service.ranchu: GnssHwListener:consume:87 sz=64
+10-04 15:57:36.499   843 10726 D android.hardware.gnss-service.ranchu: Gnss:onGnssLocationCb:311
+10-04 15:57:36.499   843 10726 D android.hardware.gnss-service.ranchu: Gnss:onGnssLocationCb:321
+10-04 15:57:36.545 10047 10100 D Maestro : View hierarchy received in 60 ms
+10-04 15:57:36.557 10047 10100 D Maestro : Requesting view hierarchy
+10-04 15:57:36.558 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:36.558 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:36.628 10047 10100 D Maestro : View hierarchy received in 71 ms
+10-04 15:57:36.639 10047 10100 D Maestro : Requesting view hierarchy
+10-04 15:57:36.640 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:36.640 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:36.698 10047 10100 D Maestro : View hierarchy received in 59 ms
+10-04 15:57:36.750 10047 10100 D Maestro : Requesting view hierarchy
+10-04 15:57:36.750 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:36.750 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:36.812 10047 10100 D Maestro : View hierarchy received in 62 ms
+10-04 15:57:36.871 10047 10100 D Maestro : Requesting view hierarchy
+10-04 15:57:36.873 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:36.873 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:36.927 10047 10100 D Maestro : View hierarchy received in 56 ms
+10-04 15:57:36.940 10047 10100 D Maestro : Requesting view hierarchy
+10-04 15:57:36.941 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:36.941 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:36.996 10047 10100 D Maestro : View hierarchy received in 56 ms
+10-04 15:57:37.006 10047 10100 D Maestro : Requesting view hierarchy
+10-04 15:57:37.006 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:37.007 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:37.048 10047 10100 D Maestro : View hierarchy received in 42 ms
+10-04 15:57:37.060 10047 10100 D Maestro : Requesting view hierarchy
+10-04 15:57:37.061 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:37.061 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:37.144 10047 10100 D Maestro : View hierarchy received in 84 ms
+10-04 15:57:37.203 10047 10100 D Maestro : Requesting view hierarchy
+10-04 15:57:37.204 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:37.204 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:37.262 10047 10100 D Maestro : View hierarchy received in 59 ms
+10-04 15:57:37.272 10047 10100 D Maestro : Requesting view hierarchy
+10-04 15:57:37.273 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:37.273 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:37.293 10377 10441 D EGL_emulation: app_time_stats: avg=999.89ms min=999.48ms max=1000.29ms count=2
+10-04 15:57:37.378 10047 10100 D Maestro : View hierarchy received in 106 ms
+10-04 15:57:37.390 10047 10100 D Maestro : Requesting view hierarchy
+10-04 15:57:37.390 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:37.390 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:37.445 10047 10100 D Maestro : View hierarchy received in 55 ms
+10-04 15:57:37.497   843 10726 D android.hardware.gnss-service.ranchu: GnssHwListener:consume:87 sz=64
+10-04 15:57:37.499   843 10726 D android.hardware.gnss-service.ranchu: GnssHwListener:consume:87 sz=64
+10-04 15:57:37.499   843 10726 D android.hardware.gnss-service.ranchu: Gnss:onGnssLocationCb:311
+10-04 15:57:37.499   843 10726 D android.hardware.gnss-service.ranchu: Gnss:onGnssLocationCb:321
+10-04 15:57:37.500 10047 10100 D Maestro : Requesting view hierarchy
+10-04 15:57:37.501 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:37.501 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:37.561 10047 10100 D Maestro : View hierarchy received in 61 ms
+10-04 15:57:37.573 10047 10100 D Maestro : Requesting view hierarchy
+10-04 15:57:37.573 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:37.574 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:37.610   786   786 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+10-04 15:57:37.627 10047 10100 D Maestro : View hierarchy received in 54 ms
+10-04 15:57:37.684 10047 10100 D Maestro : Requesting view hierarchy
+10-04 15:57:37.684 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:37.685 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:37.744 10047 10100 D Maestro : View hierarchy received in 60 ms
+10-04 15:57:37.799 10047 10100 D Maestro : Requesting view hierarchy
+10-04 15:57:37.801 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:37.801 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:37.846 10047 10100 D Maestro : View hierarchy received in 47 ms
+10-04 15:57:37.898 10047 10654 D Maestro : Requesting view hierarchy
+10-04 15:57:37.899 10047 10654 W QueryController: Could not detect idle state.
+10-04 15:57:37.900 10047 10654 W QueryController: Could not detect idle state.
+10-04 15:57:37.961 10047 10654 D Maestro : View hierarchy received in 63 ms
+10-04 15:57:37.975 10047 10654 D Maestro : Requesting view hierarchy
+10-04 15:57:37.976 10047 10654 W QueryController: Could not detect idle state.
+10-04 15:57:37.976 10047 10654 W QueryController: Could not detect idle state.
+10-04 15:57:38.046 10047 10654 D Maestro : View hierarchy received in 71 ms
+10-04 15:57:38.100 10047 10654 D Maestro : Requesting view hierarchy
+10-04 15:57:38.101 10047 10654 W QueryController: Could not detect idle state.
+10-04 15:57:38.101 10047 10654 W QueryController: Could not detect idle state.
+10-04 15:57:38.162 10047 10654 D Maestro : View hierarchy received in 62 ms
+10-04 15:57:38.215 10047 10654 D Maestro : Requesting view hierarchy
+10-04 15:57:38.216 10047 10654 W QueryController: Could not detect idle state.
+10-04 15:57:38.216 10047 10654 W QueryController: Could not detect idle state.
+10-04 15:57:38.284 10047 10654 D Maestro : View hierarchy received in 69 ms
+10-04 15:57:38.297 10377 10441 D EGL_emulation: app_time_stats: avg=1003.93ms min=1003.93ms max=1003.93ms count=1
+10-04 15:57:38.299 11174 11176 W ziparchive: Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/00000004/DynamiteModulesC.dm': No such file or directory
+10-04 15:57:38.299 11174 11176 W ziparchive: Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/00000004/DynamiteModulesC.dm': No such file or directory
+10-04 15:57:38.300 11174 11176 W ziparchive: Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/00000001/CronetDynamite.dm': No such file or directory
+10-04 15:57:38.300 11174 11176 W ziparchive: Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/00000001/CronetDynamite.dm': No such file or directory
+10-04 15:57:38.301 11174 11176 W ziparchive: Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/00000002/DynamiteLoader.dm': No such file or directory
+10-04 15:57:38.301 11174 11176 W ziparchive: Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/00000002/DynamiteLoader.dm': No such file or directory
+10-04 15:57:38.301 10047 10100 D Maestro : Requesting view hierarchy
+10-04 15:57:38.301 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:38.301 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:38.302 11174 11176 W ziparchive: Unable to open '/data/user/0/com.google.android.gms/app_fb/f.dm': No such file or directory
+10-04 15:57:38.302 11174 11176 W ziparchive: Unable to open '/data/user/0/com.google.android.gms/app_fb/f.dm': No such file or directory
+10-04 15:57:38.304 11174 11176 W ziparchive: Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/00000005/GoogleCertificates.dm': No such file or directory
+10-04 15:57:38.304 11174 11176 W ziparchive: Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/00000005/GoogleCertificates.dm': No such file or directory
+10-04 15:57:38.305 11174 11176 W ziparchive: Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/00000009/dl-TfliteDynamiteDynamite.integ_262730502100800.dm': No such file or directory
+10-04 15:57:38.305 11174 11176 W ziparchive: Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/00000009/dl-TfliteDynamiteDynamite.integ_262730502100800.dm': No such file or directory
+10-04 15:57:38.306 11174 11176 W ziparchive: Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/00000000/AdsDynamite.dm': No such file or directory
+10-04 15:57:38.306 11174 11176 W ziparchive: Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/00000000/AdsDynamite.dm': No such file or directory
+10-04 15:57:38.307 11174 11176 W ziparchive: Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/00000008/dl-VisionOcrDynamite.integ_231602402100000.dm': No such file or directory
+10-04 15:57:38.307 11174 11176 W ziparchive: Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/00000008/dl-VisionOcrDynamite.integ_231602402100000.dm': No such file or directory
+10-04 15:57:38.307 11174 11176 W ziparchive: Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/0000000c/dl-MlkitBarcodeUi.optional_231818100000.dm': No such file or directory
+10-04 15:57:38.308 11174 11176 W ziparchive: Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/0000000c/dl-MlkitBarcodeUi.optional_231818100000.dm': No such file or directory
+10-04 15:57:38.313 11174 11176 W ziparchive: Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/0000000a/dl-MlkitOcrCommon.optional_231818100800.dm': No such file or directory
+10-04 15:57:38.313 11174 11176 W ziparchive: Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/0000000a/dl-MlkitOcrCommon.optional_231818100800.dm': No such file or directory
+10-04 15:57:38.318 11174 11176 W ziparchive: Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/00000007/MeasurementDynamite.dm': No such file or directory
+10-04 15:57:38.319 11174 11176 W ziparchive: Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/00000007/MeasurementDynamite.dm': No such file or directory
+10-04 15:57:38.345 10047 10100 D Maestro : View hierarchy received in 44 ms
+10-04 15:57:38.354 10047 10100 D Maestro : Requesting view hierarchy
+10-04 15:57:38.355 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:38.355 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:38.397 10047 10100 D Maestro : View hierarchy received in 43 ms
+10-04 15:57:38.405 10047 10100 D Maestro : Requesting view hierarchy
+10-04 15:57:38.405 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:38.406 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:38.445 10047 10100 D Maestro : View hierarchy received in 40 ms
+10-04 15:57:38.458 10047 10100 D Maestro : Requesting view hierarchy
+10-04 15:57:38.459 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:38.459 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:38.498   843 10726 D android.hardware.gnss-service.ranchu: GnssHwListener:consume:87 sz=64
+10-04 15:57:38.499   843 10726 D android.hardware.gnss-service.ranchu: GnssHwListener:consume:87 sz=64
+10-04 15:57:38.499   843 10726 D android.hardware.gnss-service.ranchu: Gnss:onGnssLocationCb:311
+10-04 15:57:38.499   843 10726 D android.hardware.gnss-service.ranchu: Gnss:onGnssLocationCb:321
+10-04 15:57:38.512 10047 10100 D Maestro : View hierarchy received in 54 ms
+10-04 15:57:38.568 10047 10100 D Maestro : Requesting view hierarchy
+10-04 15:57:38.569 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:38.569 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:38.611 10047 10100 D Maestro : View hierarchy received in 43 ms
+10-04 15:57:38.626   786   786 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+10-04 15:57:38.665 10047 10100 D Maestro : Requesting view hierarchy
+10-04 15:57:38.665 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:38.666 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:38.713 10047 10100 D Maestro : View hierarchy received in 48 ms
+10-04 15:57:38.777 10047 10100 D Maestro : Requesting view hierarchy
+10-04 15:57:38.778 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:38.778 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:38.828 10047 10100 D Maestro : View hierarchy received in 51 ms
+10-04 15:57:38.887 10047 10100 D Maestro : Requesting view hierarchy
+10-04 15:57:38.887 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:38.888 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:38.931 10047 10100 D Maestro : View hierarchy received in 44 ms
+10-04 15:57:38.989 10047 10100 D Maestro : Requesting view hierarchy
+10-04 15:57:38.990 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:38.990 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:39.060 10047 10100 D Maestro : View hierarchy received in 71 ms
+10-04 15:57:39.077 10047 10100 D Maestro : Requesting view hierarchy
+10-04 15:57:39.078 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:39.078 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:39.144 10047 10100 D Maestro : View hierarchy received in 67 ms
+10-04 15:57:39.160 10047 10100 D Maestro : Requesting view hierarchy
+10-04 15:57:39.161 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:39.161 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:39.228 10047 10100 D Maestro : View hierarchy received in 68 ms
+10-04 15:57:39.289 10047 10100 D Maestro : Requesting view hierarchy
+10-04 15:57:39.290 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:39.290 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:39.337   496 10644 D BufferPoolAccessor2.0: bufferpool2 0x7d2621cb0af8 : 2(1958400 size) total buffers - 1(979200 size) used buffers - 253/255 (recycle/alloc) - 2/254 (fetch/transfer)
+10-04 15:57:39.362 10047 10100 D Maestro : View hierarchy received in 73 ms
+10-04 15:57:39.379 10047 10100 D Maestro : Requesting view hierarchy
+10-04 15:57:39.379 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:39.380 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:39.447 10047 10100 D Maestro : View hierarchy received in 68 ms
+10-04 15:57:39.499   843 10726 D android.hardware.gnss-service.ranchu: GnssHwListener:consume:87 sz=64
+10-04 15:57:39.502 10047 10100 D Maestro : Requesting view hierarchy
+10-04 15:57:39.503   843 10726 D android.hardware.gnss-service.ranchu: GnssHwListener:consume:87 sz=64
+10-04 15:57:39.503   843 10726 D android.hardware.gnss-service.ranchu: Gnss:onGnssLocationCb:311
+10-04 15:57:39.503   843 10726 D android.hardware.gnss-service.ranchu: Gnss:onGnssLocationCb:321
+10-04 15:57:39.503 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:39.504 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:39.560 10047 10100 D Maestro : View hierarchy received in 58 ms
+10-04 15:57:39.569 10047 10100 D Maestro : Requesting view hierarchy
+10-04 15:57:39.570 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:39.570 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:39.613 10047 10100 D Maestro : View hierarchy received in 44 ms
+10-04 15:57:39.668 10047 10100 D Maestro : Requesting view hierarchy
+10-04 15:57:39.668 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:39.669 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:39.728 10047 10100 D Maestro : View hierarchy received in 60 ms
+10-04 15:57:39.825 10047 10100 D Maestro : Requesting view hierarchy
+10-04 15:57:39.826 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:39.826 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:39.895 10047 10100 D Maestro : View hierarchy received in 70 ms
+10-04 15:57:39.951 10047 10100 D Maestro : Requesting view hierarchy
+10-04 15:57:39.952 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:39.952 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:40.012 10047 10100 D Maestro : View hierarchy received in 61 ms
+10-04 15:57:40.031 10047 10100 D Maestro : Requesting view hierarchy
+10-04 15:57:40.032 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:40.032 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:40.094 10047 10100 D Maestro : View hierarchy received in 63 ms
+10-04 15:57:40.110 10047 10100 D Maestro : Requesting view hierarchy
+10-04 15:57:40.110 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:40.111 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:40.178 10047 10100 D Maestro : View hierarchy received in 68 ms
+10-04 15:57:40.278 10047 10100 D Maestro : Requesting view hierarchy
+10-04 15:57:40.278 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:40.278 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:40.294 10377 10441 D EGL_emulation: app_time_stats: avg=998.17ms min=995.72ms max=1000.62ms count=2
+10-04 15:57:40.344 10047 10100 D Maestro : View hierarchy received in 66 ms
+10-04 15:57:40.402 10047 10100 D Maestro : Requesting view hierarchy
+10-04 15:57:40.402 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:40.403 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:40.461 10047 10100 D Maestro : View hierarchy received in 59 ms
+10-04 15:57:40.470 10047 10100 D Maestro : Requesting view hierarchy
+10-04 15:57:40.470 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:40.470 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:40.500   843 10726 D android.hardware.gnss-service.ranchu: GnssHwListener:consume:87 sz=64
+10-04 15:57:40.501   843 10726 D android.hardware.gnss-service.ranchu: GnssHwListener:consume:87 sz=64
+10-04 15:57:40.501   843 10726 D android.hardware.gnss-service.ranchu: Gnss:onGnssLocationCb:311
+10-04 15:57:40.501   843 10726 D android.hardware.gnss-service.ranchu: Gnss:onGnssLocationCb:321
+10-04 15:57:40.530 10047 10100 D Maestro : View hierarchy received in 60 ms
+10-04 15:57:40.541 10047 10100 D Maestro : Requesting view hierarchy
+10-04 15:57:40.542 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:40.543 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:40.595 10047 10100 D Maestro : View hierarchy received in 54 ms
+10-04 15:57:40.606 10047 10100 D Maestro : Requesting view hierarchy
+10-04 15:57:40.607 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:40.607 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:40.664 10047 10100 D Maestro : View hierarchy received in 58 ms
+10-04 15:57:40.720 10047 10100 D Maestro : Requesting view hierarchy
+10-04 15:57:40.721 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:40.721 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:40.764 10047 10100 D Maestro : View hierarchy received in 44 ms
+10-04 15:57:40.795   559   696 I netstats_mobile_sample: [46709429,13134705,49083,28025,46682174,13123495,48485,27896,1791118662110]
+10-04 15:57:40.795   559   696 I netstats_wifi_sample: [0,0,0,0,0,0,0,0,1791118662110]
+10-04 15:57:40.796   559   697 I service_manager_stats: [100,45,148667]
+10-04 15:57:40.817 10047 10100 D Maestro : Requesting view hierarchy
+10-04 15:57:40.818 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:40.818 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:40.895 10047 10100 D Maestro : View hierarchy received in 78 ms
+10-04 15:57:40.905 10047 10100 D Maestro : Requesting view hierarchy
+10-04 15:57:40.905 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:40.905 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:40.962 10047 10100 D Maestro : View hierarchy received in 57 ms
+10-04 15:57:40.973 10047 10100 D Maestro : Requesting view hierarchy
+10-04 15:57:40.973 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:40.973 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:41.046 10047 10100 D Maestro : View hierarchy received in 73 ms
+10-04 15:57:41.102 10047 10100 D Maestro : Requesting view hierarchy
+10-04 15:57:41.102 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:41.102 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:41.161 10047 10100 D Maestro : View hierarchy received in 59 ms
+10-04 15:57:41.215 10047 10100 D Maestro : Requesting view hierarchy
+10-04 15:57:41.215 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:41.216 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:41.278 10047 10100 D Maestro : View hierarchy received in 63 ms
+10-04 15:57:41.294 10377 10441 D EGL_emulation: app_time_stats: avg=1000.06ms min=1000.06ms max=1000.06ms count=1
+10-04 15:57:41.333 10047 10100 D Maestro : Requesting view hierarchy
+10-04 15:57:41.334 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:41.339 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:41.379 10047 10100 D Maestro : View hierarchy received in 46 ms
+10-04 15:57:41.433 10047 10100 D Maestro : Requesting view hierarchy
+10-04 15:57:41.434 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:41.434 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:41.480 10047 10100 D Maestro : View hierarchy received in 47 ms
+10-04 15:57:41.500   843 10726 D android.hardware.gnss-service.ranchu: GnssHwListener:consume:87 sz=64
+10-04 15:57:41.501   843 10726 D android.hardware.gnss-service.ranchu: GnssHwListener:consume:87 sz=64
+10-04 15:57:41.501   843 10726 D android.hardware.gnss-service.ranchu: Gnss:onGnssLocationCb:311
+10-04 15:57:41.501   843 10726 D android.hardware.gnss-service.ranchu: Gnss:onGnssLocationCb:321
+10-04 15:57:41.537 10047 10100 D Maestro : Requesting view hierarchy
+10-04 15:57:41.537 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:41.538 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:41.594 10047 10100 D Maestro : View hierarchy received in 57 ms
+10-04 15:57:41.648 10047 10100 D Maestro : Requesting view hierarchy
+10-04 15:57:41.648 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:41.648 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:41.695 10047 10100 D Maestro : View hierarchy received in 47 ms
+10-04 15:57:41.753 10047 10100 D Maestro : Requesting view hierarchy
+10-04 15:57:41.754 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:41.754 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:41.860 10047 10100 D Maestro : View hierarchy received in 107 ms
+10-04 15:57:41.872 10047 10100 D Maestro : Requesting view hierarchy
+10-04 15:57:41.873 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:41.873 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:41.928 10047 10100 D Maestro : View hierarchy received in 56 ms
+10-04 15:57:41.939 10047 10100 D Maestro : Requesting view hierarchy
+10-04 15:57:41.939 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:41.941 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:41.979 10047 10100 D Maestro : View hierarchy received in 40 ms
+10-04 15:57:42.033 10047 10100 D Maestro : Requesting view hierarchy
+10-04 15:57:42.033 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:42.033 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:42.078 10047 10100 D Maestro : View hierarchy received in 45 ms
+10-04 15:57:42.089 10047 10100 D Maestro : Requesting view hierarchy
+10-04 15:57:42.089 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:42.090 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:42.127 10047 10100 D Maestro : View hierarchy received in 38 ms
+10-04 15:57:42.185 10047 10100 D Maestro : Requesting view hierarchy
+10-04 15:57:42.185 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:42.186 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:42.246 10047 10100 D Maestro : View hierarchy received in 61 ms
+10-04 15:57:42.346 10047 10100 D Maestro : Requesting view hierarchy
+10-04 15:57:42.347 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:42.347 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:42.411 10047 10100 D Maestro : View hierarchy received in 65 ms
+10-04 15:57:42.471 10047 10100 D Maestro : Requesting view hierarchy
+10-04 15:57:42.472 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:42.472 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:42.501   843 10726 D android.hardware.gnss-service.ranchu: GnssHwListener:consume:87 sz=64
+10-04 15:57:42.503   843 10726 D android.hardware.gnss-service.ranchu: GnssHwListener:consume:87 sz=64
+10-04 15:57:42.503   843 10726 D android.hardware.gnss-service.ranchu: Gnss:onGnssLocationCb:311
+10-04 15:57:42.503   843 10726 D android.hardware.gnss-service.ranchu: Gnss:onGnssLocationCb:321
+10-04 15:57:42.528 10047 10100 D Maestro : View hierarchy received in 57 ms
+10-04 15:57:42.587 10047 10100 D Maestro : Requesting view hierarchy
+10-04 15:57:42.587 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:42.587 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:42.625   786   786 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+10-04 15:57:42.647 10047 10100 D Maestro : View hierarchy received in 60 ms
+10-04 15:57:42.704 10047 10100 D Maestro : Requesting view hierarchy
+10-04 15:57:42.704 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:42.704 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:42.762 10047 10100 D Maestro : View hierarchy received in 58 ms
+10-04 15:57:42.817 10047 10100 D Maestro : Requesting view hierarchy
+10-04 15:57:42.817 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:42.817 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:42.864 10047 10100 D Maestro : View hierarchy received in 47 ms
+10-04 15:57:42.935 10047 10100 D Maestro : Requesting view hierarchy
+10-04 15:57:42.936 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:42.936 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:42.993 10047 10100 D Maestro : View hierarchy received in 58 ms
+10-04 15:57:43.048 10047 10100 D Maestro : Requesting view hierarchy
+10-04 15:57:43.049 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:43.049 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:43.115 10047 10100 D Maestro : View hierarchy received in 67 ms
+10-04 15:57:43.126 10047 10100 D Maestro : Requesting view hierarchy
+10-04 15:57:43.127 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:43.128 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:43.196 10047 10100 D Maestro : View hierarchy received in 70 ms
+10-04 15:57:43.252 10047 10100 D Maestro : Requesting view hierarchy
+10-04 15:57:43.253 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:43.253 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:43.293 10377 10441 D EGL_emulation: app_time_stats: avg=999.43ms min=999.38ms max=999.48ms count=2
+10-04 15:57:43.310 10047 10100 D Maestro : View hierarchy received in 58 ms
+10-04 15:57:43.330 10047 10100 D Maestro : Requesting view hierarchy
+10-04 15:57:43.332 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:43.332 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:43.395 10047 10100 D Maestro : View hierarchy received in 65 ms
+10-04 15:57:43.405 10047 10100 D Maestro : Requesting view hierarchy
+10-04 15:57:43.406 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:43.406 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:43.462 10047 10100 D Maestro : View hierarchy received in 57 ms
+10-04 15:57:43.473 10047 10100 D Maestro : Requesting view hierarchy
+10-04 15:57:43.473 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:43.474 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:43.502   843 10726 D android.hardware.gnss-service.ranchu: GnssHwListener:consume:87 sz=64
+10-04 15:57:43.503   843 10726 D android.hardware.gnss-service.ranchu: GnssHwListener:consume:87 sz=64
+10-04 15:57:43.503   843 10726 D android.hardware.gnss-service.ranchu: Gnss:onGnssLocationCb:311
+10-04 15:57:43.503   843 10726 D android.hardware.gnss-service.ranchu: Gnss:onGnssLocationCb:321
+10-04 15:57:43.545 10047 10100 D Maestro : View hierarchy received in 72 ms
+10-04 15:57:43.604 10047 10100 D Maestro : Requesting view hierarchy
+10-04 15:57:43.605 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:43.605 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:43.625   786   786 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+10-04 15:57:43.661 10047 10100 D Maestro : View hierarchy received in 57 ms
+10-04 15:57:43.674 10047 10100 D Maestro : Requesting view hierarchy
+10-04 15:57:43.675 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:43.676 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:43.744 10047 10100 D Maestro : View hierarchy received in 70 ms
+10-04 15:57:43.798 10047 10100 D Maestro : Requesting view hierarchy
+10-04 15:57:43.798 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:43.799 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:43.862 10047 10100 D Maestro : View hierarchy received in 64 ms
+10-04 15:57:43.872 10047 10100 D Maestro : Requesting view hierarchy
+10-04 15:57:43.872 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:43.872 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:43.928 10047 10100 D Maestro : View hierarchy received in 56 ms
+10-04 15:57:43.986 10047 10100 D Maestro : Requesting view hierarchy
+10-04 15:57:43.987 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:43.987 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:44.045 10047 10100 D Maestro : View hierarchy received in 59 ms
+10-04 15:57:44.103 10047 10100 D Maestro : Requesting view hierarchy
+10-04 15:57:44.104 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:44.104 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:44.163 10047 10100 D Maestro : View hierarchy received in 60 ms
+10-04 15:57:44.213 10047 10100 D Maestro : Requesting view hierarchy
+10-04 15:57:44.213 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:44.213 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:44.260 10047 10100 D Maestro : View hierarchy received in 47 ms
+10-04 15:57:44.272 10047 10100 D Maestro : Requesting view hierarchy
+10-04 15:57:44.272 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:44.273 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:44.293 10377 10441 D EGL_emulation: app_time_stats: avg=1000.43ms min=1000.43ms max=1000.43ms count=1
+10-04 15:57:44.338   496 10644 D BufferPoolAccessor2.0: bufferpool2 0x7d2621cb0af8 : 2(1958400 size) total buffers - 1(979200 size) used buffers - 258/260 (recycle/alloc) - 2/259 (fetch/transfer)
+10-04 15:57:44.345 10047 10100 D Maestro : View hierarchy received in 73 ms
+10-04 15:57:44.356 10047 10100 D Maestro : Requesting view hierarchy
+10-04 15:57:44.356 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:44.356 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:44.412 10047 10100 D Maestro : View hierarchy received in 56 ms
+10-04 15:57:44.468 10047 10100 D Maestro : Requesting view hierarchy
+10-04 15:57:44.469 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:44.469 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:44.503   843 10726 D android.hardware.gnss-service.ranchu: GnssHwListener:consume:87 sz=64
+10-04 15:57:44.505   843 10726 D android.hardware.gnss-service.ranchu: GnssHwListener:consume:87 sz=64
+10-04 15:57:44.505   843 10726 D android.hardware.gnss-service.ranchu: Gnss:onGnssLocationCb:311
+10-04 15:57:44.505   843 10726 D android.hardware.gnss-service.ranchu: Gnss:onGnssLocationCb:321
+10-04 15:57:44.528 10047 10100 D Maestro : View hierarchy received in 60 ms
+10-04 15:57:44.585 10047 10100 D Maestro : Requesting view hierarchy
+10-04 15:57:44.585 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:44.585 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:44.628 10047 10100 D Maestro : View hierarchy received in 43 ms
+10-04 15:57:44.684 10047 10100 D Maestro : Requesting view hierarchy
+10-04 15:57:44.684 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:44.685 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:44.745 10047 10100 D Maestro : View hierarchy received in 61 ms
+10-04 15:57:44.755 10047 10100 D Maestro : Requesting view hierarchy
+10-04 15:57:44.755 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:44.756 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:44.795 10047 10100 D Maestro : View hierarchy received in 40 ms
+10-04 15:57:44.847 10047 10100 D Maestro : Requesting view hierarchy
+10-04 15:57:44.847 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:44.847 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:44.910 10047 10100 D Maestro : View hierarchy received in 63 ms
+10-04 15:57:44.963 10047 10100 D Maestro : Requesting view hierarchy
+10-04 15:57:44.963 10047 10100 W QueryController: Could not detect idle state.
+10-04 15:57:44.964 10047 10100 W QueryController: Could not detect idle state.

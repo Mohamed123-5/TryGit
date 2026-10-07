@@ -1,0 +1,73 @@
+appId: fi.iwa.sakani
+name: RESUME C2 - verify the signed state, clearing the re-arming NPS survey between steps (read-only)
+env:
+  UNIT_CODE: '${typeof UNIT_CODE === "undefined" ? "01-01-0504-999-368" : String(UNIT_CODE)}'
+  INVOICE: '${typeof INVOICE === "undefined" ? "2609100000101946" : String(INVOICE)}'
+---
+# READ-ONLY. Same checks as RESUME C. The NPS survey re-appears repeatedly after a signing, so it is
+# dragged away (header-strip drag only) before every navigation and check, and clear-overlays is
+# used with its documented opt-out of the final passive wait, which the survey defeated in RESUME C.
+- launchApp
+- evalScript: ${output.anchorOptional = true}
+- runFlow:
+    file: ../../../.maestro/subflows/clear-overlays.yaml
+    env:
+      ANCHOR: 'Account\s*Tab 4 of 4'
+- evalScript: ${output.anchorOptional = false}
+- runFlow: _nps-drag.yaml
+- tapOn: 'Account\s*Tab 4 of 4'
+- runFlow: _nps-drag.yaml
+- extendedWaitUntil:
+    visible: "My bookings"
+    timeout: 60000
+- runFlow: _nps-drag.yaml
+- tapOn: "My bookings"
+- runFlow: _nps-drag.yaml
+- extendedWaitUntil:
+    visible: 'Active\s*Tab 2 of 4'
+    timeout: 45000
+- tapOn: 'Active\s*Tab 2 of 4'
+- runFlow: _nps-drag.yaml
+- extendedWaitUntil:
+    visible: "Ready to sign"
+    timeout: 30000
+- tapOn: "Ready to sign"
+- runFlow: _nps-drag.yaml
+- extendedWaitUntil:
+    visible: "(?s).*(don.t have any booking|\nActive\n.*Unit code).*"
+    timeout: 45000
+- takeScreenshot: C2-1-ready-to-sign-after
+- assertNotVisible: "(?s).*\nActive\n.*${UNIT_CODE}.*"
+- assertVisible: "(?s).*don.t have any booking.*"
+- tapOn: "All"
+- runFlow: _nps-drag.yaml
+- extendedWaitUntil:
+    visible: "(?s).*\nActive\n.*${UNIT_CODE}.*"
+    timeout: 45000
+- tapOn: "(?s).*\nActive\n.*${UNIT_CODE}.*"
+- runFlow: _nps-drag.yaml
+- extendedWaitUntil:
+    visible: "(?s).*steps? left.*"
+    timeout: 45000
+- takeScreenshot: C2-2-booking-steps-after
+- scrollUntilVisible:
+    element:
+      text: "Price quotation"
+    direction: DOWN
+    timeout: 30000
+- runFlow: _nps-drag.yaml
+- assertVisible: "Sales contract"
+- assertVisible: "Signed"
+- assertVisible: "Price quotation"
+- assertNotVisible: "(?s)Sign sales contract\nYour booking will not be complete.*"
+- takeScreenshot: C2-3-documents-signed
+- scrollUntilVisible:
+    element:
+      text: "Invoice number"
+    direction: UP
+    timeout: 30000
+- runFlow: _nps-drag.yaml
+- assertVisible: "Booking fee status"
+- assertVisible: "Paid"
+- assertVisible: ${INVOICE}
+- takeScreenshot: C2-4-paid-invoice

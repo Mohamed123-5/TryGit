@@ -1,0 +1,12 @@
+# READ-ONLY PROBE 2: on Personal information, tap the top-left header control ONCE; nothing else.
+appId: fi.iwa.sakani
+---
+- assertVisible: "Personal information"
+- tapOn:
+    width: 21
+    height: 37
+    tolerance: 3
+    leftOf: "Personal information"
+    retryTapIfNoChange: false
+- waitForAnimationToEnd:
+    timeout: 10000

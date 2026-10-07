@@ -1,0 +1,24 @@
+appId: fi.iwa.sakani
+name: FLAG anchorOptional semantics
+---
+- evalScript: ${output.ranUnset = 0}
+- runFlow:
+    when:
+      true: ${output.anchorOptional !== true}
+    commands:
+      - evalScript: ${output.ranUnset = 1}
+- assertTrue: ${output.ranUnset === 1}
+- evalScript: ${output.anchorOptional = true}
+- runFlow:
+    when:
+      true: ${output.anchorOptional !== true}
+    commands:
+      - assertTrue: false
+- evalScript: ${output.anchorOptional = false}
+- evalScript: ${output.ranAfterReset = 0}
+- runFlow:
+    when:
+      true: ${output.anchorOptional !== true}
+    commands:
+      - evalScript: ${output.ranAfterReset = 1}
+- assertTrue: ${output.ranAfterReset === 1}

@@ -1,0 +1,25 @@
+{
+  "startedAt": "2026-09-28T11:45:46.138Z",
+  "finishedAt": "2026-09-28T11:49:21.816Z",
+  "device": "emulator-5554",
+  "includeE2e": false,
+  "results": [
+    {
+      "flow": "unit",
+      "file": ".maestro/regression-readonly/unit.yaml",
+      "suite": "regression-readonly",
+      "tags": [
+        "health-check"
+      ],
+      "startedAt": "2026-09-28T11:45:46.433Z",
+      "durationMs": 215364,
+      "logPath": "report-dashboard/maestro-output/unit/maestro.log",
+      "status": "PASS",
+      "exitCode": 0,
+      "failedSteps": 0,
+      "firstFailure": null,
+      "envReason": null,
+      "npsAppearances": 0
+    }
+  ]
+}

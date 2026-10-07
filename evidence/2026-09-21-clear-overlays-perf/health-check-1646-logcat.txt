@@ -1,0 +1,677 @@
+--------- beginning of main
+09-21 16:46:12.140 D/AndroidRuntime( 6100): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+09-21 16:46:12.142 I/AndroidRuntime( 6100): Using default boot image
+09-21 16:46:12.143 I/AndroidRuntime( 6100): Leaving lock profiling enabled
+09-21 16:46:12.144 I/app_process( 6100): Using CollectorTypeCC GC.
+09-21 16:46:12.182 D/nativeloader( 6100): InitDefaultPublicLibraries for_preload=1: libandroid.so:libaaudio.so:libamidi.so:libbinder_ndk.so:libc.so:libcamera2ndk.so:libdl.so:libEGL.so:libGLESv1_CM.so:libGLESv2.so:libGLESv3.so:libicu.so:libicui18n.so:libicuuc.so:libjnigraphics.so:liblog.so:libmediandk.so:libm.so:libnativehelper.so:libnativewindow.so:libOpenMAXAL.so:libOpenSLES.so:libRS.so:libstdc++.so:libsync.so:libvulkan.so:libwebviewchromium_plat_support.so:libz.so
+09-21 16:46:12.188 D/app_process( 6100): Time zone APEX ICU file found: /apex/com.android.tzdata/etc/icu/icu_tzdata.dat
+09-21 16:46:12.188 D/app_process( 6100): I18n APEX ICU file found: /apex/com.android.i18n/etc/icu/icudt72l.dat
+09-21 16:46:12.191 W/app_process( 6100): Unexpected CPU variant for x86: x86_64.
+09-21 16:46:12.191 W/app_process( 6100): Known variants: atom, sandybridge, silvermont, goldmont, goldmont-plus, tremont, kabylake, default
+09-21 16:46:12.206 W/libc    ( 6100): Access denied finding property "ro.product.name_for_attestation"
+09-21 16:46:12.207 W/libc    ( 6100): Access denied finding property "ro.product.brand_for_attestation"
+09-21 16:46:12.207 W/libc    ( 6100): Access denied finding property "ro.product.model_for_attestation"
+09-21 16:46:12.201 W/main    ( 6100): type=1400 audit(0.0:6321): avc:  denied  { read } for  name="u:object_r:build_attestation_prop:s0" dev="tmpfs" ino=85 scontext=u:r:shell:s0 tcontext=u:object_r:build_attestation_prop:s0 tclass=file permissive=0
+09-21 16:46:12.207 D/AndroidRuntime( 6100): Calling main entry com.android.commands.monkey.Monkey
+09-21 16:46:12.208 W/Monkey  ( 6100): args: [-p, fi.iwa.sakani, -c, android.intent.category.LAUNCHER, 1]
+09-21 16:46:12.208 W/Monkey  ( 6100):  arg: "-p"
+09-21 16:46:12.208 W/Monkey  ( 6100):  arg: "fi.iwa.sakani"
+09-21 16:46:12.208 W/Monkey  ( 6100):  arg: "-c"
+09-21 16:46:12.208 W/Monkey  ( 6100):  arg: "android.intent.category.LAUNCHER"
+09-21 16:46:12.208 W/Monkey  ( 6100):  arg: "1"
+09-21 16:46:12.208 W/Monkey  ( 6100): data="fi.iwa.sakani"
+09-21 16:46:12.208 W/Monkey  ( 6100): data="android.intent.category.LAUNCHER"
+09-21 16:46:12.201 W/main    ( 6100): type=1400 audit(0.0:6322): avc:  denied  { read } for  name="u:object_r:build_attestation_prop:s0" dev="tmpfs" ino=85 scontext=u:r:shell:s0 tcontext=u:object_r:build_attestation_prop:s0 tclass=file permissive=0
+09-21 16:46:12.201 W/main    ( 6100): type=1400 audit(0.0:6323): avc:  denied  { read } for  name="u:object_r:build_attestation_prop:s0" dev="tmpfs" ino=85 scontext=u:r:shell:s0 tcontext=u:object_r:build_attestation_prop:s0 tclass=file permissive=0
+09-21 16:46:12.213 D/StatusBarIconController(  802): ignoring old pipeline callbacks, because the new mobile icons are enabled
+--------- beginning of system
+09-21 16:46:12.232 W/ActivityManager(  563): registerReceiverWithFeature: no app for null
+09-21 16:46:12.233 W/System  ( 6100): No Compatibility callbacks set! Querying change 263076149
+09-21 16:46:12.233 W/System  ( 6100): No Compatibility callbacks set! Querying change 263076149
+09-21 16:46:12.233 W/System  ( 6100): No Compatibility callbacks set! Querying change 263076149
+09-21 16:46:12.235 D/CompatibilityChangeReporter(  563): Compat change id reported: 161252188; UID 10214; state: DISABLED
+09-21 16:46:12.235 W/ActivityTaskManager(  563): callingPackage for (uid=2000, pid=6100) has no WPC
+09-21 16:46:12.236 D/CompatibilityChangeReporter(  563): Compat change id reported: 265464455; UID 10214; state: DISABLED
+09-21 16:46:12.236 D/CompatibilityChangeReporter(  563): Compat change id reported: 265452344; UID 10214; state: DISABLED
+09-21 16:46:12.236 D/CompatibilityChangeReporter(  563): Compat change id reported: 266124927; UID 10214; state: DISABLED
+09-21 16:46:12.236 D/CompatibilityChangeReporter(  563): Compat change id reported: 265451093; UID 10214; state: DISABLED
+09-21 16:46:12.236 D/CompatibilityChangeReporter(  563): Compat change id reported: 265456536; UID 10214; state: DISABLED
+09-21 16:46:12.236 D/CompatibilityChangeReporter(  563): Compat change id reported: 255940284; UID 10214; state: DISABLED
+09-21 16:46:12.236 D/CompatibilityChangeReporter(  563): Compat change id reported: 236283604; UID 10214; state: DISABLED
+09-21 16:46:12.236 D/CompatibilityChangeReporter(  563): Compat change id reported: 263959004; UID 10214; state: DISABLED
+09-21 16:46:12.236 D/CompatibilityChangeReporter(  563): Compat change id reported: 264304459; UID 10214; state: DISABLED
+09-21 16:46:12.236 D/CompatibilityChangeReporter(  563): Compat change id reported: 264301586; UID 10214; state: DISABLED
+09-21 16:46:12.236 D/CompatibilityChangeReporter(  563): Compat change id reported: 254631730; UID 10214; state: DISABLED
+09-21 16:46:12.236 D/CompatibilityChangeReporter(  563): Compat change id reported: 273509367; UID 10214; state: DISABLED
+09-21 16:46:12.236 D/CompatibilityChangeReporter(  563): Compat change id reported: 263259275; UID 10214; state: DISABLED
+09-21 16:46:12.236 D/CompatibilityChangeReporter(  563): Compat change id reported: 174042980; UID 10214; state: DISABLED
+09-21 16:46:12.236 D/CompatibilityChangeReporter(  563): Compat change id reported: 174042936; UID 10214; state: DISABLED
+09-21 16:46:12.237 D/CompatibilityChangeReporter(  563): Compat change id reported: 181136395; UID 10214; state: DISABLED
+09-21 16:46:12.237 D/CompatibilityChangeReporter(  563): Compat change id reported: 194480991; UID 10214; state: ENABLED
+09-21 16:46:12.239 D/CompatibilityChangeReporter(  563): Compat change id reported: 184838306; UID 10214; state: DISABLED
+09-21 16:46:12.239 D/CompatibilityChangeReporter(  563): Compat change id reported: 185004937; UID 10214; state: DISABLED
+09-21 16:46:12.239 D/CompatibilityChangeReporter(  563): Compat change id reported: 197654537; UID 10214; state: ENABLED
+09-21 16:46:12.240 D/CompatibilityChangeReporter(  563): Compat change id reported: 205907456; UID 10214; state: ENABLED
+09-21 16:46:12.241 V/WindowManagerShell(  802): Transition requested: android.os.BinderProxy@df29fee TransitionRequestInfo { type = OPEN, triggerTask = TaskInfo{userId=0 taskId=284 displayId=0 isRunning=true baseIntent=Intent { act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10200000 cmp=fi.iwa.sakani/com.ad.sakani.sakan_v4_mobile.MainActivity } baseActivity=ComponentInfo{fi.iwa.sakani/com.ad.sakani.sakan_v4_mobile.MainActivity} topActivity=ComponentInfo{fi.iwa.sakani/com.ad.sakani.sakan_v4_mobile.MainActivity} origActivity=null realActivity=ComponentInfo{fi.iwa.sakani/com.ad.sakani.sakan_v4_mobile.MainActivity} numActivities=1 lastActiveTime=23045240 supportsMultiWindow=true resizeMode=1 isResizeable=true minWidth=-1 minHeight=-1 defaultMinSize=220 token=WCT{android.window.IWindowContainerToken$Stub$Proxy@d1ccc8f} topActivityType=1 pictureInPictureParams=null shouldDockBigOverlays=false launchIntoPipHostTaskId=-1 lastParentTaskIdBeforePip=-1 displayCutoutSafeInsets=Rect(0, 132 - 0, 0) topActivityInfo=ActivityInfo{130db1c com.ad.sakani.sakan_v4_mobile.MainActivity} launchCookies=[] positionInParent=Point(0, 0) parentTaskId=-1 isFocused=false isVisible=false isVisibleRequested=false isSleeping=false topActivityInSizeCompat=false topActivityEligibleForLetterboxEducation= false topActivityLetterboxed= false isFromDoubleTap= false topActivityLetterboxVerticalPosition= -1 topActivityLetterboxHorizontalPosition= -1 topActivityLetterboxWidth=-1 topActivityLetterboxHeight=-1 locusId=null displayAreaFeatureId=1 cameraCompatControlState=hidden}, remoteTransition = null, displayChange = null }
+09-21 16:46:12.241 D/CompatibilityChangeReporter(  563): Compat change id reported: 194833441; UID 10214; state: ENABLED
+09-21 16:46:12.242 I/ActivityTaskManager(  563): START u0 {act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10200000 cmp=fi.iwa.sakani/com.ad.sakani.sakan_v4_mobile.MainActivity} with LAUNCH_SINGLE_TOP from uid 2000 (BAL_ALLOW_PERMISSION) result code=0
+09-21 16:46:12.243 I/Monkey  ( 6100): Events injected: 1
+09-21 16:46:12.246 D/ActivityManager(  563): quick sync unfreeze 4278 for 1
+09-21 16:46:12.247 D/ActivityManager(  563): sync unfroze 4278 fi.iwa.sakani for 1
+09-21 16:46:12.252 I/FusedLocation( 1332): stationary throttling engaged [CONTEXT service_id=6 ]
+09-21 16:46:12.253 I/BpBinder(  416): onLastStrongRef automatically unlinking death recipients: 
+09-21 16:46:12.266 W/BatteryExternalStatsWorker(  563): error reading Bluetooth stats: 11
+09-21 16:46:12.266 I/FusedLocation( 1332): stationary throttling disengaged [CONTEXT service_id=6 ]
+09-21 16:46:12.268 I/AiAiEcho( 1458): Settings changed for uri: content://settings/secure/device_state_rotation_lock
+09-21 16:46:12.268 I/AiAiEcho( 1458): Predicting[0]: 
+09-21 16:46:12.268 I/AiAiEcho( 1458): EchoTargets: 
+09-21 16:46:12.268 I/AiAiEcho( 1458): Filtered by AiAi flag check: 
+09-21 16:46:12.268 I/AiAiEcho( 1458): Ranked targets strategy: SORT, count: 0, ranking metadata: 
+09-21 16:46:12.268 I/AiAiEcho( 1458): Predicting[0]: 
+09-21 16:46:12.268 I/AiAiEcho( 1458): EchoTargets: 
+09-21 16:46:12.268 I/AiAiEcho( 1458): Filtered by AiAi flag check: 
+09-21 16:46:12.268 I/AiAiEcho( 1458): Ranked targets strategy: SORT, count: 0, ranking metadata: 
+09-21 16:46:12.268 I/AiAiEcho( 1458): Predicting[0]: 
+09-21 16:46:12.268 I/AiAiEcho( 1458): EchoTargets: 
+09-21 16:46:12.268 I/AiAiEcho( 1458): Filtered by AiAi flag check: 
+09-21 16:46:12.268 I/AiAiEcho( 1458): Ranked targets strategy: SORT, count: 0, ranking metadata: 
+09-21 16:46:12.268 I/AiAiEcho( 1458): #postPredictionTargets: Sending updates to UISurface media_data_manager with targets# 0 (types=[])
+09-21 16:46:12.268 D/CompatibilityChangeReporter(  563): Compat change id reported: 168936375; UID 10127; state: ENABLED
+09-21 16:46:12.268 I/AiAiEcho( 1458): #postPredictionTargets: Sending updates to UISurface home with targets# 0 (types=[])
+09-21 16:46:12.268 I/AiAiEcho( 1458): #postPredictionTargets: Sending updates to UISurface lockscreen with targets# 0 (types=[])
+09-21 16:46:12.269 D/CompatibilityChangeReporter(  563): Compat change id reported: 73144566; UID 10127; state: ENABLED
+09-21 16:46:12.270 W/ProcessStats(  563): Tracking association SourceState{cd26203 com.google.android.gms/10127 BTop #38628} whose proc state 2 is better than process ProcessState{b22d07e com.google.android.gms.persistent/10127 pkg=com.google.android.gms} proc state 4 (4 skipped)
+09-21 16:46:12.274 D/TelephonyManager(  563): requestModemActivityInfo: Sending result to app: ModemActivityInfo{ mTimestamp=23045274 mSleepTimeMs=0 mIdleTimeMs=23044615 mActivityStatsTechSpecificInfo=[{mRat=UNKNOWN,mFrequencyRange=UNKNOWN,mTxTimeMs[]=[0, 0, 0, 0, 0],mRxTimeMs=0}]}
+09-21 16:46:12.275 E/system_server(  563): Cannot read thread CPU times for PID 563
+09-21 16:46:12.275 I/Monkey  ( 6100): ## Network stats: elapsed time=38ms (0ms mobile, 0ms wifi, 38ms not connected)
+09-21 16:46:12.280 W/AppOps  (  563): Noting op not finished: uid 10127 pkg com.google.android.gms code 113 startTime of in progress event=1789975351927
+09-21 16:46:12.281 W/AppOps  (  563): Noting op not finished: uid 10127 pkg com.google.android.gms code 113 startTime of in progress event=1789975351927
+09-21 16:46:12.282 W/AppOps  (  563): Noting op not finished: uid 10127 pkg com.google.android.gms code 113 startTime of in progress event=1789975351927
+09-21 16:46:12.289 D/EGL_emulation( 1075): app_time_stats: avg=35365.86ms min=433.87ms max=70297.85ms count=2
+09-21 16:46:12.292 W/SystemServiceRegistry( 1332): No service published for: wifirtt
+09-21 16:46:12.294 D/CompatibilityChangeReporter(  563): Compat change id reported: 171306433; UID 10127; state: ENABLED
+09-21 16:46:12.294 W/AlarmManager(  563): Alarms must either supply a PendingIntent or an AlarmReceiver
+09-21 16:46:12.294 D/SsMediaDataProvider(  802): Forwarding Smartspace updates []
+09-21 16:46:12.295 W/PageIndicator(  802): Total number of pages invalid: 0. Assuming 1 page.
+09-21 16:46:12.297 I/app_process( 6100): System.exit called, status: 0
+09-21 16:46:12.297 I/AndroidRuntime( 6100): VM exiting with result code 0.
+09-21 16:46:12.298 D/android.hardware.gnss-service.ranchu(  842): GnssHwConn:workerThread:70
+09-21 16:46:12.301 D/libEGL  ( 4278): loaded /vendor/lib64/egl/libEGL_emulation.so
+09-21 16:46:12.302 D/libEGL  ( 4278): loaded /vendor/lib64/egl/libGLESv1_CM_emulation.so
+09-21 16:46:12.303 D/libEGL  ( 4278): loaded /vendor/lib64/egl/libGLESv2_emulation.so
+09-21 16:46:12.311 D/KernelCpuUidUserSysTimeReader(  563): Removing uids 10257-10257
+09-21 16:46:12.311 D/KernelCpuUidUserSysTimeReader(  563): Removing uids 10258-10258
+09-21 16:46:12.312 D/EGL_emulation(  802): app_time_stats: avg=12289.03ms min=12289.03ms max=12289.03ms count=1
+09-21 16:46:12.330 I/splash  ( 4278): onCreate()
+09-21 16:46:12.347 I/Deeplink [onCreate]( 4278): null
+09-21 16:46:12.347 I/splash  ( 4278): onCreate end
+09-21 16:46:12.373 W/fi.iwa.sakani( 4278): type=1400 audit(0.0:6324): avc:  denied  { read } for  name="max_map_count" dev="proc" ino=326545 scontext=u:r:untrusted_app:s0:c214,c256,c512,c768 tcontext=u:object_r:proc_max_map_count:s0 tclass=file permissive=0 app=fi.iwa.sakani
+09-21 16:46:12.425 I/flutter ( 4278): [IMPORTANT:flutter/shell/platform/android/android_context_gl_impeller.cc(104)] Using the Impeller rendering backend (OpenGLES).
+09-21 16:46:12.511 W/Adjust  ( 4278): Adjust not initialized, can't perform onResume
+09-21 16:46:12.878 W/WebEngagePlugin( 4278): onAttachedToEngine on thread: main
+09-21 16:46:12.878 I/Deeplink( 4278): [configureFlutterEngine]
+09-21 16:46:12.878 W/FlutterEngineCxnRegstry( 4278): Attempted to register plugin (com.adjust.sdk.flutter.AdjustSdk@62c4c0f) but it was already registered with this FlutterEngine (h6.c@2a3249c).
+09-21 16:46:12.878 W/FlutterEngineCxnRegstry( 4278): Attempted to register plugin (W5.a@1464ea5) but it was already registered with this FlutterEngine (h6.c@2a3249c).
+09-21 16:46:12.878 W/FlutterEngineCxnRegstry( 4278): Attempted to register plugin (com.esri.arcgis_maps.ArcGISMapsPlugin@f83f27a) but it was already registered with this FlutterEngine (h6.c@2a3249c).
+09-21 16:46:12.878 W/FlutterEngineCxnRegstry( 4278): Attempted to register plugin (X5.b@36b9a2b) but it was already registered with this FlutterEngine (h6.c@2a3249c).
+09-21 16:46:12.878 W/FlutterEngineCxnRegstry( 4278): Attempted to register plugin (Y5.a@60bee88) but it was already registered with this FlutterEngine (h6.c@2a3249c).
+09-21 16:46:12.878 W/FlutterEngineCxnRegstry( 4278): Attempted to register plugin (n5.a@af23021) but it was already registered with this FlutterEngine (h6.c@2a3249c).
+09-21 16:46:12.878 W/FlutterEngineCxnRegstry( 4278): Attempted to register plugin (B3.f@e4ebc46) but it was already registered with this FlutterEngine (h6.c@2a3249c).
+09-21 16:46:12.878 W/FlutterEngineCxnRegstry( 4278): Attempted to register plugin (v6.d@907ae07) but it was already registered with this FlutterEngine (h6.c@2a3249c).
+09-21 16:46:12.878 W/FlutterEngineCxnRegstry( 4278): Attempted to register plugin (w6.c@fb56b34) but it was already registered with this FlutterEngine (h6.c@2a3249c).
+09-21 16:46:12.878 W/FlutterEngineCxnRegstry( 4278): Attempted to register plugin (x6.d@520ad5d) but it was already registered with this FlutterEngine (h6.c@2a3249c).
+09-21 16:46:12.878 W/FlutterEngineCxnRegstry( 4278): Attempted to register plugin (y6.b@6aa56d2) but it was already registered with this FlutterEngine (h6.c@2a3249c).
+09-21 16:46:12.878 W/FlutterEngineCxnRegstry( 4278): Attempted to register plugin (u3.b@56723a3) but it was already registered with this FlutterEngine (h6.c@2a3249c).
+09-21 16:46:12.878 W/FlutterEngineCxnRegstry( 4278): Attempted to register plugin (com.pichillilorenzo.flutter_inappwebview_android.InAppWebViewFlutterPlugin@cd806a0) but it was already registered with this FlutterEngine (h6.c@2a3249c).
+09-21 16:46:12.878 W/FlutterEngineCxnRegstry( 4278): Attempted to register plugin (x3.a@9bfc259) but it was already registered with this FlutterEngine (h6.c@2a3249c).
+09-21 16:46:12.878 W/FlutterEngineCxnRegstry( 4278): Attempted to register plugin (e6.d@db30e1e) but it was already registered with this FlutterEngine (h6.c@2a3249c).
+09-21 16:46:12.879 W/FlutterEngineCxnRegstry( 4278): Attempted to register plugin (z6.a@cbe56ff) but it was already registered with this FlutterEngine (h6.c@2a3249c).
+09-21 16:46:12.879 W/FlutterEngineCxnRegstry( 4278): Attempted to register plugin (v3.a@3c6eccc) but it was already registered with this FlutterEngine (h6.c@2a3249c).
+09-21 16:46:12.879 W/FlutterEngineCxnRegstry( 4278): Attempted to register plugin (s5.c@9a12b15) but it was already registered with this FlutterEngine (h6.c@2a3249c).
+09-21 16:46:12.879 W/FlutterEngineCxnRegstry( 4278): Attempted to register plugin (g3.a@bfdee2a) but it was already registered with this FlutterEngine (h6.c@2a3249c).
+09-21 16:46:12.879 W/FlutterEngineCxnRegstry( 4278): Attempted to register plugin (y3.a@82b641b) but it was already registered with this FlutterEngine (h6.c@2a3249c).
+09-21 16:46:12.879 W/FlutterEngineCxnRegstry( 4278): Attempted to register plugin (J6.a@adc09b8) but it was already registered with this FlutterEngine (h6.c@2a3249c).
+09-21 16:46:12.879 W/FlutterEngineCxnRegstry( 4278): Attempted to register plugin (a3.d@6f66391) but it was already registered with this FlutterEngine (h6.c@2a3249c).
+09-21 16:46:12.879 W/FlutterEngineCxnRegstry( 4278): Attempted to register plugin (A6.c@c64c2f6) but it was already registered with this FlutterEngine (h6.c@2a3249c).
+09-21 16:46:12.879 W/FlutterEngineCxnRegstry( 4278): Attempted to register plugin (d6.b@a9226f7) but it was already registered with this FlutterEngine (h6.c@2a3249c).
+09-21 16:46:12.879 W/FlutterEngineCxnRegstry( 4278): Attempted to register plugin (V5.c@2240964) but it was already registered with this FlutterEngine (h6.c@2a3249c).
+09-21 16:46:12.879 W/FlutterEngineCxnRegstry( 4278): Attempted to register plugin (com.w3conext.jailbreak_root_detection.JailbreakRootDetectionPlugin@b8ca7cd) but it was already registered with this FlutterEngine (h6.c@2a3249c).
+09-21 16:46:12.879 W/FlutterEngineCxnRegstry( 4278): Attempted to register plugin (com.github.dart_lang.jni.JniPlugin@b921882) but it was already registered with this FlutterEngine (h6.c@2a3249c).
+09-21 16:46:12.879 W/FlutterEngineCxnRegstry( 4278): Attempted to register plugin (com.github.dart_lang.jni_flutter.JniFlutterPlugin@7383b93) but it was already registered with this FlutterEngine (h6.c@2a3249c).
+09-21 16:46:12.879 W/FlutterEngineCxnRegstry( 4278): Attempted to register plugin (B6.e@bca57d0) but it was already registered with this FlutterEngine (h6.c@2a3249c).
+09-21 16:46:12.879 W/FlutterEngineCxnRegstry( 4278): Attempted to register plugin (com.alexmiller.map_launcher.MapLauncherPlugin@6c8f3c9) but it was already registered with this FlutterEngine (h6.c@2a3249c).
+09-21 16:46:12.879 W/FlutterEngineCxnRegstry( 4278): Attempted to register plugin (com.sakani.native_text_pdf.NativeTextPdfPlugin@44d3ace) but it was already registered with this FlutterEngine (h6.c@2a3249c).
+09-21 16:46:12.879 W/FlutterEngineCxnRegstry( 4278): Attempted to register plugin (d4.d@620fdef) but it was already registered with this FlutterEngine (h6.c@2a3249c).
+09-21 16:46:12.879 W/FlutterEngineCxnRegstry( 4278): Attempted to register plugin (n8.c@f4520fc) but it was already registered with this FlutterEngine (h6.c@2a3249c).
+09-21 16:46:12.879 W/FlutterEngineCxnRegstry( 4278): Attempted to register plugin (dev.fluttercommunity.plus.packageinfo.PackageInfoPlugin@f640385) but it was already registered with this FlutterEngine (h6.c@2a3249c).
+09-21 16:46:12.879 W/FlutterEngineCxnRegstry( 4278): Attempted to register plugin (e3.a@48635da) but it was already registered with this FlutterEngine (h6.c@2a3249c).
+09-21 16:46:12.879 W/FlutterEngineCxnRegstry( 4278): Attempted to register plugin (f3.a@2298a0b) but it was already registered with this FlutterEngine (h6.c@2a3249c).
+09-21 16:46:12.879 W/FlutterEngineCxnRegstry( 4278): Attempted to register plugin (C6.k@34150e8) but it was already registered with this FlutterEngine (h6.c@2a3249c).
+09-21 16:46:12.879 W/FlutterEngineCxnRegstry( 4278): Attempted to register plugin (com.google.flutter.recaptcha.RecaptchaEnterprisePlugin@4e65301) but it was already registered with this FlutterEngine (h6.c@2a3249c).
+09-21 16:46:12.879 W/FlutterEngineCxnRegstry( 4278): Attempted to register plugin (com.sakani.sakani_native_text_field.SakaniNativeTextFieldPlugin@721d5a6) but it was already registered with this FlutterEngine (h6.c@2a3249c).
+09-21 16:46:12.879 W/FlutterEngineCxnRegstry( 4278): Attempted to register plugin (z3.e@ce4bbe7) but it was already registered with this FlutterEngine (h6.c@2a3249c).
+09-21 16:46:12.879 W/FlutterEngineCxnRegstry( 4278): Attempted to register plugin (a6.b@a4e9394) but it was already registered with this FlutterEngine (h6.c@2a3249c).
+09-21 16:46:12.879 W/FlutterEngineCxnRegstry( 4278): Attempted to register plugin (io.flutter.plugins.sharedpreferences.SharedPreferencesPlugin@ce41e3d) but it was already registered with this FlutterEngine (h6.c@2a3249c).
+09-21 16:46:12.879 W/FlutterEngineCxnRegstry( 4278): Attempted to register plugin (o5.m@e85a632) but it was already registered with this FlutterEngine (h6.c@2a3249c).
+09-21 16:46:12.879 W/FlutterEngineCxnRegstry( 4278): Attempted to register plugin (c6.a@4372f83) but it was already registered with this FlutterEngine (h6.c@2a3249c).
+09-21 16:46:12.879 W/FlutterEngineCxnRegstry( 4278): Attempted to register plugin (io.flutter.plugins.urllauncher.UrlLauncherPlugin@e4b5500) but it was already registered with this FlutterEngine (h6.c@2a3249c).
+09-21 16:46:12.879 W/FlutterEngineCxnRegstry( 4278): Attempted to register plugin (D6.E@7f96139) but it was already registered with this FlutterEngine (h6.c@2a3249c).
+09-21 16:46:12.879 W/FlutterEngineCxnRegstry( 4278): Attempted to register plugin (b6.a@be3f37e) but it was already registered with this FlutterEngine (h6.c@2a3249c).
+09-21 16:46:12.879 W/FlutterEngineCxnRegstry( 4278): Attempted to register plugin (U5.f@5b340df) but it was already registered with this FlutterEngine (h6.c@2a3249c).
+09-21 16:46:12.879 I/Deeplink( 4278): [Native][initDeeplinkRoute]: 
+09-21 16:46:12.879 D/CompatibilityChangeReporter( 4278): Compat change id reported: 193247900; UID 10214; state: ENABLED
+09-21 16:46:12.881 D/BoundBrokerSvc( 1881): onBind: Intent { act=com.google.android.gms.pay.service.THIRD_PARTY dat=chimera-action:/... cmp=com.google.android.gms/.chimera.GmsApiService }
+09-21 16:46:12.882 D/BoundBrokerSvc( 1881): Loading bound service for intent: Intent { act=com.google.android.gms.pay.service.THIRD_PARTY dat=chimera-action:/... cmp=com.google.android.gms/.chimera.GmsApiService }
+09-21 16:46:12.903 D/SessionLifecycleClient( 4278): Sending lifecycle 1 to service
+09-21 16:46:12.904 D/SessionLifecycleService( 4278): Activity foregrounding at 23045904.
+09-21 16:46:12.904 D/SessionLifecycleService( 4278): Cold start detected.
+09-21 16:46:12.904 D/SessionLifecycleService( 4278): Generated new session.
+09-21 16:46:12.905 D/SessionLifecycleService( 4278): Broadcasting new session
+09-21 16:46:12.905 D/CompatibilityChangeReporter( 4278): Compat change id reported: 237531167; UID 10214; state: DISABLED
+09-21 16:46:12.905 D/SessionFirelogPublisher( 4278): Data Collection is enabled for at least one Subscriber
+09-21 16:46:12.906 I/FA      ( 4278): Tag Manager is not found and thus will not be used
+09-21 16:46:12.906 W/OpenGLRenderer( 4278): Unknown dataspace 0
+09-21 16:46:12.910 D/CompatibilityChangeReporter(  563): Compat change id reported: 168419799; UID 10214; state: DISABLED
+09-21 16:46:12.911 D/EventGDTLogger( 4278): Session Event Type: SESSION_START
+09-21 16:46:12.911 D/SessionFirelogPublisher( 4278): Successfully logged Session Start event.
+09-21 16:46:12.911 D/CompatibilityChangeReporter(  563): Compat change id reported: 273564678; UID 10214; state: DISABLED
+09-21 16:46:12.915 D/CompatibilityChangeReporter( 4278): Compat change id reported: 194532703; UID 10214; state: ENABLED
+09-21 16:46:12.915 D/CompatibilityChangeReporter( 4278): Compat change id reported: 253665015; UID 10214; state: ENABLED
+09-21 16:46:12.916 D/CompatibilityChangeReporter(  563): Compat change id reported: 271850009; UID 10214; state: ENABLED
+09-21 16:46:12.916 D/CompatibilityChangeReporter(  563): Compat change id reported: 253665015; UID 10214; state: ENABLED
+09-21 16:46:12.916 D/CompatibilityChangeReporter(  563): Compat change id reported: 194532703; UID 10214; state: ENABLED
+09-21 16:46:12.940 D/BoundBrokerSvc( 1881): onBind: Intent { act=com.google.android.gms.measurement.START pkg=com.google.android.gms }
+09-21 16:46:12.940 D/BoundBrokerSvc( 1881): Loading bound service for intent: Intent { act=com.google.android.gms.measurement.START pkg=com.google.android.gms }
+09-21 16:46:12.942 D/FlutterGeolocator( 4278): Creating service.
+09-21 16:46:12.942 D/FlutterGeolocator( 4278): Binding to location service.
+09-21 16:46:12.944 D/SessionLifecycleClient( 4278): Session update received.
+09-21 16:46:12.944 D/SessionLifecycleClient( 4278): Notified CRASHLYTICS of new session d754fbb31be94e56b9a05ce8126934e9
+09-21 16:46:12.956 D/CoreBackPreview(  563): Window{ddb7806 u0 fi.iwa.sakani/com.ad.sakani.sakan_v4_mobile.MainActivity}: Setting back callback OnBackInvokedCallbackInfo{mCallback=android.window.IOnBackInvokedCallback$Stub$Proxy@844f8db, mPriority=0, mIsAnimationCallback=false}
+09-21 16:46:12.967 W/OpenGLRenderer( 4278): Failed to choose config with EGL_SWAP_BEHAVIOR_PRESERVED, retrying without...
+09-21 16:46:12.967 W/OpenGLRenderer( 4278): Failed to initialize 101010-2 format, error = EGL_SUCCESS
+09-21 16:46:12.981 I/hwservicemanager(  166): getTransport: Cannot find entry android.hardware.graphics.mapper@4.0::IMapper/default in either framework or device VINTF manifest.
+09-21 16:46:12.982 I/Gralloc4( 4278): mapper 4.x is not supported
+09-21 16:46:12.988 E/OpenGLRenderer( 4278): Unable to match the desired swap behavior.
+09-21 16:46:12.993 E/flutter ( 4278): [ERROR:flutter/impeller/core/allocator.cc(53)] Impeller validation: Requested texture size (1, 1) exceeds maximum supported size of (0, 0)
+09-21 16:46:12.993 E/flutter ( 4278): [ERROR:flutter/impeller/renderer/blit_pass.cc(125)] Impeller validation: Attempted to add a texture blit with no destination.
+09-21 16:46:12.994 E/flutter ( 4278): [ERROR:flutter/impeller/renderer/backend/gles/pipeline_library_gles.cc(74)] Impeller validation: Failed to compile vertex shader for 'GlyphAtlas Pipeline' with error:
+09-21 16:46:12.994 E/flutter ( 4278):  
+09-21 16:46:12.994 E/flutter ( 4278): Shader source was: 
+09-21 16:46:12.994 E/flutter ( 4278): 
+09-21 16:46:12.994 E/flutter ( 4278): 
+09-21 16:46:12.994 E/flutter ( 4278): [ERROR:flutter/impeller/renderer/backend/gles/pipeline_library_gles.cc(245)] Impeller validation: Could not link pipeline program.
+09-21 16:46:12.994 W/libc    ( 4278): malloc(18446744072044618248) failed: returning null pointer
+09-21 16:46:12.994 E/libc++  ( 4278): bad_alloc was thrown in -fno-exceptions mode
+--------- beginning of crash
+09-21 16:46:12.994 F/libc    ( 4278): Fatal signal 6 (SIGABRT), code -1 (SI_QUEUE) in tid 6125 (1.raster), pid 4278 (fi.iwa.sakani)
+09-21 16:46:13.022 I/crash_dump64( 6157): obtaining output fd from tombstoned, type: kDebuggerdTombstoneProto
+09-21 16:46:13.022 I/tombstoned(  219): received crash request for pid 6125
+09-21 16:46:13.023 I/crash_dump64( 6157): performing dump of process 4278 (target tid = 6125)
+09-21 16:46:13.027 D/TrafficStats( 4278): tagSocket(133) with statsTag=0x1b37e3b5, statsUid=-1
+09-21 16:46:13.075 D/android.hardware.gnss-service.ranchu(  842): GnssHwListener:consume:87 sz=64
+09-21 16:46:13.076 D/android.hardware.gnss-service.ranchu(  842): GnssHwListener:consume:87 sz=64
+09-21 16:46:13.076 D/android.hardware.gnss-service.ranchu(  842): Gnss:onGnssLocationCb:311
+09-21 16:46:13.076 D/android.hardware.gnss-service.ranchu(  842): Gnss:onGnssLocationCb:321
+09-21 16:46:13.089 D/StatusBarIconController(  802): ignoring old pipeline callbacks, because the new mobile icons are enabled
+09-21 16:46:13.125 F/DEBUG   ( 6157): *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** ***
+09-21 16:46:13.125 F/DEBUG   ( 6157): Build fingerprint: 'google/sdk_gphone64_x86_64/emu64xa:14/UE1A.230829.036.A4/12096271:user/release-keys'
+09-21 16:46:13.125 F/DEBUG   ( 6157): Revision: '0'
+09-21 16:46:13.125 F/DEBUG   ( 6157): ABI: 'x86_64'
+09-21 16:46:13.125 F/DEBUG   ( 6157): Timestamp: 2026-09-21 16:46:13.027330730+0300
+09-21 16:46:13.125 F/DEBUG   ( 6157): Process uptime: 930s
+09-21 16:46:13.125 F/DEBUG   ( 6157): Cmdline: fi.iwa.sakani
+09-21 16:46:13.125 F/DEBUG   ( 6157): pid: 4278, tid: 6125, name: 1.raster  >>> fi.iwa.sakani <<<
+09-21 16:46:13.125 F/DEBUG   ( 6157): uid: 10214
+09-21 16:46:13.125 F/DEBUG   ( 6157): signal 6 (SIGABRT), code -1 (SI_QUEUE), fault addr --------
+09-21 16:46:13.125 F/DEBUG   ( 6157): Abort message: 'bad_alloc was thrown in -fno-exceptions mode'
+09-21 16:46:13.125 F/DEBUG   ( 6157):     rax 0000000000000000  rbx 00007ac3abd30c88  rcx 00007ac6af8e3610  rdx 0000000000000006
+09-21 16:46:13.125 F/DEBUG   ( 6157):     r8  0000000000000000  r9  0000000000000000  r10 00007ac3abd30c90  r11 0000000000000203
+09-21 16:46:13.125 F/DEBUG   ( 6157):     r12 00007ac3abd30e60  r13 0000003000000008  r14 00000000000010b6  r15 00000000000017ed
+09-21 16:46:13.125 F/DEBUG   ( 6157):     rdi 00000000000010b6  rsi 00000000000017ed
+09-21 16:46:13.125 F/DEBUG   ( 6157):     rbp 0000000000000005  rsp 00007ac3abd30c80  rip 00007ac6af8e3610
+09-21 16:46:13.125 F/DEBUG   ( 6157): 29 total frames
+09-21 16:46:13.125 F/DEBUG   ( 6157): backtrace:
+09-21 16:46:13.125 F/DEBUG   ( 6157):       #00 pc 0000000000061610  /apex/com.android.runtime/lib64/bionic/libc.so (abort+192) (BuildId: fa337969c798946280caa45e2d71a2e7)
+09-21 16:46:13.125 F/DEBUG   ( 6157):       #01 pc 00000000004f3e2d  /data/app/~~GQjY21_z-vevzxS6pIXsdQ==/fi.iwa.sakani-qwS6_FSa8LqNHxCo9DiskQ==/base.apk!libflutter.so (offset 0xd540000) (BuildId: 8dd691bfce800ce28ff255cf85f470791e637361)
+09-21 16:46:13.125 F/DEBUG   ( 6157):       #02 pc 00000000004f1d83  /data/app/~~GQjY21_z-vevzxS6pIXsdQ==/fi.iwa.sakani-qwS6_FSa8LqNHxCo9DiskQ==/base.apk!libflutter.so (offset 0xd540000) (BuildId: 8dd691bfce800ce28ff255cf85f470791e637361)
+09-21 16:46:13.125 F/DEBUG   ( 6157):       #03 pc 0000000000b6bbd4  /data/app/~~GQjY21_z-vevzxS6pIXsdQ==/fi.iwa.sakani-qwS6_FSa8LqNHxCo9DiskQ==/base.apk!libflutter.so (offset 0xd540000) (BuildId: 8dd691bfce800ce28ff255cf85f470791e637361)
+09-21 16:46:13.125 F/DEBUG   ( 6157):       #04 pc 00000000004b4b7b  /data/app/~~GQjY21_z-vevzxS6pIXsdQ==/fi.iwa.sakani-qwS6_FSa8LqNHxCo9DiskQ==/base.apk!libflutter.so (offset 0xd540000) (BuildId: 8dd691bfce800ce28ff255cf85f470791e637361)
+09-21 16:46:13.125 F/DEBUG   ( 6157):       #05 pc 00000000004f319e  /data/app/~~GQjY21_z-vevzxS6pIXsdQ==/fi.iwa.sakani-qwS6_FSa8LqNHxCo9DiskQ==/base.apk!libflutter.so (offset 0xd540000) (BuildId: 8dd691bfce800ce28ff255cf85f470791e637361)
+09-21 16:46:13.125 F/DEBUG   ( 6157):       #06 pc 00000000008da8c3  /data/app/~~GQjY21_z-vevzxS6pIXsdQ==/fi.iwa.sakani-qwS6_FSa8LqNHxCo9DiskQ==/base.apk!libflutter.so (offset 0xd540000) (BuildId: 8dd691bfce800ce28ff255cf85f470791e637361)
+09-21 16:46:13.125 F/DEBUG   ( 6157):       #07 pc 00000000008d9574  /data/app/~~GQjY21_z-vevzxS6pIXsdQ==/fi.iwa.sakani-qwS6_FSa8LqNHxCo9DiskQ==/base.apk!libflutter.so (offset 0xd540000) (BuildId: 8dd691bfce800ce28ff255cf85f470791e637361)
+09-21 16:46:13.125 F/DEBUG   ( 6157):       #08 pc 00000000008e09ca  /data/app/~~GQjY21_z-vevzxS6pIXsdQ==/fi.iwa.sakani-qwS6_FSa8LqNHxCo9DiskQ==/base.apk!libflutter.so (offset 0xd540000) (BuildId: 8dd691bfce800ce28ff255cf85f470791e637361)
+09-21 16:46:13.125 F/DEBUG   ( 6157):       #09 pc 00000000008e0116  /data/app/~~GQjY21_z-vevzxS6pIXsdQ==/fi.iwa.sakani-qwS6_FSa8LqNHxCo9DiskQ==/base.apk!libflutter.so (offset 0xd540000) (BuildId: 8dd691bfce800ce28ff255cf85f470791e637361)
+09-21 16:46:13.125 F/DEBUG   ( 6157):       #10 pc 00000000008d7c10  /data/app/~~GQjY21_z-vevzxS6pIXsdQ==/fi.iwa.sakani-qwS6_FSa8LqNHxCo9DiskQ==/base.apk!libflutter.so (offset 0xd540000) (BuildId: 8dd691bfce800ce28ff255cf85f470791e637361)
+09-21 16:46:13.125 F/DEBUG   ( 6157):       #11 pc 00000000008ab690  /data/app/~~GQjY21_z-vevzxS6pIXsdQ==/fi.iwa.sakani-qwS6_FSa8LqNHxCo9DiskQ==/base.apk!libflutter.so (offset 0xd540000) (BuildId: 8dd691bfce800ce28ff255cf85f470791e637361)
+09-21 16:46:13.125 F/DEBUG   ( 6157):       #12 pc 00000000008a9f5d  /data/app/~~GQjY21_z-vevzxS6pIXsdQ==/fi.iwa.sakani-qwS6_FSa8LqNHxCo9DiskQ==/base.apk!libflutter.so (offset 0xd540000) (BuildId: 8dd691bfce800ce28ff255cf85f470791e637361)
+09-21 16:46:13.125 F/DEBUG   ( 6157):       #13 pc 000000000089b43d  /data/app/~~GQjY21_z-vevzxS6pIXsdQ==/fi.iwa.sakani-qwS6_FSa8LqNHxCo9DiskQ==/base.apk!libflutter.so (offset 0xd540000) (BuildId: 8dd691bfce800ce28ff255cf85f470791e637361)
+09-21 16:46:13.125 F/DEBUG   ( 6157):       #14 pc 000000000092894d  /data/app/~~GQjY21_z-vevzxS6pIXsdQ==/fi.iwa.sakani-qwS6_FSa8LqNHxCo9DiskQ==/base.apk!libflutter.so (offset 0xd540000) (BuildId: 8dd691bfce800ce28ff255cf85f470791e637361)
+09-21 16:46:13.125 F/DEBUG   ( 6157):       #15 pc 00000000004c592e  /data/app/~~GQjY21_z-vevzxS6pIXsdQ==/fi.iwa.sakani-qwS6_FSa8LqNHxCo9DiskQ==/base.apk!libflutter.so (offset 0xd540000) (BuildId: 8dd691bfce800ce28ff255cf85f470791e637361)
+09-21 16:46:13.125 F/DEBUG   ( 6157):       #16 pc 00000000004c560f  /data/app/~~GQjY21_z-vevzxS6pIXsdQ==/fi.iwa.sakani-qwS6_FSa8LqNHxCo9DiskQ==/base.apk!libflutter.so (offset 0xd540000) (BuildId: 8dd691bfce800ce28ff255cf85f470791e637361)
+09-21 16:46:13.125 F/DEBUG   ( 6157):       #17 pc 00000000004c502a  /data/app/~~GQjY21_z-vevzxS6pIXsdQ==/fi.iwa.sakani-qwS6_FSa8LqNHxCo9DiskQ==/base.apk!libflutter.so (offset 0xd540000) (BuildId: 8dd691bfce800ce28ff255cf85f470791e637361)
+09-21 16:46:13.125 F/DEBUG   ( 6157):       #18 pc 00000000004cdd23  /data/app/~~GQjY21_z-vevzxS6pIXsdQ==/fi.iwa.sakani-qwS6_FSa8LqNHxCo9DiskQ==/base.apk!libflutter.so (offset 0xd540000) (BuildId: 8dd691bfce800ce28ff255cf85f470791e637361)
+09-21 16:46:13.125 F/DEBUG   ( 6157):       #19 pc 00000000009281d9  /data/app/~~GQjY21_z-vevzxS6pIXsdQ==/fi.iwa.sakani-qwS6_FSa8LqNHxCo9DiskQ==/base.apk!libflutter.so (offset 0xd540000) (BuildId: 8dd691bfce800ce28ff255cf85f470791e637361)
+09-21 16:46:13.125 F/DEBUG   ( 6157):       #20 pc 00000000004f79e9  /data/app/~~GQjY21_z-vevzxS6pIXsdQ==/fi.iwa.sakani-qwS6_FSa8LqNHxCo9DiskQ==/base.apk!libflutter.so (offset 0xd540000) (BuildId: 8dd691bfce800ce28ff255cf85f470791e637361)
+09-21 16:46:13.125 F/DEBUG   ( 6157):       #21 pc 00000000004fc3e3  /data/app/~~GQjY21_z-vevzxS6pIXsdQ==/fi.iwa.sakani-qwS6_FSa8LqNHxCo9DiskQ==/base.apk!libflutter.so (offset 0xd540000) (BuildId: 8dd691bfce800ce28ff255cf85f470791e637361)
+09-21 16:46:13.125 F/DEBUG   ( 6157):       #22 pc 000000000000fb84  /system/lib64/libutils.so (android::Looper::pollOnce(int, int*, int*, void**)+532) (BuildId: c777bd164e6d4a5c070cb5e2d9bb92e0)
+09-21 16:46:13.125 F/DEBUG   ( 6157):       #23 pc 0000000000019a0f  /system/lib64/libandroid.so (ALooper_pollOnce+95) (BuildId: 094d5e744838e61070f3b00f0a8d3c31)
+09-21 16:46:13.125 F/DEBUG   ( 6157):       #24 pc 00000000004fc4f5  /data/app/~~GQjY21_z-vevzxS6pIXsdQ==/fi.iwa.sakani-qwS6_FSa8LqNHxCo9DiskQ==/base.apk!libflutter.so (offset 0xd540000) (BuildId: 8dd691bfce800ce28ff255cf85f470791e637361)
+09-21 16:46:13.125 F/DEBUG   ( 6157):       #25 pc 00000000004f9d06  /data/app/~~GQjY21_z-vevzxS6pIXsdQ==/fi.iwa.sakani-qwS6_FSa8LqNHxCo9DiskQ==/base.apk!libflutter.so (offset 0xd540000) (BuildId: 8dd691bfce800ce28ff255cf85f470791e637361)
+09-21 16:46:13.125 F/DEBUG   ( 6157):       #26 pc 00000000004f9ade  /data/app/~~GQjY21_z-vevzxS6pIXsdQ==/fi.iwa.sakani-qwS6_FSa8LqNHxCo9DiskQ==/base.apk!libflutter.so (offset 0xd540000) (BuildId: 8dd691bfce800ce28ff255cf85f470791e637361)
+09-21 16:46:13.125 F/DEBUG   ( 6157):       #27 pc 00000000000cd06a  /apex/com.android.runtime/lib64/bionic/libc.so (__pthread_start(void*)+58) (BuildId: fa337969c798946280caa45e2d71a2e7)
+09-21 16:46:13.125 F/DEBUG   ( 6157):       #28 pc 0000000000062d88  /apex/com.android.runtime/lib64/bionic/libc.so (__start_thread+56) (BuildId: fa337969c798946280caa45e2d71a2e7)
+09-21 16:46:13.134 I/DropBoxManagerService(  563): add tag=data_app_native_crash isTagEnabled=true flags=0x2
+09-21 16:46:13.135 W/ActivityTaskManager(  563):   Force finishing activity fi.iwa.sakani/com.ad.sakani.sakan_v4_mobile.MainActivity
+09-21 16:46:13.136 E/tombstoned(  219): Tombstone written to: tombstone_07
+09-21 16:46:13.141 I/BootReceiver(  563): Copying /data/tombstones/tombstone_07 to DropBox (SYSTEM_TOMBSTONE)
+09-21 16:46:13.141 I/DropBoxManagerService(  563): add tag=SYSTEM_TOMBSTONE isTagEnabled=true flags=0x6
+09-21 16:46:13.148 I/DropBoxManagerService(  563): add tag=SYSTEM_TOMBSTONE_PROTO_WITH_HEADERS isTagEnabled=true flags=0x4
+09-21 16:46:13.155 I/ActivityManager(  563): Process fi.iwa.sakani (pid 4278) has died: fg  TOP 
+09-21 16:46:13.155 I/WindowManager(  563): WIN DEATH: Window{ddb7806 u0 fi.iwa.sakani/com.ad.sakani.sakan_v4_mobile.MainActivity}
+09-21 16:46:13.155 I/libprocessgroup(  563): Successfully killed process cgroup uid 10214 pid 4278 in 0ms
+09-21 16:46:13.155 W/InputManager-JNI(  563): Input channel object 'ddb7806 fi.iwa.sakani/com.ad.sakani.sakan_v4_mobile.MainActivity (client)' was disposed without first being removed with the input manager!
+09-21 16:46:13.156 W/ActivityManager(  563): Scheduling restart of crashed service fi.iwa.sakani/com.webengage.sdk.android.ExecutorService in 1000ms for start-requested
+09-21 16:46:13.157 D/BoundBrokerSvc( 1881): onUnbind: Intent { act=com.google.android.gms.pay.service.THIRD_PARTY dat=chimera-action:/... cmp=com.google.android.gms/.chimera.GmsApiService }
+09-21 16:46:13.158 D/BoundBrokerSvc( 1881): onUnbind: Intent { act=com.google.android.gms.measurement.START pkg=com.google.android.gms }
+09-21 16:46:13.158 I/Zygote  (  364): Process 4278 exited due to signal 6 (Aborted)
+09-21 16:46:13.159 I/FusedLocation( 1332): stationary throttling engaged [CONTEXT service_id=6 ]
+09-21 16:46:13.165 W/ActivityManager(  563): setHasOverlayUi called on unknown pid: 4278
+09-21 16:46:13.166 D/DisplayManagerService(  563): Drop pending events for gone uid 10214
+09-21 16:46:13.169 D/android.hardware.gnss-service.ranchu(  842): GnssHwConn:workerThread:119
+09-21 16:46:13.170 V/WindowManagerShell(  802): onTransitionReady android.os.BinderProxy@df29fee: {id=64 t=OPEN f=0x0 trk=0 r=[0@Point(0, 0)] c=[{WCT{android.window.IWindowContainerToken$Stub$Proxy@5e1b040} m=CHANGE f=SHOW_WALLPAPER|MOVE_TO_TOP leash=Surface(name=Task=1)/@0xf153f72 sb=Rect(0, 0 - 1080, 2400) eb=Rect(0, 0 - 1080, 2400) d=0}]}
+09-21 16:46:13.170 V/WindowManagerShell(  802): Playing animation for (#64)android.os.BinderProxy@df29fee@0
+09-21 16:46:13.170 V/WindowManagerShell(  802):  try handler com.android.wm.shell.transition.DefaultMixedHandler@abdd98d
+09-21 16:46:13.170 V/WindowManagerShell(  802):  try handler com.android.wm.shell.keyguard.KeyguardTransitionHandler@b2cc742
+09-21 16:46:13.170 V/WindowManagerShell(  802):  try handler com.android.wm.shell.activityembedding.ActivityEmbeddingController@5d32353
+09-21 16:46:13.170 V/WindowManagerShell(  802):  try handler com.android.wm.shell.recents.RecentsTransitionHandler@4db8490
+09-21 16:46:13.170 V/ShellRecents(  802): RecentsTransitionHandler.startAnimation: no controller found
+09-21 16:46:13.170 V/WindowManagerShell(  802):  try handler com.android.wm.shell.pip.PipTransition@b3b8189
+09-21 16:46:13.170 V/WindowManagerShell(  802):  try handler com.android.wm.shell.splitscreen.StageCoordinator@2c4158e
+09-21 16:46:13.170 V/WindowManagerShell(  802):  try handler com.android.wm.shell.transition.RemoteTransitionHandler@5e2a1af
+09-21 16:46:13.170 V/WindowManagerShell(  802): Transition doesn't have explicit remote, search filters for match for {id=64 t=OPEN f=0x0 trk=0 r=[0@Point(0, 0)] c=[{WCT{android.window.IWindowContainerToken$Stub$Proxy@5e1b040} m=CHANGE f=SHOW_WALLPAPER|MOVE_TO_TOP leash=Surface(name=Task=1)/@0xf153f72 sb=Rect(0, 0 - 1080, 2400) eb=Rect(0, 0 - 1080, 2400) d=0}]}
+09-21 16:46:13.170 V/WindowManagerShell(  802):  Checking filter Pair{{types=[] flags=0x0] notFlags=0x0 checks=[{atype=dream independent=true modes=[OPEN,TO_FRONT] flags=NONE mustBeTask=false order=ANY topActivity=null},{atype=home independent=true modes=[CLOSE,TO_BACK] flags=NONE mustBeTask=false order=ANY topActivity=null}]} RemoteTransition { remoteTransition = android.window.IRemoteTransition$Stub$Proxy@5eb3ed5, appThread = android.app.IApplicationThread$Stub$Proxy@cd6ea, debugName = LauncherToDream }}
+09-21 16:46:13.170 V/WindowManagerShell(  802):  Checking filter Pair{{types=[] flags=0x0] notFlags=0x100 checks=[{atype=home independent=true modes=[OPEN,TO_FRONT] flags=NONE mustBeTask=false order=TOP topActivity=ComponentInfo{com.google.android.apps.nexuslauncher/com.google.android.apps.nexuslauncher.NexusLauncherActivity}},{atype=standard independent=true modes=[CLOSE,TO_BACK] flags=NONE mustBeTask=false order=ANY topActivity=null}]} RemoteTransition { remoteTransition = android.window.IRemoteTransition$Stub$Proxy@1eefddb, appThread = android.app.IApplicationThread$Stub$Proxy@67d0078, debugName = QuickstepLaunchHome }}
+09-21 16:46:13.170 V/WindowManagerShell(  802):  Delegate animation for #64 to null
+09-21 16:46:13.170 V/WindowManagerShell(  802):  try handler com.android.wm.shell.transition.DefaultTransitionHandler@63355a8
+09-21 16:46:13.170 V/WindowManagerShell(  802): start default transition animation, info = {id=64 t=OPEN f=0x0 trk=0 r=[0@Point(0, 0)] c=[{WCT{android.window.IWindowContainerToken$Stub$Proxy@5e1b040} m=CHANGE f=SHOW_WALLPAPER|MOVE_TO_TOP leash=Surface(name=Task=1)/@0xf153f72 sb=Rect(0, 0 - 1080, 2400) eb=Rect(0, 0 - 1080, 2400) d=0}]}
+09-21 16:46:13.171 V/WindowManagerShell(  802): Transition animation finished (aborted=false), notifying core (#64)android.os.BinderProxy@df29fee@0
+09-21 16:46:13.171 I/AiAiEcho( 1458): Predicting[0]: 
+09-21 16:46:13.171 I/AiAiEcho( 1458): EchoTargets: 
+09-21 16:46:13.171 I/AiAiEcho( 1458): Filtered by AiAi flag check: 
+09-21 16:46:13.171 W/AppSearchIcing(  563): icing-search-engine.cc:283: Error: 5, Message: Document (com.google.android.googlequicksearchbox$OneSearchZeroStateGoogleSuggestions/default, zp) not found.
+09-21 16:46:13.171 I/AiAiEcho( 1458): Ranked targets strategy: SORT, count: 0, ranking metadata: 
+09-21 16:46:13.172 E/OneSearchSuggestProvider( 1075): Failed to fetch suggestions from AppSearch, fallback to AGA
+09-21 16:46:13.172 E/OneSearchSuggestProvider( 1075): java.util.concurrent.CompletionException: java.util.NoSuchElementException: No value present
+09-21 16:46:13.172 E/OneSearchSuggestProvider( 1075): 	at java.util.concurrent.CompletableFuture.encodeThrowable(CompletableFuture.java:308)
+09-21 16:46:13.172 E/OneSearchSuggestProvider( 1075): 	at java.util.concurrent.CompletableFuture.completeThrowable(CompletableFuture.java:323)
+09-21 16:46:13.172 E/OneSearchSuggestProvider( 1075): 	at java.util.concurrent.CompletableFuture$UniAccept.tryFire(CompletableFuture.java:684)
+09-21 16:46:13.172 E/OneSearchSuggestProvider( 1075): 	at java.util.concurrent.CompletableFuture.postComplete(CompletableFuture.java:486)
+09-21 16:46:13.172 E/OneSearchSuggestProvider( 1075): 	at java.util.concurrent.CompletableFuture.completeExceptionally(CompletableFuture.java:2138)
+09-21 16:46:13.172 E/OneSearchSuggestProvider( 1075): 	at com.google.android.apps.nexuslauncher.allapps.H0.onResult(Unknown Source:59)
+09-21 16:46:13.172 E/OneSearchSuggestProvider( 1075): 	at android.app.appsearch.SearchSessionUtil$1.lambda$onResult$0(SearchSessionUtil.java:129)
+09-21 16:46:13.172 E/OneSearchSuggestProvider( 1075): 	at android.app.appsearch.SearchSessionUtil$1.$r8$lambda$_nlk9WiPjSfaAsqKYmp0aPvSRC0(SearchSessionUtil.java:1)
+09-21 16:46:13.172 E/OneSearchSuggestProvider( 1075): 	at android.app.appsearch.SearchSessionUtil$1$$ExternalSyntheticLambda0.run(R8$$SyntheticClass:13)
+09-21 16:46:13.172 E/OneSearchSuggestProvider( 1075): 	at android.os.Handler.handleCallback(Handler.java:958)
+09-21 16:46:13.172 E/OneSearchSuggestProvider( 1075): 	at android.os.Handler.dispatchMessage(Handler.java:99)
+09-21 16:46:13.172 E/OneSearchSuggestProvider( 1075): 	at android.os.Looper.loopOnce(Looper.java:205)
+09-21 16:46:13.172 E/OneSearchSuggestProvider( 1075): 	at android.os.Looper.loop(Looper.java:294)
+09-21 16:46:13.172 E/OneSearchSuggestProvider( 1075): 	at android.os.HandlerThread.run(HandlerThread.java:67)
+09-21 16:46:13.172 E/OneSearchSuggestProvider( 1075): Caused by: java.util.NoSuchElementException: No value present
+09-21 16:46:13.172 E/OneSearchSuggestProvider( 1075): 	at java.util.Optional.get(Optional.java:144)
+09-21 16:46:13.172 E/OneSearchSuggestProvider( 1075): 	at com.google.android.apps.nexuslauncher.allapps.H0.onResult(Unknown Source:16)
+09-21 16:46:13.172 E/OneSearchSuggestProvider( 1075): 	... 8 more
+09-21 16:46:13.173 D/OneSearchSuggestProvider( 1075): Established or reuse existing binder channel authority=com.google.android.googlequicksearchbox
+09-21 16:46:13.173 W/AlarmManager(  563): Unrecognized alarm listener com.android.server.location.gnss.GnssLocationProvider$$ExternalSyntheticLambda13@4090edd
+09-21 16:46:13.173 W/AlarmManager(  563): Unrecognized alarm listener com.android.server.location.gnss.GnssLocationProvider$$ExternalSyntheticLambda12@650da52
+09-21 16:46:13.174 V/WindowManager(  563): Sent Transition #64 createdAt=09-21 16:46:12.237 via request=TransitionRequestInfo { type = OPEN, triggerTask = TaskInfo{userId=0 taskId=284 displayId=0 isRunning=true baseIntent=Intent { act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10200000 cmp=fi.iwa.sakani/com.ad.sakani.sakan_v4_mobile.MainActivity } baseActivity=ComponentInfo{fi.iwa.sakani/com.ad.sakani.sakan_v4_mobile.MainActivity} topActivity=ComponentInfo{fi.iwa.sakani/com.ad.sakani.sakan_v4_mobile.MainActivity} origActivity=null realActivity=ComponentInfo{fi.iwa.sakani/com.ad.sakani.sakan_v4_mobile.MainActivity} numActivities=1 lastActiveTime=23045240 supportsMultiWindow=true resizeMode=1 isResizeable=true minWidth=-1 minHeight=-1 defaultMinSize=220 token=WCT{RemoteToken{57b0eb5 Task{f4a307c #284 type=standard A=10214:fi.iwa.sakani}}} topActivityType=1 pictureInPictureParams=null shouldDockBigOverlays=false launchIntoPipHostTaskId=-1 lastParentTaskIdBeforePip=-1 displayCutoutSafeInsets=Rect(0, 132 - 0, 0) topActivityInfo=ActivityInfo{8de994a com.ad.sakani.sakan_v4_mobile.MainActivity} launchCookies=[] positionInParent=Point(0, 0) parentTaskId=-1 isFocused=false isVisible=false isVisibleRequested=false isSleeping=false topActivityInSizeCompat=false topActivityEligibleForLetterboxEducation= false topActivityLetterboxed= false isFromDoubleTap= false topActivityLetterboxVerticalPosition= -1 topActivityLetterboxHorizontalPosition= -1 topActivityLetterboxWidth=-1 topActivityLetterboxHeight=-1 locusId=null displayAreaFeatureId=1 cameraCompatControlState=hidden}, remoteTransition = null, displayChange = null }
+09-21 16:46:13.174 V/WindowManager(  563):     startWCT=WindowContainerTransaction { changes = {} hops = [] errorCallbackToken=null taskFragmentOrganizer=null }
+09-21 16:46:13.174 V/WindowManager(  563):     info={id=64 t=OPEN f=0x0 trk=0 r=[0@Point(0, 0)] c=[{WCT{RemoteToken{3158089 Task{cfe9ebd #1 type=home}}} m=CHANGE f=SHOW_WALLPAPER|MOVE_TO_TOP leash=Surface(name=Task=1)/@0x6802b16 sb=Rect(0, 0 - 1080, 2400) eb=Rect(0, 0 - 1080, 2400) d=0}]}
+09-21 16:46:13.175 D/QuickstepModelDelegate( 1075): notifyAppTargetEvent action=1 launchLocation=workspace/0/[-1,-1]/[1,1]
+09-21 16:46:13.175 V/WindowManager(  563): Finish Transition #64: created at 09-21 16:46:12.237 collect-started=0.03ms request-sent=3.362ms started=5.683ms ready=927.872ms sent=930.416ms finished=938.078ms
+09-21 16:46:13.177 V/WindowManagerShell(  802): Track 0 became idle
+09-21 16:46:13.177 V/WindowManagerShell(  802): All active transition animations finished
+09-21 16:46:13.177 V/WindowManagerShell(  802):  animated by com.android.wm.shell.transition.DefaultTransitionHandler@63355a8
+09-21 16:46:13.177 V/WindowManagerShell(  802): Track 0 became idle
+09-21 16:46:13.177 V/WindowManagerShell(  802): All active transition animations finished
+09-21 16:46:13.179 W/A       ( 1580): Can't get WAA status for Mavatar!
+09-21 16:46:13.179 W/A       ( 1580): java.lang.NullPointerException: Attempt to invoke virtual method 'java.lang.Class java.lang.Object.getClass()' on a null object reference
+09-21 16:46:13.179 W/A       ( 1580): 	at com.google.apps.tiktok.dataservice.z.b(PG:1)
+09-21 16:46:13.179 W/A       ( 1580): 	at com.google.apps.tiktok.dataservice.at.a(PG:1)
+09-21 16:46:13.179 W/A       ( 1580): 	at com.google.apps.tiktok.tracing.ec.a(PG:2)
+09-21 16:46:13.179 W/A       ( 1580): 	at com.google.common.util.concurrent.aj.a(PG:2)
+09-21 16:46:13.179 W/A       ( 1580): 	at com.google.common.util.concurrent.ac.apply(PG:1)
+09-21 16:46:13.179 W/A       ( 1580): 	at com.google.common.util.concurrent.h.e(PG:2)
+09-21 16:46:13.179 W/A       ( 1580): 	at com.google.common.util.concurrent.j.run(PG:9)
+09-21 16:46:13.179 W/A       ( 1580): 	at com.google.common.util.concurrent.bf.execute(PG:1)
+09-21 16:46:13.179 W/A       ( 1580): 	at com.google.common.util.concurrent.d.i(PG:1)
+09-21 16:46:13.179 W/A       ( 1580): 	at com.google.common.util.concurrent.d.iq(PG:5)
+09-21 16:46:13.179 W/A       ( 1580): 	at com.google.common.util.concurrent.j.h(PG:2)
+09-21 16:46:13.179 W/A       ( 1580): 	at com.google.common.util.concurrent.ax.d(PG:1)
+09-21 16:46:13.179 W/A       ( 1580): 	at com.google.apps.tiktok.dataservice.au.a(PG:5)
+09-21 16:46:13.179 W/A       ( 1580): 	at com.google.apps.tiktok.dataservice.dr.c(PG:5)
+09-21 16:46:13.179 W/A       ( 1580): 	at com.google.apps.tiktok.dataservice.dp.run(PG:6)
+09-21 16:46:13.179 W/A       ( 1580): 	at com.google.apps.tiktok.concurrent.ak.run(PG:6)
+09-21 16:46:13.179 W/A       ( 1580): 	at com.google.apps.tiktok.tracing.ei.run(PG:2)
+09-21 16:46:13.179 W/A       ( 1580): 	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:487)
+09-21 16:46:13.179 W/A       ( 1580): 	at com.google.common.util.concurrent.dy.a(PG:1)
+09-21 16:46:13.179 W/A       ( 1580): 	at com.google.common.util.concurrent.cv.run(PG:4)
+09-21 16:46:13.179 W/A       ( 1580): 	at com.google.common.util.concurrent.dz.run(PG:1)
+09-21 16:46:13.179 W/A       ( 1580): 	at android.os.Handler.handleCallback(Handler.java:958)
+09-21 16:46:13.179 W/A       ( 1580): 	at android.os.Handler.dispatchMessage(Handler.java:99)
+09-21 16:46:13.179 W/A       ( 1580): 	at android.os.Looper.loopOnce(Looper.java:205)
+09-21 16:46:13.179 W/A       ( 1580): 	at android.os.Looper.loop(Looper.java:294)
+09-21 16:46:13.179 W/A       ( 1580): 	at android.app.ActivityThread.main(ActivityThread.java:8177)
+09-21 16:46:13.179 W/A       ( 1580): 	at java.lang.reflect.Method.invoke(Native Method)
+09-21 16:46:13.179 W/A       ( 1580): 	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:552)
+09-21 16:46:13.179 W/A       ( 1580): 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:971)
+09-21 16:46:13.180 I/ImeTracker(  563): com.google.android.apps.nexuslauncher:25ba527d: onRequestHide at ORIGIN_SERVER_HIDE_INPUT reason HIDE_SAME_WINDOW_FOCUSED_WITHOUT_EDITOR
+09-21 16:46:13.180 I/ImeTracker(  563): com.google.android.apps.nexuslauncher:25ba527d: onCancelled at PHASE_SERVER_SHOULD_HIDE
+09-21 16:46:13.181 W/AppOps  (  563): Noting op not finished: uid 10127 pkg com.google.android.gms code 113 startTime of in progress event=1789975351927
+09-21 16:46:13.181 I/GoogleInputMethodService( 1361): GoogleInputMethodService.onFinishInput():3227 
+09-21 16:46:13.182 I/GoogleInputMethodService( 1361): GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 0, unlocked = true
+09-21 16:46:13.182 I/GoogleInputMethodService( 1361): GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x0(NULL) imeOptions=0x0 privateImeOptions=null actionName=UNSPECIFIED actionLabel=null actionId=0 initialSelStart=-1 initialSelEnd=-1 initialCapsMode=0x0 hintText=null label=null packageName=com.google.android.apps.nexuslauncher fieldId=0 fieldName=null extras=null}, false)
+09-21 16:46:13.182 I/GoogleInputMethodService( 1361): GoogleInputMethodService.shouldHideHeaderOnInitialState():4008 ShouldHideHeaderOnInitialState = false
+09-21 16:46:13.182 W/AppOps  (  563): Noting op not finished: uid 10127 pkg com.google.android.gms code 113 startTime of in progress event=1789975351927
+09-21 16:46:13.182 I/GoogleInputMethodService( 1361): GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 2, unlocked = true
+09-21 16:46:13.189 I/AiAiEcho( 1458): #postPredictionTargets: Sending updates to UISurface home with targets# 0 (types=[])
+09-21 16:46:13.190 W/AppOps  (  563): Noting op not finished: uid 10127 pkg com.google.android.gms code 113 startTime of in progress event=1789975351927
+09-21 16:46:13.219 D/SearchTargetUtil( 1075):  query= size=15
+09-21 16:46:13.219 D/SearchTargetUtil( 1075): layoutType=short_icon_row resultType=131072 packageName=com.google.android.googlequicksearchbox extras=Bundle{suggestion_type=33,suggest_truncate_start=false,is_answer=false,is_entity=false,is_personal=false,suggest_raw_text=southwest airlines strategic business shift,group_id=web361621,response_id=2367bb1a-6fc9-44eb-9b05-222a340471e5,support_query_builder=false,} searchAction=southwest airlines strategic business shift searchActionExtras=Bundle{learn_more_url=https://support.google.com/websearch/answer/106230?hl=106230,suggestion_action_text=Report this,should_start_for_result=true,allow_pinning=true,skip_logging_in_target_handler=false,suggestion_action_rpc=2,}ParentID: null targetID: 5de2d331-20d8-4a4f-811b-bf3b1dbb4acd
+09-21 16:46:13.219 D/SearchTargetUtil( 1075): layoutType=short_icon_row resultType=131072 packageName=com.google.android.googlequicksearchbox extras=Bundle{suggestion_type=33,suggest_truncate_start=false,is_answer=false,is_entity=false,is_personal=false,suggest_raw_text=cape verde school bus crash,group_id=web361621,response_id=2367bb1a-6fc9-44eb-9b05-222a340471e5,support_query_builder=false,} searchAction=cape verde school bus crash searchActionExtras=Bundle{learn_more_url=https://support.google.com/websearch/answer/106230?hl=106230,suggestion_action_text=Report this,should_start_for_result=true,allow_pinning=true,skip_logging_in_target_handler=false,suggestion_action_rpc=2,}ParentID: null targetID: d5ecf9fa-d22d-47b4-bb8a-1f64c613e5f1
+09-21 16:46:13.219 D/SearchTargetUtil( 1075): layoutType=short_icon_row resultType=131072 packageName=com.google.android.googlequicksearchbox extras=Bundle{suggestion_type=33,suggest_truncate_start=false,is_answer=false,is_entity=false,is_personal=false,suggest_raw_text=glenn hughes stopping live performances,group_id=web361621,response_id=2367bb1a-6fc9-44eb-9b05-222a340471e5,support_query_builder=false,} searchAction=glenn hughes stopping live performances searchActionExtras=Bundle{learn_more_url=https://support.google.com/websearch/answer/106230?hl=106230,suggestion_action_text=Report this,should_start_for_result=true,allow_pinning=true,skip_logging_in_target_handler=false,suggestion_action_rpc=2,}ParentID: null targetID: f7b947bb-1f97-46f0-94a6-2c062d8e39d3
+09-21 16:46:13.219 D/SearchTargetUtil( 1075): layoutType=short_icon_row resultType=131072 packageName=com.google.android.googlequicksearchbox extras=Bundle{suggestion_type=33,suggest_truncate_start=false,is_answer=false,is_entity=false,is_personal=false,suggest_raw_text=enes kanter wnba,group_id=web361621,response_id=2367bb1a-6fc9-44eb-9b05-222a340471e5,support_query_builder=false,} searchAction=enes kanter wnba searchActionExtras=Bundle{learn_more_url=https://support.google.com/websearch/answer/106230?hl=106230,suggestion_action_text=Report this,should_start_for_result=true,allow_pinning=true,skip_logging_in_target_handler=false,suggestion_action_rpc=2,}ParentID: null targetID: cd9cda30-351f-4d4b-9535-7024b02c62f3
+09-21 16:46:13.219 D/SearchTargetUtil( 1075): layoutType=short_icon_row resultType=131072 packageName=com.google.android.googlequicksearchbox extras=Bundle{suggestion_type=33,suggest_truncate_start=false,is_answer=false,is_entity=false,is_personal=false,suggest_raw_text=gta 6 new zealand launch time,group_id=web361621,response_id=2367bb1a-6fc9-44eb-9b05-222a340471e5,support_query_builder=false,} searchAction=gta 6 new zealand launch time searchActionExtras=Bundle{learn_more_url=https://support.google.com/websearch/answer/106230?hl=106230,suggestion_action_text=Report this,should_start_for_result=true,allow_pinning=true,skip_logging_in_target_handler=false,suggestion_action_rpc=2,}ParentID: null targetID: b90b3de6-ed1f-49ac-9773-3b7d722f6fd3
+09-21 16:46:13.219 D/SearchTargetUtil( 1075): layoutType=short_icon_row resultType=131072 packageName=com.google.android.googlequicksearchbox extras=Bundle{suggestion_type=33,suggest_truncate_start=false,is_answer=false,is_entity=false,is_personal=false,suggest_raw_text=aurora borealis,group_id=web361621,response_id=2367bb1a-6fc9-44eb-9b05-222a340471e5,support_query_builder=false,} searchAction=aurora borealis searchActionExtras=Bundle{learn_more_url=https://support.google.com/websearch/answer/106230?hl=106230,suggestion_action_text=Report this,should_start_for_result=true,allow_pinning=true,skip_logging_in_target_handler=false,suggestion_action_rpc=2,}ParentID: null targetID: ff9d4de5-5572-4da7-a29e-c173ef34af46
+09-21 16:46:13.219 D/SearchTargetUtil( 1075): layoutType=short_icon_row resultType=131072 packageName=com.google.android.googlequicksearchbox extras=Bundle{suggestion_type=33,suggest_truncate_start=false,is_answer=false,is_entity=false,is_personal=false,suggest_raw_text=indonesia volcano eruption anak krakatau,group_id=web361621,response_id=2367bb1a-6fc9-44eb-9b05-222a340471e5,support_query_builder=false,} searchAction=indonesia volcano eruption anak krakatau searchActionExtras=Bundle{learn_more_url=https://support.google.com/websearch/answer/106230?hl=106230,suggestion_action_text=Report this,should_start_for_result=true,allow_pinning=true,skip_logging_in_target_handler=false,suggestion_action_rpc=2,}ParentID: null targetID: c7fec9a1-d98d-4cc1-88c7-51b6955a9669
+09-21 16:46:13.219 D/SearchTargetUtil( 1075): layoutType=short_icon_row resultType=131072 packageName=com.google.android.googlequicksearchbox extras=Bundle{suggestion_type=33,suggest_truncate_start=false,is_answer=false,is_entity=false,is_personal=false,suggest_raw_text=grocery stores closed labor day,group_id=web361621,response_id=2367bb1a-6fc9-44eb-9b05-222a340471e5,support_query_builder=false,} searchAction=grocery stores closed labor day searchActionExtras=Bundle{learn_more_url=https://support.google.com/websearch/answer/106230?hl=106230,suggestion_action_text=Report this,should_start_for_result=true,allow_pinning=true,skip_logging_in_target_handler=false,suggestion_action_rpc=2,}ParentID: null targetID: ed03587d-5c11-486a-a30f-1749cc086bfe
+09-21 16:46:13.219 D/SearchTargetUtil( 1075): layoutType=short_icon_row resultType=131072 packageName=com.google.android.googlequicksearchbox extras=Bundle{suggestion_type=33,suggest_truncate_start=false,is_answer=false,is_entity=false,is_personal=false,suggest_raw_text=nebraska volleyball game wrigley field,group_id=web361621,response_id=2367bb1a-6fc9-44eb-9b05-222a340471e5,support_query_builder=false,} searchAction=nebraska volleyball game wrigley field searchActionExtras=Bundle{learn_more_url=https://support.google.com/websearch/answer/106230?hl=106230,suggestion_action_text=Report this,should_start_for_result=true,allow_pinning=true,skip_logging_in_target_handler=false,suggestion_action_rpc=2,}ParentID: null targetID: 441c04d6-b769-465b-a2f6-a0858ae6e941
+09-21 16:46:13.219 D/SearchTargetUtil( 1075): layoutType=short_icon_row resultType=131072 packageName=com.google.android.googlequicksearchbox extras=Bundle{suggestion_type=33,suggest_truncate_start=false,is_answer=false,is_entity=false,is_personal=false,suggest_raw_text=extreme heat mobile home mortality,group_id=web361621,response_id=2367bb1a-6fc9-44eb-9b05-222a340471e5,support_query_builder=false,} searchAction=extreme heat mobile home mortality searchActionExtras=Bundle{learn_more_url=https://support.google.com/websearch/answer/106230?hl=106230,suggestion_action_text=Report this,should_start_for_result=true,allow_pinning=true,skip_logging_in_target_handler=false,suggestion_action_rpc=2,}ParentID: null targetID: 72d5903a-ef64-405e-8f07-58139b6185ba
+09-21 16:46:13.219 D/SearchTargetUtil( 1075): layoutType=extra_tall_icon_row resultType=131072 packageName=com.google.android.googlequicksearchbox extras=Bundle{bitmap_url=data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBwgHBgkIBwgKCgkLDRYPDQwMDRsUFRAWIB0iIiAdHx8kKDQsJCYxJx8fLT0tMTU3Ojo6Iys/RD84QzQ5OjcBCgoKDQwNGg8PGjclHyU3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3N//AABEIAEoAfAMBEQACEQEDEQH/xAAcAAADAQEBAQEBAAAAAAAAAAAABAUDBgIHAQj/xAA5EAABAwMCBAQDBQgCAwAAAAABAgMEAAUREiEGEzFBFCJRYXGBkQcyQqGiFiMzUoKSsdFi8BUkQ//EABoBAQADAQEBAAAAAAAAAAAAAAACAwQFAQb/xAA3EQABBAECAwYFBAECBwAAAAABAAIDEQQhMQUSQRMiUWFxkTKBocHRFbHh8BSC8QYzRFJicrL/2gAMAwEAAhEDEQA/APuNERREURFERREURFEXh51thlbz7iG2m0lS1rVhKQOpJPQURZwpkafFblQnkPsODKHGzkKr0gjQoDa3rxEURFERREURFERREURFERREhe7zBsUBU25vBpkEJG2StR6JSO5NSa0vPK3deOcGiyuWc4p4imjXbLTEiMndBnuFS1D1KUfd+prl5PGuH4zixzy4jflF/UkfS1ayDIkFtbQ8z+AVtB4zkR1SI9/gJZktxnJDKoy9SJAQkqUkZ3CsDoffcVrxcrHzI+0x3WBobFEeo191W5r43ckgo+4UJ3jLiW8Q25NobhRGnHQ0lAy86lXXckBIGN+lWT5WLizugyCQQ3mvSq8tbJJ02GqqZ2srA+IDevP+PqkOIL5fr0UWq4Q2URYmlU1aHw23JVny5J+6nodPc/AUizMV0DZmPIL/AIe6XO8+6Oo8fhvXXZeSslLuzrbfWh5a+fujhi83+1TJVqiQ4iXHMyVIeWeS2ScfuwncAjSTk7nsNya5s3Fhwm5TnlzNG3VuJ875ddNVKNkva9i1ovfwA9KvRX7HxXd0XGKjiB6CI0mI66C22WylacHBJUR01VOLJgndI2K+4QNetg/hS5ZG8vP1F/33Xi2faYuRbzcJdheREB3XGkJdKPZQITg7irn9mzIGMXjnIsDXX0NUfdQbIXMMld0df7qumsvFlpvMkRYrjyJRQV8h9lSFaR3BIwevYmhaQL6eWv7KYeCrlRUkURFERREURFERRFN4js0e/wBmk22Vsl5PlWBktrG6VD3Bwak1xY4OC8cA4UV8ysap8K5TuFb64kvtsJ5SkElJQU/hJAJGD6fhNcD/AIiw44wziWOyiHd71uwfff1CvwXvs48hsEafhIxoguTbsBOqWq0I0hLh0c5ayQr+kAEAe+/pWnIym4ZZlP7gyCCSBzcrWt7vqSTZPhtrqqY4zLcY1Mfysk6/IVoqkR5mwsTEpjLYZAbWphnC1NLWopGOxOAk4/3XIyIX8VdD3w51uAcRyhzWgONgbC7F++y1se3FD9KGhIGtEmv2pKQ3IIiuOBblyhKdD/OZIK0rKdBDiCQTn889MV0MgZj5mtoQy8pZRvlLb5rY4WBX0AFG1RH2QYT8bbuxvdVqPP6+CwiXWDBut1lJCo8lmOElmW4Oa8s+b127bD17YxVuRgZWbh4+OSHtc/4mDusaNPnuaJrbrdqDJo4ZXyVRA2J1JTspxjiJSFMJZHKQTETIGErUF4V+kD4as1hx4peCgiSzZHPy7gcvdr/UTr15a2JV8hbmatrQaXsddfp+9piLFbkImwQGkMykhCvD/wANLuFa9PrgaBn1HxrNk5EkJhyjZdGbHN8XJY5eb1PMQPDypWRxteHxaU7TTa9br6LoOCWRNv8Ad7rgcqPpgR/bGFOfmUj5V3uEwGDAjB+J3eP+rb6V7rNM7nmceg0Hy/ldtW9QRREURFEWMuVHhR1yJb7bDKBlTjiglI+JNNkUtfFVmKB4OczOeJwGIjqVuH4jOw9zgVRLkwwx9o92imI3E1SWdv8APcH/AK0BplJ6KkO6lD4oSMfqrkS/8QQN/wCW0n6fn9le3Fcdyk5Tlwfj86XcXNBzlqN+5H5HX+qsE3F8t8YeymgmtNT9fwrWY7OblOq5a92V5Zg3a1Au3KO6nIccOVNZIKNSj0Gc/X1qeDxJvfgzHkxvaQetHof71pe5MBsOiFFp90xD4XEl564TluQ5bzhWPAvkFKCB5VHG+4z071GXjPZRMxoBzsaK77QbIJoga1vW6zdgS8vdoSeh+6bTw3a7e6qaqRJCOYl1Ta5BKNSMYJ7k5Gdyd6qk4xlzxNjpt0Ro0WAdwOgBGmlaL1mK3mNX47+CjXhywy5qZKITiZCVhRfZUGy5g5wofi6dxmtGHk5+PEYxJbT0OoHp4K92FG53Md/JVmLjbboeU+0jUrbS8kHPzrlmHIx9Y3H5Glqcxrtws18GW2O41hb4jhfN8LzdbRPoUnNdSXjWdGO8W8xbXMB3gPUUVhbiQu2Bq9unspq7PPsT8dyzO+JitpWkR5TuNBV3SQn/ADU/1PG4hG+PObyudXeaNSB0NlTGLJG4GE3vofPwT1qjPxYYS2XY6mf/ALMyljmK/ESkbb9T1Gayz8UmM5kjkNHpWgHQfLZXx4rG9x4+asMX67xSRz2ZrSTjU+1oUr+pOAP7TWyPjcjdJGg+Y0/K8dgNPwmlQY4xQkDx1veaA3U4ysOoSPU9FH5JNdCLi+NIQDY9VmfhStF7q5AutuuJWLfPiyi398MPJXp+ODtXUWSk5RF8f+2GbPhXhtxp4lDbbbjQWkKS3nWDhJyM5T1xnBxWOeMSyiN/wkbba/JXsPKwkbqRCvVz5M6NcYzZuDDXOYlNo0JUNvKrRjIwodN+tcKXEgDmSQuPITRF3W+ou626rXGZbc129Ws/2rkN2eFNMJkrceW24G3nW0jGNOPMcfiz8qn+mMOQ+LnOgBFhp9enoo9rIIxJpqaWl942ct14ft0WFNmMo3/j6VD9KiR9KqxeGCbHbK9waT5fyFZLI6OTkrVaDj2Omxt3BCZuOf4d6MdClNqxkEKIAII9vlUf0l/bmI1tYOuvTbVedv3OeutL219p8HwLsgvSUutKAEV9hBLgPdJSQNvcih4JNzhlCj1BOnyP2VXbRkEkLzI4uYvtoXLjuOqcjvttqivthH3zgKyknI6987dtjUmYD8eYRuAogmwb26a0tGORJo3TUD3NJH/yVwYwkXJ1rWfK2yy3jOOw0k9u5NaDjQO1LLrxJ/IXbdg40QHavOvyWb11mhhcxUkTUJbKwHUJSSAM+VSAMH4gj2qbcWIEMaOX0v8AY39lVPhRiEzRO0Av1Vm6ccNWiam3aZ0p7SgtqSy2UOagMYJUCd8j4g1z4eGPyWdroBr1NivlXmuM+bkfy8q/OI+NodrfTEddky5BSFuNxUoShrO4GVAknBrzE4ZLO3naA1vQmyT56FSkn7J5bWoU618ci5XBq3MR5MfnrAy64lRPqNkjG2fpWifhRgidK4g14D8kr2CftZA1yRc45kPPyEQbGXkslWVmW6rCRnzEJx2GauHCWtDTJLV/+LR8tbVX+TK6+UJu38WqdsMm4zIKHHkOhlhtSiWtRGckHc4Hvv7ZqEnDKyGwsdQIsnrQ+mql27jDznxpZtS7885b7iswUNqOttUcIacaHdW2FDbPqDvmtLBjQOe2IuDh1Nn+FSC99XRBX3PhyRIl2C3yZqtUh6OhxZ04ySM9PWu2wktHNusbqvRcN9s1tckwokhpBI0qaUcbatSVIBPbOFDfuaoyO65sngfoVbFqC1cFabzKfktQn4DaUeH0LccQor1JRgKzsBkgbY71yMnCjjY6Vj9buhVanb+lbYZnPe1j9gK+i5N1t2RYJrzM88iK+lJjA7KK
+09-21 16:46:13.219 D/SearchTargetUtil( 1075): layoutType=short_icon_row resultType=131072 packageName=com.google.android.googlequicksearchbox extras=Bundle{suggestion_type=33,suggest_truncate_start=false,is_answer=false,is_entity=false,is_personal=false,suggest_raw_text=today wordle hints,group_id=web361621,response_id=2367bb1a-6fc9-44eb-9b05-222a340471e5,support_query_builder=false,} searchAction=today wordle hints searchActionExtras=Bundle{learn_more_url=https://support.google.com/websearch/answer/106230?hl=106230,suggestion_action_text=Report this,should_start_for_result=true,allow_pinning=true,skip_logging_in_target_handler=false,suggestion_action_rpc=2,}ParentID: null targetID: 46e8d2b8-936d-4fcf-bb17-4973b8552e03
+09-21 16:46:13.219 D/SearchTargetUtil( 1075): layoutType=short_icon_row resultType=131072 packageName=com.google.android.googlequicksearchbox extras=Bundle{suggestion_type=33,suggest_truncate_start=false,is_answer=false,is_entity=false,is_personal=false,suggest_raw_text=social security 2027 cola forecast,group_id=web361621,response_id=2367bb1a-6fc9-44eb-9b05-222a340471e5,support_query_builder=false,} searchAction=social security 2027 cola forecast searchActionExtras=Bundle{learn_more_url=https://support.google.com/websearch/answer/106230?hl=106230,suggestion_action_text=Report this,should_start_for_result=true,allow_pinning=true,skip_logging_in_target_handler=false,suggestion_action_rpc=2,}ParentID: null targetID: 27e9db9c-3782-4688-9827-1bbb864cd6f8
+09-21 16:46:13.219 D/SearchTargetUtil( 1075): layoutType=short_icon_row resultType=131072 packageName=com.google.android.googlequicksearchbox extras=Bundle{suggestion_type=33,suggest_truncate_start=false,is_answer=false,is_entity=false,is_personal=false,suggest_raw_text=5th circuit court clean drinking water,group_id=web361621,response_id=2367bb1a-6fc9-44eb-9b05-222a340471e5,support_query_builder=false,} searchAction=5th circuit court clean drinking water searchActionExtras=Bundle{learn_more_url=https://support.google.com/websearch/answer/106230?hl=106230,suggestion_action_text=Report this,should_start_for_result=true,allow_pinning=true,skip_logging_in_target_handler=false,suggestion_action_rpc=2,}ParentID: null targetID: ce7d6830-6a47-42f0-a53e-2a4eacaf9703
+09-21 16:46:13.219 D/SearchTargetUtil( 1075): layoutType=short_icon_row resultType=131072 packageName=com.google.android.googlequicksearchbox extras=Bundle{suggestion_type=33,suggest_truncate_start=false,is_answer=false,is_entity=false,is_personal=false,suggest_raw_text=playstation 5 update 14.0 sony,group_id=web361621,response_id=2367bb1a-6fc9-44eb-9b05-222a340471e5,support_query_builder=false,} searchAction=playstation 5 update 14.0 sony searchActionExtras=Bundle{learn_more_url=https://support.google.com/websearch/answer/106230?hl=106230,suggestion_action_text=Report this,should_start_for_result=true,allow_pinning=true,skip_logging_in_target_handler=false,suggestion_action_rpc=2,}ParentID: null targetID: 4c13bf01-f57b-4812-8ac7-f2c672f64f10
+09-21 16:46:13.491 W/ziparchive( 5817): Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/00000004/DynamiteModulesC.dm': No such file or directory
+09-21 16:46:13.492 W/ziparchive( 5817): Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/00000004/DynamiteModulesC.dm': No such file or directory
+09-21 16:46:13.492 W/ziparchive( 5817): Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/00000001/CronetDynamite.dm': No such file or directory
+09-21 16:46:13.492 W/ziparchive( 5817): Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/00000001/CronetDynamite.dm': No such file or directory
+09-21 16:46:13.492 W/ziparchive( 5817): Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/00000002/DynamiteLoader.dm': No such file or directory
+09-21 16:46:13.492 W/ziparchive( 5817): Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/00000002/DynamiteLoader.dm': No such file or directory
+09-21 16:46:13.493 W/ziparchive( 5817): Unable to open '/data/user/0/com.google.android.gms/app_fb/f.dm': No such file or directory
+09-21 16:46:13.493 W/ziparchive( 5817): Unable to open '/data/user/0/com.google.android.gms/app_fb/f.dm': No such file or directory
+09-21 16:46:13.494 W/ziparchive( 5817): Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/00000005/GoogleCertificates.dm': No such file or directory
+09-21 16:46:13.494 W/ziparchive( 5817): Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/00000005/GoogleCertificates.dm': No such file or directory
+09-21 16:46:13.495 W/ziparchive( 5817): Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/00000009/dl-TfliteDynamiteDynamite.integ_262730502100800.dm': No such file or directory
+09-21 16:46:13.495 W/ziparchive( 5817): Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/00000009/dl-TfliteDynamiteDynamite.integ_262730502100800.dm': No such file or directory
+09-21 16:46:13.495 W/ziparchive( 5817): Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/00000000/AdsDynamite.dm': No such file or directory
+09-21 16:46:13.495 W/ziparchive( 5817): Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/00000000/AdsDynamite.dm': No such file or directory
+09-21 16:46:13.497 W/ziparchive( 5817): Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/00000008/dl-VisionOcrDynamite.integ_231602402100000.dm': No such file or directory
+09-21 16:46:13.497 W/ziparchive( 5817): Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/00000008/dl-VisionOcrDynamite.integ_231602402100000.dm': No such file or directory
+09-21 16:46:13.498 W/ziparchive( 5817): Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/0000000c/dl-MlkitBarcodeUi.optional_231818100000.dm': No such file or directory
+09-21 16:46:13.498 W/ziparchive( 5817): Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/0000000c/dl-MlkitBarcodeUi.optional_231818100000.dm': No such file or directory
+09-21 16:46:13.500 W/ziparchive( 5817): Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/0000000a/dl-MlkitOcrCommon.optional_231818100800.dm': No such file or directory
+09-21 16:46:13.500 W/ziparchive( 5817): Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/0000000a/dl-MlkitOcrCommon.optional_231818100800.dm': No such file or directory
+09-21 16:46:13.501 W/ziparchive( 5817): Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/00000007/MeasurementDynamite.dm': No such file or directory
+09-21 16:46:13.501 W/ziparchive( 5817): Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/00000007/MeasurementDynamite.dm': No such file or directory
+09-21 16:46:13.638 W/ActivityTaskManager(  563): Activity top resumed state loss timeout for ActivityRecord{da9b6f u0 fi.iwa.sakani/com.ad.sakani.sakan_v4_mobile.MainActivity t-1 f}}
+09-21 16:46:14.160 D/CompatibilityChangeReporter(  563): Compat change id reported: 135634846; UID 10214; state: DISABLED
+09-21 16:46:14.161 D/CompatibilityChangeReporter(  563): Compat change id reported: 143937733; UID 10214; state: ENABLED
+09-21 16:46:14.166 D/Zygote  (  364): Forked child process 6173
+09-21 16:46:14.166 I/ActivityManager(  563): Start proc 6173:fi.iwa.sakani/u0a214 for service {fi.iwa.sakani/com.webengage.sdk.android.ExecutorService}
+09-21 16:46:14.186 I/fi.iwa.sakani( 6173): Using CollectorTypeCC GC.
+09-21 16:46:14.187 W/fi.iwa.sakani( 6173): Unexpected CPU variant for x86: x86_64.
+09-21 16:46:14.187 W/fi.iwa.sakani( 6173): Known variants: atom, sandybridge, silvermont, goldmont, goldmont-plus, tremont, kabylake, default
+09-21 16:46:14.190 E/fi.iwa.sakani( 6173): Not starting debugger since process cannot load the jdwp agent.
+09-21 16:46:14.198 D/CompatibilityChangeReporter( 6173): Compat change id reported: 171979766; UID 10214; state: ENABLED
+09-21 16:46:14.198 D/CompatibilityChangeReporter( 6173): Compat change id reported: 242716250; UID 10214; state: ENABLED
+09-21 16:46:14.199 D/CompatibilityChangeReporter(  563): Compat change id reported: 170503758; UID 10214; state: ENABLED
+09-21 16:46:14.201 D/nativeloader( 6173): Configuring clns-6 for other apk /system/framework/org.apache.http.legacy.jar. target_sdk_version=36, uses_libraries=ALL, library_path=/data/app/~~GQjY21_z-vevzxS6pIXsdQ==/fi.iwa.sakani-qwS6_FSa8LqNHxCo9DiskQ==/lib/x86_64:/data/app/~~GQjY21_z-vevzxS6pIXsdQ==/fi.iwa.sakani-qwS6_FSa8LqNHxCo9DiskQ==/base.apk!/lib/x86_64, permitted_path=/data:/mnt/expand:/data/user/0/fi.iwa.sakani
+09-21 16:46:14.202 D/ApplicationLoaders( 6173): Returning zygote-cached class loader: /system_ext/framework/androidx.window.extensions.jar
+09-21 16:46:14.202 D/ApplicationLoaders( 6173): Returning zygote-cached class loader: /system_ext/framework/androidx.window.sidecar.jar
+09-21 16:46:14.204 D/nativeloader( 6173): Configuring clns-7 for other apk /data/app/~~GQjY21_z-vevzxS6pIXsdQ==/fi.iwa.sakani-qwS6_FSa8LqNHxCo9DiskQ==/base.apk. target_sdk_version=36, uses_libraries=, library_path=/data/app/~~GQjY21_z-vevzxS6pIXsdQ==/fi.iwa.sakani-qwS6_FSa8LqNHxCo9DiskQ==/lib/x86_64:/data/app/~~GQjY21_z-vevzxS6pIXsdQ==/fi.iwa.sakani-qwS6_FSa8LqNHxCo9DiskQ==/base.apk!/lib/x86_64, permitted_path=/data:/mnt/expand:/data/user/0/fi.iwa.sakani
+09-21 16:46:14.252 V/GraphicsEnvironment( 6173): Currently set values for:
+09-21 16:46:14.252 V/GraphicsEnvironment( 6173):   angle_gl_driver_selection_pkgs=[]
+09-21 16:46:14.252 V/GraphicsEnvironment( 6173):   angle_gl_driver_selection_values=[]
+09-21 16:46:14.252 V/GraphicsEnvironment( 6173): ANGLE GameManagerService for fi.iwa.sakani: false
+09-21 16:46:14.252 V/GraphicsEnvironment( 6173): fi.iwa.sakani is not listed in per-application setting
+09-21 16:46:14.252 V/GraphicsEnvironment( 6173): Neither updatable production driver nor prerelease driver is supported.
+09-21 16:46:14.255 D/CompatibilityChangeReporter( 6173): Compat change id reported: 183155436; UID 10214; state: ENABLED
+09-21 16:46:14.256 D/SessionsDependencies( 6173): Dependency to CRASHLYTICS added.
+09-21 16:46:14.257 I/FirebaseApp( 6173): Device unlocked: initializing all Firebase APIs for app [DEFAULT]
+09-21 16:46:14.260 D/FirebaseSessions( 6173): Initializing Firebase Sessions SDK.
+09-21 16:46:14.262 D/CompatibilityChangeReporter( 6173): Compat change id reported: 3400644; UID 10214; state: ENABLED
+09-21 16:46:14.262 I/FirebaseCrashlytics( 6173): Initializing Firebase Crashlytics 19.3.0 for fi.iwa.sakani
+09-21 16:46:14.264 D/SessionsDependencies( 6173): Subscriber CRASHLYTICS registered.
+09-21 16:46:14.270 D/LifecycleServiceBinder( 6173): Binding service to application.
+09-21 16:46:14.270 W/ziparchive( 6173): Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/00000002/DynamiteLoader.dm': No such file or directory
+09-21 16:46:14.270 W/ziparchive( 6173): Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/00000002/DynamiteLoader.dm': No such file or directory
+09-21 16:46:14.274 I/DynamiteModule( 6173): Considering local module com.google.android.gms.measurement.dynamite:127 and remote module com.google.android.gms.measurement.dynamite:90
+09-21 16:46:14.274 I/DynamiteModule( 6173): Selected local version of com.google.android.gms.measurement.dynamite
+09-21 16:46:14.274 I/FirebaseInitProvider( 6173): FirebaseApp initialization successful
+09-21 16:46:14.299 D/WM-WrkMgrInitializer( 6173): Initializing WorkManager with default configuration.
+09-21 16:46:14.312 I/FirebaseCrashlytics( 6173): Saved version control info
+09-21 16:46:14.320 D/CompatibilityChangeReporter( 6173): Compat change id reported: 160794467; UID 10214; state: ENABLED
+09-21 16:46:14.324 I/FA      ( 6173): App measurement initialized, version: 106000
+09-21 16:46:14.324 I/FA      ( 6173): To enable debug logging run: adb shell setprop log.tag.FA VERBOSE
+09-21 16:46:14.324 I/FA      ( 6173): To enable faster debug mode event logging run:
+09-21 16:46:14.324 I/FA      ( 6173):   adb shell setprop debug.firebase.analytics.app fi.iwa.sakani
+09-21 16:46:14.341 D/BoundBrokerSvc( 1881): onBind: Intent { act=com.google.android.gms.measurement.START pkg=com.google.android.gms }
+09-21 16:46:14.341 D/BoundBrokerSvc( 1881): Loading bound service for intent: Intent { act=com.google.android.gms.measurement.START pkg=com.google.android.gms }
+09-21 16:46:14.348 I/ActivityManager(  563): Flag disabled. Ignoring finishAttachApplication from uid: 10214. pid: 6173
+09-21 16:46:14.351 D/SessionLifecycleService( 6173): Service bound to new client on process 6173
+09-21 16:46:14.352 D/SessionLifecycleService( 6173): App has not yet foregrounded. Using previously stored session.
+09-21 16:46:14.352 D/SessionLifecycleClient( 6173): Connected to SessionLifecycleService. Queue size 0
+09-21 16:46:14.352 D/SessionLifecycleService( 6173): Client android.os.Messenger@64b17b9 bound at 23047351. Clients: 1
+09-21 16:46:14.365 W/ActivityManager(  563): Background start not allowed: service Intent { cmp=fi.iwa.sakani/com.webengage.sdk.android.EventLogService (has extras) } to fi.iwa.sakani/com.webengage.sdk.android.EventLogService from pid=6173 uid=10214 pkg=fi.iwa.sakani startFg?=false
+09-21 16:46:14.393 D/BoundBrokerSvc( 1332): onBind: Intent { act=com.google.android.gms.presencemanager.service.START dat=chimera-action:/... cmp=com.google.android.gms/.chimera.PersistentApiService }
+09-21 16:46:14.393 D/BoundBrokerSvc( 1332): Loading bound service for intent: Intent { act=com.google.android.gms.presencemanager.service.START dat=chimera-action:/... cmp=com.google.android.gms/.chimera.PersistentApiService }
+09-21 16:46:14.395 D/BoundBrokerSvc( 1332): onBind: Intent { act=com.google.android.gms.presencemanager.service.INTERNAL_IDENTITY dat=chimera-action:/... cmp=com.google.android.gms/.chimera.PersistentApiService }
+09-21 16:46:14.395 D/BoundBrokerSvc( 1332): Loading bound service for intent: Intent { act=com.google.android.gms.presencemanager.service.INTERNAL_IDENTITY dat=chimera-action:/... cmp=com.google.android.gms/.chimera.PersistentApiService }
+09-21 16:46:14.397 D/BoundBrokerSvc( 1332): onBind: Intent { act=com.google.android.gms.scheduler.ACTION_PROXY_SCHEDULE dat=chimera-action:/... cmp=com.google.android.gms/.chimera.PersistentApiService }
+09-21 16:46:14.397 D/BoundBrokerSvc( 1332): Loading bound service for intent: Intent { act=com.google.android.gms.scheduler.ACTION_PROXY_SCHEDULE dat=chimera-action:/... cmp=com.google.android.gms/.chimera.PersistentApiService }
+09-21 16:46:14.407 W/NetworkScheduler( 1332): Error inserting flex_time=2679000 job_id=-1 period=5360000 source=16 requires_charging=0 preferred_network_type=1 target_class=com.google.android.gms.measurement.PackageMeasurementTaskService user_id=0 target_package=com.google.android.gms tag=Measurement.PackageMeasurementTaskService.UPLOAD_TASK_TAG task_type=0 required_idleness_state=0 service_kind=0 source_version=231818000 persistence_level=1 preferred_charging_state=1 required_network_type=0 runtime=1789998374404 retry_strategy={"maximum_backoff_seconds":{"3600":0},"initial_backoff_seconds":{"30":0},"retry_policy":{"0":0}} last_runtime=0 [CONTEXT service_id=218 ]
+09-21 16:46:14.407 W/NetworkScheduler( 1332): android.database.sqlite.SQLiteConstraintException: UNIQUE constraint failed: pending_ops.tag, pending_ops.target_class, pending_ops.target_package, pending_ops.user_id (code 2067 SQLITE_CONSTRAINT_UNIQUE)
+09-21 16:46:14.407 W/NetworkScheduler( 1332): 	at android.database.sqlite.SQLiteConnection.nativeExecuteForLastInsertedRowId(Native Method)
+09-21 16:46:14.407 W/NetworkScheduler( 1332): 	at android.database.sqlite.SQLiteConnection.executeForLastInsertedRowId(SQLiteConnection.java:961)
+09-21 16:46:14.407 W/NetworkScheduler( 1332): 	at android.database.sqlite.SQLiteSession.executeForLastInsertedRowId(SQLiteSession.java:790)
+09-21 16:46:14.407 W/NetworkScheduler( 1332): 	at android.database.sqlite.SQLiteStatement.executeInsert(SQLiteStatement.java:89)
+09-21 16:46:14.407 W/NetworkScheduler( 1332): 	at android.database.sqlite.SQLiteDatabase.insertWithOnConflict(SQLiteDatabase.java:1870)
+09-21 16:46:14.407 W/NetworkScheduler( 1332): 	at android.database.sqlite.SQLiteDatabase.insertOrThrow(SQLiteDatabase.java:1765)
+09-21 16:46:14.407 W/NetworkScheduler( 1332): 	at byui.f(:com.google.android.gms@231818047@23.18.18 (190800-535401451):59)
+09-21 16:46:14.407 W/NetworkScheduler( 1332): 	at bytb.n(:com.google.android.gms@231818047@23.18.18 (190800-535401451):3)
+09-21 16:46:14.407 W/NetworkScheduler( 1332): 	at bytb.u(:com.google.android.gms@231818047@23.18.18 (190800-535401451):20)
+09-21 16:46:14.407 W/NetworkScheduler( 1332): 	at bytb.h(:com.google.android.gms@231818047@23.18.18 (190800-535401451):3)
+09-21 16:46:14.407 W/NetworkScheduler( 1332): 	at byot.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):9)
+09-21 16:46:14.407 W/NetworkScheduler( 1332): 	at aced.c(:com.google.android.gms@231818047@23.18.18 (190800-535401451):6)
+09-21 16:46:14.407 W/NetworkScheduler( 1332): 	at aced.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):7)
+09-21 16:46:14.407 W/NetworkScheduler( 1332): 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+09-21 16:46:14.407 W/NetworkScheduler( 1332): 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:644)
+09-21 16:46:14.407 W/NetworkScheduler( 1332): 	at acjn.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):0)
+09-21 16:46:14.407 W/NetworkScheduler( 1332): 	at java.lang.Thread.run(Thread.java:1012)
+09-21 16:46:14.431 D/TrafficStats( 6173): tagSocket(97) with statsTag=0x1b37e3b5, statsUid=-1
+09-21 16:46:14.527 D/TrafficStats( 6173): tagSocket(96) with statsTag=0xffffffff, statsUid=-1
+09-21 16:46:14.874 D/WifiNl80211Manager(  563): Scan result ready event
+09-21 16:46:14.874 D/WifiNative(  563): Scan result ready event
+09-21 16:46:14.883 W/GLSUser ( 1332): [DeviceKeyStore] Cannot load key: Device key file not found.
+09-21 16:46:14.884 D/ActivityManager(  563): sync unfroze 4071 com.google.android.gms.unstable for 6
+09-21 16:46:14.944 I/GMS_MM_Logger( 4071): Memory Metric Logging not allowed. Stopping.
+09-21 16:46:14.959 W/libc    ( 4071): Access denied finding property "persist.adb.tls_server.enable"
+09-21 16:46:14.959 W/libc    ( 4071): Access denied finding property "service.adb.tls.port"
+09-21 16:46:14.957 W/binder:4071_1( 4071): type=1400 audit(0.0:6325): avc:  denied  { read } for  name="u:object_r:system_adbd_prop:s0" dev="tmpfs" ino=291 scontext=u:r:gmscore_app:s0:c512,c768 tcontext=u:object_r:system_adbd_prop:s0 tclass=file permissive=0 app=com.google.android.gms
+09-21 16:46:14.957 W/binder:4071_1( 4071): type=1400 audit(0.0:6326): avc:  denied  { read } for  name="u:object_r:adbd_prop:s0" dev="tmpfs" ino=59 scontext=u:r:gmscore_app:s0:c512,c768 tcontext=u:object_r:adbd_prop:s0 tclass=file permissive=0 app=com.google.android.gms
+09-21 16:46:14.967 D/TrafficStats( 4071): tagSocket(85) with statsTag=0x1809, statsUid=-1
+09-21 16:46:14.970 W/GmsUrlRequestImpl( 1332): Content-Type header is overwritten.
+09-21 16:46:15.123 D/TrafficStats( 1332): tagSocket(100) with statsTag=0x401, statsUid=10127
+09-21 16:46:15.225 D/TrafficStats( 1332): tagSocket(102) with statsTag=0x401, statsUid=10127
+09-21 16:46:15.427 D/TrafficStats( 1332): tagSocket(146) with statsTag=0x401, statsUid=10127
+09-21 16:46:15.529 D/TrafficStats( 1332): tagSocket(100) with statsTag=0x401, statsUid=10127
+09-21 16:46:15.697 W/GLSUser ( 1332): [AppCertManager] Exception while requesting key: 
+09-21 16:46:15.697 W/GLSUser ( 1332): java.util.concurrent.ExecutionException: avvw: Parse Proto Exception.
+09-21 16:46:15.697 W/GLSUser ( 1332): 	at dlnv.s(:com.google.android.gms@231818047@23.18.18 (190800-535401451):3)
+09-21 16:46:15.697 W/GLSUser ( 1332): 	at dlnv.get(:com.google.android.gms@231818047@23.18.18 (190800-535401451):7)
+09-21 16:46:15.697 W/GLSUser ( 1332): 	at oub.b(:com.google.android.gms@231818047@23.18.18 (190800-535401451):78)
+09-21 16:46:15.697 W/GLSUser ( 1332): 	at otz.a(:com.google.android.gms@231818047@23.18.18 (190800-535401451):8)
+09-21 16:46:15.697 W/GLSUser ( 1332): 	at otv.a(:com.google.android.gms@231818047@23.18.18 (190800-535401451):0)
+09-21 16:46:15.697 W/GLSUser ( 1332): 	at otx.a(:com.google.android.gms@231818047@23.18.18 (190800-535401451):6)
+09-21 16:46:15.697 W/GLSUser ( 1332): 	at otx.b(:com.google.android.gms@231818047@23.18.18 (190800-535401451):0)
+09-21 16:46:15.697 W/GLSUser ( 1332): 	at abxk.r(:com.google.android.gms@231818047@23.18.18 (190800-535401451):1)
+09-21 16:46:15.697 W/GLSUser ( 1332): 	at abxw.e(:com.google.android.gms@231818047@23.18.18 (190800-535401451):4)
+09-21 16:46:15.697 W/GLSUser ( 1332): 	at abxw.g(:com.google.android.gms@231818047@23.18.18 (190800-535401451):0)
+09-21 16:46:15.697 W/GLSUser ( 1332): 	at cyeg.a(:com.google.android.gms@231818047@23.18.18 (190800-535401451):27)
+09-21 16:46:15.697 W/GLSUser ( 1332): 	at czpd.call(:com.google.android.gms@231818047@23.18.18 (190800-535401451):78)
+09-21 16:46:15.697 W/GLSUser ( 1332): 	at java.util.concurrent.FutureTask.run(FutureTask.java:264)
+09-21 16:46:15.697 W/GLSUser ( 1332): 	at aced.c(:com.google.android.gms@231818047@23.18.18 (190800-535401451):6)
+09-21 16:46:15.697 W/GLSUser ( 1332): 	at aced.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):7)
+09-21 16:46:15.697 W/GLSUser ( 1332): 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+09-21 16:46:15.697 W/GLSUser ( 1332): 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:644)
+09-21 16:46:15.697 W/GLSUser ( 1332): 	at acjn.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):0)
+09-21 16:46:15.697 W/GLSUser ( 1332): 	at java.lang.Thread.run(Thread.java:1012)
+09-21 16:46:15.697 W/GLSUser ( 1332): Caused by: avvw: Parse Proto Exception.
+09-21 16:46:15.697 W/GLSUser ( 1332): 	at avwn.f(:com.google.android.gms@231818047@23.18.18 (190800-535401451):5)
+09-21 16:46:15.697 W/GLSUser ( 1332): 	at avxk.onSucceeded(:com.google.android.gms@231818047@23.18.18 (190800-535401451):0)
+09-21 16:46:15.697 W/GLSUser ( 1332): 	at jf.onSucceeded(:com.google.android.gms.dynamite_cronetdynamite@231818047@23.18.18 (190800-0):0)
+09-21 16:46:15.697 W/GLSUser ( 1332): 	at ie.run(:com.google.android.gms.dynamite_cronetdynamite@231818047@23.18.18 (190800-0):4)
+09-21 16:46:15.697 W/GLSUser ( 1332): 	... 6 more
+09-21 16:46:15.697 W/GLSUser ( 1332): Caused by: dzfz: Protocol message contained an invalid tag (zero).
+09-21 16:46:15.697 W/GLSUser ( 1332): 	at dzdb.k(:com.google.android.gms@231818047@23.18.18 (190800-535401451):13)
+09-21 16:46:15.697 W/GLSUser ( 1332): 	at dzha.c(:com.google.android.gms@231818047@23.18.18 (190800-535401451):47)
+09-21 16:46:15.697 W/GLSUser ( 1332): 	at dzha.h(:com.google.android.gms@231818047@23.18.18 (190800-535401451):45)
+09-21 16:46:15.697 W/GLSUser ( 1332): 	at dzfd.A(:com.google.android.gms@231818047@23.18.18 (190800-535401451):2)
+09-21 16:46:15.697 W/GLSUser ( 1332): 	at dzex.f(:com.google.android.gms@231818047@23.18.18 (190800-535401451):0)
+09-21 16:46:15.697 W/GLSUser ( 1332): 	at dzcx.d(:com.google.android.gms@231818047@23.18.18 (190800-535401451):0)
+09-21 16:46:15.697 W/GLSUser ( 1332): 	at dzcx.c(:com.google.android.gms@231818047@23.18.18 (190800-535401451):0)
+09-21 16:46:15.697 W/GLSUser ( 1332): 	at dzcx.n(:com.google.android.gms@231818047@23.18.18 (190800-535401451):0)
+09-21 16:46:15.697 W/GLSUser ( 1332): 	at avwn.h(:com.google.android.gms@231818047@23.18.18 (190800-535401451):7)
+09-21 16:46:15.697 W/GLSUser ( 1332): 	at avwn.f(:com.google.android.gms@231818047@23.18.18 (190800-535401451):1)
+09-21 16:46:15.697 W/GLSUser ( 1332): 	... 9 more
+09-21 16:46:15.697 W/GLSUser ( 1332): [DeviceKeyStore] Cannot load key: Device key file not found.
+09-21 16:46:15.699 D/TrafficStats( 1332): tagSocket(102) with statsTag=0x24000609, statsUid=10125
+09-21 16:46:15.743 E/TaskPersister(  563): File error accessing recents directory (directory doesn't exist?).
+09-21 16:46:15.777 W/Conscrypt( 1332): Could not set socket write timeout: java.net.SocketException: Socket closed
+09-21 16:46:15.777 W/Conscrypt( 1332): 	at com.google.android.gms.org.conscrypt.Platform.setSocketWriteTimeout(:com.google.android.gms@231818047@23.18.18 (190800-535401451):2)
+09-21 16:46:15.777 W/Conscrypt( 1332): 	at com.google.android.gms.org.conscrypt.ConscryptFileDescriptorSocket.setSoWriteTimeout(:com.google.android.gms@231818047@23.18.18 (190800-535401451):0)
+09-21 16:46:15.862 W/Conscrypt( 1332): Could not set socket write timeout: java.net.SocketException: Socket closed
+09-21 16:46:15.863 W/Conscrypt( 1332): 	at com.google.android.gms.org.conscrypt.Platform.setSocketWriteTimeout(:com.google.android.gms@231818047@23.18.18 (190800-535401451):2)
+09-21 16:46:15.863 W/Conscrypt( 1332): 	at com.google.android.gms.org.conscrypt.ConscryptFileDescriptorSocket.setSoWriteTimeout(:com.google.android.gms@231818047@23.18.18 (190800-535401451):0)
+09-21 16:46:15.981 D/TrafficStats( 1840): tagSocket(79) with statsTag=0xffffffff, statsUid=-1
+09-21 16:46:16.031 W/GlsClientGrpc( 1332): Voilatile gRPC failure INVALID_ARGUMENT: Application credential header not valid. Please fix the client to pass a valid application credential header. [CONTEXT service_id=6 ]
+09-21 16:46:16.031 W/GlsClientGrpc( 1332): enms: INVALID_ARGUMENT: Application credential header not valid. Please fix the client to pass a valid application credential header.
+09-21 16:46:16.031 W/GlsClientGrpc( 1332): 	at enmr.h(:com.google.android.gms@231818047@23.18.18 (190800-535401451):0)
+09-21 16:46:16.031 W/GlsClientGrpc( 1332): 	at abxw.u(:com.google.android.gms@231818047@23.18.18 (190800-535401451):2)
+09-21 16:46:16.031 W/GlsClientGrpc( 1332): 	at abxw.e(:com.google.android.gms@231818047@23.18.18 (190800-535401451):17)
+09-21 16:46:16.031 W/GlsClientGrpc( 1332): 	at abxw.g(:com.google.android.gms@231818047@23.18.18 (190800-535401451):0)
+09-21 16:46:16.031 W/GlsClientGrpc( 1332): 	at cyeg.a(:com.google.android.gms@231818047@23.18.18 (190800-535401451):27)
+09-21 16:46:16.031 W/GlsClientGrpc( 1332): 	at czpd.call(:com.google.android.gms@231818047@23.18.18 (190800-535401451):78)
+09-21 16:46:16.031 W/GlsClientGrpc( 1332): 	at java.util.concurrent.FutureTask.run(FutureTask.java:264)
+09-21 16:46:16.031 W/GlsClientGrpc( 1332): 	at aced.c(:com.google.android.gms@231818047@23.18.18 (190800-535401451):6)
+09-21 16:46:16.031 W/GlsClientGrpc( 1332): 	at aced.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):7)
+09-21 16:46:16.031 W/GlsClientGrpc( 1332): 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+09-21 16:46:16.031 W/GlsClientGrpc( 1332): 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:644)
+09-21 16:46:16.031 W/GlsClientGrpc( 1332): 	at acjn.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):0)
+09-21 16:46:16.031 W/GlsClientGrpc( 1332): 	at java.lang.Thread.run(Thread.java:1012)
+09-21 16:46:16.034 W/AlarmManager( 1332): alarm window unlikely to be respected [CONTEXT service_id=231 ]
+09-21 16:46:16.034 W/AlarmManager( 1332): java.lang.IllegalArgumentException: alarm "NetworkLocationLocator" has short window length
+09-21 16:46:16.034 W/AlarmManager( 1332): 	at avpc.b(:com.google.android.gms@231818047@23.18.18 (190800-535401451):8)
+09-21 16:46:16.034 W/AlarmManager( 1332): 	at czpn.f(:com.google.android.gms@231818047@23.18.18 (190800-535401451):10)
+09-21 16:46:16.034 W/AlarmManager( 1332): 	at czlo.b(:com.google.android.gms@231818047@23.18.18 (190800-535401451):5)
+09-21 16:46:16.034 W/AlarmManager( 1332): 	at czlo.e(:com.google.android.gms@231818047@23.18.18 (190800-535401451):56)
+09-21 16:46:16.034 W/AlarmManager( 1332): 	at czlm.a(:com.google.android.gms@231818047@23.18.18 (190800-535401451):2)
+09-21 16:46:16.034 W/AlarmManager( 1332): 	at czpb.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):68)
+09-21 16:46:16.034 W/AlarmManager( 1332): 	at czoq.handleMessage(:com.google.android.gms@231818047@23.18.18 (190800-535401451):8)
+09-21 16:46:16.034 W/AlarmManager( 1332): 	at android.os.Handler.dispatchMessage(Handler.java:106)
+09-21 16:46:16.034 W/AlarmManager( 1332): 	at avye.ll(:com.google.android.gms@231818047@23.18.18 (190800-535401451):0)
+09-21 16:46:16.034 W/AlarmManager( 1332): 	at avye.dispatchMessage(:com.google.android.gms@231818047@23.18.18 (190800-535401451):14)
+09-21 16:46:16.034 W/AlarmManager( 1332): 	at android.os.Looper.loopOnce(Looper.java:205)
+09-21 16:46:16.034 W/AlarmManager( 1332): 	at android.os.Looper.loop(Looper.java:294)
+09-21 16:46:16.034 W/AlarmManager( 1332): 	at android.os.HandlerThread.run(HandlerThread.java:67)
+09-21 16:46:17.109 D/StatusBarIconController(  802): ignoring old pipeline callbacks, because the new mobile icons are enabled
+09-21 16:46:18.161 I/FusedLocation( 1332): stationary throttling disengaged [CONTEXT service_id=6 ]
+09-21 16:46:19.588 D/ProfileInstaller( 6173): Skipping profile installation for fi.iwa.sakani
+09-21 16:46:20.115 D/StatusBarIconController(  802): ignoring old pipeline callbacks, because the new mobile icons are enabled
+09-21 16:46:21.122 D/StatusBarIconController(  802): ignoring old pipeline callbacks, because the new mobile icons are enabled
+09-21 16:46:22.126 D/StatusBarIconController(  802): ignoring old pipeline callbacks, because the new mobile icons are enabled
+09-21 16:46:22.212 D/StatusBarIconController(  802): ignoring old pipeline callbacks, because the new mobile icons are enabled
+09-21 16:46:23.475 W/ziparchive( 5817): Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/00000004/DynamiteModulesC.dm': No such file or directory
+09-21 16:46:23.475 W/ziparchive( 5817): Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/00000004/DynamiteModulesC.dm': No such file or directory
+09-21 16:46:23.476 W/ziparchive( 5817): Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/00000001/CronetDynamite.dm': No such file or directory
+09-21 16:46:23.476 W/ziparchive( 5817): Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/00000001/CronetDynamite.dm': No such file or directory
+09-21 16:46:23.476 W/ziparchive( 5817): Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/00000002/DynamiteLoader.dm': No such file or directory
+09-21 16:46:23.476 W/ziparchive( 5817): Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/00000002/DynamiteLoader.dm': No such file or directory
+09-21 16:46:23.477 W/ziparchive( 5817): Unable to open '/data/user/0/com.google.android.gms/app_fb/f.dm': No such file or directory
+09-21 16:46:23.477 W/ziparchive( 5817): Unable to open '/data/user/0/com.google.android.gms/app_fb/f.dm': No such file or directory
+09-21 16:46:23.478 W/ziparchive( 5817): Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/00000005/GoogleCertificates.dm': No such file or directory
+09-21 16:46:23.478 W/ziparchive( 5817): Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/00000005/GoogleCertificates.dm': No such file or directory
+09-21 16:46:23.479 W/ziparchive( 5817): Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/00000009/dl-TfliteDynamiteDynamite.integ_262730502100800.dm': No such file or directory
+09-21 16:46:23.479 W/ziparchive( 5817): Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/00000009/dl-TfliteDynamiteDynamite.integ_262730502100800.dm': No such file or directory
+09-21 16:46:23.480 W/ziparchive( 5817): Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/00000000/AdsDynamite.dm': No such file or directory
+09-21 16:46:23.480 W/ziparchive( 5817): Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/00000000/AdsDynamite.dm': No such file or directory
+09-21 16:46:23.480 W/ziparchive( 5817): Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/00000008/dl-VisionOcrDynamite.integ_231602402100000.dm': No such file or directory
+09-21 16:46:23.480 W/ziparchive( 5817): Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/00000008/dl-VisionOcrDynamite.integ_231602402100000.dm': No such file or directory
+09-21 16:46:23.481 W/ziparchive( 5817): Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/0000000c/dl-MlkitBarcodeUi.optional_231818100000.dm': No such file or directory
+09-21 16:46:23.481 W/ziparchive( 5817): Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/0000000c/dl-MlkitBarcodeUi.optional_231818100000.dm': No such file or directory
+09-21 16:46:23.483 W/ziparchive( 5817): Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/0000000a/dl-MlkitOcrCommon.optional_231818100800.dm': No such file or directory
+09-21 16:46:23.483 W/ziparchive( 5817): Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/0000000a/dl-MlkitOcrCommon.optional_231818100800.dm': No such file or directory
+09-21 16:46:23.484 W/ziparchive( 5817): Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/00000007/MeasurementDynamite.dm': No such file or directory
+09-21 16:46:23.484 W/ziparchive( 5817): Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/00000007/MeasurementDynamite.dm': No such file or directory
+09-21 16:46:24.377 I/keystore2(  188): system/security/keystore2/src/watchdog.rs:319 - Watchdog thread idle -> terminating. Have a great day.
+09-21 16:46:24.416 D/BoundBrokerSvc( 1881): onUnbind: Intent { act=com.google.android.gms.measurement.START pkg=com.google.android.gms }
+09-21 16:46:24.416 W/ProcessStats(  563): Tracking association SourceState{cd26203 com.google.android.gms/10127 BTop #38750} whose proc state 2 is better than process ProcessState{b22d07e com.google.android.gms.persistent/10127 pkg=com.google.android.gms} proc state 4 (388 skipped)
+09-21 16:46:28.179 D/ActivityManager(  563): freezing 6173 fi.iwa.sakani
+09-21 16:46:29.410 D/BoundBrokerSvc( 1332): onUnbind: Intent { act=com.google.android.gms.presencemanager.service.START dat=chimera-action:/... cmp=com.google.android.gms/.chimera.PersistentApiService }
+09-21 16:46:29.411 D/BoundBrokerSvc( 1332): onUnbind: Intent { act=com.google.android.gms.presencemanager.service.INTERNAL_IDENTITY dat=chimera-action:/... cmp=com.google.android.gms/.chimera.PersistentApiService }
+09-21 16:46:29.412 D/BoundBrokerSvc( 1332): onUnbind: Intent { act=com.google.android.gms.scheduler.ACTION_PROXY_SCHEDULE dat=chimera-action:/... cmp=com.google.android.gms/.chimera.PersistentApiService }
+09-21 16:46:29.979 D/ActivityManager(  563): freezing 4071 com.google.android.gms.unstable
+09-21 16:46:30.161 D/StatusBarIconController(  802): ignoring old pipeline callbacks, because the new mobile icons are enabled
+09-21 16:46:31.162 D/StatusBarIconController(  802): ignoring old pipeline callbacks, because the new mobile icons are enabled
+09-21 16:46:32.214 D/StatusBarIconController(  802): ignoring old pipeline callbacks, because the new mobile icons are enabled
+09-21 16:46:33.500 W/System  (  563): A resource failed to call close. 
+09-21 16:46:33.500 W/System  (  563): A resource failed to call close. 
+09-21 16:46:33.509 W/ziparchive( 5817): Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/00000004/DynamiteModulesC.dm': No such file or directory
+09-21 16:46:33.509 W/ziparchive( 5817): Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/00000004/DynamiteModulesC.dm': No such file or directory
+09-21 16:46:33.510 W/ziparchive( 5817): Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/00000001/CronetDynamite.dm': No such file or directory
+09-21 16:46:33.510 W/ziparchive( 5817): Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/00000001/CronetDynamite.dm': No such file or directory
+09-21 16:46:33.510 W/ziparchive( 5817): Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/00000002/DynamiteLoader.dm': No such file or directory
+09-21 16:46:33.510 W/ziparchive( 5817): Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/00000002/DynamiteLoader.dm': No such file or directory
+09-21 16:46:33.511 W/ziparchive( 5817): Unable to open '/data/user/0/com.google.android.gms/app_fb/f.dm': No such file or directory
+09-21 16:46:33.511 W/ziparchive( 5817): Unable to open '/data/user/0/com.google.android.gms/app_fb/f.dm': No such file or directory
+09-21 16:46:33.511 W/ziparchive( 5817): Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/00000005/GoogleCertificates.dm': No such file or directory
+09-21 16:46:33.511 W/ziparchive( 5817): Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/00000005/GoogleCertificates.dm': No such file or directory
+09-21 16:46:33.512 W/ziparchive( 5817): Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/00000009/dl-TfliteDynamiteDynamite.integ_262730502100800.dm': No such file or directory
+09-21 16:46:33.512 W/ziparchive( 5817): Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/00000009/dl-TfliteDynamiteDynamite.integ_262730502100800.dm': No such file or directory
+09-21 16:46:33.512 W/ziparchive( 5817): Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/00000000/AdsDynamite.dm': No such file or directory
+09-21 16:46:33.512 W/ziparchive( 5817): Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/00000000/AdsDynamite.dm': No such file or directory
+09-21 16:46:33.514 W/ziparchive( 5817): Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/00000008/dl-VisionOcrDynamite.integ_231602402100000.dm': No such file or directory
+09-21 16:46:33.514 W/ziparchive( 5817): Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/00000008/dl-VisionOcrDynamite.integ_231602402100000.dm': No such file or directory
+09-21 16:46:33.514 W/ziparchive( 5817): Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/0000000c/dl-MlkitBarcodeUi.optional_231818100000.dm': No such file or directory
+09-21 16:46:33.514 W/ziparchive( 5817): Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/0000000c/dl-MlkitBarcodeUi.optional_231818100000.dm': No such file or directory
+09-21 16:46:33.517 W/ziparchive( 5817): Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/0000000a/dl-MlkitOcrCommon.optional_231818100800.dm': No such file or directory
+09-21 16:46:33.517 W/ziparchive( 5817): Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/0000000a/dl-MlkitOcrCommon.optional_231818100800.dm': No such file or directory
+09-21 16:46:33.518 W/ziparchive( 5817): Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/00000007/MeasurementDynamite.dm': No such file or directory
+09-21 16:46:33.518 W/ziparchive( 5817): Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/00000007/MeasurementDynamite.dm': No such file or directory
+09-21 16:46:35.177 D/StatusBarIconController(  802): ignoring old pipeline callbacks, because the new mobile icons are enabled
+09-21 16:46:35.339 D/TrafficStats( 1840): tagSocket(79) with statsTag=0xffffffff, statsUid=-1
+09-21 16:46:37.181 D/StatusBarIconController(  802): ignoring old pipeline callbacks, because the new mobile icons are enabled
+09-21 16:46:42.214 D/StatusBarIconController(  802): ignoring old pipeline callbacks, because the new mobile icons are enabled
+09-21 16:46:42.221 D/EGL_emulation(  802): app_time_stats: avg=1869.26ms min=11.61ms max=29028.92ms count=16
+09-21 16:46:43.510 W/ziparchive( 5817): Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/00000004/DynamiteModulesC.dm': No such file or directory
+09-21 16:46:43.510 W/ziparchive( 5817): Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/00000004/DynamiteModulesC.dm': No such file or directory
+09-21 16:46:43.511 W/ziparchive( 5817): Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/00000001/CronetDynamite.dm': No such file or directory
+09-21 16:46:43.511 W/ziparchive( 5817): Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/00000001/CronetDynamite.dm': No such file or directory
+09-21 16:46:43.511 W/ziparchive( 5817): Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/00000002/DynamiteLoader.dm': No such file or directory
+09-21 16:46:43.511 W/ziparchive( 5817): Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/00000002/DynamiteLoader.dm': No such file or directory
+09-21 16:46:43.512 W/ziparchive( 5817): Unable to open '/data/user/0/com.google.android.gms/app_fb/f.dm': No such file or directory
+09-21 16:46:43.512 W/ziparchive( 5817): Unable to open '/data/user/0/com.google.android.gms/app_fb/f.dm': No such file or directory
+09-21 16:46:43.513 W/ziparchive( 5817): Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/00000005/GoogleCertificates.dm': No such file or directory
+09-21 16:46:43.513 W/ziparchive( 5817): Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/00000005/GoogleCertificates.dm': No such file or directory
+09-21 16:46:43.514 W/ziparchive( 5817): Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/00000009/dl-TfliteDynamiteDynamite.integ_262730502100800.dm': No such file or directory
+09-21 16:46:43.514 W/ziparchive( 5817): Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/00000009/dl-TfliteDynamiteDynamite.integ_262730502100800.dm': No such file or directory
+09-21 16:46:43.515 W/ziparchive( 5817): Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/00000000/AdsDynamite.dm': No such file or directory
+09-21 16:46:43.515 W/ziparchive( 5817): Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/00000000/AdsDynamite.dm': No such file or directory
+09-21 16:46:43.516 W/ziparchive( 5817): Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/00000008/dl-VisionOcrDynamite.integ_231602402100000.dm': No such file or directory
+09-21 16:46:43.516 W/ziparchive( 5817): Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/00000008/dl-VisionOcrDynamite.integ_231602402100000.dm': No such file or directory
+09-21 16:46:43.517 W/ziparchive( 5817): Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/0000000c/dl-MlkitBarcodeUi.optional_231818100000.dm': No such file or directory
+09-21 16:46:43.517 W/ziparchive( 5817): Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/0000000c/dl-MlkitBarcodeUi.optional_231818100000.dm': No such file or directory
+09-21 16:46:43.518 W/ziparchive( 5817): Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/0000000a/dl-MlkitOcrCommon.optional_231818100800.dm': No such file or directory
+09-21 16:46:43.518 W/ziparchive( 5817): Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/0000000a/dl-MlkitOcrCommon.optional_231818100800.dm': No such file or directory
+09-21 16:46:43.519 W/ziparchive( 5817): Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/00000007/MeasurementDynamite.dm': No such file or directory
+09-21 16:46:43.519 W/ziparchive( 5817): Unable to open '/data/user_de/0/com.google.android.gms/app_chimera/m/00000007/MeasurementDynamite.dm': No such file or directory

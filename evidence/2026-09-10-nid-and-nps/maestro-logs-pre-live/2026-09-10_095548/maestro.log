@@ -1,0 +1,79 @@
+09:55:48.520 [ INFO] maestro.cli.report.TestDebugReporter.logSystemInfo: Debug output path: C:\Users\Mohammed Elkatry\.maestro\tests\2026-09-10_095548
+09:55:48.524 [ INFO] MAESTRO.logSystemInfo: ---- System Info ----
+09:55:48.524 [ INFO] MAESTRO.logSystemInfo: Maestro Version: 2.9.0
+09:55:48.525 [ INFO] MAESTRO.logSystemInfo: CI: Undefined
+09:55:48.525 [ INFO] MAESTRO.logSystemInfo: OS Name: Windows 11
+09:55:48.525 [ INFO] MAESTRO.logSystemInfo: OS Version: 10.0
+09:55:48.525 [ INFO] MAESTRO.logSystemInfo: Architecture: amd64
+09:55:48.526 [ INFO] MAESTRO.logSystemInfo: Java Version: 26
+09:55:48.527 [ INFO] MAESTRO.logSystemInfo: Xcode Version: null
+09:55:48.528 [ INFO] MAESTRO.logSystemInfo: Flutter Version: Undefined
+09:55:48.531 [ INFO] MAESTRO.logSystemInfo: Flutter Channel: Undefined
+09:55:48.532 [ INFO] MAESTRO.logSystemInfo: ---------------------
+09:55:49.478 [DEBUG] io.micrometer.common.util.internal.logging.InternalLoggerFactory.newDefaultFactory: Using SLF4J as the default logging framework
+09:55:49.514 [ INFO] maestro.cli.command.TestCommand.runShardSuite: [shard 1] Selected device emulator-5554 using port 52232 with execution plan ExecutionPlan(flowsToRun=[D:\Automation\Maestro-Mobile\.maestro\_nid-validation.yaml], sequence=FlowSequence(flows=[], continueOnFailure=true), workspaceConfig=WorkspaceConfig(flows=null, includeTags=null, excludeTags=null, executionOrder=null, baselineBranch=null, notifications=null, disableRetries=false, platform=PlatformConfiguration(android=AndroidConfiguration(disableAnimations=false), ios=IOSConfiguration(disableAnimations=false, snapshotKeyHonorModalViews=null)), testOutputDir=null))
+09:55:49.629 [ERROR] maestro.cli.session.MaestroSessionManager.newSession$lambda$0: Failed to record heartbeat
+java.io.IOException: The process cannot access the file because another process has locked a portion of the file
+	at java.base/java.io.FileOutputStream.writeBytes(Native Method)
+	at java.base/java.io.FileOutputStream.write(FileOutputStream.java:332)
+	at kotlin.io.FilesKt__FileReadWriteKt.writeTextImpl(FileReadWrite.kt:160)
+	at kotlin.io.FilesKt__FileReadWriteKt.writeText(FileReadWrite.kt:145)
+	at kotlin.io.FilesKt__FileReadWriteKt.writeText$default(FileReadWrite.kt:144)
+	at maestro.cli.db.KeyValueStore.commit(KeyValueStore.kt:50)
+	at maestro.cli.db.KeyValueStore.set$lambda$3$lambda$2(KeyValueStore.kt:23)
+	at maestro.cli.db.KeyValueStore.withFileLock(KeyValueStore.kt:62)
+	at maestro.cli.db.KeyValueStore.set(KeyValueStore.kt:20)
+	at maestro.cli.session.SessionStore.heartbeat(SessionStore.kt:12)
+	at maestro.cli.session.MaestroSessionManager.newSession$lambda$0(MaestroSessionManager.kt:98)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:545)
+	at java.base/java.util.concurrent.FutureTask.runAndReset(FutureTask.java:371)
+	at java.base/java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:310)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1090)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:614)
+	at java.base/java.lang.Thread.run(Thread.java:1516)
+09:55:51.876 [ INFO] maestro.cli.runner.TestRunner.runSingle: Running flow _nid-validation.yaml...
+09:55:51.905 [ INFO] maestro.Maestro.cachedDeviceInfo_delegate$lambda$0: Getting device info
+09:55:52.143 [ INFO] maestro.Maestro.cachedDeviceInfo_delegate$lambda$0: Got device info: DeviceInfo(platform=ANDROID, widthPixels=1080, heightPixels=2400, widthGrid=1080, heightGrid=2400)
+09:55:52.279 [ INFO] maestro.cli.runner.MaestroCommandRunner.runCommands$lambda$0: Define variables RUNNING
+09:55:52.293 [ INFO] maestro.cli.runner.MaestroCommandRunner.runCommands$lambda$11: Define variables metadata CommandMetadata(numberOfRuns=null, evaluatedCommand=MaestroCommand(defineVariablesCommand=DefineVariablesCommand(env={NATIONAL_ID=abcdefghij, MAESTRO_FILENAME=_nid-validation, MAESTRO_DEVICE_UDID=emulator-5554, MAESTRO_SHARD_ID=1, MAESTRO_SHARD_INDEX=0}, label=null, optional=false)), logMessages=[], insight=Insight(message=, level=NONE), aiReasoning=null, labeledCommand=null)
+09:55:52.297 [ INFO] maestro.cli.runner.MaestroCommandRunner.runCommands$lambda$2: Define variables COMPLETED
+09:55:52.300 [ INFO] maestro.cli.runner.MaestroCommandRunner.runCommands$lambda$0: Define variables RUNNING
+09:55:53.503 [ INFO] maestro.cli.runner.MaestroCommandRunner.runCommands$lambda$11: Define variables metadata CommandMetadata(numberOfRuns=null, evaluatedCommand=MaestroCommand(defineVariablesCommand=DefineVariablesCommand(env={NATIONAL_ID=abcdefghij, PROJECT=مساكن طيبة المدائن EN, MODULE=Apartment, CARD_NUMBER=4464040000000007, CARD_EXPIRY=1252, CARD_CVV=222, CONTRACT_OTP=1234}, label=null, optional=false)), logMessages=[], insight=Insight(message=, level=NONE), aiReasoning=null, labeledCommand=null)
+09:55:53.505 [ INFO] maestro.cli.runner.MaestroCommandRunner.runCommands$lambda$2: Define variables COMPLETED
+09:55:53.507 [ INFO] maestro.cli.runner.MaestroCommandRunner.runCommands$lambda$0: Apply configuration RUNNING
+09:55:53.511 [ INFO] maestro.cli.runner.MaestroCommandRunner.runCommands$lambda$11: Apply configuration metadata CommandMetadata(numberOfRuns=null, evaluatedCommand=MaestroCommand(applyConfigurationCommand=ApplyConfigurationCommand(config=MaestroConfig(appId=fi.iwa.sakani, name=VALIDATION - Stage 1 only (login + eligibility), no booking, tags=[], ext={}, onFlowStart=null, onFlowComplete=null, properties={}), label=null, optional=false)), logMessages=[], insight=Insight(message=, level=NONE), aiReasoning=null, labeledCommand=null)
+09:55:53.513 [ INFO] maestro.cli.runner.MaestroCommandRunner.runCommands$lambda$2: Apply configuration COMPLETED
+09:55:53.515 [ INFO] maestro.cli.runner.MaestroCommandRunner.runCommands$lambda$0: Run ${console.log('FULL JOURNEY TARGET NATIONAL_ID = [' + NATIONAL_ID + ']')} RUNNING
+09:55:53.517 [ INFO] maestro.cli.runner.MaestroCommandRunner.runCommands$lambda$11: Run ${console.log('FULL JOURNEY TARGET NATIONAL_ID = [' + NATIONAL_ID + ']')} metadata CommandMetadata(numberOfRuns=null, evaluatedCommand=MaestroCommand(evalScriptCommand=EvalScriptCommand(scriptString=${console.log('FULL JOURNEY TARGET NATIONAL_ID = [' + NATIONAL_ID + ']')}, label=null, optional=false)), logMessages=[], insight=Insight(message=, level=NONE), aiReasoning=null, labeledCommand=null)
+09:55:53.540 [ INFO] maestro.cli.runner.MaestroCommandRunner.runCommands$lambda$11: Run ${console.log('FULL JOURNEY TARGET NATIONAL_ID = [' + NATIONAL_ID + ']')} metadata CommandMetadata(numberOfRuns=null, evaluatedCommand=MaestroCommand(evalScriptCommand=EvalScriptCommand(scriptString=${console.log('FULL JOURNEY TARGET NATIONAL_ID = [' + NATIONAL_ID + ']')}, label=null, optional=false)), logMessages=[FULL JOURNEY TARGET NATIONAL_ID = [abcdefghij]], insight=Insight(message=, level=NONE), aiReasoning=null, labeledCommand=null)
+09:55:53.542 [ INFO] maestro.orchestra.Orchestra.executeCommands$lambda$23$lambda$21: JsConsole: FULL JOURNEY TARGET NATIONAL_ID = [abcdefghij]
+09:55:53.545 [ INFO] maestro.cli.runner.MaestroCommandRunner.runCommands$lambda$2: Run ${console.log('FULL JOURNEY TARGET NATIONAL_ID = [' + NATIONAL_ID + ']')} COMPLETED
+09:55:53.547 [ INFO] maestro.cli.runner.MaestroCommandRunner.runCommands$lambda$0: Run ${output.targetNationalId = String(NATIONAL_ID)} RUNNING
+09:55:53.549 [ INFO] maestro.cli.runner.MaestroCommandRunner.runCommands$lambda$11: Run ${output.targetNationalId = String(NATIONAL_ID)} metadata CommandMetadata(numberOfRuns=null, evaluatedCommand=MaestroCommand(evalScriptCommand=EvalScriptCommand(scriptString=${output.targetNationalId = String(NATIONAL_ID)}, label=null, optional=false)), logMessages=[], insight=Insight(message=, level=NONE), aiReasoning=null, labeledCommand=null)
+09:55:53.572 [ INFO] maestro.cli.runner.MaestroCommandRunner.runCommands$lambda$2: Run ${output.targetNationalId = String(NATIONAL_ID)} COMPLETED
+09:55:53.574 [ INFO] maestro.cli.runner.MaestroCommandRunner.runCommands$lambda$0: Assert that ${String(NATIONAL_ID).length === 10 && !/[^0-9]/.test(String(NATIONAL_ID)) && (String(NATIONAL_ID).charAt(0) === "1" || String(NATIONAL_ID).charAt(0) === "2")} is true RUNNING
+09:55:53.728 [ INFO] maestro.cli.runner.MaestroCommandRunner.runCommands$lambda$11: Assert that ${String(NATIONAL_ID).length === 10 && !/[^0-9]/.test(String(NATIONAL_ID)) && (String(NATIONAL_ID).charAt(0) === "1" || String(NATIONAL_ID).charAt(0) === "2")} is true metadata CommandMetadata(numberOfRuns=null, evaluatedCommand=MaestroCommand(assertConditionCommand=AssertConditionCommand(condition=Condition(platform=null, visible=null, notVisible=null, scriptCondition=false, label=null), timeout=null, label=null, optional=false)), logMessages=[], insight=Insight(message=, level=NONE), aiReasoning=null, labeledCommand=null)
+09:55:54.032 [ERROR] maestro.orchestra.Orchestra.executeCommands: [Command execution] CommandFailed: Assertion is false: false is true
+09:55:54.626 [ERROR] maestro.cli.session.MaestroSessionManager.newSession$lambda$0: Failed to record heartbeat
+java.io.IOException: The process cannot access the file because another process has locked a portion of the file
+	at java.base/java.io.FileOutputStream.writeBytes(Native Method)
+	at java.base/java.io.FileOutputStream.write(FileOutputStream.java:332)
+	at kotlin.io.FilesKt__FileReadWriteKt.writeTextImpl(FileReadWrite.kt:160)
+	at kotlin.io.FilesKt__FileReadWriteKt.writeText(FileReadWrite.kt:145)
+	at kotlin.io.FilesKt__FileReadWriteKt.writeText$default(FileReadWrite.kt:144)
+	at maestro.cli.db.KeyValueStore.commit(KeyValueStore.kt:50)
+	at maestro.cli.db.KeyValueStore.set$lambda$3$lambda$2(KeyValueStore.kt:23)
+	at maestro.cli.db.KeyValueStore.withFileLock(KeyValueStore.kt:62)
+	at maestro.cli.db.KeyValueStore.set(KeyValueStore.kt:20)
+	at maestro.cli.session.SessionStore.heartbeat(SessionStore.kt:12)
+	at maestro.cli.session.MaestroSessionManager.newSession$lambda$0(MaestroSessionManager.kt:98)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:545)
+	at java.base/java.util.concurrent.FutureTask.runAndReset(FutureTask.java:371)
+	at java.base/java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:310)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1090)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:614)
+	at java.base/java.lang.Thread.run(Thread.java:1516)
+09:55:54.678 [ INFO] maestro.Maestro.takeScreenshot: Taking screenshot
+09:55:54.682 [TRACE] maestro.utils.ScreenshotUtils.takeScreenshot: Taking screenshot to output sink
+09:55:54.867 [ INFO] maestro.cli.runner.MaestroCommandRunner.runCommands$lambda$4: Assert that ${String(NATIONAL_ID).length === 10 && !/[^0-9]/.test(String(NATIONAL_ID)) && (String(NATIONAL_ID).charAt(0) === "1" || String(NATIONAL_ID).charAt(0) === "2")} is true FAILED
+09:55:55.650 [ INFO] maestro.cli.report.TestDebugReporter.deleteOldFiles: Performing purge of logs older than 14 days from C:\Users\Mohammed Elkatry\.maestro\tests

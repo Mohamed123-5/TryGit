@@ -1,0 +1,475 @@
+# Reusable helper — clear the first-run and promotional surfaces that this build raises
+# non-deterministically, and stop as soon as the caller's anchor is on screen.
+#
+# WHY THIS EXISTS
+# Every regression flow in this suite had grown its own copy of this loop, each slightly
+# different, because the overlays arrive in no fixed order and not on every run. This
+# gathers the known set in one place so the Full Journey does not add an eleventh copy.
+# The existing regression flows are deliberately NOT refactored onto it - they are
+# passing, and rewriting them is out of scope for this task.
+#
+# CONTRACT
+#   ANCHOR - a Maestro (regex) selector for the screen element that means "we have
+#            arrived". The loop is `while notVisible: ANCHOR`, bounded at 20 passes, so it
+#            genuinely exits as soon as the anchor appears and on a clean run costs one
+#            hierarchy read rather than twenty passes.
+#
+# WHY A POLL AND NOT A FIXED WAIT
+# A cold start after a state wipe on this build can take well over a minute to paint its
+# first frame - the process is alive throughout and logcat shows no crash, the UI simply
+# has not rendered yet - so any fixed settling budget can expire against a blank screen
+# and fail an app that was about to come up.
+#
+# WHY EVERY "back" IS GUARDED
+# Each Back press is tied to a specific overlay being visible. An earlier revision of
+# login.yaml pressed Back on a pass where the sheet had already gone but its node still
+# lingered; that popped the navigation stack and left the run on the Android launcher.
+# Nothing here presses Back unconditionally.
+#
+# WHAT IS NEVER TAPPED
+# "Submit" on the satisfaction survey (it would post a real response) and "Update email"
+# on the contact-details prompt (it would write to the account). Both are dismissed.
+appId: fi.iwa.sakani
+name: Clear first-run and promo overlays
+---
+- repeat:
+    # BOUNDED, WITH A REAL EARLY EXIT.
+    #
+    # "times" alone was the bug: the loop ran all 20 iterations unconditionally, even once the
+    # caller's anchor was on screen. Each iteration costs ~10 hierarchy reads plus a 5s wait
+    # whenever the anchor is absent, so a call that should have cost one hierarchy read instead
+    # burned well over a minute before returning - and the caller then sat in its own
+    # extendedWaitUntil on top of that. It looked like a hang; it was this loop grinding.
+    #
+    # "while" gives the early exit the header always claimed: the body stops the moment ANCHOR
+    # is visible. "times" is kept as the hard upper bound so this can never spin forever.
+    times: 20
+    while:
+      notVisible: ${ANCHOR}
+    commands:
+      # Android's own POST_NOTIFICATIONS permission dialog. It is a SYSTEM dialog drawn over
+      # the app, so while it is up the app's own hierarchy - including the onboarding "Skip" -
+      # is not reachable at all, and every handler below silently matches nothing. That is what
+      # made a cleared launch appear to stop dead on the first onboarding screen.
+      #
+      # Declined rather than allowed: granting changes the device's permission state, and
+      # nothing in this suite depends on system notifications (the in-app Notifications Center
+      # is a separate surface and still works). The apostrophe in "Don't" is a curly one in the
+      # system font, so it is matched with "." rather than typed literally.
+      - runFlow:
+          when:
+            visible: "Don.t allow"
+          commands:
+            - tapOn: "Don.t allow"
+            - waitForAnimationToEnd:
+                timeout: 3000
+
+      # Onboarding carousel, replayed after every state wipe. One tap on "Skip" clears the
+      # whole carousel - verified live on STG against the "Your land starts here" page, which
+      # exposes Skip (top-right) and Next (bottom-right).
+      - runFlow:
+          when:
+            visible: "Skip"
+          commands:
+            - tapOn: "Skip"
+            - waitForAnimationToEnd:
+                timeout: 3000
+
+      # Satisfaction survey - reappears on every launch (defect D-12).
+      - runFlow:
+          when:
+            visible: "Dismiss"
+          commands:
+            - tapOn: "Dismiss"
+            - waitForAnimationToEnd:
+                timeout: 3000
+
+      # Intermittent staging dashboard error dialog.
+      #
+      # WHY THIS TAP IS STILL BROAD, AND WHY THAT IS SAFE (decided 10/09/2026).
+      # The staging start-up error and the REAL reservation/payment failure dialog carry the
+      # same text - "There's something wrong. Please try again later!" - with the "Sorry!"
+      # title present on 2026-08-31 and absent on 2026-09-01. No selector can separate them,
+      # so narrowing this would silently break the start-up recovery this helper exists for.
+      #
+      # It cannot mask a business outcome. In full-journey-with-fee.yaml there is NO call to this helper
+      # between "Reserve unit", "Pay booking fee" and "Pay now" - its only committing actions
+      # since 13/09/2026, when the sales-contract signature left the journey - and the payment is
+      # then re-verified on the product's own booking record, so a dismissed real error still
+      # fails the run at its record check.
+      #
+      # What WAS lost is the diagnostic: the dialog vanished without trace, which is how the
+      # 2026-09-07_103002 dismissal of a real reservation error went unnoticed. The markers
+      # below fix exactly that - every dismissal is now attributable in the log, and one that
+      # carried the error text says so loudly. Nothing is tapped that was not tapped before.
+      - runFlow:
+          when:
+            visible: "Ok"
+          commands:
+            - runFlow:
+                when:
+                  visible: "There's something wrong. Please try again later!"
+                commands:
+                  # Double-quoted on purpose - the message contains ": ", and an unquoted YAML
+                  # scalar breaks on it (this exact line failed check-syntax before quoting).
+                  - evalScript: "${console.log('CLEAR-OVERLAYS OK-HANDLER: dismissing the ERROR dialog (there is something wrong / please try again later). If this line sits after a reservation, payment or signature step, the business outcome MUST be re-read from the product records before the run is called green.')}"
+            - evalScript: "${console.log('CLEAR-OVERLAYS OK-HANDLER: tapping Ok')}"
+            - tapOn: "Ok"
+            - waitForAnimationToEnd:
+                timeout: 3000
+
+      # STG-4.7.5-1278 "Marketplace Day" countdown sheet. Its scrim removes everything
+      # underneath from the hierarchy, so nothing else can be found while it is up.
+      - runFlow:
+          when:
+            visible: "Marketplace Day"
+          commands:
+            - back
+            - waitForAnimationToEnd:
+                timeout: 3000
+
+      # Compare coach mark.
+      - runFlow:
+          when:
+            visible: "Start comparing properties"
+          commands:
+            - back
+            - waitForAnimationToEnd:
+                timeout: 3000
+
+      # "Sakani Loyalty / Weekly Offer" (renamed "Sakani sharrai / weekly deal" on PRE-4.7.6-1283) promo sheet.
+      - runFlow:
+          when:
+            visible: "Go to the weekly (offer|deal)"
+          commands:
+            - back
+            - waitForAnimationToEnd:
+                timeout: 3000
+
+      # "Update your contact information" prompt. Dismissed with back, never by tapping
+      # "Update email" - that would write to the account under test.
+      - runFlow:
+          when:
+            visible: "Update email"
+          commands:
+            - back
+            - waitForAnimationToEnd:
+                timeout: 3000
+
+      # "Number and Email Already Linked" - a full-screen contact-verification interstitial
+      # that lands on top of the authenticated Home for an account whose phone number and
+      # email were unlinked for security. Without this the journey stops dead at login: the
+      # greeting assertion fails because Home is completely covered.
+      #
+      # Android BACK does NOT dismiss it. The first BACK only closes the soft keyboard, which
+      # then reveals the "Update information" button underneath. Only the screen's own back
+      # arrow dismisses it, and that arrow carries no text, no id and no accessibility label -
+      # so this is a point tap. Its bounds were read from the live hierarchy at
+      # [0,132][147,279] on this 1080x2400 device, giving centre (73,205) = 7%,9%. The tap is
+      # inside a "when visible" guard, so it only ever fires while this screen is actually up.
+      #
+      # "Update information" is NEVER tapped: it would write a new phone number and email to
+      # the account under test.
+      - runFlow:
+          when:
+            visible: "Number and Email Already Linked"
+          commands:
+            - tapOn:
+                point: "7%,9%"
+            - waitForAnimationToEnd:
+                timeout: 4000
+
+      # NPS survey - "To what extent would you recommend benefiting from Sakani's services
+      # to others?" - a bottom sheet that lands after a completed reservation and then
+      # re-appears on navigation.
+      #
+      # Until 13/09/2026 it had NO dismiss, close or "later" control, only Submit, and dragging
+      # the sheet downwards was the only thing that closed it (verified live: the swipe returned
+      # the app to Home). Submit is never tapped - it would post a real survey response - and no
+      # rating is ever tapped. BACK and the scrim do not close it (both were tried).
+      #
+      # CLOSE X FIRST (13/09/2026, PRE-4.7.6-1283). The sheet now carries its own close "X" at the
+      # top left, and the header-strip drag no longer dismisses it: full-journey run
+      # 2026-09-13_123054 (1119880072) dragged it twice after the payment relaunch and it stayed,
+      # failing the final sweep. The X has no text, no content-desc and no resource-id in either
+      # Maestro's or uiautomator's hierarchy, so it is a point tap at the centre of its live bounds
+      # [42,1403][105,1466] on this 1080x2400 device: 73,1434. GUARDED: only while the survey AND
+      # its Submit are visible and no product error is showing. The rating row (y 1817-1922) and
+      # Submit (y 2169-2295) are 380+ px below that point, and on the older X-less sheet the same
+      # point is the empty header strip, so a miss is inert. After the X the survey is re-checked;
+      # the drag runs only if it is still up, and is re-checked again. Each step logs to the
+      # console which one it was, so a run shows whether the X or the drag cleared it.
+      #
+      # WHERE THE DRAG STARTS IS LOAD-BEARING. 50%,73% was tried first and does NOT dismiss
+      # it: that point lands on the question text and the 0-10 rating row, which swallow the
+      # gesture, so the sheet stayed up and blocked three consecutive navigation attempts.
+      # The sheet's own header - the empty strip between the scrim's bottom edge and the
+      # question - is what can be dragged. On this 1080x2400 device the scrim ends at y=1308
+      # and the question starts at y=1649, so 58% (y=1392) lands in that strip. Verified: the
+      # same sheet that survived the 73% drag closes on the first 58% one.
+      #
+      # NEVER WHILE A PRODUCT ERROR IS SHOWING. This drag is only ever a survey recovery. An
+      # error dialog is a RESULT the caller must see, not an overlay to clear, so with one on
+      # screen the drag is withheld, the loop runs out, and the final sweep at the end of this
+      # file fails loudly with the error in the failure screenshot.
+      - runFlow:
+          when:
+            visible: "(?s).*would you recommend benefiting from Sakani.*"
+          commands:
+            - runFlow:
+                when:
+                  notVisible: '(?s)(.*There.s something wrong.*|.*the service is down.*|Error!)'
+                commands:
+                  - runFlow:
+                      when:
+                        visible: "Submit"
+                      commands:
+                        - tapOn:
+                            point: "73,1434"
+                            retryTapIfNoChange: false
+                        - waitForAnimationToEnd:
+                            timeout: 3000
+                  - runFlow:
+                      when:
+                        notVisible: "(?s).*would you recommend benefiting from Sakani.*"
+                      commands:
+                        - evalScript: "${console.log('NPS - gone after the close-X step')}"
+                  - runFlow:
+                      when:
+                        visible: "(?s).*would you recommend benefiting from Sakani.*"
+                      commands:
+                        - evalScript: "${console.log('NPS - still visible after the close X, drag fallback')}"
+                        - swipe:
+                            start: "50%,58%"
+                            end: "50%,99%"
+                        - waitForAnimationToEnd:
+                            timeout: 4000
+                        - runFlow:
+                            when:
+                              notVisible: "(?s).*would you recommend benefiting from Sakani.*"
+                            commands:
+                              - evalScript: "${console.log('NPS - gone after the drag fallback')}"
+
+      # Biometric enrolment offer, declined.
+      - runFlow:
+          when:
+            visible: "Maybe Later"
+          commands:
+            - tapOn: "Maybe Later"
+            - waitForAnimationToEnd:
+                timeout: 3000
+
+      # Cookie-consent modal on the WebView-served pages (Housing Support product pages).
+      # New on PRE-4.7.6-1283. It covers the lower half of the page - bounds
+      # [0,1407]-[997,2106] on this 1080x2400 device - which is where those pages put their
+      # CTAs, so it hides content rather than merely decorating the screen.
+      #
+      # "Reject cookies" is used rather than "Accept all cookies". Both dismiss it (verified
+      # live), but rejecting stores no tracking cookies. This is a WebView preference only:
+      # no account, booking, payment or contract data is affected.
+      - runFlow:
+          when:
+            visible: "Reject cookies"
+          commands:
+            - tapOn: "Reject cookies"
+            - waitForAnimationToEnd:
+                timeout: 4000
+
+      # Nothing left to clear and the anchor has not arrived yet - give the app time.
+      - runFlow:
+          when:
+            notVisible: ${ANCHOR}
+          commands:
+            - waitForAnimationToEnd:
+                timeout: 5000
+
+# ==========================================================================================
+# NPS FINAL SWEEP - bounded, and independent of ANCHOR
+# ==========================================================================================
+#
+# WHY THIS EXISTS. The loop above stops the moment ANCHOR is visible - and the tab bar, like
+# most anchors, stays in the hierarchy BEHIND the NPS sheet. So the loop could report
+# "arrived" with the survey still covering the screen, and the caller's very next tap landed
+# on the sheet. Observed live on PRE-4.7.6-1283: "Run clear-overlays COMPLETED" followed
+# immediately by "Tap on Account Tab 4 of 4 FAILED", with the NPS on screen.
+#
+# BOUNDED AND INERT BY DESIGN. At most three rounds (close X, then the drag only if the survey
+# is still up), each only while the survey is actually
+# visible and no product error is on screen; a clean screen costs one hierarchy read. It
+# never taps Submit and never taps a rating. A drag is a press at 58% and a release at 99%,
+# and Android only clicks a control when the press and the release both land on it - on this
+# 1080x2400 device the 0-10 rating row sits at 76-80% and Submit at 90-95%, so the gesture
+# starts above both and ends below both.
+# CALLER OPT-OUT for the sweep (13/09/2026): full-journey-with-fee.yaml's LEAVE HOME block sets
+# output.npsLeftToCaller around its call on Home. On Home the survey re-opens BY ITSELF about
+# 10 s after every close, so a sweep that must end with it gone fails whenever its own tail runs
+# past that gap (contract run 2026-09-13_132414: closed 13:29:10, back before the 13:29:38 assert).
+# That caller closes the survey with its X itself and leaves Home in the same breath. Every other
+# caller is unaffected: no flag = the sweep and its assert run exactly as before.
+- runFlow:
+    when:
+      true: ${output.npsLeftToCaller !== true}
+    commands:
+      - repeat:
+          times: 3
+          while:
+            visible: "(?s).*would you recommend benefiting from Sakani.*"
+          commands:
+            - runFlow:
+                when:
+                  notVisible: '(?s)(.*There.s something wrong.*|.*the service is down.*|Error!)'
+                commands:
+                  - runFlow:
+                      when:
+                        visible: "Submit"
+                      commands:
+                        - tapOn:
+                            point: "73,1434"
+                            retryTapIfNoChange: false
+                        - waitForAnimationToEnd:
+                            timeout: 3000
+                  - runFlow:
+                      when:
+                        notVisible: "(?s).*would you recommend benefiting from Sakani.*"
+                      commands:
+                        - evalScript: "${console.log('NPS - gone after the close-X step')}"
+                  - runFlow:
+                      when:
+                        visible: "(?s).*would you recommend benefiting from Sakani.*"
+                      commands:
+                        - evalScript: "${console.log('NPS - still visible after the close X, drag fallback')}"
+                        - swipe:
+                            start: "50%,58%"
+                            end: "50%,99%"
+                        - waitForAnimationToEnd:
+                            timeout: 4000
+                        - runFlow:
+                            when:
+                              notVisible: "(?s).*would you recommend benefiting from Sakani.*"
+                            commands:
+                              - evalScript: "${console.log('NPS - gone after the drag fallback')}"
+
+      # FAIL, DON'T HIDE. If three drags did not clear it - or an error is on screen and the drags
+      # were withheld - the helper stops here, so no caller ever continues against a screen it
+      # cannot see.
+      - assertNotVisible: "(?s).*would you recommend benefiting from Sakani.*"
+
+# ==========================================================================================
+# EXIT CONTRACT - hand back only once the caller's screen is reachable
+# ==========================================================================================
+#
+# The helper returns only when ANCHOR - the caller's "we have arrived" selector - is visible.
+# Without this a caller could carry on after the loop ran out, or after an NPS recovery,
+# against a screen it cannot actually see.
+#
+# THE WAIT ALSO CLEARS A RETURNING NPS SURVEY (review 13/09/2026). After a contract is signed
+# the survey comes back on its own, again and again: on 10/09/2026 it was dragged away four
+# times in three minutes (17:31:04, 17:31:27, 17:31:50, 17:32:01) and then returned during the
+# old single, passive 120s wait for ANCHOR, which failed with the survey covering the tab bar
+# (run 2026-09-10_173015). So the wait is a BOUNDED loop: each round waits up to 120s for
+# EITHER the anchor OR the survey, and if it is the survey, removes it with the same
+# header-strip drag as above - never Submit, never a rating, and withheld while a product
+# error is showing. At most 6 rounds; a screen that never arrives still fails after 120s, as
+# before, and a survey that keeps coming back fails after 6 drags instead of looping forever.
+# Every round tries the sheet's close X first and drags only if the survey is still up (see
+# the loop handler above for the X's bounds and guard).
+#
+# 120s per round is deliberate: it is the LONGEST wait any caller already applies straight
+# after this helper (login's "Login / Sign up"), so the contract is never stricter than the
+# waits it sits in front of. When the anchor is already on screen it returns at once.
+#
+# OPT-OUT, for ONE documented caller: subflows/login.yaml's post-authentication call sets
+# output.anchorOptional around itself, because a full-screen promo can still cover Home when
+# this returns and that caller recovers with its own relaunch. No flag = the contract applies.
+- runFlow:
+    when:
+      true: ${output.anchorOptional !== true}
+    commands:
+      - repeat:
+          times: 6
+          while:
+            notVisible: ${ANCHOR}
+          commands:
+            - extendedWaitUntil:
+                visible: "(?s)(?:${ANCHOR}|.*would you recommend benefiting from Sakani.*)"
+                timeout: 120000
+            - runFlow:
+                when:
+                  visible: "(?s).*would you recommend benefiting from Sakani.*"
+                commands:
+                  - runFlow:
+                      when:
+                        notVisible: '(?s)(.*There.s something wrong.*|.*the service is down.*|Error!)'
+                      commands:
+                        - runFlow:
+                            when:
+                              visible: "Submit"
+                            commands:
+                              - tapOn:
+                                  point: "73,1434"
+                                  retryTapIfNoChange: false
+                              - waitForAnimationToEnd:
+                                  timeout: 3000
+                        - runFlow:
+                            when:
+                              notVisible: "(?s).*would you recommend benefiting from Sakani.*"
+                            commands:
+                              - evalScript: "${console.log('NPS - gone after the close-X step')}"
+                        - runFlow:
+                            when:
+                              visible: "(?s).*would you recommend benefiting from Sakani.*"
+                            commands:
+                              - evalScript: "${console.log('NPS - still visible after the close X, drag fallback')}"
+                              - swipe:
+                                  start: "50%,58%"
+                                  end: "50%,99%"
+                              - waitForAnimationToEnd:
+                                  timeout: 4000
+                              - runFlow:
+                                  when:
+                                    notVisible: "(?s).*would you recommend benefiting from Sakani.*"
+                                  commands:
+                                    - evalScript: "${console.log('NPS - gone after the drag fallback')}"
+      # The anchor can stay in the hierarchy BEHIND the survey sheet (see the final sweep
+      # above), so a survey that returned at the last moment is swept once more - bounded, the
+      # same drag - before the contract is asserted.
+      - repeat:
+          times: 3
+          while:
+            visible: "(?s).*would you recommend benefiting from Sakani.*"
+          commands:
+            - runFlow:
+                when:
+                  notVisible: '(?s)(.*There.s something wrong.*|.*the service is down.*|Error!)'
+                commands:
+                  - runFlow:
+                      when:
+                        visible: "Submit"
+                      commands:
+                        - tapOn:
+                            point: "73,1434"
+                            retryTapIfNoChange: false
+                        - waitForAnimationToEnd:
+                            timeout: 3000
+                  - runFlow:
+                      when:
+                        notVisible: "(?s).*would you recommend benefiting from Sakani.*"
+                      commands:
+                        - evalScript: "${console.log('NPS - gone after the close-X step')}"
+                  - runFlow:
+                      when:
+                        visible: "(?s).*would you recommend benefiting from Sakani.*"
+                      commands:
+                        - evalScript: "${console.log('NPS - still visible after the close X, drag fallback')}"
+                        - swipe:
+                            start: "50%,58%"
+                            end: "50%,99%"
+                        - waitForAnimationToEnd:
+                            timeout: 4000
+                        - runFlow:
+                            when:
+                              notVisible: "(?s).*would you recommend benefiting from Sakani.*"
+                            commands:
+                              - evalScript: "${console.log('NPS - gone after the drag fallback')}"
+      - assertNotVisible: "(?s).*would you recommend benefiting from Sakani.*"
+      - assertVisible: ${ANCHOR}

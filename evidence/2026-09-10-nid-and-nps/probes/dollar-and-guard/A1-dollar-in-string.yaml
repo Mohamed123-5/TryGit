@@ -1,0 +1,4 @@
+appId: fi.iwa.sakani
+name: A1 dollar inside string literal (false)
+---
+- assertTrue: ${"a$b" === "x"}

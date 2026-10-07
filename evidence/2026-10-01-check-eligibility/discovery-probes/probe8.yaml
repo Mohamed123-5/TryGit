@@ -1,0 +1,69 @@
+# PROBE: sign in as the probe-registered generated user 1617798968 (not a business account),
+# Eligibility -> Step 1 Terms accepted -> capture Step 2 while scrolling. Step 2 is NOT filled.
+appId: fi.iwa.sakani
+name: PROBE - eligibility step 2 discovery
+---
+- launchApp:
+    clearState: true
+- runFlow:
+    file: D:/Automation/Maestro-Mobile/.maestro/subflows/login.yaml
+    env:
+      NATIONAL_ID: "1617798968"
+- runFlow:
+    file: D:/Automation/Maestro-Mobile/.maestro/subflows/open-account-tab.yaml
+    env:
+      DESTINATION: "My bookings"
+- evalScript: ${output.accountService = "(?s)Eligibility checker status.*"}
+- runFlow:
+    file: D:/Automation/Maestro-Mobile/.maestro/subflows/open-account-service.yaml
+- extendedWaitUntil:
+    visible: "Check your eligibility"
+    timeout: 30000
+- tapOn: "Check your eligibility"
+- extendedWaitUntil:
+    visible: "Step 1 of 3"
+    timeout: 30000
+- tapOn: "I have read and understood the terms and conditions of the contract.*"
+- waitForAnimationToEnd:
+    timeout: 3000
+- takeScreenshot: probe8-1-terms-ticked
+- runFlow:
+    optional: true
+    commands:
+      - assertVisible: "DUMP-TERMS-TICKED"
+- tapOn:
+    text: "Accept and continue"
+    retryTapIfNoChange: false
+- extendedWaitUntil:
+    visible: "Step 2 of 3"
+    timeout: 30000
+- waitForAnimationToEnd:
+    timeout: 3000
+- takeScreenshot: probe8-2-step2-a
+- runFlow:
+    optional: true
+    commands:
+      - assertVisible: "DUMP-STEP2-A"
+- swipe:
+    start: "50%,75%"
+    end: "50%,35%"
+    duration: 700
+- waitForAnimationToEnd:
+    timeout: 3000
+- takeScreenshot: probe8-3-step2-b
+- runFlow:
+    optional: true
+    commands:
+      - assertVisible: "DUMP-STEP2-B"
+- swipe:
+    start: "50%,75%"
+    end: "50%,35%"
+    duration: 700
+- waitForAnimationToEnd:
+    timeout: 3000
+- takeScreenshot: probe8-4-step2-c
+- runFlow:
+    optional: true
+    commands:
+      - assertVisible: "DUMP-STEP2-C"
+- assertVisible: "PROBE-END-MARKER-NOT-PRESENT"

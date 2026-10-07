@@ -1,0 +1,59 @@
+appId: fi.iwa.sakani
+name: PROBE - Explore search for a project (read-only discovery, guest)
+env:
+  # The search term. Default is the Arabic fragment of the project the 09/09 journey signed a
+  # contract in; it lives here, in this UTF-8 file, rather than on the command line, because
+  # passing Arabic through `maestro.bat -e` goes through the Windows console code page.
+  # A Latin term can override it:  maestro test -e TERM=Murcia .maestro/_probe-marketplace-search.yaml
+  TERM: '${typeof TERM === "undefined" ? "طيبة" : String(TERM)}'
+---
+# READ-ONLY and unauthenticated. It opens Explore's search, types TERM, and stops on the result
+# list so `maestro hierarchy` can read it. It taps no result, opens no project, reserves nothing.
+- evalScript: ${console.log('SEARCH PROBE TERM = [' + TERM + ']')}
+- launchApp:
+    clearState: true
+- runFlow:
+    file: subflows/clear-overlays.yaml
+    env:
+      ANCHOR: 'Explore\s*Tab 2 of 4'
+- tapOn: 'Explore\s*Tab 2 of 4'
+- runFlow:
+    file: subflows/clear-overlays.yaml
+    env:
+      ANCHOR: "Registered Interests"
+- extendedWaitUntil:
+    visible: "Registered Interests"
+    timeout: 45000
+
+# Opening search: the same proven point search.yaml uses. The Explore location field exposes no
+# text, label or id and is not itself clickable, and relative selectors mis-target (search.yaml
+# documents both), so this is the one place a point is unavoidable. The first Explore visit can
+# raise a "Select category" sheet that swallows the tap; it is cancelled and the tap retried.
+- repeat:
+    times: 3
+    commands:
+      - runFlow:
+          when:
+            visible: "Select category"
+          commands:
+            - tapOn: "Cancel"
+            - waitForAnimationToEnd:
+                timeout: 5000
+      - runFlow:
+          when:
+            notVisible: "Popular locations"
+          commands:
+            - tapOn:
+                point: "55%,11%"
+            - waitForAnimationToEnd:
+                timeout: 8000
+- extendedWaitUntil:
+    visible: "Popular locations"
+    timeout: 30000
+
+- tapOn: "Enter Region, City, Neighborhood, Street, Project, Developer, Building Number, Block Number"
+- inputText: ${TERM}
+- extendedWaitUntil:
+    visible: "(?s).*(Show more results|No results were found for your search\\.).*"
+    timeout: 30000
+- takeScreenshot: probe-search-results

@@ -1,0 +1,20 @@
+{
+  "name": "Sakani-mobileapp",
+  "version": "1.0.0",
+  "private": true,
+  "type": "commonjs",
+  "scripts": {
+    "test": "node report-dashboard/run-maestro.js",
+    "test:e2e": "node report-dashboard/run-maestro.js --include-e2e --yes-i-understand-this-changes-business-data",
+    "e2e:full-journey": "node report-dashboard/run-and-report.js --include-e2e --yes-i-understand-this-changes-business-data --flows full-journey",
+    "e2e:full-journey-paid": "node report-dashboard/run-and-report.js --include-e2e --yes-i-understand-this-changes-business-data --flows full-journey-paid",
+    "e2e:check-eligibility": "node report-dashboard/run-and-report.js --include-e2e --yes-i-understand-this-changes-business-data --flows \"check-eligibility\"",
+    "e2e:appeal-request": "node report-dashboard/run-and-report.js --include-e2e --yes-i-understand-this-changes-business-data --flows \"appeal request\"",
+    "e2e:cancel-booking": "node report-dashboard/run-and-report.js --include-e2e --yes-i-understand-this-changes-business-data --flows cancel-booking",
+    "merge-results": "node report-dashboard/merge-results.js",
+    "generate-report": "node report-dashboard/generate-dashboard.js",
+    "post-test": "npm run merge-results && npm run generate-report",
+    "posttest": "npm run post-test",
+    "clean-history": "node -e \"require('fs').rmSync('report-dashboard/test-reports-history',{recursive:true,force:true})\""
+  }
+}

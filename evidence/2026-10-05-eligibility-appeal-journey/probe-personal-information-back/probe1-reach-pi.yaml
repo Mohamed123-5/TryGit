@@ -1,0 +1,22 @@
+# READ-ONLY PROBE 1: reach registration "Personal information" with ONE generated ID using the proven
+# register-new-user.yaml; MIN_AGE 999 makes its own age gate stop there BEFORE phone/email/OTP (no account).
+appId: fi.iwa.sakani
+---
+- evalScript: ${output.probeId = String(Math.floor(1000000000 + Math.random() * 1000000000))}
+- evalScript: "${console.log('PROBE ID [' + output.probeId + ']')}"
+- launchApp:
+    clearState: true
+- runFlow:
+    file: D:/Automation/Maestro-Mobile/.maestro/subflows/register-new-user.yaml
+    env:
+      NATIONAL_ID: ${output.probeId}
+      PHONE: "500000000"
+      EMAIL: "probe.never.used@example.com"
+      OTP: "1234"
+      MIN_AGE_HIJRI_YEARS: "999"
+- assertTrue:
+    condition: ${output.registrationStoppedForAge === true}
+    label: "PROBE - helper did not stop on Personal information"
+- assertVisible: "Personal information"
+- assertNotVisible: "(?s).*Please fill in your mobile number detail and email address.*"
+- takeScreenshot: probe-01-personal-information

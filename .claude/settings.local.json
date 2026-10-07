@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(maestro test \"d:\\\\Automation\\\\Maestro-Mobile\\\\.maestro\\\\_explore.yaml\")"
+    ]
+  }
+}

@@ -1,0 +1,3 @@
+search MAESTRO_EXIT=0 crashes=0
+unit MAESTRO_EXIT=0 crashes=0
+wallet MAESTRO_EXIT=1 crashes=0

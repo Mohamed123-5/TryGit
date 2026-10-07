@@ -1,0 +1,14 @@
+############ 0. PRECEDENCE on Maestro 2.9.0 (pure JS, re-verified this round) ############
+  lit          -e NATIONAL_ID=1000011487    exit=1 want=1 OK  literal in env vs -e (exit 1 = literal WON) 
+  is-override  -e NATIONAL_ID=1000011487    exit=0 want=0 OK  typeof default resolves to the -e value 
+  is-default   (no -e)                      exit=0 want=0 OK  typeof default with no -e resolves to the default 
+  tyo          -e NATIONAL_ID=              exit=0 want=0 OK  empty -e resolves to empty (logged below) PREC RESOLVED = [' + NATIONAL_ID + ']
+############ DIAG ATTEMPT 1: 1000011487 post-login timeline (observe only) ############
+  exit=0  log=C:/Users/Mohammed Elkatry/.maestro/tests/2026-09-10_121310/maestro.log  frames=249
+  typed=1000011487   nafath-id-asserts=      1 textRegex=1000011487   FAILED=
+  FINAL STATE: PROMO_SHEET PROMO_SHEET PROMO_SHEET KEYBOARD KEYBOARD PROMO_SHEET KEYBOARD 
+  >>> post-login stack PRESENT at the end - running the recovery experiments (one action at a time) <<<
+    R0-start: PROMO_SHEET PROMO_SHEET KEYBOARD KEYBOARD 
+    R1-after-escape-hide-keyboard: PROMO_SHEET PROMO_SHEET KEYBOARD KEYBOARD 
+    R2-after-android-back: PROMO_SHEET PROMO_SHEET PROMO_BUTTON PROMO_BUTTON 
+    R3-after-relaunch-no-clear: CSAT CSAT 

@@ -1,0 +1,33 @@
+{
+  "generatedAt": "2026-09-28T07:21:32.815Z",
+  "device": "emulator-5554",
+  "startedAt": "2026-09-28T07:06:00.129Z",
+  "finishedAt": "2026-09-28T07:13:21.264Z",
+  "includeE2e": false,
+  "totals": {
+    "flows": 1,
+    "pass": 1,
+    "fail": 0,
+    "blockedEnvironment": 0,
+    "unresolved": 0,
+    "npsAppearances": 0
+  },
+  "disagreements": [],
+  "results": [
+    {
+      "flow": "account",
+      "file": ".maestro/regression-readonly/account.yaml",
+      "suite": "regression-readonly",
+      "startedAt": "2026-09-28T07:06:00.252Z",
+      "durationMs": 441007,
+      "logPath": "report-dashboard/maestro-output/account/maestro.log",
+      "screenshotPath": "report-dashboard/maestro-output/account/debug/.maestro/tests/2026-09-28_100601/Account services - read-only profile, wallet, preferences, eligibility, bookings and settings/takeScreenshot/account-services-complete.png",
+      "status": "PASS",
+      "exitCode": 0,
+      "failedSteps": 0,
+      "firstFailure": null,
+      "envReason": null,
+      "npsAppearances": 0
+    }
+  ]
+}

@@ -1,0 +1,87 @@
+check-syntax .maestro/_resume-from-account.yaml: OK
+check-syntax .maestro/subflows/login.yaml: OK
+check-syntax .maestro/subflows/clear-overlays.yaml: OK
+check-syntax .maestro/subflows/verify-signed-in-account.yaml: OK
+START 13:10:11  maestro test -e NATIONAL_ID=1119880072 .maestro/_resume-from-account.yaml
+13:10:22.223 >> Assert that ${String(NATIONAL_ID).length === 10 && !/[^0-9]/.test(String(NATIONAL_ID)) && (String(NATIONAL_ID).charAt(0) === "1" || String(NATIONAL_ID).charAt(0) === "2")} is true
+13:10:22.303    COMPLETED  Assert that ${String(NATIONAL_ID).length === 10 && !/[^0-9]/.test(String(NATIONAL_ID)) && (String(NATIONAL_ID).charAt(0) === "1" || String(NATIONAL_ID).charAt(0) === "2")} is true
+13:10:22.304 >> Run ${console.log('FULL JOURNEY TARGET NATIONAL_ID = [' + NATIONAL_ID + ']')}
+13:10:22.316    COMPLETED  Run ${console.log('FULL JOURNEY TARGET NATIONAL_ID = [' + NATIONAL_ID + ']')}
+13:10:22.317 >> Run ${output.targetNationalId = String(NATIONAL_ID)}
+13:10:22.331    COMPLETED  Run ${output.targetNationalId = String(NATIONAL_ID)}
+13:10:22.332 >> Run subflows/clear-overlays.yaml
+13:10:22.356 >> Repeat while "${ANCHOR}" is not visible (up to 20 times)
+13:10:29.348    SKIPPED  Repeat while "${ANCHOR}" is not visible (up to 20 times)
+13:10:29.350 >> Repeat while "(?s).*would you recommend benefiting from Sakani.*" is visible (up to 3 times)
+13:10:29.661    SKIPPED  Repeat while "(?s).*would you recommend benefiting from Sakani.*" is visible (up to 3 times)
+13:10:29.662 >> Assert that "(?s).*would you recommend benefiting from Sakani.*" is not visible
+13:10:30.440    COMPLETED  Assert that "(?s).*would you recommend benefiting from Sakani.*" is not visible
+13:10:30.441 >> Run flow when ${output.anchorOptional !== true} is true
+13:10:30.451 >> Repeat while "${ANCHOR}" is not visible (up to 6 times)
+13:10:30.642    SKIPPED  Repeat while "${ANCHOR}" is not visible (up to 6 times)
+13:10:30.643 >> Repeat while "(?s).*would you recommend benefiting from Sakani.*" is visible (up to 3 times)
+13:10:30.976    SKIPPED  Repeat while "(?s).*would you recommend benefiting from Sakani.*" is visible (up to 3 times)
+13:10:30.977 >> Assert that "(?s).*would you recommend benefiting from Sakani.*" is not visible
+13:10:31.927    COMPLETED  Assert that "(?s).*would you recommend benefiting from Sakani.*" is not visible
+13:10:31.927 >> Assert that "${ANCHOR}" is visible
+13:10:32.045    COMPLETED  Assert that "${ANCHOR}" is visible
+13:10:32.046    COMPLETED  Run flow when ${output.anchorOptional !== true} is true
+13:10:32.046    COMPLETED  Run subflows/clear-overlays.yaml
+13:10:32.047 >> Run subflows/verify-signed-in-account.yaml
+13:10:32.049 >> Assert that ${typeof NATIONAL_ID !== "undefined" && String(NATIONAL_ID).length === 10 && !/[^0-9]/.test(String(NATIONAL_ID))} is true
+13:10:32.053    COMPLETED  Assert that ${typeof NATIONAL_ID !== "undefined" && String(NATIONAL_ID).length === 10 && !/[^0-9]/.test(String(NATIONAL_ID))} is true
+13:10:32.054 >> Tap on "Profile details"
+13:10:34.786    COMPLETED  Tap on "Profile details"
+13:10:34.788 >> Assert that "Personal Detail(s)?" is visible
+13:10:36.180    COMPLETED  Assert that "Personal Detail(s)?" is visible
+13:10:36.181 >> Assert that "National ID" is visible
+13:10:36.277    COMPLETED  Assert that "National ID" is visible
+13:10:36.277 >> Assert that "${NATIONAL_ID}" is visible
+13:10:36.358    COMPLETED  Assert that "${NATIONAL_ID}" is visible
+13:10:36.359 >> Run ${output.profileNationalId = String(NATIONAL_ID)}
+13:10:36.362    COMPLETED  Run ${output.profileNationalId = String(NATIONAL_ID)}
+13:10:36.363 >> Run flow when "Personal Detail(s)?" is visible
+13:10:36.442 >> Press back
+13:10:37.611    COMPLETED  Press back
+13:10:37.611    COMPLETED  Run flow when "Personal Detail(s)?" is visible
+13:10:37.611 >> Assert that "My bookings" is visible
+13:10:37.688    COMPLETED  Assert that "My bookings" is visible
+13:10:37.688    COMPLETED  Run subflows/verify-signed-in-account.yaml
+13:10:37.688 >> Assert that ${output.profileNationalId === output.targetNationalId && output.targetNationalId === String(NATIONAL_ID)} is true
+13:10:37.693    COMPLETED  Assert that ${output.profileNationalId === output.targetNationalId && output.targetNationalId === String(NATIONAL_ID)} is true
+13:10:37.695 >> Assert that "My bookings" is visible
+13:10:37.821    COMPLETED  Assert that "My bookings" is visible
+13:10:37.822 >> Tap on "My bookings"
+13:10:40.549    COMPLETED  Tap on "My bookings"
+13:10:40.550 >> Assert that "My Bookings" is visible
+13:10:40.705    COMPLETED  Assert that "My Bookings" is visible
+13:10:40.714 >> Tap on "Active\s*Tab 2 of 4"
+13:10:43.274    COMPLETED  Tap on "Active\s*Tab 2 of 4"
+13:10:43.359 >> Assert that "(?s).*don.t have any active booking.*" is not visible
+13:10:43.957    COMPLETED  Assert that "(?s).*don.t have any active booking.*" is not visible
+13:10:43.958 >> Tap on "Ready to sign"
+13:10:45.984    COMPLETED  Tap on "Ready to sign"
+13:10:46.703 >> Tap on "All"
+13:10:48.784    COMPLETED  Tap on "All"
+13:10:51.501 >> Assert that "Booking Details" is visible
+13:10:52.430    COMPLETED  Assert that "Booking Details" is visible
+13:10:52.431 >> Assert that "Offplan MOH land" is visible
+13:10:53.501    COMPLETED  Assert that "Offplan MOH land" is visible
+13:10:53.502 >> Assert that "Booking fee status" is visible
+13:10:53.626    COMPLETED  Assert that "Booking fee status" is visible
+13:10:53.627 >> Assert that "Paid" is visible
+13:10:53.662    COMPLETED  Assert that "Paid" is visible
+13:10:53.662 >> Assert that "Invoice number" is visible
+13:10:53.741    COMPLETED  Assert that "Invoice number" is visible
+13:10:53.742 >> Take screenshot journey-6-booking-paid
+13:10:53.909    COMPLETED  Take screenshot journey-6-booking-paid
+13:10:53.910 >> Scrolling UP until "Select payment method" is visible with speed 40, visibility percentage 100%, timeout 30000 ms, with centering disabled
+13:10:54.043    COMPLETED  Scrolling UP until "Select payment method" is visible with speed 40, visibility percentage 100%, timeout 30000 ms, with centering disabled
+13:10:54.043 >> Assert that "Select payment method" is visible
+13:10:54.122    COMPLETED  Assert that "Select payment method" is visible
+13:10:54.123 >> Take screenshot resume-7-entry-select-payment-method
+13:10:54.324    COMPLETED  Take screenshot resume-7-entry-select-payment-method
+13:10:54.324 >> Run ${console.log('RESUME END - Select payment method reachable, NOT tapped')}
+13:10:54.330    COMPLETED  Run ${console.log('RESUME END - Select payment method reachable, NOT tapped')}
+EXIT exit=0 failed=0 first_failed=[]
+DONE 13:10:59

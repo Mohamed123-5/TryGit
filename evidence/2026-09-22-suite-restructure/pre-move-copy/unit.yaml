@@ -1,0 +1,111 @@
+# UNIT-005 — Unit Details exposes the "Reserve unit" CTA for an eligible unit.
+#
+# Scope: UNIT-005 only. Nothing is tapped on the CTA - the case requires only that the
+# booking entry point is exposed, and tapping it would start a reservation.
+#
+# UNIT-005 preconditions are "Logged in, unrestricted unit". Both halves matter:
+#   * Logged in - as a guest every unit shows "Reserve unit", so a guest run would pass
+#     without testing anything. home.yaml already covers the guest CTA.
+#   * Eligible - for an ineligible account a beneficiary unit replaces the CTA with
+#     "Beneficiaries only". That is UNIT-003, the opposite case.
+#
+# ACCOUNT: NATIONAL_ID, default 1000011487 (see `env`) - an ELIGIBLE account, confirmed by the
+# test owner on 14/09/2026, so `maestro test .maestro/unit.yaml` needs no `-e`. This flow
+# authenticates itself rather than depending on a pre-existing session, through the shared
+# subflows/login.yaml (the one authentication implementation); login.yaml keeps ownership of the
+# Login regression cases.
+#
+# TEST DATA: Villa B91-360 (project "... non_bene unit 1", Hail Region, AD DUWADIMI).
+# The unit is pinned by code on purpose - the CTA is per-unit, not per-account, and the
+# neighbouring cards do not satisfy the case:
+#   * Apartment 1-1-1-6-603 renders "Active booking detected!" in place of the CTA,
+#     because account 1119880040 already holds an active booking in that same project
+#     (Villa 01-01-0504-74-74, booked 13/08/2026).
+#   * Villa N1170-1234, the Home featured card, has no announced price ("Starting price
+#     will be announced soon") and reports "No azm item code, please contact
+#     administrator"; it exposes no CTA at all. This is what the previous revision of
+#     this flow navigated to, and why UNIT-005 was blocked.
+#
+# ROUTE: Home -> featured section -> "View all" -> "Place of featured units" -> the unit.
+# Explore is deliberately avoided: on this build the authenticated Explore interposes a
+# "Select category" sheet, loses its location on relaunch, and mislabels its own result
+# header ("Projects for sale" vs "Units for sale") - see D-09 / D-24 and PRJ-001.
+appId: fi.iwa.sakani
+name: UNIT-005 Unit Details exposes Reserve CTA
+env:
+  # The account this flow signs in as - defined once, here. Default (no override): 1000011487.
+  #   maestro test -e NATIONAL_ID=<10-digit National ID / Iqama> .maestro/unit.yaml
+  # A self-referencing default, NOT a literal: on Maestro 2.9.0 a literal here silently beats
+  # `-e NATIONAL_ID=...`. Single-quoted because the expression contains ": ".
+  #
+  # ACCOUNT DATA: UNIT-005 needs an ELIGIBLE account for which Villa B91-360 still exposes
+  # "Reserve unit" (see TEST DATA above). The default 1000011487 is eligible and satisfies this
+  # case; an override has to satisfy the same.
+  NATIONAL_ID: '${typeof NATIONAL_ID === "undefined" ? "1000011487" : String(NATIONAL_ID)}'
+---
+# Fail fast, before the app is touched, on an empty or malformed override. Dollar-free on
+# purpose: a "$" inside ${...} makes Maestro 2.9.0 skip evaluation and pass the assert.
+- evalScript: ${console.log('UNIT.YAML TARGET NATIONAL_ID = [' + NATIONAL_ID + ']')}
+- assertTrue: ${String(NATIONAL_ID).length === 10 && !/[^0-9]/.test(String(NATIONAL_ID)) && (String(NATIONAL_ID).charAt(0) === "1" || String(NATIONAL_ID).charAt(0) === "2")}
+- launchApp:
+    clearState: true
+
+# --- Authenticate as the eligible account through the shared login, exactly as login.yaml,
+# account.yaml and the Full Journey do. It owns onboarding, Nafath (with the exact-ID check on
+# the Nafath screen), the contact prompts, the Sharrai/weekly-deal promo, the optional
+# biometrics prompt and the login-page bounce recovery, and returns only on a Home that greets
+# the account holder by name with the guest entry gone - the "Logged in" half of the
+# precondition.
+- runFlow:
+    file: subflows/login.yaml
+    env:
+      NATIONAL_ID: ${NATIONAL_ID}
+
+# --- Guard the "eligible" half. Without this an eligibility regression would surface as
+# a missing CTA on the unit screen and read as a unit defect rather than a data problem.
+- tapOn: 'Account\s*Tab 4 of 4'
+- extendedWaitUntil:
+    visible: "My bookings"
+    timeout: 60000
+- scrollUntilVisible:
+    element:
+      text: "(?s).*Eligibility checker status.*"
+    direction: DOWN
+    timeout: 30000
+- assertVisible: "(?s).*Eligibility checker status\\s*Eligible.*"
+
+- tapOn: 'Home\s*Tab 1 of 4'
+- extendedWaitUntil:
+    visible: '(?si)(Hello|Good (morning|afternoon|evening)),\s*\S.*'
+    timeout: 45000
+
+# --- Route to the unit. The featured section sits below the fold on the authenticated
+# Home, so it must be scrolled to - it is present, just off-screen. The section CTA opens the
+# curated "Place of featured units" list, which carries the unit this case needs.
+#
+# ROUTE-SELECTOR UPDATE for STG-4.7.5-1278 (confirmed intended, section is always present):
+# the section subtitle "Discover featured unit in the market" is now "Featured unit in mobile
+# dashboard", and its CTA "View all" is now "View Details". Both are matched alongside the PRE
+# strings so the same route works on either build. Nothing below this point is changed - the
+# unit, the assertions and the D-47 guard are untouched.
+- scrollUntilVisible:
+    element:
+      text: '(Discover featured unit in the market|Featured unit in mobile dashboard)\s*'
+    direction: DOWN
+    timeout: 45000
+- tapOn: "(View all|View Details)"
+
+- extendedWaitUntil:
+    visible: "(?s).*Place of featured units.*"
+    timeout: 45000
+- tapOn: "(?s).*Villa B91-360.*"
+
+# Unit Details genuinely loaded - static selectors only, no price or view count.
+- extendedWaitUntil:
+    visible: "Mortgage Calculator"
+    timeout: 30000
+- assertVisible: "(?s).*Villa B91-360.*"
+- assertVisible: "(?s).*(Approved by Wafi|Licensed by).*"
+
+# UNIT-005 expected result: the booking entry point is exposed. Not tapped.
+- assertVisible: "Reserve unit"

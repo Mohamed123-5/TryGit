@@ -1,0 +1,22 @@
+WARNING: Final field parent in class maestro.cli.command.TestCommand has been mutated reflectively by class picocli.CommandLine$Model$FieldBinding in unnamed module @2d9d4f9d (file:/D:/Automation-Tool/maestro/lib/picocli-4.6.3.jar)
+WARNING: Use --enable-final-field-mutation=ALL-UNNAMED to avoid a warning
+WARNING: Mutating final fields will be blocked in a future release unless final field mutation is enabled
+?????????????????????????????????????????????????????????????????????????????????????????????????
+?                                                                                               ?
+?   Get results faster by executing flows in parallel on Maestro Cloud virtual devices. Run:    ?
+?   maestro cloud app_file flows_folder/                                                        ?
+?                                                                                               ?
+?????????????????????????????????????????????????????????????????????????????????????????????????
+
+
+Waiting for flows to complete...
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::arrayBaseOffset has been called by com.google.protobuf.UnsafeUtil$MemoryAccessor (file:/D:/Automation-Tool/maestro/lib/protobuf-java-3.21.9.jar)
+WARNING: Please consider reporting this to the maintainers of class com.google.protobuf.UnsafeUtil$MemoryAccessor
+WARNING: sun.misc.Unsafe::arrayBaseOffset will be removed in a future release
+[Passed] Account services - read-only profile, wallet, preferences, eligibility, bookings and settings (7m)
+[Passed] Booking - BKG-001 guest restriction, BKG-004/005/006 My Bookings, BKG-011 status tabs, BKG-014 Unit Details (5m 4s)
+[Passed] Home - HOME-001 tabs, HOME-005 featured unit, SRV-001 Services catalogues, HOME-006 personalisation, QA-004 Rental Behavior fee, NAV-001 back navigation (3m 27s)
+[Passed] Login - AUTH-002 input validation, AUTH-012 Nafath entry, AUTH-006 sign-in, AUTH-010 authenticated Home, AUTH-009 restart (3m 43s)
+[Passed] OUT-002 Logout clears session (3m 46s)
+[Passed] MKT-001 Explore loads marketplace (MKT-005 result count) (1m 15s)

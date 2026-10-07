@@ -1,0 +1,19 @@
+{
+  "flow": "check-eligibility",
+  "file": ".maestro/e2e/check-eligibility.yaml",
+  "suite": "e2e",
+  "tags": [
+    "e2e",
+    "eligibility",
+    "critical"
+  ],
+  "startedAt": "2026-10-05T09:54:21.829Z",
+  "durationMs": 437178,
+  "logPath": "report-dashboard/maestro-output/check-eligibility/maestro.log",
+  "status": "FAIL",
+  "exitCode": 1,
+  "failedSteps": 2,
+  "firstFailure": "APPEAL - the persisted Eligibility status page did not open from the result screen... FAILED",
+  "envReason": null,
+  "npsAppearances": 0
+}

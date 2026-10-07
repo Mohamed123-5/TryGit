@@ -1,0 +1,6 @@
+  # The project this journey books, pinned by name. See the STAGE 2 header for why it is
+  # pinned rather than picked positionally, and why THIS project.
+  PROJECT: "مساكن طيبة المدائن EN"
+  # The module (property type) to book inside that project. MODULE must match the project's
+  # inventory - this one sells Apartments.
+  MODULE: "Apartment"

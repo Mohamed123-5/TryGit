@@ -1,0 +1,100 @@
+# Reusable helper — authenticate through the Nafath happy path and land on an
+# authenticated Home.
+#
+# CONTRACT
+#   NATIONAL_ID - the National ID / Iqama to sign in with.
+# Precondition: the app is running and unauthenticated (a cleared launch, or after a
+# logout). Postcondition: Home greets the account holder by name.
+#
+# SCOPE
+# This is the happy path only. The AUTH-002 input-validation cases and the AUTH-009
+# restart check stay owned by login.yaml and are deliberately not duplicated here - this
+# helper exists so journey flows stop re-inlining the sign-in sequence, not to take those
+# cases over. login.yaml is unchanged.
+appId: fi.iwa.sakani
+name: Login with National ID
+---
+# SAFETY GUARD - never type an unresolved or malformed ID. Without this, a caller that forgot
+# to pass NATIONAL_ID would type the literal text "undefined" into the login field.
+# Dollar-free on purpose - see the fail-fast guard in full-journey.yaml: a "$" inside ${...}
+# makes Maestro 2.9.0 skip evaluation and pass the assert unconditionally.
+- assertTrue: ${typeof NATIONAL_ID !== "undefined" && String(NATIONAL_ID).length === 10 && !/[^0-9]/.test(String(NATIONAL_ID)) && (String(NATIONAL_ID).charAt(0) === "1" || String(NATIONAL_ID).charAt(0) === "2")}
+# Get to the guest Home. A cleared launch replays onboarding and this build interposes a
+# "Marketplace Day" sheet whose scrim hides the sign-in entry entirely.
+- runFlow:
+    file: clear-overlays.yaml
+    env:
+      ANCHOR: "(?s).*Login / Sign up.*"
+
+- extendedWaitUntil:
+    visible: "(?s).*Login / Sign up.*"
+    timeout: 120000
+- tapOn: "(?s).*Login / Sign up.*"
+
+# Build PRE-4.7.5-1279 spells this "Nefath" on the button and STG-4.7.5-1278 spells it
+# "Nafath" (defect D-14), so both are matched.
+- extendedWaitUntil:
+    visible: "Continue with N[ae]fath"
+    timeout: 45000
+
+# The field hint carries a comma before "or" in this build.
+- tapOn: "Enter your ID, phone number,? or email"
+- inputText: ${NATIONAL_ID}
+- assertVisible: ${NATIONAL_ID}
+- tapOn: "Continue"
+
+# SAFETY VALIDATION - the Nafath screen must carry EXACTLY the requested ID before the session
+# is created. Maestro text selectors are full-match regexes, so a different ID - including a
+# stale default that silently won over an override - cannot satisfy this line. This is the
+# last point at which a wrong account can be stopped before it is authenticated.
+- extendedWaitUntil:
+    visible: "Login with nafath"
+    timeout: 45000
+- assertVisible: ${NATIONAL_ID}
+- tapOn: "Confirm"
+
+- extendedWaitUntil:
+    notVisible: "Login with nafath"
+    timeout: 90000
+
+# The promo sheet, the biometrics prompt and the contact-details prompt all land after
+# authentication, in any order and not on every run.
+- runFlow:
+    file: clear-overlays.yaml
+    env:
+      ANCHOR: '(?si)(Hello|Good (morning|afternoon|evening)),\s*\S.*'
+# The "Sakani sharrai / Weekly deal" promo is a FULL-SCREEN interstitial on
+# PRE-4.7.6-1283 (bounds [0,132]-[1080,2337]), not a bottom sheet, and it exposes NO
+# dismiss control at all: its only clickable node is the "Go to the weekly deal" CTA.
+# Android BACK does not close it and dragging it down does not either - both were tried
+# live and left it on screen, which is why the generic back handler in clear-overlays
+# cannot clear it on this build.
+#
+# Relaunching does clear it, and is safe HERE specifically: this runs immediately after
+# authentication, before any navigation has been done, and launchApp without clearState
+# keeps the session that was just established. The CTA is never tapped - that would
+# navigate into the offer instead of dismissing it.
+#
+# This recovery is deliberately NOT in clear-overlays.yaml: that helper is also called
+# mid-journey (for example straight after a reservation is confirmed), where restarting
+# the app would throw away the screen the caller is waiting on.
+- runFlow:
+    when:
+      visible: "Go to the weekly (offer|deal)"
+    commands:
+      - launchApp
+      - runFlow:
+          file: clear-overlays.yaml
+          env:
+            ANCHOR: '(?si)(Hello|Good (morning|afternoon|evening)),\s*\S.*'
+
+
+# Authenticated. Home must greet the user BY NAME: STG-4.7.5-1278 renders "Hello, <name>"
+# where PRE-4.7.5-1279 rendered "Good Morning, <name>", so both are matched. The ",\s*\S"
+# tail is load-bearing and is deliberately not relaxed to a bare "Hello" - the greeting has
+# to be followed by an actual name, which is what separates an authenticated header from a
+# guest one, since the guest Account renders "Hello" with nothing after it.
+- extendedWaitUntil:
+    visible: '(?si)(Hello|Good (morning|afternoon|evening)),\s*\S.*'
+    timeout: 90000
+- assertNotVisible: "(?s).*Login / Sign up.*"

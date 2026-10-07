@@ -1,0 +1,15 @@
+09-21 11:26:58.486 D/BiometricService(  563): canAuthenticate: User=0, Caller=0, Authenticators=255
+09-21 11:26:58.487 D/BiometricService/PreAuthInfo(  563): Package: fi.iwa.sakani Sensor ID: 4 Modality: 8 Status: 7
+09-21 11:26:58.489 D/BiometricService/PreAuthInfo(  563): Package: fi.iwa.sakani Sensor ID: 0 Modality: 2 Status: 7
+09-21 11:26:58.489 D/BiometricService/PreAuthInfo(  563): getCanAuthenticateInternal Modality: 8 AuthenticatorStatus: 7
+09-21 11:26:58.489 D/AuthService(  563): canAuthenticate, userId: 0, callingUserId: 0, authenticators: 255, result: 11
+09-21 11:27:34.693 D/BiometricService(  563): canAuthenticate: User=0, Caller=0, Authenticators=255
+09-21 11:27:34.695 D/BiometricService/PreAuthInfo(  563): Package: fi.iwa.sakani Sensor ID: 4 Modality: 8 Status: 7
+09-21 11:27:34.697 D/BiometricService/PreAuthInfo(  563): Package: fi.iwa.sakani Sensor ID: 0 Modality: 2 Status: 7
+09-21 11:27:34.697 D/BiometricService/PreAuthInfo(  563): getCanAuthenticateInternal Modality: 8 AuthenticatorStatus: 7
+09-21 11:27:34.697 D/AuthService(  563): canAuthenticate, userId: 0, callingUserId: 0, authenticators: 255, result: 11
+09-21 11:27:56.309 D/BiometricService(  563): canAuthenticate: User=0, Caller=0, Authenticators=255
+09-21 11:27:56.309 D/BiometricService/PreAuthInfo(  563): Package: fi.iwa.sakani Sensor ID: 4 Modality: 8 Status: 7
+09-21 11:27:56.309 D/BiometricService/PreAuthInfo(  563): Package: fi.iwa.sakani Sensor ID: 0 Modality: 2 Status: 7
+09-21 11:27:56.310 D/BiometricService/PreAuthInfo(  563): getCanAuthenticateInternal Modality: 8 AuthenticatorStatus: 7
+09-21 11:27:56.310 D/AuthService(  563): canAuthenticate, userId: 0, callingUserId: 0, authenticators: 255, result: 11

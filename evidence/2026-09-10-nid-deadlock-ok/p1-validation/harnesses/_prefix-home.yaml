@@ -1,0 +1,295 @@
+# HOME-001 — App launch renders the Home screen with the four primary tabs.
+#
+# Scope: HOME-001 only. Per the automation triage in exploration-report.md this case
+# absorbs HOME-002, HOME-003, HOME-004 and QA-001, so it also asserts that Home rendered
+# real content ("Quick Access") rather than just an empty shell.
+#
+# Deliberately NOT asserted:
+#   - banner carousel content (HOME-002): the hero rotates between destinations and ads,
+#     so no stable string exists.
+#   - featured-unit prices (HOME-004): unit price data is unstable in PREPROD (defect D-08),
+#     and "Place of Featured Unit" is absent from the authenticated Home. The featured-unit
+#     card is covered instead by HOME-005, which opens it.
+#
+# No authentication required: the guest Home exposes all four tabs, so this flow does not
+# depend on login.yaml.
+#
+# HOME-005 is covered at the end of this flow and needs the guest Home specifically: the
+# "Place of Featured Unit" section is replaced by other content once a session exists.
+#
+# PRECONDITION: this flow starts as a guest and ends authenticated, because HOME-006 has to
+# compare the two states. The launch therefore clears state, which is what makes the guest
+# half repeatable - without it a second run would begin from the session the first run left
+# behind and the guest assertions could never hold.
+#
+# An earlier revision avoided clearState:true because a state wipe appeared to crash the app
+# during first-run onboarding (SIGSEGV in libflutter.so on the "1.raster" thread). That
+# diagnosis was wrong: the crash was emulator graphics degradation after hours of uptime and
+# reproduced just as readily on a plain launchApp. It is gone after a cold boot, and
+# booking.yaml and logout.yaml both wipe state on every run without incident.
+appId: fi.iwa.sakani
+name: PREFIX home - own steps up to the Nafath ID check, never confirms
+env:
+  # The account HOME-006 / QA-004 sign in as - defined once, here. Default (no override): 1000011485.
+  #   maestro test -e NATIONAL_ID=<10-digit National ID / Iqama> .maestro/home.yaml
+  # A self-referencing default, NOT a literal: on Maestro 2.9.0 a literal here silently beats
+  # `-e NATIONAL_ID=...`. Single-quoted because the expression contains ": ".
+  NATIONAL_ID: '${typeof NATIONAL_ID === "undefined" ? "1000011485" : String(NATIONAL_ID)}'
+---
+# Fail fast, before the app is touched, on an empty or malformed override. Dollar-free on
+# purpose: a "$" inside ${...} makes Maestro 2.9.0 skip evaluation and pass the assert.
+- evalScript: ${console.log('HOME.YAML TARGET NATIONAL_ID = [' + NATIONAL_ID + ']')}
+- assertTrue: ${String(NATIONAL_ID).length === 10 && !/[^0-9]/.test(String(NATIONAL_ID)) && (String(NATIONAL_ID).charAt(0) === "1" || String(NATIONAL_ID).charAt(0) === "2")}
+- launchApp:
+    clearState: true
+
+# Home is reachable from a cold first run and from a warm relaunch, and the two paths raise
+# different overlays: the onboarding carousel ("Skip") only after a state wipe, the compare
+# coach mark, the staging dashboard error, and the satisfaction survey ("Dismiss").
+#
+# A cold start after a state wipe on build PRE-4.7.5-1279 can take well over a minute to
+# paint its first frame, so a fixed settling budget can expire against a still-blank screen
+# and fail an app that was about to come up. Poll until the guest header has actually
+# surfaced, clearing whichever overlay is on top. The loop exits as soon as the header
+# appears, so it costs nothing on a fast start and no assertion below is relaxed.
+- waitForAnimationToEnd:
+    timeout: 20000
+- repeat:
+    times: 20
+    commands:
+      - runFlow:
+          when:
+            visible: "Skip"
+          commands:
+            - tapOn: "Skip"
+      - runFlow:
+          when:
+            visible: "Dismiss"
+          commands:
+            - tapOn: "Dismiss"
+      - runFlow:
+          when:
+            visible: "Ok"
+          commands:
+            - tapOn: "Ok"
+      - runFlow:
+          when:
+            visible: "Marketplace Day"
+          commands:
+            - back
+      - runFlow:
+          when:
+            visible: "Start comparing properties"
+          commands:
+            - back
+      - runFlow:
+          when:
+            notVisible: "(?s).*Login / Sign up.*"
+          commands:
+            - waitForAnimationToEnd:
+                timeout: 5000
+
+# HOME-001 assertion. Each tab exposes one accessibility label spanning two lines, e.g.
+# "Home\nTab 1 of 4"; \s* crosses that newline without needing DOTALL.
+- extendedWaitUntil:
+    visible: 'Home\s*Tab 1 of 4'
+    timeout: 30000
+- assertVisible: 'Explore\s*Tab 2 of 4'
+- assertVisible: 'Services\s*Tab 3 of 4'
+- assertVisible: 'Account\s*Tab 4 of 4'
+
+# Home rendered content, not an empty shell. "Quick Access" is the one section label present
+# in both the guest and authenticated Home.
+- assertVisible: "Quick Access"
+
+# --- HOME-005: the featured unit card opens Unit Details.
+# Absorbs UNIT-001 (details render) and UNIT-006 (regulatory badge).
+
+# Home's hero content rotates, so the featured section can sit below the fold. Scroll to
+# it rather than assuming it is on screen.
+- scrollUntilVisible:
+    element:
+      text: 'Discover featured unit in the market\s*'
+    direction: DOWN
+    timeout: 30000
+
+# The card's own accessibility label embeds the price and the unit code - both dynamic -
+# so it is targeted by position relative to the static section subtitle directly above it
+# rather than by its text or by coordinates.
+- tapOn:
+    below:
+      text: 'Discover featured unit in the market\s*'
+
+# Unit Details reached. All three assertions are static: the unit title, price and view
+# count on this screen are dynamic and deliberately not asserted. The regulatory badge
+# (UNIT-006) is labelled "Approved by Wafi" on STG-4.7.5-1278 and "Licensed by" on
+# PRE-4.7.6-1283, where the licensor itself is a logo exposing no text - so both labels
+# are matched. It sits inside one large combined node, hence the regex. The assertion
+# still proves the accreditation block rendered.
+- extendedWaitUntil:
+    visible: "Mortgage Calculator"
+    timeout: 30000
+- assertVisible: "Reserve unit"
+- assertVisible: "(?s).*(Approved by Wafi|Licensed by).*"
+
+# --- NAV-001: Android Back unwinds to the previous screen. Absorbs NAV-003 (the bottom nav
+# is reachable everywhere), NAV-004 (a modal sheet closes on back) and NAV-005 (tapping the
+# scrim closes a sheet). The case is built up across this flow at each real screen change
+# rather than as an isolated section, so every drill-down below is also a back test.
+#
+# Wallet is deliberately excluded: Android Back does not work there at all (defect D-31), so
+# including it would fail this case for a known, separately tracked product defect.
+#
+# First unwind: Unit Details -> Home. Unit Details carries no bottom navigation, so the tab
+# bar reappearing is itself proof the stack popped rather than the screen merely repainting.
+- back
+- extendedWaitUntil:
+    visible: 'Home\s*Tab 1 of 4'
+    timeout: 30000
+- assertVisible: "Quick Access"
+- assertNotVisible: "Reserve unit"
+
+# --- SRV-001: the Services tab lists the service categories.
+# Absorbs SRV-002 (Housing Support catalogue), SRV-005 (a product detail opens),
+# MTG-001 (Professional Services catalogue) and VCH-001 (the More hub).
+#
+# Verified to work without a session, so it runs in the guest half of this flow.
+- tapOn: 'Services\s*Tab 3 of 4'
+- extendedWaitUntil:
+    visible: "Categories"
+    timeout: 30000
+
+# The three category cards. Each is one node combining title and description, so the title
+# is matched inside it rather than as a standalone string.
+- assertVisible: "(?s).*Housing Support Products.*"
+- assertVisible: "(?s).*Professional Services.*"
+- assertVisible: "(?s).*More.*vouchers.*"
+
+# NAV-003: the bottom nav stays reachable on the Services tab.
+- assertVisible: 'Home\s*Tab 1 of 4'
+- assertVisible: 'Account\s*Tab 4 of 4'
+
+# SRV-002: the Housing Support catalogue lists its six products.
+- tapOn: "(?s).*Housing Support Products.*"
+- extendedWaitUntil:
+    visible: "Explore Housing Support Products"
+    timeout: 30000
+- assertVisible: "(?s).*Off-plan Units.*"
+- assertVisible: "(?s).*Ready Units.*"
+- assertVisible: "(?s).*Land support.*"
+- assertVisible: "(?s).*Eligibility Checker.*"
+- assertVisible: "(?s).*Real estate tax exemption.*"
+- assertVisible: "(?s).*Financial advisory.*"
+
+# SRV-005: a product opens its detail page. This one is served in a WebView, which is the
+# part of the app most exposed to the corporate TLS interception on this network - if it
+# ever comes up blank, that is an environment failure rather than a product regression.
+- tapOn: "(?s).*Off-plan Units.*"
+# The page is served in a WebView. Wait on its rendered content rather than on the CTA:
+# a blank WebView (the TLS-interception failure mode this case has always guarded) fails
+# here, which keeps that signal intact.
+- extendedWaitUntil:
+    visible: "Product Advantages"
+    timeout: 60000
+
+# Build PRE-4.7.6-1283 raises a cookie-consent modal over the lower half of this page
+# (bounds [0,1407]-[997,2106]), which is exactly where the CTA sits. "Reject cookies" is
+# used rather than "Accept all cookies": it dismisses the modal just as reliably (verified
+# live) without storing tracking cookies. It is a WebView preference only - no account,
+# booking or business data is touched.
+- runFlow:
+    when:
+      visible: "Reject cookies"
+    commands:
+      - tapOn: "Reject cookies"
+      - waitForAnimationToEnd:
+          timeout: 5000
+
+# SRV-005 expected result, unchanged: the product detail page exposes its "View units"
+# CTA. On this build that CTA renders BELOW THE FOLD, and extendedWaitUntil does not
+# scroll - which is the whole reason this step failed. Verified live: the CTA exists, is
+# clickable, and is reached by scrolling. It is NOT replaced by "Off-plan Projects",
+# which is the breadcrumb and page heading (clickable=false), so the selector is kept.
+- scrollUntilVisible:
+    element:
+      text: "View units"
+    direction: DOWN
+    timeout: 45000
+- assertVisible: "Close"
+
+# NAV-001: back unwinds the product detail to the catalogue...
+- back
+- extendedWaitUntil:
+    visible: "Explore Housing Support Products"
+    timeout: 30000
+- assertNotVisible: "View units"
+
+# ...and the catalogue back to the Services tab.
+- back
+- extendedWaitUntil:
+    visible: "Categories"
+    timeout: 30000
+
+# MTG-001: the Professional Services catalogue lists its four services.
+- tapOn: "(?s).*Professional Services.*"
+- extendedWaitUntil:
+    visible: "Explore Professional Services"
+    timeout: 30000
+- assertVisible: "(?s).*Farz certificate.*"
+- assertVisible: "(?s).*Online lending.*"
+- assertVisible: "(?s).*Mortgage Calculator.*"
+- assertVisible: "(?s).*Resell offplan units.*"
+
+- back
+- extendedWaitUntil:
+    visible: "Categories"
+    timeout: 30000
+
+# VCH-001: the More hub lists its four sections.
+- tapOn: "(?s).*More.*vouchers.*"
+- extendedWaitUntil:
+    visible: "Explore More"
+    timeout: 30000
+- assertVisible: "(?s).*Sakani News.*"
+- assertVisible: "(?s).*Asset and Facility Management.*"
+- assertVisible: "(?s).*Sakani Offers.*"
+- assertVisible: "(?s).*Sakani Metaverse.*"
+
+- back
+- extendedWaitUntil:
+    visible: "Categories"
+    timeout: 30000
+# --- end SRV-001
+
+# --- HOME-006, guest half: an unauthenticated Home offers sign-in and does not greet anyone.
+# Asserted here, before logging in, so the two halves are compared within one run.
+- tapOn: 'Home\s*Tab 1 of 4'
+- extendedWaitUntil:
+    visible: "(?s).*Login / Sign up.*"
+    timeout: 30000
+# Build PRE-4.7.6-1283 greets with "Hello, <name>" where earlier builds used the
+# time-of-day form. Both are excluded here. The ",\s*\S" tail on the Hello branch is
+# deliberate: a guest surface legitimately renders a bare "Hello" with no name, and it is
+# the NAME that would prove a personalised greeting leaked into the guest Home. The
+# time-of-day branch keeps its original unrestricted form, so this is not weakened.
+- assertNotVisible: '(?si)(Good (morning|afternoon|evening).*|Hello,\s*\S.*)'
+
+# Authenticate. This mirrors login.yaml's proven happy-path sequence and selectors without
+# modifying it; the AUTH-002 validation cases and the AUTH-009 restart check remain owned by
+# login.yaml and are not duplicated here.
+- tapOn: "(?s).*Login / Sign up.*"
+- extendedWaitUntil:
+    visible: "Continue with N[ae]fath"
+    timeout: 30000
+- tapOn: "Enter your ID, phone number,? or email"
+- inputText: ${NATIONAL_ID}
+- tapOn: "Continue"
+
+- extendedWaitUntil:
+    visible: "Login with nafath"
+    timeout: 30000
+# The Nafath screen must carry EXACTLY the requested ID before the session is created - the last
+# point at which a wrong account can be stopped before it is authenticated.
+- assertVisible: ${NATIONAL_ID}
+
+- takeScreenshot: prefix-home-nafath

@@ -1,0 +1,48 @@
+# PROBE (exploration only): new generated user -> Nafath -> "Personal information" (pre-filled)
+# -> Continue once -> capture the next screen. No other input.
+appId: fi.iwa.sakani
+name: PROBE - new user registration discovery
+---
+- evalScript: ${output.generatedNationalId = String(Math.floor(1000000000 + Math.random() * 1000000000))}
+- evalScript: "${console.log('PROBE GENERATED NATIONAL ID = [' + output.generatedNationalId + ']')}"
+- launchApp:
+    clearState: true
+- runFlow:
+    file: D:/Automation/Maestro-Mobile/.maestro/subflows/clear-overlays.yaml
+    env:
+      ANCHOR: "(?s).*Login / Sign up.*"
+- tapOn: "(?s).*Login / Sign up.*"
+- extendedWaitUntil:
+    visible: "Continue with N[ae]fath"
+    timeout: 45000
+- tapOn: "Enter your ID, phone number,? or email"
+- inputText: ${output.generatedNationalId}
+- tapOn: "Continue"
+- extendedWaitUntil:
+    visible: "Login with nafath"
+    timeout: 45000
+- tapOn: "Confirm"
+- extendedWaitUntil:
+    visible: "Personal information"
+    timeout: 90000
+- takeScreenshot: probe2-1-personal-info
+- tapOn: "Continue"
+- waitForAnimationToEnd:
+    timeout: 8000
+- takeScreenshot: probe2-2-after-continue
+- runFlow:
+    optional: true
+    commands:
+      - assertVisible: "DUMP-AFTER-CONTINUE"
+- swipe:
+    start: "50%,80%"
+    end: "50%,30%"
+    duration: 700
+- waitForAnimationToEnd:
+    timeout: 4000
+- takeScreenshot: probe2-3-scrolled
+- runFlow:
+    optional: true
+    commands:
+      - assertVisible: "DUMP-SCROLLED"
+- assertVisible: "PROBE-END-MARKER-NOT-PRESENT"

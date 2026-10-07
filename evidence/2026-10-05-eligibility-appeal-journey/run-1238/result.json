@@ -1,0 +1,19 @@
+{
+  "flow": "check-eligibility",
+  "file": ".maestro/e2e/check-eligibility.yaml",
+  "suite": "e2e",
+  "tags": [
+    "e2e",
+    "eligibility",
+    "critical"
+  ],
+  "startedAt": "2026-10-05T09:38:16.348Z",
+  "durationMs": 211461,
+  "logPath": "report-dashboard/maestro-output/check-eligibility/maestro.log",
+  "status": "FAIL",
+  "exitCode": 1,
+  "failedSteps": 4,
+  "firstFailure": "Assert that \"Personal information\" is visible... FAILED",
+  "envReason": null,
+  "npsAppearances": 0
+}

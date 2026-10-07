@@ -1,0 +1,11 @@
+
+> Sakani-mobileapp@1.0.0 e2e:check-eligibility
+> node report-dashboard/run-maestro.js --include-e2e --yes-i-understand-this-changes-business-data --flows "check elgibilty" && npm run post-test
+
+Device emulator-5554 | 1 flow(s) | e2e INCLUDED
+
+check elgibilty ... FAIL (exit 1, 366s)
+    Assert that "(?s)(?:${ANCHOR}|.*would you recommend benefiting from Sakani.*|Thank you for your feedback)" is visible...
+
+0 passed, 1 failed, 0 blocked/unresolved
+Now run: npm run post-test

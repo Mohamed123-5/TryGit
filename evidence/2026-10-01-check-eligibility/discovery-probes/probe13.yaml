@@ -1,0 +1,214 @@
+# PROBE: sign in as the probe-registered generated user 1617798968 (not a business account),
+# Eligibility -> Step 1 Terms accepted -> capture Step 2 while scrolling. Step 2 is NOT filled.
+appId: fi.iwa.sakani
+name: PROBE - divorce date control and bottom of step 3
+---
+- launchApp:
+    clearState: true
+- runFlow:
+    file: D:/Automation/Maestro-Mobile/.maestro/subflows/login.yaml
+    env:
+      NATIONAL_ID: "1617798968"
+- runFlow:
+    file: D:/Automation/Maestro-Mobile/.maestro/subflows/open-account-tab.yaml
+    env:
+      DESTINATION: "My bookings"
+- evalScript: ${output.accountService = "(?s)Eligibility checker status.*"}
+- runFlow:
+    file: D:/Automation/Maestro-Mobile/.maestro/subflows/open-account-service.yaml
+- extendedWaitUntil:
+    visible: "Check your eligibility"
+    timeout: 30000
+- tapOn: "Check your eligibility"
+- extendedWaitUntil:
+    visible: "Step 1 of 3"
+    timeout: 30000
+- tapOn: "I have read and understood the terms and conditions of the contract.*"
+- waitForAnimationToEnd:
+    timeout: 3000
+- takeScreenshot: probe8-1-terms-ticked
+- runFlow:
+    optional: true
+    commands:
+      - assertVisible: "DUMP-TERMS-TICKED"
+- tapOn:
+    text: "Accept and continue"
+    retryTapIfNoChange: false
+- extendedWaitUntil:
+    visible: "Step 2 of 3"
+    timeout: 30000
+- waitForAnimationToEnd:
+    timeout: 3000
+- tapOn:
+    width: 63
+    height: 63
+    tolerance: 3
+    below: "1. Have you or any of your dependents resided outside.*"
+    above: "2. Do you or your family have financial assets.*"
+    index: 1
+    retryTapIfNoChange: false
+- waitForAnimationToEnd:
+    timeout: 2000
+- tapOn:
+    width: 63
+    height: 63
+    tolerance: 3
+    below: "2. Do you or your family have financial assets.*"
+    above: "3. Did you or any of your dependents own a house title.*"
+    index: 1
+    retryTapIfNoChange: false
+- waitForAnimationToEnd:
+    timeout: 2000
+- tapOn:
+    width: 63
+    height: 63
+    tolerance: 3
+    below: "3. Did you or any of your dependents own a house title.*"
+    above: "Continue"
+    index: 1
+    retryTapIfNoChange: false
+- waitForAnimationToEnd:
+    timeout: 2000
+- takeScreenshot: probe13-1-step2-answered
+- runFlow:
+    optional: true
+    commands:
+      - assertVisible: "DUMP-STEP2-ANSWERED"
+- tapOn:
+    text: "Continue"
+    retryTapIfNoChange: false
+- extendedWaitUntil:
+    visible: "Step 3 of 3"
+    timeout: 30000
+- waitForAnimationToEnd:
+    timeout: 3000
+- tapOn:
+    text: "Select region"
+    index: 0
+- extendedWaitUntil:
+    visible: "Search"
+    timeout: 15000
+- tapOn: "Riyadh"
+- waitForAnimationToEnd:
+    timeout: 3000
+- tapOn:
+    text: "Select city"
+    index: 0
+- extendedWaitUntil:
+    visible: "Search"
+    timeout: 15000
+- takeScreenshot: probe13-CITY-LIST
+- runFlow:
+    optional: true
+    commands:
+      - assertVisible: "DUMP-CITY-LIST"
+- copyTextFrom:
+    below: "Search"
+    width: 1080
+    height: 147
+    tolerance: 4
+    index: 0
+- evalScript: "${console.log('PROBE PICK CITY-LIST = [' + maestro.copiedText + ']')}"
+- tapOn:
+    below: "Search"
+    width: 1080
+    height: 147
+    tolerance: 4
+    index: 0
+- waitForAnimationToEnd:
+    timeout: 3000
+- tapOn:
+    text: "Select region"
+    index: 0
+- extendedWaitUntil:
+    visible: "Search"
+    timeout: 15000
+- tapOn: "Riyadh"
+- waitForAnimationToEnd:
+    timeout: 3000
+- tapOn:
+    text: "Select city"
+    index: 0
+- extendedWaitUntil:
+    visible: "Search"
+    timeout: 15000
+- takeScreenshot: probe13-PREF-CITY-LIST
+- runFlow:
+    optional: true
+    commands:
+      - assertVisible: "DUMP-PREF-CITY-LIST"
+- copyTextFrom:
+    below: "Search"
+    width: 1080
+    height: 147
+    tolerance: 4
+    index: 0
+- evalScript: "${console.log('PROBE PICK PREF-CITY-LIST = [' + maestro.copiedText + ']')}"
+- tapOn:
+    below: "Search"
+    width: 1080
+    height: 147
+    tolerance: 4
+    index: 0
+- waitForAnimationToEnd:
+    timeout: 3000
+- takeScreenshot: probe13-STEP3-AFTER-REGIONS
+- runFlow:
+    optional: true
+    commands:
+      - assertVisible: "DUMP-STEP3-AFTER-REGIONS"
+- scrollUntilVisible:
+    element:
+      text: "Select an option"
+    direction: DOWN
+    timeout: 15000
+- tapOn: "Select an option"
+- waitForAnimationToEnd:
+    timeout: 4000
+- takeScreenshot: probe13-HOUSING-LIST
+- runFlow:
+    optional: true
+    commands:
+      - assertVisible: "DUMP-HOUSING-LIST"
+- tapOn: "Rented house"
+- waitForAnimationToEnd:
+    timeout: 3000
+- takeScreenshot: probe13-AFTER-HOUSING
+- runFlow:
+    optional: true
+    commands:
+      - assertVisible: "DUMP-AFTER-HOUSING"
+- scrollUntilVisible:
+    element:
+      text: "Enter the date of divorce"
+    direction: DOWN
+    timeout: 15000
+- hideKeyboard
+- tapOn: "Hijri"
+- waitForAnimationToEnd:
+    timeout: 4000
+- takeScreenshot: probe13-AFTER-HIJRI-TAP
+- runFlow:
+    optional: true
+    commands:
+      - assertVisible: "DUMP-AFTER-HIJRI-TAP"
+- back
+- waitForAnimationToEnd:
+    timeout: 3000
+- scrollUntilVisible:
+    element:
+      text: "Family Information"
+    direction: DOWN
+    timeout: 15000
+- swipe:
+    start: "50%,70%"
+    end: "50%,35%"
+    duration: 700
+- waitForAnimationToEnd:
+    timeout: 3000
+- takeScreenshot: probe13-BOTTOM
+- runFlow:
+    optional: true
+    commands:
+      - assertVisible: "DUMP-BOTTOM"
+- assertVisible: "PROBE-END-MARKER-NOT-PRESENT"

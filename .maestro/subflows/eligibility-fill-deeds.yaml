@@ -1,0 +1,395 @@
+# Eligibility - complete EVERY deed on "Deed information": Deed Type = "Housing", then Construction
+# Status = "Completed constructing" (proven live with 3 deeds). Called by subflows/eligibility-check.yaml
+# whenever "Deed information" is shown; deeds are part of the user's real profile, never a rejection.
+appId: fi.iwa.sakani
+name: Eligibility - complete all deeds (Housing / Completed constructing)
+---
+# ==========================================================================================
+# 7. DEED INFORMATION (still Step 3) - for EVERY deed: Deed Type = "Housing", then
+#    Construction Status = "Completed constructing"
+# ==========================================================================================
+# Profiles owning property get "Deed information" - one card per deed (Deed number, Deed owner,
+# mandatory "Deed Type *" dropdown). Choosing a Deed Type reveals a dependent mandatory
+# "Construction Status *" dropdown on THE SAME card (options Under constructing / Completed
+# constructing / Empty land / Mortgaged). Both show "Select an option" when unset, so that text alone
+# never identifies a field.
+#
+# EACH DEED IS ONE UNIT, bound to its own Deed number N:
+#   N          = the nearest long number ABOVE the first unset Deed Type placeholder on screen
+#   Deed Type  = "Select an option" below  [the "Deed Type" label below N]          -> "Housing"
+#   Constr.St. = "Select an option" below  [the "Construction Status" label below N] -> "Completed constructing"
+#   proofs     = the chosen value below the same label below N
+# `below` resolves to the NEAREST element, so each label is N's own.
+# Additionally each opened list must CONTAIN the required value before anything is tapped (searched
+# or scrolled for): a wrongly identified dropdown can never receive a value - the run stops instead.
+# No deed number exposed -> STOP (the fields cannot be tied to a deed safely).
+# DEED DROPDOWNS (tolerant of layout, strict on values):
+#   (a) SCROLL: small bounded steps (swipe 70% -> 55%, inside the scroll area, never on the fixed
+#       Confirm/Back bar; max 6) until THIS deed's dropdown is on screen. No size requirement - a
+#       partly clipped control is reported with clipped bounds and Maestro taps its visible centre,
+#       which lies inside the scroll area, never on the bar.
+#   (b) OPEN: tap that dropdown. An open list hides the page from the hierarchy (only the list title,
+#       its options, Cancel and a scrim are exposed), so "Deed information" disappearing proves a list
+#       is open, whatever its style. If it did not open, recentre (one 10 % step) and tap THE SAME
+#       field-bound selector once more; still closed -> STOP. The retry is a selector tap on the page
+#       field, so it can never land on an open list.
+#   (c) SELECT: only the exact required text BELOW the list's own title ("Deed Type" / "Construction
+#       Status"), and only while the page is hidden. A list for the other field lacks that title and
+#       the required option, a page value cannot match - no wrong value can ever be chosen.
+#   (d) PROVE: back on the page, the value is shown below THIS deed's label (not persisted -> STOP).
+# Loop: one deed per pass; cards below the fold are reached by scrolling; ends after two passes
+# without an unset Deed Type (bound 12 = deeds + scrolls, never a second attempt at the same field).
+#
+# SPEED: a Maestro visibility condition answers at once when the element is in the state it asks
+# about, but spends up to ~7 s waiting when it is not (visible on an absent element, notVisible on a
+# present one). Every state check below therefore asks for the state that normally holds (field on
+# screen -> `visible`; list open, no Search box, no further deed right after one was completed ->
+# `notVisible`) and records the answer in a flag; the unusual case costs what it always cost. The
+# proofs (asserts with labels) are unchanged.
+- runFlow:
+    when:
+      visible: "Deed information"
+    commands:
+      - evalScript: ${output.deedCount = 0}
+      - evalScript: ${output.deedEmptyPasses = 0}
+      - evalScript: ${output.deedLog = ''}
+      - evalScript: ${output.deedJustCompleted = false}
+      - repeat:
+          times: 12
+          while:
+            true: ${output.deedEmptyPasses < 2}
+          commands:
+            - evalScript: ${output.deedFoundThisPass = false}
+            # Is an unset Deed Type on screen? Right after a deed was completed the next card is normally
+            # below the fold (asked with notVisible); otherwise it is normally on screen (asked with visible).
+            - evalScript: ${output.deedOnScreen = output.deedJustCompleted === true}
+            - runFlow:
+                when:
+                  true: ${output.deedJustCompleted === true}
+                commands:
+                  - runFlow:
+                      when:
+                        notVisible:
+                          text: "Select an option"
+                          below: "Deed Type.*"
+                      commands:
+                        - evalScript: ${output.deedOnScreen = false}
+            - runFlow:
+                when:
+                  true: ${output.deedJustCompleted !== true}
+                commands:
+                  - runFlow:
+                      when:
+                        visible:
+                          text: "Select an option"
+                          below: "Deed Type.*"
+                      commands:
+                        - evalScript: ${output.deedOnScreen = true}
+            - evalScript: ${output.deedJustCompleted = false}
+            - runFlow:
+                when:
+                  true: ${output.deedOnScreen === true}
+                commands:
+                  - evalScript: ${output.deedFoundThisPass = true}
+                  - evalScript: ${output.deedCount = output.deedCount + 1}
+                  # 1-2. Identify the deed: its own Deed number (required).
+                  - evalScript: ${output.deedNumber = ''}
+                  - runFlow:
+                      when:
+                        visible:
+                          text: "[0-9 ]{6,}"
+                          above:
+                            text: "Select an option"
+                            below: "Deed Type.*"
+                      commands:
+                        - copyTextFrom:
+                            text: "[0-9 ]{6,}"
+                            above:
+                              text: "Select an option"
+                              below: "Deed Type.*"
+                        - evalScript: ${output.deedNumber = String(maestro.copiedText).trim()}
+                  - assertTrue:
+                      condition: ${output.deedNumber.length >= 6}
+                      label: "DEED - no deed number exposed for this deed; its fields cannot be tied to it safely - STOPPED"
+
+                  # 3-5. THIS deed's Deed Type -> exact "Housing", proven on THIS deed.
+                  # (a) bring THIS deed's dropdown on screen: at most 6 small steps, no size requirement.
+                  - evalScript: ${output.fieldOnScreen = false}
+                  - evalScript: ${output.fieldScrolls = 0}
+                  - repeat:
+                      times: 7
+                      while:
+                        true: ${output.fieldOnScreen !== true}
+                      commands:
+                        - runFlow:
+                            when:
+                              visible:
+                                text: "Select an option"
+                                below:
+                                  text: "Deed Type.*"
+                                  below:
+                                    text: ${output.deedNumber}
+                            commands:
+                              - evalScript: ${output.fieldOnScreen = true}
+                        - runFlow:
+                            when:
+                              true: ${output.fieldOnScreen !== true && output.fieldScrolls < 6}
+                            commands:
+                              - swipe:
+                                  start: "50%,70%"
+                                  end: "50%,55%"
+                                  duration: 800
+                              - waitForAnimationToEnd:
+                                  timeout: 2000
+                              - evalScript: ${output.fieldScrolls = output.fieldScrolls + 1}
+                  - assertVisible:
+                      text: "Select an option"
+                      below:
+                        text: "Deed Type.*"
+                        below:
+                          text: ${output.deedNumber}
+                      label: "DEED TYPE - this deed's Deed Type field could not be brought on screen after 6 scroll steps - STOPPED (nothing tapped)"
+                  # (b) open it; if the list did not open, recentre and open THE SAME field once more.
+                  - tapOn:
+                      text: "Select an option"
+                      below:
+                        text: "Deed Type.*"
+                        below:
+                          text: ${output.deedNumber}
+                      retryTapIfNoChange: false
+                  - evalScript: ${output.listOpen = false}
+                  - runFlow:
+                      when:
+                        notVisible: "Deed information"
+                      commands:
+                        - evalScript: ${output.listOpen = true}
+                  - runFlow:
+                      when:
+                        true: ${output.listOpen !== true}
+                      commands:
+                        - swipe:
+                            start: "50%,70%"
+                            end: "50%,60%"
+                            duration: 800
+                        - waitForAnimationToEnd:
+                            timeout: 2000
+                        - tapOn:
+                            text: "Select an option"
+                            below:
+                              text: "Deed Type.*"
+                              below:
+                                text: ${output.deedNumber}
+                            retryTapIfNoChange: false
+                  - extendedWaitUntil:
+                      notVisible: "Deed information"
+                      timeout: 5000
+                      label: "DEED TYPE - this deed's Deed Type list did not open after 2 bounded attempts - STOPPED (nothing selected)"
+                  - waitForAnimationToEnd:
+                      timeout: 3000
+                  - takeScreenshot: elig-deed-type-options
+                  # (c) exact "Housing" inside THIS list: below the list's own "Deed Type" title (the
+                  #     page behind a list is not exposed, so a page value can never match). A Search box,
+                  #     when the list has one, narrows it first.
+                  - evalScript: ${output.listHasSearch = true}
+                  - runFlow:
+                      when:
+                        notVisible: "Search"
+                      commands:
+                        - evalScript: ${output.listHasSearch = false}
+                  - runFlow:
+                      when:
+                        true: ${output.listHasSearch === true}
+                      commands:
+                        - tapOn: "Search"
+                        - inputText: "Housing"
+                        - hideKeyboard
+                        - waitForAnimationToEnd:
+                            timeout: 3000
+                  - scrollUntilVisible:
+                      element:
+                        text: "Housing"
+                        below: "Deed Type.*"
+                      direction: DOWN
+                      timeout: 20000
+                      label: "DEED TYPE - exact 'Housing' is not offered in this deed's Deed Type list - STOPPED (no other value chosen; see elig-deed-type-options)"
+                  - assertNotVisible:
+                      text: "Deed information"
+                      label: "DEED TYPE - the list closed before Housing could be chosen - STOPPED (nothing selected)"
+                  - tapOn:
+                      text: "Housing"
+                      below: "Deed Type.*"
+                      retryTapIfNoChange: false
+                  # (d) back on the page, Housing on THIS deed.
+                  - extendedWaitUntil:
+                      visible: "Deed information"
+                      timeout: 15000
+                      label: "DEED TYPE - did not return to Deed information after choosing Housing"
+                  - assertVisible:
+                      text: "Housing"
+                      below:
+                        text: "Deed Type.*"
+                        below:
+                          text: ${output.deedNumber}
+                      label: "DEED TYPE - Housing did not persist on this deed's Deed Type"
+
+                  # 6-8. THE SAME deed's Construction Status -> exact "Completed constructing".
+                  # (a) bring THIS deed's dropdown on screen (the label alone is not enough).
+                  - evalScript: ${output.fieldOnScreen = false}
+                  - evalScript: ${output.fieldScrolls = 0}
+                  - repeat:
+                      times: 7
+                      while:
+                        true: ${output.fieldOnScreen !== true}
+                      commands:
+                        - runFlow:
+                            when:
+                              visible:
+                                text: "Select an option"
+                                below:
+                                  text: "Construction Status.*"
+                                  below:
+                                    text: ${output.deedNumber}
+                            commands:
+                              - evalScript: ${output.fieldOnScreen = true}
+                        - runFlow:
+                            when:
+                              true: ${output.fieldOnScreen !== true && output.fieldScrolls < 6}
+                            commands:
+                              - swipe:
+                                  start: "50%,70%"
+                                  end: "50%,55%"
+                                  duration: 800
+                              - waitForAnimationToEnd:
+                                  timeout: 2000
+                              - evalScript: ${output.fieldScrolls = output.fieldScrolls + 1}
+                  - assertVisible:
+                      text: "Select an option"
+                      below:
+                        text: "Construction Status.*"
+                        below:
+                          text: ${output.deedNumber}
+                      label: "CONSTRUCTION STATUS - this deed shows no Construction Status field on screen after Housing (6 scroll steps) - STOPPED (nothing tapped)"
+                  # (b) open it; if the list did not open, recentre and open THE SAME field once more.
+                  - tapOn:
+                      text: "Select an option"
+                      below:
+                        text: "Construction Status.*"
+                        below:
+                          text: ${output.deedNumber}
+                      retryTapIfNoChange: false
+                  - evalScript: ${output.listOpen = false}
+                  - runFlow:
+                      when:
+                        notVisible: "Deed information"
+                      commands:
+                        - evalScript: ${output.listOpen = true}
+                  - runFlow:
+                      when:
+                        true: ${output.listOpen !== true}
+                      commands:
+                        - swipe:
+                            start: "50%,70%"
+                            end: "50%,60%"
+                            duration: 800
+                        - waitForAnimationToEnd:
+                            timeout: 2000
+                        - tapOn:
+                            text: "Select an option"
+                            below:
+                              text: "Construction Status.*"
+                              below:
+                                text: ${output.deedNumber}
+                            retryTapIfNoChange: false
+                  - extendedWaitUntil:
+                      notVisible: "Deed information"
+                      timeout: 5000
+                      label: "CONSTRUCTION STATUS - this deed's Construction Status list did not open after 2 bounded attempts - STOPPED (nothing selected)"
+                  - waitForAnimationToEnd:
+                      timeout: 3000
+                  - takeScreenshot: elig-construction-status-options
+                  # (c) exact "Completed constructing" inside THIS list, below the list's own title.
+                  - evalScript: ${output.listHasSearch = true}
+                  - runFlow:
+                      when:
+                        notVisible: "Search"
+                      commands:
+                        - evalScript: ${output.listHasSearch = false}
+                  - runFlow:
+                      when:
+                        true: ${output.listHasSearch === true}
+                      commands:
+                        - tapOn: "Search"
+                        - inputText: "Completed constructing"
+                        - hideKeyboard
+                        - waitForAnimationToEnd:
+                            timeout: 3000
+                  - scrollUntilVisible:
+                      element:
+                        text: "Completed constructing"
+                        below: "Construction Status.*"
+                      direction: DOWN
+                      timeout: 20000
+                      label: "CONSTRUCTION STATUS - exact 'Completed constructing' is not offered in this deed's list - STOPPED (no other value chosen; see elig-construction-status-options)"
+                  - assertNotVisible:
+                      text: "Deed information"
+                      label: "CONSTRUCTION STATUS - the list closed before Completed constructing could be chosen - STOPPED (nothing selected)"
+                  - tapOn:
+                      text: "Completed constructing"
+                      below: "Construction Status.*"
+                      retryTapIfNoChange: false
+                  # (d) back on the page, Completed constructing on THIS deed.
+                  - extendedWaitUntil:
+                      visible: "Deed information"
+                      timeout: 15000
+                      label: "CONSTRUCTION STATUS - did not return to Deed information after the choice"
+                  - assertVisible:
+                      text: "Completed constructing"
+                      below:
+                        text: "Construction Status.*"
+                        below:
+                          text: ${output.deedNumber}
+                      label: "CONSTRUCTION STATUS - Completed constructing is not shown on this deed"
+
+                  # 9. One log line per deed.
+                  - evalScript: ${output.deedLog = output.deedLog + 'DEED ' + output.deedCount + ' [' + output.deedNumber + '] Housing / Completed constructing; '}
+                  - evalScript: "${console.log('DEED ' + output.deedCount + ' [' + output.deedNumber + '] - Type [Housing] - Construction Status [Completed constructing]')}"
+                  - evalScript: ${output.deedJustCompleted = true}
+            - runFlow:
+                when:
+                  true: ${output.deedFoundThisPass !== true}
+                commands:
+                  - evalScript: ${output.deedEmptyPasses = output.deedEmptyPasses + 1}
+                  - swipe:
+                      start: "50%,70%"
+                      end: "50%,40%"
+                      duration: 600
+                  - waitForAnimationToEnd:
+                      timeout: 3000
+            - runFlow:
+                when:
+                  true: ${output.deedFoundThisPass === true}
+                commands:
+                  - evalScript: ${output.deedEmptyPasses = 0}
+      # All deeds done: at least one, and no unset dropdown of either kind left on screen.
+      - assertTrue:
+          condition: ${output.deedCount > 0}
+          label: "DEED - Deed information opened but no deed was set"
+      - assertNotVisible:
+          text: "Select an option"
+          label: "DEED - an unset Deed Type or Construction Status remains"
+      - evalScript: "${console.log('DEED INFORMATION - ' + output.deedCount + ' deed(s): ' + output.deedLog)}"
+      - takeScreenshot: elig-6-deeds-complete
+      # Confirm ONCE, never re-tapped; the next destination is evaluated by the result gate.
+      - scrollUntilVisible:
+          element:
+            text: "Confirm"
+          direction: DOWN
+          timeout: 15000
+      - tapOn:
+          text: "Confirm"
+          retryTapIfNoChange: false
+      - waitForAnimationToEnd:
+          timeout: 15000
+      - assertNotVisible:
+          text: '(?s)(.*There.s something wrong.*|.*the service is down.*|Error!)'
+          label: "DEED INFORMATION - the product reported an error after Confirm"

@@ -1,0 +1,4 @@
+appId: fi.iwa.sakani
+name: scope sub that receives LEAKTEST
+---
+- assertTrue: ${typeof LEAKTEST !== "undefined" && String(LEAKTEST) === "yes"}

@@ -1,0 +1,39 @@
+# READ-ONLY: where is booking 01-01-0504-999-182 now? Only tabs are tapped.
+appId: fi.iwa.sakani
+name: PROBE - state of booking 999-182 (read-only)
+---
+- launchApp:
+    clearState: true
+- runFlow:
+    file: D:/Automation/Maestro-Mobile/.maestro/subflows/login.yaml
+    env:
+      NATIONAL_ID: "1000011487"
+- runFlow:
+    file: D:/Automation/Maestro-Mobile/.maestro/subflows/open-account-tab.yaml
+    env:
+      DESTINATION: "My bookings"
+- runFlow:
+    file: D:/Automation/Maestro-Mobile/.maestro/subflows/tap-until-destination.yaml
+    env:
+      TARGET: "My bookings"
+      DESTINATION: 'Cancelled\s*Tab 4 of 4'
+- tapOn: 'Cancelled\s*Tab 4 of 4'
+- waitForAnimationToEnd:
+    timeout: 8000
+- extendedWaitUntil:
+    visible: "(?s).*(Unit code|don.t have any).*"
+    timeout: 60000
+- takeScreenshot: probe-cancelled-tab
+- copyTextFrom:
+    text: "(?s).*(Unit code|don.t have any).*"
+    index: 0
+- evalScript: "${console.log('PROBE CANCELLED TOP [' + String(maestro.copiedText).replace(/\n/g, ' | ') + ']')}"
+- tapOn: 'All\s*Tab 1 of 4'
+- waitForAnimationToEnd:
+    timeout: 8000
+- takeScreenshot: probe-all-tab
+- copyTextFrom:
+    text: "(?s).*(Unit code|don.t have any).*"
+    index: 0
+- evalScript: "${console.log('PROBE ALL TOP [' + String(maestro.copiedText).replace(/\n/g, ' | ') + ']')}"
+- assertVisible: "PROBE-END-MARKER-NOT-PRESENT"

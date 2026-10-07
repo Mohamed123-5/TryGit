@@ -1,0 +1,378 @@
+forbidden-step pattern: tapOn: "(Reserve unit|Pay booking fee|Pay now)"|inputText: \$\{CARD_|Card Holder|Card Number
+check-syntax .maestro/_contract-resume.yaml: OK
+check-syntax .maestro/subflows/login.yaml: OK
+check-syntax .maestro/subflows/clear-overlays.yaml: OK
+check-syntax .maestro/subflows/verify-signed-in-account.yaml: OK
+START 13:24:27  maestro test -e NATIONAL_ID=1119880072 .maestro/_contract-resume.yaml
+13:24:34.086 >> Assert that ${String(NATIONAL_ID).length === 10 && !/[^0-9]/.test(String(NATIONAL_ID)) && (String(NATIONAL_ID).charAt(0) === "1" || String(NATIONAL_ID).charAt(0) === "2")} is true
+13:24:34.150    COMPLETED  Assert that ${String(NATIONAL_ID).length === 10 && !/[^0-9]/.test(String(NATIONAL_ID)) && (String(NATIONAL_ID).charAt(0) === "1" || String(NATIONAL_ID).charAt(0) === "2")} is true
+13:24:34.151 >> Run ${console.log('FULL JOURNEY TARGET NATIONAL_ID = [' + NATIONAL_ID + ']')}
+13:24:34.162    COMPLETED  Run ${console.log('FULL JOURNEY TARGET NATIONAL_ID = [' + NATIONAL_ID + ']')}
+13:24:34.164 >> Run ${output.targetNationalId = String(NATIONAL_ID)}
+13:24:34.181    COMPLETED  Run ${output.targetNationalId = String(NATIONAL_ID)}
+13:24:34.182 >> Launch app "fi.iwa.sakani"
+13:24:38.963    COMPLETED  Launch app "fi.iwa.sakani"
+13:24:38.964 >> Repeat while "My bookings" is not visible (up to 5 times)
+13:24:41.989 >> Run ${output.anchorOptional = true}
+13:24:41.996    COMPLETED  Run ${output.anchorOptional = true}
+13:24:41.997 >> Run subflows/clear-overlays.yaml
+13:24:42.008 >> Repeat while "${ANCHOR}" is not visible (up to 20 times)
+13:24:44.028 >> Run flow when "Don.t allow" is visible
+13:24:49.535    SKIPPED  Run flow when "Don.t allow" is visible
+13:24:49.536 >> Run flow when "Skip" is visible
+13:24:49.964    SKIPPED  Run flow when "Skip" is visible
+13:24:49.966 >> Run flow when "Dismiss" is visible
+13:24:50.199 >> Tap on "Dismiss"
+13:24:54.584    COMPLETED  Tap on "Dismiss"
+13:24:54.585 >> Wait for animation to end within 3000 ms
+13:24:55.695    COMPLETED  Wait for animation to end within 3000 ms
+13:24:55.696    COMPLETED  Run flow when "Dismiss" is visible
+13:24:55.697 >> Run flow when "Ok" is visible
+13:25:02.912    SKIPPED  Run flow when "Ok" is visible
+13:25:02.912 >> Run flow when "Marketplace Day" is visible
+13:25:03.133    SKIPPED  Run flow when "Marketplace Day" is visible
+13:25:03.134 >> Run flow when "Start comparing properties" is visible
+13:25:03.275    SKIPPED  Run flow when "Start comparing properties" is visible
+13:25:03.276 >> Run flow when "Go to the weekly (offer|deal)" is visible
+13:25:03.490    SKIPPED  Run flow when "Go to the weekly (offer|deal)" is visible
+13:25:03.491 >> Run flow when "Update email" is visible
+13:25:03.708    SKIPPED  Run flow when "Update email" is visible
+13:25:03.709 >> Run flow when "Number and Email Already Linked" is visible
+13:25:03.937    SKIPPED  Run flow when "Number and Email Already Linked" is visible
+13:25:03.937 >> Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible
+13:25:04.057 >> Run flow when "(?s)(.*There.s something wrong.*|.*the service is down.*|Error!)" is not visible
+13:25:04.771 >> Run flow when "Submit" is visible
+13:25:04.861 >> Tap on point (73,1434)
+13:25:06.320    COMPLETED  Tap on point (73,1434)
+13:25:06.321 >> Wait for animation to end within 3000 ms
+13:25:07.191    COMPLETED  Wait for animation to end within 3000 ms
+13:25:07.192    COMPLETED  Run flow when "Submit" is visible
+13:25:07.193 >> Run flow when "(?s).*would you recommend benefiting from Sakani.*" is not visible
+13:25:07.812 >> Run ${console.log('NPS - gone after the close-X step')}
+13:25:07.816    COMPLETED  Run ${console.log('NPS - gone after the close-X step')}
+13:25:07.816    COMPLETED  Run flow when "(?s).*would you recommend benefiting from Sakani.*" is not visible
+13:25:07.817 >> Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible
+13:25:14.934    SKIPPED  Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible
+13:25:14.935    COMPLETED  Run flow when "(?s)(.*There.s something wrong.*|.*the service is down.*|Error!)" is not visible
+13:25:14.936    COMPLETED  Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible
+13:25:14.937 >> Run flow when "Maybe Later" is visible
+13:25:22.136    SKIPPED  Run flow when "Maybe Later" is visible
+13:25:22.136 >> Run flow when "Reject cookies" is visible
+13:25:22.289    SKIPPED  Run flow when "Reject cookies" is visible
+13:25:22.289 >> Run flow when "${ANCHOR}" is not visible
+13:25:22.409    SKIPPED  Run flow when "${ANCHOR}" is not visible
+13:25:22.485    COMPLETED  Repeat while "${ANCHOR}" is not visible (up to 20 times)
+13:25:22.487 >> Repeat while "(?s).*would you recommend benefiting from Sakani.*" is visible (up to 3 times)
+13:25:22.625 >> Run flow when "(?s)(.*There.s something wrong.*|.*the service is down.*|Error!)" is not visible
+13:25:23.343 >> Run flow when "Submit" is visible
+13:25:23.477 >> Tap on point (73,1434)
+13:25:24.594    COMPLETED  Tap on point (73,1434)
+13:25:24.594 >> Wait for animation to end within 3000 ms
+13:25:27.164    COMPLETED  Wait for animation to end within 3000 ms
+13:25:27.165    COMPLETED  Run flow when "Submit" is visible
+13:25:27.166 >> Run flow when "(?s).*would you recommend benefiting from Sakani.*" is not visible
+13:25:27.919 >> Run ${console.log('NPS - gone after the close-X step')}
+13:25:27.923    COMPLETED  Run ${console.log('NPS - gone after the close-X step')}
+13:25:27.923    COMPLETED  Run flow when "(?s).*would you recommend benefiting from Sakani.*" is not visible
+13:25:27.924 >> Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible
+13:25:34.597 >> Run ${console.log('NPS - still visible after the close X, drag fallback')}
+13:25:34.602    COMPLETED  Run ${console.log('NPS - still visible after the close X, drag fallback')}
+13:25:34.602 >> Swipe from (50%,58%) to (50%,99%) in 400 ms
+13:25:35.734    COMPLETED  Swipe from (50%,58%) to (50%,99%) in 400 ms
+13:25:35.735 >> Wait for animation to end within 4000 ms
+13:25:36.417    COMPLETED  Wait for animation to end within 4000 ms
+13:25:36.417 >> Run flow when "(?s).*would you recommend benefiting from Sakani.*" is not visible
+13:25:38.092 >> Run ${console.log('NPS - gone after the drag fallback')}
+13:25:38.098    COMPLETED  Run ${console.log('NPS - gone after the drag fallback')}
+13:25:38.099    COMPLETED  Run flow when "(?s).*would you recommend benefiting from Sakani.*" is not visible
+13:25:38.099    COMPLETED  Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible
+13:25:38.099    COMPLETED  Run flow when "(?s)(.*There.s something wrong.*|.*the service is down.*|Error!)" is not visible
+13:25:45.849 >> Run flow when "(?s)(.*There.s something wrong.*|.*the service is down.*|Error!)" is not visible
+13:25:46.553 >> Run flow when "Submit" is visible
+13:25:46.672 >> Tap on point (73,1434)
+13:25:47.788    COMPLETED  Tap on point (73,1434)
+13:25:47.788 >> Wait for animation to end within 3000 ms
+13:25:48.414    COMPLETED  Wait for animation to end within 3000 ms
+13:25:48.415    COMPLETED  Run flow when "Submit" is visible
+13:25:48.415 >> Run flow when "(?s).*would you recommend benefiting from Sakani.*" is not visible
+13:25:49.637 >> Run ${console.log('NPS - gone after the close-X step')}
+13:25:49.642    COMPLETED  Run ${console.log('NPS - gone after the close-X step')}
+13:25:49.643    COMPLETED  Run flow when "(?s).*would you recommend benefiting from Sakani.*" is not visible
+13:25:49.643 >> Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible
+13:25:56.779    SKIPPED  Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible
+13:25:56.780    COMPLETED  Run flow when "(?s)(.*There.s something wrong.*|.*the service is down.*|Error!)" is not visible
+13:25:57.729 >> Run flow when "(?s)(.*There.s something wrong.*|.*the service is down.*|Error!)" is not visible
+13:25:58.319 >> Run flow when "Submit" is visible
+13:25:58.532 >> Tap on point (73,1434)
+13:25:59.792    COMPLETED  Tap on point (73,1434)
+13:25:59.792 >> Wait for animation to end within 3000 ms
+13:26:00.649    COMPLETED  Wait for animation to end within 3000 ms
+13:26:00.650    COMPLETED  Run flow when "Submit" is visible
+13:26:00.650 >> Run flow when "(?s).*would you recommend benefiting from Sakani.*" is not visible
+13:26:02.360 >> Run ${console.log('NPS - gone after the close-X step')}
+13:26:02.365    COMPLETED  Run ${console.log('NPS - gone after the close-X step')}
+13:26:02.366    COMPLETED  Run flow when "(?s).*would you recommend benefiting from Sakani.*" is not visible
+13:26:02.366 >> Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible
+13:26:09.577 >> Run ${console.log('NPS - still visible after the close X, drag fallback')}
+13:26:09.585    COMPLETED  Run ${console.log('NPS - still visible after the close X, drag fallback')}
+13:26:09.586 >> Swipe from (50%,58%) to (50%,99%) in 400 ms
+13:26:10.844    COMPLETED  Swipe from (50%,58%) to (50%,99%) in 400 ms
+13:26:10.844 >> Wait for animation to end within 4000 ms
+13:26:11.530    COMPLETED  Wait for animation to end within 4000 ms
+13:26:11.531 >> Run flow when "(?s).*would you recommend benefiting from Sakani.*" is not visible
+13:26:12.286 >> Run ${console.log('NPS - gone after the drag fallback')}
+13:26:12.292    COMPLETED  Run ${console.log('NPS - gone after the drag fallback')}
+13:26:12.292    COMPLETED  Run flow when "(?s).*would you recommend benefiting from Sakani.*" is not visible
+13:26:12.292    COMPLETED  Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible
+13:26:12.293    COMPLETED  Run flow when "(?s)(.*There.s something wrong.*|.*the service is down.*|Error!)" is not visible
+13:26:19.511    COMPLETED  Repeat while "(?s).*would you recommend benefiting from Sakani.*" is visible (up to 3 times)
+13:26:19.511 >> Assert that "(?s).*would you recommend benefiting from Sakani.*" is not visible
+13:26:20.952    COMPLETED  Assert that "(?s).*would you recommend benefiting from Sakani.*" is not visible
+13:26:20.953 >> Run flow when ${output.anchorOptional !== true} is true
+13:26:20.957    SKIPPED  Run flow when ${output.anchorOptional !== true} is true
+13:26:20.958    COMPLETED  Run subflows/clear-overlays.yaml
+13:26:20.958 >> Run ${output.anchorOptional = false}
+13:26:20.960    COMPLETED  Run ${output.anchorOptional = false}
+13:26:20.961 >> Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible
+13:26:21.113 >> Run flow when "(?s)(.*There.s something wrong.*|.*the service is down.*|Error!)" is not visible
+13:26:21.764 >> Run flow when "Submit" is visible
+13:26:21.904 >> Run ${console.log('LEAVE HOME (after payment) - NPS up, closing it with its X, then Account at once')}
+13:26:21.909    COMPLETED  Run ${console.log('LEAVE HOME (after payment) - NPS up, closing it with its X, then Account at once')}
+13:26:21.910 >> Tap on point (73,1434)
+13:26:22.936    COMPLETED  Tap on point (73,1434)
+13:26:22.937    COMPLETED  Run flow when "Submit" is visible
+13:26:22.937    COMPLETED  Run flow when "(?s)(.*There.s something wrong.*|.*the service is down.*|Error!)" is not visible
+13:26:22.937    COMPLETED  Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible
+13:26:22.937 >> Tap on (Optional) "Account\s*Tab 4 of 4"
+13:26:25.235    COMPLETED  Tap on (Optional) "Account\s*Tab 4 of 4"
+13:26:25.888 >> Run ${output.anchorOptional = true}
+13:26:25.892    COMPLETED  Run ${output.anchorOptional = true}
+13:26:25.893 >> Run subflows/clear-overlays.yaml
+13:26:25.898 >> Repeat while "${ANCHOR}" is not visible (up to 20 times)
+13:26:32.925    SKIPPED  Repeat while "${ANCHOR}" is not visible (up to 20 times)
+13:26:32.926 >> Repeat while "(?s).*would you recommend benefiting from Sakani.*" is visible (up to 3 times)
+13:26:33.061    SKIPPED  Repeat while "(?s).*would you recommend benefiting from Sakani.*" is visible (up to 3 times)
+13:26:33.062 >> Assert that "(?s).*would you recommend benefiting from Sakani.*" is not visible
+13:26:33.723    COMPLETED  Assert that "(?s).*would you recommend benefiting from Sakani.*" is not visible
+13:26:33.724 >> Run flow when ${output.anchorOptional !== true} is true
+13:26:33.727    SKIPPED  Run flow when ${output.anchorOptional !== true} is true
+13:26:33.728    COMPLETED  Run subflows/clear-overlays.yaml
+13:26:33.728 >> Run ${output.anchorOptional = false}
+13:26:33.731    COMPLETED  Run ${output.anchorOptional = false}
+13:26:33.731 >> Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible
+13:26:40.859    SKIPPED  Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible
+13:26:40.860 >> Tap on (Optional) "Account\s*Tab 4 of 4"
+13:26:42.960    COMPLETED  Tap on (Optional) "Account\s*Tab 4 of 4"
+13:26:50.001    COMPLETED  Repeat while "My bookings" is not visible (up to 5 times)
+13:26:50.001 >> Run subflows/clear-overlays.yaml
+13:26:50.007 >> Repeat while "${ANCHOR}" is not visible (up to 20 times)
+13:26:57.072    SKIPPED  Repeat while "${ANCHOR}" is not visible (up to 20 times)
+13:26:57.073 >> Repeat while "(?s).*would you recommend benefiting from Sakani.*" is visible (up to 3 times)
+13:26:57.260    SKIPPED  Repeat while "(?s).*would you recommend benefiting from Sakani.*" is visible (up to 3 times)
+13:26:57.260 >> Assert that "(?s).*would you recommend benefiting from Sakani.*" is not visible
+13:26:57.944    COMPLETED  Assert that "(?s).*would you recommend benefiting from Sakani.*" is not visible
+13:26:57.944 >> Run flow when ${output.anchorOptional !== true} is true
+13:26:57.947 >> Repeat while "${ANCHOR}" is not visible (up to 6 times)
+13:26:58.060    SKIPPED  Repeat while "${ANCHOR}" is not visible (up to 6 times)
+13:26:58.060 >> Repeat while "(?s).*would you recommend benefiting from Sakani.*" is visible (up to 3 times)
+13:26:58.227    SKIPPED  Repeat while "(?s).*would you recommend benefiting from Sakani.*" is visible (up to 3 times)
+13:26:58.228 >> Assert that "(?s).*would you recommend benefiting from Sakani.*" is not visible
+13:26:58.885    COMPLETED  Assert that "(?s).*would you recommend benefiting from Sakani.*" is not visible
+13:26:58.886 >> Assert that "${ANCHOR}" is visible
+13:26:58.996    COMPLETED  Assert that "${ANCHOR}" is visible
+13:26:58.996    COMPLETED  Run flow when ${output.anchorOptional !== true} is true
+13:26:58.997    COMPLETED  Run subflows/clear-overlays.yaml
+13:26:58.997 >> Run subflows/verify-signed-in-account.yaml
+13:26:58.999 >> Assert that ${typeof NATIONAL_ID !== "undefined" && String(NATIONAL_ID).length === 10 && !/[^0-9]/.test(String(NATIONAL_ID))} is true
+13:26:59.003    COMPLETED  Assert that ${typeof NATIONAL_ID !== "undefined" && String(NATIONAL_ID).length === 10 && !/[^0-9]/.test(String(NATIONAL_ID))} is true
+13:26:59.004 >> Tap on "Profile details"
+13:27:01.727    COMPLETED  Tap on "Profile details"
+13:27:01.727 >> Assert that "Personal Detail(s)?" is visible
+13:27:02.376    COMPLETED  Assert that "Personal Detail(s)?" is visible
+13:27:02.376 >> Assert that "National ID" is visible
+13:27:02.449    COMPLETED  Assert that "National ID" is visible
+13:27:02.449 >> Assert that "${NATIONAL_ID}" is visible
+13:27:02.515    COMPLETED  Assert that "${NATIONAL_ID}" is visible
+13:27:02.516 >> Run ${output.profileNationalId = String(NATIONAL_ID)}
+13:27:02.520    COMPLETED  Run ${output.profileNationalId = String(NATIONAL_ID)}
+13:27:02.520 >> Run flow when "Personal Detail(s)?" is visible
+13:27:02.553 >> Press back
+13:27:03.817    COMPLETED  Press back
+13:27:03.819    COMPLETED  Run flow when "Personal Detail(s)?" is visible
+13:27:03.820 >> Assert that "My bookings" is visible
+13:27:03.905    COMPLETED  Assert that "My bookings" is visible
+13:27:03.905    COMPLETED  Run subflows/verify-signed-in-account.yaml
+13:27:03.906 >> Assert that ${output.profileNationalId === output.targetNationalId && output.targetNationalId === String(NATIONAL_ID)} is true
+13:27:03.912    COMPLETED  Assert that ${output.profileNationalId === output.targetNationalId && output.targetNationalId === String(NATIONAL_ID)} is true
+13:27:03.913 >> Assert that "My bookings" is visible
+13:27:04.041    COMPLETED  Assert that "My bookings" is visible
+13:27:04.042 >> Tap on "My bookings"
+13:27:06.560    COMPLETED  Tap on "My bookings"
+13:27:06.560 >> Assert that "My Bookings" is visible
+13:27:06.609    COMPLETED  Assert that "My Bookings" is visible
+13:27:06.610 >> Tap on "Active\s*Tab 2 of 4"
+13:27:08.723    COMPLETED  Tap on "Active\s*Tab 2 of 4"
+13:27:08.758 >> Assert that "(?s).*don.t have any active booking.*" is not visible
+13:27:09.391    COMPLETED  Assert that "(?s).*don.t have any active booking.*" is not visible
+13:27:09.392 >> Tap on "Ready to sign"
+13:27:11.540    COMPLETED  Tap on "Ready to sign"
+13:27:12.396 >> Tap on "All"
+13:27:14.324    COMPLETED  Tap on "All"
+13:27:16.821 >> Assert that "Booking Details" is visible
+13:27:17.622    COMPLETED  Assert that "Booking Details" is visible
+13:27:17.623 >> Assert that "Offplan MOH land" is visible
+13:27:17.679    COMPLETED  Assert that "Offplan MOH land" is visible
+13:27:17.679 >> Assert that "Booking fee status" is visible
+13:27:17.740    COMPLETED  Assert that "Booking fee status" is visible
+13:27:17.740 >> Assert that "Paid" is visible
+13:27:17.876    COMPLETED  Assert that "Paid" is visible
+13:27:17.876 >> Assert that "Invoice number" is visible
+13:27:18.682    COMPLETED  Assert that "Invoice number" is visible
+13:27:18.683 >> Take screenshot journey-6-booking-paid
+13:27:18.787    COMPLETED  Take screenshot journey-6-booking-paid
+13:27:18.787 >> Assert that "2609130000101982" is visible
+13:27:18.855    COMPLETED  Assert that "2609130000101982" is visible
+13:27:18.856 >> Scrolling UP until "Select payment method" is visible with speed 40, visibility percentage 100%, timeout 30000 ms, with centering disabled
+13:27:18.933    COMPLETED  Scrolling UP until "Select payment method" is visible with speed 40, visibility percentage 100%, timeout 30000 ms, with centering disabled
+13:27:18.935 >> Tap on "Select payment method"
+13:27:21.483    COMPLETED  Tap on "Select payment method"
+13:27:21.485 >> Assert that "Finalize sales contract" is visible
+13:27:21.516    COMPLETED  Assert that "Finalize sales contract" is visible
+13:27:21.516 >> Assert that "Step 1 of 2" is visible
+13:27:21.623    COMPLETED  Assert that "Step 1 of 2" is visible
+13:27:25.669 >> Run subflows/clear-overlays.yaml
+13:27:25.672 >> Repeat while "${ANCHOR}" is not visible (up to 20 times)
+13:27:32.675    SKIPPED  Repeat while "${ANCHOR}" is not visible (up to 20 times)
+13:27:32.676 >> Repeat while "(?s).*would you recommend benefiting from Sakani.*" is visible (up to 3 times)
+13:27:32.853    SKIPPED  Repeat while "(?s).*would you recommend benefiting from Sakani.*" is visible (up to 3 times)
+13:27:32.853 >> Assert that "(?s).*would you recommend benefiting from Sakani.*" is not visible
+13:27:33.473    COMPLETED  Assert that "(?s).*would you recommend benefiting from Sakani.*" is not visible
+13:27:33.474 >> Run flow when ${output.anchorOptional !== true} is true
+13:27:33.476 >> Repeat while "${ANCHOR}" is not visible (up to 6 times)
+13:27:33.549    SKIPPED  Repeat while "${ANCHOR}" is not visible (up to 6 times)
+13:27:33.550 >> Repeat while "(?s).*would you recommend benefiting from Sakani.*" is visible (up to 3 times)
+13:27:33.736    SKIPPED  Repeat while "(?s).*would you recommend benefiting from Sakani.*" is visible (up to 3 times)
+13:27:33.736 >> Assert that "(?s).*would you recommend benefiting from Sakani.*" is not visible
+13:27:34.361    COMPLETED  Assert that "(?s).*would you recommend benefiting from Sakani.*" is not visible
+13:27:34.361 >> Assert that "${ANCHOR}" is visible
+13:27:34.440    COMPLETED  Assert that "${ANCHOR}" is visible
+13:27:34.441    COMPLETED  Run flow when ${output.anchorOptional !== true} is true
+13:27:34.441    COMPLETED  Run subflows/clear-overlays.yaml
+13:27:34.441 >> Assert that "Select payment schedule" is visible
+13:27:34.465    COMPLETED  Assert that "Select payment schedule" is visible
+13:27:36.438 >> Wait for animation to end within 8000 ms
+13:27:36.792    COMPLETED  Wait for animation to end within 8000 ms
+13:27:36.793 >> Tap on "Save and continue"
+13:27:38.800    COMPLETED  Tap on "Save and continue"
+13:27:38.800 >> Assert that "Sign sales contract" is visible
+13:27:51.735    COMPLETED  Assert that "Sign sales contract" is visible
+13:27:51.735 >> Assert that "Step 2 of 2" is visible
+13:27:52.291    COMPLETED  Assert that "Step 2 of 2" is visible
+13:27:52.291 >> Assert that "Approve" is visible
+13:27:52.347    COMPLETED  Assert that "Approve" is visible
+13:27:52.347 >> Assert that "Reject" is visible
+13:27:52.423    COMPLETED  Assert that "Reject" is visible
+13:27:52.424 >> Tap on "Approve"
+13:27:56.730    COMPLETED  Tap on "Approve"
+13:27:56.730 >> Assert that "Verification Code" is visible
+13:27:56.811    COMPLETED  Assert that "Verification Code" is visible
+13:27:56.811 >> Assert that "(?s).*Code has been sent to.*mobile number.*" is visible
+13:27:56.921    COMPLETED  Assert that "(?s).*Code has been sent to.*mobile number.*" is visible
+13:27:56.921 >> Assert that "OTP" is visible
+13:27:57.381    COMPLETED  Assert that "OTP" is visible
+13:27:57.382 >> Tap on "X", Below "OTP", Above "OTP Expires in:", Index: 0
+13:28:00.445    COMPLETED  Tap on "X", Below "OTP", Above "OTP Expires in:", Index: 0
+13:28:00.446 >> Input text ${CONTRACT_OTP}
+13:28:01.727    COMPLETED  Input text ${CONTRACT_OTP}
+13:28:01.727 >> Wait for animation to end within 15000 ms
+13:28:04.451    COMPLETED  Wait for animation to end within 15000 ms
+13:28:04.451 >> Assert that "(?s).*Sales contract has been signed.*" is visible
+13:28:07.766    COMPLETED  Assert that "(?s).*Sales contract has been signed.*" is visible
+13:28:07.766 >> Assert that "(?s).*(Invalid|incorrect|expired).*" is not visible
+13:28:08.636    COMPLETED  Assert that "(?s).*(Invalid|incorrect|expired).*" is not visible
+13:28:08.637 >> Assert that "There's something wrong. Please try again later!" is not visible
+13:28:10.237    COMPLETED  Assert that "There's something wrong. Please try again later!" is not visible
+13:28:10.237 >> Launch app "fi.iwa.sakani"
+13:28:15.217    COMPLETED  Launch app "fi.iwa.sakani"
+13:28:15.217 >> Repeat while "My bookings" is not visible (up to 5 times)
+13:28:17.737 >> Run ${output.anchorOptional = true}
+13:28:17.740    COMPLETED  Run ${output.anchorOptional = true}
+13:28:17.741 >> Run subflows/clear-overlays.yaml
+13:28:17.745 >> Repeat while "${ANCHOR}" is not visible (up to 20 times)
+13:28:21.599 >> Run flow when "Don.t allow" is visible
+13:28:24.932    SKIPPED  Run flow when "Don.t allow" is visible
+13:28:24.933 >> Run flow when "Skip" is visible
+13:28:25.051    SKIPPED  Run flow when "Skip" is visible
+13:28:25.051 >> Run flow when "Dismiss" is visible
+13:28:25.192 >> Tap on "Dismiss"
+13:28:27.575    COMPLETED  Tap on "Dismiss"
+13:28:27.575 >> Wait for animation to end within 3000 ms
+13:28:28.047    COMPLETED  Wait for animation to end within 3000 ms
+13:28:28.048    COMPLETED  Run flow when "Dismiss" is visible
+13:28:28.048 >> Run flow when "Ok" is visible
+13:28:36.759    SKIPPED  Run flow when "Ok" is visible
+13:28:36.760 >> Run flow when "Marketplace Day" is visible
+13:28:37.661    SKIPPED  Run flow when "Marketplace Day" is visible
+13:28:37.662 >> Run flow when "Start comparing properties" is visible
+13:28:37.828    SKIPPED  Run flow when "Start comparing properties" is visible
+13:28:37.829 >> Run flow when "Go to the weekly (offer|deal)" is visible
+13:28:38.071    SKIPPED  Run flow when "Go to the weekly (offer|deal)" is visible
+13:28:38.072 >> Run flow when "Update email" is visible
+13:28:38.265    SKIPPED  Run flow when "Update email" is visible
+13:28:38.265 >> Run flow when "Number and Email Already Linked" is visible
+13:28:38.640    SKIPPED  Run flow when "Number and Email Already Linked" is visible
+13:28:38.640 >> Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible
+13:28:38.741 >> Run flow when "(?s)(.*There.s something wrong.*|.*the service is down.*|Error!)" is not visible
+13:28:39.542 >> Run flow when "Submit" is visible
+13:28:39.641 >> Tap on point (73,1434)
+13:28:40.862    COMPLETED  Tap on point (73,1434)
+13:28:40.862 >> Wait for animation to end within 3000 ms
+13:28:41.729    COMPLETED  Wait for animation to end within 3000 ms
+13:28:41.729    COMPLETED  Run flow when "Submit" is visible
+13:28:41.730 >> Run flow when "(?s).*would you recommend benefiting from Sakani.*" is not visible
+13:28:42.454 >> Run ${console.log('NPS - gone after the close-X step')}
+13:28:42.458    COMPLETED  Run ${console.log('NPS - gone after the close-X step')}
+13:28:42.458    COMPLETED  Run flow when "(?s).*would you recommend benefiting from Sakani.*" is not visible
+13:28:42.459 >> Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible
+13:28:49.605    SKIPPED  Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible
+13:28:49.606    COMPLETED  Run flow when "(?s)(.*There.s something wrong.*|.*the service is down.*|Error!)" is not visible
+13:28:49.607    COMPLETED  Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible
+13:28:49.608 >> Run flow when "Maybe Later" is visible
+13:28:56.844    SKIPPED  Run flow when "Maybe Later" is visible
+13:28:56.844 >> Run flow when "Reject cookies" is visible
+13:28:57.036    SKIPPED  Run flow when "Reject cookies" is visible
+13:28:57.037 >> Run flow when "${ANCHOR}" is not visible
+13:28:57.180    SKIPPED  Run flow when "${ANCHOR}" is not visible
+13:28:57.280    COMPLETED  Repeat while "${ANCHOR}" is not visible (up to 20 times)
+13:28:57.281 >> Repeat while "(?s).*would you recommend benefiting from Sakani.*" is visible (up to 3 times)
+13:28:57.376 >> Run flow when "(?s)(.*There.s something wrong.*|.*the service is down.*|Error!)" is not visible
+13:28:57.987 >> Run flow when "Submit" is visible
+13:28:58.145 >> Tap on point (73,1434)
+13:29:00.759    COMPLETED  Tap on point (73,1434)
+13:29:00.760 >> Wait for animation to end within 3000 ms
+13:29:01.615    COMPLETED  Wait for animation to end within 3000 ms
+13:29:01.616    COMPLETED  Run flow when "Submit" is visible
+13:29:01.616 >> Run flow when "(?s).*would you recommend benefiting from Sakani.*" is not visible
+13:29:02.460 >> Run ${console.log('NPS - gone after the close-X step')}
+13:29:02.462    COMPLETED  Run ${console.log('NPS - gone after the close-X step')}
+13:29:02.464    COMPLETED  Run flow when "(?s).*would you recommend benefiting from Sakani.*" is not visible
+13:29:02.464 >> Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible
+13:29:09.301 >> Run ${console.log('NPS - still visible after the close X, drag fallback')}
+13:29:09.306    COMPLETED  Run ${console.log('NPS - still visible after the close X, drag fallback')}
+13:29:09.306 >> Swipe from (50%,58%) to (50%,99%) in 400 ms
+13:29:10.665    COMPLETED  Swipe from (50%,58%) to (50%,99%) in 400 ms
+13:29:10.665 >> Wait for animation to end within 4000 ms
+13:29:11.522    COMPLETED  Wait for animation to end within 4000 ms
+13:29:11.522 >> Run flow when "(?s).*would you recommend benefiting from Sakani.*" is not visible
+13:29:12.460 >> Run ${console.log('NPS - gone after the drag fallback')}
+13:29:12.465    COMPLETED  Run ${console.log('NPS - gone after the drag fallback')}
+13:29:12.465    COMPLETED  Run flow when "(?s).*would you recommend benefiting from Sakani.*" is not visible
+13:29:12.466    COMPLETED  Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible
+13:29:12.466    COMPLETED  Run flow when "(?s)(.*There.s something wrong.*|.*the service is down.*|Error!)" is not visible
+13:29:20.688    COMPLETED  Repeat while "(?s).*would you recommend benefiting from Sakani.*" is visible (up to 3 times)
+13:29:20.688 >> Assert that "(?s).*would you recommend benefiting from Sakani.*" is not visible
+13:29:38.551    FAILED  Assert that "(?s).*would you recommend benefiting from Sakani.*" is not visible
+13:29:38.922    FAILED  Run subflows/clear-overlays.yaml
+13:29:39.343    FAILED  Repeat while "My bookings" is not visible (up to 5 times)
+EXIT exit=1 failed=3 first_failed=[13:29:38.551 Assert that "(?s).*would you recommend benefiting from Sakani.*" is not visible FAILED]
+DONE 13:29:45

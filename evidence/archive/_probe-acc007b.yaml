@@ -1,0 +1,74 @@
+appId: fi.iwa.sakani
+name: PROBE ACC-007b - read this account bookings properly, on the session already signed in
+env:
+  NATIONAL_ID: '${typeof NATIONAL_ID === "undefined" ? "1000011485" : String(NATIONAL_ID)}'
+---
+# READ-ONLY. Opens no booking, cancels nothing, edits nothing.
+#
+# WHY THIS EXISTS
+# Probe ACC-007 read the Notifications Center correctly (empty after BOTH a cleared launch
+# and a warm relaunch), but its bookings read used a fixed 8s settle and captured the list
+# still in its skeleton state, so the booking states never got recorded. A fixed budget was
+# the wrong tool: this list is asserted on content, so it must WAIT for content.
+#
+# This runs on the session the previous probe left signed in - launchApp WITHOUT clearState -
+# so it costs a navigation rather than another full Nafath login. The account is pinned from
+# the profile first, because "My Bookings" itself shows no ID and reporting the wrong
+# account's bookings would be worse than reporting none.
+- evalScript: ${console.log('PROBE ACC-007b TARGET NATIONAL_ID = [' + NATIONAL_ID + ']')}
+- assertTrue: ${String(NATIONAL_ID).length === 10 && !/[^0-9]/.test(String(NATIONAL_ID)) && (String(NATIONAL_ID).charAt(0) === "1" || String(NATIONAL_ID).charAt(0) === "2")}
+
+- launchApp
+- runFlow:
+    file: subflows/clear-overlays.yaml
+    env:
+      ANCHOR: 'Account\s*Tab 4 of 4'
+- tapOn: 'Account\s*Tab 4 of 4'
+- runFlow:
+    file: subflows/clear-overlays.yaml
+    env:
+      ANCHOR: "Profile details"
+
+# IDENTITY GATE - prove which account this session belongs to before reading anything from it.
+- tapOn: "Profile details"
+- extendedWaitUntil:
+    visible: "Personal Detail(s)?"
+    timeout: 30000
+- assertVisible: ${NATIONAL_ID}
+- evalScript: "${console.log('PROBE ACC-007b: session confirmed as the requested account')}"
+- back
+
+- runFlow:
+    file: subflows/clear-overlays.yaml
+    env:
+      ANCHOR: "My bookings"
+- tapOn: "My bookings"
+- extendedWaitUntil:
+    visible: "My Bookings"
+    timeout: 45000
+
+# --- ALL tab: wait for real content, not for an animation budget.
+- tapOn: 'All\s*Tab 1 of 4'
+- extendedWaitUntil:
+    visible: "(?s).*Unit code.*"
+    timeout: 60000
+- takeScreenshot: probe-acc007b-A-all-tab
+- evalScript: "${console.log('PROBE ACC-007b: ALL tab captured with content')}"
+
+# --- COMPLETED tab. This is also BKG-011's precondition: does this account hold a completed
+# booking on PRE at all? Either render is a real answer, so the wait is on the tab having
+# finished loading (either a card or the empty state), and neither is asserted.
+- tapOn: 'Completed\s*Tab 3 of 4'
+- extendedWaitUntil:
+    visible: "(?s).*(Unit code|don.t have any completed booking).*"
+    timeout: 60000
+- takeScreenshot: probe-acc007b-B-completed-tab
+- evalScript: "${console.log('PROBE ACC-007b: COMPLETED tab captured')}"
+
+# --- ACTIVE tab, for the full picture of what lifecycle events this account has had.
+- tapOn: 'Active\s*Tab 2 of 4'
+- extendedWaitUntil:
+    visible: "(?s).*(Unit code|don.t have any active booking).*"
+    timeout: 60000
+- takeScreenshot: probe-acc007b-C-active-tab
+- evalScript: "${console.log('PROBE ACC-007b: ACTIVE tab captured')}"

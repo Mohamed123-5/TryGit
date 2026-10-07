@@ -1,0 +1,13 @@
+START 17:26:36.063
+check-syntax _sign-A.yaml: OK
+check-syntax _sign-B.yaml: OK
+check-syntax _sign-C.yaml: OK
+A exit=0 failed=0 run=2026-09-10_172647 end=17:29:24.864
+OTP screen up (A finished): 17:29:24.888
+pre-typing hierarchy dumped: 17:29:35.134
+pre-typing screenshot: 17:29:35.757
+B start: 17:29:35.793
+B exit=0 failed=0 run=2026-09-10_172937 end=17:30:03.801
+post-B hierarchy dumped: 17:30:14.116
+C exit=1 failed=3 run=2026-09-10_173015 end=17:34:16.323
+END 17:34:16.365

@@ -1,0 +1,7 @@
+appId: fi.iwa.sakani
+name: NPS probe - tap rating 5 only
+---
+- assertVisible: "(?s).*would you recommend benefiting from Sakani.*"
+- tapOn: "5"
+- waitForAnimationToEnd:
+    timeout: 3000

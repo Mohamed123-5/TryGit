@@ -1,0 +1,14 @@
+
+# The signed booking still records the fee as settled, with its invoice. On this screen these
+# sit in the Booking Details section ABOVE Documents (09/09 dump final-detail.xml: Invoice
+# number / Booking fee status / Paid are one scroll above Documents), hence the scroll back UP.
+- takeScreenshot: journey-8-documents-signed
+- scrollUntilVisible:
+    element:
+      text: "Invoice number"
+    direction: UP
+    timeout: 30000
+- assertVisible: "Booking fee status"
+- assertVisible: "Paid"
+- assertVisible: "Invoice number"
+- takeScreenshot: journey-8-booking-paid-and-signed

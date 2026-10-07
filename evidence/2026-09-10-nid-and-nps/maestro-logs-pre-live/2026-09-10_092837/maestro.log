@@ -1,0 +1,97 @@
+09:28:37.150 [ INFO] maestro.cli.report.TestDebugReporter.logSystemInfo: Debug output path: C:\Users\Mohammed Elkatry\.maestro\tests\2026-09-10_092837
+09:28:37.153 [ INFO] MAESTRO.logSystemInfo: ---- System Info ----
+09:28:37.154 [ INFO] MAESTRO.logSystemInfo: Maestro Version: 2.9.0
+09:28:37.155 [ INFO] MAESTRO.logSystemInfo: CI: Undefined
+09:28:37.156 [ INFO] MAESTRO.logSystemInfo: OS Name: Windows 11
+09:28:37.157 [ INFO] MAESTRO.logSystemInfo: OS Version: 10.0
+09:28:37.157 [ INFO] MAESTRO.logSystemInfo: Architecture: amd64
+09:28:37.158 [ INFO] MAESTRO.logSystemInfo: Java Version: 26
+09:28:37.161 [ INFO] MAESTRO.logSystemInfo: Xcode Version: null
+09:28:37.164 [ INFO] MAESTRO.logSystemInfo: Flutter Version: Undefined
+09:28:37.170 [ INFO] MAESTRO.logSystemInfo: Flutter Channel: Undefined
+09:28:37.170 [ INFO] MAESTRO.logSystemInfo: ---------------------
+09:28:38.353 [ INFO] maestro.cli.command.TestCommand.runShardSuite: [shard 1] Selected device emulator-5554 using port 62337 with execution plan ExecutionPlan(flowsToRun=[C:\Users\Mohammed Elkatry\AppData\Local\Temp\claude\d--Automation-Maestro-Mobile\28e891c4-d342-4645-8a23-a5196b13181c\scratchpad\envexp\expD.yaml], sequence=FlowSequence(flows=[], continueOnFailure=true), workspaceConfig=WorkspaceConfig(flows=null, includeTags=null, excludeTags=null, executionOrder=null, baselineBranch=null, notifications=null, disableRetries=false, platform=PlatformConfiguration(android=AndroidConfiguration(disableAnimations=false), ios=IOSConfiguration(disableAnimations=false, snapshotKeyHonorModalViews=null)), testOutputDir=null))
+09:28:38.468 [ERROR] maestro.cli.session.MaestroSessionManager.newSession$lambda$0: Failed to record heartbeat
+java.io.IOException: The process cannot access the file because another process has locked a portion of the file
+	at java.base/java.io.FileOutputStream.writeBytes(Native Method)
+	at java.base/java.io.FileOutputStream.write(FileOutputStream.java:332)
+	at kotlin.io.FilesKt__FileReadWriteKt.writeTextImpl(FileReadWrite.kt:160)
+	at kotlin.io.FilesKt__FileReadWriteKt.writeText(FileReadWrite.kt:145)
+	at kotlin.io.FilesKt__FileReadWriteKt.writeText$default(FileReadWrite.kt:144)
+	at maestro.cli.db.KeyValueStore.commit(KeyValueStore.kt:50)
+	at maestro.cli.db.KeyValueStore.set$lambda$3$lambda$2(KeyValueStore.kt:23)
+	at maestro.cli.db.KeyValueStore.withFileLock(KeyValueStore.kt:62)
+	at maestro.cli.db.KeyValueStore.set(KeyValueStore.kt:20)
+	at maestro.cli.session.SessionStore.heartbeat(SessionStore.kt:12)
+	at maestro.cli.session.MaestroSessionManager.newSession$lambda$0(MaestroSessionManager.kt:98)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:545)
+	at java.base/java.util.concurrent.FutureTask.runAndReset(FutureTask.java:371)
+	at java.base/java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:310)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1090)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:614)
+	at java.base/java.lang.Thread.run(Thread.java:1516)
+09:28:38.497 [DEBUG] io.micrometer.common.util.internal.logging.InternalLoggerFactory.newDefaultFactory: Using SLF4J as the default logging framework
+09:28:40.757 [ INFO] maestro.cli.runner.TestRunner.runSingle: Running flow expD.yaml...
+09:28:40.787 [ INFO] maestro.Maestro.cachedDeviceInfo_delegate$lambda$0: Getting device info
+09:28:41.047 [ INFO] maestro.Maestro.cachedDeviceInfo_delegate$lambda$0: Got device info: DeviceInfo(platform=ANDROID, widthPixels=1080, heightPixels=2400, widthGrid=1080, heightGrid=2400)
+09:28:41.154 [ INFO] maestro.cli.runner.MaestroCommandRunner.runCommands$lambda$0: Define variables RUNNING
+09:28:41.158 [ INFO] maestro.cli.runner.MaestroCommandRunner.runCommands$lambda$11: Define variables metadata CommandMetadata(numberOfRuns=null, evaluatedCommand=MaestroCommand(defineVariablesCommand=DefineVariablesCommand(env={MAESTRO_FILENAME=expD, MAESTRO_DEVICE_UDID=emulator-5554, MAESTRO_SHARD_ID=1, MAESTRO_SHARD_INDEX=0}, label=null, optional=false)), logMessages=[], insight=Insight(message=, level=NONE), aiReasoning=null, labeledCommand=null)
+09:28:41.159 [ INFO] maestro.cli.runner.MaestroCommandRunner.runCommands$lambda$2: Define variables COMPLETED
+09:28:41.160 [ INFO] maestro.cli.runner.MaestroCommandRunner.runCommands$lambda$0: Define variables RUNNING
+09:28:42.236 [ INFO] maestro.cli.runner.MaestroCommandRunner.runCommands$lambda$11: Define variables metadata CommandMetadata(numberOfRuns=null, evaluatedCommand=MaestroCommand(defineVariablesCommand=DefineVariablesCommand(env={NATIONAL_ID=1119880062}, label=null, optional=false)), logMessages=[], insight=Insight(message=, level=NONE), aiReasoning=null, labeledCommand=null)
+09:28:42.237 [ INFO] maestro.cli.runner.MaestroCommandRunner.runCommands$lambda$2: Define variables COMPLETED
+09:28:42.240 [ INFO] maestro.cli.runner.MaestroCommandRunner.runCommands$lambda$0: Apply configuration RUNNING
+09:28:42.242 [ INFO] maestro.cli.runner.MaestroCommandRunner.runCommands$lambda$11: Apply configuration metadata CommandMetadata(numberOfRuns=null, evaluatedCommand=MaestroCommand(applyConfigurationCommand=ApplyConfigurationCommand(config=MaestroConfig(appId=fi.iwa.sakani, name=EXP-D parent, tags=[], ext={}, onFlowStart=null, onFlowComplete=null, properties={}), label=null, optional=false)), logMessages=[], insight=Insight(message=, level=NONE), aiReasoning=null, labeledCommand=null)
+09:28:42.242 [ INFO] maestro.cli.runner.MaestroCommandRunner.runCommands$lambda$2: Apply configuration COMPLETED
+09:28:42.242 [ INFO] maestro.cli.runner.MaestroCommandRunner.runCommands$lambda$0: Run expD-sub.yaml RUNNING
+09:28:42.246 [ INFO] maestro.cli.runner.MaestroCommandRunner.runCommands$lambda$11: Run expD-sub.yaml metadata CommandMetadata(numberOfRuns=null, evaluatedCommand=MaestroCommand(runFlowCommand=RunFlowCommand(commands=[MaestroCommand(defineVariablesCommand=DefineVariablesCommand(env={NATIONAL_ID=${NATIONAL_ID}}, label=null, optional=false)), MaestroCommand(applyConfigurationCommand=ApplyConfigurationCommand(config=MaestroConfig(appId=fi.iwa.sakani, name=EXP-D sub, tags=[], ext={}, onFlowStart=null, onFlowComplete=null, properties={}), label=null, optional=false)), MaestroCommand(evalScriptCommand=EvalScriptCommand(scriptString=${console.log("PROBE typeof=" + (typeof NATIONAL_ID) + " value=[" + (typeof NATIONAL_ID === "undefined" ? "<undefined>" : NATIONAL_ID) + "]")}, label=null, optional=false)), MaestroCommand(runFlowCommand=RunFlowCommand(commands=[MaestroCommand(evalScriptCommand=EvalScriptCommand(scriptString=${1}, label=null, optional=false))], condition=Condition(platform=null, visible=null, notVisible=null, scriptCondition=${typeof NATIONAL_ID !== "undefined" && String(NATIONAL_ID) === "1000011487"}, label=null), sourceDescription=null, config=null, label=RESOLVED-IS-1000011487, optional=false)), MaestroCommand(runFlowCommand=RunFlowCommand(commands=[MaestroCommand(evalScriptCommand=EvalScriptCommand(scriptString=${1}, label=null, optional=false))], condition=Condition(platform=null, visible=null, notVisible=null, scriptCondition=${typeof NATIONAL_ID !== "undefined" && String(NATIONAL_ID) === "1119880062"}, label=null), sourceDescription=null, config=null, label=RESOLVED-IS-1119880062, optional=false)), MaestroCommand(runFlowCommand=RunFlowCommand(commands=[MaestroCommand(evalScriptCommand=EvalScriptCommand(scriptString=${1}, label=null, optional=false))], condition=Condition(platform=null, visible=null, notVisible=null, scriptCondition=${typeof NATIONAL_ID === "undefined"}, label=null), sourceDescription=null, config=null, label=RESOLVED-IS-UNDEFINED, optional=false)), MaestroCommand(runFlowCommand=RunFlowCommand(commands=[MaestroCommand(evalScriptCommand=EvalScriptCommand(scriptString=${1}, label=null, optional=false))], condition=Condition(platform=null, visible=null, notVisible=null, scriptCondition=${typeof NATIONAL_ID !== "undefined" && String(NATIONAL_ID) === ""}, label=null), sourceDescription=null, config=null, label=RESOLVED-IS-EMPTY-STRING, optional=false))], condition=null, sourceDescription=expD-sub.yaml, config=MaestroConfig(appId=fi.iwa.sakani, name=EXP-D sub, tags=[], ext={}, onFlowStart=null, onFlowComplete=null, properties={}), label=null, optional=false)), logMessages=[], insight=Insight(message=, level=NONE), aiReasoning=null, labeledCommand=null)
+09:28:42.248 [ INFO] maestro.cli.runner.MaestroCommandRunner.runCommands$lambda$0: Define variables RUNNING
+09:28:42.255 [ INFO] maestro.cli.runner.MaestroCommandRunner.runCommands$lambda$11: Define variables metadata CommandMetadata(numberOfRuns=null, evaluatedCommand=MaestroCommand(defineVariablesCommand=DefineVariablesCommand(env={NATIONAL_ID=1119880062}, label=null, optional=false)), logMessages=[], insight=Insight(message=, level=NONE), aiReasoning=null, labeledCommand=null)
+09:28:42.255 [ INFO] maestro.cli.runner.MaestroCommandRunner.runCommands$lambda$2: Define variables COMPLETED
+09:28:42.256 [ INFO] maestro.cli.runner.MaestroCommandRunner.runCommands$lambda$0: Apply configuration RUNNING
+09:28:42.257 [ INFO] maestro.cli.runner.MaestroCommandRunner.runCommands$lambda$11: Apply configuration metadata CommandMetadata(numberOfRuns=null, evaluatedCommand=MaestroCommand(applyConfigurationCommand=ApplyConfigurationCommand(config=MaestroConfig(appId=fi.iwa.sakani, name=EXP-D sub, tags=[], ext={}, onFlowStart=null, onFlowComplete=null, properties={}), label=null, optional=false)), logMessages=[], insight=Insight(message=, level=NONE), aiReasoning=null, labeledCommand=null)
+09:28:42.257 [ INFO] maestro.cli.runner.MaestroCommandRunner.runCommands$lambda$2: Apply configuration COMPLETED
+09:28:42.258 [ INFO] maestro.cli.runner.MaestroCommandRunner.runCommands$lambda$0: Run ${console.log("PROBE typeof=" + (typeof NATIONAL_ID) + " value=[" + (typeof NATIONAL_ID === "undefined" ? "<undefined>" : NATIONAL_ID) + "]")} RUNNING
+09:28:42.258 [ INFO] maestro.cli.runner.MaestroCommandRunner.runCommands$lambda$11: Run ${console.log("PROBE typeof=" + (typeof NATIONAL_ID) + " value=[" + (typeof NATIONAL_ID === "undefined" ? "<undefined>" : NATIONAL_ID) + "]")} metadata CommandMetadata(numberOfRuns=null, evaluatedCommand=MaestroCommand(evalScriptCommand=EvalScriptCommand(scriptString=${console.log("PROBE typeof=" + (typeof NATIONAL_ID) + " value=[" + (typeof NATIONAL_ID === "undefined" ? "<undefined>" : NATIONAL_ID) + "]")}, label=null, optional=false)), logMessages=[], insight=Insight(message=, level=NONE), aiReasoning=null, labeledCommand=null)
+09:28:42.268 [ INFO] maestro.cli.runner.MaestroCommandRunner.runCommands$lambda$11: Define variables metadata CommandMetadata(numberOfRuns=null, evaluatedCommand=MaestroCommand(defineVariablesCommand=DefineVariablesCommand(env={NATIONAL_ID=1119880062}, label=null, optional=false)), logMessages=[PROBE typeof=string value=[1119880062]], insight=Insight(message=, level=NONE), aiReasoning=null, labeledCommand=null)
+09:28:42.269 [ INFO] maestro.orchestra.Orchestra.executeCommands$lambda$23$lambda$21: JsConsole: PROBE typeof=string value=[1119880062]
+09:28:42.271 [ INFO] maestro.cli.runner.MaestroCommandRunner.runCommands$lambda$2: Run ${console.log("PROBE typeof=" + (typeof NATIONAL_ID) + " value=[" + (typeof NATIONAL_ID === "undefined" ? "<undefined>" : NATIONAL_ID) + "]")} COMPLETED
+09:28:42.272 [ INFO] maestro.cli.runner.MaestroCommandRunner.runCommands$lambda$0: RESOLVED-IS-1000011487 RUNNING
+09:28:42.281 [ INFO] maestro.cli.runner.MaestroCommandRunner.runCommands$lambda$11: RESOLVED-IS-1000011487 metadata CommandMetadata(numberOfRuns=null, evaluatedCommand=MaestroCommand(runFlowCommand=RunFlowCommand(commands=[MaestroCommand(evalScriptCommand=EvalScriptCommand(scriptString=${1}, label=null, optional=false))], condition=Condition(platform=null, visible=null, notVisible=null, scriptCondition=false, label=null), sourceDescription=null, config=null, label=RESOLVED-IS-1000011487, optional=false)), logMessages=[], insight=Insight(message=, level=NONE), aiReasoning=null, labeledCommand=null)
+09:28:42.282 [ INFO] maestro.orchestra.Orchestra.executeSubflowCommands: [Command execution subflow] CommandSkipped: null
+09:28:42.282 [ INFO] maestro.cli.runner.MaestroCommandRunner.runCommands$lambda$8: RESOLVED-IS-1000011487 SKIPPED
+09:28:42.283 [ INFO] maestro.cli.runner.MaestroCommandRunner.runCommands$lambda$0: RESOLVED-IS-1119880062 RUNNING
+09:28:42.287 [ INFO] maestro.cli.runner.MaestroCommandRunner.runCommands$lambda$11: RESOLVED-IS-1119880062 metadata CommandMetadata(numberOfRuns=null, evaluatedCommand=MaestroCommand(runFlowCommand=RunFlowCommand(commands=[MaestroCommand(evalScriptCommand=EvalScriptCommand(scriptString=${1}, label=null, optional=false))], condition=Condition(platform=null, visible=null, notVisible=null, scriptCondition=true, label=null), sourceDescription=null, config=null, label=RESOLVED-IS-1119880062, optional=false)), logMessages=[], insight=Insight(message=, level=NONE), aiReasoning=null, labeledCommand=null)
+09:28:42.287 [ INFO] maestro.cli.runner.MaestroCommandRunner.runCommands$lambda$0: Run ${1} RUNNING
+09:28:42.287 [ INFO] maestro.cli.runner.MaestroCommandRunner.runCommands$lambda$11: Run ${1} metadata CommandMetadata(numberOfRuns=null, evaluatedCommand=MaestroCommand(evalScriptCommand=EvalScriptCommand(scriptString=${1}, label=null, optional=false)), logMessages=[], insight=Insight(message=, level=NONE), aiReasoning=null, labeledCommand=null)
+09:28:42.294 [ INFO] maestro.cli.runner.MaestroCommandRunner.runCommands$lambda$2: Run ${1} COMPLETED
+09:28:42.294 [ INFO] maestro.cli.runner.MaestroCommandRunner.runCommands$lambda$2: RESOLVED-IS-1119880062 COMPLETED
+09:28:42.295 [ INFO] maestro.cli.runner.MaestroCommandRunner.runCommands$lambda$0: RESOLVED-IS-UNDEFINED RUNNING
+09:28:42.299 [ INFO] maestro.cli.runner.MaestroCommandRunner.runCommands$lambda$11: RESOLVED-IS-UNDEFINED metadata CommandMetadata(numberOfRuns=null, evaluatedCommand=MaestroCommand(runFlowCommand=RunFlowCommand(commands=[MaestroCommand(evalScriptCommand=EvalScriptCommand(scriptString=${1}, label=null, optional=false))], condition=Condition(platform=null, visible=null, notVisible=null, scriptCondition=false, label=null), sourceDescription=null, config=null, label=RESOLVED-IS-UNDEFINED, optional=false)), logMessages=[], insight=Insight(message=, level=NONE), aiReasoning=null, labeledCommand=null)
+09:28:42.299 [ INFO] maestro.orchestra.Orchestra.executeSubflowCommands: [Command execution subflow] CommandSkipped: null
+09:28:42.300 [ INFO] maestro.cli.runner.MaestroCommandRunner.runCommands$lambda$8: RESOLVED-IS-UNDEFINED SKIPPED
+09:28:42.300 [ INFO] maestro.cli.runner.MaestroCommandRunner.runCommands$lambda$0: RESOLVED-IS-EMPTY-STRING RUNNING
+09:28:42.304 [ INFO] maestro.cli.runner.MaestroCommandRunner.runCommands$lambda$11: RESOLVED-IS-EMPTY-STRING metadata CommandMetadata(numberOfRuns=null, evaluatedCommand=MaestroCommand(runFlowCommand=RunFlowCommand(commands=[MaestroCommand(evalScriptCommand=EvalScriptCommand(scriptString=${1}, label=null, optional=false))], condition=Condition(platform=null, visible=null, notVisible=null, scriptCondition=false, label=null), sourceDescription=null, config=null, label=RESOLVED-IS-EMPTY-STRING, optional=false)), logMessages=[], insight=Insight(message=, level=NONE), aiReasoning=null, labeledCommand=null)
+09:28:42.304 [ INFO] maestro.orchestra.Orchestra.executeSubflowCommands: [Command execution subflow] CommandSkipped: null
+09:28:42.305 [ INFO] maestro.cli.runner.MaestroCommandRunner.runCommands$lambda$8: RESOLVED-IS-EMPTY-STRING SKIPPED
+09:28:42.305 [ INFO] maestro.cli.runner.MaestroCommandRunner.runCommands$lambda$2: Run expD-sub.yaml COMPLETED
+09:28:43.115 [ INFO] maestro.cli.report.TestDebugReporter.deleteOldFiles: Performing purge of logs older than 14 days from C:\Users\Mohammed Elkatry\.maestro\tests
+09:28:43.467 [ERROR] maestro.cli.session.MaestroSessionManager.newSession$lambda$0: Failed to record heartbeat
+java.io.IOException: The process cannot access the file because another process has locked a portion of the file
+	at java.base/java.io.FileOutputStream.writeBytes(Native Method)
+	at java.base/java.io.FileOutputStream.write(FileOutputStream.java:332)
+	at kotlin.io.FilesKt__FileReadWriteKt.writeTextImpl(FileReadWrite.kt:160)
+	at kotlin.io.FilesKt__FileReadWriteKt.writeText(FileReadWrite.kt:145)
+	at kotlin.io.FilesKt__FileReadWriteKt.writeText$default(FileReadWrite.kt:144)
+	at maestro.cli.db.KeyValueStore.commit(KeyValueStore.kt:50)
+	at maestro.cli.db.KeyValueStore.set$lambda$3$lambda$2(KeyValueStore.kt:23)
+	at maestro.cli.db.KeyValueStore.withFileLock(KeyValueStore.kt:62)
+	at maestro.cli.db.KeyValueStore.set(KeyValueStore.kt:20)
+	at maestro.cli.session.SessionStore.heartbeat(SessionStore.kt:12)
+	at maestro.cli.session.MaestroSessionManager.newSession$lambda$0(MaestroSessionManager.kt:98)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:545)
+	at java.base/java.util.concurrent.FutureTask.runAndReset(FutureTask.java:371)
+	at java.base/java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:310)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1090)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:614)
+	at java.base/java.lang.Thread.run(Thread.java:1516)

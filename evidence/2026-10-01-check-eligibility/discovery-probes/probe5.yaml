@@ -1,0 +1,61 @@
+# PROBE: new user -> pre-filled Personal information -> generated contact data -> Continue ->
+# capture what follows (verification? Home?). Stops there.
+appId: fi.iwa.sakani
+name: PROBE - after contact details
+---
+- evalScript: ${output.generatedNationalId = String(Math.floor(1000000000 + Math.random() * 1000000000))}
+# "50" + 7 digits: the app rejects numbers starting "52" (observed 01/10/2026).
+- evalScript: ${output.generatedPhone = String(Math.floor(500000000 + Math.random() * 10000000))}
+- evalScript: ${output.generatedEmail = 'elig.' + output.generatedNationalId + '@example.com'}
+- evalScript: "${console.log('PROBE NEW USER - id [' + output.generatedNationalId + '] phone [+966' + output.generatedPhone + '] email [' + output.generatedEmail + ']')}"
+- launchApp:
+    clearState: true
+- runFlow:
+    file: D:/Automation/Maestro-Mobile/.maestro/subflows/clear-overlays.yaml
+    env:
+      ANCHOR: "(?s).*Login / Sign up.*"
+- tapOn: "(?s).*Login / Sign up.*"
+- extendedWaitUntil:
+    visible: "Continue with N[ae]fath"
+    timeout: 45000
+- tapOn: "Enter your ID, phone number,? or email"
+- inputText: ${output.generatedNationalId}
+- tapOn: "Continue"
+- extendedWaitUntil:
+    visible: "Login with nafath"
+    timeout: 45000
+- tapOn: "Confirm"
+- extendedWaitUntil:
+    visible: "Personal information"
+    timeout: 90000
+- tapOn: "Continue"
+- extendedWaitUntil:
+    visible: "(?s).*Please fill in your mobile number detail and email address.*"
+    timeout: 45000
+- tapOn: "Enter your phone number"
+- inputText: ${output.generatedPhone}
+- hideKeyboard
+- tapOn: "Enter your email"
+- inputText: ${output.generatedEmail}
+- hideKeyboard
+- waitForAnimationToEnd:
+    timeout: 3000
+- takeScreenshot: probe5-1-contact-filled
+- runFlow:
+    optional: true
+    commands:
+      - assertVisible: "DUMP-CONTACT-FILLED"
+# Continue has no node of its own (merged into the root's text); measured centre (540,2228) of
+# 1080x2400 on probe4-1-contact-screen.png.
+- assertVisible: "(?s).*Please fill in your mobile number detail and email address.*"
+- tapOn:
+    point: "50%,93%"
+    retryTapIfNoChange: false
+- waitForAnimationToEnd:
+    timeout: 8000
+- takeScreenshot: probe5-2-after-contact-continue
+- runFlow:
+    optional: true
+    commands:
+      - assertVisible: "DUMP-AFTER-CONTACT"
+- assertVisible: "PROBE-END-MARKER-NOT-PRESENT"

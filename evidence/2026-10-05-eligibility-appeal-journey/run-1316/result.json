@@ -1,0 +1,19 @@
+{
+  "flow": "check-eligibility",
+  "file": ".maestro/e2e/check-eligibility.yaml",
+  "suite": "e2e",
+  "tags": [
+    "e2e",
+    "eligibility",
+    "critical"
+  ],
+  "startedAt": "2026-10-05T10:16:34.201Z",
+  "durationMs": 477875,
+  "logPath": "report-dashboard/maestro-output/check-eligibility/maestro.log",
+  "status": "FAIL",
+  "exitCode": 1,
+  "failedSteps": 1,
+  "firstFailure": "TEST DATA - none of 5 generated IDs belongs to an applicant older than 25 Hijri years; no account was created (see the IDENTITY lines)... FAILED",
+  "envReason": null,
+  "npsAppearances": 0
+}

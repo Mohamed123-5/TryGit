@@ -1,0 +1,238 @@
+WARNING: Final field parent in class maestro.cli.command.TestCommand has been mutated reflectively by class picocli.CommandLine$Model$FieldBinding in unnamed module @2d9d4f9d (file:/D:/Automation-Tool/maestro/lib/picocli-4.6.3.jar)
+WARNING: Use --enable-final-field-mutation=ALL-UNNAMED to avoid a warning
+WARNING: Mutating final fields will be blocked in a future release unless final field mutation is enabled
+Running on Pixel_8
+ > Flow HOME-001 Home renders with four tabs, HOME-005 featured unit opens details, SRV-001 Services catalogue, NAV-001 back unwinds, QA-004 paid-service fee disclosed, HOME-006 Home personalises after login
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::arrayBaseOffset has been called by com.google.protobuf.UnsafeUtil$MemoryAccessor (file:/D:/Automation-Tool/maestro/lib/protobuf-java-3.21.9.jar)
+WARNING: Please consider reporting this to the maintainers of class com.google.protobuf.UnsafeUtil$MemoryAccessor
+WARNING: sun.misc.Unsafe::arrayBaseOffset will be removed in a future release
+Run ${console.log('HOME.YAML TARGET NATIONAL_ID = [' + NATIONAL_ID + ']')}... COMPLETED
+Assert that ${String(NATIONAL_ID).length === 10 && !/[^0-9]/.test(String(NATIONAL_ID)) && (String(NATIONAL_ID).charAt(0) === "1" || String(NATIONAL_ID).charAt(0) === "2")} is true... COMPLETED
+Launch app "fi.iwa.sakani" with clear state... COMPLETED
+Run subflows/clear-overlays.yaml...
+  Repeat while "${ANCHOR}" is not visible (up to 20 times)...
+    Run flow when "Don.t allow" is visible...
+    Run flow when "Don.t allow" is visible... SKIPPED
+    Run flow when "Skip" is visible...
+      Tap on "Skip"... COMPLETED
+      Wait for animation to end within 3000 ms... COMPLETED
+    Run flow when "Skip" is visible... COMPLETED
+    Run flow when "Dismiss" is visible...
+    Run flow when "Dismiss" is visible... SKIPPED
+    Run flow when "Ok" is visible...
+    Run flow when "Ok" is visible... SKIPPED
+    Run flow when "Marketplace Day" is visible...
+    Run flow when "Marketplace Day" is visible... SKIPPED
+    Run flow when "Start comparing properties" is visible...
+      Press back... COMPLETED
+      Wait for animation to end within 3000 ms... COMPLETED
+    Run flow when "Start comparing properties" is visible... COMPLETED
+    Run flow when "Go to the weekly (offer|deal)" is visible...
+    Run flow when "Go to the weekly (offer|deal)" is visible... SKIPPED
+    Run flow when "Update email" is visible...
+    Run flow when "Update email" is visible... SKIPPED
+    Run flow when "Number and Email Already Linked" is visible...
+    Run flow when "Number and Email Already Linked" is visible... SKIPPED
+    Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible...
+    Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible... SKIPPED
+    Run flow when "Maybe Later" is visible...
+    Run flow when "Maybe Later" is visible... SKIPPED
+    Run flow when "Reject cookies" is visible...
+    Run flow when "Reject cookies" is visible... SKIPPED
+    Run flow when "${ANCHOR}" is not visible...
+    Run flow when "(?s).*Login / Sign up.*" is not visible... SKIPPED
+  Repeat while "${ANCHOR}" is not visible (up to 20 times)... COMPLETED
+  Run flow when ${output.npsLeftToCaller !== true} is true...
+    Repeat while "(?s).*would you recommend benefiting from Sakani.*" is visible (up to 3 times)...
+    Repeat while "(?s).*would you recommend benefiting from Sakani.*" is visible (up to 3 times)... SKIPPED
+    Assert that "(?s).*would you recommend benefiting from Sakani.*" is not visible... COMPLETED
+  Run flow when true is true... COMPLETED
+  Run flow when ${output.anchorOptional !== true} is true...
+    Repeat while "${ANCHOR}" is not visible (up to 6 times)...
+    Repeat while "${ANCHOR}" is not visible (up to 6 times)... SKIPPED
+    Repeat while "(?s).*would you recommend benefiting from Sakani.*" is visible (up to 3 times)...
+    Repeat while "(?s).*would you recommend benefiting from Sakani.*" is visible (up to 3 times)... SKIPPED
+    Assert that "(?s).*would you recommend benefiting from Sakani.*" is not visible... COMPLETED
+    Assert that "${ANCHOR}" is visible... COMPLETED
+  Run flow when true is true... COMPLETED
+Run subflows/clear-overlays.yaml... COMPLETED
+Assert that "Home\s*Tab 1 of 4" is visible... COMPLETED
+Assert that "Explore\s*Tab 2 of 4" is visible... COMPLETED
+Assert that "Services\s*Tab 3 of 4" is visible... COMPLETED
+Assert that "Account\s*Tab 4 of 4" is visible... COMPLETED
+Assert that "Quick Access" is visible... COMPLETED
+Scrolling DOWN until "Discover featured unit in the market\s*" is visible with speed 40, visibility percentage 100%, timeout 30000 ms, with centering disabled... COMPLETED
+Tap on Below "Discover featured unit in the market\s*"... COMPLETED
+Assert that "Mortgage Calculator" is visible... COMPLETED
+Assert that "Reserve unit" is visible... COMPLETED
+Assert that "(?s).*(Approved by Wafi|Licensed by).*" is visible... COMPLETED
+Press back... COMPLETED
+Assert that "Home\s*Tab 1 of 4" is visible... COMPLETED
+Assert that "Quick Access" is visible... COMPLETED
+Assert that "Reserve unit" is not visible... COMPLETED
+Tap on "Services\s*Tab 3 of 4"... COMPLETED
+Assert that "Categories" is visible... COMPLETED
+Assert that "(?s).*Housing Support Products.*" is visible... COMPLETED
+Assert that "(?s).*Professional Services.*" is visible... COMPLETED
+Assert that "(?s).*More.*vouchers.*" is visible... COMPLETED
+Assert that "Home\s*Tab 1 of 4" is visible... COMPLETED
+Assert that "Account\s*Tab 4 of 4" is visible... COMPLETED
+Tap on "(?s).*Housing Support Products.*"... COMPLETED
+Assert that "Explore Housing Support Products" is visible... COMPLETED
+Assert that "(?s).*Off-plan Units.*" is visible... COMPLETED
+Assert that "(?s).*Ready Units.*" is visible... COMPLETED
+Assert that "(?s).*Land support.*" is visible... COMPLETED
+Assert that "(?s).*Eligibility Checker.*" is visible... COMPLETED
+Assert that "(?s).*Real estate tax exemption.*" is visible... COMPLETED
+Assert that "(?s).*Financial advisory.*" is visible... COMPLETED
+Tap on "(?s).*Off-plan Units.*"... COMPLETED
+Assert that "Product Advantages" is visible... COMPLETED
+Run flow when "Reject cookies" is visible...
+  Tap on "Reject cookies"... COMPLETED
+  Wait for animation to end within 5000 ms... COMPLETED
+Run flow when "Reject cookies" is visible... COMPLETED
+Scrolling DOWN until "View units" is visible with speed 40, visibility percentage 100%, timeout 45000 ms, with centering disabled... COMPLETED
+Assert that "Close" is visible... COMPLETED
+Press back... COMPLETED
+Assert that "Explore Housing Support Products" is visible... COMPLETED
+Assert that "View units" is not visible... COMPLETED
+Press back... COMPLETED
+Assert that "Categories" is visible... COMPLETED
+Tap on "(?s).*Professional Services.*"... COMPLETED
+Assert that "Explore Professional Services" is visible... COMPLETED
+Assert that "(?s).*Farz certificate.*" is visible... COMPLETED
+Assert that "(?s).*Online lending.*" is visible... COMPLETED
+Assert that "(?s).*Mortgage Calculator.*" is visible... COMPLETED
+Assert that "(?s).*Resell offplan units.*" is visible... COMPLETED
+Press back... COMPLETED
+Assert that "Categories" is visible... COMPLETED
+Tap on "(?s).*More.*vouchers.*"... COMPLETED
+Assert that "Explore More" is visible... COMPLETED
+Assert that "(?s).*Sakani News.*" is visible... COMPLETED
+Assert that "(?s).*Asset and Facility Management.*" is visible... COMPLETED
+Assert that "(?s).*Sakani Offers.*" is visible... COMPLETED
+Assert that "(?s).*Sakani Metaverse.*" is visible... COMPLETED
+Press back... COMPLETED
+Assert that "Categories" is visible... COMPLETED
+Tap on "Home\s*Tab 1 of 4"... COMPLETED
+Assert that "(?s).*Login / Sign up.*" is visible... COMPLETED
+Assert that "(?si)(Good (morning|afternoon|evening).*|Hello,\s*\S.*)" is not visible... COMPLETED
+Run subflows/login.yaml...
+  Assert that ${typeof NATIONAL_ID !== "undefined" && String(NATIONAL_ID).length === 10 && !/[^0-9]/.test(String(NATIONAL_ID)) && (String(NATIONAL_ID).charAt(0) === "1" || String(NATIONAL_ID).charAt(0) === "2")} is true... COMPLETED
+  Run clear-overlays.yaml...
+    Repeat while "${ANCHOR}" is not visible (up to 20 times)...
+    Repeat while "${ANCHOR}" is not visible (up to 20 times)... SKIPPED
+    Run flow when ${output.npsLeftToCaller !== true} is true...
+      Repeat while "(?s).*would you recommend benefiting from Sakani.*" is visible (up to 3 times)...
+      Repeat while "(?s).*would you recommend benefiting from Sakani.*" is visible (up to 3 times)... SKIPPED
+      Assert that "(?s).*would you recommend benefiting from Sakani.*" is not visible... COMPLETED
+    Run flow when true is true... COMPLETED
+    Run flow when ${output.anchorOptional !== true} is true...
+      Repeat while "${ANCHOR}" is not visible (up to 6 times)...
+      Repeat while "${ANCHOR}" is not visible (up to 6 times)... SKIPPED
+      Repeat while "(?s).*would you recommend benefiting from Sakani.*" is visible (up to 3 times)...
+      Repeat while "(?s).*would you recommend benefiting from Sakani.*" is visible (up to 3 times)... SKIPPED
+      Assert that "(?s).*would you recommend benefiting from Sakani.*" is not visible... COMPLETED
+      Assert that "${ANCHOR}" is visible... COMPLETED
+    Run flow when true is true... COMPLETED
+  Run clear-overlays.yaml... COMPLETED
+  Assert that "(?s).*Login / Sign up.*" is visible... COMPLETED
+  Tap on "(?s).*Login / Sign up.*"... COMPLETED
+  Assert that "Continue with N[ae]fath" is visible... COMPLETED
+  Tap on "Enter your ID, phone number,? or email"... COMPLETED
+  Input text ${NATIONAL_ID}... COMPLETED
+  Assert that "${NATIONAL_ID}" is visible... COMPLETED
+  Tap on "Continue"... COMPLETED
+  Assert that "Login with nafath" is visible... COMPLETED
+  Assert that "${NATIONAL_ID}" is visible... COMPLETED
+  Run ${output.loginNationalId = String(NATIONAL_ID)}... COMPLETED
+  Tap on "Confirm"... COMPLETED
+  Assert that "Login with nafath" is not visible... COMPLETED
+  Run ${output.anchorOptional = true}... COMPLETED
+  Run clear-overlays.yaml...
+    Repeat while "${ANCHOR}" is not visible (up to 20 times)...
+      Run flow when "Don.t allow" is visible...
+      Run flow when "Don.t allow" is visible... SKIPPED
+      Run flow when "Skip" is visible...
+      Run flow when "Skip" is visible... SKIPPED
+      Run flow when "Dismiss" is visible...
+      Run flow when "Dismiss" is visible... SKIPPED
+      Run flow when "Ok" is visible...
+      Run flow when "Ok" is visible... SKIPPED
+      Run flow when "Marketplace Day" is visible...
+      Run flow when "Marketplace Day" is visible... SKIPPED
+      Run flow when "Start comparing properties" is visible...
+      Run flow when "Start comparing properties" is visible... SKIPPED
+      Run flow when "Go to the weekly (offer|deal)" is visible...
+      Run flow when "Go to the weekly (offer|deal)" is visible... SKIPPED
+      Run flow when "Update email" is visible...
+      Run flow when "Update email" is visible... SKIPPED
+      Run flow when "Number and Email Already Linked" is visible...
+        Tap on point (7%,9%)... COMPLETED
+        Wait for animation to end within 4000 ms... COMPLETED
+      Run flow when "Number and Email Already Linked" is visible... COMPLETED
+      Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible...
+      Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible... SKIPPED
+      Run flow when "Maybe Later" is visible...
+      Run flow when "Maybe Later" is visible... SKIPPED
+      Run flow when "Reject cookies" is visible...
+      Run flow when "Reject cookies" is visible... SKIPPED
+      Run flow when "${ANCHOR}" is not visible...
+      Run flow when "(?si)((Hello|Good (morning|afternoon|evening)),\s*\S.*|New service|Go to the weekly (offer|deal))" is not visible... SKIPPED
+    Repeat while "${ANCHOR}" is not visible (up to 20 times)... COMPLETED
+    Run flow when ${output.npsLeftToCaller !== true} is true...
+      Repeat while "(?s).*would you recommend benefiting from Sakani.*" is visible (up to 3 times)...
+      Repeat while "(?s).*would you recommend benefiting from Sakani.*" is visible (up to 3 times)... SKIPPED
+      Assert that "(?s).*would you recommend benefiting from Sakani.*" is not visible... COMPLETED
+    Run flow when true is true... COMPLETED
+    Run flow when ${output.anchorOptional !== true} is true...
+    Run flow when false is true... SKIPPED
+  Run clear-overlays.yaml... COMPLETED
+  Run ${output.anchorOptional = false}... COMPLETED
+  Run flow when "New service" is visible...
+  Run flow when "New service" is visible... SKIPPED
+  Run flow when "Go to the weekly (offer|deal)" is visible...
+  Run flow when "Go to the weekly (offer|deal)" is visible... SKIPPED
+  Run flow when "Continue with N[ae]fath" is visible...
+  Run flow when "Continue with N[ae]fath" is visible... SKIPPED
+  Assert that "(?si)(Hello|Good (morning|afternoon|evening)),\s*\S.*" is visible... COMPLETED
+  Assert that "(?s).*Login / Sign up.*" is not visible... COMPLETED
+Run subflows/login.yaml... COMPLETED
+Assert that "Home\s*Tab 1 of 4", selected is visible... COMPLETED
+Assert that "(?si)(Hello|Good (morning|afternoon|evening)),\s*\S.*" is visible... COMPLETED
+Assert that "(?s).*Login / Sign up.*" is not visible... COMPLETED
+Tap on "Account\s*Tab 4 of 4"... COMPLETED
+Assert that "My bookings" is visible... COMPLETED
+Run ${output.accountService = "Rental Behavior Inquiry"}... COMPLETED
+Run subflows/open-account-service.yaml...
+  Run account-ready.yaml...
+    Assert that "Account\s*Tab 4 of 4", selected is visible... COMPLETED
+    Assert that "(Profile details|Invoices)" is visible... COMPLETED
+  Run account-ready.yaml... COMPLETED
+  Repeat while "${output.accountService}", enabled, Below "(?s)(Account|Hello\s.*)", Above "Home\s*Tab 1 of 4", Size: 996x147(tolerance: 4) is not visible (up to 6 times)...
+    Swipe from (50%,80%) to (50%,40%) in 500 ms... COMPLETED
+    Wait for animation to end within 2000 ms... COMPLETED
+  Repeat while "${output.accountService}", enabled, Below "(?s)(Account|Hello\s.*)", Above "Home\s*Tab 1 of 4", Size: 996x147(tolerance: 4) is not visible (up to 6 times)... COMPLETED
+  Assert that "${output.accountService}", enabled, Below "(?s)(Account|Hello\s.*)", Above "Home\s*Tab 1 of 4", Size: 996x147(tolerance: 4) is visible... COMPLETED
+  Tap on "${output.accountService}", enabled, Below "(?s)(Account|Hello\s.*)", Above "Home\s*Tab 1 of 4", Size: 996x147(tolerance: 4)... COMPLETED
+Run subflows/open-account-service.yaml... COMPLETED
+Assert that "Request (your Rental Score|Rental Behavior) Report" is visible... COMPLETED
+Assert that "Service fee\s*SAR\s*50" is visible... COMPLETED
+Assert that "Expected time\s*Immediate" is visible... COMPLETED
+Assert that "Beneficiaries\s*Citizens, Residents" is visible... COMPLETED
+Assert that "Request (your Rental Score|Rental Behavior) Report" is visible... COMPLETED
+Press back... COMPLETED
+Assert that "Request (your Rental Score|Rental Behavior) Report" is not visible... COMPLETED
+Assert that "My bookings" is visible... COMPLETED
+Tap on "Rental Behavior Inquiry"... COMPLETED
+Assert that "Request (your Rental Score|Rental Behavior) Report" is visible... COMPLETED
+Tap on point (50%,8%)... COMPLETED
+Assert that "Request (your Rental Score|Rental Behavior) Report" is not visible... COMPLETED
+Assert that "My bookings" is visible... COMPLETED
+Assert that "Home\s*Tab 1 of 4" is visible... COMPLETED
+Assert that "Explore\s*Tab 2 of 4" is visible... COMPLETED
+Assert that "Services\s*Tab 3 of 4" is visible... COMPLETED
+Assert that "Account\s*Tab 4 of 4" is visible... COMPLETED
+MAESTRO_EXIT=0
+/c/Users/Mohammed Elkatry/.maestro/tests/2026-09-21_105708/

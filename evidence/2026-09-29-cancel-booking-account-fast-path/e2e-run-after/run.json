@@ -1,0 +1,25 @@
+{
+  "startedAt": "2026-09-29T12:56:01.290Z",
+  "finishedAt": "2026-09-29T12:59:00.297Z",
+  "device": "emulator-5554",
+  "includeE2e": true,
+  "results": [
+    {
+      "flow": "cancel-booking",
+      "file": ".maestro/e2e/cancel-booking.yaml",
+      "suite": "e2e",
+      "tags": [
+        "happy-path"
+      ],
+      "startedAt": "2026-09-29T12:56:01.472Z",
+      "durationMs": 178823,
+      "logPath": "report-dashboard/maestro-output/cancel-booking/maestro.log",
+      "status": "FAIL",
+      "exitCode": 1,
+      "failedSteps": 1,
+      "firstFailure": "Assert that ${output.cancelAllowed === true} is true... FAILED",
+      "envReason": null,
+      "npsAppearances": 0
+    }
+  ]
+}

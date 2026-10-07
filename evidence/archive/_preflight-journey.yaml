@@ -1,0 +1,85 @@
+appId: fi.iwa.sakani
+name: PRE-FLIGHT - can the Full Journey run on this account (eligibility + active booking)
+env:
+  # No usable default on purpose: this harness exists to read a SPECIFIC candidate account.
+  #   maestro test -e NATIONAL_ID=<10-digit National ID / Iqama> .maestro/_preflight-journey.yaml
+  NATIONAL_ID: '${typeof NATIONAL_ID === "undefined" ? "" : String(NATIONAL_ID)}'
+---
+# READ-ONLY. Signs in and reads two facts: the eligibility status on Account, and the Active tab
+# of My Bookings. It never opens a booking, never cancels, never rechecks eligibility, never
+# opens a project, and never presses Back.
+#
+# WHY THIS EXISTS
+# full-journey.yaml's STAGE 1 requires "Eligible", and its STAGE 0 cancels whatever active booking
+# the account already holds - the cancellation dialog states the booking fee is not refunded. So
+# before a journey is started on an account, both facts are read here, and the journey is only
+# started where it will neither fail on eligibility nor destroy an existing booking.
+#
+# Neither answer is asserted: "Not Eligible" and "has an active booking" are real answers about
+# the account, not failures of this harness. Each answer is written as a console line (read the
+# `JsConsole:` lines, which are emitted once per real execution) and backed by a screenshot.
+- evalScript: ${console.log('PREFLIGHT TARGET NATIONAL_ID = [' + NATIONAL_ID + ']')}
+- assertTrue: ${String(NATIONAL_ID).length === 10 && !/[^0-9]/.test(String(NATIONAL_ID)) && (String(NATIONAL_ID).charAt(0) === "1" || String(NATIONAL_ID).charAt(0) === "2")}
+- launchApp:
+    clearState: true
+- runFlow:
+    file: subflows/login.yaml
+    env:
+      NATIONAL_ID: ${NATIONAL_ID}
+
+# --- Account. Cleared against "My bookings", which exists only for a signed-in user.
+- tapOn: 'Account\s*Tab 4 of 4'
+- runFlow:
+    file: subflows/clear-overlays.yaml
+    env:
+      ANCHOR: "My bookings"
+
+# --- FACT 1: eligibility. Label and value are one two-line node; "Not Eligible" cannot satisfy
+# the first pattern because "Not " sits between the label and "Eligible".
+- scrollUntilVisible:
+    element:
+      text: "(?s).*Eligibility checker status.*"
+    direction: DOWN
+    timeout: 30000
+- takeScreenshot: preflight-1-eligibility
+- runFlow:
+    when:
+      visible: '(?s).*Eligibility checker status\s*Eligible.*'
+    commands:
+      - evalScript: "${console.log('PREFLIGHT RESULT: ELIGIBLE')}"
+- runFlow:
+    when:
+      visible: '(?s).*Eligibility checker status\s*Not Eligible.*'
+    commands:
+      - evalScript: "${console.log('PREFLIGHT RESULT: NOT ELIGIBLE')}"
+
+# --- FACT 2: does the account hold an ACTIVE booking? Reached by scrolling back up rather than
+# by Back, so nothing here can pop the navigation stack.
+- scrollUntilVisible:
+    element:
+      text: "My bookings"
+    direction: UP
+    timeout: 30000
+- tapOn: "My bookings"
+# Waits on the tab label, not on "My Bookings": matching is case-insensitive, so the Account
+# row "My bookings" that was just tapped would satisfy that at once.
+- extendedWaitUntil:
+    visible: 'Active\s*Tab 2 of 4'
+    timeout: 45000
+- tapOn: 'Active\s*Tab 2 of 4'
+# The tab paints before its list arrives, so the read waits for CONTENT - an Active card or the
+# empty-state message - never for an animation budget, which captured a skeleton list before.
+- extendedWaitUntil:
+    visible: "(?s).*(\nActive\n.*Unit code|don.t have any active booking).*"
+    timeout: 60000
+- takeScreenshot: preflight-2-active-tab
+- runFlow:
+    when:
+      visible: "(?s).*\nActive\n.*Unit code.*"
+    commands:
+      - evalScript: "${console.log('PREFLIGHT RESULT: ACTIVE BOOKING PRESENT - a journey on this account would cancel it in STAGE 0')}"
+- runFlow:
+    when:
+      visible: "(?s).*don.t have any active booking.*"
+    commands:
+      - evalScript: "${console.log('PREFLIGHT RESULT: NO ACTIVE BOOKING')}"

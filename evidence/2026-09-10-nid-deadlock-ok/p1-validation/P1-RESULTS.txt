@@ -1,0 +1,44 @@
+############ A. NEGATIVE - bad NATIONAL_ID must stop BEFORE launchApp (8 parameterised flows) ############
+  account    NATIONAL_ID=[12345]        exit=1 launchApp=0 typed=nothing  -> STOPPED-BEFORE-APP
+  booking    NATIONAL_ID=[]             exit=1 launchApp=0 typed=nothing  -> STOPPED-BEFORE-APP
+  home       NATIONAL_ID=[abcdefghij]   exit=1 launchApp=0 typed=nothing  -> STOPPED-BEFORE-APP
+  logout     NATIONAL_ID=[12abcdefgh]   exit=1 launchApp=0 typed=nothing  -> STOPPED-BEFORE-APP
+  wallet     NATIONAL_ID=[3123456789]   exit=1 launchApp=0 typed=nothing  -> STOPPED-BEFORE-APP
+  unit       NATIONAL_ID=[11198800621]  exit=1 launchApp=0 typed=nothing  -> STOPPED-BEFORE-APP
+  login      NATIONAL_ID=[12345]        exit=1 launchApp=0 typed=nothing  -> STOPPED-BEFORE-APP
+  _explore   NATIONAL_ID=[]             exit=1 launchApp=0 typed=nothing  -> STOPPED-BEFORE-APP
+############ B. OVERRIDE - two different IDs through each flow's own steps, stopping at the Nafath ID check (never confirms) ############
+  account  -e 1000011487  exit=0 resolved=[1000011487] typed=1000011487  nafath-assert=1000011487  confirm-taps=0 
+  account  -e 1119880062  exit=0 resolved=[1119880062] typed=1119880062  nafath-assert=1119880062  confirm-taps=0 
+  booking  -e 1000011487  exit=0 resolved=[1000011487] typed=1000011487  nafath-assert=1000011487  confirm-taps=0 
+  booking  -e 1119880062  exit=0 resolved=[1119880062] typed=1119880062  nafath-assert=1119880062  confirm-taps=0 
+  home     -e 1000011487  exit=0 resolved=[1000011487] typed=1000011487  nafath-assert=1000011487  confirm-taps=0 
+  home     -e 1119880062  exit=0 resolved=[1119880062] typed=1119880062  nafath-assert=1119880062  confirm-taps=0 
+  logout   -e 1000011487  exit=0 resolved=[1000011487] typed=1000011487  nafath-assert=1000011487  confirm-taps=0 
+  logout   -e 1119880062  exit=0 resolved=[1119880062] typed=1119880062  nafath-assert=1119880062  confirm-taps=0 
+  wallet   -e 1000011487  exit=0 resolved=[1000011487] typed=1000011487  nafath-assert=1000011487  confirm-taps=0 
+  wallet   -e 1119880062  exit=0 resolved=[1119880062] typed=1119880062  nafath-assert=1119880062  confirm-taps=0 
+  unit     -e 1000011487  exit=0 resolved=[1000011487] typed=1000011487  nafath-assert=1000011487  confirm-taps=0 
+  unit     -e 1119880062  exit=0 resolved=[1119880062] typed=1119880062  nafath-assert=1119880062  confirm-taps=0 
+############ C. DEFAULT - full non-destructive regression runs (no override) ############
+  login    exit=0 steps=73/0 resolved=[1000011485] typed=1000011485  id-asserts=2x1000011485  forbidden-taps=0
+           FAILED: 
+           log: C:/Users/Mohammed Elkatry/.maestro/tests/2026-09-10_130119/maestro.log
+  home     exit=0 steps=113/0 resolved=[1000011485] typed=1000011485  id-asserts=1x1000011485  forbidden-taps=0
+           FAILED: 
+           log: C:/Users/Mohammed Elkatry/.maestro/tests/2026-09-10_130452/maestro.log
+  account  exit=1 steps=91/1 resolved=[1000011485] typed=1000011485  id-asserts=2x1000011483 2x1000011485  forbidden-taps=0
+           FAILED: Assert that "(?s).*(\d{1,2}:\d{2}\s*(AM|PM)|Today|Yesterday|Monday|Tuesday|Wednesday|Thursday|Friday|
+           log: C:/Users/Mohammed Elkatry/.maestro/tests/2026-09-10_130901/maestro.log
+  booking  exit=1 steps=83/1 resolved=[1000011485] typed=1000011485  id-asserts=1x1000011485  forbidden-taps=0
+           FAILED: Assert that "(?s).*|
+           log: C:/Users/Mohammed Elkatry/.maestro/tests/2026-09-10_131255/maestro.log
+  logout   exit=0 steps=82/0 resolved=[1000011485] typed=1000011485  id-asserts=1x1000011485  forbidden-taps=0
+           FAILED: 
+           log: C:/Users/Mohammed Elkatry/.maestro/tests/2026-09-10_131750/maestro.log
+  wallet   exit=1 steps=130/1 resolved=[1000011485] typed=1000011485  id-asserts=1x1000011485  forbidden-taps=0
+           FAILED: Assert that "Profile details" is visible FAILED|
+           log: C:/Users/Mohammed Elkatry/.maestro/tests/2026-09-10_132253/maestro.log
+  unit     exit=0 steps=50/0 resolved=[1119880040] typed=1119880040  id-asserts=1x1119880040  forbidden-taps=0
+           FAILED: 
+           log: C:/Users/Mohammed Elkatry/.maestro/tests/2026-09-10_132807/maestro.log

@@ -1,0 +1,18 @@
+
+> Sakani-mobileapp@1.0.0 e2e:check-eligibility
+> node report-dashboard/run-and-report.js --include-e2e --yes-i-understand-this-changes-business-data --flows "check-eligibility"
+
+Device emulator-5554 | 1 flow(s) | e2e INCLUDED
+
+check-eligibility ... FAIL (exit 1, 276s)
+    STEP 2 - Q1 (resided outside KSA) is not answered No... FAILED
+
+0 passed, 1 failed, 0 blocked/unresolved
+Now run: npm run post-test
+
+run-and-report: building the report (merge-results -> generate-dashboard)...
+Merged 1 flow(s): 0 pass, 1 fail, 0 blocked (environment), 0 unresolved
+
+-> test-results\merged-results.json
+-> report-dashboard\dashboard.html
+run-and-report: runner exit 1, report exit 0 -> exit 1

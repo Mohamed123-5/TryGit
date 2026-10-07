@@ -1,0 +1,11 @@
+appId: fi.iwa.sakani
+name: D2 npsRecovered true - block must RUN
+---
+- evalScript: ${output.npsRecovered = true}
+- evalScript: ${output.ran = 0}
+- runFlow:
+    when:
+      true: ${output.npsRecovered === true}
+    commands:
+      - evalScript: ${output.ran = 1}
+- assertTrue: ${output.ran === 1}

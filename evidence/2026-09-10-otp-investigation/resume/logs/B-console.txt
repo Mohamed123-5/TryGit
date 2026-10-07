@@ -1,0 +1,18 @@
+WARNING: Final field parent in class maestro.cli.command.TestCommand has been mutated reflectively by class picocli.CommandLine$Model$FieldBinding in unnamed module @2d9d4f9d (file:/D:/Automation-Tool/maestro/lib/picocli-4.6.3.jar)
+WARNING: Use --enable-final-field-mutation=ALL-UNNAMED to avoid a warning
+WARNING: Mutating final fields will be blocked in a future release unless final field mutation is enabled
+Running on Pixel_8
+ > Flow RESUME B - enter the contract OTP 1234 once, with the corrected focus tap
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::arrayBaseOffset has been called by com.google.protobuf.UnsafeUtil$MemoryAccessor (file:/D:/Automation-Tool/maestro/lib/protobuf-java-3.21.9.jar)
+WARNING: Please consider reporting this to the maintainers of class com.google.protobuf.UnsafeUtil$MemoryAccessor
+WARNING: sun.misc.Unsafe::arrayBaseOffset will be removed in a future release
+Take screenshot B-0-start... COMPLETED
+Tap on "X", Below "OTP", Above "OTP Expires in:", Index: 0... COMPLETED
+Take screenshot B-1-after-focus-tap... COMPLETED
+Run ${console.log('RESUME B: typing CONTRACT_OTP once')}... COMPLETED
+Input text ${CONTRACT_OTP}... COMPLETED
+Take screenshot B-2-after-typing... COMPLETED
+Assert that "(?s).*Sales contract has been signed.*" is visible... COMPLETED
+Assert that "(?s).*(Invalid|incorrect|expired).*" is not visible... COMPLETED
+Take screenshot B-3-signed... COMPLETED

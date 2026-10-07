@@ -1,0 +1,51 @@
+WARNING: Final field parent in class maestro.cli.command.TestCommand has been mutated reflectively by class picocli.CommandLine$Model$FieldBinding in unnamed module @2d9d4f9d (file:/D:/Automation-Tool/maestro/lib/picocli-4.6.3.jar)
+WARNING: Use --enable-final-field-mutation=ALL-UNNAMED to avoid a warning
+WARNING: Mutating final fields will be blocked in a future release unless final field mutation is enabled
+Running on Pixel_8
+ > Flow CHECK - final unsigned state
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::arrayBaseOffset has been called by com.google.protobuf.UnsafeUtil$MemoryAccessor (file:/D:/Automation-Tool/maestro/lib/protobuf-java-3.21.9.jar)
+WARNING: Please consider reporting this to the maintainers of class com.google.protobuf.UnsafeUtil$MemoryAccessor
+WARNING: sun.misc.Unsafe::arrayBaseOffset will be removed in a future release
+Tap on point (7%,9%)... COMPLETED
+Wait for animation to end within 10000 ms... COMPLETED
+Launch app "fi.iwa.sakani"... COMPLETED
+Run subflows/clear-overlays.yaml...
+  Repeat while "${ANCHOR}" is not visible (up to 20 times)...
+    Run flow when "Don.t allow" is visible...
+    Run flow when "Don.t allow" is visible... SKIPPED
+    Run flow when "Skip" is visible...
+    Run flow when "Skip" is visible... SKIPPED
+    Run flow when "Dismiss" is visible...
+    Run flow when "Dismiss" is visible... SKIPPED
+    Run flow when "Ok" is visible...
+    Run flow when "Ok" is visible... SKIPPED
+    Run flow when "Marketplace Day" is visible...
+    Run flow when "Marketplace Day" is visible... SKIPPED
+    Run flow when "Start comparing properties" is visible...
+    Run flow when "Start comparing properties" is visible... SKIPPED
+    Run flow when "Go to the weekly (offer|deal)" is visible...
+    Run flow when "Go to the weekly (offer|deal)" is visible... SKIPPED
+    Run flow when "Update email" is visible...
+    Run flow when "Update email" is visible... SKIPPED
+    Run flow when "Number and Email Already Linked" is visible...
+    Run flow when "Number and Email Already Linked" is visible... SKIPPED
+    Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible...
+    Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible... SKIPPED
+    Run flow when "Maybe Later" is visible...
+    Run flow when "Maybe Later" is visible... SKIPPED
+    Run flow when "Reject cookies" is visible...
+    Run flow when "Reject cookies" is visible... SKIPPED
+    Run flow when "${ANCHOR}" is not visible...
+    Run flow when "Account\s*Tab 4 of 4" is not visible... SKIPPED
+  Repeat while "${ANCHOR}" is not visible (up to 20 times)... COMPLETED
+Run subflows/clear-overlays.yaml... COMPLETED
+Tap on "Account\s*Tab 4 of 4"... COMPLETED
+Assert that "My bookings" is visible... COMPLETED
+Tap on "My bookings"... COMPLETED
+Assert that "My Bookings" is visible... COMPLETED
+Tap on "Ready to sign"... COMPLETED
+Assert that "(?s).*
+Active
+.*Unit code.*" is visible... COMPLETED
+Take screenshot u3-ready-to-sign... COMPLETED

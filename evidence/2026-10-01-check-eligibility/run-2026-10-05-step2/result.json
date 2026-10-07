@@ -1,0 +1,19 @@
+{
+  "flow": "check-eligibility",
+  "file": ".maestro/e2e/check-eligibility.yaml",
+  "suite": "e2e",
+  "tags": [
+    "e2e",
+    "eligibility",
+    "critical"
+  ],
+  "startedAt": "2026-10-05T07:32:11.900Z",
+  "durationMs": 270866,
+  "logPath": "report-dashboard/maestro-output/check-eligibility/maestro.log",
+  "status": "FAIL",
+  "exitCode": 1,
+  "failedSteps": 4,
+  "firstFailure": "STEP 2 - Q1 (resided outside KSA) is not answered No... FAILED",
+  "envReason": null,
+  "npsAppearances": 0
+}

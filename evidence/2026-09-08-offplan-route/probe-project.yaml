@@ -1,0 +1,9 @@
+appId: fi.iwa.sakani
+name: PROBE - open offplan project from destination
+---
+- assertVisible: '(?s).*Units under construction.*'
+- tapOn:
+    text: '(?s).*Units under construction.*'
+    index: 0
+- waitForAnimationToEnd:
+    timeout: 10000

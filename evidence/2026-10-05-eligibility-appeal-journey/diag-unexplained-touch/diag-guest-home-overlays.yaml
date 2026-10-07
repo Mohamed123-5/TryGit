@@ -1,0 +1,40 @@
+# DIAGNOSTIC ONLY - not part of any suite. Reproduces the guest Home / overlay phase in which unexplained
+# edge touches appeared (runs 05/10 09:25 and 14:21). Clean launch -> shared clear-overlays (same ANCHOR as
+# register-new-user.yaml) -> stable "Login / Sign up" -> ~35 s of READ-ONLY visibility checks (the same NPS
+# negative checks that were running when the touches arrived). No Login / Sign up tap, no ID, no registration,
+# no dismiss-nps.yaml (it would submit a rating).
+appId: fi.iwa.sakani
+name: DIAG - guest Home overlay phase (read-only hold)
+---
+- launchApp:
+    clearState: true
+- runFlow:
+    file: ../../../.maestro/subflows/clear-overlays.yaml
+    env:
+      ANCHOR: "(?s).*Login / Sign up.*"
+- extendedWaitUntil:
+    visible: "(?s).*Login / Sign up.*"
+    timeout: 120000
+- evalScript: ${console.log('DIAG HOLD START - guest Home stable')}
+- repeat:
+    times: 5
+    commands:
+      - runFlow:
+          when:
+            visible: "(?s).*would you recommend benefiting from Sakani.*"
+          commands:
+            - evalScript: ${console.log('DIAG - NPS survey visible (not touched)')}
+      - runFlow:
+          when:
+            visible: "Thank you for your feedback"
+          commands:
+            - evalScript: ${console.log('DIAG - NPS thank-you visible (not touched)')}
+      - runFlow:
+          when:
+            visible: "Trending Services"
+          commands:
+            - evalScript: ${console.log('DIAG - SEARCH SCREEN VISIBLE (unexpected navigation)')}
+- evalScript: ${console.log('DIAG HOLD END')}
+- assertVisible:
+    text: "(?s).*Login / Sign up.*"
+    label: "DIAG - guest Home no longer visible at the end of the hold"

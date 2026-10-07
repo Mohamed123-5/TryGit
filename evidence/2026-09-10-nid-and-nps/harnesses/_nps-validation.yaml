@@ -1,0 +1,29 @@
+# TEMPORARY, non-destructive: bottom-tab navigation only. Never opens a booking and never calls
+# the Stage 0 helper. Exercises the hardened NPS recovery the way the journey meets it.
+appId: fi.iwa.sakani
+name: VALIDATION - NPS recovery on tab navigation (no booking)
+---
+- repeat:
+    times: 4
+    commands:
+      - runFlow:
+          file: subflows/clear-overlays.yaml
+          env:
+            ANCHOR: 'Account\s*Tab 4 of 4'
+      - tapOn: 'Account\s*Tab 4 of 4'
+      - runFlow:
+          file: subflows/clear-overlays.yaml
+          env:
+            ANCHOR: "My bookings"
+      - extendedWaitUntil:
+          visible: "My bookings"
+          timeout: 60000
+      - tapOn: 'Home\s*Tab 1 of 4'
+      - runFlow:
+          file: subflows/clear-overlays.yaml
+          env:
+            ANCHOR: '(?si)(Hello|Good (morning|afternoon|evening)),\s*\S.*'
+      - extendedWaitUntil:
+          visible: '(?si)(Hello|Good (morning|afternoon|evening)),\s*\S.*'
+          timeout: 60000
+- takeScreenshot: nps-validation-end

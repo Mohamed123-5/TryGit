@@ -1,0 +1,25 @@
+{
+  "startedAt": "2026-09-29T14:52:01.341Z",
+  "finishedAt": "2026-09-29T14:57:28.501Z",
+  "device": "emulator-5554",
+  "includeE2e": true,
+  "results": [
+    {
+      "flow": "full-journey",
+      "file": ".maestro/e2e/full-journey.yaml",
+      "suite": "e2e",
+      "tags": [
+        "critical"
+      ],
+      "startedAt": "2026-09-29T14:52:01.471Z",
+      "durationMs": 327025,
+      "logPath": "report-dashboard/maestro-output/full-journey/maestro.log",
+      "status": "FAIL",
+      "exitCode": 1,
+      "failedSteps": 1,
+      "firstFailure": "CONFIRM - the product's booking confirmation banner did not appear... FAILED",
+      "envReason": null,
+      "npsAppearances": 0
+    }
+  ]
+}

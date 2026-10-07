@@ -1,0 +1,27 @@
+appId: fi.iwa.sakani
+name: PRE-FLIGHT - booking state for NATIONAL_ID (default 1119880062)
+env:
+  # Configurable, never forced. This file used to pass a literal "1119880062" straight into
+  # the login helper, so reusing it for any other account silently signed in as the old user.
+  #   maestro test -e NATIONAL_ID=<10-digit National ID / Iqama> .maestro/_explore.yaml
+  # A self-referencing default, NOT a literal: on Maestro 2.9.0 a literal beats `-e`.
+  NATIONAL_ID: '${typeof NATIONAL_ID === "undefined" ? "1119880062" : String(NATIONAL_ID)}'
+---
+# Read-only: signs in and opens My Bookings. It never opens a booking and never cancels.
+# Fail fast, before the app is touched, on an empty or malformed override (dollar-free).
+- evalScript: ${console.log('EXPLORE TARGET NATIONAL_ID = [' + NATIONAL_ID + ']')}
+- assertTrue: ${String(NATIONAL_ID).length === 10 && !/[^0-9]/.test(String(NATIONAL_ID)) && (String(NATIONAL_ID).charAt(0) === "1" || String(NATIONAL_ID).charAt(0) === "2")}
+- launchApp:
+    clearState: true
+- runFlow:
+    file: subflows/login.yaml
+    env:
+      NATIONAL_ID: ${NATIONAL_ID}
+- tapOn: 'Account\s*Tab 4 of 4'
+- extendedWaitUntil:
+    visible: "My bookings"
+    timeout: 60000
+- tapOn: "My bookings"
+- extendedWaitUntil:
+    visible: "My Bookings"
+    timeout: 45000

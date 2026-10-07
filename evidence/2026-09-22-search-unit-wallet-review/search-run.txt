@@ -1,0 +1,77 @@
+WARNING: Final field parent in class maestro.cli.command.TestCommand has been mutated reflectively by class picocli.CommandLine$Model$FieldBinding in unnamed module @2d9d4f9d (file:/D:/Automation-Tool/maestro/lib/picocli-4.6.3.jar)
+WARNING: Use --enable-final-field-mutation=ALL-UNNAMED to avoid a warning
+WARNING: Mutating final fields will be blocked in a future release unless final field mutation is enabled
+Running on Pixel_8
+ > Flow SRCH-003 no-results empty state, SRCH-002 grouped autocomplete, SRCH-008 recent searches, SRCH-009 popular location scopes search
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::arrayBaseOffset has been called by com.google.protobuf.UnsafeUtil$MemoryAccessor (file:/D:/Automation-Tool/maestro/lib/protobuf-java-3.21.9.jar)
+WARNING: Please consider reporting this to the maintainers of class com.google.protobuf.UnsafeUtil$MemoryAccessor
+WARNING: sun.misc.Unsafe::arrayBaseOffset will be removed in a future release
+Launch app "fi.iwa.sakani"... COMPLETED
+Run subflows/clear-overlays.yaml...
+  Repeat while "${ANCHOR}" is not visible (up to 26 times)...
+    Run ${output.handled = false}... COMPLETED
+    Run flow when "(?s)(?:Don.t allow|Skip|Dismiss|Ok|Marketplace Day|Start comparing properties|Go to the weekly (offer|deal)|Update email|Number and Email Already Linked|.*would you recommend benefiting from Sakani.*|Maybe Later|Reject cookies)" is visible...
+    Run flow when "(?s)(?:Don.t allow|Skip|Dismiss|Ok|Marketplace Day|Start comparing properties|Go to the weekly (offer|deal)|Update email|Number and Email Already Linked|.*would you recommend benefiting from Sakani.*|Maybe Later|Reject cookies)" is visible... SKIPPED
+    Run flow when ${output.handled !== true} is true...
+      Wait for animation to end within 5000 ms... COMPLETED
+    Run flow when true is true... COMPLETED
+  Repeat while "${ANCHOR}" is not visible (up to 26 times)... COMPLETED
+  Run flow when ${output.npsLeftToCaller !== true} is true...
+    Repeat while "(?s).*would you recommend benefiting from Sakani.*" is visible (up to 3 times)...
+    Repeat while "(?s).*would you recommend benefiting from Sakani.*" is visible (up to 3 times)... SKIPPED
+    Assert that "(?s).*would you recommend benefiting from Sakani.*" is not visible... COMPLETED
+  Run flow when true is true... COMPLETED
+  Run flow when ${output.anchorOptional !== true} is true...
+    Repeat while "${ANCHOR}" is not visible (up to 6 times)...
+    Repeat while "${ANCHOR}" is not visible (up to 6 times)... SKIPPED
+    Repeat while "(?s).*would you recommend benefiting from Sakani.*" is visible (up to 3 times)...
+    Repeat while "(?s).*would you recommend benefiting from Sakani.*" is visible (up to 3 times)... SKIPPED
+    Assert that "(?s).*would you recommend benefiting from Sakani.*" is not visible... COMPLETED
+    Assert that "${ANCHOR}" is visible... COMPLETED
+  Run flow when true is true... COMPLETED
+Run subflows/clear-overlays.yaml... COMPLETED
+Tap on "Explore\s*Tab 2 of 4"... COMPLETED
+Assert that "Registered Interests" is visible... COMPLETED
+Repeat 3 times...
+  Run flow when "Select category" is visible...
+  Run flow when "Select category" is visible... SKIPPED
+  Run flow when "Popular locations" is not visible...
+    Tap on point (55%,11%)... COMPLETED
+    Wait for animation to end within 8000 ms... COMPLETED
+  Run flow when "Popular locations" is not visible... COMPLETED
+Repeat 3 times... COMPLETED
+Assert that "Popular locations" is visible... COMPLETED
+Tap on "Enter Region, City, Neighborhood, Street, Project, Developer, Building Number, Block Number"... COMPLETED
+Input text zzzqqqxyz... COMPLETED
+Assert that "No results were found for your search." is visible... COMPLETED
+Assert that "Please try refining your search or explore nearby properties." is visible... COMPLETED
+Tap on "Cancel"... COMPLETED
+Assert that "Explore\s*Tab 2 of 4" is visible... COMPLETED
+Assert that "Popular locations" is not visible... COMPLETED
+Tap on point (55%,11%)... COMPLETED
+Assert that "Popular locations" is visible... COMPLETED
+Tap on "Enter Region, City, Neighborhood, Street, Project, Developer, Building Number, Block Number"... COMPLETED
+Input text Riy... COMPLETED
+Assert that "Show more results" is visible... COMPLETED
+Assert that "Location" is visible... COMPLETED
+Assert that "Property" is visible... COMPLETED
+Assert that "(?s).*Riy.*KSA.*" is visible... COMPLETED
+Tap on "Cancel"... COMPLETED
+Assert that "Explore\s*Tab 2 of 4" is visible... COMPLETED
+Tap on point (55%,11%)... COMPLETED
+Assert that "Recent searches" is visible... COMPLETED
+Assert that "zzzqqqxyz" is visible... COMPLETED
+Assert that "Riy" is visible... COMPLETED
+Assert that "Popular locations" is visible... COMPLETED
+Assert that "Riyadh\s*Saudi Arabia" is visible... COMPLETED
+Assert that "MAKKAH AL MUKARRAMAH\s*Saudi Arabia" is visible... COMPLETED
+Assert that "JEDDAH\s*Saudi Arabia" is visible... COMPLETED
+Assert that "AL MADINAH AL MUNAWWARAH\s*Saudi Arabia" is visible... COMPLETED
+Tap on "Riyadh\s*Saudi Arabia"... COMPLETED
+Assert that "Riyadh" is visible... COMPLETED
+Assert that "Looking for?" is visible... COMPLETED
+Assert that "Popular locations" is not visible... COMPLETED
+Assert that "Recent searches" is not visible... COMPLETED
+MAESTRO_EXIT=0
+/c/Users/Mohammed Elkatry/.maestro/tests/2026-09-22_101611/

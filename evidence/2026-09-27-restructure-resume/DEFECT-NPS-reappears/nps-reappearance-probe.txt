@@ -1,0 +1,35 @@
+NPS SURVEY RE-PRESENTS AFTER AN EXPLICIT CLOSE - direct device evidence
+Device emulator-5554, fi.iwa.sakani 4.7.6 (PRE-4.7.6-1283), 27/09/2026, account 1000011487.
+
+Taken AFTER the wallet run ended (10:03) with NO maestro/java process running, so this is
+manual device behaviour, not an automation timing artifact.
+
+The close control is the clickable node bounds=[42,1403][105,1466], centre (73,1434). It has
+an EMPTY content-desc, so it has no usable semantic selector - the coordinate tap used by
+subflows/clear-overlays.yaml is correct and its bounds are still current.
+
+Probe 1 - single close, then poll for the survey text:
+  t=0                 survey_present=1
+  ~1s after close     survey_present=0
+  ~2s after close     survey_present=0
+  ~3s after close     survey_present=1   <-- returned
+  ~5s / 8s / 12s / 20s / 30s             survey_present=1  (stayed)
+
+Probe 2 - repeated closes:
+  round 1: 1s_after_close=0   5s_after_close=1   <-- returned
+  round 2: 1s_after_close=0   5s_after_close=1   <-- returned
+  round 3: 1s_after_close=0   5s_after_close=0   <-- finally stayed closed
+
+CONCLUSION SUPPORTED BY THIS EVIDENCE: the sheet is genuinely dismissed by the close X and the
+app re-presents it several times before it stays closed. It is NOT a hierarchy-read race and
+NOT a wrong coordinate.
+
+CONSEQUENCE FOR THE SUITE: subflows/clear-overlays.yaml bounds its NPS recovery to 3 attempts
+(correctly - recovery must never be unbounded). The observed app behaviour needs roughly four
+dismissals, so the bounded recovery is exhausted and the guard
+  assertNotVisible "(?s).*would you recommend benefiting from Sakani.*"
+fails. That guard was NOT relaxed and the retry count was NOT raised: doing either would hide
+the behaviour instead of reporting it.
+
+The run log shows the same signature - within one iteration both branches fire:
+  "NPS - gone after the close-X step"  then  "NPS - still visible after the close X, drag fallback"

@@ -1,0 +1,70 @@
+appId: fi.iwa.sakani
+name: PROBE - zero-fee Stage 6 verbatim on the booking created 29/09/2026 (read-only)
+env:
+  MODULE: "Apartment"
+---
+# Seeded from run 2026-09-29_111933 log: block [999] Apartment [182]; app is signed in (no clearState).
+- evalScript: ${output.unitBlock = "999"}
+- evalScript: ${output.unitNumber = "182"}
+- launchApp
+# ==========================================================================================
+# STAGE 6 - Prove the booking in the product's own record: My bookings -> Active
+# ==========================================================================================
+# Baseline (read-only probe, 29/09/2026): this account had no Active booking before the run.
+# Leave the post-confirm screen through the Account tab when it is there; otherwise a warm
+# relaunch (session kept, as proven after payment in the with-fee journey) returns to Home.
+- runFlow:
+    when:
+      notVisible: '(?s)(Account\s*Tab 4 of 4|.*would you recommend benefiting from Sakani.*)'
+    commands:
+      - evalScript: "${console.log('AFTER CONFIRM - no Account tab on the post-confirm screen; warm relaunch to Home')}"
+      - launchApp
+# Observed 29/09/2026: after the relaunch Home is covered by the satisfaction survey (D-12,
+# "Overall, how satisfied are you...") which hides the tab bar; the shared helper dismisses it.
+- runFlow:
+    file: D:/Automation/Maestro-Mobile/.maestro/subflows/clear-overlays.yaml
+    env:
+      ANCHOR: 'Account\s*Tab 4 of 4'
+- runFlow:
+    file: D:/Automation/Maestro-Mobile/.maestro/subflows/open-account-tab.yaml
+    env:
+      DESTINATION: "My bookings"
+- runFlow:
+    file: D:/Automation/Maestro-Mobile/.maestro/subflows/tap-until-destination.yaml
+    env:
+      TARGET: "My bookings"
+      DESTINATION: 'Active\s*Tab 2 of 4'
+- tapOn: 'Active\s*Tab 2 of 4'
+- extendedWaitUntil:
+    visible: "(?s).*(\nActive\n.*Unit code|don.t have any active booking).*"
+    timeout: 60000
+- takeScreenshot: journey-without-fee-my-bookings-active
+- assertNotVisible:
+    text: "(?s).*don.t have any active booking.*"
+    label: "BOOKING - no Active booking exists after Confirm booking"
+
+# Same unit: the Active card's unit code must carry the block read from the summary.
+- copyTextFrom:
+    text: "(?s).*\nActive\n.*\nUnit code\n.*"
+- evalScript: ${output.activeCard = String(maestro.copiedText)}
+- evalScript: '${output.unitCode = (output.activeCard.match(/Unit code\s*([0-9]{2}(-[0-9]+)+)/) || ["", ""])[1]}'
+- evalScript: "${console.log('ZERO-FEE BOOKING - Active card [' + output.activeCard.replace(/\\n/g, ' | ') + '] unit code [' + output.unitCode + ']')}"
+- assertTrue:
+    condition: ${output.unitCode.length > 0 && output.unitCode.split('-').indexOf(output.unitBlock) > 0}
+    label: "BOOKING - the Active booking's unit code does not carry the booked unit's block"
+- tapOn: "(?s).*\nActive\n.*\nUnit code\n${output.unitCode}\n.*"
+
+- extendedWaitUntil:
+    visible: 'Booking Details\s*Tab 1 of 2'
+    timeout: 45000
+- assertVisible: "Offplan MOH land"
+- takeScreenshot: journey-without-fee-booking-details
+- tapOn: 'Unit Details\s*Tab 2 of 2'
+- waitForAnimationToEnd:
+    timeout: 8000
+- takeScreenshot: journey-without-fee-unit-details
+- assertVisible:
+    text: ${output.unitNumber}
+    label: "BOOKING - Unit Details does not show the booked unit number"
+
+- evalScript: "${console.log('FULL JOURNEY END - zero-fee booking Active, unit code [' + output.unitCode + '], block [' + output.unitBlock + '], unit [' + output.unitNumber + ']')}"

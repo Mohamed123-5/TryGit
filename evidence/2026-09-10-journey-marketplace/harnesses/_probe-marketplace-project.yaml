@@ -1,0 +1,76 @@
+appId: fi.iwa.sakani
+name: PROBE - Explore, Marketplace, search, open the project (read-only discovery, guest)
+env:
+  # UTF-8 defaults in this file: passing Arabic through `maestro.bat -e` crosses the Windows
+  # console code page. Override both for a Latin project, e.g. -e TERM=Murcia -e PROJECT_MATCH=Murcia
+  TERM: '${typeof TERM === "undefined" ? "طيبة" : String(TERM)}'
+  PROJECT_MATCH: '${typeof PROJECT_MATCH === "undefined" ? "مساكن طيبة المدائن EN" : String(PROJECT_MATCH)}'
+---
+# READ-ONLY and unauthenticated: it opens a project page and stops. Nothing is reserved.
+- launchApp:
+    clearState: true
+- runFlow:
+    file: subflows/clear-overlays.yaml
+    env:
+      ANCHOR: 'Explore\s*Tab 2 of 4'
+- tapOn: 'Explore\s*Tab 2 of 4'
+- runFlow:
+    file: subflows/clear-overlays.yaml
+    env:
+      ANCHOR: "Registered Interests"
+- extendedWaitUntil:
+    visible: "Registered Interests"
+    timeout: 45000
+
+# Marketplace: Buy + Offplan, the same fork full-journey.yaml already handles.
+- tapOn: "(Construction Status|Ready Units|Readymade|Offplan|Land)"
+- waitForAnimationToEnd:
+    timeout: 8000
+- runFlow:
+    when:
+      visible: "Start searching"
+    commands:
+      - tapOn: "Buy"
+      - tapOn: "Offplan"
+      - tapOn: "Start searching"
+- runFlow:
+    when:
+      visible: "Apply"
+    commands:
+      - tapOn: "Clear"
+      - waitForAnimationToEnd:
+          timeout: 5000
+      - tapOn: "Offplan"
+      - tapOn: "Apply"
+- extendedWaitUntil:
+    visible: 'Projects\s*Tab 1 of 2'
+    timeout: 45000
+- takeScreenshot: p2-1-marketplace
+
+# Search, from the Marketplace results view.
+- repeat:
+    times: 3
+    commands:
+      - runFlow:
+          when:
+            notVisible: "Popular locations"
+          commands:
+            - tapOn:
+                point: "55%,11%"
+            - waitForAnimationToEnd:
+                timeout: 8000
+- extendedWaitUntil:
+    visible: "Popular locations"
+    timeout: 30000
+- tapOn: "Enter Region, City, Neighborhood, Street, Project, Developer, Building Number, Block Number"
+- inputText: ${TERM}
+- extendedWaitUntil:
+    visible: "Property"
+    timeout: 30000
+- takeScreenshot: p2-2-search-results
+
+- tapOn: "(?s).*${PROJECT_MATCH}.*"
+- extendedWaitUntil:
+    visible: '(?s).*(View units|About this project|Units under construction|Projectss*Tab 1 of 2).*'
+    timeout: 45000
+- takeScreenshot: p2-3-after-project-tap

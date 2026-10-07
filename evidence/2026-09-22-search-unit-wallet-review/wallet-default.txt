@@ -1,0 +1,231 @@
+WARNING: Final field parent in class maestro.cli.command.TestCommand has been mutated reflectively by class picocli.CommandLine$Model$FieldBinding in unnamed module @2d9d4f9d (file:/D:/Automation-Tool/maestro/lib/picocli-4.6.3.jar)
+WARNING: Use --enable-final-field-mutation=ALL-UNNAMED to avoid a warning
+WARNING: Mutating final fields will be blocked in a future release unless final field mutation is enabled
+Running on Pixel_8
+ > Flow WAL-008 over-balance withdrawal blocked, PRE-002 registered-interest empty state, PRE-008 preference-form gate, MTG validation, WAL-010 D-31 guard
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::arrayBaseOffset has been called by com.google.protobuf.UnsafeUtil$MemoryAccessor (file:/D:/Automation-Tool/maestro/lib/protobuf-java-3.21.9.jar)
+WARNING: Please consider reporting this to the maintainers of class com.google.protobuf.UnsafeUtil$MemoryAccessor
+WARNING: sun.misc.Unsafe::arrayBaseOffset will be removed in a future release
+Run ${console.log('WALLET.YAML TARGET NATIONAL_ID = [' + NATIONAL_ID + ']')}... COMPLETED
+Assert that ${String(NATIONAL_ID).length === 10 && !/[^0-9]/.test(String(NATIONAL_ID)) && (String(NATIONAL_ID).charAt(0) === "1" || String(NATIONAL_ID).charAt(0) === "2")} is true... COMPLETED
+Launch app "fi.iwa.sakani" with clear state... COMPLETED
+Run subflows/login.yaml...
+  Assert that ${typeof NATIONAL_ID !== "undefined" && String(NATIONAL_ID).length === 10 && !/[^0-9]/.test(String(NATIONAL_ID)) && (String(NATIONAL_ID).charAt(0) === "1" || String(NATIONAL_ID).charAt(0) === "2")} is true... COMPLETED
+  Run clear-overlays.yaml...
+    Repeat while "${ANCHOR}" is not visible (up to 26 times)...
+      Run ${output.handled = false}... COMPLETED
+      Run flow when "(?s)(?:Don.t allow|Skip|Dismiss|Ok|Marketplace Day|Start comparing properties|Go to the weekly (offer|deal)|Update email|Number and Email Already Linked|.*would you recommend benefiting from Sakani.*|Maybe Later|Reject cookies)" is visible...
+        Run flow when "Don.t allow" is visible...
+        Run flow when "Don.t allow" is visible... SKIPPED
+        Run flow when "Skip" is visible...
+          Tap on "Skip"... COMPLETED
+          Run ${output.handled = true}... COMPLETED
+          Wait for animation to end within 3000 ms... COMPLETED
+        Run flow when "Skip" is visible... COMPLETED
+        Run flow when "Dismiss" is visible...
+        Run flow when "Dismiss" is visible... SKIPPED
+        Run flow when "Ok" is visible...
+        Run flow when "Ok" is visible... SKIPPED
+        Run flow when "Marketplace Day" is visible...
+        Run flow when "Marketplace Day" is visible... SKIPPED
+        Run flow when "Start comparing properties" is visible...
+          Press back... COMPLETED
+          Run ${output.handled = true}... COMPLETED
+          Wait for animation to end within 3000 ms... COMPLETED
+        Run flow when "Start comparing properties" is visible... COMPLETED
+        Run flow when "Go to the weekly (offer|deal)" is visible...
+        Run flow when "Go to the weekly (offer|deal)" is visible... SKIPPED
+        Run flow when "Update email" is visible...
+        Run flow when "Update email" is visible... SKIPPED
+        Run flow when "Number and Email Already Linked" is visible...
+        Run flow when "Number and Email Already Linked" is visible... SKIPPED
+        Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible...
+        Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible... SKIPPED
+        Run flow when "Maybe Later" is visible...
+        Run flow when "Maybe Later" is visible... SKIPPED
+        Run flow when "Reject cookies" is visible...
+        Run flow when "Reject cookies" is visible... SKIPPED
+      Run flow when "(?s)(?:Don.t allow|Skip|Dismiss|Ok|Marketplace Day|Start comparing properties|Go to the weekly (offer|deal)|Update email|Number and Email Already Linked|.*would you recommend benefiting from Sakani.*|Maybe Later|Reject cookies)" is visible... COMPLETED
+      Run flow when ${output.handled !== true} is true...
+      Run flow when false is true... SKIPPED
+    Repeat while "${ANCHOR}" is not visible (up to 26 times)... COMPLETED
+    Run flow when ${output.npsLeftToCaller !== true} is true...
+      Repeat while "(?s).*would you recommend benefiting from Sakani.*" is visible (up to 3 times)...
+      Repeat while "(?s).*would you recommend benefiting from Sakani.*" is visible (up to 3 times)... SKIPPED
+      Assert that "(?s).*would you recommend benefiting from Sakani.*" is not visible... COMPLETED
+    Run flow when true is true... COMPLETED
+    Run flow when ${output.anchorOptional !== true} is true...
+      Repeat while "${ANCHOR}" is not visible (up to 6 times)...
+      Repeat while "${ANCHOR}" is not visible (up to 6 times)... SKIPPED
+      Repeat while "(?s).*would you recommend benefiting from Sakani.*" is visible (up to 3 times)...
+      Repeat while "(?s).*would you recommend benefiting from Sakani.*" is visible (up to 3 times)... SKIPPED
+      Assert that "(?s).*would you recommend benefiting from Sakani.*" is not visible... COMPLETED
+      Assert that "${ANCHOR}" is visible... COMPLETED
+    Run flow when true is true... COMPLETED
+  Run clear-overlays.yaml... COMPLETED
+  Assert that "(?s).*Login / Sign up.*" is visible... COMPLETED
+  Tap on "(?s).*Login / Sign up.*"... COMPLETED
+  Assert that "Continue with N[ae]fath" is visible... COMPLETED
+  Tap on "Enter your ID, phone number,? or email"... COMPLETED
+  Input text ${NATIONAL_ID}... COMPLETED
+  Assert that "${NATIONAL_ID}" is visible... COMPLETED
+  Tap on "Continue"... COMPLETED
+  Assert that "Login with nafath" is visible... COMPLETED
+  Assert that "${NATIONAL_ID}" is visible... COMPLETED
+  Run ${output.loginNationalId = String(NATIONAL_ID)}... COMPLETED
+  Tap on "Confirm"... COMPLETED
+  Run post-login.yaml...
+    Assert that "Login with nafath" is not visible... COMPLETED
+    Run ${output.anchorOptional = true}... COMPLETED
+    Run clear-overlays.yaml...
+      Repeat while "${ANCHOR}" is not visible (up to 26 times)...
+        Run ${output.handled = false}... COMPLETED
+        Run flow when "(?s)(?:Don.t allow|Skip|Dismiss|Ok|Marketplace Day|Start comparing properties|Go to the weekly (offer|deal)|Update email|Number and Email Already Linked|.*would you recommend benefiting from Sakani.*|Maybe Later|Reject cookies)" is visible...
+          Run flow when "Don.t allow" is visible...
+          Run flow when "Don.t allow" is visible... SKIPPED
+          Run flow when "Skip" is visible...
+          Run flow when "Skip" is visible... SKIPPED
+          Run flow when "Dismiss" is visible...
+          Run flow when "Dismiss" is visible... SKIPPED
+          Run flow when "Ok" is visible...
+          Run flow when "Ok" is visible... SKIPPED
+          Run flow when "Marketplace Day" is visible...
+          Run flow when "Marketplace Day" is visible... SKIPPED
+          Run flow when "Start comparing properties" is visible...
+          Run flow when "Start comparing properties" is visible... SKIPPED
+          Run flow when "Go to the weekly (offer|deal)" is visible...
+          Run flow when "Go to the weekly (offer|deal)" is visible... SKIPPED
+          Run flow when "Update email" is visible...
+          Run flow when "Update email" is visible... SKIPPED
+          Run flow when "Number and Email Already Linked" is visible...
+            Tap on point (7%,9%)... COMPLETED
+            Run ${output.handled = true}... COMPLETED
+            Wait for animation to end within 4000 ms... COMPLETED
+          Run flow when "Number and Email Already Linked" is visible... COMPLETED
+          Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible...
+          Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible... SKIPPED
+          Run flow when "Maybe Later" is visible...
+          Run flow when "Maybe Later" is visible... SKIPPED
+          Run flow when "Reject cookies" is visible...
+          Run flow when "Reject cookies" is visible... SKIPPED
+        Run flow when "(?s)(?:Don.t allow|Skip|Dismiss|Ok|Marketplace Day|Start comparing properties|Go to the weekly (offer|deal)|Update email|Number and Email Already Linked|.*would you recommend benefiting from Sakani.*|Maybe Later|Reject cookies)" is visible... COMPLETED
+        Run flow when ${output.handled !== true} is true...
+        Run flow when false is true... SKIPPED
+      Repeat while "${ANCHOR}" is not visible (up to 26 times)... COMPLETED
+      Run flow when ${output.npsLeftToCaller !== true} is true...
+        Repeat while "(?s).*would you recommend benefiting from Sakani.*" is visible (up to 3 times)...
+        Repeat while "(?s).*would you recommend benefiting from Sakani.*" is visible (up to 3 times)... SKIPPED
+        Assert that "(?s).*would you recommend benefiting from Sakani.*" is not visible... COMPLETED
+      Run flow when true is true... COMPLETED
+      Run flow when ${output.anchorOptional !== true} is true...
+      Run flow when false is true... SKIPPED
+    Run clear-overlays.yaml... COMPLETED
+    Run ${output.anchorOptional = false}... COMPLETED
+    Run flow when "New service" is visible...
+    Run flow when "New service" is visible... SKIPPED
+    Run flow when "Go to the weekly (offer|deal)" is visible...
+    Run flow when "Go to the weekly (offer|deal)" is visible... SKIPPED
+    Run flow when "Continue with N[ae]fath" is visible...
+    Run flow when "Continue with N[ae]fath" is visible... SKIPPED
+    Assert that "(?si)(Hello|Good (morning|afternoon|evening)),\s*\S.*" is visible... COMPLETED
+    Assert that "(?s).*Login / Sign up.*" is not visible... COMPLETED
+  Run post-login.yaml... COMPLETED
+Run subflows/login.yaml... COMPLETED
+Tap on "Account\s*Tab 4 of 4"... COMPLETED
+Assert that "My bookings" is visible... COMPLETED
+Assert that "Log in" is not visible... COMPLETED
+Tap on "Preferences"... COMPLETED
+Assert that "(?s).*Registered interest.*" is visible... COMPLETED
+Assert that "(?s).*Preference form.*" is visible... COMPLETED
+Tap on "(?s).*Registered interest.*"... COMPLETED
+Assert that "Your register interest list is empty" is visible... COMPLETED
+Assert that "Mega projects" is visible... COMPLETED
+Assert that "Projects" is visible... COMPLETED
+Assert that "Brokers" is visible... COMPLETED
+Assert that "Developers" is visible... COMPLETED
+Assert that "Explore marketplace to register your interests" is visible... COMPLETED
+Assert that "Explore marketplace" is visible... COMPLETED
+Press back... COMPLETED
+Assert that "My bookings" is visible... COMPLETED
+Tap on "Preferences"... COMPLETED
+Assert that "(?s).*Preference form.*" is visible... COMPLETED
+Tap on "(?s).*Preference form.*"... COMPLETED
+Assert that "Step 1 of 2" is visible... COMPLETED
+Assert that "Region" is visible... COMPLETED
+Assert that "City" is visible... COMPLETED
+Assert that "Neighborhood" is visible... COMPLETED
+Assert that "Completion status" is visible... COMPLETED
+Assert that "Property type" is visible... COMPLETED
+Tap on point (73%,93%)... COMPLETED
+Wait for animation to end within 8000 ms... COMPLETED
+Assert that "Step 1 of 2" is visible... COMPLETED
+Assert that "Step 2 of 2" is not visible... COMPLETED
+Tap on "Ready(made| )?Units"... COMPLETED
+Tap on "Villa"... COMPLETED
+Wait for animation to end within 5000 ms... COMPLETED
+Tap on point (73%,93%)... COMPLETED
+Wait for animation to end within 8000 ms... COMPLETED
+Assert that "Step 1 of 2" is visible... COMPLETED
+Assert that "Step 2 of 2" is not visible... COMPLETED
+Tap on "Cancel"... COMPLETED
+Assert that "(?s).*Preference form.*" is visible... COMPLETED
+Assert that "Step 1 of 2" is not visible... COMPLETED
+Press back... COMPLETED
+Assert that "My bookings" is visible... COMPLETED
+Tap on "Services\s*Tab 3 of 4"... COMPLETED
+Assert that "Categories" is visible... COMPLETED
+Tap on "(?s).*Professional Services.*"... COMPLETED
+Assert that "Explore Professional Services" is visible... COMPLETED
+Tap on "(?s).*Mortgage Calculator.*"... COMPLETED
+Assert that "Calculate Your Mortgage" is visible... COMPLETED
+Assert that "Services Fee\s*SAR\s*0\.00" is visible... COMPLETED
+Assert that "Expected time\s*Immediate" is visible... COMPLETED
+Assert that "Service available on\s*Sakani web, mobile app" is visible... COMPLETED
+Tap on "Calculate Your Mortgage"... COMPLETED
+Assert that "Financial information" is visible... COMPLETED
+Assert that "Property Price \*" is visible... COMPLETED
+Assert that "Monthly Income \*" is visible... COMPLETED
+Assert that "Funding period \*" is visible... COMPLETED
+Assert that "Annual Interest Rate \*" is visible... COMPLETED
+Assert that "Down Payment Percentage \*" is visible... COMPLETED
+Tap on Below "Monthly Income \*"... COMPLETED
+Erase 20 characters... COMPLETED
+Input text 1000... COMPLETED
+Assert that "(?s).*Must be between.*2000.*500,000.*" is visible... COMPLETED
+Tap on Below "Monthly Income \*"... COMPLETED
+Erase 20 characters... COMPLETED
+Input text 20000... COMPLETED
+Assert that "(?s).*Must be between.*2000.*500,000.*" is not visible... COMPLETED
+Press back... COMPLETED
+Wait for animation to end within 10000 ms... COMPLETED
+Repeat 4 times...
+  Run flow when "Account\s*Tab 4 of 4" is not visible...
+    Press back... COMPLETED
+    Wait for animation to end within 5000 ms... COMPLETED
+  Run flow when "Account\s*Tab 4 of 4" is not visible... COMPLETED
+Repeat 4 times... COMPLETED
+Assert that "Account\s*Tab 4 of 4" is visible... COMPLETED
+Tap on "Account\s*Tab 4 of 4"... COMPLETED
+Assert that "My bookings" is visible... COMPLETED
+Tap on "(?s).*Wallet.*"... COMPLETED
+Assert that "Available Balance" is visible... COMPLETED
+Assert that "Reserved Balance" is visible... COMPLETED
+Assert that "Total Balance" is visible... COMPLETED
+Assert that "Transaction( history)?" is visible... COMPLETED
+PRECONDITION - WAL-008 needs a positive Available Balance on NATIONAL_ID (test data)... FAILED
+
+Assertion is false: "0(\.00)?", Below "Available Balance", Above "Reserved Balance" is not visible
+
+Assertion '"0(\.00)?", Below "Available Balance", Above "Reserved Balance" is not visible' failed. Check the UI hierarchy in debug artifacts to verify the element state and properties.
+
+Possible causes:
+- Element selector may be incorrect - check if there are similar elements with slightly different names/properties.
+- Element may be temporarily unavailable due to loading state
+- This could be a real regression that needs to be addressed
+
+==== Debug output (logs & screenshots) ====
+
+C:\Users\Mohammed Elkatry\.maestro\tests\2026-09-22_103118
+MAESTRO_EXIT=1
+/c/Users/Mohammed Elkatry/.maestro/tests/2026-09-22_103118/

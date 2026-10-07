@@ -1,0 +1,417 @@
+# BKG-001 — A guest tapping "Reserve unit" is redirected to the login screen.
+#
+# Scope: BKG-001 only. This is the auth gate on the revenue path: an unauthenticated user
+# must not be able to start a reservation. The flow stops at the login screen - it does not
+# log in, does not create a booking, and changes no business data.
+#
+# BKG-001's precondition is "Logged out", so the launch clears state. That is also what
+# makes the assertion meaningful: an authenticated but ineligible account sees
+# "Beneficiaries only" instead of the CTA (UNIT-003), so this case only exists as a guest.
+#
+# Route is Home -> featured unit -> Unit Details, the drill-down proven stable in home.yaml.
+# Explore is avoided: it carries the D-09 / D-24 instability.
+# BKG-004 is covered at the end of this flow. It needs the opposite state - an
+# authenticated session - so it authenticates from the login screen that BKG-001 lands on,
+# rather than restarting the app. Ordering the two cases this way means one app launch
+# serves both.
+appId: fi.iwa.sakani
+name: BKG-001 guest Reserve redirects to login, BKG-004 My Bookings lists reservations
+env:
+  # The account this flow signs in as - defined once, here. Default (no override): 1000011487.
+  #   maestro test -e NATIONAL_ID=<10-digit National ID / Iqama> .maestro/booking.yaml
+  # A self-referencing default, NOT a literal: on Maestro 2.9.0 a literal here silently beats
+  # `-e NATIONAL_ID=...`. Single-quoted because the expression contains ": ".
+  #
+  # ACCOUNT DATA: BKG-004 / BKG-011 / BKG-014 read this account's own bookings, so the account
+  # must hold an Active, a Completed and a Cancelled booking. Still read-only for any account.
+  NATIONAL_ID: '${typeof NATIONAL_ID === "undefined" ? "1000011487" : String(NATIONAL_ID)}'
+---
+# Fail fast, before the app is touched, on an empty or malformed override. Dollar-free on
+# purpose: a "$" inside ${...} makes Maestro 2.9.0 skip evaluation and pass the assert.
+- evalScript: ${console.log('BOOKING.YAML TARGET NATIONAL_ID = [' + NATIONAL_ID + ']')}
+- assertTrue: ${String(NATIONAL_ID).length === 10 && !/[^0-9]/.test(String(NATIONAL_ID)) && (String(NATIONAL_ID).charAt(0) === "1" || String(NATIONAL_ID).charAt(0) === "2")}
+- launchApp:
+    clearState: true
+
+# A cleared launch replays first-run onboarding, and the staging dashboard can raise an
+# error dialog, the compare coach mark or the satisfaction survey. Clear whichever appear.
+- waitForAnimationToEnd:
+    timeout: 20000
+- repeat:
+    times: 5
+    commands:
+      - runFlow:
+          when:
+            visible: "Skip"
+          commands:
+            - tapOn: "Skip"
+      - runFlow:
+          when:
+            visible: "Dismiss"
+          commands:
+            - tapOn: "Dismiss"
+      - runFlow:
+          when:
+            visible: "Ok"
+          commands:
+            - tapOn: "Ok"
+      - runFlow:
+          when:
+            visible: "Marketplace Day"
+          commands:
+            - back
+      - runFlow:
+          when:
+            visible: "Start comparing properties"
+          commands:
+            - back
+      - waitForAnimationToEnd:
+          timeout: 5000
+
+# Guard the "Logged out" half of the precondition: the guest header offers sign-in, and an
+# authenticated Home would greet by name instead.
+- assertVisible: "(?s).*Login / Sign up.*"
+
+# --- BKG-001: a guest reaching Unit Details must not be able to reserve.
+#
+# Build STG-4.7.5-1278 does not expose "Reserve unit" to a guest at all, so the PRE journey
+# ("tap Reserve -> redirected to login") no longer exists. Product has confirmed the new
+# behaviour as intended, so this is the baseline now rather than a defect: the case asserts
+# the restriction the app actually applies - no CTA, and the guest is told the three
+# preconditions for booking.
+#
+# ROUTE CHANGE: PRE reached Unit Details through the Home featured unit. On STG that
+# drill-down fails for a guest with a service error (reproduced 4 times out of 4, while the
+# project route succeeds in the same session), so this case now goes
+# Explore -> project -> Project details -> View units -> unit. BKG-001 never depended on the
+# featured unit - it needs any guest Unit Details - so the business intent is unchanged. The
+# featured-unit drill-down remains covered by HOME-005, which is where that defect belongs.
+- extendedWaitUntil:
+    visible: 'Explore\s*Tab 2 of 4'
+    timeout: 30000
+- tapOn: 'Explore\s*Tab 2 of 4'
+- extendedWaitUntil:
+    visible: "Registered Interests"
+    timeout: 45000
+
+# The marketplace gate, identical to project.yaml and marketplace.yaml: the Projects/Units
+# sub-tabs only exist once a search has run. The chip opens "Select category" on a cleared
+# install and the "Construction Status" filter sheet once a category is persisted.
+- runFlow:
+    when:
+      notVisible: '[Uu]nits\s*Tab 2 of 2'
+    commands:
+      - tapOn: "(Construction Status|Ready Units|Readymade|Offplan|Land)"
+      - waitForAnimationToEnd:
+          timeout: 8000
+      - runFlow:
+          when:
+            visible: "Start searching"
+          commands:
+            - tapOn: "Buy"
+            - tapOn: "Ready(made| Units)"
+            - tapOn: "Start searching"
+      - runFlow:
+          when:
+            visible: "Apply"
+          commands:
+            - tapOn: "Ready(made| Units)"
+            - tapOn: "Apply"
+- extendedWaitUntil:
+    visible: '[Uu]nits\s*Tab 2 of 2'
+    timeout: 90000
+
+- tapOn: 'Projects\s*Tab 1 of 2'
+- waitForAnimationToEnd:
+    timeout: 10000
+- tapOn:
+    below:
+      text: 'Projects\s*Tab 1 of 2'
+
+# The compare coach mark can land on top of the Project details screen.
+- waitForAnimationToEnd:
+    timeout: 8000
+- runFlow:
+    when:
+      visible: "Start comparing properties"
+    commands:
+      - back
+      - waitForAnimationToEnd:
+          timeout: 5000
+
+- extendedWaitUntil:
+    visible: "View units"
+    timeout: 45000
+- tapOn: "View units"
+- extendedWaitUntil:
+    visible: "(?s).*Unit list.*"
+    timeout: 45000
+
+# Open the first unit. Unit codes and prices are test data, so the card is targeted by
+# position relative to the static sort-control row directly above it.
+#
+# Anchored on "Area size" rather than "Price": on PRE-4.7.6-1283 the leading (price) sort
+# chip renders icon-only with no text and no contentDescription, so it cannot anchor
+# anything. "Area size" is the leftmost chip carrying a label on both STG-4.7.5-1278 and
+# PRE-4.7.6-1283, and sits in the same row, so the card targeted is unchanged.
+- tapOn:
+    below:
+      text: "Area size"
+
+# Unit Details genuinely loaded before asserting on it - static selectors only.
+- extendedWaitUntil:
+    visible: "Mortgage Calculator"
+    timeout: 45000
+
+# BKG-001 expected result on STG: the booking entry point is withheld from a guest, and the
+# app explains why. The negative assertion is the load-bearing half - it is what proves a
+# guest cannot start a reservation. No login redirect is expected or forced any more.
+- assertNotVisible: "Reserve unit"
+- assertVisible: "You are not logged in"
+- assertVisible: "(?s).*Logged in.*Eligible.*Financial Recommendations.*partner bank.*"
+# --- end BKG-001
+
+# --- BKG-004: My Bookings lists the customer's reservations.
+# Absorbs BKG-005 (status tabs) and BKG-006 (sub-filters).
+#
+# Authenticate from the login screen BKG-001 just landed on. This mirrors login.yaml's
+# proven happy-path sequence and selectors without modifying it; the AUTH-002 validation
+# cases and the AUTH-009 restart check remain owned by login.yaml and are not duplicated
+# here. Nothing in this section cancels, signs, rejects, pays for or creates a booking -
+# it only reads the list.
+# ENTRY CHANGE: BKG-001 no longer lands on the login screen, because STG shows a guest no
+# Reserve CTA to tap. The session is therefore established from the guest Account tab, which
+# offers "Log in" exactly when no session exists.
+#
+# Getting back to the bottom navigation is done by relaunching rather than by pressing Back.
+# Unit Details and the units list carry no tab bar, and blind Back presses over-pop: on a slow
+# render the guard reads "no tab bar yet", presses again, and walks the stack out of the app
+# entirely (observed - the flow ended on the Android launcher). launchApp without clearState
+# is deterministic and preserves the guest session, which is exactly what this case needs.
+- launchApp
+- waitForAnimationToEnd:
+    timeout: 20000
+- repeat:
+    times: 8
+    commands:
+      - runFlow:
+          when:
+            visible: "Dismiss"
+          commands:
+            - tapOn: "Dismiss"
+      - runFlow:
+          when:
+            visible: "Ok"
+          commands:
+            - tapOn: "Ok"
+      - runFlow:
+          when:
+            visible: "Marketplace Day"
+          commands:
+            - back
+      - runFlow:
+          when:
+            visible: "Start comparing properties"
+          commands:
+            - back
+      - runFlow:
+          when:
+            notVisible: 'Account\s*Tab 4 of 4'
+          commands:
+            - waitForAnimationToEnd:
+                timeout: 5000
+
+- extendedWaitUntil:
+    visible: 'Account\s*Tab 4 of 4'
+    timeout: 60000
+- tapOn: 'Account\s*Tab 4 of 4'
+
+# The guest Account offers "Log in"; an authenticated one lists "My bookings" instead, so
+# this also re-confirms the flow is still unauthenticated at this point.
+- extendedWaitUntil:
+    visible: "Log in"
+    timeout: 45000
+- tapOn: "Log in"
+
+- extendedWaitUntil:
+    visible: "Continue with N[ae]fath"
+    timeout: 45000
+- tapOn: "Enter your ID, phone number,? or email"
+- inputText: ${NATIONAL_ID}
+- tapOn: "Continue"
+
+- extendedWaitUntil:
+    visible: "Login with nafath"
+    timeout: 30000
+- assertVisible: "Confirm"
+# The Nafath screen must carry EXACTLY the requested ID before the session is created - the last
+# point at which a wrong account can be stopped before it is authenticated.
+- assertVisible: ${NATIONAL_ID}
+- tapOn: "Confirm"
+- extendedWaitUntil:
+    notVisible: "Login with nafath"
+    timeout: 60000
+
+# Same race login.yaml guards against: the "Sakani Loyalty / Weekly Offer" (renamed "Sakani sharrai / weekly deal" on PRE-4.7.6-1283) sheet lands
+# non-deterministically after authentication and removes "Maybe Later" from the hierarchy
+# while it is up, so poll and clear it before waiting on the biometrics prompt.
+- repeat:
+    times: 12
+    commands:
+      - runFlow:
+          when:
+            visible: "Go to the weekly (offer|deal)"
+          commands:
+            - back
+            - waitForAnimationToEnd:
+                timeout: 3000
+      - runFlow:
+          when:
+            notVisible: "Maybe Later"
+          commands:
+            - waitForAnimationToEnd:
+                timeout: 5000
+- repeat:
+    times: 4
+    commands:
+      - runFlow:
+          when:
+            visible: "Go to the weekly (offer|deal)"
+          commands:
+            - back
+            - waitForAnimationToEnd:
+                timeout: 3000
+      - runFlow:
+          when:
+            visible: "Maybe Later"
+          commands:
+            - tapOn: "Maybe Later"
+            - waitForAnimationToEnd:
+                timeout: 3000
+
+# Authenticating from the Account tab returns to Home or to Account depending on timing, and
+# both carry the bottom navigation, so wait for the tab bar rather than assuming which.
+
+# Account is a bottom-nav tab, so this is the most stable route to My Bookings.
+#
+# The session is asserted on Account rather than on Home. Home's tab bar renders well
+# before its content does, and its content can sit on skeleton loaders indefinitely -
+# but that is Home's problem, not this case's, so depending on it would make BKG-004
+# fail for an unrelated reason. Account is a reliable discriminator: it lists
+# "My bookings" only when authenticated, and offers "Log in" only to a guest.
+- tapOn: 'Account\s*Tab 4 of 4'
+- extendedWaitUntil:
+    visible: "My bookings"
+    timeout: 60000
+- assertNotVisible: "Log in"
+- tapOn: "My bookings"
+
+# The screen title is capitalised differently from the Account row ("My Bookings" vs
+# "My bookings"), and Maestro matching is case-sensitive, so this confirms we actually
+# landed on the screen rather than still seeing the row we tapped.
+- extendedWaitUntil:
+    visible: "My Bookings"
+    timeout: 30000
+
+# BKG-005: status tabs.
+- assertVisible: 'All\s*Tab 1 of 4'
+- assertVisible: 'Active\s*Tab 2 of 4'
+- assertVisible: 'Completed\s*Tab 3 of 4'
+- assertVisible: 'Cancelled\s*Tab 4 of 4'
+
+# BKG-006: sub-filters.
+- assertVisible: "Unpaid"
+- assertVisible: "Ready to sign"
+
+# BKG-004: reservations are actually listed. Matched on the static "Unit code" label that
+# every booking card carries, not on the code itself - booking IDs, project names, prices,
+# dates and the number of bookings are all test-data dependent and deliberately not asserted.
+- assertVisible: "(?s).*Unit code.*"
+
+# --- BKG-011: the Completed and Cancelled tabs render the correct set or an empty state.
+# Read-only: tabs are only switched, nothing is cancelled, selected or modified.
+#
+# Both tabs are asserted on what separates them from each other rather than on a booking
+# count, which is test-data dependent. The card labels are single multi-line nodes, so each
+# card's status and field labels are matched inside one string with (?s).
+
+# Completed: RE-BASELINED for STG-4.7.5-1278. On PRE this account had no completed booking,
+# so the empty state was the correct render; on STG it has completed bookings (verified live
+# on the Completed tab: two Villa cards, unit codes 01-01-0092-3-80 and 01-01-0057-17-1), so
+# cards are now the correct render and the empty-state assertion no longer describes reality.
+#
+# The case still validates the same business intent - the Completed tab loads and renders
+# genuinely completed bookings - without pinning a specific booking, because which bookings
+# exist is test data. It asserts the status word plus the "Unit code" label every card
+# carries, and the two negatives prove the tab actually filtered rather than repainting the
+# full list, which the positive alone would not catch.
+#
+# The status word is anchored between newlines on purpose. Maestro matches case-insensitively,
+# so a bare ".*Completed.*" would also match the "Completed\nTab 3 of 4" tab label itself and
+# would pass even on an empty tab - the same trap BKG-014 documents below.
+- tapOn: 'Completed\s*Tab 3 of 4'
+- extendedWaitUntil:
+    visible: "(?s).*\nCompleted\n.*Unit code.*"
+    timeout: 30000
+- assertNotVisible: "(?s).*\nActive\n.*"
+- assertNotVisible: "(?s).*\nCancelled\n.*"
+
+# Cancelled: this account has cancelled bookings, so cards are the correct render. Cancelled
+# cards carry "Cancellation date"; active cards carry "Booking date" instead. Asserting the
+# first present and the second absent proves the tab actually filtered rather than just
+# repainting the full list.
+- tapOn: 'Cancelled\s*Tab 4 of 4'
+- extendedWaitUntil:
+    visible: "(?s).*Cancellation date.*"
+    timeout: 30000
+- assertVisible: "(?s).*Cancelled.*Unit code.*"
+- assertNotVisible: "(?s).*Booking date.*"
+
+# Completed cards must not leak into the Cancelled tab either. This replaces a negative
+# assertion on the completed-tab empty-state string, which became vacuous once STG started
+# returning completed bookings - that string no longer renders anywhere, so asserting its
+# absence tested nothing.
+- assertNotVisible: "(?s).*\nCompleted\n.*"
+# --- end BKG-011
+
+# --- BKG-014: the Unit Details tab on a booking shows the booked unit's information.
+# Read-only: no booking is created, cancelled, paid for or signed.
+- tapOn: 'All\s*Tab 1 of 4'
+- extendedWaitUntil:
+    visible: "(?s).*Unit code.*"
+    timeout: 30000
+
+# Open an active booking specifically. Project names are test data (one is Arabic), so the
+# card is matched by the status and field labels every active card carries instead.
+#
+# The status word is anchored between newlines on purpose. Maestro matches selectors
+# case-insensitively, so a bare ".*Active.*" also matches the project named "Interactive Map
+# 25May - NonBene" - which is cancelled - and opened the wrong booking once that card lost
+# its Active status. Anchoring on the status line itself keeps it to genuinely active cards.
+- tapOn: "(?s).*\nActive\n.*Unit code.*"
+
+# Booking Details opened, and it is the two-tab layout this case navigates.
+- extendedWaitUntil:
+    visible: 'Unit Details\s*Tab 2 of 2'
+    timeout: 30000
+- assertVisible: 'Booking Details\s*Tab 1 of 2'
+
+- tapOn: 'Unit Details\s*Tab 2 of 2'
+
+# BKG-014 expected result: unit information for the booked unit. Asserted on the field
+# labels the unit panel is built from - the unit code, price, area, room counts and region
+# are all test-data dependent and deliberately not asserted.
+- extendedWaitUntil:
+    visible: "Unit Price"
+    timeout: 30000
+- assertVisible: "Project"
+- assertVisible: "Block"
+- assertVisible: "Building"
+- assertVisible: "Floor"
+- assertVisible: "Location"
+
+# The tab genuinely switched rather than only highlighting: the Booking Details tab's own
+# content is gone.
+- assertNotVisible: "Payment Details"
+- assertNotVisible: "Select payment method"
+# --- end BKG-014

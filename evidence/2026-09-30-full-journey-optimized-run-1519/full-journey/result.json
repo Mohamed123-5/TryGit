@@ -1,0 +1,17 @@
+{
+  "flow": "full-journey",
+  "file": ".maestro/e2e/full-journey.yaml",
+  "suite": "e2e",
+  "tags": [
+    "critical"
+  ],
+  "startedAt": "2026-09-30T12:19:34.386Z",
+  "durationMs": 379271,
+  "logPath": "report-dashboard/maestro-output/full-journey/maestro.log",
+  "status": "FAIL",
+  "exitCode": 1,
+  "failedSteps": 2,
+  "firstFailure": "Assert that \"(?s).*Your booking has been confirmed!.*\" is visible... FAILED",
+  "envReason": null,
+  "npsAppearances": 0
+}

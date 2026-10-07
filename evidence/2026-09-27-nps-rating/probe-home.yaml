@@ -1,0 +1,50 @@
+# THROWAWAY DIAGNOSTIC - not part of the regression suite.
+# Clean state -> shared login -> STAY ON HOME. No tab switching, no Account, no scenarios.
+# post-login.yaml is deliberately NOT used: it would dismiss the survey through the shared
+# handler, which is exactly what must be left on screen for inspection. The known contact prompt
+# is cleared with Back only, never "Update email".
+appId: fi.iwa.sakani
+env:
+  NATIONAL_ID: '${typeof NATIONAL_ID === "undefined" ? "1012204739" : String(NATIONAL_ID)}'
+---
+- launchApp:
+    clearState: true
+- runFlow:
+    file: ../../.maestro/subflows/clear-overlays.yaml
+    env:
+      ANCHOR: "(?s).*Login / Sign up.*"
+- extendedWaitUntil:
+    visible: "(?s).*Login / Sign up.*"
+    timeout: 120000
+- tapOn: "(?s).*Login / Sign up.*"
+- extendedWaitUntil:
+    visible: "Continue with N[ae]fath"
+    timeout: 45000
+- tapOn: "Enter your ID, phone number,? or email"
+- inputText: ${NATIONAL_ID}
+- tapOn: "Continue"
+- extendedWaitUntil:
+    visible: "Login with nafath"
+    timeout: 45000
+- tapOn: "Confirm"
+
+# Clear the one known post-login prompt with Back, then stay put.
+- runFlow:
+    when:
+      visible: "(?s)(Update your contact information|Number and Email Already Linked|Update email)"
+    commands:
+      - back
+      - waitForAnimationToEnd:
+          timeout: 3000
+- runFlow:
+    when:
+      visible: "Maybe Later"
+    commands:
+      - tapOn: "Maybe Later"
+      - waitForAnimationToEnd:
+          timeout: 3000
+
+# Bounded 2-minute poll ON HOME. Nothing is tapped; the survey is left exactly as it appears.
+- extendedWaitUntil:
+    visible: "(?s).*would you recommend benefiting from Sakani.*"
+    timeout: 120000

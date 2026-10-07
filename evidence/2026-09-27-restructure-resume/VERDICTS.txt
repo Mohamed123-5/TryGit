@@ -1,0 +1,12 @@
+FLOW          EXIT  FAILEDSTEPS VERDICT FIRST FAILED STEP
+---------------------------------------------------------------------------------
+account       -     -           NOT-RUN no log preserved
+booking       -     -           NOT-RUN no log preserved
+home          -     -           NOT-RUN no log preserved
+login         -     -           NOT-RUN no log preserved
+logout        -     -           NOT-RUN no log preserved
+marketplace   -     -           NOT-RUN no log preserved
+project       1     1           FAIL    Assert that "Price" is visible... FAILED
+search        1     1           FAIL    Assert that "Location" is visible... FAILED
+unit          1     5           FAIL    Assert that "(?s).*would you recommend benefiting from Sak
+wallet        1     5           FAIL    Assert that "(?s).*would you recommend benefiting from Sak

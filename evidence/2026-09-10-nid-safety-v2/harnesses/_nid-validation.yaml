@@ -1,0 +1,161 @@
+# Full Journey — the complete customer booking lifecycle.
+#
+#   Login -> Offplan Project -> Module -> Unit -> Reserve -> Pay booking fee
+#         -> Payment method + schedule -> Sales Contract -> Approve + OTP
+#         -> Price quotation issued -> signed state persisted
+#
+# ACCOUNT: whatever NATIONAL_ID resolves to - defined in ONE place, the `env` block below.
+# Default when no override is given: 1119880062 (خولة الخالدي), Eligible on PRE-4.7.6-1283.
+# To run as another user:
+#   maestro test -e NATIONAL_ID=<10-digit National ID / Iqama> .maestro/full-journey.yaml
+#
+# --- THIS JOURNEY SPENDS MONEY -------------------------------------------------------------
+# Reserving on this build is not free. "Reserve unit" leads to a booking summary whose only
+# confirm control is "Pay booking fee", and the fee is charged through a real payment gateway
+# before the booking exists at all. On ${PROJECT} the fee is SAR 8,855, refundable on
+# completion. The card in `env` is PRE test data supplied by the team and is used for nothing
+# else. Run this flow only against PRE, and only when that spend is approved.
+#
+# The price quotation is NOT produced at reservation time: it appears in the booking's
+# Documents only AFTER the sales contract is signed, alongside a PQ expiry countdown.
+#
+# --- WHY THIS FLOW INSISTS ON AN OFFPLAN PROJECT -------------------------------------------
+# The project type is not incidental to this case, it IS the case. A Ready Units booking was
+# created end-to-end on 07/09/2026 (booking 03-01-0004-052-04-0979, Apartment 775-555) and its
+# Booking Details exposed only "Documents", "Apply for online lending" and "Cancel booking" -
+# no payment stage, no price quotation, no contract, and it entered neither the "Unpaid" nor
+# the "Ready to sign" filter. The lifecycle simply stops there.
+#
+# The same account on an Offplan project reached the contract in one attempt. So this flow
+# asserts the project type rather than taking whatever bookable project happens to sort first:
+# selecting a Ready Units project silently produces a journey that cannot complete, and the
+# failure would surface three screens later as a missing button rather than as a wrong choice.
+#
+# The Offplan project type is spelled three different ways by three different screens, and
+# each is asserted where it is actually rendered:
+#   * "Units under construction" - the project card and Project Details
+#   * "Off-plan" (HYPHENATED)    - the booking summary, before the fee is paid
+#   * "Offplan MOH land"         - the booking detail, after the booking exists
+# The first two are checked before any money moves.
+#
+# --- THIS FLOW CHANGES BUSINESS DATA ON PURPOSE --------------------------------------------
+# It creates a real reservation and signs a real sales contract. It is NOT idempotent: once it
+# has reserved, the account holds an active booking and a re-run stops at
+# "Active booking detected! You already have an active booking." Re-running needs that booking
+# released through Account -> My bookings -> the booking -> Cancel booking (which requires a
+# reason, and "Other reason" requires free text).
+#
+# --- HOW UNEXPECTED UI IS HANDLED ----------------------------------------------------------
+# Overlay handling is delegated to subflows/clear-overlays.yaml rather than re-implemented.
+# It takes an ANCHOR - the selector meaning "we have arrived" - clears the known first-run,
+# promotional and survey surfaces, and gives the app time when neither an overlay nor the
+# anchor is present. It is invoked where interstitials are known to land; elsewhere the flow
+# uses targeted "runFlow when visible" guards.
+#
+# Nothing that writes data is ever tapped: "Update information", "Update email", the CSAT
+# "Submit" and the NPS "Submit" are all specifically avoided. No error dialog is dismissed -
+# an error is a result, and this flow must fail on one rather than clear it away.
+#
+# --- HOW TRANSITIONS ARE VERIFIED ----------------------------------------------------------
+# Each stage ends by asserting content unique to its intended destination, so a flow bounced
+# back to Home, Login or Explore fails there instead of somewhere misleading. Waits are on UI
+# state; waitForAnimationToEnd is only ever a settle budget after a tap.
+appId: fi.iwa.sakani
+name: VALIDATION - Stage 1 only (login + eligibility), no booking
+env:
+  # THE TEST USER - the single source of truth for which account this run signs in as.
+  #
+  # NOT A PLAIN LITERAL, deliberately. On Maestro 2.9.0 a literal here silently BEATS
+  # `-e NATIONAL_ID=...` on the command line: run 2026-09-09_155536 was launched with
+  # `-e NATIONAL_ID=1000011487` against a literal "1119880062", and Maestro typed 1119880062
+  # into Nafath. The run looked like it targeted one account while it logged in as another.
+  #
+  # This expression is evaluated with the `-e` value already in scope, so an override wins and
+  # the default only applies when NO override was given. `typeof` (rather than `||`) is what
+  # tells "not provided" apart from "provided but empty": `-e NATIONAL_ID=` resolves to "",
+  # which the fail-fast check at the top of STAGE 1 rejects, instead of quietly falling back
+  # to the default user - that would be the same wrong-account bug by another route.
+  #
+  # Single-quoted because the expression contains ": ", which YAML reads as a mapping.
+  NATIONAL_ID: '${typeof NATIONAL_ID === "undefined" ? "1119880062" : String(NATIONAL_ID)}'
+  # The project this journey books, pinned by name. See the STAGE 2 header for why it is
+  # pinned rather than picked positionally, and why THIS project.
+  PROJECT: "مساكن طيبة المدائن EN"
+  # The module (property type) to book inside that project. MODULE must match the project's
+  # inventory - this one sells Apartments.
+  MODULE: "Apartment"
+  # Booking-fee card, PRE test data supplied by the team. It is a TEST instrument for the
+  # staging payment gateway and pays the refundable SAR 8,855 booking fee, nothing else.
+  CARD_NUMBER: "4464040000000007"
+  # Typed as four digits: the gateway inserts the separator itself, so "12/52" would be
+  # re-formatted a second time. Verified against the live form as "12 / 52".
+  CARD_EXPIRY: "1252"
+  CARD_CVV: "222"
+  # OTP for the sales-contract signature. 1234 is the STG test value, supplied by the team.
+  # It is declared once here and referenced by name at the single point it is used, so the
+  # value never appears inline in a step and can be overridden per environment with
+  #   maestro test -e CONTRACT_OTP=<code> .maestro/full-journey.yaml
+  # It is ONLY the contract-signing code - it is not a login credential and is not reused
+  # anywhere else in this suite.
+  CONTRACT_OTP: "1234"
+---
+# ==========================================================================================
+# STAGE 1 - Login and verify the booking preconditions
+# ==========================================================================================
+
+# --- FAIL FAST on the test user, before anything touches the app. The resolved value is
+# written to the run log and to `output`, and must be a 10-digit Saudi National ID (1...) or
+# Iqama (2...). An empty or malformed override stops the run HERE, with nothing reserved or
+# paid, rather than being typed into Nafath.
+- evalScript: ${console.log('FULL JOURNEY TARGET NATIONAL_ID = [' + NATIONAL_ID + ']')}
+- evalScript: ${output.targetNationalId = String(NATIONAL_ID)}
+#
+# NO "$" ANYWHERE INSIDE THIS EXPRESSION - not even a regex end-anchor. Maestro 2.9.0 silently
+# skips evaluating any ${...} script that contains a second "$", and treats the raw text as a
+# truthy string, so the assert PASSES whatever the value is. Verified live on this machine:
+# ${/^x$/.test("abc")} and ${"a$b" === "x"} both pass, while the same checks without "$" fail.
+# An earlier version of this guard used /^[12][0-9]+$/ and let "", "12345" and "abcdefghij"
+# straight through to the login screen. Hence the dollar-free form: exactly 10 characters,
+# no non-digit anywhere, first digit 1 (National ID) or 2 (Iqama).
+- assertTrue: ${String(NATIONAL_ID).length === 10 && !/[^0-9]/.test(String(NATIONAL_ID)) && (String(NATIONAL_ID).charAt(0) === "1" || String(NATIONAL_ID).charAt(0) === "2")}
+
+- launchApp:
+    clearState: true
+
+# The helper owns the Nafath sequence and the post-authentication interstitials, and asserts
+# Home greets the account holder BY NAME - which is the "authenticated Home" check for this
+# stage, since a guest Account renders a bare "Hello" with no name.
+- runFlow:
+    file: subflows/login.yaml
+    env:
+      NATIONAL_ID: ${NATIONAL_ID}
+
+# --- Eligibility, asserted from Account rather than inferred from the Reserve CTA later.
+# Without this an eligibility regression would surface as a missing button on the unit screen
+# and read as a unit defect rather than as an account-state problem.
+- tapOn: 'Account\s*Tab 4 of 4'
+- extendedWaitUntil:
+    visible: "My bookings"
+    timeout: 60000
+- scrollUntilVisible:
+    element:
+      text: "(?s).*Eligibility checker status.*"
+    direction: DOWN
+    timeout: 30000
+- assertVisible: '(?s).*Eligibility checker status\s*Eligible.*'
+
+- tapOn: 'Home\s*Tab 1 of 4'
+- extendedWaitUntil:
+    visible: '(?si)(Hello|Good (morning|afternoon|evening)),\s*\S.*'
+    timeout: 45000
+
+# --- IDENTITY GATE - the last check before anything destructive. STAGE 0 can cancel a
+# booking and STAGE 4 pays a fee, so before either runs this proves the account that signed
+# in is the one this run resolved. The login helper records the ID it has just matched on the
+# Nafath screen (output.loginNationalId); it must equal the ID resolved at the top of this
+# flow (output.targetNationalId), which must still equal NATIONAL_ID. A missing record fails.
+# Dollar-free on purpose - see the fail-fast guard at the top of this stage.
+- assertTrue: ${output.loginNationalId === output.targetNationalId && output.targetNationalId === String(NATIONAL_ID)}
+
+
+- takeScreenshot: nid-validation-authenticated-home

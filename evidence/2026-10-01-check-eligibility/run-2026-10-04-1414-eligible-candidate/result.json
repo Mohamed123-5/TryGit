@@ -1,0 +1,18 @@
+{
+  "flow": "check elgibilty",
+  "file": ".maestro/e2e/check elgibilty.yaml",
+  "suite": "e2e",
+  "tags": [
+    "e2e",
+    "eligibility"
+  ],
+  "startedAt": "2026-10-04T11:14:07.090Z",
+  "durationMs": 182271,
+  "logPath": "report-dashboard/maestro-output/check elgibilty/maestro.log",
+  "status": "UNRESOLVED",
+  "exitCode": 1,
+  "failedSteps": 0,
+  "firstFailure": null,
+  "envReason": null,
+  "npsAppearances": 0
+}

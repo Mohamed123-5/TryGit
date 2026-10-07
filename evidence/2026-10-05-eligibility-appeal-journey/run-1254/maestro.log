@@ -1,0 +1,459 @@
+Running on Pixel_8
+ > Flow Eligibility & Appeal Journey
+Run ${output.userRegistered = false}... COMPLETED
+Run ${output.idAttempts = 0}... COMPLETED
+Run ${output.screenedIds = ','}... COMPLETED
+Repeat while ${output.userRegistered !== true && output.idAttempts < 5} is true (up to 5 times)...
+  Run ../subflows/register-adult-new-user.yaml...
+    Run ${output.idAttempts = output.idAttempts + 1}... COMPLETED
+    Run ${output.generatedNationalId = String(Math.floor(1000000000 + Math.random() * 1000000000))}... COMPLETED
+    TEST DATA - generated National ID does not match 1 followed by 9 digits, or was already tried in this run... COMPLETED
+    Run ${output.screenedIds = output.screenedIds + output.generatedNationalId + ','}... COMPLETED
+    Run ${output.generatedPhone = String(Math.floor(500000000 + Math.random() * 10000000))}... COMPLETED
+    Run ${output.generatedEmail = 'elig.' + output.generatedNationalId + '@example.com'}... COMPLETED
+    Run ${console.log('IDENTITY ' + output.idAttempts + ' [' + output.generatedNationalId + '] - phone [+966' + output.generatedPhone + '] email [' + output.generatedEmail + ']')}... COMPLETED
+    Launch app "fi.iwa.sakani" with clear state... COMPLETED
+    Run register-new-user.yaml...
+      Assert that ${typeof NATIONAL_ID !== "undefined" && String(NATIONAL_ID).length === 10 && !/[^0-9]/.test(String(NATIONAL_ID))} is true... COMPLETED
+      Run clear-overlays.yaml...
+        Repeat while "${ANCHOR}" is not visible (up to 26 times)...
+          Run ${output.handled = false}... COMPLETED
+          Run flow when "(?s)(?:Don.t allow|Skip|Dismiss|Ok|Marketplace Day|Start comparing properties|Go to the weekly (offer|deal)|Update email|Number and Email Already Linked|.*would you recommend benefiting from Sakani.*|Thank you for your feedback|Maybe Later|Reject cookies)" is visible...
+            Run flow when "Don.t allow" is visible...
+            Run flow when "Don.t allow" is visible... SKIPPED
+            Run flow when "Skip" is visible...
+              Tap on "Skip"... COMPLETED
+              Run ${output.handled = true}... COMPLETED
+              Wait for animation to end within 3000 ms... COMPLETED
+            Run flow when "Skip" is visible... COMPLETED
+            Run flow when "Dismiss" is visible...
+            Run flow when "Dismiss" is visible... SKIPPED
+            Run flow when "Ok" is visible...
+            Run flow when "Ok" is visible... SKIPPED
+            Run flow when "Marketplace Day" is visible...
+            Run flow when "Marketplace Day" is visible... SKIPPED
+            Run flow when "Start comparing properties" is visible...
+              Press back... COMPLETED
+              Run ${output.handled = true}... COMPLETED
+              Wait for animation to end within 3000 ms... COMPLETED
+            Run flow when "Start comparing properties" is visible... COMPLETED
+            Run flow when "Go to the weekly (offer|deal)" is visible...
+            Run flow when "Go to the weekly (offer|deal)" is visible... SKIPPED
+            Run flow when "Update email" is visible...
+            Run flow when "Update email" is visible... SKIPPED
+            Run flow when "Number and Email Already Linked" is visible...
+            Run flow when "Number and Email Already Linked" is visible... SKIPPED
+            Run flow when "(?s)(.*would you recommend benefiting from Sakani.*|Thank you for your feedback)" is visible...
+            Run flow when "(?s)(.*would you recommend benefiting from Sakani.*|Thank you for your feedback)" is visible... SKIPPED
+            Run flow when "Maybe Later" is visible...
+            Run flow when "Maybe Later" is visible... SKIPPED
+            Run flow when "Reject cookies" is visible...
+            Run flow when "Reject cookies" is visible... SKIPPED
+          Run flow when "(?s)(?:Don.t allow|Skip|Dismiss|Ok|Marketplace Day|Start comparing properties|Go to the weekly (offer|deal)|Update email|Number and Email Already Linked|.*would you recommend benefiting from Sakani.*|Thank you for your feedback|Maybe Later|Reject cookies)" is visible... COMPLETED
+          Run flow when ${output.handled !== true} is true...
+          Run flow when false is true... SKIPPED
+        Repeat while "${ANCHOR}" is not visible (up to 26 times)... COMPLETED
+        Run flow when ${output.npsLeftToCaller !== true} is true...
+          Run dismiss-nps.yaml...
+            Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible...
+            Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible... SKIPPED
+            Run flow when "Thank you for your feedback" is visible...
+            Run flow when "Thank you for your feedback" is visible... SKIPPED
+          Run dismiss-nps.yaml... COMPLETED
+        Run flow when true is true... COMPLETED
+        Run flow when ${output.anchorOptional !== true} is true...
+          Repeat while "${ANCHOR}" is not visible (up to 6 times)...
+          Repeat while "${ANCHOR}" is not visible (up to 6 times)... SKIPPED
+          Run dismiss-nps.yaml...
+            Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible...
+            Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible... SKIPPED
+            Run flow when "Thank you for your feedback" is visible...
+            Run flow when "Thank you for your feedback" is visible... SKIPPED
+          Run dismiss-nps.yaml... COMPLETED
+          Assert that "${ANCHOR}" is visible... COMPLETED
+        Run flow when true is true... COMPLETED
+      Run clear-overlays.yaml... COMPLETED
+      Assert that "(?s).*Login / Sign up.*" is visible... COMPLETED
+      Tap on "(?s).*Login / Sign up.*"... COMPLETED
+      Assert that "Continue with N[ae]fath" is visible... COMPLETED
+      Tap on "Enter your ID, phone number,? or email"... COMPLETED
+      Input text ${NATIONAL_ID}... COMPLETED
+      Assert that "${NATIONAL_ID}" is visible... COMPLETED
+      Tap on "Continue"... COMPLETED
+      Assert that "Login with nafath" is visible... COMPLETED
+      Assert that "${NATIONAL_ID}" is visible... COMPLETED
+      Tap on "Confirm"... COMPLETED
+      Assert that "Personal information" is visible... COMPLETED
+      Assert that "We populated the information based on your National ID/Iqama and DOB." is visible... COMPLETED
+      Assert that "${NATIONAL_ID}", Below "National ID.*" is visible... COMPLETED
+      Run ${output.registeredApplicantDob = ''}... COMPLETED
+      Run flow when "[0-9]{4}-[0-9]{1,2}-[0-9]{1,2}", Below "Date of Birth.*" is visible...
+        Copy text from element with "[0-9]{4}-[0-9]{1,2}-[0-9]{1,2}", Below "Date of Birth.*"... COMPLETED
+        Run ${output.registeredApplicantDob = String(maestro.copiedText).trim()}... COMPLETED
+      Run flow when "[0-9]{4}-[0-9]{1,2}-[0-9]{1,2}", Below "Date of Birth.*" is visible... COMPLETED
+      Run ../scripts/hijri-age.js... COMPLETED
+      Run ${console.log('REGISTRATION - applicant Date of Birth [' + output.registeredApplicantDob + '] = ' + output.applicantAgeHijri + ' Hijri years (today ' + output.todayHijri + ')')}... COMPLETED
+      Run ${output.registrationStoppedForAge = typeof MIN_AGE_HIJRI_YEARS !== "undefined" && !(output.applicantAgeHijri > Number(MIN_AGE_HIJRI_YEARS))}... COMPLETED
+      Run flow when ${typeof MIN_AGE_HIJRI_YEARS !== "undefined"} is true...
+        REGISTRATION - the applicant Date of Birth could not be read on Personal information... COMPLETED
+      Run flow when true is true... COMPLETED
+      Run flow when ${output.registrationStoppedForAge !== true} is true...
+        Tap on "Continue"... COMPLETED
+        Assert that "(?s).*Please fill in your mobile number detail and email address.*" is visible... COMPLETED
+        Tap on "Enter your phone number"... COMPLETED
+        Input text ${PHONE}... COMPLETED
+        Hide Keyboard... COMPLETED
+        Tap on "Enter your email"... COMPLETED
+        Input text ${EMAIL}... COMPLETED
+        Hide Keyboard... COMPLETED
+        Wait for animation to end within 3000 ms... COMPLETED
+        Assert that "${PHONE}" is visible... COMPLETED
+        Assert that "${EMAIL}" is visible... COMPLETED
+        REGISTRATION - the app rejected the generated phone number... COMPLETED
+        Assert that "(?s).*Please fill in your mobile number detail and email address.*" is visible... COMPLETED
+        Tap on point (50%,93%)... COMPLETED
+        REGISTRATION - contact details were not accepted (no Verification Code screen)... COMPLETED
+        Tap on "X", Index: 0... COMPLETED
+        Input text ${OTP}... COMPLETED
+        Run clear-overlays.yaml...
+          Repeat while "${ANCHOR}" is not visible (up to 26 times)...
+            Run ${output.handled = false}... COMPLETED
+            Run flow when "(?s)(?:Don.t allow|Skip|Dismiss|Ok|Marketplace Day|Start comparing properties|Go to the weekly (offer|deal)|Update email|Number and Email Already Linked|.*would you recommend benefiting from Sakani.*|Thank you for your feedback|Maybe Later|Reject cookies)" is visible...
+              Run flow when "Don.t allow" is visible...
+              Run flow when "Don.t allow" is visible... SKIPPED
+              Run flow when "Skip" is visible...
+              Run flow when "Skip" is visible... SKIPPED
+              Run flow when "Dismiss" is visible...
+              Run flow when "Dismiss" is visible... SKIPPED
+              Run flow when "Ok" is visible...
+              Run flow when "Ok" is visible... SKIPPED
+              Run flow when "Marketplace Day" is visible...
+              Run flow when "Marketplace Day" is visible... SKIPPED
+              Run flow when "Start comparing properties" is visible...
+              Run flow when "Start comparing properties" is visible... SKIPPED
+              Run flow when "Go to the weekly (offer|deal)" is visible...
+              Run flow when "Go to the weekly (offer|deal)" is visible... SKIPPED
+              Run flow when "Update email" is visible...
+              Run flow when "Update email" is visible... SKIPPED
+              Run flow when "Number and Email Already Linked" is visible...
+              Run flow when "Number and Email Already Linked" is visible... SKIPPED
+              Run flow when "(?s)(.*would you recommend benefiting from Sakani.*|Thank you for your feedback)" is visible...
+              Run flow when "(?s)(.*would you recommend benefiting from Sakani.*|Thank you for your feedback)" is visible... SKIPPED
+              Run flow when "Maybe Later" is visible...
+                Tap on "Maybe Later"... COMPLETED
+                Run ${output.handled = true}... COMPLETED
+                Wait for animation to end within 3000 ms... COMPLETED
+              Run flow when "Maybe Later" is visible... COMPLETED
+              Run flow when "Reject cookies" is visible...
+              Run flow when "Reject cookies" is visible... SKIPPED
+            Run flow when "(?s)(?:Don.t allow|Skip|Dismiss|Ok|Marketplace Day|Start comparing properties|Go to the weekly (offer|deal)|Update email|Number and Email Already Linked|.*would you recommend benefiting from Sakani.*|Thank you for your feedback|Maybe Later|Reject cookies)" is visible... COMPLETED
+            Run flow when ${output.handled !== true} is true...
+            Run flow when false is true... SKIPPED
+          Repeat while "${ANCHOR}" is not visible (up to 26 times)... COMPLETED
+          Run flow when ${output.npsLeftToCaller !== true} is true...
+            Run dismiss-nps.yaml...
+              Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible...
+              Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible... SKIPPED
+              Run flow when "Thank you for your feedback" is visible...
+              Run flow when "Thank you for your feedback" is visible... SKIPPED
+            Run dismiss-nps.yaml... COMPLETED
+          Run flow when true is true... COMPLETED
+          Run flow when ${output.anchorOptional !== true} is true...
+            Repeat while "${ANCHOR}" is not visible (up to 6 times)...
+            Repeat while "${ANCHOR}" is not visible (up to 6 times)... SKIPPED
+            Run dismiss-nps.yaml...
+              Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible...
+              Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible... SKIPPED
+              Run flow when "Thank you for your feedback" is visible...
+              Run flow when "Thank you for your feedback" is visible... SKIPPED
+            Run dismiss-nps.yaml... COMPLETED
+            Assert that "${ANCHOR}" is visible... COMPLETED
+          Run flow when true is true... COMPLETED
+        Run clear-overlays.yaml... COMPLETED
+        Assert that "Welcome! Your account is all set." is visible... COMPLETED
+        Tap on "Continue"... COMPLETED
+        Run post-login.yaml...
+          Assert that "Login with nafath" is not visible... COMPLETED
+          Run ${output.anchorOptional = true}... COMPLETED
+          Run clear-overlays.yaml...
+            Repeat while "${ANCHOR}" is not visible (up to 26 times)...
+              Run ${output.handled = false}... COMPLETED
+              Run flow when "(?s)(?:Don.t allow|Skip|Dismiss|Ok|Marketplace Day|Start comparing properties|Go to the weekly (offer|deal)|Update email|Number and Email Already Linked|.*would you recommend benefiting from Sakani.*|Thank you for your feedback|Maybe Later|Reject cookies)" is visible...
+                Run flow when "Don.t allow" is visible...
+                Run flow when "Don.t allow" is visible... SKIPPED
+                Run flow when "Skip" is visible...
+                  Tap on "Skip"... COMPLETED
+                  Run ${output.handled = true}... COMPLETED
+                  Wait for animation to end within 3000 ms... COMPLETED
+                Run flow when "Skip" is visible... COMPLETED
+                Run flow when "Dismiss" is visible...
+                Run flow when "Dismiss" is visible... SKIPPED
+                Run flow when "Ok" is visible...
+                Run flow when "Ok" is visible... SKIPPED
+                Run flow when "Marketplace Day" is visible...
+                Run flow when "Marketplace Day" is visible... SKIPPED
+                Run flow when "Start comparing properties" is visible...
+                Run flow when "Start comparing properties" is visible... SKIPPED
+                Run flow when "Go to the weekly (offer|deal)" is visible...
+                Run flow when "Go to the weekly (offer|deal)" is visible... SKIPPED
+                Run flow when "Update email" is visible...
+                Run flow when "Update email" is visible... SKIPPED
+                Run flow when "Number and Email Already Linked" is visible...
+                Run flow when "Number and Email Already Linked" is visible... SKIPPED
+                Run flow when "(?s)(.*would you recommend benefiting from Sakani.*|Thank you for your feedback)" is visible...
+                Run flow when "(?s)(.*would you recommend benefiting from Sakani.*|Thank you for your feedback)" is visible... SKIPPED
+                Run flow when "Maybe Later" is visible...
+                Run flow when "Maybe Later" is visible... SKIPPED
+                Run flow when "Reject cookies" is visible...
+                Run flow when "Reject cookies" is visible... SKIPPED
+              Run flow when "(?s)(?:Don.t allow|Skip|Dismiss|Ok|Marketplace Day|Start comparing properties|Go to the weekly (offer|deal)|Update email|Number and Email Already Linked|.*would you recommend benefiting from Sakani.*|Thank you for your feedback|Maybe Later|Reject cookies)" is visible... COMPLETED
+              Run flow when ${output.handled !== true} is true...
+              Run flow when false is true... SKIPPED
+            Repeat while "${ANCHOR}" is not visible (up to 26 times)... COMPLETED
+            Run flow when ${output.npsLeftToCaller !== true} is true...
+              Run dismiss-nps.yaml...
+                Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible...
+                Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible... SKIPPED
+                Run flow when "Thank you for your feedback" is visible...
+                Run flow when "Thank you for your feedback" is visible... SKIPPED
+              Run dismiss-nps.yaml... COMPLETED
+            Run flow when true is true... COMPLETED
+            Run flow when ${output.anchorOptional !== true} is true...
+            Run flow when false is true... SKIPPED
+          Run clear-overlays.yaml... COMPLETED
+          Run ${output.anchorOptional = false}... COMPLETED
+          Run flow when "New service" is visible...
+          Run flow when "New service" is visible... SKIPPED
+          Run flow when "Go to the weekly (offer|deal)" is visible...
+          Run flow when "Go to the weekly (offer|deal)" is visible... SKIPPED
+          Run flow when "Continue with N[ae]fath" is visible...
+          Run flow when "Continue with N[ae]fath" is visible... SKIPPED
+          Repeat while "(?si)(Hello|Good (morning|afternoon|evening)),\s*\S.*" is not visible (up to 6 times)...
+          Repeat while "(?si)(Hello|Good (morning|afternoon|evening)),\s*\S.*" is not visible (up to 6 times)... SKIPPED
+          Run dismiss-nps.yaml...
+            Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible...
+            Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible... SKIPPED
+            Run flow when "Thank you for your feedback" is visible...
+            Run flow when "Thank you for your feedback" is visible... SKIPPED
+          Run dismiss-nps.yaml... COMPLETED
+          Assert that "(?si)(Hello|Good (morning|afternoon|evening)),\s*\S.*" is visible... COMPLETED
+          Assert that "(?s).*Login / Sign up.*" is not visible... COMPLETED
+        Run post-login.yaml... COMPLETED
+      Run flow when true is true... COMPLETED
+    Run register-new-user.yaml... COMPLETED
+    Run flow when ${output.registrationStoppedForAge === true} is true...
+    Run flow when false is true... SKIPPED
+    Run flow when ${output.registrationStoppedForAge !== true} is true...
+      Run ${output.userRegistered = true}... COMPLETED
+      Run ${console.log('ELIGIBILITY NEW USER - National ID [' + output.generatedNationalId + '] phone [+966' + output.generatedPhone + '] email [' + output.generatedEmail + '] DOB [' + output.registeredApplicantDob + '] age ' + output.applicantAgeHijri + ' Hijri years - registered (the only registration of this run)')}... COMPLETED
+    Run flow when true is true... COMPLETED
+  Run ../subflows/register-adult-new-user.yaml... COMPLETED
+Repeat while ${output.userRegistered !== true && output.idAttempts < 5} is true (up to 5 times)... COMPLETED
+TEST DATA - none of 5 generated IDs belongs to an applicant older than 25 Hijri years; no account was created (see the IDENTITY lines)... COMPLETED
+Run ../subflows/eligibility-check.yaml...
+  Run open-account-tab.yaml...
+    Run tap-until-destination.yaml...
+      Repeat while "${DESTINATION}" is not visible (up to 6 times)...
+        Run dismiss-nps.yaml...
+          Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible...
+          Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible... SKIPPED
+          Run flow when "Thank you for your feedback" is visible...
+          Run flow when "Thank you for your feedback" is visible... SKIPPED
+        Run dismiss-nps.yaml... COMPLETED
+        Tap on (Optional) "${TARGET}"... COMPLETED
+        Wait for animation to end within 3000 ms... COMPLETED
+      Repeat while "${DESTINATION}" is not visible (up to 6 times)... COMPLETED
+      Assert that "${DESTINATION}" is visible... COMPLETED
+    Run tap-until-destination.yaml... COMPLETED
+  Run open-account-tab.yaml... COMPLETED
+  Run ${console.log('ELIGIBILITY - Account opened')}... COMPLETED
+  Run ${output.accountService = "(?s)Eligibility checker status.*"}... COMPLETED
+  Run open-account-service.yaml...
+    Run account-ready.yaml...
+      Assert that "Account\s*Tab 4 of 4", selected is visible... COMPLETED
+      Assert that "(Profile details|Invoices)" is visible... COMPLETED
+    Run account-ready.yaml... COMPLETED
+    Repeat while "${output.accountService}", enabled, Below "(?s)(Account|Hello\s.*)", Above "Home\s*Tab 1 of 4", Size: 996x147(tolerance: 4) is not visible (up to 6 times)...
+    Repeat while "${output.accountService}", enabled, Below "(?s)(Account|Hello\s.*)", Above "Home\s*Tab 1 of 4", Size: 996x147(tolerance: 4) is not visible (up to 6 times)... SKIPPED
+    Assert that "${output.accountService}", enabled, Below "(?s)(Account|Hello\s.*)", Above "Home\s*Tab 1 of 4", Size: 996x147(tolerance: 4) is visible... COMPLETED
+    Tap on "${output.accountService}", enabled, Below "(?s)(Account|Hello\s.*)", Above "Home\s*Tab 1 of 4", Size: 996x147(tolerance: 4)... COMPLETED
+  Run open-account-service.yaml... COMPLETED
+  Assert that "Check your eligibility" is visible... COMPLETED
+  Assert that "Eligibility" is visible... COMPLETED
+  Assert that "Housing options, picked for you" is visible... COMPLETED
+  Take screenshot elig-1-eligibility-checker... COMPLETED
+  Tap on "Check your eligibility"... COMPLETED
+  Assert that "Step 1 of 3" is visible... COMPLETED
+  Assert that "Terms and Conditions" is visible... COMPLETED
+  Take screenshot elig-2-step1-terms... COMPLETED
+  Wait for animation to end within 15000 ms... COMPLETED
+  Tap on "I have read and understood the terms and conditions of the contract.*"... COMPLETED
+  Tap on "Accept and continue"... COMPLETED
+  STEP 1 - Terms were not accepted (Step 2 did not open)... COMPLETED
+  Assert that "Acknowledgement" is visible... COMPLETED
+  Assert that "1\. Have you or any of your dependents resided outside.*" is visible... COMPLETED
+  Assert that "2\. Do you or your family have financial assets.*" is visible... COMPLETED
+  Assert that "3\. Did you or any of your dependents own a house title.*" is visible... COMPLETED
+  Tap on Below "1\. Have you or any of your dependents resided outside.*", Above "2\. Do you or your family have financial assets.*", Size: 63x63(tolerance: 3), Index: 1... COMPLETED
+  Wait for animation to end within 3000 ms... COMPLETED
+  STEP 2 - Q1 (resided outside KSA) is not answered No... COMPLETED
+  Tap on Below "2\. Do you or your family have financial assets.*", Above "3\. Did you or any of your dependents own a house title.*", Size: 63x63(tolerance: 3), Index: 1... COMPLETED
+  Wait for animation to end within 3000 ms... COMPLETED
+  STEP 2 - Q2 (financial assets) is not answered No... COMPLETED
+  Tap on Below "3\. Did you or any of your dependents own a house title.*", Above "Continue", Size: 63x63(tolerance: 3), Index: 1... COMPLETED
+  Wait for animation to end within 3000 ms... COMPLETED
+  STEP 2 - Q3 (house title) is not answered No... COMPLETED
+  Run ${console.log('STEP 2 - all three mandatory Yes/No questions answered No (pixel-proven)')}... COMPLETED
+  Take screenshot elig-3-step2-all-no... COMPLETED
+  Tap on "Continue"... COMPLETED
+  STEP 2 - answers were not accepted (Step 3 did not open)... COMPLETED
+  Assert that "Family and Preferences information" is visible... COMPLETED
+  Tap on "Select region", Index: 0... COMPLETED
+  Assert that "Search" is visible... COMPLETED
+  Copy text from element with Below "Search", Size: 1080x147(tolerance: 4), Index: 0... COMPLETED
+  Run ${output.currentRegion = String(maestro.copiedText)}... COMPLETED
+  Tap on Below "Search", Size: 1080x147(tolerance: 4), Index: 0... COMPLETED
+  Tap on "Select city", Index: 0... COMPLETED
+  Assert that "Search" is visible... COMPLETED
+  Copy text from element with Below "Search", Size: 1080x147(tolerance: 4), Index: 0... COMPLETED
+  Run ${output.currentCity = String(maestro.copiedText)}... COMPLETED
+  Tap on Below "Search", Size: 1080x147(tolerance: 4), Index: 0... COMPLETED
+  Tap on "Select region", Index: 0... COMPLETED
+  Assert that "Search" is visible... COMPLETED
+  Copy text from element with Below "Search", Size: 1080x147(tolerance: 4), Index: 0... COMPLETED
+  Run ${output.preferredRegion = String(maestro.copiedText)}... COMPLETED
+  Tap on Below "Search", Size: 1080x147(tolerance: 4), Index: 0... COMPLETED
+  Tap on "Select city", Index: 0... COMPLETED
+  Assert that "Search" is visible... COMPLETED
+  Copy text from element with Below "Search", Size: 1080x147(tolerance: 4), Index: 0... COMPLETED
+  Run ${output.preferredCity = String(maestro.copiedText)}... COMPLETED
+  Tap on Below "Search", Size: 1080x147(tolerance: 4), Index: 0... COMPLETED
+  Scrolling DOWN until "Select District" is visible with speed 40, visibility percentage 100%, timeout 15000 ms, with centering disabled... COMPLETED
+  Tap on "Select District"... COMPLETED
+  Assert that "Search" is visible... COMPLETED
+  Copy text from element with Below "Search", Size: 1080x147(tolerance: 4), Index: 0... COMPLETED
+  Run ${output.firstDistrictIsPlaceholder = String(maestro.copiedText).trim().toUpperCase() === 'UNKNOWN'}... COMPLETED
+  Run flow when ${output.firstDistrictIsPlaceholder !== true} is true...
+  Run flow when false is true... SKIPPED
+  Run flow when ${output.firstDistrictIsPlaceholder === true} is true...
+    Copy text from element with Below "Search", Size: 1080x147(tolerance: 4), Index: 1... COMPLETED
+    Run ${output.preferredDistrict = String(maestro.copiedText)}... COMPLETED
+    Tap on Below "Search", Size: 1080x147(tolerance: 4), Index: 1... COMPLETED
+  Run flow when true is true... COMPLETED
+  Run ${console.log('STEP 3 - current [' + output.currentRegion + ' / ' + output.currentCity + '] preferred [' + output.preferredRegion + ' / ' + output.preferredCity + ' / ' + output.preferredDistrict + ']')}... COMPLETED
+  Scrolling DOWN until "Select an option" is visible with speed 40, visibility percentage 100%, timeout 15000 ms, with centering disabled... COMPLETED
+  Tap on "Select an option"... COMPLETED
+  Assert that "Rented house" is visible... COMPLETED
+  Tap on "Rented house"... COMPLETED
+  STEP 3 - Current housing status is not Rented house... COMPLETED
+  Run ${console.log('STEP 3 - Current housing status = Rented house')}... COMPLETED
+  STEP 3 - Current housing status shows an ownership value - must be Rented house... COMPLETED
+  Run flow when "Divorce date.*" is visible...
+  Run flow when "Divorce date.*" is visible... SKIPPED
+  Run ${output.familyDobs = ''}... COMPLETED
+  Run ${output.familyDobCount = 0}... COMPLETED
+  Run ${output.dobEmptyPasses = 0}... COMPLETED
+  Run flow when "Family Information" is not visible...
+  Run flow when "Family Information" is not visible... SKIPPED
+  Run flow when "Family Information" is not visible...
+  Run flow when "Family Information" is not visible... SKIPPED
+  Run ${output.dobCountFresh = false}... COMPLETED
+  Repeat while ${output.dobEmptyPasses < 2} is true (up to 12 times)...
+    Run ${output.dobProcessedThisPass = false}... COMPLETED
+    Run flow when "Enter DOB" is visible...
+    Run flow when "Enter DOB" is visible... SKIPPED
+    Run flow when ${output.dobProcessedThisPass !== true} is true...
+      Run ${output.dobEmptyPasses = output.dobEmptyPasses + 1}... COMPLETED
+      Swipe from (50%,70%) to (50%,40%) in 600 ms... COMPLETED
+      Wait for animation to end within 3000 ms... COMPLETED
+      Run ${output.dobCountFresh = false}... COMPLETED
+    Run flow when true is true... COMPLETED
+  Repeat while ${output.dobEmptyPasses < 2} is true (up to 12 times)... COMPLETED
+  Run ${console.log('STEP 3 - person DOB fields filled: ' + output.familyDobCount + (output.familyDobs ? ' [' + output.familyDobs.trim() + ']' : ''))}... COMPLETED
+  Run ${output.usedIds = ',' + output.generatedNationalId + ','}... COMPLETED
+  Run ${output.generatedAdditionalIds = ''}... COMPLETED
+  Run ${output.additionalIdCount = 0}... COMPLETED
+  Run ${output.idEmptyPasses = 0}... COMPLETED
+  Run flow when "Family Information" is not visible...
+  Run flow when "Family Information" is not visible... SKIPPED
+  Run flow when "Family Information" is not visible...
+  Run flow when "Family Information" is not visible... SKIPPED
+  Run ${output.idCountFresh = false}... COMPLETED
+  Repeat while ${output.idEmptyPasses < 2} is true (up to 12 times)...
+    Run ${output.idProcessedThisPass = false}... COMPLETED
+    Run flow when "Enter ID number" is visible...
+    Run flow when "Enter ID number" is visible... SKIPPED
+    Run flow when ${output.idProcessedThisPass !== true} is true...
+      Run ${output.idEmptyPasses = output.idEmptyPasses + 1}... COMPLETED
+      Swipe from (50%,70%) to (50%,40%) in 600 ms... COMPLETED
+      Wait for animation to end within 3000 ms... COMPLETED
+      Run ${output.idCountFresh = false}... COMPLETED
+    Run flow when true is true... COMPLETED
+  Repeat while ${output.idEmptyPasses < 2} is true (up to 12 times)... COMPLETED
+  Run ${console.log('STEP 3 - additional person-ID fields filled: ' + output.additionalIdCount + (output.generatedAdditionalIds ? ' [' + output.generatedAdditionalIds.trim() + ']' : ''))}... COMPLETED
+  Take screenshot elig-4-step3-filled... COMPLETED
+  Scrolling DOWN until "Confirm" is visible with speed 40, visibility percentage 100%, timeout 15000 ms, with centering disabled... COMPLETED
+  Tap on "Confirm"... COMPLETED
+  Wait for animation to end within 15000 ms... COMPLETED
+  SUBMIT - the product reported an error after Confirm... COMPLETED
+  Take screenshot elig-5-after-family-confirm... COMPLETED
+  Run eligibility-fill-deeds.yaml...
+    Run flow when "Deed information" is visible...
+    Run flow when "Deed information" is visible... SKIPPED
+  Run eligibility-fill-deeds.yaml... COMPLETED
+  Take screenshot elig-7-destination... COMPLETED
+  RESULT - no eligibility result message on screen (another required page, or no result) - NOT a PASS... COMPLETED
+  Wait for animation to end within 10000 ms... COMPLETED
+  RESULT - still on an eligibility form step - another required page, NOT a result... COMPLETED
+  RESULT - still on Deed information - NOT a result... COMPLETED
+  RESULT - back on the Eligibility introduction - NOT a result... COMPLETED
+  RESULT - the result message did not stay on screen... COMPLETED
+  Copy text from element with "(?si).*\beligible for\b.*"... COMPLETED
+  Run ${output.eligibilityResult = String(maestro.copiedText)}... COMPLETED
+  Take screenshot elig-8-final-result... COMPLETED
+  Run ${console.log('ELIGIBILITY END - new user [' + output.generatedNationalId + '] result [' + output.eligibilityResult.replace(/\n/g, ' | ') + ']')}... COMPLETED
+  Run ${output.reasonOwnsDeed = 'absent'}... COMPLETED
+  Run ${output.reasonUnder24 = 'absent'}... COMPLETED
+  Run ${output.reasonHusband = 'absent'}... COMPLETED
+  Run flow when "(?si).*own a housing deed.*" is visible...
+  Run flow when "(?si).*own a housing deed.*" is visible... SKIPPED
+  Run flow when "(?si).*under 24.*" is visible...
+  Run flow when "(?si).*under 24.*" is visible... SKIPPED
+  Run flow when "(?si).*husband has already submitted an application.*" is visible...
+  Run flow when "(?si).*husband has already submitted an application.*" is visible... SKIPPED
+  Run ${console.log('PREVIOUS REASONS - owns a housing deed [' + output.reasonOwnsDeed + '] under 24 [' + output.reasonUnder24 + '] husband already applied [' + output.reasonHusband + ']')}... COMPLETED
+  Run ${output.eligibilityOutcome = 'unknown'}... COMPLETED
+  Run flow when "(?si).*\bnot eligible for\b.*" is visible...
+    Run ${output.eligibilityOutcome = 'not-eligible'}... COMPLETED
+  Run flow when "(?si).*\bnot eligible for\b.*" is visible... COMPLETED
+  Take screenshot elig-9-outcome... COMPLETED
+  Run ${console.log('ELIGIBILITY OUTCOME [' + output.eligibilityOutcome + '] for [' + output.generatedNationalId + '] - result text [' + output.eligibilityResult.replace(/\n/g, ' | ') + ']')}... COMPLETED
+  UNKNOWN ELIGIBILITY RESULT - the result screen shows neither a known negative nor a proven positive message (see elig-8-final-result / elig-9-outcome) - NOT a PASS... COMPLETED
+Run ../subflows/eligibility-check.yaml... COMPLETED
+Run flow when ${output.eligibilityOutcome === 'eligible'} is true...
+Run flow when false is true... SKIPPED
+Run flow when ${output.eligibilityOutcome === 'not-eligible'} is true...
+  Run ${console.log('JOURNEY - NOT ELIGIBLE - user [' + output.generatedNationalId + '] continues into the Appeal')}... COMPLETED
+  Tap on "Eligibility status"... COMPLETED
+  APPEAL - the persisted Eligibility status page did not open from the result screen... FAILED
+Run flow when true is true... FAILED
+
+Assertion is false: "Checked on" is visible
+
+Assertion '"Checked on" is visible' failed. Check the UI hierarchy in debug artifacts to verify the element state and properties.
+
+Possible causes:
+- Element selector may be incorrect - check if there are similar elements with slightly different names/properties.
+- Element may be temporarily unavailable due to loading state
+- This could be a real regression that needs to be addressed
+
+==== Debug output (logs & screenshots) ====
+
+D:\Automation\Maestro-Mobile\report-dashboard\maestro-output\check-eligibility\debug\.maestro\tests\2026-10-05_125422
+WARNING: Final field parent in class maestro.cli.command.TestCommand has been mutated reflectively by class picocli.CommandLine$Model$FieldBinding in unnamed module @2d9d4f9d (file:/D:/Automation-Tool/maestro/lib/picocli-4.6.3.jar)
+WARNING: Use --enable-final-field-mutation=ALL-UNNAMED to avoid a warning
+WARNING: Mutating final fields will be blocked in a future release unless final field mutation is enabled
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::arrayBaseOffset has been called by com.google.protobuf.UnsafeUtil$MemoryAccessor (file:/D:/Automation-Tool/maestro/lib/protobuf-java-3.21.9.jar)
+WARNING: Please consider reporting this to the maintainers of class com.google.protobuf.UnsafeUtil$MemoryAccessor
+WARNING: sun.misc.Unsafe::arrayBaseOffset will be removed in a future release

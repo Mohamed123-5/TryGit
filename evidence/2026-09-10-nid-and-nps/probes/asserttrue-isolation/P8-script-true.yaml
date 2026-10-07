@@ -1,0 +1,4 @@
+appId: fi.iwa.sakani
+name: P8-script-true
+---
+- assertTrue: ${1 === 1}

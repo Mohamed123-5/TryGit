@@ -1,0 +1,83 @@
+# TEMPORARY DIAGNOSTIC - delete after the investigation. OBSERVES ONLY: taps nothing, types
+# nothing. Logs which of the known post-login surfaces are present right now, tagged with LABEL,
+# as evaluated console.log lines in maestro.log ("DIAG <label> <STATE>").
+appId: fi.iwa.sakani
+name: DIAG state snapshot
+---
+- runFlow:
+    when:
+      visible: "Number and Email Already Linked"
+    commands:
+      - evalScript: ${console.log('DIAG ' + LABEL + ' NUMBER_EMAIL')}
+- runFlow:
+    when:
+      visible: "(?s).*Update information.*"
+    commands:
+      - evalScript: ${console.log('DIAG ' + LABEL + ' UPDATE_INFO_BUTTON')}
+- runFlow:
+    when:
+      visible: "New service"
+    commands:
+      - evalScript: ${console.log('DIAG ' + LABEL + ' PROMO_SHEET')}
+- runFlow:
+    when:
+      visible: "Go to the weekly (offer|deal)"
+    commands:
+      - evalScript: ${console.log('DIAG ' + LABEL + ' PROMO_BUTTON')}
+- runFlow:
+    when:
+      visible: "Delete"
+    commands:
+      - evalScript: ${console.log('DIAG ' + LABEL + ' KEYBOARD')}
+- runFlow:
+    when:
+      visible: "Maybe Later"
+    commands:
+      - evalScript: ${console.log('DIAG ' + LABEL + ' BIOMETRICS')}
+- runFlow:
+    when:
+      visible: '(?si)(Hello|Good (morning|afternoon|evening)),\s*\S.*'
+    commands:
+      - evalScript: ${console.log('DIAG ' + LABEL + ' HOME_GREETING')}
+- runFlow:
+    when:
+      visible: "(?s).*please enter your information to proceed.*"
+    commands:
+      - evalScript: ${console.log('DIAG ' + LABEL + ' BACK_AT_LOGIN_ENTRY')}
+- runFlow:
+    when:
+      visible: "Login with nafath"
+    commands:
+      - evalScript: ${console.log('DIAG ' + LABEL + ' STILL_ON_NAFATH')}
+- runFlow:
+    when:
+      visible: "Ok"
+    commands:
+      - evalScript: ${console.log('DIAG ' + LABEL + ' OK_DIALOG')}
+      - takeScreenshot: diag-ok-dialog
+- runFlow:
+    when:
+      visible: "(?s).*(There.s something wrong|the service is down|Error!).*"
+    commands:
+      - evalScript: ${console.log('DIAG ' + LABEL + ' ERROR_TEXT')}
+- runFlow:
+    when:
+      visible: "(?s).*would you recommend benefiting from Sakani.*"
+    commands:
+      - evalScript: ${console.log('DIAG ' + LABEL + ' NPS')}
+- runFlow:
+    when:
+      visible: "Dismiss"
+    commands:
+      - evalScript: ${console.log('DIAG ' + LABEL + ' CSAT')}
+- runFlow:
+    when:
+      visible: "Skip"
+    commands:
+      - evalScript: ${console.log('DIAG ' + LABEL + ' ONBOARDING')}
+- runFlow:
+    when:
+      visible: "(?s).*Login / Sign up.*"
+    commands:
+      - evalScript: ${console.log('DIAG ' + LABEL + ' GUEST_HOME')}
+- evalScript: ${console.log('DIAG ' + LABEL + ' END')}

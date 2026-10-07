@@ -1,0 +1,71 @@
+# PROBE (exploration only): new generated user -> Account -> Eligibility Checker -> Check your
+# eligibility -> capture the form. NOTHING is filled or submitted.
+appId: fi.iwa.sakani
+name: PROBE - eligibility form discovery (no submission)
+---
+# 10 digits starting with 1: an integer in [1000000000, 1999999999].
+- evalScript: ${output.generatedNationalId = String(Math.floor(1000000000 + Math.random() * 1000000000))}
+- assertTrue: ${output.generatedNationalId.length === 10 && output.generatedNationalId.charAt(0) === '1' && !/[^0-9]/.test(output.generatedNationalId)}
+- evalScript: "${console.log('PROBE GENERATED NATIONAL ID = [' + output.generatedNationalId + ']')}"
+- launchApp:
+    clearState: true
+- runFlow:
+    file: D:/Automation/Maestro-Mobile/.maestro/subflows/login.yaml
+    env:
+      NATIONAL_ID: ${output.generatedNationalId}
+- takeScreenshot: probe-1-after-login
+- runFlow:
+    optional: true
+    commands:
+      - assertVisible: "DUMP-HOME"
+- runFlow:
+    file: D:/Automation/Maestro-Mobile/.maestro/subflows/open-account-tab.yaml
+    env:
+      DESTINATION: "My bookings"
+- takeScreenshot: probe-2-account
+- runFlow:
+    optional: true
+    commands:
+      - assertVisible: "DUMP-ACCOUNT"
+- evalScript: ${output.accountService = "(?s)Eligibility checker status.*"}
+- runFlow:
+    file: D:/Automation/Maestro-Mobile/.maestro/subflows/open-account-service.yaml
+- extendedWaitUntil:
+    visible: "Check your eligibility"
+    timeout: 30000
+- takeScreenshot: probe-3-eligibility-intro
+- runFlow:
+    optional: true
+    commands:
+      - assertVisible: "DUMP-ELIG-INTRO"
+- tapOn: "Check your eligibility"
+- waitForAnimationToEnd:
+    timeout: 8000
+- takeScreenshot: probe-4-form-top
+- runFlow:
+    optional: true
+    commands:
+      - assertVisible: "DUMP-FORM-1"
+- swipe:
+    start: "50%,80%"
+    end: "50%,30%"
+    duration: 700
+- waitForAnimationToEnd:
+    timeout: 4000
+- takeScreenshot: probe-5-form-2
+- runFlow:
+    optional: true
+    commands:
+      - assertVisible: "DUMP-FORM-2"
+- swipe:
+    start: "50%,80%"
+    end: "50%,30%"
+    duration: 700
+- waitForAnimationToEnd:
+    timeout: 4000
+- takeScreenshot: probe-6-form-3
+- runFlow:
+    optional: true
+    commands:
+      - assertVisible: "DUMP-FORM-3"
+- assertVisible: "PROBE-END-MARKER-NOT-PRESENT"

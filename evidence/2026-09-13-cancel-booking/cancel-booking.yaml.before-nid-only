@@ -1,0 +1,487 @@
+# Cancel Booking — cancel ONE ASSIGNED booking, and only if it is Active with an Unsigned contract.
+#
+#   maestro test \
+#     -e NATIONAL_ID=<10-digit National ID / Iqama> \
+#     -e EXPECTED_UNIT_CODE=<unit code, e.g. 01-01-0504-999-205> \
+#     -e EXPECTED_INVOICE=<invoice number, e.g. 2609090000101875> \
+#     .maestro/cancel-booking.yaml
+#
+# ALL THREE INPUTS ARE MANDATORY. A run missing any of them, or with a malformed value, stops at
+# the first steps below - BEFORE the app is launched - with nothing typed, opened or cancelled.
+# NATIONAL_ID alone is never enough: the booking to cancel is ASSIGNED by its unit code and its
+# invoice number, and the flow looks for exactly that booking. It never takes "the first" Active
+# or unsigned booking, and it never cancels any other booking instead.
+#
+#   Login (NATIONAL_ID) -> account proven by National ID -> Account -> My bookings -> Active
+#     -> find THE ASSIGNED unit code -> open it -> read its invoice, progress and Documents
+#     -> SAFETY GATE (all five conditions below) -> Cancel booking -> "Yes, cancel my booking"
+#     -> reason -> "Confirm cancellation" -> "Yes" -> the product's confirmation names the unit
+#     -> relaunch -> Active no longer lists the unit -> Cancelled lists it.
+#
+# --- THIS FLOW CANCELS A REAL BOOKING, ON PURPOSE -------------------------------------------
+# The product's own dialog says it: "The booking fee is not refunded when you cancel the
+# booking". Run it only on a PRE test account, for a booking assigned for cancellation.
+#
+# --- THE SAFETY GATE - ALL FIVE must be read from the product before "Cancel booking" --------
+#   1. The signed-in account IS NATIONAL_ID: the Nafath screen showed it (login.yaml) AND the
+#      signed-in profile's own "National ID" field shows it (verify-signed-in-account.yaml).
+#   2. The booking's unit code, copied from its My bookings card, EXACTLY equals
+#      EXPECTED_UNIT_CODE. The card is selected BY that unit code, never by its position.
+#   3. The booking's invoice number, copied from its Booking Details, EXACTLY equals
+#      EXPECTED_INVOICE.
+#   4. The booking is ACTIVE: its card is listed under My bookings -> Active and reads
+#      "\nActive\n" (a Completed or Cancelled card renders "\nCompleted\n" / "\nCancelled\n").
+#   5. Its sales contract is UNSIGNED:
+#      * its Documents show "Unsigned" under "Sales contract" (a drafted, unsigned contract -
+#        09/09/2026 dump u3-final.xml; 13/09/2026 unit 999-205). A booking with NO Sales
+#        contract row yet is therefore refused as well - that is the safe side;
+#      * its progress card shows "2..9 steps left". Once the contract is signed only the first
+#        installment is left - "1 steps left" - and the price-quotation banner with
+#        "Extend PQ Period" appears on top (13/09/2026, units 999-147 and 999-288);
+#      * its Documents show no "Signed" and no "Price quotation" (PRE issues the quotation only
+#        at signature). "Signed" is a full match, so "Unsigned" can never satisfy it.
+#      Any signed marker blocks the gate. ("Pay first installment" is NOT a signed marker: an
+#      unsigned booking lists it as a future step.)
+#
+# --- WHEN IT STOPS - safely, with nothing cancelled ------------------------------------------
+#   * the assigned unit is not on this account, or it is but its invoice is not the assigned
+#     invoice                                  -> "Assigned booking not found."
+#   * the assigned unit exists but not under Active (Cancelled / Completed)
+#                                              -> "Assigned booking found but it is not Active - nothing cancelled."
+#   * the assigned booking is Active but Signed, or its contract is not shown as Unsigned
+#                                              -> "Assigned booking found but it is Signed or its contract is not Unsigned - nothing cancelled."
+# Each message is logged, backed by a screenshot, and followed by the gate assertion failing -
+# deliberately not a pass. No cancellation screen is ever opened on these paths.
+#
+# --- NEVER ---------------------------------------------------------------------------------
+# No reservation, no payment, no payment method, no contract signature, no OTP, no NPS/CSAT
+# Submit or rating. On the success screen neither "View booking" nor "Reserve unit" is tapped
+# (the latter would start a new reservation) - the flow relaunches instead. No overlay helper
+# runs between the "Cancel booking" tap and the product's confirmation, so a real product error
+# in that window is never cleared away: the flow fails on it, with the error in the screenshot.
+#
+# The cancellation screens and texts are the ones proven by subflows/ensure-no-active-booking.yaml
+# (09/09/2026, booking 01-01-0504-999-368) and by this flow itself (13/09/2026, run
+# cancel3-152245: 1000011487, unit 01-01-0504-999-205, invoice 2609090000101875).
+appId: fi.iwa.sakani
+name: Cancel booking - the ASSIGNED Active booking with an Unsigned contract
+env:
+  # Same self-referencing form as full-journey.yaml: a literal here silently BEATS `-e` on
+  # Maestro 2.9.0. There are NO defaults - an unsupplied input resolves to "" and the fail-fast
+  # guards below stop the run before the app is launched.
+  NATIONAL_ID: '${typeof NATIONAL_ID === "undefined" ? "" : String(NATIONAL_ID)}'
+  EXPECTED_UNIT_CODE: '${typeof EXPECTED_UNIT_CODE === "undefined" ? "" : String(EXPECTED_UNIT_CODE)}'
+  EXPECTED_INVOICE: '${typeof EXPECTED_INVOICE === "undefined" ? "" : String(EXPECTED_INVOICE)}'
+---
+# ==========================================================================================
+# 0. FAIL FAST - all three inputs, before the app is launched
+# ==========================================================================================
+- evalScript: "${console.log('CANCEL BOOKING INPUTS - NATIONAL_ID [' + NATIONAL_ID + '] EXPECTED_UNIT_CODE [' + EXPECTED_UNIT_CODE + '] EXPECTED_INVOICE [' + EXPECTED_INVOICE + ']')}"
+- evalScript: ${output.targetNationalId = String(NATIONAL_ID)}
+# Dollar-free on purpose (a second "$" inside ${...} makes Maestro 2.9.0 skip the check and pass).
+# NATIONAL_ID: exactly 10 characters, digits only, first digit 1 (National ID) or 2 (Iqama).
+- assertTrue: ${String(NATIONAL_ID).length === 10 && !/[^0-9]/.test(String(NATIONAL_ID)) && (String(NATIONAL_ID).charAt(0) === "1" || String(NATIONAL_ID).charAt(0) === "2")}
+# EXPECTED_UNIT_CODE: digit groups joined by hyphens, starting with two digits ("01-01-0504-999-205").
+# Only digits and "-" are allowed, so the value is safe to place inside the card selectors below.
+- assertTrue: ${String(EXPECTED_UNIT_CODE).length >= 5 && !/[^0-9-]/.test(String(EXPECTED_UNIT_CODE)) && /^[0-9]{2}-[0-9]/.test(String(EXPECTED_UNIT_CODE)) && String(EXPECTED_UNIT_CODE).indexOf("--") < 0 && String(EXPECTED_UNIT_CODE).charAt(String(EXPECTED_UNIT_CODE).length - 1) !== "-"}
+# EXPECTED_INVOICE: digits only, at least 10 of them ("2609090000101875").
+- assertTrue: ${String(EXPECTED_INVOICE).length >= 10 && !/[^0-9]/.test(String(EXPECTED_INVOICE))}
+
+# ==========================================================================================
+# 1. LOGIN - then prove which account is signed in (gate condition 1)
+# ==========================================================================================
+- launchApp:
+    clearState: true
+- runFlow:
+    file: subflows/login.yaml
+    env:
+      NATIONAL_ID: ${NATIONAL_ID}
+
+# Home -> Account. An account that holds a booking can get the NPS survey on Home, and on Home
+# it re-opens by itself about 10 s after every close (evidence/2026-09-13-nps-close), so this
+# is full-journey.yaml's LEAVE HOME block: clear the rest, close the survey with its X, and tap
+# Account at once. Bounded at 5 rounds; Submit and ratings are never tapped.
+- repeat:
+    times: 5
+    while:
+      notVisible: "My bookings"
+    commands:
+      - evalScript: ${output.anchorOptional = true}
+      - evalScript: ${output.npsLeftToCaller = true}
+      - runFlow:
+          file: subflows/clear-overlays.yaml
+          env:
+            ANCHOR: '(?s)(Account\s*Tab 4 of 4|.*would you recommend benefiting from Sakani.*)'
+      - evalScript: ${output.anchorOptional = false}
+      - evalScript: ${output.npsLeftToCaller = false}
+      - runFlow:
+          when:
+            visible: "(?s).*would you recommend benefiting from Sakani.*"
+          commands:
+            - runFlow:
+                when:
+                  notVisible: '(?s)(.*There.s something wrong.*|.*the service is down.*|Error!)'
+                commands:
+                  - runFlow:
+                      when:
+                        visible: "Submit"
+                      commands:
+                        - evalScript: "${console.log('LEAVE HOME (after login) - NPS up, closing it with its X, then Account at once')}"
+                        - tapOn:
+                            point: "73,1434"
+                            retryTapIfNoChange: false
+      - tapOn:
+          text: 'Account\s*Tab 4 of 4'
+          optional: true
+- extendedWaitUntil:
+    visible: "My bookings"
+    timeout: 60000
+
+# WHO IS SIGNED IN - from the profile's own "National ID" field (records output.profileNationalId
+# only after it matched). All three records must agree; a mismatch fails the run right here.
+- runFlow:
+    file: subflows/verify-signed-in-account.yaml
+    env:
+      NATIONAL_ID: ${NATIONAL_ID}
+- assertTrue: ${output.loginNationalId === output.targetNationalId && output.targetNationalId === String(NATIONAL_ID) && output.profileNationalId === output.targetNationalId}
+- evalScript: ${output.identityOk = output.loginNationalId === String(NATIONAL_ID) && output.profileNationalId === String(NATIONAL_ID)}
+
+# ==========================================================================================
+# 2. NAVIGATION - Account -> My bookings -> Active
+# ==========================================================================================
+- runFlow:
+    file: subflows/clear-overlays.yaml
+    env:
+      ANCHOR: "My bookings"
+- tapOn: "My bookings"
+- extendedWaitUntil:
+    visible: "My Bookings"
+    timeout: 45000
+- assertVisible: 'All\s*Tab 1 of 4'
+- assertVisible: 'Active\s*Tab 2 of 4'
+- assertVisible: 'Cancelled\s*Tab 4 of 4'
+- tapOn: 'Active\s*Tab 2 of 4'
+# The tabs paint before the list arrives: wait for a card OR the empty state, never a bare screen.
+- extendedWaitUntil:
+    visible: "(?s).*(\nActive\n.*Unit code|don.t have any active booking).*"
+    timeout: 60000
+- takeScreenshot: cancel-00-active-tab-before
+
+# ==========================================================================================
+# 3. FIND THE ASSIGNED BOOKING - by its unit code, never by position
+# ==========================================================================================
+# A card reads "<project>\nActive\nPaid\nUnit Type\n...\nUnit code\n<code>\nBooking fees...".
+# The selectors pin "\nUnit code\n<EXPECTED_UNIT_CODE>\n" - newline on BOTH sides - so a longer
+# code sharing the prefix (e.g. ...-999-2050 for ...-999-205) can never match.
+- evalScript: ${output.cancelAllowed = false}
+- evalScript: ${output.assignedInActive = false}
+- evalScript: ${output.assignedElsewhere = false}
+- evalScript: ${output.unitCode = ""}
+- evalScript: ${output.invoiceNumber = ""}
+- evalScript: ${output.preSignatureSteps = false}
+- evalScript: ${output.signedEvidence = false}
+- evalScript: ${output.unsignedDocument = false}
+
+# Under Active - scrolled to if the list outgrows the screen; bounded, and optional because
+# "not here" is an answer, not an error.
+- runFlow:
+    when:
+      notVisible: "(?s).*don.t have any active booking.*"
+    commands:
+      - scrollUntilVisible:
+          element:
+            text: "(?s).*\nActive\n.*\nUnit code\n${EXPECTED_UNIT_CODE}\n.*"
+          direction: DOWN
+          timeout: 20000
+          optional: true
+- runFlow:
+    when:
+      visible: "(?s).*\nActive\n.*\nUnit code\n${EXPECTED_UNIT_CODE}\n.*"
+    commands:
+      - evalScript: ${output.assignedInActive = true}
+
+# Not under Active: look for the unit under All, only to report WHY nothing is cancelled.
+- runFlow:
+    when:
+      true: ${output.assignedInActive !== true}
+    commands:
+      - tapOn: 'All\s*Tab 1 of 4'
+      - extendedWaitUntil:
+          visible: "(?s).*(Unit code|don.t have any booking).*"
+          timeout: 45000
+      - scrollUntilVisible:
+          element:
+            text: "(?s).*\nUnit code\n${EXPECTED_UNIT_CODE}\n.*"
+          direction: DOWN
+          timeout: 30000
+          optional: true
+      - runFlow:
+          when:
+            visible: "(?s).*\nUnit code\n${EXPECTED_UNIT_CODE}\n.*"
+          commands:
+            - evalScript: ${output.assignedElsewhere = true}
+            - copyTextFrom:
+                text: "(?s).*\nUnit code\n${EXPECTED_UNIT_CODE}\n.*"
+            - evalScript: '${output.otherCard = String(maestro.copiedText).replace(/\s+/g, " ").slice(0, 200)}'
+            - evalScript: "${console.log('CANCEL BOOKING - assigned unit found OUTSIDE Active - card [' + output.otherCard + ']')}"
+      - takeScreenshot: cancel-00b-all-tab-search
+
+# Under Active: open THE assigned booking and read conditions 2, 3 and 5 from it.
+- runFlow:
+    when:
+      true: ${output.assignedInActive === true}
+    commands:
+      - copyTextFrom:
+          text: "(?s).*\nActive\n.*\nUnit code\n${EXPECTED_UNIT_CODE}\n.*"
+      - evalScript: '${output.unitCode = (String(maestro.copiedText).match(/Unit code\s*([0-9]{2}(-[0-9]+)+)/) || ["", ""])[1]}'
+      - evalScript: "${console.log('CANCEL BOOKING - assigned Active card, unit code [' + output.unitCode + ']')}"
+      - tapOn:
+          text: "(?s).*\nActive\n.*\nUnit code\n${EXPECTED_UNIT_CODE}\n.*"
+      - extendedWaitUntil:
+          visible: "Booking Details"
+          timeout: 45000
+      # The progress card paints first, at the top - it is read before anything is scrolled.
+      - extendedWaitUntil:
+          visible: "(?s).*steps? left.*"
+          timeout: 45000
+      - takeScreenshot: cancel-01-booking-top-progress
+      - runFlow:
+          when:
+            visible: "[2-9] steps left"
+          commands:
+            - evalScript: ${output.preSignatureSteps = true}
+      - runFlow:
+          when:
+            visible: "1 steps? left"
+          commands:
+            - evalScript: ${output.signedEvidence = true}
+      - runFlow:
+          when:
+            visible: "Extend PQ Period"
+          commands:
+            - evalScript: ${output.signedEvidence = true}
+
+      # The invoice number sits in Booking Details, BELOW the progress card - and below the fold
+      # when that card is long (a signed booking lists every step).
+      - scrollUntilVisible:
+          element:
+            text: "Invoice number"
+          direction: DOWN
+          timeout: 30000
+      - assertVisible: "Invoice number"
+      - copyTextFrom:
+          text: "[0-9]{10,}"
+          below:
+            text: "Invoice number"
+      - evalScript: '${output.invoiceNumber = String(maestro.copiedText)}'
+      - takeScreenshot: cancel-01b-booking-invoice
+
+      # Only a booking that already looks unsigned is scrolled to its bottom, where Documents and
+      # "Cancel booking" sit together: "Unsigned" under "Sales contract", no "Signed", no
+      # "Price quotation".
+      - runFlow:
+          when:
+            true: ${output.preSignatureSteps === true && output.signedEvidence !== true}
+          commands:
+            - scrollUntilVisible:
+                element:
+                  text: "Cancel booking"
+                direction: DOWN
+                timeout: 30000
+            - runFlow:
+                when:
+                  visible: "Signed"
+                commands:
+                  - evalScript: ${output.signedEvidence = true}
+            - runFlow:
+                when:
+                  visible: "Price quotation"
+                commands:
+                  - evalScript: ${output.signedEvidence = true}
+            - runFlow:
+                when:
+                  visible:
+                    text: "Unsigned"
+                    below:
+                      text: "Sales contract"
+                commands:
+                  - evalScript: ${output.unsignedDocument = true}
+            - takeScreenshot: cancel-02-documents-and-cancel-button
+
+# ==========================================================================================
+# 4. THE DECISION - all five conditions, each recorded
+# ==========================================================================================
+- evalScript: ${output.unitMatch = output.unitCode === String(EXPECTED_UNIT_CODE)}
+- evalScript: ${output.invoiceMatch = output.invoiceNumber === String(EXPECTED_INVOICE)}
+- evalScript: ${output.activeOk = output.assignedInActive === true}
+- evalScript: ${output.unsignedOk = output.preSignatureSteps === true && output.signedEvidence !== true && output.unsignedDocument === true}
+- evalScript: ${output.cancelAllowed = output.identityOk === true && output.unitMatch === true && output.invoiceMatch === true && output.activeOk === true && output.unsignedOk === true}
+- evalScript: "${console.log('CANCEL BOOKING DECISION - 1 account=' + output.identityOk + ' | 2 unit [' + output.unitCode + '] vs [' + EXPECTED_UNIT_CODE + ']=' + output.unitMatch + ' | 3 invoice [' + output.invoiceNumber + '] vs [' + EXPECTED_INVOICE + ']=' + output.invoiceMatch + ' | 4 active=' + output.activeOk + ' | 5 unsigned=' + output.unsignedOk + ' (steps=' + output.preSignatureSteps + ' signedEvidence=' + output.signedEvidence + ' unsignedDocument=' + output.unsignedDocument + ') | cancelAllowed=' + output.cancelAllowed)}"
+
+# Why nothing will be cancelled, when that is the answer.
+- runFlow:
+    when:
+      true: ${output.cancelAllowed !== true && output.assignedInActive !== true && output.assignedElsewhere !== true}
+    commands:
+      - evalScript: "${console.log('Assigned booking not found.')}"
+- runFlow:
+    when:
+      true: ${output.cancelAllowed !== true && output.assignedInActive === true && (output.unitMatch !== true || output.invoiceMatch !== true)}
+    commands:
+      - evalScript: "${console.log('Assigned booking not found. (unit [' + EXPECTED_UNIT_CODE + '] is Active, but its invoice [' + output.invoiceNumber + '] is not the assigned invoice [' + EXPECTED_INVOICE + '])')}"
+- runFlow:
+    when:
+      true: ${output.cancelAllowed !== true && output.assignedInActive !== true && output.assignedElsewhere === true}
+    commands:
+      - evalScript: "${console.log('Assigned booking found but it is not Active - nothing cancelled.')}"
+- runFlow:
+    when:
+      true: ${output.cancelAllowed !== true && output.assignedInActive === true && output.unitMatch === true && output.invoiceMatch === true && output.unsignedOk !== true}
+    commands:
+      - evalScript: "${console.log('Assigned booking found but it is Signed or its contract is not Unsigned - nothing cancelled.')}"
+- runFlow:
+    when:
+      true: ${output.cancelAllowed !== true}
+    commands:
+      - takeScreenshot: cancel-STOP-assigned-booking-not-cancellable
+
+# --- SAFETY GATE. Nothing below this line runs unless ALL FIVE conditions were proven above.
+# Otherwise the run stops HERE (a failed assertion, deliberately not a pass) with the reason in
+# the log line just before it, and no booking has been touched.
+- assertTrue: ${output.cancelAllowed === true}
+
+# ==========================================================================================
+# 5. CANCEL - the assigned, proven booking, through the product's own screens
+# ==========================================================================================
+- evalScript: "${console.log('CANCEL BOOKING - cancelling the ASSIGNED booking: unit [' + EXPECTED_UNIT_CODE + '] invoice [' + EXPECTED_INVOICE + '] - account, unit, invoice, Active and Unsigned all proven')}"
+- assertVisible: "Cancel booking"
+- tapOn: "Cancel booking"
+
+# First confirmation - asserted on its own wording. "No, return project" is the safe branch and
+# is only asserted, never tapped.
+- extendedWaitUntil:
+    visible: "(?s).*booking fee is not refunded.*are you sure you want to cancel.*"
+    timeout: 30000
+- assertVisible: "No, return project"
+- takeScreenshot: cancel-03-first-confirmation
+- tapOn: "Yes, cancel my booking"
+
+# Reason. "Relocation" needs no free text and records no complaint about the product or a lender
+# (the eight listed: Project location, Project unit design, Unit price, Unit area, Relocation,
+# Reject by bank, Unsigned contract, Other reason - "Other reason" requires free text). Should
+# "Relocation" ever be missing, "Unsigned contract" - also text-free, and true of this booking -
+# is used; with neither, the reason assertion stops the run with the booking still intact.
+- extendedWaitUntil:
+    visible: "Reason for cancelling"
+    timeout: 45000
+- takeScreenshot: cancel-04-reason-screen
+- evalScript: ${output.reason = ""}
+- runFlow:
+    when:
+      visible: "Relocation"
+    commands:
+      - tapOn: "Relocation"
+      - evalScript: ${output.reason = "Relocation"}
+- runFlow:
+    when:
+      true: ${output.reason === ""}
+    commands:
+      - runFlow:
+          when:
+            visible: "Unsigned contract"
+          commands:
+            - tapOn: "Unsigned contract"
+            - evalScript: ${output.reason = "Unsigned contract"}
+- assertTrue: ${output.reason === "Relocation" || output.reason === "Unsigned contract"}
+- evalScript: "${console.log('CANCEL BOOKING - reason selected [' + output.reason + ']')}"
+- waitForAnimationToEnd:
+    timeout: 6000
+- takeScreenshot: cancel-05-reason-selected
+
+# "Confirm cancellation" stays disabled until a reason is selected.
+- tapOn: "Confirm cancellation"
+
+# Second confirmation - plain "Yes" / "No", matched on their own text.
+- extendedWaitUntil:
+    visible: "(?s).*booking fee is not refunded.*"
+    timeout: 30000
+- assertVisible: "No"
+- takeScreenshot: cancel-06-second-confirmation
+- tapOn: "Yes"
+
+# The product's confirmation names the unit it cancelled - it must be the ASSIGNED unit.
+- extendedWaitUntil:
+    visible: "(?s).*has been cancelled successfully.*"
+    timeout: 60000
+- assertVisible: "Cancellation request submitted"
+- assertVisible: "(?s).*${EXPECTED_UNIT_CODE}.*has been cancelled successfully.*"
+- takeScreenshot: cancel-07-cancellation-confirmed
+
+# ==========================================================================================
+# 6. FINAL VALIDATION - on the product's own records, from a fresh launch
+# ==========================================================================================
+# Neither "View booking" nor "Reserve unit" on the success screen is tapped; a relaunch also
+# makes My Bookings re-read from the server instead of showing this session's cached list.
+- launchApp
+- repeat:
+    times: 5
+    while:
+      notVisible: "My bookings"
+    commands:
+      - evalScript: ${output.anchorOptional = true}
+      - evalScript: ${output.npsLeftToCaller = true}
+      - runFlow:
+          file: subflows/clear-overlays.yaml
+          env:
+            ANCHOR: '(?s)(Account\s*Tab 4 of 4|.*would you recommend benefiting from Sakani.*)'
+      - evalScript: ${output.anchorOptional = false}
+      - evalScript: ${output.npsLeftToCaller = false}
+      - runFlow:
+          when:
+            visible: "(?s).*would you recommend benefiting from Sakani.*"
+          commands:
+            - runFlow:
+                when:
+                  notVisible: '(?s)(.*There.s something wrong.*|.*the service is down.*|Error!)'
+                commands:
+                  - runFlow:
+                      when:
+                        visible: "Submit"
+                      commands:
+                        - evalScript: "${console.log('LEAVE HOME (after cancellation) - NPS up, closing it with its X, then Account at once')}"
+                        - tapOn:
+                            point: "73,1434"
+                            retryTapIfNoChange: false
+      - tapOn:
+          text: 'Account\s*Tab 4 of 4'
+          optional: true
+- runFlow:
+    file: subflows/clear-overlays.yaml
+    env:
+      ANCHOR: "My bookings"
+- tapOn: "My bookings"
+- extendedWaitUntil:
+    visible: "My Bookings"
+    timeout: 45000
+
+# The assigned unit is no longer Active.
+- tapOn: 'Active\s*Tab 2 of 4'
+- extendedWaitUntil:
+    visible: "(?s).*(\nActive\n.*Unit code|don.t have any active booking).*"
+    timeout: 60000
+- assertNotVisible: "(?s).*\nUnit code\n${EXPECTED_UNIT_CODE}\n.*"
+- takeScreenshot: cancel-08-active-tab-after
+
+# ... and it is listed as Cancelled, by the same unit code.
+- tapOn: 'Cancelled\s*Tab 4 of 4'
+- extendedWaitUntil:
+    visible: "(?s).*Cancellation date.*"
+    timeout: 45000
+- scrollUntilVisible:
+    element:
+      text: "(?s).*\nCancelled\n.*\nUnit code\n${EXPECTED_UNIT_CODE}\n.*"
+    direction: DOWN
+    timeout: 30000
+- assertVisible: "(?s).*\nCancelled\n.*\nUnit code\n${EXPECTED_UNIT_CODE}\n.*Cancellation date.*"
+- takeScreenshot: cancel-09-cancelled-tab-after
+- evalScript: "${console.log('CANCEL BOOKING END - assigned unit [' + EXPECTED_UNIT_CODE + '] invoice [' + EXPECTED_INVOICE + '] cancelled - gone from Active, listed as Cancelled - reason [' + output.reason + ']')}"

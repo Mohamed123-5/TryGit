@@ -1,0 +1,6 @@
+resume run started: Sun Sep 27 09:21:18 AST 2026
+device:
+emulator-5554          device product:sdk_gphone64_x86_64 model:sdk_gphone64_x86_64 device:emu64xa transport_id:1
+boot_completed: 1
+app: fi.iwa.sakani versionName=versionName=4.7.6
+maestro: 2.9.0

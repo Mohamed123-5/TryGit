@@ -1,0 +1,294 @@
+# OUT-002 — Logging out clears the session.
+#
+# Scope: OUT-002 only. Per the automation triage in exploration-report.md this case
+# absorbs OUT-001 (logout asks for confirmation), OUT-003 (guest menu is reduced) and
+# ACC-021, so all three are asserted here.
+#
+# The flow authenticates itself rather than relying on a pre-existing session: it logs
+# out, so a second run would otherwise start as a guest and fail. That login reuses
+# login.yaml's proven happy-path selectors without modifying it - the AUTH-002 validation
+# cases and the AUTH-009 restart check remain owned by login.yaml and are not duplicated.
+#
+# Security-relevant: an incomplete logout that leaves a stored token behind would be a
+# serious defect, so the final section relaunches the app and re-checks the guest state
+# rather than trusting the screen that was on top immediately after logging out.
+appId: fi.iwa.sakani
+name: OUT-002 Logout clears session
+---
+- launchApp:
+    clearState: true
+
+# A cleared launch replays first-run onboarding, and the staging dashboard can raise an
+# error dialog, the compare coach mark or the satisfaction survey.
+# A cold start after a state wipe on build PRE-4.7.5-1279 can take well over a minute to
+# paint its first frame. The process is alive and healthy throughout - logcat shows no
+# crash, no tombstone and no ANR, the UI simply has not rendered yet - so the previous
+# fixed settling budget (20s + 5x5s) could expire against a still-blank screen and fail
+# on an app that was about to come up. Poll until the guest header has actually surfaced,
+# clearing whichever overlay is on top. The loop exits as soon as the header appears, so
+# it costs nothing on a fast start and no assertion below is relaxed.
+- waitForAnimationToEnd:
+    timeout: 20000
+- repeat:
+    times: 20
+    commands:
+      - runFlow:
+          when:
+            visible: "Skip"
+          commands:
+            - tapOn: "Skip"
+      - runFlow:
+          when:
+            visible: "Dismiss"
+          commands:
+            - tapOn: "Dismiss"
+      - runFlow:
+          when:
+            visible: "Ok"
+          commands:
+            - tapOn: "Ok"
+      - runFlow:
+          when:
+            visible: "Marketplace Day"
+          commands:
+            - back
+      - runFlow:
+          when:
+            visible: "Start comparing properties"
+          commands:
+            - back
+      - runFlow:
+          when:
+            notVisible: "(?s).*Login / Sign up.*"
+          commands:
+            - waitForAnimationToEnd:
+                timeout: 5000
+
+# --- Establish the authenticated session this case starts from.
+- extendedWaitUntil:
+    visible: "(?s).*Login / Sign up.*"
+    timeout: 30000
+- tapOn: "(?s).*Login / Sign up.*"
+
+- extendedWaitUntil:
+    visible: "Continue with N[ae]fath"
+    timeout: 30000
+- tapOn: "Enter your ID, phone number,? or email"
+- inputText: "1000011485"
+- tapOn: "Continue"
+
+- extendedWaitUntil:
+    visible: "Login with nafath"
+    timeout: 30000
+- tapOn: "Confirm"
+- extendedWaitUntil:
+    notVisible: "Login with nafath"
+    timeout: 60000
+
+# The "Sakani Loyalty / Weekly Offer" (renamed "Sakani sharrai / weekly deal" on PRE-4.7.6-1283) sheet lands non-deterministically after
+# authentication and removes "Maybe Later" from the hierarchy while it is up, so poll and
+# clear it before waiting on the biometrics prompt.
+- repeat:
+    times: 12
+    commands:
+      - runFlow:
+          when:
+            visible: "Go to the weekly (offer|deal)"
+          commands:
+            - back
+            - waitForAnimationToEnd:
+                timeout: 3000
+      - runFlow:
+          when:
+            notVisible: "Maybe Later"
+          commands:
+            - waitForAnimationToEnd:
+                timeout: 5000
+- repeat:
+    times: 4
+    commands:
+      - runFlow:
+          when:
+            visible: "Go to the weekly (offer|deal)"
+          commands:
+            - back
+            - waitForAnimationToEnd:
+                timeout: 3000
+      - runFlow:
+          when:
+            visible: "Maybe Later"
+          commands:
+            - tapOn: "Maybe Later"
+            - waitForAnimationToEnd:
+                timeout: 3000
+
+# Home's tab bar renders well before its content does, so wait on the tab rather than on
+# any Home content.
+- extendedWaitUntil:
+    visible: 'Home\s*Tab 1 of 4'
+    timeout: 60000
+- tapOn: 'Account\s*Tab 4 of 4'
+
+# --- Authenticated Account state, asserted on entries that exist only for a signed-in
+# user. "Hello" is deliberately not used: the guest Account shows "Hello" too, just
+# without a name, so it would pass either way.
+- extendedWaitUntil:
+    visible: "My bookings"
+    timeout: 60000
+- assertVisible: "Profile details"
+- assertVisible: "Preferences"
+- assertNotVisible: "Log in"
+
+# --- ACC-001: the Account screen loads for an authenticated user with name, sections
+# and activities. The three assertions above already cover two section entries, so only
+# the parts ACC-001 adds are asserted here.
+#
+# The account holder's name is dynamic (Arabic for this account), so it is matched
+# structurally rather than by value: "Hello" followed by at least one non-whitespace
+# character. That is exactly what separates the authenticated header from the guest one,
+# which renders "Hello" with no name after it.
+- assertVisible: '(?s)Hello\s*\S.*'
+
+# Section headers, not the rows beneath them - the rows are account-dependent.
+- assertVisible: "My Account"
+- assertVisible: "Personal Activities"
+
+# --- OUT-002 action: the real Logout entry, which sits below the fold under App settings.
+- scrollUntilVisible:
+    element:
+      text: "Log out"
+    direction: DOWN
+    timeout: 30000
+# --- ACC-001 (absorbing SET-001): the App settings section is present. The scroll above
+# already brought it into view, so this costs no extra navigation. Labels are matched as
+# the build actually renders them - "App appearance" carries a trailing space and
+# "Regulations and policies" is the full label, neither matching the shorthand in the
+# case description. Language is matched by its label only; its value is a user setting.
+- assertVisible: "App settings"
+- assertVisible: '(?s)Language\s*\S.*'
+- assertVisible: "Accessibility"
+- assertVisible: 'App appearance\s*'
+- assertVisible: "Regulations and policies"
+# --- end ACC-001
+
+- tapOn: "Log out"
+
+# OUT-001 (merged): logout asks for confirmation before acting.
+- extendedWaitUntil:
+    visible: "Are you sure you want to log out?"
+    timeout: 30000
+- assertVisible: "Cancel"
+
+# --- OUT-004: Cancel on the confirmation keeps the session. Deliberately placed before
+# OUT-002's "Yes, log out" so the dialog OUT-001 already raised serves both cases; the
+# dialog is re-opened afterwards so OUT-002 still acts on a freshly raised confirmation.
+- tapOn: "Cancel"
+- extendedWaitUntil:
+    notVisible: "Are you sure you want to log out?"
+    timeout: 30000
+
+# Still authenticated. Asserted on entries that exist only for a signed-in user, and on
+# the absence of the guest entry - the same discriminator OUT-002 uses below, so a
+# cancelled logout that silently dropped the session could not pass.
+- assertVisible: "My bookings"
+- assertVisible: "Log out"
+- assertNotVisible: "Log in"
+
+# Re-raise the confirmation so OUT-002 proceeds from the state it expects.
+- tapOn: "Log out"
+- extendedWaitUntil:
+    visible: "Are you sure you want to log out?"
+    timeout: 30000
+- assertVisible: "Cancel"
+# --- end OUT-004
+
+- tapOn: "Yes, log out"
+
+# The satisfaction survey (D-12) lands on top of the guest Account after the session is
+# cleared, covering the very entries asserted below - and it does not arrive at a fixed
+# moment, so a one-shot clear races it. Poll instead: clear whichever overlay is on top
+# until the guest entry has actually surfaced. The loop exits early once "Log in" is
+# visible, so it costs nothing on runs where the survey never appears.
+# Only "Dismiss" is used - "Submit" would post a real survey response.
+# No assertion below is relaxed; this only removes the overlay hiding them.
+- repeat:
+    times: 30
+    commands:
+      - runFlow:
+          when:
+            visible: "Dismiss"
+          commands:
+            - tapOn: "Dismiss"
+            - waitForAnimationToEnd:
+                timeout: 3000
+      - runFlow:
+          when:
+            visible: "Ok"
+          commands:
+            - tapOn: "Ok"
+            - waitForAnimationToEnd:
+                timeout: 3000
+      - runFlow:
+          when:
+            notVisible: "Log in"
+          commands:
+            - waitForAnimationToEnd:
+                timeout: 5000
+
+# --- Session cleared. Positive guest assertion plus OUT-003's reduced menu...
+- extendedWaitUntil:
+    visible: "Log in"
+    timeout: 60000
+- assertVisible: "(?s).*create new account.*"
+# Build PRE-4.7.6-1283 renders this entry with an ampersand ("Help & Support") where
+# earlier builds spelled it out ("Help and Support"). Both are matched so the same
+# assertion holds on either build. OUT-003's intent is unchanged - the guest menu must
+# still offer the support entry; only the label's spelling moved.
+- assertVisible: "Help (and|&) Support"
+
+# ...and the negative counterpart: the authenticated-only entries are gone.
+- assertNotVisible: "My bookings"
+- assertNotVisible: "Profile details"
+- assertNotVisible: "Preferences"
+
+# --- Prove the stored session was cleared, not just the current screen. Relaunch without
+# clearing state and without logging in; the app must still come up as a guest.
+- launchApp
+- waitForAnimationToEnd:
+    timeout: 20000
+- repeat:
+    times: 4
+    commands:
+      - runFlow:
+          when:
+            visible: "Dismiss"
+          commands:
+            - tapOn: "Dismiss"
+      - runFlow:
+          when:
+            visible: "Ok"
+          commands:
+            - tapOn: "Ok"
+      - runFlow:
+          when:
+            visible: "Marketplace Day"
+          commands:
+            - back
+      - runFlow:
+          when:
+            visible: "Start comparing properties"
+          commands:
+            - back
+      - waitForAnimationToEnd:
+          timeout: 5000
+
+- extendedWaitUntil:
+    visible: 'Account\s*Tab 4 of 4'
+    timeout: 60000
+- tapOn: 'Account\s*Tab 4 of 4'
+
+- extendedWaitUntil:
+    visible: "Log in"
+    timeout: 60000
+- assertNotVisible: "My bookings"
+- assertNotVisible: "Profile details"

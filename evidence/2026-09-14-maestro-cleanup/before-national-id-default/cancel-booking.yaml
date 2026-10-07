@@ -1,0 +1,360 @@
+# Cancel Booking — cancel the FIRST booking at the top of My bookings -> Active.
+#
+#   maestro test -e NATIONAL_ID=<10-digit National ID / Iqama> .maestro/cancel-booking.yaml
+#
+# NATIONAL_ID is the ONLY input, and it is MANDATORY: a run without it, or with a malformed
+# value, stops at the first steps below - BEFORE the app is launched.
+#
+#   Login -> account proven by National ID -> Account -> My bookings -> Active
+#     -> open the FIRST card at the top of the list (index 0)
+#     -> scroll down inside Booking Details to "Cancel booking" -> tap it
+#     -> "Yes, cancel my booking" -> reason "Unit area" -> "Confirm cancellation"
+#     -> the final confirmation, if one appears -> "Yes"
+#     -> relaunch -> the same booking is gone from Active and listed under Cancelled.
+#
+# --- HOW THE BOOKING IS CHOSEN (14/09/2026, by request) --------------------------------------
+# The first card at the TOP of the Active list, by position, and nothing else. The flow does NOT
+# choose by creation or booking date, by unit code, by invoice number, or by sales-contract
+# status; it does not read the contract status at all, and it never scans or compares other
+# bookings. The unit code IS copied from that first card afterwards - purely as the record used
+# to prove, at the end, that THIS booking is the one that was cancelled - never to pick it.
+#
+# NO FALLBACK. If the first card cannot be opened, the run FAILS at the step that could not be
+# performed. It never tries the second booking.
+#
+# --- THIS FLOW CANCELS A REAL BOOKING, ON PURPOSE -------------------------------------------
+# The product's own dialog says it: "The booking fee is not refunded when you cancel the
+# booking". Run it only on a PRE test account whose first Active booking may be cancelled.
+#
+# --- WHEN IT STOPS INSTEAD -------------------------------------------------------------------
+#   no Active booking at all -> "No active bookings available for cancellation." and the gate
+#   below fails, deliberately not a pass, with nothing tapped on any cancellation screen.
+#
+# --- CHECKED BEFORE "Cancel booking" (the SAFETY GATE) ---------------------------------------
+#   1. the signed-in account is NATIONAL_ID (the Nafath screen AND the profile's own field);
+#   2. the Active list actually holds a card at the top to cancel.
+#
+# --- NEVER ---------------------------------------------------------------------------------
+# No reservation, no payment, no payment method, no contract signature, no OTP, no NPS/CSAT
+# Submit or rating. "Other reason" is never selected (it requires free text). On the success
+# screen neither "View booking" nor "Reserve unit" is tapped - the flow relaunches. No overlay
+# helper runs between the "Cancel booking" tap and the product's confirmation, so a real product
+# error in that window is never cleared away: the flow fails on it, with the error in the shot.
+#
+# The cancellation screens and texts are the ones proven by subflows/ensure-no-active-booking.yaml
+# (09/09/2026) and by this flow (13/09/2026, run cancel3-152245: unit 01-01-0504-999-205).
+appId: fi.iwa.sakani
+name: Cancel booking - the first Active booking at the top of the list
+env:
+  # Same self-referencing form as full-journey.yaml: a literal here silently BEATS `-e` on
+  # Maestro 2.9.0. There is NO default account - unsupplied resolves to "" and the fail-fast
+  # guard below stops the run before the app is launched.
+  NATIONAL_ID: '${typeof NATIONAL_ID === "undefined" ? "" : String(NATIONAL_ID)}'
+---
+# ==========================================================================================
+# 0. FAIL FAST - NATIONAL_ID, before the app is launched
+# ==========================================================================================
+- evalScript: ${console.log('CANCEL BOOKING TARGET NATIONAL_ID = [' + NATIONAL_ID + ']')}
+- evalScript: ${output.targetNationalId = String(NATIONAL_ID)}
+# Dollar-free on purpose (a second "$" inside ${...} makes Maestro 2.9.0 skip the check and pass):
+# exactly 10 characters, digits only, first digit 1 (National ID) or 2 (Iqama).
+- assertTrue: ${String(NATIONAL_ID).length === 10 && !/[^0-9]/.test(String(NATIONAL_ID)) && (String(NATIONAL_ID).charAt(0) === "1" || String(NATIONAL_ID).charAt(0) === "2")}
+
+# ==========================================================================================
+# 1. LOGIN - then prove which account is signed in
+# ==========================================================================================
+- launchApp:
+    clearState: true
+- runFlow:
+    file: subflows/login.yaml
+    env:
+      NATIONAL_ID: ${NATIONAL_ID}
+
+# Home -> Account. An account that holds a booking can get the NPS survey on Home, and on Home
+# it re-opens by itself about 10 s after every close (evidence/2026-09-13-nps-close), so this
+# is full-journey.yaml's LEAVE HOME block: clear the rest, close the survey with its X, and tap
+# Account at once. Bounded at 5 rounds; Submit and ratings are never tapped.
+- repeat:
+    times: 5
+    while:
+      notVisible: "My bookings"
+    commands:
+      - evalScript: ${output.anchorOptional = true}
+      - evalScript: ${output.npsLeftToCaller = true}
+      - runFlow:
+          file: subflows/clear-overlays.yaml
+          env:
+            ANCHOR: '(?s)(Account\s*Tab 4 of 4|.*would you recommend benefiting from Sakani.*)'
+      - evalScript: ${output.anchorOptional = false}
+      - evalScript: ${output.npsLeftToCaller = false}
+      - runFlow:
+          when:
+            visible: "(?s).*would you recommend benefiting from Sakani.*"
+          commands:
+            - runFlow:
+                when:
+                  notVisible: '(?s)(.*There.s something wrong.*|.*the service is down.*|Error!)'
+                commands:
+                  - runFlow:
+                      when:
+                        visible: "Submit"
+                      commands:
+                        - evalScript: "${console.log('LEAVE HOME (after login) - NPS up, closing it with its X, then Account at once')}"
+                        - tapOn:
+                            point: "73,1434"
+                            retryTapIfNoChange: false
+      - tapOn:
+          text: 'Account\s*Tab 4 of 4'
+          optional: true
+- extendedWaitUntil:
+    visible: "My bookings"
+    timeout: 60000
+
+# WHO IS SIGNED IN - from the profile's own "National ID" field (records output.profileNationalId
+# only after it matched). All three records must agree; a mismatch fails the run right here.
+- runFlow:
+    file: subflows/verify-signed-in-account.yaml
+    env:
+      NATIONAL_ID: ${NATIONAL_ID}
+- assertTrue: ${output.loginNationalId === output.targetNationalId && output.targetNationalId === String(NATIONAL_ID) && output.profileNationalId === output.targetNationalId}
+- evalScript: ${output.identityOk = output.loginNationalId === String(NATIONAL_ID) && output.profileNationalId === String(NATIONAL_ID)}
+
+# ==========================================================================================
+# 2. NAVIGATION - Account -> My bookings -> Active
+# ==========================================================================================
+- runFlow:
+    file: subflows/clear-overlays.yaml
+    env:
+      ANCHOR: "My bookings"
+- tapOn: "My bookings"
+- extendedWaitUntil:
+    visible: "My Bookings"
+    timeout: 45000
+- assertVisible: 'Active\s*Tab 2 of 4'
+- assertVisible: 'Cancelled\s*Tab 4 of 4'
+- tapOn: 'Active\s*Tab 2 of 4'
+# The tabs paint before the list arrives: wait for a card OR the empty state, never a bare screen.
+- extendedWaitUntil:
+    visible: "(?s).*(\nActive\n.*Unit code|don.t have any active booking).*"
+    timeout: 60000
+- takeScreenshot: cancel-00-active-tab-before
+
+# ==========================================================================================
+# 3. THE FIRST CARD AT THE TOP - is there one at all?
+# ==========================================================================================
+- evalScript: ${output.unitCode = ""}
+- evalScript: ${output.hasActiveBooking = false}
+- runFlow:
+    when:
+      visible:
+        text: "(?s).*\nActive\n.*\nUnit code\n.*"
+        index: 0
+    commands:
+      - evalScript: ${output.hasActiveBooking = true}
+      # RECORD ONLY - the unit code of that first card, used at the end to prove this booking is
+      # the one that was cancelled. It plays no part in choosing it.
+      - copyTextFrom:
+          text: "(?s).*\nActive\n.*\nUnit code\n.*"
+          index: 0
+      - evalScript: '${output.unitCode = (String(maestro.copiedText).match(/Unit code\s*([0-9]{2}(-[0-9]+)+)/) || ["", ""])[1]}'
+      - evalScript: "${console.log('CANCEL BOOKING - first Active card at the top; its unit code is recorded as [' + output.unitCode + ']')}"
+
+- evalScript: ${output.cancelAllowed = output.identityOk === true && output.hasActiveBooking === true}
+- evalScript: "${console.log('CANCEL BOOKING DECISION - account=' + output.identityOk + ' | a first Active card is present=' + output.hasActiveBooking + ' | cancelAllowed=' + output.cancelAllowed)}"
+- runFlow:
+    when:
+      true: ${output.hasActiveBooking !== true}
+    commands:
+      - evalScript: "${console.log('No active bookings available for cancellation.')}"
+      - takeScreenshot: cancel-STOP-no-active-booking
+
+# Nothing below this line runs unless the account is proven and a first card exists: the run
+# stops HERE (a failed assertion, deliberately not a pass), with nothing tapped.
+- assertTrue: ${output.cancelAllowed === true}
+
+# ==========================================================================================
+# 4. OPEN THE FIRST CARD - by position, with no fallback
+# ==========================================================================================
+# index 0 is the top card. If it cannot be opened, the steps below FAIL - the second booking is
+# never tried.
+- tapOn:
+    text: "(?s).*\nActive\n.*\nUnit code\n.*"
+    index: 0
+- extendedWaitUntil:
+    visible: "Booking Details"
+    timeout: 45000
+- takeScreenshot: cancel-01-booking-opened
+
+# ==========================================================================================
+# 5. CANCEL - through the product's own screens
+# ==========================================================================================
+# Down to the bottom of the booking, where "Cancel booking" sits (09/09/2026 dump docs.xml).
+- scrollUntilVisible:
+    element:
+      text: "Cancel booking"
+    direction: DOWN
+    timeout: 30000
+- assertVisible: "Cancel booking"
+- takeScreenshot: cancel-02-before-cancel
+- evalScript: "${console.log('CANCEL BOOKING - cancelling the first Active booking, unit [' + output.unitCode + ']')}"
+- tapOn: "Cancel booking"
+
+# First confirmation - asserted on its own wording. "No, return project" is the safe branch and
+# is only asserted, never tapped.
+- extendedWaitUntil:
+    visible: "(?s).*booking fee is not refunded.*are you sure you want to cancel.*"
+    timeout: 30000
+- assertVisible: "No, return project"
+- takeScreenshot: cancel-03-first-confirmation
+- tapOn: "Yes, cancel my booking"
+
+# Reason. "Unit area" is selected: it needs no free text, unlike "Other reason", which is never
+# selected. The eight listed on this build are Project location, Project unit design, Unit price,
+# Unit area, Relocation, Reject by bank, Unsigned contract, Other reason. Should "Unit area" ever
+# be missing, "Relocation" - also text-free - is used; with neither, the assertion below stops the
+# run with the booking still intact.
+- extendedWaitUntil:
+    visible: "Reason for cancelling"
+    timeout: 45000
+- takeScreenshot: cancel-04-reason-screen
+- evalScript: ${output.reason = ""}
+- runFlow:
+    when:
+      visible: "Unit area"
+    commands:
+      - tapOn: "Unit area"
+      - evalScript: ${output.reason = "Unit area"}
+- runFlow:
+    when:
+      true: ${output.reason === ""}
+    commands:
+      - runFlow:
+          when:
+            visible: "Relocation"
+          commands:
+            - tapOn: "Relocation"
+            - evalScript: ${output.reason = "Relocation"}
+- assertTrue: ${output.reason === "Unit area" || output.reason === "Relocation"}
+- evalScript: "${console.log('CANCEL BOOKING - reason selected [' + output.reason + ']')}"
+- waitForAnimationToEnd:
+    timeout: 6000
+- takeScreenshot: cancel-05-reason-selected
+
+# "Confirm cancellation" stays disabled until a reason is selected.
+- tapOn: "Confirm cancellation"
+
+# The FINAL confirmation, when the product shows one - plain "Yes" / "No", matched on their own
+# text and on the dialog's own wording. Handled only if it actually appears.
+- waitForAnimationToEnd:
+    timeout: 8000
+- runFlow:
+    when:
+      visible: "(?s).*booking fee is not refunded.*"
+    commands:
+      - assertVisible: "No"
+      - takeScreenshot: cancel-06-final-confirmation
+      - tapOn: "Yes"
+
+# The product's own confirmation of the cancellation.
+- extendedWaitUntil:
+    visible: "(?s).*has been cancelled successfully.*"
+    timeout: 60000
+- assertVisible: "Cancellation request submitted"
+- takeScreenshot: cancel-07-cancellation-confirmed
+# ... and it names the unit that was recorded from the first card, which is how this run proves
+# it cancelled THAT booking. (Recorded after selection - the choice was still "the top card".)
+- runFlow:
+    when:
+      true: ${/^[0-9]{2}-[0-9]/.test(output.unitCode)}
+    commands:
+      - assertVisible: "(?s).*${output.unitCode}.*has been cancelled successfully.*"
+
+# ==========================================================================================
+# 6. FINAL VALIDATION - in the SAME session, with NO relaunch
+# ==========================================================================================
+# The app is NOT restarted after a cancellation (14/09/2026, by request): no launchApp, no
+# clearState, no second login. The flow walks back out of the success screen and navigates the
+# app itself.
+#
+# LEAVING THE SUCCESS SCREEN. It offers "View booking" and "Reserve unit" and NEITHER is tapped:
+# "Reserve unit" would start a new reservation, and "View booking" was recorded in the Full
+# Journey as dropping the app to the Android launcher. Back is used instead, and only while a
+# known post-cancellation screen is on top, so it can never pop past the tab bar and out of the
+# app. Bounded at 6 rounds, ending the moment the bottom tab bar is reachable.
+#
+# The NPS survey lands hard right after a cancellation, so it is closed here with its X - never
+# Submit, never a rating, and withheld while a product error is on screen.
+- repeat:
+    times: 6
+    while:
+      notVisible: 'Account\s*Tab 4 of 4'
+    commands:
+      - runFlow:
+          when:
+            visible: "(?s)(.*has been cancelled successfully.*|Cancellation request submitted|Booking Details|My Bookings)"
+          commands:
+            - back
+            - waitForAnimationToEnd:
+                timeout: 4000
+      - runFlow:
+          when:
+            visible: "(?s).*would you recommend benefiting from Sakani.*"
+          commands:
+            - runFlow:
+                when:
+                  notVisible: '(?s)(.*There.s something wrong.*|.*the service is down.*|Error!)'
+                commands:
+                  - runFlow:
+                      when:
+                        visible: "Submit"
+                      commands:
+                        - evalScript: "${console.log('AFTER CANCELLATION - NPS up, closing it with its X')}"
+                        - tapOn:
+                            point: "73,1434"
+                            retryTapIfNoChange: false
+- assertVisible: 'Account\s*Tab 4 of 4'
+- takeScreenshot: cancel-08-back-on-a-tabbed-screen
+
+# Account -> My bookings, in the same session.
+- tapOn: 'Account\s*Tab 4 of 4'
+- runFlow:
+    file: subflows/clear-overlays.yaml
+    env:
+      ANCHOR: "My bookings"
+- extendedWaitUntil:
+    visible: "My bookings"
+    timeout: 60000
+- tapOn: "My bookings"
+- extendedWaitUntil:
+    visible: "My Bookings"
+    timeout: 45000
+
+# The booking has left Active. This is a bounded WAIT rather than a bare assertion because the
+# list is no longer re-read by a relaunch: the tab is given up to 30 s to come back without it.
+- tapOn: 'Active\s*Tab 2 of 4'
+- extendedWaitUntil:
+    visible: "(?s).*(\nActive\n.*Unit code|don.t have any active booking).*"
+    timeout: 60000
+- assertTrue: ${/^[0-9]{2}-[0-9]/.test(output.unitCode)}
+- extendedWaitUntil:
+    notVisible: "(?s).*\nUnit code\n${output.unitCode}\n.*"
+    timeout: 30000
+- takeScreenshot: cancel-09-active-tab-after
+
+# ... and it is listed under Cancelled, by the unit code recorded from the first card before it
+# was cancelled, with its cancellation date.
+- tapOn: 'Cancelled\s*Tab 4 of 4'
+- extendedWaitUntil:
+    visible: "(?s).*Cancellation date.*"
+    timeout: 45000
+- scrollUntilVisible:
+    element:
+      text: "(?s).*\nCancelled\n.*\nUnit code\n${output.unitCode}\n.*"
+    direction: DOWN
+    timeout: 30000
+- assertVisible: "(?s).*\nCancelled\n.*\nUnit code\n${output.unitCode}\n.*Cancellation date.*"
+- copyTextFrom:
+    text: "(?s).*\nCancelled\n.*\nUnit code\n${output.unitCode}\n.*"
+- evalScript: '${output.cancellationDate = (String(maestro.copiedText).match(/Cancellation date\s*([0-9]{2}\/[0-9]{2}\/[0-9]{4})/) || ["", ""])[1]}'
+- takeScreenshot: cancel-10-cancelled-tab-after
+- evalScript: "${console.log('CANCEL BOOKING END - the first Active booking, unit [' + output.unitCode + '], is cancelled - gone from Active, listed as Cancelled on [' + output.cancellationDate + '] - reason [' + output.reason + '] - no relaunch after the cancellation')}"

@@ -1,0 +1,301 @@
+NetworkProviders for:
+  1: VcnNetworkProvider
+  6: UntrustedWifiNetworkFactory
+  7: RestrictedWifiNetworkFactory
+  4: TelephonyNetworkFactory[0]
+  3: PhoneSwitcherNetworkRequstListener
+  8: OemPaidWifiNetworkFactory
+  9: MultiInternetWifiNetworkFactory
+  5: WifiNetworkFactory
+  2: VpnNetworkProvider:0
+
+Active default network: 100
+
+Current network preferences: 
+  Default requests:
+
+Current Networks:
+  NetworkAgentInfo{network{100}  handle{432902426637}  ni{MOBILE[HSPA] CONNECTED extra: fast.t-mobile.com} created=2026-10-04T11:17:44.764Z Score(Policies : EVER_EVALUATED&EVER_VALIDATED&IS_VALIDATED ; KeepConnected : 0)  created 24973 firstValidated 25909 lastValidated 25909  lp{{InterfaceName: eth0 LinkAddresses: [ 10.0.2.15/24 ] DnsAddresses: [ /10.0.2.3 ] Domains: null MTU: 1500 TcpBufferSizes: 2097152,6291456,16777216,512000,2097152,8388608 Routes: [ 0.0.0.0/0 -> 10.0.2.2 eth0 mtu 1500,10.0.2.0/24 -> 0.0.0.0 eth0 mtu 0 ]}}  nc{[ Transports: CELLULAR Capabilities: SUPL&IA&INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VPN&VALIDATED&NOT_ROAMING&FOREGROUND&NOT_CONGESTED&NOT_SUSPENDED&NOT_VCN_MANAGED LinkUpBandwidth>=1800Kbps LinkDnBandwidth>=4300Kbps Specifier: <TelephonyNetworkSpecifier [mSubId = 1]> SubscriptionIds: {1} UnderlyingNetworks: Null]}  factorySerialNumber=4}
+    Nat464Xlat:
+      <not started>
+    Requests: REQUEST:43 LISTEN:19 BACKGROUND_REQUEST:1 total:63
+      NetworkRequest [ REQUEST id=1, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VPN&NOT_VCN_MANAGED RequestorUid: 1000 RequestorPkg: android UnderlyingNetworks: Null] ]
+      NetworkRequest [ BACKGROUND_REQUEST id=2, [ Transports: CELLULAR Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VPN&NOT_VCN_MANAGED RequestorUid: 1000 RequestorPkg: android UnderlyingNetworks: Null] ]
+      NetworkRequest [ LISTEN id=5, [ Capabilities: FOREGROUND RequestorUid: 1000 RequestorPkg: android UnderlyingNetworks: Null] ]
+      NetworkRequest [ REQUEST id=7, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 1000 RequestorUid: 1000 RequestorPkg: android UnderlyingNetworks: Null] ]
+      NetworkRequest [ LISTEN id=8, [ Capabilities: FOREGROUND RequestorUid: 1000 RequestorPkg: android UnderlyingNetworks: Null] ]
+      NetworkRequest [ LISTEN id=9, [ Capabilities: NOT_RESTRICTED&TRUSTED&NOT_VPN&FOREGROUND&NOT_VCN_MANAGED Uid: 1000 RequestorUid: 1000 RequestorPkg: android UnderlyingNetworks: Null] ]
+      NetworkRequest [ LISTEN id=10, [ RequestorUid: 1000 RequestorPkg: android UnderlyingNetworks: Null] ]
+      NetworkRequest [ LISTEN id=11, [ Capabilities: NOT_RESTRICTED&TRUSTED&NOT_VPN&NOT_VCN_MANAGED Uid: 1000 RequestorUid: 1000 RequestorPkg: android UnderlyingNetworks: Null] ]
+      NetworkRequest [ LISTEN id=12, [ Transports: CELLULAR Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VPN&NOT_VCN_MANAGED Uid: 1000 RequestorUid: 1000 RequestorPkg: android UnderlyingNetworks: Null] ]
+      NetworkRequest [ REQUEST id=14, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10214 RequestorUid: 1000 RequestorPkg: android UnderlyingNetworks: Null] ]
+      NetworkRequest [ LISTEN id=15, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&VALIDATED&NOT_VCN_MANAGED Uid: 1000 RequestorUid: 1000 RequestorPkg: android UnderlyingNetworks: Null] ]
+      NetworkRequest [ REQUEST id=17, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10180 RequestorUid: 1000 RequestorPkg: android UnderlyingNetworks: Null] ]
+      NetworkRequest [ REQUEST id=19, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10154 RequestorUid: 1000 RequestorPkg: android UnderlyingNetworks: Null] ]
+      NetworkRequest [ REQUEST id=21, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10151 RequestorUid: 1000 RequestorPkg: android UnderlyingNetworks: Null] ]
+      NetworkRequest [ REQUEST id=23, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10144 RequestorUid: 1000 RequestorPkg: android UnderlyingNetworks: Null] ]
+      NetworkRequest [ REQUEST id=25, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10136 RequestorUid: 1000 RequestorPkg: android UnderlyingNetworks: Null] ]
+      NetworkRequest [ REQUEST id=27, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10132 RequestorUid: 1000 RequestorPkg: android UnderlyingNetworks: Null] ]
+      NetworkRequest [ REQUEST id=29, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10131 RequestorUid: 1000 RequestorPkg: android UnderlyingNetworks: Null] ]
+      NetworkRequest [ REQUEST id=31, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10126 RequestorUid: 1000 RequestorPkg: android UnderlyingNetworks: Null] ]
+      NetworkRequest [ REQUEST id=33, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10125 RequestorUid: 1000 RequestorPkg: android UnderlyingNetworks: Null] ]
+      NetworkRequest [ REQUEST id=35, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 1000 RequestorUid: 1000 RequestorPkg: android UnderlyingNetworks: Null] ]
+      NetworkRequest [ REQUEST id=37, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 1073 RequestorUid: 1073 RequestorPkg: com.google.android.networkstack UnderlyingNetworks: Null] ]
+      NetworkRequest [ TRACK_SYSTEM_DEFAULT id=39, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VPN&NOT_VCN_MANAGED RequestorUid: 1073 RequestorPkg: com.google.android.networkstack.tethering UnderlyingNetworks: Null] ]
+      NetworkRequest [ LISTEN id=40, [ Transports: CELLULAR|WIFI Capabilities: NOT_VPN RequestorUid: 10163 RequestorPkg: com.android.systemui UnderlyingNetworks: Null] ]
+      NetworkRequest [ REQUEST id=42, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10163 RequestorUid: 10163 RequestorPkg: com.android.systemui UnderlyingNetworks: Null] ]
+      NetworkRequest [ REQUEST id=44, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10163 RequestorUid: 10163 RequestorPkg: com.android.systemui UnderlyingNetworks: Null] ]
+      NetworkRequest [ LISTEN id=45, [ RequestorUid: 10163 RequestorPkg: com.android.systemui UnderlyingNetworks: Null] ]
+      NetworkRequest [ REQUEST id=48, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 1001 RequestorUid: 1001 RequestorPkg: com.android.phone UnderlyingNetworks: Null] ]
+      NetworkRequest [ REQUEST id=50, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 1001 RequestorUid: 1001 RequestorPkg: com.android.phone UnderlyingNetworks: Null] ]
+      NetworkRequest [ REQUEST id=52, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10163 RequestorUid: 10163 RequestorPkg: com.android.systemui UnderlyingNetworks: Null] ]
+      NetworkRequest [ LISTEN id=53, [ Transports: CELLULAR|WIFI Capabilities: NOT_VPN RequestorUid: 10163 RequestorPkg: com.android.systemui UnderlyingNetworks: Null] ]
+      NetworkRequest [ REQUEST id=55, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 1000 RequestorUid: 1000 RequestorPkg: android UnderlyingNetworks: Null] ]
+      NetworkRequest [ LISTEN id=56, [ Capabilities: NOT_RESTRICTED&TRUSTED&NOT_VPN&VALIDATED&NOT_VCN_MANAGED Uid: 1001 RequestorUid: 1001 RequestorPkg: com.android.ons UnderlyingNetworks: Null] ]
+      NetworkRequest [ REQUEST id=62, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10154 RequestorUid: 10154 RequestorPkg: com.google.android.inputmethod.latin UnderlyingNetworks: Null] ]
+      NetworkRequest [ LISTEN id=63, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&FOREGROUND&NOT_VCN_MANAGED Uid: 10154 RequestorUid: 10154 RequestorPkg: com.google.android.inputmethod.latin UnderlyingNetworks: Null] ]
+      NetworkRequest [ REQUEST id=65, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10138 RequestorUid: 1000 RequestorPkg: android UnderlyingNetworks: Null] ]
+      NetworkRequest [ REQUEST id=67, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10121 RequestorUid: 1000 RequestorPkg: android UnderlyingNetworks: Null] ]
+      NetworkRequest [ REQUEST id=74, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10132 RequestorUid: 10132 RequestorPkg: com.google.android.googlequicksearchbox UnderlyingNetworks: Null] ]
+      NetworkRequest [ REQUEST id=81, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10130 RequestorUid: 10130 RequestorPkg: com.google.android.apps.messaging UnderlyingNetworks: Null] ]
+      NetworkRequest [ REQUEST id=85, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10153 RequestorUid: 1000 RequestorPkg: android UnderlyingNetworks: Null] ]
+      NetworkRequest [ REQUEST id=93, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10132 RequestorUid: 10132 RequestorPkg: com.google.android.googlequicksearchbox UnderlyingNetworks: Null] ]
+      NetworkRequest [ REQUEST id=95, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10130 RequestorUid: 10130 RequestorPkg: com.google.android.apps.messaging UnderlyingNetworks: Null] ]
+      NetworkRequest [ REQUEST id=97, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10130 RequestorUid: 1000 RequestorPkg: android UnderlyingNetworks: Null] ]
+      NetworkRequest [ REQUEST id=101, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10132 RequestorUid: 10132 RequestorPkg: com.google.android.googlequicksearchbox UnderlyingNetworks: Null] ]
+      NetworkRequest [ LISTEN id=102, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10132 RequestorUid: 10132 RequestorPkg: com.google.android.googlequicksearchbox UnderlyingNetworks: Null] ]
+      NetworkRequest [ REQUEST id=108, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10131 RequestorUid: 10131 RequestorPkg: com.android.vending UnderlyingNetworks: Null] ]
+      NetworkRequest [ REQUEST id=110, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10133 RequestorUid: 1000 RequestorPkg: android UnderlyingNetworks: Null] ]
+      NetworkRequest [ REQUEST id=117, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10124 RequestorUid: 1000 RequestorPkg: android UnderlyingNetworks: Null] ]
+      NetworkRequest [ REQUEST id=119, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10132 RequestorUid: 10132 RequestorPkg: com.google.android.googlequicksearchbox UnderlyingNetworks: Null] ]
+      NetworkRequest [ LISTEN id=120, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10132 RequestorUid: 10132 RequestorPkg: com.google.android.googlequicksearchbox UnderlyingNetworks: Null] ]
+      NetworkRequest [ REQUEST id=133, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10177 RequestorUid: 1000 RequestorPkg: android UnderlyingNetworks: Null] ]
+      NetworkRequest [ REQUEST id=138, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10140 RequestorUid: 1000 RequestorPkg: android UnderlyingNetworks: Null] ]
+      NetworkRequest [ REQUEST id=140, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10187 RequestorUid: 1000 RequestorPkg: android UnderlyingNetworks: Null] ]
+      NetworkRequest [ LISTEN id=143, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10127 RequestorUid: 10127 RequestorPkg: com.google.android.gms UnderlyingNetworks: Null] ]
+      NetworkRequest [ REQUEST id=144, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10127 RequestorUid: 10127 RequestorPkg: com.google.android.gms UnderlyingNetworks: Null] ]
+      NetworkRequest [ REQUEST id=152, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10127 RequestorUid: 10127 RequestorPkg: com.google.android.gms UnderlyingNetworks: Null] ]
+      NetworkRequest [ LISTEN id=153, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10127 RequestorUid: 10127 RequestorPkg: com.google.android.gms UnderlyingNetworks: Null] ]
+      NetworkRequest [ REQUEST id=155, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10127 RequestorUid: 10127 RequestorPkg: com.google.android.gms UnderlyingNetworks: Null] ]
+      NetworkRequest [ LISTEN id=156, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10127 RequestorUid: 10127 RequestorPkg: com.google.android.gms UnderlyingNetworks: Null] ]
+      NetworkRequest [ LISTEN id=159, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VPN&NOT_VCN_MANAGED Uid: 10127 RequestorUid: 10127 RequestorPkg: com.google.android.gms UnderlyingNetworks: Null] ]
+      NetworkRequest [ REQUEST id=179, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10152 RequestorUid: 1000 RequestorPkg: android UnderlyingNetworks: Null] ]
+      NetworkRequest [ REQUEST id=183, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10214 RequestorUid: 10214 RequestorPkg: fi.iwa.sakani UnderlyingNetworks: Null] ]
+      NetworkRequest [ REQUEST id=185, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10130 RequestorUid: 10130 RequestorPkg: com.google.android.apps.messaging UnderlyingNetworks: Null] ]
+    Inactivity Timers:
+
+Status for known UIDs:
+  UID=10122 blockedReasons=4
+  UID=10126 blockedReasons=4
+  UID=10136 blockedReasons=4
+  UID=10141 blockedReasons=4
+  UID=10142 blockedReasons=4
+  UID=10144 blockedReasons=4
+  UID=10149 blockedReasons=4
+  UID=10152 blockedReasons=4
+  UID=10192 blockedReasons=4
+  UID=10221 blockedReasons=4
+  
+Network Requests:
+  uid/pid:1000/559 activeRequest: 1 callbackRequest: 1 [NetworkRequest [ REQUEST id=1, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VPN&NOT_VCN_MANAGED RequestorUid: 1000 RequestorPkg: android UnderlyingNetworks: Null] ]] callback flags: 1 order: 2147483647
+  uid/pid:1000/559 activeRequest: 2 callbackRequest: 2 [NetworkRequest [ BACKGROUND_REQUEST id=2, [ Transports: CELLULAR Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VPN&NOT_VCN_MANAGED RequestorUid: 1000 RequestorPkg: android UnderlyingNetworks: Null] ]] callback flags: 1 order: 2147483647
+  uid/pid:1000/559 activeRequest: null callbackRequest: 5 [NetworkRequest [ LISTEN id=5, [ Capabilities: FOREGROUND RequestorUid: 1000 RequestorPkg: android UnderlyingNetworks: Null] ]] callback flags: 0 order: 2147483647
+  uid/pid:1000/559 activeRequest: 7 callbackRequest: 6 [NetworkRequest [ REQUEST id=7, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 1000 RequestorUid: 1000 RequestorPkg: android UnderlyingNetworks: Null] ]] callback flags: 0 order: 2147483647
+  uid/pid:1000/559 activeRequest: null callbackRequest: 8 [NetworkRequest [ LISTEN id=8, [ Capabilities: FOREGROUND RequestorUid: 1000 RequestorPkg: android UnderlyingNetworks: Null] ]] callback flags: 0 order: 2147483647
+  uid/pid:1000/559 activeRequest: null callbackRequest: 9 [NetworkRequest [ LISTEN id=9, [ Capabilities: NOT_RESTRICTED&TRUSTED&NOT_VPN&FOREGROUND&NOT_VCN_MANAGED Uid: 1000 RequestorUid: 1000 RequestorPkg: android UnderlyingNetworks: Null] ]] callback flags: 0 order: 2147483647
+  uid/pid:1000/559 activeRequest: null callbackRequest: 10 [NetworkRequest [ LISTEN id=10, [ RequestorUid: 1000 RequestorPkg: android UnderlyingNetworks: Null] ]] callback flags: 0 order: 2147483647
+  uid/pid:1000/559 activeRequest: null callbackRequest: 11 [NetworkRequest [ LISTEN id=11, [ Capabilities: NOT_RESTRICTED&TRUSTED&NOT_VPN&NOT_VCN_MANAGED Uid: 1000 RequestorUid: 1000 RequestorPkg: android UnderlyingNetworks: Null] ]] callback flags: 0 order: 2147483647
+  uid/pid:1000/559 activeRequest: null callbackRequest: 12 [NetworkRequest [ LISTEN id=12, [ Transports: CELLULAR Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VPN&NOT_VCN_MANAGED Uid: 1000 RequestorUid: 1000 RequestorPkg: android UnderlyingNetworks: Null] ]] callback flags: 0 order: 2147483647
+  uid/pid:1000/559 asUid: 10214 activeRequest: 14 callbackRequest: 13 [NetworkRequest [ REQUEST id=14, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10214 RequestorUid: 1000 RequestorPkg: android UnderlyingNetworks: Null] ]] callback flags: 0 order: 2147483647
+  uid/pid:1000/559 activeRequest: null callbackRequest: 15 [NetworkRequest [ LISTEN id=15, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&VALIDATED&NOT_VCN_MANAGED Uid: 1000 RequestorUid: 1000 RequestorPkg: android UnderlyingNetworks: Null] ]] callback flags: 0 order: 2147483647
+  uid/pid:1000/559 asUid: 10180 activeRequest: 17 callbackRequest: 16 [NetworkRequest [ REQUEST id=17, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10180 RequestorUid: 1000 RequestorPkg: android UnderlyingNetworks: Null] ]] callback flags: 0 order: 2147483647
+  uid/pid:1000/559 asUid: 10154 activeRequest: 19 callbackRequest: 18 [NetworkRequest [ REQUEST id=19, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10154 RequestorUid: 1000 RequestorPkg: android UnderlyingNetworks: Null] ]] callback flags: 0 order: 2147483647
+  uid/pid:1000/559 asUid: 10151 activeRequest: 21 callbackRequest: 20 [NetworkRequest [ REQUEST id=21, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10151 RequestorUid: 1000 RequestorPkg: android UnderlyingNetworks: Null] ]] callback flags: 0 order: 2147483647
+  uid/pid:1000/559 asUid: 10144 activeRequest: 23 callbackRequest: 22 [NetworkRequest [ REQUEST id=23, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10144 RequestorUid: 1000 RequestorPkg: android UnderlyingNetworks: Null] ]] callback flags: 0 order: 2147483647
+  uid/pid:1000/559 asUid: 10136 activeRequest: 25 callbackRequest: 24 [NetworkRequest [ REQUEST id=25, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10136 RequestorUid: 1000 RequestorPkg: android UnderlyingNetworks: Null] ]] callback flags: 0 order: 2147483647
+  uid/pid:1000/559 asUid: 10132 activeRequest: 27 callbackRequest: 26 [NetworkRequest [ REQUEST id=27, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10132 RequestorUid: 1000 RequestorPkg: android UnderlyingNetworks: Null] ]] callback flags: 0 order: 2147483647
+  uid/pid:1000/559 asUid: 10131 activeRequest: 29 callbackRequest: 28 [NetworkRequest [ REQUEST id=29, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10131 RequestorUid: 1000 RequestorPkg: android UnderlyingNetworks: Null] ]] callback flags: 0 order: 2147483647
+  uid/pid:1000/559 asUid: 10126 activeRequest: 31 callbackRequest: 30 [NetworkRequest [ REQUEST id=31, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10126 RequestorUid: 1000 RequestorPkg: android UnderlyingNetworks: Null] ]] callback flags: 0 order: 2147483647
+  uid/pid:1000/559 asUid: 10125 activeRequest: 33 callbackRequest: 32 [NetworkRequest [ REQUEST id=33, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10125 RequestorUid: 1000 RequestorPkg: android UnderlyingNetworks: Null] ]] callback flags: 0 order: 2147483647
+  uid/pid:1000/559 activeRequest: 35 callbackRequest: 34 [NetworkRequest [ REQUEST id=35, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 1000 RequestorUid: 1000 RequestorPkg: android UnderlyingNetworks: Null] ]] callback flags: 0 order: 2147483647
+  uid/pid:1073/880 activeRequest: 37 callbackRequest: 36 [NetworkRequest [ REQUEST id=37, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 1073 RequestorUid: 1073 RequestorPkg: com.google.android.networkstack UnderlyingNetworks: Null] ]] callback flags: 0 order: 2147483647
+  uid/pid:1073/880 activeRequest: null callbackRequest: 38 [NetworkRequest [ LISTEN id=38, [ Transports: WIFI Capabilities: NOT_RESTRICTED&TRUSTED&NOT_VPN&NOT_VCN_MANAGED Uid: 1073 RequestorUid: 1073 RequestorPkg: com.google.android.networkstack UnderlyingNetworks: Null] ]] callback flags: 0 order: 2147483647
+  uid/pid:1073/880 activeRequest: 39 callbackRequest: 39 [NetworkRequest [ TRACK_SYSTEM_DEFAULT id=39, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VPN&NOT_VCN_MANAGED RequestorUid: 1073 RequestorPkg: com.google.android.networkstack.tethering UnderlyingNetworks: Null] ]] callback flags: 0 order: 2147483647
+  uid/pid:10163/786 activeRequest: null callbackRequest: 40 [NetworkRequest [ LISTEN id=40, [ Transports: CELLULAR|WIFI Capabilities: NOT_VPN RequestorUid: 10163 RequestorPkg: com.android.systemui UnderlyingNetworks: Null] ]] callback flags: 1 order: 2147483647
+  uid/pid:10163/786 activeRequest: 42 callbackRequest: 41 [NetworkRequest [ REQUEST id=42, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10163 RequestorUid: 10163 RequestorPkg: com.android.systemui UnderlyingNetworks: Null] ]] callback flags: 1 order: 2147483647
+  uid/pid:10163/786 activeRequest: 44 callbackRequest: 43 [NetworkRequest [ REQUEST id=44, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10163 RequestorUid: 10163 RequestorPkg: com.android.systemui UnderlyingNetworks: Null] ]] callback flags: 1 order: 2147483647
+  uid/pid:10163/786 activeRequest: null callbackRequest: 45 [NetworkRequest [ LISTEN id=45, [ RequestorUid: 10163 RequestorPkg: com.android.systemui UnderlyingNetworks: Null] ]] callback flags: 0 order: 2147483647
+  uid/pid:1001/984 activeRequest: null callbackRequest: 46 [NetworkRequest [ LISTEN id=46, [ Transports: WIFI Capabilities: INTERNET&TRUSTED&NOT_VPN&NOT_VCN_MANAGED Uid: 1001 RequestorUid: 1001 RequestorPkg: com.android.phone UnderlyingNetworks: Null] ]] callback flags: 0 order: 2147483647
+  uid/pid:1001/984 activeRequest: 48 callbackRequest: 47 [NetworkRequest [ REQUEST id=48, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 1001 RequestorUid: 1001 RequestorPkg: com.android.phone UnderlyingNetworks: Null] ]] callback flags: 0 order: 2147483647
+  uid/pid:1001/984 activeRequest: 50 callbackRequest: 49 [NetworkRequest [ REQUEST id=50, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 1001 RequestorUid: 1001 RequestorPkg: com.android.phone UnderlyingNetworks: Null] ]] callback flags: 0 order: 2147483647
+  uid/pid:10163/786 activeRequest: 52 callbackRequest: 51 [NetworkRequest [ REQUEST id=52, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10163 RequestorUid: 10163 RequestorPkg: com.android.systemui UnderlyingNetworks: Null] ]] callback flags: 1 order: 2147483647
+  uid/pid:10163/786 activeRequest: null callbackRequest: 53 [NetworkRequest [ LISTEN id=53, [ Transports: CELLULAR|WIFI Capabilities: NOT_VPN RequestorUid: 10163 RequestorPkg: com.android.systemui UnderlyingNetworks: Null] ]] callback flags: 1 order: 2147483647
+  uid/pid:1000/559 activeRequest: 55 callbackRequest: 54 [NetworkRequest [ REQUEST id=55, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 1000 RequestorUid: 1000 RequestorPkg: android UnderlyingNetworks: Null] ]] callback flags: 0 order: 2147483647
+  uid/pid:1001/984 activeRequest: null callbackRequest: 56 [NetworkRequest [ LISTEN id=56, [ Capabilities: NOT_RESTRICTED&TRUSTED&NOT_VPN&VALIDATED&NOT_VCN_MANAGED Uid: 1001 RequestorUid: 1001 RequestorPkg: com.android.ons UnderlyingNetworks: Null] ]] callback flags: 0 order: 2147483647
+  uid/pid:10154/1356 activeRequest: 62 callbackRequest: 61 [NetworkRequest [ REQUEST id=62, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10154 RequestorUid: 10154 RequestorPkg: com.google.android.inputmethod.latin UnderlyingNetworks: Null] ]] callback flags: 0 order: 2147483647
+  uid/pid:10154/1356 activeRequest: null callbackRequest: 63 [NetworkRequest [ LISTEN id=63, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&FOREGROUND&NOT_VCN_MANAGED Uid: 10154 RequestorUid: 10154 RequestorPkg: com.google.android.inputmethod.latin UnderlyingNetworks: Null] ]] callback flags: 0 order: 2147483647
+  uid/pid:1000/559 asUid: 10138 activeRequest: 65 callbackRequest: 64 [NetworkRequest [ REQUEST id=65, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10138 RequestorUid: 1000 RequestorPkg: android UnderlyingNetworks: Null] ]] callback flags: 0 order: 2147483647
+  uid/pid:1000/559 asUid: 10121 activeRequest: 67 callbackRequest: 66 [NetworkRequest [ REQUEST id=67, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10121 RequestorUid: 1000 RequestorPkg: android UnderlyingNetworks: Null] ]] callback flags: 0 order: 2147483647
+  uid/pid:10132/1652 activeRequest: 74 callbackRequest: 73 [NetworkRequest [ REQUEST id=74, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10132 RequestorUid: 10132 RequestorPkg: com.google.android.googlequicksearchbox UnderlyingNetworks: Null] ]] callback flags: 0 order: 2147483647
+  uid/pid:10130/1527 activeRequest: 81 callbackRequest: 80 [NetworkRequest [ REQUEST id=81, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10130 RequestorUid: 10130 RequestorPkg: com.google.android.apps.messaging UnderlyingNetworks: Null] ]] callback flags: 0 order: 2147483647
+  uid/pid:1000/559 asUid: 10153 activeRequest: 85 callbackRequest: 84 [NetworkRequest [ REQUEST id=85, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10153 RequestorUid: 1000 RequestorPkg: android UnderlyingNetworks: Null] ]] callback flags: 0 order: 2147483647
+  uid/pid:10132/1652 activeRequest: 93 callbackRequest: 92 [NetworkRequest [ REQUEST id=93, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10132 RequestorUid: 10132 RequestorPkg: com.google.android.googlequicksearchbox UnderlyingNetworks: Null] ]] callback flags: 0 order: 2147483647
+  uid/pid:10130/1527 activeRequest: 95 callbackRequest: 94 [NetworkRequest [ REQUEST id=95, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10130 RequestorUid: 10130 RequestorPkg: com.google.android.apps.messaging UnderlyingNetworks: Null] ]] callback flags: 0 order: 2147483647
+  uid/pid:1000/559 asUid: 10130 activeRequest: 97 callbackRequest: 96 [NetworkRequest [ REQUEST id=97, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10130 RequestorUid: 1000 RequestorPkg: android UnderlyingNetworks: Null] ]] callback flags: 0 order: 2147483647
+  uid/pid:10132/1652 activeRequest: 101 callbackRequest: 100 [NetworkRequest [ REQUEST id=101, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10132 RequestorUid: 10132 RequestorPkg: com.google.android.googlequicksearchbox UnderlyingNetworks: Null] ]] callback flags: 0 order: 2147483647
+  uid/pid:10132/1652 activeRequest: null callbackRequest: 102 [NetworkRequest [ LISTEN id=102, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10132 RequestorUid: 10132 RequestorPkg: com.google.android.googlequicksearchbox UnderlyingNetworks: Null] ]] callback flags: 0 order: 2147483647
+  uid/pid:10131/2988 activeRequest: 108 callbackRequest: 107 [NetworkRequest [ REQUEST id=108, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10131 RequestorUid: 10131 RequestorPkg: com.android.vending UnderlyingNetworks: Null] ]] callback flags: 0 order: 2147483647
+  uid/pid:1000/559 asUid: 10133 activeRequest: 110 callbackRequest: 109 [NetworkRequest [ REQUEST id=110, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10133 RequestorUid: 1000 RequestorPkg: android UnderlyingNetworks: Null] ]] callback flags: 0 order: 2147483647
+  uid/pid:1000/559 asUid: 10124 activeRequest: 117 callbackRequest: 116 [NetworkRequest [ REQUEST id=117, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10124 RequestorUid: 1000 RequestorPkg: android UnderlyingNetworks: Null] ]] callback flags: 0 order: 2147483647
+  uid/pid:10132/1652 activeRequest: 119 callbackRequest: 118 [NetworkRequest [ REQUEST id=119, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10132 RequestorUid: 10132 RequestorPkg: com.google.android.googlequicksearchbox UnderlyingNetworks: Null] ]] callback flags: 0 order: 2147483647
+  uid/pid:10132/1652 activeRequest: null callbackRequest: 120 [NetworkRequest [ LISTEN id=120, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10132 RequestorUid: 10132 RequestorPkg: com.google.android.googlequicksearchbox UnderlyingNetworks: Null] ]] callback flags: 0 order: 2147483647
+  uid/pid:1000/559 asUid: 10177 activeRequest: 133 callbackRequest: 132 [NetworkRequest [ REQUEST id=133, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10177 RequestorUid: 1000 RequestorPkg: android UnderlyingNetworks: Null] ]] callback flags: 0 order: 2147483647
+  uid/pid:1000/559 asUid: 10140 activeRequest: 138 callbackRequest: 137 [NetworkRequest [ REQUEST id=138, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10140 RequestorUid: 1000 RequestorPkg: android UnderlyingNetworks: Null] ]] callback flags: 0 order: 2147483647
+  uid/pid:1000/559 asUid: 10187 activeRequest: 140 callbackRequest: 139 [NetworkRequest [ REQUEST id=140, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10187 RequestorUid: 1000 RequestorPkg: android UnderlyingNetworks: Null] ]] callback flags: 0 order: 2147483647
+  uid/pid:10127/1325 activeRequest: null callbackRequest: 143 [NetworkRequest [ LISTEN id=143, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10127 RequestorUid: 10127 RequestorPkg: com.google.android.gms UnderlyingNetworks: Null] ]] callback flags: 0 order: 2147483647
+  uid/pid:10127/1325 activeRequest: 144 callbackRequest: 144 [NetworkRequest [ REQUEST id=144, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10127 RequestorUid: 10127 RequestorPkg: com.google.android.gms UnderlyingNetworks: Null] ]] callback flags: 0 order: 2147483647
+  uid/pid:10127/1616 activeRequest: 152 callbackRequest: 151 [NetworkRequest [ REQUEST id=152, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10127 RequestorUid: 10127 RequestorPkg: com.google.android.gms UnderlyingNetworks: Null] ]] callback flags: 0 order: 2147483647
+  uid/pid:10127/1616 activeRequest: null callbackRequest: 153 [NetworkRequest [ LISTEN id=153, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10127 RequestorUid: 10127 RequestorPkg: com.google.android.gms UnderlyingNetworks: Null] ]] callback flags: 0 order: 2147483647
+  uid/pid:10127/1325 activeRequest: 155 callbackRequest: 154 [NetworkRequest [ REQUEST id=155, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10127 RequestorUid: 10127 RequestorPkg: com.google.android.gms UnderlyingNetworks: Null] ]] callback flags: 0 order: 2147483647
+  uid/pid:10127/1325 activeRequest: null callbackRequest: 156 [NetworkRequest [ LISTEN id=156, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10127 RequestorUid: 10127 RequestorPkg: com.google.android.gms UnderlyingNetworks: Null] ]] callback flags: 0 order: 2147483647
+  uid/pid:10127/1616 activeRequest: null callbackRequest: 159 [NetworkRequest [ LISTEN id=159, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VPN&NOT_VCN_MANAGED Uid: 10127 RequestorUid: 10127 RequestorPkg: com.google.android.gms UnderlyingNetworks: Null] ]] callback flags: 0 order: 2147483647
+  uid/pid:1000/559 asUid: 10152 activeRequest: 179 callbackRequest: 178 [NetworkRequest [ REQUEST id=179, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10152 RequestorUid: 1000 RequestorPkg: android UnderlyingNetworks: Null] ]] callback flags: 0 order: 2147483647
+  uid/pid:10214/10377 activeRequest: 183 callbackRequest: 182 [NetworkRequest [ REQUEST id=183, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10214 RequestorUid: 10214 RequestorPkg: fi.iwa.sakani UnderlyingNetworks: Null] ]] callback flags: 0 order: 2147483647
+  uid/pid:10130/15921 activeRequest: 185 callbackRequest: 184 [NetworkRequest [ REQUEST id=185, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10130 RequestorUid: 10130 RequestorPkg: com.google.android.apps.messaging UnderlyingNetworks: Null] ]] callback flags: 0 order: 2147483647
+
+Network Offers:
+  NetworkOffer [ Provider Id (1) Score(Policies : TRANSPORT_PRIMARY&EVER_EVALUATED&IS_UNMETERED&EVER_VALIDATED&IS_VALIDATED ; KeepConnected : 0) Caps [ Transports: CELLULAR Capabilities: MMS&SUPL&DUN&FOTA&IMS&CBS&IA&RCS&XCAP&EIMS&INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VPN&MCX&NOT_VCN_MANAGED UnderlyingNetworks: Null] Needed by [81, 23, 27, 35, 2, 62, 138, 110, 42, 7, 29, 21, 48, 108, 133, 65, 37, 55, 152, 1, 17, 74, 85, 101, 144, 25, 44, 117, 140, 67, 93, 52, 19, 33, 97, 14, 119, 179, 155, 50, 185, 183, 95, 31]]
+  NetworkOffer [ Provider Id (3) Score(Policies : EVER_EVALUATED&IS_INVINCIBLE&IS_UNMETERED&EVER_VALIDATED&IS_VALIDATED ; KeepConnected : 0) Caps [ Transports: CELLULAR Capabilities: MMS&SUPL&DUN&FOTA&IMS&CBS&IA&RCS&XCAP&EIMS&INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VPN&MCX&ENTERPRISE&MMTEL&PRIORITIZE_LATENCY&PRIORITIZE_BANDWIDTH Specifier: <android.net.MatchAllNetworkSpecifier@0> EnterpriseId: 1&2&3&4&5 UnderlyingNetworks: Null] Needed by []]
+  NetworkOffer [ Provider Id (5) Score(Policies : EVER_EVALUATED&IS_UNMETERED&EVER_VALIDATED&IS_VALIDATED ; KeepConnected : 0) Caps [ Transports: WIFI Capabilities: NOT_METERED&INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VPN&NOT_ROAMING&NOT_CONGESTED&NOT_SUSPENDED&NOT_VCN_MANAGED LinkUpBandwidth>=1048576Kbps LinkDnBandwidth>=1048576Kbps Specifier: <android.net.MatchAllNetworkSpecifier@0> UnderlyingNetworks: Null] Needed by [81, 23, 27, 35, 62, 138, 110, 42, 7, 29, 21, 48, 108, 133, 65, 37, 55, 152, 1, 17, 74, 85, 101, 144, 25, 44, 117, 140, 67, 93, 52, 19, 33, 97, 14, 119, 179, 155, 50, 185, 183, 95, 31]]
+  NetworkOffer [ Provider Id (6) Score(Policies : EVER_EVALUATED&IS_INVINCIBLE&IS_UNMETERED&EVER_VALIDATED&IS_VALIDATED ; KeepConnected : 0) Caps [ Transports: WIFI Capabilities: NOT_METERED&INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VPN&NOT_ROAMING&NOT_CONGESTED&NOT_SUSPENDED&NOT_VCN_MANAGED LinkUpBandwidth>=1048576Kbps LinkDnBandwidth>=1048576Kbps Specifier: <android.net.MatchAllNetworkSpecifier@0> UnderlyingNetworks: Null] Needed by [81, 23, 27, 35, 62, 138, 110, 42, 7, 29, 21, 48, 108, 133, 65, 37, 55, 152, 1, 17, 74, 85, 101, 144, 25, 44, 117, 140, 67, 93, 52, 19, 33, 97, 14, 119, 179, 155, 50, 185, 183, 95, 31]]
+  NetworkOffer [ Provider Id (7) Score(Policies : EVER_EVALUATED&IS_INVINCIBLE&IS_UNMETERED&EVER_VALIDATED&IS_VALIDATED ; KeepConnected : 0) Caps [ Transports: WIFI Capabilities: NOT_METERED&INTERNET&TRUSTED&NOT_VPN&NOT_ROAMING&NOT_CONGESTED&NOT_SUSPENDED&NOT_VCN_MANAGED LinkUpBandwidth>=1048576Kbps LinkDnBandwidth>=1048576Kbps Specifier: <android.net.MatchAllNetworkSpecifier@0> UnderlyingNetworks: Null] Needed by []]
+  NetworkOffer [ Provider Id (8) Score(Policies : EVER_EVALUATED&IS_INVINCIBLE&IS_UNMETERED&EVER_VALIDATED&IS_VALIDATED ; KeepConnected : 0) Caps [ Transports: WIFI Capabilities: NOT_METERED&INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VPN&NOT_ROAMING&NOT_CONGESTED&NOT_SUSPENDED&OEM_PAID&OEM_PRIVATE&NOT_VCN_MANAGED LinkUpBandwidth>=1048576Kbps LinkDnBandwidth>=1048576Kbps Specifier: <android.net.MatchAllNetworkSpecifier@0> UnderlyingNetworks: Null] Needed by [81, 23, 27, 35, 62, 138, 110, 42, 7, 29, 21, 48, 108, 133, 65, 37, 55, 152, 1, 17, 74, 85, 101, 144, 25, 44, 117, 140, 67, 93, 52, 19, 33, 97, 14, 119, 179, 155, 50, 185, 183, 95, 31]]
+  NetworkOffer [ Provider Id (9) Score(Policies : EVER_EVALUATED&IS_INVINCIBLE&IS_UNMETERED&EVER_VALIDATED&IS_VALIDATED ; KeepConnected : 0) Caps [ Transports: WIFI Capabilities: NOT_METERED&INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VPN&NOT_ROAMING&NOT_CONGESTED&NOT_SUSPENDED&NOT_VCN_MANAGED LinkUpBandwidth>=1048576Kbps LinkDnBandwidth>=1048576Kbps Specifier: <android.net.MatchAllNetworkSpecifier@0> UnderlyingNetworks: Null] Needed by [81, 23, 27, 35, 62, 138, 110, 42, 7, 29, 21, 48, 108, 133, 65, 37, 55, 152, 1, 17, 74, 85, 101, 144, 25, 44, 117, 140, 67, 93, 52, 19, 33, 97, 14, 119, 179, 155, 50, 185, 183, 95, 31]]
+  NetworkOffer [ Provider Id (4) Score(Policies : EVER_EVALUATED&IS_UNMETERED&EVER_VALIDATED&IS_VALIDATED ; KeepConnected : 0) Caps [ Transports: CELLULAR Capabilities: MMS&SUPL&DUN&FOTA&IMS&CBS&IA&RCS&XCAP&EIMS&INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VPN&MCX&NOT_VCN_MANAGED&ENTERPRISE&MMTEL&PRIORITIZE_LATENCY&PRIORITIZE_BANDWIDTH Specifier: <TelephonyNetworkSpecifier [mSubId = 1]> EnterpriseId: 1&2&3&4&5 UnderlyingNetworks: Null] Needed by [81, 23, 27, 35, 2, 62, 138, 110, 42, 7, 29, 21, 48, 108, 133, 65, 37, 55, 152, 1, 17, 74, 85, 101, 144, 25, 44, 117, 140, 67, 93, 52, 19, 33, 97, 14, 119, 179, 155, 50, 185, 183, 95, 31]]
+
+mLegacyTypeTracker:
+  Supported types: 0 1 2 3 4 5 7 10 11 12 13 14 15 17
+  Current state:
+    0 [100 CELLULAR]
+
+
+Supported Socket keepalives: [1, 3, 0, 0, 0, 0, 0, 0, 0, 0]
+Reserved Privileged keepalives: 2
+Allowed Unprivileged keepalives per uid: 2
+Socket keepalives:
+AutomaticOnOff enabled: true
+Events (most recent first):
+
+Bad Wi-Fi avoidance: unrestricted
+
+
+mNetworkRequestInfoLogs (most recent first):
+  2026-10-04T16:14:14.872738 - REGISTER uid/pid:10130/15921 activeRequest: null callbackRequest: 184 [NetworkRequest [ REQUEST id=185, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10130 RequestorUid: 10130 RequestorPkg: com.google.android.apps.messaging UnderlyingNetworks: Null] ]] callback flags: 0 order: 2147483647
+  2026-10-04T16:03:04.263146 - RELEASE uid/pid:10151/8820 activeRequest: 181 callbackRequest: 180 [NetworkRequest [ REQUEST id=181, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10151 RequestorUid: 10151 RequestorPkg: com.google.android.apps.photos UnderlyingNetworks: Null] ]] callback flags: 0 order: 2147483647
+  2026-10-04T15:53:26.065767 - REGISTER uid/pid:10214/10377 activeRequest: null callbackRequest: 182 [NetworkRequest [ REQUEST id=183, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10214 RequestorUid: 10214 RequestorPkg: fi.iwa.sakani UnderlyingNetworks: Null] ]] callback flags: 0 order: 2147483647
+  2026-10-04T15:53:17.552979 - RELEASE uid/pid:10214/1017 activeRequest: 177 callbackRequest: 176 [NetworkRequest [ REQUEST id=177, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10214 RequestorUid: 10214 RequestorPkg: fi.iwa.sakani UnderlyingNetworks: Null] ]] callback flags: 0 order: 2147483647
+  2026-10-04T15:48:59.729397 - REGISTER uid/pid:10151/8820 activeRequest: null callbackRequest: 180 [NetworkRequest [ REQUEST id=181, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10151 RequestorUid: 10151 RequestorPkg: com.google.android.apps.photos UnderlyingNetworks: Null] ]] callback flags: 0 order: 2147483647
+  2026-10-04T15:40:41.859266 - RELEASE uid/pid:10140/30370 activeRequest: null callbackRequest: 173 [NetworkRequest [ LISTEN id=173, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&FOREGROUND&NOT_VCN_MANAGED Uid: 10140 RequestorUid: 10140 RequestorPkg: com.google.android.tts UnderlyingNetworks: Null] ]] callback flags: 0 order: 2147483647
+  2026-10-04T15:40:41.859133 - RELEASE uid/pid:10140/30370 activeRequest: 172 callbackRequest: 171 [NetworkRequest [ REQUEST id=172, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10140 RequestorUid: 10140 RequestorPkg: com.google.android.tts UnderlyingNetworks: Null] ]] callback flags: 0 order: 2147483647
+  2026-10-04T15:33:51.400259 - RELEASE uid/pid:10130/28687 activeRequest: 170 callbackRequest: 169 [NetworkRequest [ REQUEST id=170, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10130 RequestorUid: 10130 RequestorPkg: com.google.android.apps.messaging UnderlyingNetworks: Null] ]] callback flags: 0 order: 2147483647
+  2026-10-04T15:33:38.535152 - REGISTER uid/pid:1000/559 asUid: 10152 activeRequest: null callbackRequest: 178 [NetworkRequest [ REQUEST id=179, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10152 RequestorUid: 1000 RequestorPkg: android UnderlyingNetworks: Null] ]] callback flags: 0 order: 2147483647
+  2026-10-04T15:30:07.228187 - REGISTER uid/pid:10214/1017 activeRequest: null callbackRequest: 176 [NetworkRequest [ REQUEST id=177, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10214 RequestorUid: 10214 RequestorPkg: fi.iwa.sakani UnderlyingNetworks: Null] ]] callback flags: 0 order: 2147483647
+  2026-10-04T15:30:04.027525 - RELEASE uid/pid:10214/31696 activeRequest: 175 callbackRequest: 174 [NetworkRequest [ REQUEST id=175, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10214 RequestorUid: 10214 RequestorPkg: fi.iwa.sakani UnderlyingNetworks: Null] ]] callback flags: 0 order: 2147483647
+  2026-10-04T15:27:57.016247 - REGISTER uid/pid:10214/31696 activeRequest: null callbackRequest: 174 [NetworkRequest [ REQUEST id=175, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10214 RequestorUid: 10214 RequestorPkg: fi.iwa.sakani UnderlyingNetworks: Null] ]] callback flags: 0 order: 2147483647
+  2026-10-04T15:27:48.237914 - RELEASE uid/pid:10214/20222 activeRequest: 163 callbackRequest: 162 [NetworkRequest [ REQUEST id=163, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10214 RequestorUid: 10214 RequestorPkg: fi.iwa.sakani UnderlyingNetworks: Null] ]] callback flags: 0 order: 2147483647
+  2026-10-04T15:25:50.839102 - RELEASE uid/pid:10151/3301 activeRequest: 115 callbackRequest: 114 [NetworkRequest [ REQUEST id=115, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10151 RequestorUid: 10151 RequestorPkg: com.google.android.apps.photos UnderlyingNetworks: Null] ]] callback flags: 0 order: 2147483647
+  2026-10-04T15:25:04.764461 - REGISTER uid/pid:10140/30370 activeRequest: null callbackRequest: 173 [NetworkRequest [ LISTEN id=173, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&FOREGROUND&NOT_VCN_MANAGED Uid: 10140 RequestorUid: 10140 RequestorPkg: com.google.android.tts UnderlyingNetworks: Null] ]] callback flags: 0 order: 2147483647
+  2026-10-04T15:25:04.754594 - REGISTER uid/pid:10140/30370 activeRequest: null callbackRequest: 171 [NetworkRequest [ REQUEST id=172, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10140 RequestorUid: 10140 RequestorPkg: com.google.android.tts UnderlyingNetworks: Null] ]] callback flags: 0 order: 2147483647
+  2026-10-04T15:23:02.363847 - REGISTER uid/pid:10130/28687 activeRequest: null callbackRequest: 169 [NetworkRequest [ REQUEST id=170, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10130 RequestorUid: 10130 RequestorPkg: com.google.android.apps.messaging UnderlyingNetworks: Null] ]] callback flags: 0 order: 2147483647
+  2026-10-04T15:18:13.337323 - RELEASE uid/pid:10130/21375 activeRequest: 165 callbackRequest: 164 [NetworkRequest [ REQUEST id=165, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10130 RequestorUid: 10130 RequestorPkg: com.google.android.apps.messaging UnderlyingNetworks: Null] ]] callback flags: 0 order: 2147483647
+  2026-10-04T15:18:13.337245 - RELEASE uid/pid:10130/21375 activeRequest: null callbackRequest: 168 [NetworkRequest [ LISTEN id=168, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10130 RequestorUid: 10130 RequestorPkg: com.google.android.apps.messaging UnderlyingNetworks: Null] ]] callback flags: 0 order: 2147483647
+  2026-10-04T15:18:13.336891 - RELEASE uid/pid:10130/21375 activeRequest: 167 callbackRequest: 166 [NetworkRequest [ REQUEST id=167, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10130 RequestorUid: 10130 RequestorPkg: com.google.android.apps.messaging UnderlyingNetworks: Null] ]] callback flags: 0 order: 2147483647
+
+mNetworkInfoBlockingLogs (most recent first):
+  2026-10-04T15:58:00.755512 - BLOCKED 10152(179) on netId 100: 4
+  2026-10-04T14:50:27.750204 - UNBLOCKED 10154
+  2026-10-04T14:27:50.151301 - BLOCKED 10144(23) on netId 100: 4
+  2026-10-04T14:23:42.858682 - UNBLOCKED 10154(63) on netId 100: 0
+  2026-10-04T14:23:42.858581 - UNBLOCKED 10154(62) on netId 100: 0
+  2026-10-04T14:23:42.858547 - UNBLOCKED 10154(19) on netId 100: 0
+  2026-10-04T14:18:17.183640 - BLOCKED 10136(147) on netId 100: 4
+  2026-10-04T14:18:17.183539 - BLOCKED 10136(146) on netId 100: 4
+  2026-10-04T14:18:17.183071 - BLOCKED 10136(25) on netId 100: 4
+  2026-10-04T14:18:15.158225 - BLOCKED 10154(63) on netId 100: 4
+  2026-10-04T14:18:15.157912 - BLOCKED 10154(62) on netId 100: 4
+  2026-10-04T14:18:15.157644 - BLOCKED 10154(19) on netId 100: 4
+  2026-10-04T14:18:14.194991 - BLOCKED 10126(127) on netId 100: 4
+  2026-10-04T14:18:14.194916 - BLOCKED 10126(126) on netId 100: 4
+  2026-10-04T14:18:14.194764 - BLOCKED 10126(31) on netId 100: 4
+  2026-10-04T14:17:55.770701 - UNBLOCKED 10136(25) on netId 100: 0
+  2026-10-04T14:17:55.142873 - UNBLOCKED 10154(63) on netId 100: 0
+  2026-10-04T14:17:55.142697 - UNBLOCKED 10154(62) on netId 100: 0
+  2026-10-04T14:17:55.142392 - UNBLOCKED 10154(19) on netId 100: 0
+  2026-10-04T14:17:52.119361 - UNBLOCKED 10126(31) on netId 100: 0
+  2026-10-04T14:17:50.150613 - UNBLOCKED 10144(23) on netId 100: 0
+  2026-10-04T14:17:49.473599 - BLOCKED 10142
+  2026-10-04T14:17:46.453783 - BLOCKED 10154
+
+NetTransition WakeLock activity (most recent first):
+  total acquisitions: 0
+  total releases: 0
+  cumulative duration: 0s
+  longest duration: 0s
+  
+  bandwidth update requests (by uid):
+
+mOemNetworkPreferencesLogs (most recent first):
+
+
+Permission Monitor:
+  Interface filtering rules:
+  
+  Lockdown filtering rules:
+  
+  Update logs:
+    2026-10-04T15:57:59.293242 - Package remove: uid=10302, nPerm=(NONE/NONE), tPerm=UNINSTALLED
+    2026-10-04T15:57:59.220611 - Package remove: uid=10301, nPerm=(NONE/NONE), tPerm=UNINSTALLED
+    2026-10-04T15:53:13.839540 - Package add: uid=10302, nPerm=(NONE/NONE), tPerm=NONE
+    2026-10-04T15:53:12.989718 - Package add: uid=10301, nPerm=(NONE/NONE), tPerm=INTERNET
+    2026-10-04T15:38:59.171393 - Package remove: uid=10300, nPerm=(NONE/NONE), tPerm=UNINSTALLED
+    2026-10-04T15:38:59.041564 - Package remove: uid=10299, nPerm=(NONE/NONE), tPerm=UNINSTALLED
+    2026-10-04T15:38:55.639808 - Package add: uid=10300, nPerm=(NONE/NONE), tPerm=NONE
+    2026-10-04T15:38:55.345145 - Package add: uid=10299, nPerm=(NONE/NONE), tPerm=INTERNET
+    2026-10-04T15:38:52.569938 - Package remove: uid=10298, nPerm=(NONE/NONE), tPerm=UNINSTALLED
+    2026-10-04T15:38:52.342068 - Package remove: uid=10297, nPerm=(NONE/NONE), tPerm=UNINSTALLED
+    2026-10-04T15:38:45.477872 - Package add: uid=10298, nPerm=(NONE/NONE), tPerm=NONE
+    2026-10-04T15:38:45.229291 - Package add: uid=10297, nPerm=(NONE/NONE), tPerm=INTERNET
+    2026-10-04T15:38:41.934713 - Package remove: uid=10296, nPerm=(NONE/NONE), tPerm=UNINSTALLED
+    2026-10-04T15:38:41.791705 - Package remove: uid=10295, nPerm=(NONE/NONE), tPerm=UNINSTALLED
+    2026-10-04T15:38:38.310605 - Package add: uid=10296, nPerm=(NONE/NONE), tPerm=NONE
+    2026-10-04T15:38:38.046176 - Package add: uid=10295, nPerm=(NONE/NONE), tPerm=INTERNET
+    2026-10-04T15:38:35.056420 - Package remove: uid=10294, nPerm=(NONE/NONE), tPerm=UNINSTALLED
+    2026-10-04T15:38:34.792899 - Package remove: uid=10293, nPerm=(NONE/NONE), tPerm=UNINSTALLED
+    2026-10-04T15:37:56.943274 - Package add: uid=10294, nPerm=(NONE/NONE), tPerm=NONE
+    2026-10-04T15:37:56.633032 - Package add: uid=10293, nPerm=(NONE/NONE), tPerm=INTERNET
+    2026-10-04T15:37:43.166659 - Package remove: uid=10292, nPerm=(NONE/NONE), tPerm=UNINSTALLED
+    2026-10-04T15:37:42.995782 - Package remove: uid=10291, nPerm=(NONE/NONE), tPerm=UNINSTALLED
+    2026-10-04T15:37:39.426881 - Package add: uid=10292, nPerm=(NONE/NONE), tPerm=NONE
+    2026-10-04T15:37:39.200537 - Package add: uid=10291, nPerm=(NONE/NONE), tPerm=INTERNET
+    2026-10-04T15:37:36.242644 - Package remove: uid=10290, nPerm=(NONE/NONE), tPerm=UNINSTALLED
+    2026-10-04T15:37:36.090692 - Package remove: uid=10289, nPerm=(NONE/NONE), tPerm=UNINSTALLED
+    2026-10-04T15:37:28.335713 - Package add: uid=10290, nPerm=(NONE/NONE), tPerm=NONE
+    2026-10-04T15:37:28.039748 - Package add: uid=10289, nPerm=(NONE/NONE), tPerm=INTERNET
+    2026-10-04T15:37:06.181230 - Package remove: uid=10288, nPerm=(NONE/NONE), tPerm=UNINSTALLED
+    2026-10-04T15:37:05.992089 - Package remove: uid=10287, nPerm=(NONE/NONE), tPerm=UNINSTALLED
+    2026-10-04T15:37:02.743125 - Package add: uid=10288, nPerm=(NONE/NONE), tPerm=NONE
+    2026-10-04T15:37:02.379135 - Package add: uid=10287, nPerm=(NONE/NONE), tPerm=INTERNET
+    2026-10-04T15:36:47.689669 - Package remove: uid=10286, nPerm=(NONE/NONE), tPerm=UNINSTALLED
+    2026-10-04T15:36:47.544568 - Package remove: uid=10285, nPerm=(NONE/NONE), tPerm=UNINSTALLED
+    2026-10-04T15:36:44.259038 - Package add: uid=10286, nPerm=(NONE/NONE), tPerm=NONE
+    2026-10-04T15:36:43.977913 - Package add: uid=10285, nPerm=(NONE/NONE), tPerm=INTERNET
+    2026-10-04T15:36:41.131655 - Package remove: uid=10284, nPerm=(NONE/NONE), tPerm=UNINSTALLED
+    2026-10-04T15:36:40.916982 - Package remove: uid=10283, nPerm=(NONE/NONE), tPerm=UNINSTALLED
+    2026-10-04T15:36:19.172330 - Package add: uid=10284, nPerm=(NONE/NONE), tPerm=NONE
+    2026-10-04T15:36:18.912684 - Package add: uid=10283, nPerm=(NONE/NONE), tPerm=INTERNET
+
+Legacy network activity:
+  mNetworkActive=true
+  Idle timers:
+    eth0:
+      timeout=10 type=0

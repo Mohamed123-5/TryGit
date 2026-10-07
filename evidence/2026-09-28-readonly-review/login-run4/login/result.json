@@ -1,0 +1,17 @@
+{
+  "flow": "login",
+  "file": ".maestro/regression-readonly/login.yaml",
+  "suite": "regression-readonly",
+  "tags": [
+    "health-check"
+  ],
+  "startedAt": "2026-09-28T10:34:49.501Z",
+  "durationMs": 246778,
+  "logPath": "report-dashboard/maestro-output/login/maestro.log",
+  "status": "PASS",
+  "exitCode": 0,
+  "failedSteps": 0,
+  "firstFailure": null,
+  "envReason": null,
+  "npsAppearances": 0
+}

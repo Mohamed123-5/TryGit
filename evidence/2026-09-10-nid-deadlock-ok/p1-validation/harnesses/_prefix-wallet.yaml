@@ -1,0 +1,107 @@
+# Wallet, Mortgage and Preferences regression — WAL-008, MTG-009, WAL-010, PRE-002, PRE-008.
+#
+# Per the automation triage in exploration-report.md these absorb:
+#   WAL-008 <- WAL-007 (Withdraw disabled when empty), WAL-009 (amount auto-formats)
+#   PRE-002 <- PRE-003 (registered-interest tabs)
+#   PRE-008 <- PRE-001 (hub lists options), PRE-006 (form step 1), PRE-007 (Next disabled on
+#              empty), PRE-009 (Cancel discards), ACC-014 (Preferences opens)
+#   MTG-009 <- MTG-002, MTG-003, MTG-005, MTG-006, MTG-007, MTG-008, UNIT-008, UNIT-009
+#
+# Everything is read-only. No withdrawal is submitted, no calculation is submitted, no
+# preference is saved, and no profile, eligibility, booking, payment or contract state is
+# touched. The two forms that are dirtied (Withdraw, Preference form) are both abandoned
+# without saving.
+#
+# TWO CASES DO NOT PASS, AND ARE LEFT ASSERTING THE CORRECT BEHAVIOUR ON PURPOSE:
+#
+#   WAL-010 is the designated regression guard for defect D-31 - Android Back does not work
+#   on the Wallet screen. It is placed LAST so every other case executes first, because
+#   Maestro aborts a flow at the first failed assertion. While D-31 is open this flow exits
+#   non-zero BY DESIGN, with everything above it COMPLETED. Do not "fix" it by removing the
+#   assertion or by substituting the header arrow - that would delete the only guard proving
+#   the defect is still there.
+#
+#   MTG-009's own expected result ("Calculate button enabled once all fields are set") is not
+#   observable on this build: the button's accessibility node is identical whether it is
+#   greyed out or active - desc="Calculate Your Mortgage", clickable="true", enabled="true",
+#   bounds=[0,0][1080,2337] (the whole screen). Because the node covers the screen, no
+#   selector resolves to the button either. The MTG sub-cases that ARE observable are
+#   automated below; the enabled-state assertion is reported BLOCKED rather than replaced
+#   with a weaker one that would pass without testing anything.
+#
+# The flow authenticates itself so it is repeatable from any starting state, mirroring
+# login.yaml's proven happy-path selectors without modifying it.
+appId: fi.iwa.sakani
+name: PREFIX wallet - own steps up to the Nafath ID check, never confirms
+env:
+  # The account this flow signs in as - defined once, here. Default (no override): 1000011485.
+  #   maestro test -e NATIONAL_ID=<10-digit National ID / Iqama> .maestro/wallet.yaml
+  # A self-referencing default, NOT a literal: on Maestro 2.9.0 a literal here silently beats
+  # `-e NATIONAL_ID=...`. Single-quoted because the expression contains ": ".
+  #
+  # ACCOUNT DATA: PRE-002 expects this account's registered-interest list to be EMPTY.
+  NATIONAL_ID: '${typeof NATIONAL_ID === "undefined" ? "1000011485" : String(NATIONAL_ID)}'
+---
+# Fail fast, before the app is touched, on an empty or malformed override. Dollar-free on
+# purpose: a "$" inside ${...} makes Maestro 2.9.0 skip evaluation and pass the assert.
+- evalScript: ${console.log('WALLET.YAML TARGET NATIONAL_ID = [' + NATIONAL_ID + ']')}
+- assertTrue: ${String(NATIONAL_ID).length === 10 && !/[^0-9]/.test(String(NATIONAL_ID)) && (String(NATIONAL_ID).charAt(0) === "1" || String(NATIONAL_ID).charAt(0) === "2")}
+- launchApp:
+    clearState: true
+
+- waitForAnimationToEnd:
+    timeout: 20000
+- repeat:
+    times: 20
+    commands:
+      - runFlow:
+          when:
+            visible: "Skip"
+          commands:
+            - tapOn: "Skip"
+      - runFlow:
+          when:
+            visible: "Dismiss"
+          commands:
+            - tapOn: "Dismiss"
+      - runFlow:
+          when:
+            visible: "Ok"
+          commands:
+            - tapOn: "Ok"
+      - runFlow:
+          when:
+            visible: "Marketplace Day"
+          commands:
+            - back
+      - runFlow:
+          when:
+            visible: "Start comparing properties"
+          commands:
+            - back
+      - runFlow:
+          when:
+            notVisible: "(?s).*Login / Sign up.*"
+          commands:
+            - waitForAnimationToEnd:
+                timeout: 5000
+
+# --- Authenticate.
+- extendedWaitUntil:
+    visible: "(?s).*Login / Sign up.*"
+    timeout: 30000
+- tapOn: "(?s).*Login / Sign up.*"
+- extendedWaitUntil:
+    visible: "Continue with N[ae]fath"
+    timeout: 30000
+- tapOn: "Enter your ID, phone number,? or email"
+- inputText: ${NATIONAL_ID}
+- tapOn: "Continue"
+- extendedWaitUntil:
+    visible: "Login with nafath"
+    timeout: 30000
+# The Nafath screen must carry EXACTLY the requested ID before the session is created - the last
+# point at which a wrong account can be stopped before it is authenticated.
+- assertVisible: ${NATIONAL_ID}
+
+- takeScreenshot: prefix-wallet-nafath

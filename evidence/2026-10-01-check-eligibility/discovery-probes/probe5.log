@@ -1,0 +1,114 @@
+WARNING: Final field parent in class maestro.cli.command.TestCommand has been mutated reflectively by class picocli.CommandLine$Model$FieldBinding in unnamed module @2d9d4f9d (file:/D:/Automation-Tool/maestro/lib/picocli-4.6.3.jar)
+WARNING: Use --enable-final-field-mutation=ALL-UNNAMED to avoid a warning
+WARNING: Mutating final fields will be blocked in a future release unless final field mutation is enabled
+Running on Pixel_8
+ > Flow PROBE - after contact details
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::arrayBaseOffset has been called by com.google.protobuf.UnsafeUtil$MemoryAccessor (file:/D:/Automation-Tool/maestro/lib/protobuf-java-3.21.9.jar)
+WARNING: Please consider reporting this to the maintainers of class com.google.protobuf.UnsafeUtil$MemoryAccessor
+WARNING: sun.misc.Unsafe::arrayBaseOffset will be removed in a future release
+Run ${output.generatedNationalId = String(Math.floor(1000000000 + Math.random() * 1000000000))}... COMPLETED
+Run ${output.generatedPhone = String(Math.floor(500000000 + Math.random() * 10000000))}... COMPLETED
+Run ${output.generatedEmail = 'elig.' + output.generatedNationalId + '@example.com'}... COMPLETED
+Run ${console.log('PROBE NEW USER - id [' + output.generatedNationalId + '] phone [+966' + output.generatedPhone + '] email [' + output.generatedEmail + ']')}... COMPLETED
+Launch app "fi.iwa.sakani" with clear state... COMPLETED
+Run D:/Automation/Maestro-Mobile/.maestro/subflows/clear-overlays.yaml...
+  Repeat while "${ANCHOR}" is not visible (up to 26 times)...
+    Run ${output.handled = false}... COMPLETED
+    Run flow when "(?s)(?:Don.t allow|Skip|Dismiss|Ok|Marketplace Day|Start comparing properties|Go to the weekly (offer|deal)|Update email|Number and Email Already Linked|.*would you recommend benefiting from Sakani.*|Thank you for your feedback|Maybe Later|Reject cookies)" is visible...
+      Run flow when "Don.t allow" is visible...
+      Run flow when "Don.t allow" is visible... SKIPPED
+      Run flow when "Skip" is visible...
+        Tap on "Skip"... COMPLETED
+        Run ${output.handled = true}... COMPLETED
+        Wait for animation to end within 3000 ms... COMPLETED
+      Run flow when "Skip" is visible... COMPLETED
+      Run flow when "Dismiss" is visible...
+      Run flow when "Dismiss" is visible... SKIPPED
+      Run flow when "Ok" is visible...
+      Run flow when "Ok" is visible... SKIPPED
+      Run flow when "Marketplace Day" is visible...
+      Run flow when "Marketplace Day" is visible... SKIPPED
+      Run flow when "Start comparing properties" is visible...
+        Press back... COMPLETED
+        Run ${output.handled = true}... COMPLETED
+        Wait for animation to end within 3000 ms... COMPLETED
+      Run flow when "Start comparing properties" is visible... COMPLETED
+      Run flow when "Go to the weekly (offer|deal)" is visible...
+      Run flow when "Go to the weekly (offer|deal)" is visible... SKIPPED
+      Run flow when "Update email" is visible...
+      Run flow when "Update email" is visible... SKIPPED
+      Run flow when "Number and Email Already Linked" is visible...
+      Run flow when "Number and Email Already Linked" is visible... SKIPPED
+      Run flow when "(?s)(.*would you recommend benefiting from Sakani.*|Thank you for your feedback)" is visible...
+      Run flow when "(?s)(.*would you recommend benefiting from Sakani.*|Thank you for your feedback)" is visible... SKIPPED
+      Run flow when "Maybe Later" is visible...
+      Run flow when "Maybe Later" is visible... SKIPPED
+      Run flow when "Reject cookies" is visible...
+      Run flow when "Reject cookies" is visible... SKIPPED
+    Run flow when "(?s)(?:Don.t allow|Skip|Dismiss|Ok|Marketplace Day|Start comparing properties|Go to the weekly (offer|deal)|Update email|Number and Email Already Linked|.*would you recommend benefiting from Sakani.*|Thank you for your feedback|Maybe Later|Reject cookies)" is visible... COMPLETED
+    Run flow when ${output.handled !== true} is true...
+    Run flow when false is true... SKIPPED
+  Repeat while "${ANCHOR}" is not visible (up to 26 times)... COMPLETED
+  Run flow when ${output.npsLeftToCaller !== true} is true...
+    Run dismiss-nps.yaml...
+      Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible...
+      Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible... SKIPPED
+      Run flow when "Thank you for your feedback" is visible...
+      Run flow when "Thank you for your feedback" is visible... SKIPPED
+    Run dismiss-nps.yaml... COMPLETED
+  Run flow when true is true... COMPLETED
+  Run flow when ${output.anchorOptional !== true} is true...
+    Repeat while "${ANCHOR}" is not visible (up to 6 times)...
+    Repeat while "${ANCHOR}" is not visible (up to 6 times)... SKIPPED
+    Run dismiss-nps.yaml...
+      Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible...
+      Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible... SKIPPED
+      Run flow when "Thank you for your feedback" is visible...
+      Run flow when "Thank you for your feedback" is visible... SKIPPED
+    Run dismiss-nps.yaml... COMPLETED
+    Assert that "${ANCHOR}" is visible... COMPLETED
+  Run flow when true is true... COMPLETED
+Run D:/Automation/Maestro-Mobile/.maestro/subflows/clear-overlays.yaml... COMPLETED
+Tap on "(?s).*Login / Sign up.*"... COMPLETED
+Assert that "Continue with N[ae]fath" is visible... COMPLETED
+Tap on "Enter your ID, phone number,? or email"... COMPLETED
+Input text ${output.generatedNationalId}... COMPLETED
+Tap on "Continue"... COMPLETED
+Assert that "Login with nafath" is visible... COMPLETED
+Tap on "Confirm"... COMPLETED
+Assert that "Personal information" is visible... COMPLETED
+Tap on "Continue"... COMPLETED
+Assert that "(?s).*Please fill in your mobile number detail and email address.*" is visible... COMPLETED
+Tap on "Enter your phone number"... COMPLETED
+Input text ${output.generatedPhone}... COMPLETED
+Hide Keyboard... COMPLETED
+Tap on "Enter your email"... COMPLETED
+Input text ${output.generatedEmail}... COMPLETED
+Hide Keyboard... COMPLETED
+Wait for animation to end within 3000 ms... COMPLETED
+Take screenshot probe5-1-contact-filled... COMPLETED
+Run flow...
+  Assert that "DUMP-CONTACT-FILLED" is visible... FAILED
+Run flow... WARNED
+Assert that "(?s).*Please fill in your mobile number detail and email address.*" is visible... COMPLETED
+Tap on point (50%,93%)... COMPLETED
+Wait for animation to end within 8000 ms... COMPLETED
+Take screenshot probe5-2-after-contact-continue... COMPLETED
+Run flow...
+  Assert that "DUMP-AFTER-CONTACT" is visible... FAILED
+Run flow... WARNED
+Assert that "PROBE-END-MARKER-NOT-PRESENT" is visible... FAILED
+
+Assertion is false: "PROBE-END-MARKER-NOT-PRESENT" is visible
+
+Assertion '"PROBE-END-MARKER-NOT-PRESENT" is visible' failed. Check the UI hierarchy in debug artifacts to verify the element state and properties.
+
+Possible causes:
+- Element selector may be incorrect - check if there are similar elements with slightly different names/properties.
+- Element may be temporarily unavailable due to loading state
+- This could be a real regression that needs to be addressed
+
+==== Debug output (logs & screenshots) ====
+
+C:\Users\MOHAMM~1\AppData\Local\Temp\claude\d--Automation-Maestro-Mobile\d0c46072-bdc2-4cb5-adfa-96f983915029\scratchpad\elig\debug5\.maestro\tests\2026-10-01_122229

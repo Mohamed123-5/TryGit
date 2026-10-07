@@ -1,0 +1,46 @@
+WARNING: Final field parent in class maestro.cli.command.TestCommand has been mutated reflectively by class picocli.CommandLine$Model$FieldBinding in unnamed module @2d9d4f9d (file:/D:/Automation-Tool/maestro/lib/picocli-4.6.3.jar)
+WARNING: Use --enable-final-field-mutation=ALL-UNNAMED to avoid a warning
+WARNING: Mutating final fields will be blocked in a future release unless final field mutation is enabled
+Running on Pixel_8
+ > Flow Login - AUTH-002 input validation, AUTH-012 Nafath entry, AUTH-006 sign-in, AUTH-010 authenticated Home, AUTH-009 restart
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::arrayBaseOffset has been called by com.google.protobuf.UnsafeUtil$MemoryAccessor (file:/D:/Automation-Tool/maestro/lib/protobuf-java-3.21.9.jar)
+WARNING: Please consider reporting this to the maintainers of class com.google.protobuf.UnsafeUtil$MemoryAccessor
+WARNING: sun.misc.Unsafe::arrayBaseOffset will be removed in a future release
+Run ${console.log('LOGIN.YAML TARGET NATIONAL_ID = [' + NATIONAL_ID + ']')}... COMPLETED
+Assert that ${String(NATIONAL_ID).length === 10 && !/[^0-9]/.test(String(NATIONAL_ID)) && (String(NATIONAL_ID).charAt(0) === "1" || String(NATIONAL_ID).charAt(0) === "2")} is true... COMPLETED
+Launch app "fi.iwa.sakani" with clear state... COMPLETED
+Run ../subflows/clear-overlays.yaml...
+  Repeat while "${ANCHOR}" is not visible (up to 26 times)...
+    Run ${output.handled = false}... COMPLETED
+    Run flow when "(?s)(?:Don.t allow|Skip|Dismiss|Ok|Marketplace Day|Start comparing properties|Go to the weekly (offer|deal)|Update email|Number and Email Already Linked|.*would you recommend benefiting from Sakani.*|Maybe Later|Reject cookies)" is visible...
+    Run flow when "(?s)(?:Don.t allow|Skip|Dismiss|Ok|Marketplace Day|Start comparing properties|Go to the weekly (offer|deal)|Update email|Number and Email Already Linked|.*would you recommend benefiting from Sakani.*|Maybe Later|Reject cookies)" is visible... SKIPPED
+    Run flow when ${output.handled !== true} is true...
+      Wait for animation to end within 5000 ms... COMPLETED
+    Run flow when true is true... COMPLETED
+  Repeat while "${ANCHOR}" is not visible (up to 26 times)... COMPLETED
+  Run flow when ${output.npsLeftToCaller !== true} is true...
+    Run dismiss-nps.yaml...
+      Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible...
+      Run flow when "(?s).*would you recommend benefiting from Sakani.*" is visible... SKIPPED
+    Run dismiss-nps.yaml... COMPLETED
+  Run flow when true is true... COMPLETED
+  Run flow when ${output.anchorOptional !== true} is true...
+    Repeat while "${ANCHOR}" is not visible (up to 6 times)...
+      Assert that "(?s)(?:${ANCHOR}|.*would you recommend benefiting from Sakani.*)" is visible... FAILED
+    Repeat while "${ANCHOR}" is not visible (up to 6 times)... FAILED
+  Run flow when true is true... FAILED
+Run ../subflows/clear-overlays.yaml... FAILED
+
+Assertion is false: "(?s)(?:(?s).*Login / Sign up.*|.*would you recommend benefiting from Sakani.*)" is visible
+
+Assertion '"(?s)(?:(?s).*Login / Sign up.*|.*would you recommend benefiting from Sakani.*)" is visible' failed. Check the UI hierarchy in debug artifacts to verify the element state and properties.
+
+Possible causes:
+- Element selector may be incorrect - check if there are similar elements with slightly different names/properties.
+- Element may be temporarily unavailable due to loading state
+- This could be a real regression that needs to be addressed
+
+==== Debug output (logs & screenshots) ====
+
+D:\Automation\Maestro-Mobile\evidence\2026-09-27-restructure-resume\run-logs-nps-fix-v3\login-debug\.maestro\tests\2026-09-27_125029

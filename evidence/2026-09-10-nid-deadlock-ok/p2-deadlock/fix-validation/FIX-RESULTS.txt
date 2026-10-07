@@ -1,0 +1,13 @@
+=== syntax: subflows/login.yaml=OK ===
+############ FIX VALIDATION 1: _explore.yaml -e NATIONAL_ID=1000011487 (read-only; uses subflows/login.yaml) ############
+  exit=0  log=C:/Users/Mohammed Elkatry/.maestro/tests/2026-09-10_133124/maestro.log
+  typed=1000011487  nafath-id-asserts=      2 textRegex=1000011487 
+  STACK GUARD fired (promo title visible): 1 | its Back executed (control hidden): 1 | promo control then visible -> relaunch recovery: 1 | contact-screen back arrow taps: 0 | launchApp total: 2
+  reached My Bookings: 1 | FAILED: 
+############ FIX VALIDATION 2: _explore.yaml -e NATIONAL_ID=1000011487 (read-only; uses subflows/login.yaml) ############
+  exit=0  log=C:/Users/Mohammed Elkatry/.maestro/tests/2026-09-10_133817/maestro.log
+  typed=1000011487  nafath-id-asserts=      2 textRegex=1000011487 
+  STACK GUARD fired (promo title visible): 1 | its Back executed (control hidden): 1 | promo control then visible -> relaunch recovery: 1 | contact-screen back arrow taps: 0 | launchApp total: 2
+  reached My Bookings: 1 | FAILED: 
+  (stack guard exercised; stopping after this attempt)
+=== stack guard exercised in 2 attempt(s) ===

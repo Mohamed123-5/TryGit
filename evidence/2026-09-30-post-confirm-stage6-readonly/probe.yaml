@@ -1,0 +1,98 @@
+appId: fi.iwa.sakani
+name: PROBE - Stage 6 read-only on the booking of run 2026-09-29_175202
+env:
+  MODULE: "Apartment"
+---
+- evalScript: ${output.unitBlock = "999"}
+- evalScript: ${output.unitNumber = "182"}
+- launchApp:
+    clearState: true
+- runFlow:
+    file: D:/Automation/Maestro-Mobile/.maestro/subflows/login.yaml
+    env:
+      NATIONAL_ID: "1000011487"
+# Observed 29/09/2026: after the relaunch Home is covered by the satisfaction survey (D-12,
+# "Overall, how satisfied are you...") which hides the tab bar; the shared helper dismisses it.
+- runFlow:
+    file: D:/Automation/Maestro-Mobile/.maestro/subflows/clear-overlays.yaml
+    env:
+      ANCHOR: 'Account\s*Tab 4 of 4'
+- runFlow:
+    file: D:/Automation/Maestro-Mobile/.maestro/subflows/open-account-tab.yaml
+    env:
+      DESTINATION: "My bookings"
+- runFlow:
+    file: D:/Automation/Maestro-Mobile/.maestro/subflows/tap-until-destination.yaml
+    env:
+      TARGET: "My bookings"
+      DESTINATION: 'Active\s*Tab 2 of 4'
+- tapOn: 'Active\s*Tab 2 of 4'
+- extendedWaitUntil:
+    visible: "(?s).*(\nActive\n.*Unit code|don.t have any active booking).*"
+    timeout: 60000
+- takeScreenshot: journey-without-fee-my-bookings-active
+- assertNotVisible:
+    text: "(?s).*don.t have any active booking.*"
+    label: "BOOKING - no Active booking exists after Confirm booking"
+
+# Same unit. Observed 29/09/2026: Block 999 / Apartment 182 was booked as unit code
+# 01-01-0504-999-182 - the code ends in <block>-<unit number> read from the summary. The card is
+# located BY that identity, never by position: with several Active bookings the first card may be
+# an older one. Observed card text: "<project>\nActive\nUnit Type\nApartment\nUnit code\n<code>\n
+# Booking date\n<date>".
+- scrollUntilVisible:
+    element:
+      text: "(?s).*\nActive\n.*\nUnit code\n[0-9]{2}(-[0-9]+)*-${output.unitBlock}-${output.unitNumber}\n.*"
+    direction: DOWN
+    timeout: 30000
+    label: "BOOKING - no Active booking for the booked unit (block ${output.unitBlock}, unit ${output.unitNumber})"
+- copyTextFrom:
+    text: "(?s).*\nActive\n.*\nUnit code\n[0-9]{2}(-[0-9]+)*-${output.unitBlock}-${output.unitNumber}\n.*"
+- evalScript: ${output.activeCard = String(maestro.copiedText)}
+- evalScript: '${output.unitCode = (output.activeCard.match(/Unit code\s*([0-9]{2}(-[0-9]+)+)/) || ["", ""])[1]}'
+- evalScript: "${console.log('ZERO-FEE BOOKING - Active card [' + output.activeCard.replace(/\\n/g, ' | ') + '] unit code [' + output.unitCode + ']')}"
+- assertTrue:
+    condition: ${output.unitCode.length > 0 && output.unitCode.slice(-(output.unitBlock.length + output.unitNumber.length + 2)) === '-' + output.unitBlock + '-' + output.unitNumber}
+    label: "BOOKING - the Active booking's unit code is not the booked unit"
+- tapOn: "(?s).*\nActive\n.*\nUnit code\n${output.unitCode}\n.*"
+
+# Booking Details of the new booking, as observed 29/09/2026: Offplan MOH land, and the next step
+# is "Select payment method". A paid booking shows a "Pay the booking fee" step and a "Booking fee
+# status" row here; neither exists for this zero-fee booking.
+- extendedWaitUntil:
+    visible: 'Booking Details\s*Tab 1 of 2'
+    timeout: 45000
+- extendedWaitUntil:
+    visible: "Offplan MOH land"
+    timeout: 30000
+- assertVisible: "Complete your booking"
+- assertVisible: "Select payment method"
+- assertVisible: "Booking date"
+- assertNotVisible:
+    text: "Pay the booking fee"
+    label: "BOOKING - zero-fee booking unexpectedly asks for a booking fee"
+- assertNotVisible: "Booking fee status"
+- takeScreenshot: journey-without-fee-booking-details
+
+# Unit Details: the SAME unit - card title, Block and unit number as read from the summary.
+- tapOn: 'Unit Details\s*Tab 2 of 2'
+- extendedWaitUntil:
+    visible: "${MODULE} ${output.unitBlock}-${output.unitNumber}"
+    timeout: 30000
+    label: "BOOKING - Unit Details is not the booked unit"
+- assertVisible:
+    text: ${output.unitBlock}
+    below: "Block"
+- assertVisible:
+    text: ${output.unitNumber}
+    below: "Block"
+- takeScreenshot: journey-without-fee-unit-details
+
+- evalScript: "${console.log('FULL JOURNEY END - zero-fee booking Active, unit code [' + output.unitCode + '], block [' + output.unitBlock + '], unit [' + output.unitNumber + ']')}"
+
+# PROBE ONLY - save the Unit Details hierarchy (optional failing marker), then end.
+- runFlow:
+    optional: true
+    commands:
+      - assertVisible: "DUMP-UNIT-DETAILS"
+- assertVisible: "PROBE-END-MARKER-NOT-PRESENT"

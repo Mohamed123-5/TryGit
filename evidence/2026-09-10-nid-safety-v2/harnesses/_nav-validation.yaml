@@ -1,0 +1,25 @@
+# TEMPORARY, non-destructive: Account <-> Home bottom-tab navigation through the overlay helper.
+# Never opens a booking and never calls the Stage 0 helper.
+appId: fi.iwa.sakani
+name: VALIDATION - Account and Home navigation through clear-overlays (no booking)
+---
+- repeat:
+    times: 4
+    commands:
+      - runFlow:
+          file: subflows/clear-overlays.yaml
+          env:
+            ANCHOR: 'Account\s*Tab 4 of 4'
+      - tapOn: 'Account\s*Tab 4 of 4'
+      - runFlow:
+          file: subflows/clear-overlays.yaml
+          env:
+            ANCHOR: "My bookings"
+      - assertVisible: "My bookings"
+      - tapOn: 'Home\s*Tab 1 of 4'
+      - runFlow:
+          file: subflows/clear-overlays.yaml
+          env:
+            ANCHOR: '(?si)(Hello|Good (morning|afternoon|evening)),\s*\S.*'
+      - assertVisible: '(?si)(Hello|Good (morning|afternoon|evening)),\s*\S.*'
+- takeScreenshot: nav-validation-end

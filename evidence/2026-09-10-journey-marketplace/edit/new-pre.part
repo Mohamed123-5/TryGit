@@ -1,0 +1,41 @@
+# --- IDENTITY GATE - the last check before anything that books or pays. STAGE 4 reserves and
+# STAGE 5 pays a fee, so before either runs, three records must agree:
+#   * output.targetNationalId  - the ID this run resolved at the top of STAGE 1;
+#   * output.loginNationalId   - written by the login helper only after the Nafath screen
+#                                displayed exactly that ID (what was submitted);
+#   * output.profileNationalId - written by subflows/verify-signed-in-account.yaml only after
+#                                the signed-in profile displayed exactly that ID (who is signed
+#                                in).
+# The first two are both copies of NATIONAL_ID and could never disagree on their own; the
+# profile record is what makes this a real check. A missing record fails.
+# Dollar-free on purpose - see the fail-fast guard at the top of this stage.
+- assertTrue: ${output.loginNationalId === output.targetNationalId && output.targetNationalId === String(NATIONAL_ID) && output.profileNationalId === output.targetNationalId}
+
+# --- NO ACCOUNT CLEAN-UP STAGE (removed 10/09/2026). Account is visited above for the two
+# technical preconditions only - who is signed in, and whether that account is Eligible - and
+# the journey then goes straight to Explore. It no longer opens My Bookings before the
+# Marketplace and it never cancels a booking: the former STAGE 0 cancelled whatever booking the
+# account already held, which is not part of the customer journey and destroyed data this run
+# had not created.
+#
+# The account must therefore start with NO active booking. The product enforces that itself at
+# "Reserve unit" ("Active booking detected!"), where this flow stops on its assertion - read the
+# screen there before classifying the failure (see STAGE 3).
+
+# ==========================================================================================
+# STAGE 2 - Explore -> Marketplace -> search -> open the project
+# ==========================================================================================
+
+- tapOn: 'Explore\s*Tab 2 of 4'
+- runFlow:
+    file: subflows/clear-overlays.yaml
+    env:
+      ANCHOR: "Registered Interests"
+- extendedWaitUntil:
+    visible: "Registered Interests"
+    timeout: 45000
+
+# --- MARKETPLACE. Explore's results view is the Marketplace: it is entered by choosing a
+# category - Buy, with the Offplan construction status - and then lists the matching projects
+# under the "Projects / Units Model" tabs (marketplace.yaml asserts the same view).
+#

@@ -1,0 +1,67 @@
+
+.maestro/e2e/cancel-booking.yaml   launchApp=1 clearState=1   coordinate taps=1
+   points: L106 "73,1434"
+   no issues
+
+.maestro/e2e/full-journey-with-fee.yaml   launchApp=2 clearState=1   coordinate taps=3
+   points: L93 "55%,11%" | L258 "73,2095" | L371 "73,1434"
+   no issues
+
+.maestro/e2e/full-journey-without-fee.yaml   launchApp=1 clearState=1   coordinate taps=1
+   points: L90 "55%,11%"
+   no issues
+
+.maestro/regression-readonly/account.yaml   launchApp=1 clearState=1   coordinate taps=3
+   points: L104 "76,204" | L129 "76,204" | L149 "76,204"
+   no issues
+
+.maestro/regression-readonly/booking.yaml   launchApp=2 clearState=2   coordinate taps=0
+   no issues
+
+.maestro/regression-readonly/home.yaml   launchApp=1 clearState=1   coordinate taps=1
+   points: L329 "50%,8%"
+   no issues
+
+.maestro/regression-readonly/login.yaml   launchApp=2 clearState=1   coordinate taps=0
+   !! L123 DATA-CHANGING tap in a read-only flow: - tapOn: "Confirm"
+
+.maestro/regression-readonly/logout.yaml   launchApp=2 clearState=1   coordinate taps=0
+   no issues
+
+.maestro/regression-readonly/marketplace.yaml   launchApp=1 clearState=0   coordinate taps=0
+   no issues
+
+.maestro/regression-readonly/project.yaml   launchApp=1 clearState=0   coordinate taps=0
+   no issues
+
+.maestro/regression-readonly/search.yaml   launchApp=1 clearState=0   coordinate taps=3
+   points: L70 "55%,11%" | L99 "55%,11%" | L137 "55%,11%"
+   no issues
+
+.maestro/regression-readonly/unit.yaml   launchApp=1 clearState=1   coordinate taps=0
+   no issues
+
+.maestro/regression-readonly/wallet.yaml   launchApp=1 clearState=1   coordinate taps=2
+   points: L132 "73%,93%" | L148 "73%,93%"
+   !! L293 DATA-CHANGING tap in a read-only flow: - tapOn: "Withdraw"
+
+.maestro/subflows/account-ready.yaml   launchApp=0 clearState=0   coordinate taps=0
+   no issues
+
+.maestro/subflows/clear-overlays.yaml   launchApp=0 clearState=0   coordinate taps=5
+   points: L210 "7%,9%" | L261 "73,1434" | L369 "73,1434" | L451 "73,1434" | L492 "73,1434"
+   no issues
+
+.maestro/subflows/login.yaml   launchApp=0 clearState=0   coordinate taps=0
+   !! L59 DATA-CHANGING tap in a read-only flow: - tapOn: "Confirm"
+
+.maestro/subflows/open-account-service.yaml   launchApp=0 clearState=0   coordinate taps=0
+   no issues
+
+.maestro/subflows/post-login.yaml   launchApp=1 clearState=0   coordinate taps=0
+   no issues
+
+.maestro/subflows/verify-signed-in-account.yaml   launchApp=0 clearState=0   coordinate taps=0
+   no issues
+
+LINT: 3 issue(s) across 19 files

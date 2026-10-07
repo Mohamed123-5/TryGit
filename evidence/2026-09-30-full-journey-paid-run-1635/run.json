@@ -1,0 +1,25 @@
+{
+  "startedAt": "2026-09-30T13:35:38.932Z",
+  "finishedAt": "2026-09-30T13:42:32.830Z",
+  "device": "emulator-5554",
+  "includeE2e": true,
+  "results": [
+    {
+      "flow": "full-journey-paid",
+      "file": ".maestro/e2e/full-journey-paid.yaml",
+      "suite": "e2e",
+      "tags": [
+        "critical"
+      ],
+      "startedAt": "2026-09-30T13:35:39.026Z",
+      "durationMs": 413800,
+      "logPath": "report-dashboard/maestro-output/full-journey-paid/maestro.log",
+      "status": "PASS",
+      "exitCode": 0,
+      "failedSteps": 0,
+      "firstFailure": null,
+      "envReason": null,
+      "npsAppearances": 0
+    }
+  ]
+}

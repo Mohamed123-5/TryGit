@@ -1,0 +1,111 @@
+appId: fi.iwa.sakani
+name: PROBE ACC-007 - is the empty Notifications Center a wiped local store or a real empty list
+env:
+  # The account whose notifications are missing. Same default as account.yaml.
+  NATIONAL_ID: '${typeof NATIONAL_ID === "undefined" ? "1000011485" : String(NATIONAL_ID)}'
+---
+# READ-ONLY. This probe signs in and reads three screens. It never opens a booking, never
+# taps a notification, never edits the profile and never touches booking, payment, contract
+# or eligibility state.
+#
+# THE QUESTION
+# account.yaml's ACC-007 failed on PRE-4.7.6-1283: the Notifications Center rendered
+# "There is no notification" for 1000011485, while the same account's My Bookings showed a
+# booking in "Ready to sign" - exactly the lifecycle event ACC-008 expects a notification for.
+# Two explanations survive the evidence so far, and they are told apart by ONE variable:
+#
+#   H1  the list is server-side and genuinely empty -> it stays empty after a WARM relaunch
+#   H2  the list is a LOCAL store that `clearState: true` wipes -> it repopulates on a warm
+#       relaunch, because the flow's own cleared launch is what emptied it
+#
+# So the same screen is read twice: once after the cleared launch that account.yaml performs,
+# and once after a relaunch that keeps app data. Nothing else changes between the two reads.
+- evalScript: ${console.log('PROBE ACC-007 TARGET NATIONAL_ID = [' + NATIONAL_ID + ']')}
+- assertTrue: ${String(NATIONAL_ID).length === 10 && !/[^0-9]/.test(String(NATIONAL_ID)) && (String(NATIONAL_ID).charAt(0) === "1" || String(NATIONAL_ID).charAt(0) === "2")}
+
+# ==========================================================================================
+# READ 1 - after a CLEARED launch, which is what account.yaml does
+# ==========================================================================================
+- launchApp:
+    clearState: true
+- runFlow:
+    file: subflows/login.yaml
+    env:
+      NATIONAL_ID: ${NATIONAL_ID}
+
+- tapOn: 'Account\s*Tab 4 of 4'
+- runFlow:
+    file: subflows/clear-overlays.yaml
+    env:
+      ANCHOR: "Notifications"
+- extendedWaitUntil:
+    visible: "Notifications"
+    timeout: 60000
+- tapOn: "Notifications"
+- extendedWaitUntil:
+    visible: "Notifications Center"
+    timeout: 30000
+# Let the list settle - an empty state that is merely still loading would be a third
+# explanation, and 10s of settling removes it.
+- waitForAnimationToEnd:
+    timeout: 10000
+- takeScreenshot: probe-acc007-A-cleared-launch
+- evalScript: "${console.log('PROBE ACC-007: READ 1 (cleared launch) captured')}"
+
+# ==========================================================================================
+# READ 2 - the same account's bookings, in the SAME session
+# ==========================================================================================
+#
+# The two facts have to come from one session to be comparable at all: the earlier evidence
+# had the notification list and the booking list from two different runs.
+- back
+- runFlow:
+    file: subflows/clear-overlays.yaml
+    env:
+      ANCHOR: "My bookings"
+- extendedWaitUntil:
+    visible: "My bookings"
+    timeout: 60000
+- tapOn: "My bookings"
+- extendedWaitUntil:
+    visible: "My Bookings"
+    timeout: 45000
+- tapOn: 'All\s*Tab 1 of 4'
+- waitForAnimationToEnd:
+    timeout: 8000
+- takeScreenshot: probe-acc007-B-bookings-all
+- evalScript: "${console.log('PROBE ACC-007: READ 2 (bookings) captured')}"
+
+# ==========================================================================================
+# READ 3 - the same screen as READ 1, after a WARM relaunch that KEEPS app data
+# ==========================================================================================
+#
+# launchApp WITHOUT clearState keeps the session and the local stores. If the Notifications
+# Center now lists anything, the empty state in READ 1 was created by the cleared launch
+# (H2) and ACC-007 is asserting against a store its own launch wiped. If it is still empty,
+# the list really is empty for this account (H1) and the question moves to the product.
+- launchApp
+- runFlow:
+    file: subflows/clear-overlays.yaml
+    env:
+      ANCHOR: 'Account\s*Tab 4 of 4'
+- tapOn: 'Account\s*Tab 4 of 4'
+- runFlow:
+    file: subflows/clear-overlays.yaml
+    env:
+      ANCHOR: "Notifications"
+- extendedWaitUntil:
+    visible: "Notifications"
+    timeout: 60000
+- tapOn: "Notifications"
+- extendedWaitUntil:
+    visible: "Notifications Center"
+    timeout: 30000
+- waitForAnimationToEnd:
+    timeout: 10000
+- takeScreenshot: probe-acc007-C-warm-launch
+- evalScript: "${console.log('PROBE ACC-007: READ 3 (warm relaunch) captured')}"
+
+# No assertion on the outcome on purpose. This probe exists to OBSERVE which hypothesis is
+# true; asserting either one here would decide the answer in advance and turn an unknown
+# into a failure. The three screenshots and the hierarchy dumps are the deliverable.

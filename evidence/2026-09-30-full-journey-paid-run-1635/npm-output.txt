@@ -1,0 +1,26 @@
+
+> Sakani-mobileapp@1.0.0 e2e:full-journey-paid
+> node report-dashboard/run-maestro.js --include-e2e --yes-i-understand-this-changes-business-data --flows full-journey-paid && npm run post-test
+
+Device emulator-5554 | 1 flow(s) | e2e INCLUDED
+
+full-journey-paid ... PASS (exit 0, 414s)
+
+1 passed, 0 failed, 0 blocked/unresolved
+Now run: npm run post-test
+
+> Sakani-mobileapp@1.0.0 post-test
+> npm run merge-results && npm run generate-report
+
+
+> Sakani-mobileapp@1.0.0 merge-results
+> node report-dashboard/merge-results.js
+
+Merged 1 flow(s): 1 pass, 0 fail, 0 blocked (environment), 0 unresolved
+
+-> test-results\merged-results.json
+
+> Sakani-mobileapp@1.0.0 generate-report
+> node report-dashboard/generate-dashboard.js
+
+-> report-dashboard\dashboard.html

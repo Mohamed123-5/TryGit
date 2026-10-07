@@ -1,0 +1,17 @@
+{
+  "flow": "full-journey",
+  "file": ".maestro/e2e/full-journey.yaml",
+  "suite": "e2e",
+  "tags": [
+    "critical"
+  ],
+  "startedAt": "2026-09-29T13:13:44.094Z",
+  "durationMs": 314191,
+  "logPath": "report-dashboard/maestro-output/full-journey/maestro.log",
+  "status": "FAIL",
+  "exitCode": 1,
+  "failedSteps": 2,
+  "firstFailure": "Assert screenshot matches ../reference-screenshots/booking/disclaimer-ticked.png (threshold: 95%) (cropped on Left of \"I have read and understood the Booking disclaimer\")... FAILED",
+  "envReason": null,
+  "npsAppearances": 0
+}

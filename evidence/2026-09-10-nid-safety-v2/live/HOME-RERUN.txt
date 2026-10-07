@@ -1,0 +1,27 @@
+===== home.yaml CONFIRMATION RE-RUN (file unchanged) =====
+  exit=0
+  log: C:/Users/Mohammed Elkatry/.maestro/tests/2026-09-10_113847/maestro.log
+  steps: 109 completed, 0 failed
+  FAILED: 
+  HOME-005 tap -> Mortgage Calculator timing: 11:40:19.849 -> 11:40:22.226  (COMPLETED)
+  typed into login field: 1000011485 
+  EXECUTED taps:
+          1 Tap on "(?s).*Housing Support Products.*" COMPLETED
+          1 Tap on "(?s).*Login / Sign up.*" COMPLETED
+          1 Tap on "(?s).*More.*vouchers.*" COMPLETED
+          1 Tap on "(?s).*Off-plan Units.*" COMPLETED
+          1 Tap on "(?s).*Professional Services.*" COMPLETED
+          1 Tap on "Account\s*Tab 4 of 4" COMPLETED
+          1 Tap on "Confirm" COMPLETED
+          1 Tap on "Continue" COMPLETED
+          1 Tap on "Enter your ID, phone number,? or email" COMPLETED
+          1 Tap on "Home\s*Tab 1 of 4" COMPLETED
+          1 Tap on "Maybe Later" COMPLETED
+          1 Tap on "Reject cookies" COMPLETED
+          2 Tap on "Rental Behavior Inquiry" COMPLETED
+          1 Tap on "Services\s*Tab 3 of 4" COMPLETED
+          1 Tap on "Skip" COMPLETED
+          1 Tap on Below "Discover featured unit in the market\s*" COMPLETED
+          1 Tap on point (50%,8%) COMPLETED
+  forbidden taps executed (Reserve unit / Request ... Report / Submit): 0
+  sections reached: Mortgage Calculator ✓, Categories ✓, Explore Housing Support Products ✓, Explore Professional Services ✓, Explore More ✓, Service fee ✓, My bookings ✓, 

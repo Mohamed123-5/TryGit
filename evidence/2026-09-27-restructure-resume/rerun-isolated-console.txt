@@ -1,0 +1,10 @@
+=== 10:31:33 ISOLATE project - clearing app data for a clean guest start ===
+Success
+    NPS present before project: 0
+=== 10:31:34 START project ===
+=== 10:33:59 END project exit=0 ===
+=== 10:33:59 ISOLATE search - clearing app data for a clean guest start ===
+Success
+    NPS present before search: 0
+=== 10:34:03 START search ===
+=== 10:36:18 END search exit=0 ===

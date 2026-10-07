@@ -1,0 +1,179 @@
+09:39:37.740 223037ms COMPLETED Run eligibility-fill-deeds.yaml
+09:39:37.743      2ms COMPLETED   Apply configuration
+09:39:37.746 223030ms COMPLETED   Run flow when "Deed information" is visible
+09:39:37.983      3ms COMPLETED     Run ${output.deedCount = 0}
+09:39:37.986      2ms COMPLETED     Run ${output.deedEmptyPasses = 0}
+09:39:37.988      2ms COMPLETED     Run ${output.deedLog = ''}
+09:39:37.991 216432ms COMPLETED     Repeat while ${output.deedEmptyPasses < 2} is true (up to 12 times)
+09:39:37.993      2ms COMPLETED       Run ${output.deedFoundThisPass = false}
+09:39:37.997  58805ms COMPLETED       Run flow when "Select an option", Below "Deed Type.*" is visible
+09:39:38.463      3ms COMPLETED         Run ${output.deedFoundThisPass = true}
+09:39:38.466      3ms COMPLETED         Run ${output.deedCount = output.deedCount + 1}
+09:39:38.471      4ms COMPLETED         Run ${output.deedNumber = ''}
+09:39:38.475    194ms COMPLETED         Run flow when "[0-9 ]{6,}", Above "Select an option", Below "Deed Type.*" is visible
+09:39:38.573     90ms COMPLETED           Copy text from element with "[0-9 ]{6,}", Above "Select an option", Below "Deed Type.*"
+09:39:38.664      4ms COMPLETED           Run ${output.deedNumber = String(maestro.copiedText).trim()}
+09:39:38.670      3ms COMPLETED         DEED - no deed number exposed for this deed; its fields cannot be tied to it safely - STOPPED
+09:39:38.674   7013ms SKIPPED           Repeat while "Select an option", Below "Deed Type.*", Below "${output.deedNumber}" is not visible (up to 6 times)
+09:39:45.687    105ms COMPLETED         DEED TYPE - this deed's Deed Type field could not be brought on screen after 6 scroll steps - STOPPED (nothing tapped)
+09:39:45.793   2465ms COMPLETED         Tap on "Select an option", Below "Deed Type.*", Below "${output.deedNumber}"
+09:39:48.258    767ms COMPLETED         Assert that (Optional) "Deed information" is not visible
+09:39:49.026   6374ms SKIPPED           Run flow when "Deed information" is visible
+09:39:55.400    780ms COMPLETED         DEED TYPE - this deed's Deed Type list did not open after 2 bounded attempts - STOPPED (nothing selected)
+09:39:56.181    402ms COMPLETED         Wait for animation to end within 3000 ms
+09:39:56.584     84ms COMPLETED         Take screenshot elig-deed-type-options
+09:39:56.670   7137ms SKIPPED           Run flow when "Search" is visible
+09:40:03.809    152ms COMPLETED         DEED TYPE - exact 'Housing' is not offered in this deed's Deed Type list - STOPPED (no other value chosen; see elig-deed-type-opti
+09:40:03.961    701ms COMPLETED         DEED TYPE - the list closed before Housing could be chosen - STOPPED (nothing selected)
+09:40:04.662   2644ms COMPLETED         Tap on "Housing", Below "Deed Type.*"
+09:40:07.306    369ms COMPLETED         Wait for animation to end within 3000 ms
+09:40:07.676     70ms COMPLETED         DEED TYPE - did not return to Deed information after choosing Housing
+09:40:07.747     71ms COMPLETED         DEED TYPE - Housing did not persist on this deed's Deed Type
+09:40:07.819   6875ms SKIPPED           Repeat while "Select an option", Below "Construction Status.*", Below "${output.deedNumber}" is not visible (up to 6 times)
+09:40:14.695    128ms COMPLETED         CONSTRUCTION STATUS - this deed shows no Construction Status field on screen after Housing (6 scroll steps) - STOPPED (nothing tap
+09:40:14.824   2547ms COMPLETED         Tap on "Select an option", Below "Construction Status.*", Below "${output.deedNumber}"
+09:40:17.372    699ms COMPLETED         Assert that (Optional) "Deed information" is not visible
+09:40:18.072   6566ms SKIPPED           Run flow when "Deed information" is visible
+09:40:24.638    767ms COMPLETED         CONSTRUCTION STATUS - this deed's Construction Status list did not open after 2 bounded attempts - STOPPED (nothing selected)
+09:40:25.407    376ms COMPLETED         Wait for animation to end within 3000 ms
+09:40:25.783     90ms COMPLETED         Take screenshot elig-construction-status-options
+09:40:25.873   7061ms SKIPPED           Run flow when "Search" is visible
+09:40:32.934    158ms COMPLETED         CONSTRUCTION STATUS - exact 'Completed constructing' is not offered in this deed's list - STOPPED (no other value chosen; see elig
+09:40:33.093    613ms COMPLETED         CONSTRUCTION STATUS - the list closed before Completed constructing could be chosen - STOPPED (nothing selected)
+09:40:33.707   2405ms COMPLETED         Tap on "Completed constructing", Below "Construction Status.*"
+09:40:36.112    399ms COMPLETED         Wait for animation to end within 3000 ms
+09:40:36.511    115ms COMPLETED         CONSTRUCTION STATUS - did not return to Deed information after the choice
+09:40:36.627    165ms COMPLETED         CONSTRUCTION STATUS - Completed constructing is not shown on this deed
+09:40:36.793      3ms COMPLETED         Run ${output.deedLog = output.deedLog + 'DEED ' + output.deedCount + ' [' + output.deedNumber + '] Housing / Completed constructin
+09:40:36.797      4ms COMPLETED         Run ${console.log('DEED ' + output.deedCount + ' [' + output.deedNumber + '] - Type [Housing] - Construction Status [Completed con
+09:40:36.802      3ms SKIPPED         Run flow when ${output.deedFoundThisPass !== true} is true
+09:40:36.807      8ms COMPLETED       Run flow when ${output.deedFoundThisPass === true} is true
+09:40:36.811      3ms COMPLETED         Run ${output.deedEmptyPasses = 0}
+09:40:36.851      1ms COMPLETED       Run ${output.deedFoundThisPass = false}
+09:40:36.853   7160ms SKIPPED         Run flow when "Select an option", Below "Deed Type.*" is visible
+09:40:44.013   1805ms COMPLETED       Run flow when ${output.deedFoundThisPass !== true} is true
+09:40:44.016      3ms COMPLETED         Run ${output.deedEmptyPasses = output.deedEmptyPasses + 1}
+09:40:44.020   1404ms COMPLETED         Swipe from (50%,70%) to (50%,40%) in 600 ms
+09:40:45.425    392ms COMPLETED         Wait for animation to end within 3000 ms
+09:40:45.818      3ms SKIPPED         Run flow when ${output.deedFoundThisPass === true} is true
+09:40:45.873      2ms COMPLETED       Run ${output.deedFoundThisPass = false}
+09:40:45.876  60723ms COMPLETED       Run flow when "Select an option", Below "Deed Type.*" is visible
+09:40:46.021      5ms COMPLETED         Run ${output.deedFoundThisPass = true}
+09:40:46.027      3ms COMPLETED         Run ${output.deedCount = output.deedCount + 1}
+09:40:46.031      4ms COMPLETED         Run ${output.deedNumber = ''}
+09:40:46.036    184ms COMPLETED         Run flow when "[0-9 ]{6,}", Above "Select an option", Below "Deed Type.*" is visible
+09:40:46.162     53ms COMPLETED           Copy text from element with "[0-9 ]{6,}", Above "Select an option", Below "Deed Type.*"
+09:40:46.216      3ms COMPLETED           Run ${output.deedNumber = String(maestro.copiedText).trim()}
+09:40:46.220      2ms COMPLETED         DEED - no deed number exposed for this deed; its fields cannot be tied to it safely - STOPPED
+09:40:46.223   7102ms SKIPPED           Repeat while "Select an option", Below "Deed Type.*", Below "${output.deedNumber}" is not visible (up to 6 times)
+09:40:53.326    134ms COMPLETED         DEED TYPE - this deed's Deed Type field could not be brought on screen after 6 scroll steps - STOPPED (nothing tapped)
+09:40:53.460   2436ms COMPLETED         Tap on "Select an option", Below "Deed Type.*", Below "${output.deedNumber}"
+09:40:55.896    616ms COMPLETED         Assert that (Optional) "Deed information" is not visible
+09:40:56.513   6594ms SKIPPED           Run flow when "Deed information" is visible
+09:41:03.108    590ms COMPLETED         DEED TYPE - this deed's Deed Type list did not open after 2 bounded attempts - STOPPED (nothing selected)
+09:41:03.699    438ms COMPLETED         Wait for animation to end within 3000 ms
+09:41:04.137     87ms COMPLETED         Take screenshot elig-deed-type-options
+09:41:04.225   7097ms SKIPPED           Run flow when "Search" is visible
+09:41:11.322    116ms COMPLETED         DEED TYPE - exact 'Housing' is not offered in this deed's Deed Type list - STOPPED (no other value chosen; see elig-deed-type-opti
+09:41:11.438    617ms COMPLETED         DEED TYPE - the list closed before Housing could be chosen - STOPPED (nothing selected)
+09:41:12.056   2404ms COMPLETED         Tap on "Housing", Below "Deed Type.*"
+09:41:14.461    361ms COMPLETED         Wait for animation to end within 3000 ms
+09:41:14.822    120ms COMPLETED         DEED TYPE - did not return to Deed information after choosing Housing
+09:41:14.943    129ms COMPLETED         DEED TYPE - Housing did not persist on this deed's Deed Type
+09:41:15.073   9536ms COMPLETED         Repeat while "Select an option", Below "Construction Status.*", Below "${output.deedNumber}" is not visible (up to 6 times)
+09:41:15.711   1532ms COMPLETED           Swipe from (50%,70%) to (50%,55%) in 800 ms
+09:41:17.244    302ms COMPLETED           Wait for animation to end within 2000 ms
+09:41:24.609     98ms COMPLETED         CONSTRUCTION STATUS - this deed shows no Construction Status field on screen after Housing (6 scroll steps) - STOPPED (nothing tap
+09:41:24.708   2585ms COMPLETED         Tap on "Select an option", Below "Construction Status.*", Below "${output.deedNumber}"
+09:41:27.294    618ms COMPLETED         Assert that (Optional) "Deed information" is not visible
+09:41:27.913   6557ms SKIPPED           Run flow when "Deed information" is visible
+09:41:34.471    577ms COMPLETED         CONSTRUCTION STATUS - this deed's Construction Status list did not open after 2 bounded attempts - STOPPED (nothing selected)
+09:41:35.049    333ms COMPLETED         Wait for animation to end within 3000 ms
+09:41:35.382    130ms COMPLETED         Take screenshot elig-construction-status-options
+09:41:35.512   7111ms SKIPPED           Run flow when "Search" is visible
+09:41:42.623    217ms COMPLETED         CONSTRUCTION STATUS - exact 'Completed constructing' is not offered in this deed's list - STOPPED (no other value chosen; see elig
+09:41:42.841    747ms COMPLETED         CONSTRUCTION STATUS - the list closed before Completed constructing could be chosen - STOPPED (nothing selected)
+09:41:43.588   2468ms COMPLETED         Tap on "Completed constructing", Below "Construction Status.*"
+09:41:46.057    323ms COMPLETED         Wait for animation to end within 3000 ms
+09:41:46.381     82ms COMPLETED         CONSTRUCTION STATUS - did not return to Deed information after the choice
+09:41:46.463    128ms COMPLETED         CONSTRUCTION STATUS - Completed constructing is not shown on this deed
+09:41:46.591      4ms COMPLETED         Run ${output.deedLog = output.deedLog + 'DEED ' + output.deedCount + ' [' + output.deedNumber + '] Housing / Completed constructin
+09:41:46.595      3ms COMPLETED         Run ${console.log('DEED ' + output.deedCount + ' [' + output.deedNumber + '] - Type [Housing] - Construction Status [Completed con
+09:41:46.599      2ms SKIPPED         Run flow when ${output.deedFoundThisPass !== true} is true
+09:41:46.602      7ms COMPLETED       Run flow when ${output.deedFoundThisPass === true} is true
+09:41:46.604      4ms COMPLETED         Run ${output.deedEmptyPasses = 0}
+09:41:46.640      2ms COMPLETED       Run ${output.deedFoundThisPass = false}
+09:41:46.642   7196ms SKIPPED         Run flow when "Select an option", Below "Deed Type.*" is visible
+09:41:53.841   1772ms COMPLETED       Run flow when ${output.deedFoundThisPass !== true} is true
+09:41:53.842      2ms COMPLETED         Run ${output.deedEmptyPasses = output.deedEmptyPasses + 1}
+09:41:53.845   1431ms COMPLETED         Swipe from (50%,70%) to (50%,40%) in 600 ms
+09:41:55.277    335ms COMPLETED         Wait for animation to end within 3000 ms
+09:41:55.613      3ms SKIPPED         Run flow when ${output.deedFoundThisPass === true} is true
+09:41:55.659      2ms COMPLETED       Run ${output.deedFoundThisPass = false}
+09:41:55.662  60795ms COMPLETED       Run flow when "Select an option", Below "Deed Type.*" is visible
+09:41:55.793      3ms COMPLETED         Run ${output.deedFoundThisPass = true}
+09:41:55.796      2ms COMPLETED         Run ${output.deedCount = output.deedCount + 1}
+09:41:55.798      3ms COMPLETED         Run ${output.deedNumber = ''}
+09:41:55.802    228ms COMPLETED         Run flow when "[0-9 ]{6,}", Above "Select an option", Below "Deed Type.*" is visible
+09:41:55.909    115ms COMPLETED           Copy text from element with "[0-9 ]{6,}", Above "Select an option", Below "Deed Type.*"
+09:41:56.025      4ms COMPLETED           Run ${output.deedNumber = String(maestro.copiedText).trim()}
+09:41:56.030      5ms COMPLETED         DEED - no deed number exposed for this deed; its fields cannot be tied to it safely - STOPPED
+09:41:56.036   7058ms SKIPPED           Repeat while "Select an option", Below "Deed Type.*", Below "${output.deedNumber}" is not visible (up to 6 times)
+09:42:03.095    128ms COMPLETED         DEED TYPE - this deed's Deed Type field could not be brought on screen after 6 scroll steps - STOPPED (nothing tapped)
+09:42:03.223   2435ms COMPLETED         Tap on "Select an option", Below "Deed Type.*", Below "${output.deedNumber}"
+09:42:05.660    678ms COMPLETED         Assert that (Optional) "Deed information" is not visible
+09:42:06.338   6500ms SKIPPED           Run flow when "Deed information" is visible
+09:42:12.840    771ms COMPLETED         DEED TYPE - this deed's Deed Type list did not open after 2 bounded attempts - STOPPED (nothing selected)
+09:42:13.612    366ms COMPLETED         Wait for animation to end within 3000 ms
+09:42:13.979     86ms COMPLETED         Take screenshot elig-deed-type-options
+09:42:14.065   7058ms SKIPPED           Run flow when "Search" is visible
+09:42:21.125    129ms COMPLETED         DEED TYPE - exact 'Housing' is not offered in this deed's Deed Type list - STOPPED (no other value chosen; see elig-deed-type-opti
+09:42:21.256    678ms COMPLETED         DEED TYPE - the list closed before Housing could be chosen - STOPPED (nothing selected)
+09:42:21.935   2457ms COMPLETED         Tap on "Housing", Below "Deed Type.*"
+09:42:24.392    390ms COMPLETED         Wait for animation to end within 3000 ms
+09:42:24.783     79ms COMPLETED         DEED TYPE - did not return to Deed information after choosing Housing
+09:42:24.864     86ms COMPLETED         DEED TYPE - Housing did not persist on this deed's Deed Type
+09:42:24.950   9756ms COMPLETED         Repeat while "Select an option", Below "Construction Status.*", Below "${output.deedNumber}" is not visible (up to 6 times)
+09:42:25.692   1564ms COMPLETED           Swipe from (50%,70%) to (50%,55%) in 800 ms
+09:42:27.257    428ms COMPLETED           Wait for animation to end within 2000 ms
+09:42:34.706    104ms COMPLETED         CONSTRUCTION STATUS - this deed shows no Construction Status field on screen after Housing (6 scroll steps) - STOPPED (nothing tap
+09:42:34.811   2513ms COMPLETED         Tap on "Select an option", Below "Construction Status.*", Below "${output.deedNumber}"
+09:42:37.325    750ms COMPLETED         Assert that (Optional) "Deed information" is not visible
+09:42:38.075   6396ms SKIPPED           Run flow when "Deed information" is visible
+09:42:44.471    651ms COMPLETED         CONSTRUCTION STATUS - this deed's Construction Status list did not open after 2 bounded attempts - STOPPED (nothing selected)
+09:42:45.123    412ms COMPLETED         Wait for animation to end within 3000 ms
+09:42:45.536     86ms COMPLETED         Take screenshot elig-construction-status-options
+09:42:45.622   7116ms SKIPPED           Run flow when "Search" is visible
+09:42:52.740    116ms COMPLETED         CONSTRUCTION STATUS - exact 'Completed constructing' is not offered in this deed's list - STOPPED (no other value chosen; see elig
+09:42:52.857    665ms COMPLETED         CONSTRUCTION STATUS - the list closed before Completed constructing could be chosen - STOPPED (nothing selected)
+09:42:53.523   2430ms COMPLETED         Tap on "Completed constructing", Below "Construction Status.*"
+09:42:55.954    299ms COMPLETED         Wait for animation to end within 3000 ms
+09:42:56.254    120ms COMPLETED         CONSTRUCTION STATUS - did not return to Deed information after the choice
+09:42:56.375     76ms COMPLETED         CONSTRUCTION STATUS - Completed constructing is not shown on this deed
+09:42:56.452      2ms COMPLETED         Run ${output.deedLog = output.deedLog + 'DEED ' + output.deedCount + ' [' + output.deedNumber + '] Housing / Completed constructin
+09:42:56.454      3ms COMPLETED         Run ${console.log('DEED ' + output.deedCount + ' [' + output.deedNumber + '] - Type [Housing] - Construction Status [Completed con
+09:42:56.458      2ms SKIPPED         Run flow when ${output.deedFoundThisPass !== true} is true
+09:42:56.460      4ms COMPLETED       Run flow when ${output.deedFoundThisPass === true} is true
+09:42:56.462      2ms COMPLETED         Run ${output.deedEmptyPasses = 0}
+09:42:56.491      1ms COMPLETED       Run ${output.deedFoundThisPass = false}
+09:42:56.493   7152ms SKIPPED         Run flow when "Select an option", Below "Deed Type.*" is visible
+09:43:03.645   1755ms COMPLETED       Run flow when ${output.deedFoundThisPass !== true} is true
+09:43:03.648      2ms COMPLETED         Run ${output.deedEmptyPasses = output.deedEmptyPasses + 1}
+09:43:03.651   1375ms COMPLETED         Swipe from (50%,70%) to (50%,40%) in 600 ms
+09:43:05.027    373ms COMPLETED         Wait for animation to end within 3000 ms
+09:43:05.401      1ms SKIPPED         Run flow when ${output.deedFoundThisPass === true} is true
+09:43:05.430      1ms COMPLETED       Run ${output.deedFoundThisPass = false}
+09:43:05.432   7190ms SKIPPED         Run flow when "Select an option", Below "Deed Type.*" is visible
+09:43:12.624   1793ms COMPLETED       Run flow when ${output.deedFoundThisPass !== true} is true
+09:43:12.626      2ms COMPLETED         Run ${output.deedEmptyPasses = output.deedEmptyPasses + 1}
+09:43:12.629   1391ms COMPLETED         Swipe from (50%,70%) to (50%,40%) in 600 ms
+09:43:14.020    396ms COMPLETED         Wait for animation to end within 3000 ms
+09:43:14.417      3ms SKIPPED         Run flow when ${output.deedFoundThisPass === true} is true
+09:43:14.424      3ms COMPLETED     DEED - Deed information opened but no deed was set
+09:43:14.427    679ms COMPLETED     DEED - an unset Deed Type or Construction Status remains
+09:43:15.107      3ms COMPLETED     Run ${console.log('DEED INFORMATION - ' + output.deedCount + ' deed(s): ' + output.deedLog)}
+09:43:15.110    130ms COMPLETED     Take screenshot elig-6-deeds-complete
+09:43:15.241    166ms COMPLETED     Scrolling DOWN until "Confirm" is visible with speed 40, visibility percentage 100%, timeout 15000 ms, with centering disabled
+09:43:15.408   2153ms COMPLETED     Tap on "Confirm"
+09:43:17.572   2472ms COMPLETED     Wait for animation to end within 15000 ms
+09:43:20.045    730ms COMPLETED     DEED INFORMATION - the product reported an error after Confirm

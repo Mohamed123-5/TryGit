@@ -1,0 +1,19 @@
+{
+  "flow": "appeal request",
+  "file": ".maestro/e2e/appeal request.yaml",
+  "suite": "e2e",
+  "tags": [
+    "e2e",
+    "eligibility",
+    "appeal"
+  ],
+  "startedAt": "2026-10-04T12:27:43.001Z",
+  "durationMs": 475420,
+  "logPath": "report-dashboard/maestro-output/appeal request/maestro.log",
+  "status": "FAIL",
+  "exitCode": 1,
+  "failedSteps": 3,
+  "firstFailure": "Assert that \"${DESTINATION}\" is visible... FAILED",
+  "envReason": null,
+  "npsAppearances": 0
+}

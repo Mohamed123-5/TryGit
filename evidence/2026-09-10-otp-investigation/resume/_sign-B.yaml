@@ -1,0 +1,33 @@
+appId: fi.iwa.sakani
+name: RESUME B - enter the contract OTP 1234 once, with the corrected focus tap
+env:
+  CONTRACT_OTP: "1234"
+---
+# Runs on the OTP screen RESUME A left open. ONE attempt, ONLY 1234, no retry: if the signed
+# message does not appear, the flow fails here and nothing else is typed.
+- takeScreenshot: B-0-start
+
+# THE FIX UNDER TEST - focus the FIRST OTP box and nothing else. The boxes are the four elements
+# labelled "X" (the empty-box placeholder, accessibilityText) between the "OTP" label and the
+# "OTP Expires in:" timer; the keyboard sits below the timer and so cannot match. The previous
+# selector, a bare `below: "OTP"`, resolved to the numeric keyboard's "1" key (run
+# 2026-09-10_170119, resource-id com.google.android.inputmethod.latin:id/key_pos_number_line1_1),
+# which typed an extra "1" before the code.
+- tapOn:
+    text: "X"
+    below:
+      text: "OTP"
+    above:
+      text: "OTP Expires in:"
+    index: 0
+- takeScreenshot: B-1-after-focus-tap
+
+- evalScript: "${console.log('RESUME B: typing CONTRACT_OTP once')}"
+- inputText: ${CONTRACT_OTP}
+- takeScreenshot: B-2-after-typing
+
+- extendedWaitUntil:
+    visible: "(?s).*Sales contract has been signed.*"
+    timeout: 90000
+- assertNotVisible: "(?s).*(Invalid|incorrect|expired).*"
+- takeScreenshot: B-3-signed

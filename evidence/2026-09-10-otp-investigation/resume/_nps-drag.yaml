@@ -1,0 +1,17 @@
+appId: fi.iwa.sakani
+name: NPS drag only (same gesture as clear-overlays; never Submit, never a rating)
+---
+- repeat:
+    times: 3
+    while:
+      visible: "(?s).*would you recommend benefiting from Sakani.*"
+    commands:
+      - runFlow:
+          when:
+            notVisible: '(?s)(.*There.s something wrong.*|.*the service is down.*|Error!)'
+          commands:
+            - swipe:
+                start: "50%,58%"
+                end: "50%,99%"
+            - waitForAnimationToEnd:
+                timeout: 4000

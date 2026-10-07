@@ -1,0 +1,103 @@
+WARNING: Final field parent in class maestro.cli.command.TestCommand has been mutated reflectively by class picocli.CommandLine$Model$FieldBinding in unnamed module @2d9d4f9d (file:/D:/Automation-Tool/maestro/lib/picocli-4.6.3.jar)
+WARNING: Use --enable-final-field-mutation=ALL-UNNAMED to avoid a warning
+WARNING: Mutating final fields will be blocked in a future release unless final field mutation is enabled
+Running on Pixel_8
+ > Flow Sakani login with National ID
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::arrayBaseOffset has been called by com.google.protobuf.UnsafeUtil$MemoryAccessor (file:/D:/Automation-Tool/maestro/lib/protobuf-java-3.21.9.jar)
+WARNING: Please consider reporting this to the maintainers of class com.google.protobuf.UnsafeUtil$MemoryAccessor
+WARNING: sun.misc.Unsafe::arrayBaseOffset will be removed in a future release
+Run ${console.log('LOGIN.YAML TARGET NATIONAL_ID = [' + NATIONAL_ID + ']')}... COMPLETED
+Assert that ${String(NATIONAL_ID).length === 10 && !/[^0-9]/.test(String(NATIONAL_ID)) && (String(NATIONAL_ID).charAt(0) === "1" || String(NATIONAL_ID).charAt(0) === "2")} is true... COMPLETED
+Launch app "fi.iwa.sakani" with clear state... COMPLETED
+Wait for animation to end within 20000 ms... COMPLETED
+Assert that "Skip" is visible... COMPLETED
+Tap on "Skip"... COMPLETED
+Repeat 8 times...
+  Run flow when "Marketplace Day" is visible...
+  Run flow when "Marketplace Day" is visible... SKIPPED
+  Run flow when "Start comparing properties" is not visible...
+    Wait for animation to end within 5000 ms... COMPLETED
+  Run flow when "Start comparing properties" is not visible... COMPLETED
+Repeat 8 times... COMPLETED
+Assert that "Start comparing properties" is visible... COMPLETED
+Tap on point (73,690)... COMPLETED
+Assert that "Start comparing properties" is not visible... COMPLETED
+Assert that "(?s).*Login / Sign up.*" is visible... COMPLETED
+Assert that "(?s).*Login / Sign up.*" is visible... COMPLETED
+Tap on "(?s).*Login / Sign up.*"... COMPLETED
+Assert that "Continue with N[ae]fath" is visible... COMPLETED
+Tap on "Continue"... COMPLETED
+Wait for animation to end within 3000 ms... COMPLETED
+Assert that "Login with nafath" is not visible... COMPLETED
+Tap on "Enter your ID, phone number,? or email"... COMPLETED
+Input text 123... COMPLETED
+Tap on "Continue"... COMPLETED
+Wait for animation to end within 3000 ms... COMPLETED
+Assert that "Login with nafath" is not visible... COMPLETED
+Tap on "123"... COMPLETED
+Erase text... COMPLETED
+Input text abcdefghij... COMPLETED
+Tap on "Continue"... COMPLETED
+Wait for animation to end within 3000 ms... COMPLETED
+Assert that "Login with nafath" is not visible... COMPLETED
+Tap on "abcdefghij"... COMPLETED
+Erase text... COMPLETED
+Tap on "Continue with N[ae]fath"... COMPLETED
+Assert that "Login with nafath" is visible... COMPLETED
+Assert that "Use your nafath information to login" is visible... COMPLETED
+Assert that "National ID / Iqama number" is visible... COMPLETED
+Assert that "Confirm" is visible... COMPLETED
+Press back... COMPLETED
+Assert that "(?s).*Login / Sign up.*" is visible... COMPLETED
+Tap on "(?s).*Login / Sign up.*"... COMPLETED
+Assert that "Continue with N[ae]fath" is visible... COMPLETED
+Assert that "Enter your ID, phone number,? or email" is visible... COMPLETED
+Assert that "Login with nafath" is not visible... COMPLETED
+Tap on "Enter your ID, phone number,? or email"... COMPLETED
+Input text ${NATIONAL_ID}... COMPLETED
+Assert that "${NATIONAL_ID}" is visible... COMPLETED
+Tap on "Continue"... COMPLETED
+Assert that "Login with nafath" is visible... COMPLETED
+Assert that "Confirm" is visible... COMPLETED
+Assert that "${NATIONAL_ID}" is visible... COMPLETED
+Tap on "Confirm"... COMPLETED
+Assert that "Login with nafath" is not visible... COMPLETED
+Repeat 12 times...
+  Run flow when "Go to the weekly (offer|deal)" is visible...
+    Press back... COMPLETED
+    Wait for animation to end within 3000 ms... COMPLETED
+  Run flow when "Go to the weekly (offer|deal)" is visible... COMPLETED
+  Run flow when "Maybe Later" is not visible...
+  Run flow when "Maybe Later" is not visible... SKIPPED
+Repeat 12 times... COMPLETED
+Assert that "Maybe Later" is visible... COMPLETED
+Assert that "Enable Biometrics" is visible... COMPLETED
+Repeat 4 times...
+  Run flow when "Go to the weekly (offer|deal)" is visible...
+  Run flow when "Go to the weekly (offer|deal)" is visible... SKIPPED
+  Run flow when "Maybe Later" is visible...
+    Tap on "Maybe Later"... COMPLETED
+    Wait for animation to end within 3000 ms... COMPLETED
+  Run flow when "Maybe Later" is visible... COMPLETED
+Repeat 4 times... COMPLETED
+Assert that "(?s).*Login / Sign up.*" is not visible... COMPLETED
+Assert that "(?si)(Hello|Good (morning|afternoon|evening)),\s*\S.*" is visible... COMPLETED
+Launch app "fi.iwa.sakani"... COMPLETED
+Wait for animation to end within 20000 ms... COMPLETED
+Repeat 10 times...
+  Run flow when "Dismiss" is visible...
+    Tap on "Dismiss"... COMPLETED
+  Run flow when "Dismiss" is visible... COMPLETED
+  Run flow when "Ok" is visible...
+  Run flow when "Ok" is visible... SKIPPED
+  Run flow when "Marketplace Day" is visible...
+  Run flow when "Marketplace Day" is visible... SKIPPED
+  Run flow when "Start comparing properties" is visible...
+  Run flow when "Start comparing properties" is visible... SKIPPED
+  Run flow when "Account\s*Tab 4 of 4" is not visible...
+  Run flow when "Account\s*Tab 4 of 4" is not visible... SKIPPED
+Repeat 10 times... COMPLETED
+Assert that "Account\s*Tab 4 of 4" is visible... COMPLETED
+Assert that "(?s).*Login / Sign up.*" is not visible... COMPLETED
+Assert that "(?si)(Hello|Good (morning|afternoon|evening)),\s*\S.*" is visible... COMPLETED

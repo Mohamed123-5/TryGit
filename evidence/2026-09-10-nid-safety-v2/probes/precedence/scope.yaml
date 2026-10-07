@@ -1,0 +1,10 @@
+appId: fi.iwa.sakani
+name: SCOPE does runFlow env outlive the call
+---
+- runFlow:
+    file: scope-sub-set.yaml
+    env:
+      LEAKTEST: "yes"
+- runFlow:
+    file: scope-sub-check.yaml
+- evalScript: ${console.log('SCOPE PARENT LEAKTEST typeof = [' + (typeof LEAKTEST) + ']')}

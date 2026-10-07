@@ -1,0 +1,14 @@
+{
+  "flow": "account",
+  "file": ".maestro/regression-readonly/account.yaml",
+  "suite": "regression-readonly",
+  "startedAt": "2026-09-28T07:06:00.252Z",
+  "durationMs": 441007,
+  "logPath": "report-dashboard/maestro-output/account/maestro.log",
+  "status": "PASS",
+  "exitCode": 0,
+  "failedSteps": 0,
+  "firstFailure": null,
+  "envReason": null,
+  "npsAppearances": 0
+}

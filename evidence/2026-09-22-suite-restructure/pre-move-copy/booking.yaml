@@ -1,0 +1,324 @@
+# Booking regression - READ-ONLY. Nothing is reserved, paid, confirmed, cancelled or signed.
+# The state-changing booking paths live elsewhere and are not duplicated here:
+#   full-journey-with-fee.yaml    (Pay booking fee path)
+#   full-journey-without-fee.yaml (Confirm booking path)
+#   cancel-booking.yaml           (cancellation)
+#
+# BKG-001  guest Unit Details withholds "Reserve unit" and states the booking preconditions
+# BKG-004  My Bookings lists this account's reservations (absorbs BKG-005 tabs, BKG-006 filters)
+# BKG-011  Completed and Cancelled tabs filter correctly
+# BKG-014  an Active UNIT booking's Unit Details tab shows the booked unit (BLOCKED when none)
+#
+# Order: BKG-001 needs a guest, so it runs on the first cleared launch. A second cleared
+# launch then signs in through the shared subflows/login.yaml for the remaining cases.
+# Explore is used for the guest route (see BKG-001); Home's featured unit stays with HOME-005.
+appId: fi.iwa.sakani
+name: Booking - BKG-001 guest restriction, BKG-004/005/006 My Bookings, BKG-011 status tabs, BKG-014 Unit Details
+env:
+  # The account this flow signs in as - defined once, here. Default (no override): 1000011487.
+  #   maestro test -e NATIONAL_ID=<10-digit National ID / Iqama> .maestro/booking.yaml
+  # A self-referencing default, NOT a literal: on Maestro 2.9.0 a literal here silently beats
+  # `-e NATIONAL_ID=...`. Single-quoted because the expression contains ": ".
+  #
+  # ACCOUNT DATA (read-only for any account): BKG-004 needs at least one booking, BKG-011 a
+  # Cancelled booking, BKG-014 an Active UNIT (non-Land) booking or it reports BLOCKED. cancel-booking.yaml and the Full Journeys
+  # change this account's bookings, so these preconditions are re-checked on every run.
+  NATIONAL_ID: '${typeof NATIONAL_ID === "undefined" ? "1000011487" : String(NATIONAL_ID)}'
+---
+# Fail fast, before the app is touched, on an empty or malformed override. Dollar-free on
+# purpose: a "$" inside ${...} makes Maestro 2.9.0 skip evaluation and pass the assert.
+- evalScript: ${console.log('BOOKING.YAML TARGET NATIONAL_ID = [' + NATIONAL_ID + ']')}
+- assertTrue: ${String(NATIONAL_ID).length === 10 && !/[^0-9]/.test(String(NATIONAL_ID)) && (String(NATIONAL_ID).charAt(0) === "1" || String(NATIONAL_ID).charAt(0) === "2")}
+- launchApp:
+    clearState: true
+
+# A cleared launch replays onboarding and can raise promos, error dialogs, the compare coach
+# mark or the survey. The shared helper clears them and stops as soon as guest Home is up -
+# the same call and anchor subflows/login.yaml makes, so there is one overlay policy.
+- runFlow:
+    file: subflows/clear-overlays.yaml
+    env:
+      ANCHOR: "(?s).*Login / Sign up.*"
+
+# Guard the "Logged out" half of the precondition: the guest header offers sign-in, and an
+# authenticated Home would greet by name instead.
+- assertVisible: "(?s).*Login / Sign up.*"
+
+# --- BKG-001: a guest reaching Unit Details must not be able to reserve.
+#
+# Build STG-4.7.5-1278 does not expose "Reserve unit" to a guest at all, so the PRE journey
+# ("tap Reserve -> redirected to login") no longer exists. Product has confirmed the new
+# behaviour as intended, so this is the baseline now rather than a defect: the case asserts
+# the restriction the app actually applies - no CTA, and the guest is told the three
+# preconditions for booking.
+#
+# ROUTE CHANGE: PRE reached Unit Details through the Home featured unit. On STG that
+# drill-down fails for a guest with a service error (reproduced 4 times out of 4, while the
+# project route succeeds in the same session), so this case now goes
+# Explore -> project -> Project details -> View units -> unit. BKG-001 never depended on the
+# featured unit - it needs any guest Unit Details - so the business intent is unchanged. The
+# featured-unit drill-down remains covered by HOME-005, which is where that defect belongs.
+# Re-verified live on PRE-4.7.6-1283 (21/09/2026): no Reserve unit, the three preconditions shown.
+- extendedWaitUntil:
+    visible: 'Explore\s*Tab 2 of 4'
+    timeout: 30000
+- tapOn: 'Explore\s*Tab 2 of 4'
+- extendedWaitUntil:
+    visible: "Registered Interests"
+    timeout: 45000
+
+# The marketplace gate, identical to project.yaml and marketplace.yaml: the Projects/Units
+# sub-tabs only exist once a search has run. The chip opens "Select category" on a cleared
+# install and the "Construction Status" filter sheet once a category is persisted.
+- runFlow:
+    when:
+      notVisible: '[Uu]nits\s*Tab 2 of 2'
+    commands:
+      - tapOn: "(Construction Status|Ready Units|Readymade|Offplan|Land)"
+      - waitForAnimationToEnd:
+          timeout: 8000
+      - runFlow:
+          when:
+            visible: "Start searching"
+          commands:
+            - tapOn: "Buy"
+            - tapOn: "Ready(made| Units)"
+            - tapOn: "Start searching"
+      - runFlow:
+          when:
+            visible: "Apply"
+          commands:
+            - tapOn: "Ready(made| Units)"
+            - tapOn: "Apply"
+- extendedWaitUntil:
+    visible: '[Uu]nits\s*Tab 2 of 2'
+    timeout: 90000
+
+- tapOn: 'Projects\s*Tab 1 of 2'
+- waitForAnimationToEnd:
+    timeout: 10000
+- tapOn:
+    below:
+      text: 'Projects\s*Tab 1 of 2'
+
+# The compare coach mark can land on top of the Project details screen.
+- waitForAnimationToEnd:
+    timeout: 8000
+- runFlow:
+    when:
+      visible: "Start comparing properties"
+    commands:
+      - back
+      - waitForAnimationToEnd:
+          timeout: 5000
+
+- extendedWaitUntil:
+    visible: "View units"
+    timeout: 45000
+- tapOn: "View units"
+- extendedWaitUntil:
+    visible: "(?s).*Unit list.*"
+    timeout: 45000
+
+# Open the first unit. Unit codes and prices are test data, so the card is targeted by
+# position relative to the static sort-control row directly above it.
+#
+# Anchored on "Area size" rather than "Price": on PRE-4.7.6-1283 the leading (price) sort
+# chip renders icon-only with no text and no contentDescription, so it cannot anchor
+# anything. "Area size" is the leftmost chip carrying a label on both STG-4.7.5-1278 and
+# PRE-4.7.6-1283, and sits in the same row, so the card targeted is unchanged.
+- tapOn:
+    below:
+      text: "Area size"
+
+# Unit Details genuinely loaded before asserting on it - static selectors only.
+- extendedWaitUntil:
+    visible: "Mortgage Calculator"
+    timeout: 45000
+
+# BKG-001 expected result on STG: the booking entry point is withheld from a guest, and the
+# app explains why. The negative assertion is the load-bearing half - it is what proves a
+# guest cannot start a reservation. No login redirect is expected or forced any more.
+- assertNotVisible: "Reserve unit"
+- assertVisible: "You are not logged in"
+- assertVisible: "(?s).*Logged in.*Eligible.*Financial Recommendations.*partner bank.*"
+# --- end BKG-001
+
+# --- Authenticated section: BKG-004 (absorbs BKG-005 status tabs, BKG-006 sub-filters),
+# BKG-011 and BKG-014. Read-only: nothing is reserved, paid, confirmed, cancelled or signed.
+#
+# LOGIN: the shared helper, exactly as account.yaml and the Full Journey call it. It owns
+# onboarding, Nafath, the contact-details prompts, the Sharrai/weekly-deal promo, the
+# biometrics prompt, the login-page bounce recovery and the authenticated-Home proof. Its
+# precondition is an unauthenticated app, so the guest session BKG-001 used is replaced by a
+# second cleared launch - relaunching also leaves Unit Details without blind Back presses.
+- launchApp:
+    clearState: true
+- runFlow:
+    file: subflows/login.yaml
+    env:
+      NATIONAL_ID: ${NATIONAL_ID}
+
+# Account lists "My bookings" only when authenticated and offers "Log in" only to a guest.
+- tapOn: 'Account\s*Tab 4 of 4'
+- extendedWaitUntil:
+    visible: "My bookings"
+    timeout: 60000
+- assertNotVisible: "Log in"
+# The bookings below are this account's own data, so prove from the profile itself which
+# account the session belongs to (read-only; returns to Account).
+- runFlow:
+    file: subflows/verify-signed-in-account.yaml
+    env:
+      NATIONAL_ID: ${NATIONAL_ID}
+- assertTrue: ${output.profileNationalId === String(NATIONAL_ID)}
+
+- tapOn: "My bookings"
+# Transition proof: the status-tab row exists only on My Bookings. (Maestro text matching is
+# case-insensitive, so the "My Bookings" title alone cannot be told apart from the Account row.)
+- extendedWaitUntil:
+    visible: 'Active\s*Tab 2 of 4'
+    timeout: 30000
+- assertVisible: "My Bookings"
+
+# BKG-005: status tabs.
+- assertVisible: 'All\s*Tab 1 of 4'
+- assertVisible: 'Active\s*Tab 2 of 4'
+- assertVisible: 'Completed\s*Tab 3 of 4'
+- assertVisible: 'Cancelled\s*Tab 4 of 4'
+
+# BKG-006: sub-filters.
+- assertVisible: "Unpaid"
+- assertVisible: "Ready to sign"
+
+# BKG-004: reservations are actually listed. Matched on the static "Unit code" label that
+# every booking card carries, not on the code itself - booking IDs, project names, prices,
+# dates and the number of bookings are all test-data dependent and deliberately not asserted.
+- assertVisible:
+    text: "(?s).*Unit code.*"
+    label: "PRECONDITION - BKG-004 needs at least one booking on NATIONAL_ID (test data)"
+
+# --- BKG-011: the Completed and Cancelled tabs render the correct set or an empty state.
+# Read-only: tabs are only switched, nothing is cancelled, selected or modified.
+#
+# Tab switches are proven by the tab's own selected=true state (exposed on this screen,
+# PRE-4.7.6-1283), never by the tap completing. Card labels are single multi-line nodes, so a
+# card's status and field labels are matched inside one string with (?s). Status words are
+# anchored between newlines: matching is case-insensitive, so a bare ".*Completed.*" would
+# also match the "Completed\nTab 3 of 4" label and pass on an empty tab.
+
+# Completed - either render is correct and both are asserted exactly: completed cards
+# (STG-4.7.5-1278 data), or the tab's own empty state (1000011487 on PRE-4.7.6-1283, live
+# 21/09/2026). The negatives prove the tab filtered in both cases.
+- tapOn: 'Completed\s*Tab 3 of 4'
+- extendedWaitUntil:
+    visible:
+      text: 'Completed\s*Tab 3 of 4'
+      selected: true
+    timeout: 15000
+- extendedWaitUntil:
+    visible: "(?s)(.*\nCompleted\n.*Unit code.*|You don't have any completed booking)"
+    timeout: 30000
+- assertNotVisible: "(?s).*\nActive\n.*"
+- assertNotVisible: "(?s).*\nCancelled\n.*"
+
+# Cancelled - requires at least one cancelled booking (precondition). Cancelled cards carry
+# "Cancellation date"; active cards carry "Booking date". First present and second absent
+# proves the tab filtered; completed cards must not leak in either.
+- tapOn: 'Cancelled\s*Tab 4 of 4'
+- extendedWaitUntil:
+    visible:
+      text: 'Cancelled\s*Tab 4 of 4'
+      selected: true
+    timeout: 15000
+- extendedWaitUntil:
+    visible: "(?s).*\nCancelled\n.*Unit code.*Cancellation date.*"
+    timeout: 30000
+    label: "PRECONDITION - BKG-011 needs a Cancelled booking on NATIONAL_ID (test data)"
+- assertNotVisible: "(?s).*Booking date.*"
+- assertNotVisible: "(?s).*\nCompleted\n.*"
+- assertNotVisible: "(?s).*\nActive\n.*"
+# --- end BKG-011
+
+# --- BKG-014: an Active UNIT booking's Unit Details tab shows the booked unit's information.
+# Read-only: no booking is created, cancelled, paid for or signed.
+#
+# PRECONDITION (test data): authenticated account -> My Bookings -> Active -> an Active UNIT
+# booking exists. A land booking is NOT a substitute: it opens "Land Details", a different
+# panel. Cards read "<project>\nActive\n[Paid\n]Unit Type\n<type>\nUnit code\n...", so a unit
+# booking is an Active card whose Unit Type is not "Land" (live 21/09/2026: 1012204739 has
+# three Active cards, all Land; 1000011487 has none).
+#
+# With no such card, BKG-014 is BLOCKED - no Active unit booking test data: it logs that, keeps
+# a screenshot and returns without failing the suite. It never creates a booking to satisfy
+# itself. Nothing is inferred from a completed tap: every step below is followed by a state
+# assertion.
+- tapOn: 'Active\s*Tab 2 of 4'
+- extendedWaitUntil:
+    visible:
+      text: 'Active\s*Tab 2 of 4'
+      selected: true
+    timeout: 15000
+# The Active tab has rendered: cards or its own empty state.
+- extendedWaitUntil:
+    visible: "(?s)(.*\nActive\n.*Unit code.*|You don't have any active booking)"
+    timeout: 30000
+# Bounded physical scroll (Flutter can list semantics outside the viewport): look for a unit
+# card below the fold, at most four swipes. Finger UP moves content DOWN.
+- repeat:
+    times: 4
+    while:
+      notVisible: "(?s).*\nActive\n(Paid\n)?Unit Type\n(?!Land\n)[^\n]+\nUnit code\n.*"
+    commands:
+      - swipe:
+          start: "50%,80%"
+          end: "50%,40%"
+          duration: 600
+      - waitForAnimationToEnd:
+          timeout: 3000
+
+- runFlow:
+    when:
+      notVisible: "(?s).*\nActive\n(Paid\n)?Unit Type\n(?!Land\n)[^\n]+\nUnit code\n.*"
+    commands:
+      - evalScript: ${output.bkg014 = "BLOCKED"}
+      - evalScript: "${console.log('BKG-014 BLOCKED - no Active unit booking test data for NATIONAL_ID [' + NATIONAL_ID + ']')}"
+      - takeScreenshot: bkg-014-blocked-no-active-unit-booking
+
+- runFlow:
+    when:
+      visible: "(?s).*\nActive\n(Paid\n)?Unit Type\n(?!Land\n)[^\n]+\nUnit code\n.*"
+    commands:
+      - tapOn: "(?s).*\nActive\n(Paid\n)?Unit Type\n(?!Land\n)[^\n]+\nUnit code\n.*"
+      # Transition proof: Booking Details opens on its own first tab, selected, and a unit
+      # booking's second tab is Unit Details (never Land Details).
+      - extendedWaitUntil:
+          visible:
+            text: 'Booking Details\s*Tab 1 of 2'
+            selected: true
+          timeout: 30000
+      - assertVisible: 'Unit Details\s*Tab 2 of 2'
+      - assertNotVisible: 'Land Details\s*Tab 2 of 2'
+      - tapOn: 'Unit Details\s*Tab 2 of 2'
+      - extendedWaitUntil:
+          visible:
+            text: 'Unit Details\s*Tab 2 of 2'
+            selected: true
+          timeout: 30000
+      # Unit panel field labels. Values (code, price, area, rooms, region) are test data and
+      # deliberately not asserted. NOT YET LIVE-VERIFIED on PRE-4.7.6-1283: no account with an
+      # Active unit booking has been available (carried over from the STG baseline).
+      - extendedWaitUntil:
+          visible: "Unit Price"
+          timeout: 30000
+      - assertVisible: "Project"
+      - assertVisible: "Block"
+      - assertVisible: "Building"
+      - assertVisible: "Floor"
+      - assertVisible: "Location"
+      # The Booking Details tab's own content is gone.
+      - assertNotVisible: "Payment Details"
+      - assertNotVisible: "Select payment method"
+      - evalScript: ${output.bkg014 = "EXECUTED"}
+      - evalScript: "${console.log('BKG-014 EXECUTED - Active unit booking Unit Details validated')}"
+# --- end BKG-014

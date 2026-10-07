@@ -1,0 +1,34 @@
+WARNING: Final field parent in class maestro.cli.command.TestCommand has been mutated reflectively by class picocli.CommandLine$Model$FieldBinding in unnamed module @2d9d4f9d (file:/D:/Automation-Tool/maestro/lib/picocli-4.6.3.jar)
+WARNING: Use --enable-final-field-mutation=ALL-UNNAMED to avoid a warning
+WARNING: Mutating final fields will be blocked in a future release unless final field mutation is enabled
+
+[31mcmd: Can't find service: package
+[39m[0m
+
+The stack trace was:
+maestro.android.AndroidOperationFailedException: cmd: Can't find service: package
+
+	at maestro.android.AndroidDeviceConnectionModelKt.orThrowOnFailure(AndroidDeviceConnectionModel.kt:138)
+	at maestro.drivers.AndroidDriver.install(AndroidDriver.kt:1337)
+	at maestro.drivers.AndroidDriver.installMaestroDriverApp$lambda$88(AndroidDriver.kt:1270)
+	at maestro.utils.Metrics.measured(Metrics.kt:48)
+	at maestro.drivers.AndroidDriver.installMaestroDriverApp(AndroidDriver.kt:1255)
+	at maestro.drivers.AndroidDriver.installMaestroApks(AndroidDriver.kt:1301)
+	at maestro.drivers.AndroidDriver.open(AndroidDriver.kt:110)
+	at maestro.Maestro$Companion.android(Maestro.kt:800)
+	at maestro.cli.session.MaestroSessionManager.createAndroid(MaestroSessionManager.kt:347)
+	at maestro.cli.session.MaestroSessionManager.createMaestro(MaestroSessionManager.kt:210)
+	at maestro.cli.session.MaestroSessionManager.newSession(MaestroSessionManager.kt:108)
+	at maestro.cli.session.MaestroSessionManager.newSession$default(MaestroSessionManager.kt:66)
+	at maestro.cli.command.TestCommand.runShardSuite(TestCommand.kt:477)
+	at maestro.cli.command.TestCommand.access$runShardSuite(TestCommand.kt:81)
+	at maestro.cli.command.TestCommand$handleSessions$1$results$1$1.invokeSuspend(TestCommand.kt:438)
+	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(ContinuationImpl.kt:34)
+	at kotlinx.coroutines.DispatchedTask.run(DispatchedTask.kt:100)
+	at kotlinx.coroutines.internal.LimitedDispatcher$Worker.run(LimitedDispatcher.kt:124)
+	at kotlinx.coroutines.scheduling.TaskImpl.run(Tasks.kt:89)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler.runSafely(CoroutineScheduler.kt:586)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.executeTask(CoroutineScheduler.kt:820)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.runWorker(CoroutineScheduler.kt:717)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.run(CoroutineScheduler.kt:704)
+

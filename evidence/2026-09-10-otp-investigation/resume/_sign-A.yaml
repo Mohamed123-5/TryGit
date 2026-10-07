@@ -1,0 +1,80 @@
+appId: fi.iwa.sakani
+name: RESUME A - open the unsigned booking and reach the contract OTP screen (nothing typed)
+env:
+  NATIONAL_ID: '${typeof NATIONAL_ID === "undefined" ? "1119880044" : String(NATIONAL_ID)}'
+  UNIT_CODE: '${typeof UNIT_CODE === "undefined" ? "01-01-0504-999-368" : String(UNIT_CODE)}'
+  INVOICE: '${typeof INVOICE === "undefined" ? "2609100000101946" : String(INVOICE)}'
+---
+# Resumes the EXISTING booking only. It creates no booking, pays nothing, cancels nothing and
+# never taps "Reject". It stops on the OTP screen WITHOUT typing, so that screen can be inspected
+# (hierarchy, focus, box contents, keyboard, timer) before the one and only OTP attempt.
+- assertTrue: ${String(NATIONAL_ID).length === 10 && !/[^0-9]/.test(String(NATIONAL_ID))}
+- launchApp:
+    clearState: true
+- runFlow:
+    file: ../../../.maestro/subflows/login.yaml
+    env:
+      NATIONAL_ID: ${NATIONAL_ID}
+
+- tapOn: 'Account\s*Tab 4 of 4'
+- runFlow:
+    file: ../../../.maestro/subflows/clear-overlays.yaml
+    env:
+      ANCHOR: "My bookings"
+- tapOn: "My bookings"
+- extendedWaitUntil:
+    visible: 'Active\s*Tab 2 of 4'
+    timeout: 45000
+- tapOn: 'Active\s*Tab 2 of 4'
+- extendedWaitUntil:
+    visible: "Ready to sign"
+    timeout: 30000
+- tapOn: "Ready to sign"
+- extendedWaitUntil:
+    visible: "(?s).*\nActive\n.*${UNIT_CODE}.*"
+    timeout: 45000
+- takeScreenshot: A-1-ready-to-sign
+- tapOn: "(?s).*\nActive\n.*${UNIT_CODE}.*"
+- extendedWaitUntil:
+    visible: "(?s).*steps? left.*"
+    timeout: 45000
+- takeScreenshot: A-2-booking-steps
+
+# This booking is paid, with its own invoice.
+- scrollUntilVisible:
+    element:
+      text: ${INVOICE}
+    direction: DOWN
+    timeout: 30000
+- assertVisible: "Booking fee status"
+- assertVisible: "Paid"
+- assertVisible: ${INVOICE}
+- takeScreenshot: A-3-paid-invoice
+
+# The step's CTA is the CLICKABLE "Sign contract" below the "Pay first installment" step; the
+# step label with the same text sits above it and is not a control (discovery dump 17:21).
+- scrollUntilVisible:
+    element:
+      text: "Sign contract"
+      below:
+        text: "Pay first installment"
+    direction: UP
+    timeout: 30000
+- tapOn:
+    text: "Sign contract"
+    below:
+      text: "Pay first installment"
+- extendedWaitUntil:
+    visible: "Sign sales contract"
+    timeout: 60000
+- assertVisible: "Approve"
+- assertVisible: "Reject"
+- takeScreenshot: A-4-contract
+
+- evalScript: "${console.log('RESUME A: tapping Approve')}"
+- tapOn: "Approve"
+- extendedWaitUntil:
+    visible: "Verification Code"
+    timeout: 45000
+- takeScreenshot: A-5-otp-screen-before-typing
+- evalScript: "${console.log('RESUME A: OTP screen reached, nothing typed')}"

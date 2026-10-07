@@ -1,0 +1,29 @@
+--------- beginning of main
+09-13 09:32:32.762 D/TrafficStats( 1789): tagSocket(93) with statsTag=0x6900, statsUid=-1
+09-13 09:32:33.320 D/StatusBarIconController(  817): ignoring old pipeline callbacks, because the new mobile icons are enabled
+09-13 09:32:33.542 D/Maestro ( 6126): Requesting view hierarchy
+09-13 09:32:33.545 W/QueryController( 6126): Could not detect idle state.
+09-13 09:32:33.546 W/QueryController( 6126): Could not detect idle state.
+09-13 09:32:33.591 I/Maestro ( 6126): Skipping invisible child: android.view.accessibility.AccessibilityNodeInfo@2d0b1; boundsInParent: Rect(0, 0 - 0, 49); boundsInScreen: Rect(99, 382 - 99, 431); boundsInWindow: Rect(99, 382 - 99, 431); packageName: com.google.android.apps.nexuslauncher; className: android.widget.TextView; text: null; error: null; maxTextLength: -1; stateDescription: null; contentDescription: null; tooltipText: null; containerTitle: null; viewIdResName: com.google.android.apps.nexuslauncher:id/subtitle_text; uniqueId: null; checkable: false; checked: false; focusable: true; focused: false; selected: false; clickable: true; longClickable: false; contextClickable: false; enabled: true; password: false; scrollable: false; importantForAccessibility: true; visible: false; actions: [AccessibilityAction: ACTION_FOCUS - null, AccessibilityAction: ACTION_SELECT - null, AccessibilityAction: ACTION_CLEAR_SELECTION - null, AccessibilityAction: ACTION_CLICK - null, AccessibilityAction: ACTION_ACCESSIBILITY_FOCUS - null, AccessibilityAction: ACTION_SHOW_ON_SCREEN - null]; isTextSelectable: false
+09-13 09:32:33.599 D/Maestro ( 6126): View hierarchy received in 57 ms
+09-13 09:32:33.681 D/StatusBarIconController(  817): ignoring old pipeline callbacks, because the new mobile icons are enabled
+09-13 09:32:33.693 D/EGL_emulation(  817): app_time_stats: avg=2338.50ms min=45.02ms max=6764.54ms count=3
+09-13 09:32:34.182 D/Maestro ( 6126): Requesting view hierarchy
+09-13 09:32:34.182 W/QueryController( 6126): Could not detect idle state.
+09-13 09:32:34.182 W/QueryController( 6126): Could not detect idle state.
+09-13 09:32:34.212 I/Maestro ( 6126): Skipping invisible child: android.view.accessibility.AccessibilityNodeInfo@2d0b1; boundsInParent: Rect(0, 0 - 0, 49); boundsInScreen: Rect(99, 382 - 99, 431); boundsInWindow: Rect(99, 382 - 99, 431); packageName: com.google.android.apps.nexuslauncher; className: android.widget.TextView; text: null; error: null; maxTextLength: -1; stateDescription: null; contentDescription: null; tooltipText: null; containerTitle: null; viewIdResName: com.google.android.apps.nexuslauncher:id/subtitle_text; uniqueId: null; checkable: false; checked: false; focusable: true; focused: false; selected: false; clickable: true; longClickable: false; contextClickable: false; enabled: true; password: false; scrollable: false; importantForAccessibility: true; visible: false; actions: [AccessibilityAction: ACTION_FOCUS - null, AccessibilityAction: ACTION_SELECT - null, AccessibilityAction: ACTION_CLEAR_SELECTION - null, AccessibilityAction: ACTION_CLICK - null, AccessibilityAction: ACTION_ACCESSIBILITY_FOCUS - null, AccessibilityAction: ACTION_SHOW_ON_SCREEN - null]; isTextSelectable: false
+09-13 09:32:34.218 D/Maestro ( 6126): View hierarchy received in 36 ms
+09-13 09:32:34.321 D/StatusBarIconController(  817): ignoring old pipeline callbacks, because the new mobile icons are enabled
+--------- beginning of system
+09-13 09:32:34.506 D/WindowManager(  572): captureDisplay
+09-13 09:32:34.515 I/hwservicemanager(  162): getTransport: Cannot find entry android.hardware.graphics.mapper@4.0::IMapper/default in either framework or device VINTF manifest.
+09-13 09:32:34.516 I/Gralloc4( 6112): mapper 4.x is not supported
+09-13 09:32:34.530 D/libEGL  ( 6112): loaded /vendor/lib64/egl/libEGL_emulation.so
+09-13 09:32:34.531 D/libEGL  ( 6112): loaded /vendor/lib64/egl/libGLESv1_CM_emulation.so
+09-13 09:32:34.532 D/libEGL  ( 6112): loaded /vendor/lib64/egl/libGLESv2_emulation.so
+09-13 09:32:34.543 W/OpenGLRenderer( 6112): Failed to choose config with EGL_SWAP_BEHAVIOR_PRESERVED, retrying without...
+09-13 09:32:34.544 W/OpenGLRenderer( 6112): Failed to initialize 101010-2 format, error = EGL_SUCCESS
+09-13 09:32:35.258 I/AidlLazyServiceRegistrar( 5459): Process has 0 (of 1 available) client(s) in use after notification artd has clients: 0
+09-13 09:32:35.259 I/AidlLazyServiceRegistrar( 5459): Trying to shut down the service. No clients in use for any service in process.
+09-13 09:32:35.263 I/AidlLazyServiceRegistrar( 5459): Unregistered all clients and exiting
+09-13 09:32:35.325 D/StatusBarIconController(  817): ignoring old pipeline callbacks, because the new mobile icons are enabled

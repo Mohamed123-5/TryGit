@@ -1,0 +1,288 @@
+@@@TARGET .maestro/account.yaml
+@@@OLD
+appId: fi.iwa.sakani
+name: PRF-001 profile details, PRF-007 invalid email, PRF-009 unsaved-changes guard, ACC-004 eligibility reason, ACC-007 notifications
+---
+- launchApp:
+    clearState: true
+@@@NEW
+appId: fi.iwa.sakani
+name: PRF-001 profile details, PRF-007 invalid email, PRF-009 unsaved-changes guard, ACC-004 eligibility reason, ACC-007 notifications
+env:
+  # The account this flow signs in as - defined once, here. Default (no override): 1000011485.
+  #   maestro test -e NATIONAL_ID=<10-digit National ID / Iqama> .maestro/account.yaml
+  # A self-referencing default, NOT a literal: on Maestro 2.9.0 a literal here silently beats
+  # `-e NATIONAL_ID=...`. Single-quoted because the expression contains ": ".
+  #
+  # ACCOUNT DATA: the cases below also assert this account's own data - the email
+  # 1000011483@test-sakani.housingapps.sa, a "Not Eligible" status with its reasons screen, and
+  # booking-lifecycle notifications. An override must point at an account holding the same data,
+  # or those assertions fail loudly; they are deliberately not re-pointed at whoever logged in.
+  NATIONAL_ID: '${typeof NATIONAL_ID === "undefined" ? "1000011485" : String(NATIONAL_ID)}'
+---
+# Fail fast, before the app is touched, on an empty or malformed override. Dollar-free on
+# purpose: a "$" inside ${...} makes Maestro 2.9.0 skip evaluation and pass the assert.
+- evalScript: ${console.log('ACCOUNT.YAML TARGET NATIONAL_ID = [' + NATIONAL_ID + ']')}
+- assertTrue: ${String(NATIONAL_ID).length === 10 && !/[^0-9]/.test(String(NATIONAL_ID)) && (String(NATIONAL_ID).charAt(0) === "1" || String(NATIONAL_ID).charAt(0) === "2")}
+- launchApp:
+    clearState: true
+@@@END
+@@@TARGET .maestro/account.yaml
+@@@OLD
+- inputText: "1000011485"
+@@@NEW
+- inputText: ${NATIONAL_ID}
+@@@END
+@@@TARGET .maestro/account.yaml
+@@@OLD
+- extendedWaitUntil:
+    visible: "Login with nafath"
+    timeout: 30000
+- tapOn: "Confirm"
+@@@NEW
+- extendedWaitUntil:
+    visible: "Login with nafath"
+    timeout: 30000
+# The Nafath screen must carry EXACTLY the requested ID before the session is created - the last
+# point at which a wrong account can be stopped before it is authenticated.
+- assertVisible: ${NATIONAL_ID}
+- tapOn: "Confirm"
+@@@END
+@@@TARGET .maestro/account.yaml
+@@@OLD
+- assertVisible: "National ID"
+- assertVisible: "1000011485"
+@@@NEW
+- assertVisible: "National ID"
+- assertVisible: ${NATIONAL_ID}
+@@@END
+@@@TARGET .maestro/booking.yaml
+@@@OLD
+appId: fi.iwa.sakani
+name: BKG-001 guest Reserve redirects to login, BKG-004 My Bookings lists reservations
+---
+- launchApp:
+    clearState: true
+@@@NEW
+appId: fi.iwa.sakani
+name: BKG-001 guest Reserve redirects to login, BKG-004 My Bookings lists reservations
+env:
+  # The account this flow signs in as - defined once, here. Default (no override): 1000011485.
+  #   maestro test -e NATIONAL_ID=<10-digit National ID / Iqama> .maestro/booking.yaml
+  # A self-referencing default, NOT a literal: on Maestro 2.9.0 a literal here silently beats
+  # `-e NATIONAL_ID=...`. Single-quoted because the expression contains ": ".
+  #
+  # ACCOUNT DATA: BKG-004 / BKG-011 / BKG-014 read this account's own bookings, so the account
+  # must hold an Active, a Completed and a Cancelled booking. Still read-only for any account.
+  NATIONAL_ID: '${typeof NATIONAL_ID === "undefined" ? "1000011485" : String(NATIONAL_ID)}'
+---
+# Fail fast, before the app is touched, on an empty or malformed override. Dollar-free on
+# purpose: a "$" inside ${...} makes Maestro 2.9.0 skip evaluation and pass the assert.
+- evalScript: ${console.log('BOOKING.YAML TARGET NATIONAL_ID = [' + NATIONAL_ID + ']')}
+- assertTrue: ${String(NATIONAL_ID).length === 10 && !/[^0-9]/.test(String(NATIONAL_ID)) && (String(NATIONAL_ID).charAt(0) === "1" || String(NATIONAL_ID).charAt(0) === "2")}
+- launchApp:
+    clearState: true
+@@@END
+@@@TARGET .maestro/booking.yaml
+@@@OLD
+- inputText: "1000011485"
+@@@NEW
+- inputText: ${NATIONAL_ID}
+@@@END
+@@@TARGET .maestro/booking.yaml
+@@@OLD
+- assertVisible: "Confirm"
+- tapOn: "Confirm"
+@@@NEW
+- assertVisible: "Confirm"
+# The Nafath screen must carry EXACTLY the requested ID before the session is created - the last
+# point at which a wrong account can be stopped before it is authenticated.
+- assertVisible: ${NATIONAL_ID}
+- tapOn: "Confirm"
+@@@END
+@@@TARGET .maestro/home.yaml
+@@@OLD
+appId: fi.iwa.sakani
+name: HOME-001 Home renders with four tabs, HOME-005 featured unit opens details, SRV-001 Services catalogue, NAV-001 back unwinds, QA-004 paid-service fee disclosed, HOME-006 Home personalises after login
+---
+- launchApp:
+    clearState: true
+@@@NEW
+appId: fi.iwa.sakani
+name: HOME-001 Home renders with four tabs, HOME-005 featured unit opens details, SRV-001 Services catalogue, NAV-001 back unwinds, QA-004 paid-service fee disclosed, HOME-006 Home personalises after login
+env:
+  # The account HOME-006 / QA-004 sign in as - defined once, here. Default (no override): 1000011485.
+  #   maestro test -e NATIONAL_ID=<10-digit National ID / Iqama> .maestro/home.yaml
+  # A self-referencing default, NOT a literal: on Maestro 2.9.0 a literal here silently beats
+  # `-e NATIONAL_ID=...`. Single-quoted because the expression contains ": ".
+  NATIONAL_ID: '${typeof NATIONAL_ID === "undefined" ? "1000011485" : String(NATIONAL_ID)}'
+---
+# Fail fast, before the app is touched, on an empty or malformed override. Dollar-free on
+# purpose: a "$" inside ${...} makes Maestro 2.9.0 skip evaluation and pass the assert.
+- evalScript: ${console.log('HOME.YAML TARGET NATIONAL_ID = [' + NATIONAL_ID + ']')}
+- assertTrue: ${String(NATIONAL_ID).length === 10 && !/[^0-9]/.test(String(NATIONAL_ID)) && (String(NATIONAL_ID).charAt(0) === "1" || String(NATIONAL_ID).charAt(0) === "2")}
+- launchApp:
+    clearState: true
+@@@END
+@@@TARGET .maestro/home.yaml
+@@@OLD
+- inputText: "1000011485"
+@@@NEW
+- inputText: ${NATIONAL_ID}
+@@@END
+@@@TARGET .maestro/home.yaml
+@@@OLD
+- extendedWaitUntil:
+    visible: "Login with nafath"
+    timeout: 30000
+- tapOn: "Confirm"
+@@@NEW
+- extendedWaitUntil:
+    visible: "Login with nafath"
+    timeout: 30000
+# The Nafath screen must carry EXACTLY the requested ID before the session is created - the last
+# point at which a wrong account can be stopped before it is authenticated.
+- assertVisible: ${NATIONAL_ID}
+- tapOn: "Confirm"
+@@@END
+@@@TARGET .maestro/logout.yaml
+@@@OLD
+appId: fi.iwa.sakani
+name: OUT-002 Logout clears session
+---
+- launchApp:
+    clearState: true
+@@@NEW
+appId: fi.iwa.sakani
+name: OUT-002 Logout clears session
+env:
+  # The account this flow signs in as and then logs out - defined once, here. Default (no
+  # override): 1000011485.
+  #   maestro test -e NATIONAL_ID=<10-digit National ID / Iqama> .maestro/logout.yaml
+  # A self-referencing default, NOT a literal: on Maestro 2.9.0 a literal here silently beats
+  # `-e NATIONAL_ID=...`. Single-quoted because the expression contains ": ".
+  NATIONAL_ID: '${typeof NATIONAL_ID === "undefined" ? "1000011485" : String(NATIONAL_ID)}'
+---
+# Fail fast, before the app is touched, on an empty or malformed override. Dollar-free on
+# purpose: a "$" inside ${...} makes Maestro 2.9.0 skip evaluation and pass the assert.
+- evalScript: ${console.log('LOGOUT.YAML TARGET NATIONAL_ID = [' + NATIONAL_ID + ']')}
+- assertTrue: ${String(NATIONAL_ID).length === 10 && !/[^0-9]/.test(String(NATIONAL_ID)) && (String(NATIONAL_ID).charAt(0) === "1" || String(NATIONAL_ID).charAt(0) === "2")}
+- launchApp:
+    clearState: true
+@@@END
+@@@TARGET .maestro/logout.yaml
+@@@OLD
+- inputText: "1000011485"
+@@@NEW
+- inputText: ${NATIONAL_ID}
+@@@END
+@@@TARGET .maestro/logout.yaml
+@@@OLD
+- extendedWaitUntil:
+    visible: "Login with nafath"
+    timeout: 30000
+- tapOn: "Confirm"
+@@@NEW
+- extendedWaitUntil:
+    visible: "Login with nafath"
+    timeout: 30000
+# The Nafath screen must carry EXACTLY the requested ID before the session is created - the last
+# point at which a wrong account can be stopped before it is authenticated.
+- assertVisible: ${NATIONAL_ID}
+- tapOn: "Confirm"
+@@@END
+@@@TARGET .maestro/wallet.yaml
+@@@OLD
+appId: fi.iwa.sakani
+name: WAL-008 over-balance withdrawal blocked, PRE-002 registered-interest empty state, PRE-008 preference-form gate, MTG validation, WAL-010 D-31 guard
+---
+- launchApp:
+    clearState: true
+@@@NEW
+appId: fi.iwa.sakani
+name: WAL-008 over-balance withdrawal blocked, PRE-002 registered-interest empty state, PRE-008 preference-form gate, MTG validation, WAL-010 D-31 guard
+env:
+  # The account this flow signs in as - defined once, here. Default (no override): 1000011485.
+  #   maestro test -e NATIONAL_ID=<10-digit National ID / Iqama> .maestro/wallet.yaml
+  # A self-referencing default, NOT a literal: on Maestro 2.9.0 a literal here silently beats
+  # `-e NATIONAL_ID=...`. Single-quoted because the expression contains ": ".
+  #
+  # ACCOUNT DATA: PRE-002 expects this account's registered-interest list to be EMPTY.
+  NATIONAL_ID: '${typeof NATIONAL_ID === "undefined" ? "1000011485" : String(NATIONAL_ID)}'
+---
+# Fail fast, before the app is touched, on an empty or malformed override. Dollar-free on
+# purpose: a "$" inside ${...} makes Maestro 2.9.0 skip evaluation and pass the assert.
+- evalScript: ${console.log('WALLET.YAML TARGET NATIONAL_ID = [' + NATIONAL_ID + ']')}
+- assertTrue: ${String(NATIONAL_ID).length === 10 && !/[^0-9]/.test(String(NATIONAL_ID)) && (String(NATIONAL_ID).charAt(0) === "1" || String(NATIONAL_ID).charAt(0) === "2")}
+- launchApp:
+    clearState: true
+@@@END
+@@@TARGET .maestro/wallet.yaml
+@@@OLD
+- inputText: "1000011485"
+@@@NEW
+- inputText: ${NATIONAL_ID}
+@@@END
+@@@TARGET .maestro/wallet.yaml
+@@@OLD
+- extendedWaitUntil:
+    visible: "Login with nafath"
+    timeout: 30000
+- tapOn: "Confirm"
+@@@NEW
+- extendedWaitUntil:
+    visible: "Login with nafath"
+    timeout: 30000
+# The Nafath screen must carry EXACTLY the requested ID before the session is created - the last
+# point at which a wrong account can be stopped before it is authenticated.
+- assertVisible: ${NATIONAL_ID}
+- tapOn: "Confirm"
+@@@END
+@@@TARGET .maestro/unit.yaml
+@@@OLD
+appId: fi.iwa.sakani
+name: UNIT-005 Unit Details exposes Reserve CTA
+---
+- launchApp:
+    clearState: true
+@@@NEW
+appId: fi.iwa.sakani
+name: UNIT-005 Unit Details exposes Reserve CTA
+env:
+  # The account this flow signs in as - defined once, here. Default (no override): 1119880040.
+  #   maestro test -e NATIONAL_ID=<10-digit National ID / Iqama> .maestro/unit.yaml
+  # A self-referencing default, NOT a literal: on Maestro 2.9.0 a literal here silently beats
+  # `-e NATIONAL_ID=...`. Single-quoted because the expression contains ": ".
+  #
+  # ACCOUNT DATA: UNIT-005 needs an ELIGIBLE account for which Villa B91-360 still exposes
+  # "Reserve unit" (see TEST DATA above). Any override must satisfy that too.
+  NATIONAL_ID: '${typeof NATIONAL_ID === "undefined" ? "1119880040" : String(NATIONAL_ID)}'
+---
+# Fail fast, before the app is touched, on an empty or malformed override. Dollar-free on
+# purpose: a "$" inside ${...} makes Maestro 2.9.0 skip evaluation and pass the assert.
+- evalScript: ${console.log('UNIT.YAML TARGET NATIONAL_ID = [' + NATIONAL_ID + ']')}
+- assertTrue: ${String(NATIONAL_ID).length === 10 && !/[^0-9]/.test(String(NATIONAL_ID)) && (String(NATIONAL_ID).charAt(0) === "1" || String(NATIONAL_ID).charAt(0) === "2")}
+- launchApp:
+    clearState: true
+@@@END
+@@@TARGET .maestro/unit.yaml
+@@@OLD
+# ACCOUNT: 1119880040. This flow authenticates itself rather than depending on a
+# pre-existing session, because login.yaml is pinned to 1000011485 - an account that is
+@@@NEW
+# ACCOUNT: NATIONAL_ID, default 1119880040 (see `env`). This flow authenticates itself rather
+# than depending on a pre-existing session, because login.yaml defaults to 1000011485 - an account that is
+@@@END
+@@@TARGET .maestro/unit.yaml
+@@@OLD
+- inputText: "1119880040"
+@@@NEW
+- inputText: ${NATIONAL_ID}
+@@@END
+@@@TARGET .maestro/unit.yaml
+@@@OLD
+- assertVisible: "1119880040"
+@@@NEW
+# The Nafath screen must carry EXACTLY the requested ID before the session is created.
+- assertVisible: ${NATIONAL_ID}
+@@@END

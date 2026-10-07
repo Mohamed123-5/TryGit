@@ -1,0 +1,25 @@
+WARNING: Final field parent in class maestro.cli.command.TestCommand has been mutated reflectively by class picocli.CommandLine$Model$FieldBinding in unnamed module @2d9d4f9d (file:/D:/Automation-Tool/maestro/lib/picocli-4.6.3.jar)
+WARNING: Use --enable-final-field-mutation=ALL-UNNAMED to avoid a warning
+WARNING: Mutating final fields will be blocked in a future release unless final field mutation is enabled
+Running on Pixel_8
+ > Flow PROBE - Murcia landing labels
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::arrayBaseOffset has been called by com.google.protobuf.UnsafeUtil$MemoryAccessor (file:/D:/Automation-Tool/maestro/lib/protobuf-java-3.21.9.jar)
+WARNING: Please consider reporting this to the maintainers of class com.google.protobuf.UnsafeUtil$MemoryAccessor
+WARNING: sun.misc.Unsafe::arrayBaseOffset will be removed in a future release
+Scrolling DOWN until "(?s).*Murcia complex project.*Units under construction.*" is visible with speed 40, visibility percentage 40%, timeout 60000 ms, with centering enabled... FAILED
+
+No visible element found: "(?s).*Murcia complex project.*Units under construction.*"
+
+Could not find a visible element matching selector: "(?s).*Murcia complex project.*Units under construction.*"
+Tip: Try adjusting the following settings to improve detection:
+- `timeout`: current = 60000ms ? Increase if you need more time to find the element
+- `speed`: current = 40 (0-100 scale) ? Increase for faster scrolling if element is far away
+- `waitToSettleTimeoutMs`: current = Not defined ? Set this value (e.g., 500ms) if your UI updates frequently between scrolls
+- `visibilityPercentage`: current = 40% ? Lower this value if you want to detect partially visible elements
+- `centerElement`: current = true ? Disable if you don't need the element to be centered after finding it
+
+
+==== Debug output (logs & screenshots) ====
+
+C:\Users\Mohammed Elkatry\.maestro\tests\2026-09-09_093017

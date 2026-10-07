@@ -1,0 +1,313 @@
+# DESTRUCTIVE: creates ONE real booking on the ZERO booking-fee path ("Confirm booking").
+# Explicit run authorization required. No payment, card data, invoice or gateway step exists here.
+# First matching unit only. Inventory with a fee above 0 is unsuitable test data and fails before
+# anything is committed; no retries across units. PASS only when the new Active booking of the
+# SAME unit is proven under My bookings - never from the Confirm tap itself.
+appId: fi.iwa.sakani
+name: PROBE - zero-fee summary disclaimer reference capture (NO Confirm booking)
+tags:
+  - critical
+env:
+
+  NATIONAL_ID: '${typeof NATIONAL_ID === "undefined" ? "1000011487" : String(NATIONAL_ID)}'
+  PROJECT: '${typeof PROJECT === "undefined" ? "مساكن طيبة المدائن EN" : String(PROJECT)}'
+  PROJECT_SEARCH: '${typeof PROJECT_SEARCH === "undefined" ? "طيبة" : String(PROJECT_SEARCH)}'
+  MODULE: '${typeof MODULE === "undefined" ? "Apartment" : String(MODULE)}'
+---
+- evalScript: ${console.log('FULL JOURNEY TARGET NATIONAL_ID = [' + NATIONAL_ID + ']')}
+- evalScript: ${output.targetNationalId = String(NATIONAL_ID)}
+- assertTrue: ${String(NATIONAL_ID).length === 10 && !/[^0-9]/.test(String(NATIONAL_ID)) && (String(NATIONAL_ID).charAt(0) === "1" || String(NATIONAL_ID).charAt(0) === "2")}
+
+- launchApp:
+    clearState: true
+- runFlow:
+    file: D:/Automation/Maestro-Mobile/.maestro/subflows/login.yaml
+    env:
+      NATIONAL_ID: ${NATIONAL_ID}
+- tapOn: 'Account\s*Tab 4 of 4'
+- extendedWaitUntil:
+    visible: "My bookings"
+    timeout: 60000
+- runFlow:
+    file: D:/Automation/Maestro-Mobile/.maestro/subflows/verify-signed-in-account.yaml
+    env:
+      NATIONAL_ID: ${NATIONAL_ID}
+
+- scrollUntilVisible:
+    element:
+      text: "(?s).*Eligibility checker status.*"
+    direction: DOWN
+    timeout: 30000
+- assertVisible: '(?s).*Eligibility checker status\s*Eligible.*'
+
+- assertTrue: ${output.loginNationalId === output.targetNationalId && output.targetNationalId === String(NATIONAL_ID) && output.profileNationalId === output.targetNationalId}
+- tapOn: 'Explore\s*Tab 2 of 4'
+- runFlow:
+    file: D:/Automation/Maestro-Mobile/.maestro/subflows/clear-overlays.yaml
+    env:
+      ANCHOR: "Registered Interests"
+- extendedWaitUntil:
+    visible: "Registered Interests"
+    timeout: 45000
+
+- tapOn: "(Construction Status|Ready Units|Readymade|Offplan|Land)"
+- waitForAnimationToEnd:
+    timeout: 8000
+
+- runFlow:
+    when:
+      visible: "Start searching"
+    commands:
+      - tapOn: "Buy"
+      - assertVisible: "Offplan"
+      - tapOn: "Offplan"
+      - tapOn: "Start searching"
+
+- runFlow:
+    when:
+      visible: "Apply"
+    commands:
+      - tapOn: "Clear"
+      - waitForAnimationToEnd:
+          timeout: 5000
+      - assertVisible: "Offplan"
+      - tapOn: "Offplan"
+      - tapOn: "Apply"
+
+- waitForAnimationToEnd:
+    timeout: 20000
+
+- extendedWaitUntil:
+    visible: "Offplan"
+    timeout: 45000
+- extendedWaitUntil:
+    visible: 'Projects\s*Tab 1 of 2'
+    timeout: 45000
+- takeScreenshot: journey-2-marketplace
+- repeat:
+    times: 3
+    commands:
+      - runFlow:
+          when:
+            notVisible: "Popular locations"
+          commands:
+            - tapOn:
+                point: "55%,11%"
+            - waitForAnimationToEnd:
+                timeout: 8000
+- extendedWaitUntil:
+    visible: "Popular locations"
+    timeout: 30000
+- tapOn: "Enter Region, City, Neighborhood, Street, Project, Developer, Building Number, Block Number"
+- inputText: ${PROJECT_SEARCH}
+
+# Results arrive grouped - Location, Property, Developer. Projects are listed under "Property";
+# a "Location" row can also contain the search term (a land-plan "Project ..."), so the tap is
+# constrained to the full project name AND to rows below the "Property" header.
+- extendedWaitUntil:
+    visible: "Property"
+    timeout: 30000
+- takeScreenshot: journey-2-search-results
+- tapOn:
+    text: "(?s).*${PROJECT}.*"
+    below:
+      text: "Property"
+
+# Opening a project raises the one-off "Start comparing properties" coach mark over it on a
+# fresh install (seen 10/09/2026); the helper closes it with Back - never its CTA - and stops at
+# the project page.
+- runFlow:
+    file: D:/Automation/Maestro-Mobile/.maestro/subflows/clear-overlays.yaml
+    env:
+      ANCHOR: "About this project"
+
+# --- Destination check: Project Details, and it is a bookable Offplan project.
+- extendedWaitUntil:
+    visible: "View units"
+    timeout: 45000
+- assertVisible: "About this project"
+- assertVisible: "Bookings open"
+- assertVisible: "(?s).*available units.*"
+
+# The project-type assertion this whole flow exists for. "Units under construction" is STG's
+# label for Offplan; a Ready Units project renders "Ready Units" here and fails this line
+# immediately, which is the intended behaviour.
+- scrollUntilVisible:
+    element:
+      text: "Project type"
+    direction: DOWN
+    timeout: 45000
+- assertVisible: "Units under construction"
+- runFlow:
+    when:
+      visible: "Target audience"
+    commands:
+      - assertVisible: "For all"
+
+- assertVisible: "Payment methods"
+- assertVisible: "Cash"
+
+# ==========================================================================================
+# STAGE 3 - Module inside the project, then a unit inside that module
+# ==========================================================================================
+
+- tapOn: "View units"
+- extendedWaitUntil:
+    visible: "(?s).*Unit list.*"
+    timeout: 45000
+- runFlow:
+    when:
+      visible: "Property type"
+    commands:
+      - tapOn: "Property type"
+      - extendedWaitUntil:
+          visible: "Apply"
+          timeout: 20000
+      - assertVisible: ${MODULE}
+      - tapOn: ${MODULE}
+      - tapOn: "Apply"
+      - extendedWaitUntil:
+          visible: "(?s).*Unit list.*"
+          timeout: 45000
+
+- assertNotVisible: "Scrim"
+
+- extendedWaitUntil:
+    visible: "(?s).*(Available|matched).*"
+    timeout: 45000
+- tapOn: "(?s).*${MODULE}s? (Available|matched).*"
+
+# Destination check: inside the module, listing its units.
+- extendedWaitUntil:
+    visible: "Eligibility type"
+    timeout: 45000
+- assertVisible: "(?s).*Prices.*"
+
+# Preserve the selected card for the same-booking proof. Observed 29/09/2026: the card title
+# "Apartment 999-182" is <block>-<unit number> of the unit on the booking summary.
+- copyTextFrom:
+    text: '(?s)${MODULE} [0-9A-Za-z-]+\n.*'
+    index: 0
+- evalScript: ${output.selectedUnitCard = String(maestro.copiedText)}
+- tapOn:
+    text: '(?s)${MODULE} [0-9A-Za-z-]+\n.*'
+    index: 0
+
+# Destination check: Unit Details for a unit of the selected module, and it is reservable.
+- extendedWaitUntil:
+    visible: "Mortgage Calculator"
+    timeout: 45000
+- assertVisible: "(?s).*Unit Price.*"
+- assertVisible: "Reserve unit"
+- takeScreenshot: journey-3-unit-details
+
+# ==========================================================================================
+# STAGE 4 - Reserve the unit
+# ==========================================================================================
+
+- tapOn: "Reserve unit"
+
+- extendedWaitUntil:
+    visible: "Booking summary"
+    timeout: 45000
+- assertVisible: "Please check your reservation details below and click Confirm booking."
+- extendedWaitUntil:
+    visible: "Booking Details"
+    timeout: 30000
+
+- scrollUntilVisible:
+    element:
+      text: "Project Type"
+    direction: DOWN
+    timeout: 30000
+
+# Second project-type gate, at the last point before the reservation is committed. This
+# screen spells it "Off-plan", hyphenated, where Project Details spells the same fact
+# "Units under construction"; each is matched where it is actually rendered.
+- assertVisible: "Project Type"
+- assertVisible: "(?s).*Off-?plan.*"
+
+# Read the fee label, then enforce the business-path and numeric-fee gates below.
+- scrollUntilVisible:
+    element:
+      text: "Booking Fee"
+    direction: DOWN
+    timeout: 30000
+- assertVisible: "Booking Fee"
+- takeScreenshot: journey-4-booking-summary
+
+# ZERO-FEE PATH ONLY. The fee is read from the rendered summary first; a fee above 0 is
+# unsuitable test data for this journey and stops the run here, before anything is committed.
+# Nothing on this path pays: there is no "Pay booking fee" step anywhere in this flow.
+- assertVisible: "Unit booking"
+- copyTextFrom:
+    text: '[0-9][0-9,]*(\.[0-9]+)?'
+    below: "Booking Fee"
+    above: "Booking disclaimer"
+- evalScript: ${output.bookingFee = Number(String(maestro.copiedText).replace(/,/g, ""))}
+- evalScript: "${console.log('BOOKING SUMMARY - Booking Fee rendered as [' + maestro.copiedText + '] = ' + output.bookingFee)}"
+- assertTrue:
+    condition: ${output.bookingFee === 0}
+    label: "TEST DATA - Booking Fee is not 0: unit unsuitable for the zero-fee journey"
+- assertNotVisible:
+    text: "Pay booking fee"
+    label: "TEST DATA - summary offers Pay booking fee: unit unsuitable for the zero-fee journey"
+- assertVisible:
+    text: "Confirm booking"
+    label: "PRECONDITION - zero-fee summary must expose Confirm booking"
+
+# Unit identity for the same-booking proof, read from the summary rows observed on
+# PRE-4.7.6-1283 (label node above its value node). Relative filters pick the closest match.
+- copyTextFrom:
+    text: '[0-9]+'
+    below: "Block"
+- evalScript: ${output.unitBlock = String(maestro.copiedText)}
+- copyTextFrom:
+    text: '[0-9]+'
+    below:
+      text: "${MODULE}"
+      index: 0
+- evalScript: ${output.unitNumber = String(maestro.copiedText)}
+- evalScript: "${console.log('ZERO-FEE UNIT - card [' + String(output.selectedUnitCard).replace(/\\n/g, ' | ') + '] block [' + output.unitBlock + '] ' + MODULE + ' [' + output.unitNumber + ']')}"
+- assertTrue:
+    condition: ${String(output.selectedUnitCard).indexOf(output.unitBlock + '-' + output.unitNumber) >= 0}
+    label: "PRECONDITION - booking summary is not for the selected unit card"
+
+# ==========================================================================================
+# STAGE 5 - Acknowledge the booking disclaimer, then Confirm booking (commits the reservation)
+# ==========================================================================================
+- scrollUntilVisible:
+    element:
+      text: "I have read and understood the Booking disclaimer"
+    direction: DOWN
+    timeout: 30000
+- assertVisible: "Booking disclaimer"
+- assertVisible: "I have read and understood the Booking disclaimer"
+- waitForAnimationToEnd:
+    timeout: 5000
+
+# CHECKBOX STATE. Its semantics cannot be trusted: the checkbox (a clickable ImageView left of
+# the label, no text) reports checked=false and selected=false while visibly ticked in every
+# saved hierarchy (29/09/2026, runs 11:00, 11:24, 14:59). As for the Favorites chips in
+# account.yaml, the state is proven by comparing the checkbox's own pixels with a reference
+# captured on this device. It is tapped ONLY when it does not match the ticked reference - a
+# blind tap would untick an already ticked box - and the ticked state is then REQUIRED.
+# PROBE ONLY - never taps Confirm booking or the checkbox.
+- takeScreenshot:
+    path: disclaimer-ticked
+    cropOn:
+      leftOf: "I have read and understood the Booking disclaimer"
+- takeScreenshot: probe-summary-full
+# Mechanism check: an optional runFlow whose screenshot assertion FAILS must leave the flag false and continue.
+- evalScript: ${output.flagWrong = false}
+- runFlow:
+    optional: true
+    commands:
+      - assertScreenshot:
+          path: D:/Automation/Maestro-Mobile/.maestro/reference-screenshots/favorites/land-selected.png
+          cropOn:
+            leftOf: "I have read and understood the Booking disclaimer"
+          thresholdPercentage: 95
+      - evalScript: ${output.flagWrong = true}
+- evalScript: "${console.log('PROBE MECHANISM - flag after failing optional assertScreenshot = ' + output.flagWrong)}"
+- assertVisible: "PROBE-END-MARKER-NOT-PRESENT"

@@ -1,0 +1,123 @@
+# PRJ-001 - Project card opens the Available Units list. Absorbs PRJ-002 (project summary).
+#
+# READ-ONLY: navigation and assertions only. The one interaction beyond navigation is choosing a
+# Buy / Ready Units search filter, a UI preference that changes no account, project, unit or
+# booking data. No unit is reserved and no booking CTA is tapped.
+#
+# Precondition is "Results": no authentication required, so this flow neither clears state nor
+# signs in, and runs as a guest or as whoever the device is signed in as. If an authenticated
+# Project case is ever added, sign in through subflows/login.yaml (the shared login that
+# login.yaml also uses) - never inline.
+appId: fi.iwa.sakani
+name: PRJ-001 Project opens Available Units list (PRJ-002 project summary)
+---
+- launchApp
+
+# Launched WITHOUT clearState, so the app starts from whatever the device holds (onboarding
+# after another flow's state wipe, the survey that reappears on every launch - D-12 - the
+# intermittent error dialog, or post-login prompts). The shared helper clears whichever is on
+# top and returns once the tab bar is reachable.
+- runFlow:
+    file: subflows/clear-overlays.yaml
+    env:
+      ANCHOR: 'Explore\s*Tab 2 of 4'
+- tapOn: 'Explore\s*Tab 2 of 4'
+
+# Explore's header must exist before acting on it: taps that land before it lays out open the
+# wrong surface. "Registered Interests" is the static filter chip present in both the
+# map-first landing and the results view.
+- extendedWaitUntil:
+    visible: "Registered Interests"
+    timeout: 45000
+
+# CATEGORY GATE - identical to marketplace.yaml. The Projects/Units sub-tabs exist only once a
+# search has run. The construction-status chip opens "Select category" (Buy/Rent + status,
+# confirmed with "Start searching") on a fresh install, or the "Construction Status" sheet
+# (confirmed with "Apply") once a category is persisted. Linear on purpose: a retry loop
+# oscillates, because the search can outlast any per-pass wait. Skipped when the sub-tabs are up.
+- runFlow:
+    when:
+      notVisible: '[Uu]nits\s*Tab 2 of 2'
+    commands:
+      - tapOn: "(Construction Status|Ready Units|Readymade|Offplan|Land)"
+      # Transition proof: one of the two sheets opened (not just "the tap completed").
+      - extendedWaitUntil:
+          visible: "(Start searching|Apply)"
+          timeout: 15000
+      - runFlow:
+          when:
+            visible: "Start searching"
+          commands:
+            - tapOn: "Buy"
+            - tapOn: "Ready(made| Units)"
+            - tapOn: "Start searching"
+      - runFlow:
+          when:
+            visible: "Apply"
+          commands:
+            - tapOn: "Ready(made| Units)"
+            - tapOn: "Apply"
+
+- extendedWaitUntil:
+    visible: '[Uu]nits\s*Tab 2 of 2'
+    timeout: 90000
+
+# Projects sub-tab. Transition proof: the tab reports selected (live, PRE-4.7.6-1283).
+- tapOn: 'Projects\s*Tab 1 of 2'
+- extendedWaitUntil:
+    visible:
+      text: 'Projects\s*Tab 1 of 2'
+      selected: true
+    timeout: 30000
+
+# The project cards render directly beneath the sub-tab row. Card labels embed the project
+# name, price and unit counts - all dynamic - so the first card is targeted by position
+# relative to the static sub-tab label. Its destination is proven below ("About this project"),
+# so a tap that lands anywhere else fails there rather than passing silently.
+- tapOn:
+    below:
+      text: 'Projects\s*Tab 1 of 2'
+
+# Project details. The compare coach mark can land on top of it the first time it opens; the
+# shared helper clears it (guarded Back) and returns once the project page is reachable - the
+# same call and anchor the Full Journeys use at this point.
+- runFlow:
+    file: subflows/clear-overlays.yaml
+    env:
+      ANCHOR: "About this project"
+
+# --- PRJ-002: the project summary, on the Project details screen that sits between the
+# results list and the units list (confirmed intended by product). The project name, price and
+# counts are live data, so each is asserted by shape or by its static label, not by value.
+- extendedWaitUntil:
+    visible: "View units"
+    timeout: 45000
+- assertVisible: "About this project"
+- assertVisible: "(?s).*Prices start from.*"
+- assertVisible: '\d+ - \d+'
+- assertVisible: '(?s).*\d+ - \d+ m.*'
+- assertVisible: "(?s).*available units.*"
+# --- end PRJ-002
+
+# --- PRJ-001: the project opens its Available Units list.
+- tapOn: "View units"
+
+# Transition proof: the units screen opens on its own "Unit list" tab, selected. Its label
+# carries the live unit count ("Unit list\n56\nTab 1 of 2", 22/09/2026), so it is matched by
+# shape.
+- extendedWaitUntil:
+    visible:
+      text: "(?s)Unit list.*Tab 1 of 2"
+      selected: true
+    timeout: 45000
+- assertVisible: "(?s)Project details.*Tab 2 of 2"
+
+# The sort controls are static. On PRE-4.7.6-1283 (live, 22/09/2026) they are "Price",
+# "Area size" and "Property type"; the earlier "Block"/"Bathroom" and "Bedroom" sorts are gone.
+# The leading chip renders icon-only - no text, no contentDescription - so it has no label to
+# assert; that missing label is a recorded defect, not papered over. Unit codes, prices and
+# the unit count are dynamic and asserted by shape only.
+- assertVisible: "Price"
+- assertVisible: "Area size"
+- assertVisible: "Property type"
+- assertVisible: "(?s).*[0-9]+ available units.*"

@@ -1,0 +1,6 @@
+=== 11:50:56 START login (NPS before launch: 0) ===
+=== 12:07:13 END login exit=1 ===
+=== 12:07:26 START unit (NPS before launch: 0) ===
+=== 12:23:17 END unit exit=1 ===
+=== 12:23:29 START wallet (NPS before launch: 0) ===
+=== 12:39:36 END wallet exit=1 ===

@@ -1,0 +1,5 @@
+appId: fi.iwa.sakani
+name: P7-condition-form
+---
+- assertTrue:
+    condition: ${1 === 2}

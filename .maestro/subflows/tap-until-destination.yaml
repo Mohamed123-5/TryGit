@@ -1,0 +1,48 @@
+# Navigate by tapping TARGET until DESTINATION is proven, surviving the NPS survey.
+#
+# WHY THIS EXISTS. The known NPS product defect can present the survey between two consecutive
+# Maestro hierarchy reads, and while it is up the sheet REPLACES the screen's accessibility tree -
+# so "clear overlays, then tap" is a race: the tab is there, the sheet comes back, the tap lands on
+# the sheet. This is the Account pattern proven in open-account-tab.yaml (itself lifted from the
+# e2e LEAVE HOME block), generalised so every flow that navigates across an NPS-prone transition
+# uses the same code instead of re-inlining it. open-account-tab.yaml now calls this.
+#
+#   NPS appears -> subflows/dismiss-nps.yaml (THE one NPS implementation: rating 5, Submit,
+#   close the thank-you) -> retry the SAME tap -> continue only once DESTINATION is proven.
+#
+# WHY IT IS NOT A BLIND RETRY
+#   - The loop condition is STATE: `while notVisible: DESTINATION`. It exits the moment the
+#     destination is genuinely reached and does nothing at all when it already is.
+#   - The bound (6) limits how long we try to REACH THE DESTINATION. It is NOT a limit on how often
+#     the survey may appear - it is handled on every pass, however many passes there are.
+#   - Use it only for navigation that is safe to repeat (tabs, list rows, "View ..." links): the
+#     tap is re-sent only while the destination is still absent.
+#
+# WHY THE TAP IS `optional: true`
+#   A tap that cannot land because the survey covers the screen must not fail the run - it is simply
+#   retried on the next pass. This is NOT a weakened assertion: arrival is proven below by
+#   DESTINATION, never by the tap having been dispatched.
+#
+# CONTRACT
+#   TARGET      - text selector (regex) of the element to tap.
+#   DESTINATION - text selector (regex) that only the opened screen satisfies. The caller keeps its
+#                 own business assertions; this helper proves arrival and nothing more.
+appId: fi.iwa.sakani
+name: Tap until the destination is proven
+---
+- repeat:
+    times: 6
+    while:
+      notVisible: ${DESTINATION}
+    commands:
+      - runFlow:
+          file: dismiss-nps.yaml
+      - tapOn:
+          text: ${TARGET}
+          optional: true
+      - waitForAnimationToEnd:
+          timeout: 3000
+
+# ARRIVAL IS PROVEN BY THE DESTINATION SCREEN, not by a completed tap. If it never opened, this
+# fails here with the real screen in the failure artifacts.
+- assertVisible: ${DESTINATION}

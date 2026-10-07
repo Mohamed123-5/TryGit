@@ -1,0 +1,25 @@
+{
+  "startedAt": "2026-09-29T08:19:32.770Z",
+  "finishedAt": "2026-09-29T08:26:01.731Z",
+  "device": "emulator-5554",
+  "includeE2e": true,
+  "results": [
+    {
+      "flow": "full-journey-without-fee",
+      "file": ".maestro/e2e/full-journey-without-fee.yaml",
+      "suite": "e2e",
+      "tags": [
+        "critical"
+      ],
+      "startedAt": "2026-09-29T08:19:32.869Z",
+      "durationMs": 388859,
+      "logPath": "report-dashboard/maestro-output/full-journey-without-fee/maestro.log",
+      "status": "FAIL",
+      "exitCode": 1,
+      "failedSteps": 3,
+      "firstFailure": "Assert that \"${DESTINATION}\" is visible... FAILED",
+      "envReason": null,
+      "npsAppearances": 0
+    }
+  ]
+}

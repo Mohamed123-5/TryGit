@@ -1,0 +1,3 @@
+login MAESTRO_EXIT=0 crashes=0
+account MAESTRO_EXIT=0 crashes=0
+marketplace MAESTRO_EXIT=0 crashes=0

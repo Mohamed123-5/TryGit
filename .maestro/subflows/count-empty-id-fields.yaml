@@ -1,0 +1,16 @@
+# Count the EMPTY person-ID inputs currently on screen into output.idEmptyNow.
+# An empty ID input exposes the placeholder "Enter ID number"; a filled one does not (live 04/10/2026,
+# run 10:33: after the Husband ID was typed the placeholder was gone and the fill loop ended).
+# Counts index 0, 1, 2 ... until the first index that is absent (one negative check, about 7 s).
+appId: fi.iwa.sakani
+name: Count empty person-ID fields
+---
+- evalScript: ${output.idEmptyNow = 0}
+- repeat:
+    times: 8
+    while:
+      visible:
+        text: "Enter ID number"
+        index: ${output.idEmptyNow}
+    commands:
+      - evalScript: ${output.idEmptyNow = output.idEmptyNow + 1}

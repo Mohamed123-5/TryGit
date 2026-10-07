@@ -1,0 +1,51 @@
+# TEMPORARY DIAGNOSTIC - delete after the investigation. Non-destructive.
+#
+# Signs in and then OBSERVES the post-login surfaces for ~110s without touching anything: after
+# "Confirm" nothing is tapped, typed or dismissed, so the order in which the overlays arrive is
+# recorded as the app produces it. A short pre-login observation window also tries to catch the
+# intermittent staging "Ok" dialog on camera (it is observed only; the helper then clears it).
+appId: fi.iwa.sakani
+name: DIAG - post-login overlay timeline (observes only after Confirm)
+env:
+  NATIONAL_ID: '${typeof NATIONAL_ID === "undefined" ? "1000011487" : String(NATIONAL_ID)}'
+---
+- assertTrue: ${String(NATIONAL_ID).length === 10 && !/[^0-9]/.test(String(NATIONAL_ID)) && (String(NATIONAL_ID).charAt(0) === "1" || String(NATIONAL_ID).charAt(0) === "2")}
+- launchApp:
+    clearState: true
+- evalScript: ${output.l0 = Date.now()}
+- repeat:
+    times: 6
+    commands:
+      - runFlow:
+          file: _diag-state.yaml
+          env:
+            LABEL: ${'PRE+' + Math.round((Date.now() - output.l0) / 1000) + 's'}
+      - waitForAnimationToEnd:
+          timeout: 2000
+- runFlow:
+    file: subflows/clear-overlays.yaml
+    env:
+      ANCHOR: "(?s).*Login / Sign up.*"
+- tapOn: "(?s).*Login / Sign up.*"
+- extendedWaitUntil:
+    visible: "Continue with N[ae]fath"
+    timeout: 45000
+- tapOn: "Enter your ID, phone number,? or email"
+- inputText: ${NATIONAL_ID}
+- tapOn: "Continue"
+- extendedWaitUntil:
+    visible: "Login with nafath"
+    timeout: 45000
+- assertVisible: ${NATIONAL_ID}
+- evalScript: ${output.t0 = Date.now()}
+- tapOn: "Confirm"
+- repeat:
+    times: 25
+    commands:
+      - runFlow:
+          file: _diag-state.yaml
+          env:
+            LABEL: ${'T+' + Math.round((Date.now() - output.t0) / 1000) + 's'}
+      - waitForAnimationToEnd:
+          timeout: 1500
+- takeScreenshot: diag-timeline-end

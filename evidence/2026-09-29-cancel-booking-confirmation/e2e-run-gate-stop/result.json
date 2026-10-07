@@ -1,0 +1,17 @@
+{
+  "flow": "cancel-booking",
+  "file": ".maestro/e2e/cancel-booking.yaml",
+  "suite": "e2e",
+  "tags": [
+    "happy-path"
+  ],
+  "startedAt": "2026-09-29T08:58:32.496Z",
+  "durationMs": 202115,
+  "logPath": "report-dashboard/maestro-output/cancel-booking/maestro.log",
+  "status": "FAIL",
+  "exitCode": 1,
+  "failedSteps": 1,
+  "firstFailure": "Assert that ${output.cancelAllowed === true} is true... FAILED",
+  "envReason": null,
+  "npsAppearances": 0
+}

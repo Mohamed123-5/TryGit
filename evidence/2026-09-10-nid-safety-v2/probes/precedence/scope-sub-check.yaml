@@ -1,0 +1,4 @@
+appId: fi.iwa.sakani
+name: scope sub that must NOT see LEAKTEST
+---
+- evalScript: ${console.log('SCOPE LEAKTEST typeof = [' + (typeof LEAKTEST) + ']')}

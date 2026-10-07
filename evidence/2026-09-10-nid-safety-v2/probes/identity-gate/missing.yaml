@@ -1,0 +1,7 @@
+appId: fi.iwa.sakani
+name: GATE missing
+env:
+  NATIONAL_ID: '${typeof NATIONAL_ID === "undefined" ? "1119880062" : String(NATIONAL_ID)}'
+---
+- evalScript: ${output.targetNationalId = String(NATIONAL_ID)}
+- assertTrue: ${output.loginNationalId === output.targetNationalId && output.targetNationalId === String(NATIONAL_ID)}

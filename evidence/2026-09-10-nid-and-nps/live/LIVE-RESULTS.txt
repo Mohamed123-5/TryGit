@@ -1,0 +1,36 @@
+===== LIVE 1: NO override (default must be 1119880062) =====
+  exit=0
+  maestro.log: C:/Users/Mohammed Elkatry/.maestro/tests/2026-09-10_095636/maestro.log
+  resolved target (evaluated console.log): NATIONAL_ID = [1119880062]
+  typed into login field (InputTextCommand): InputTextCommand(text=1119880062 
+  ID assertions on entry + Nafath screens (textRegex):       2 textRegex=1119880062 
+  eligibility assert: COMPLETED
+  FAILED steps: 
+===== LIVE 2: -e NATIONAL_ID=1000011487 =====
+  exit=1
+  maestro.log: C:/Users/Mohammed Elkatry/.maestro/tests/2026-09-10_095858/maestro.log
+  resolved target (evaluated console.log): NATIONAL_ID = [1000011487]
+  typed into login field (InputTextCommand): InputTextCommand(text=1000011487 
+  ID assertions on entry + Nafath screens (textRegex):       2 textRegex=1000011487 
+  eligibility assert: 
+  FAILED steps: Assert that "(?si)(Hello|Good (morning|afternoon|evening)),\s*\S.*" is visible FAILED|Run subflows/login.yaml FAILED|
+===== LIVE 3: NPS recovery (tab navigation only, session of 1000011487) =====
+  exit=1
+  maestro.log: C:/Users/Mohammed Elkatry/.maestro/tests/2026-09-10_100615/maestro.log
+  NPS sheet met (handler condition true): 0
+  recovery drags executed at 58%: 0
+  drags at the OLD 73% point: 0
+  every element TAPPED (textRegex):
+      2     Account\s*Tab 4 of 4
+     45     Dismiss
+     45     Don.t allow
+      1     Home\s*Tab 1 of 4
+     45     Maybe Later
+     45     Ok
+     45     Reject cookies
+     45     Skip
+  taps on Submit or a 0-10 rating: 0
+  point taps:      45 TapOnPointV2Command(point=7%,9% 
+  final-sweep assertNotVisible(NPS):       1 COMPLETED 
+  post-recovery anchor proof ran: 0 | skipped: 1
+  FAILED steps: Tap on "Account\s*Tab 4 of 4" FAILED|Repeat 4 times FAILED|

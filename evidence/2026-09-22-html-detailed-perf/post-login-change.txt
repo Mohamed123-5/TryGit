@@ -1,0 +1,8 @@
+subflows/post-login.yaml - executable change (22/09/2026), comments aside:
+  L60  ANCHOR: '(?si)((Hello|Good (morning|afternoon|evening)),\s*\S.*|New service|Go to the weekly (offer|deal))'
+    -> ANCHOR: '(?si)((Hello|Good (morning|afternoon|evening)),\s*\S.*|New service|Go to the weekly (offer|deal)|Continue with N[ae]fath)'
+  L149 ANCHOR: '(?si)(Hello|Good (morning|afternoon|evening)),\s*\S.*'
+    -> ANCHOR: '(?si)((Hello|Good (morning|afternoon|evening)),\s*\S.*|Continue with N[ae]fath)'
+Reason: account.yaml html-detailed run 2026-09-22_121633 - contact prompt stacked on the login page;
+clear-overlays (greeting anchor) ground 26 passes + 120 s exit wait (341.3 s) and FAILED before the
+post-login LOGIN RECOVERY (relaunch, no clearState) could run.

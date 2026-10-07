@@ -1,0 +1,53 @@
+A. fail-fast guards (before launchApp)
+  PASS  3 assertTrue guards precede the first launchApp (line 93); found 3
+  PASS  all three valid -> proceeds
+  PASS  NATIONAL_ID missing -> stops before launch
+  PASS  NATIONAL_ID empty -> stops before launch
+  PASS  NATIONAL_ID malformed (12345) -> stops before launch
+  PASS  NATIONAL_ID starts with 3 -> stops before launch
+  PASS  EXPECTED_UNIT_CODE missing -> stops before launch
+  PASS  EXPECTED_UNIT_CODE empty -> stops before launch
+  PASS  EXPECTED_UNIT_CODE with a letter -> stops before launch
+  PASS  EXPECTED_UNIT_CODE regex chars (.*) -> stops before launch
+  PASS  EXPECTED_UNIT_CODE trailing hyphen -> stops before launch
+  PASS  EXPECTED_UNIT_CODE double hyphen -> stops before launch
+  PASS  EXPECTED_UNIT_CODE no hyphen -> stops before launch
+  PASS  EXPECTED_INVOICE missing -> stops before launch
+  PASS  EXPECTED_INVOICE empty -> stops before launch
+  PASS  EXPECTED_INVOICE too short -> stops before launch
+  PASS  EXPECTED_INVOICE with a letter -> stops before launch
+B. five-condition gate and stop messages
+  gate decision under test: output.cancelAllowed = output.identityOk === true && output.unitMatch === true && output.invoiceMatch === true && output.activeOk === true && output.unsignedOk === true
+  PASS  5 stop branches after the decision (4 messages + screenshot); found 5
+  PASS  ASSIGNED + Active + Unsigned (all five) -> CANCEL allowed
+  PASS  identity not proven -> stop
+  PASS  assigned unit nowhere on the account -> stop | "Assigned booking not found."
+  PASS  assigned unit Active but a DIFFERENT invoice -> stop | "Assigned booking not found. (unit ["
+  PASS  assigned unit only under Cancelled/Completed -> stop | "Assigned booking found but it is not Active - nothing cancelled."
+  PASS  assigned booking SIGNED (1 steps left) -> stop | "Assigned booking found but it is Signed or its contract is not Unsigne"
+  PASS  assigned booking, Documents show Signed -> stop | "Assigned booking found but it is Signed or its contract is not Unsigne"
+  PASS  assigned booking, no Sales contract row yet -> stop | "Assigned booking found but it is Signed or its contract is not Unsigne"
+  PASS  unit text extracted differently from the pin -> stop | "Assigned booking not found. (unit ["
+C. unit-code card selectors against real card texts (saved dumps)
+  PASS  real cards found in dumps: 8 distinct (Active 999-132 and Cancelled 999-132 present)
+  PASS  Active-card selector and any-card selector are both pinned to ${EXPECTED_UNIT_CODE}
+  PASS  Active selector MATCHES the real Active card of its own unit (999-132)
+  PASS  Active selector does NOT match a shorter prefix pin (999-13)
+  PASS  Active selector does NOT match a longer pin (999-1320)
+  PASS  Active selector does NOT match another unit (999-205)
+  PASS  Active selector does NOT match the same unit when Cancelled
+  PASS  any-card selector finds the same unit under Cancelled (for the not-Active report)
+D. ordering and structure
+  PASS  safety gate present (line 351)
+  PASS  all 6 cancellation taps are after the gate
+  PASS  no step selects anything by position (no "index: 0")
+  PASS  every booking-card selector (6) is pinned to EXPECTED_UNIT_CODE
+  PASS  no forbidden step (reserve/pay/method/approve/reject/sign/OTP/card/Submit/View booking/free-text reason)
+  PASS  no ${...} expression contains a second "$"
+  PASS  stop message present: "Assigned booking not found."
+  PASS  stop message present: "Assigned booking found but it is not Active - nothing cancelled."
+  PASS  stop message present: "Assigned booking found but it is Signed or its contract is not Unsigned - nothing cancelled."
+  PASS  header documents the 3-input command
+  PASS  referenced subflows exist: subflows/login.yaml, subflows/clear-overlays.yaml, subflows/verify-signed-in-account.yaml
+
+STATIC CHECK: ALL PASS

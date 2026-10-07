@@ -1,0 +1,5032 @@
+[ {
+  "command" : {
+    "defineVariablesCommand" : {
+      "env" : {
+        "MAESTRO_FILENAME" : "diag-guest-home-overlays",
+        "MAESTRO_DEVICE_UDID" : "emulator-5554",
+        "MAESTRO_SHARD_ID" : "1",
+        "MAESTRO_SHARD_INDEX" : "0"
+      },
+      "optional" : false
+    }
+  },
+  "metadata" : {
+    "status" : "COMPLETED",
+    "timestamp" : 1791200639976,
+    "duration" : 14,
+    "sequenceNumber" : 0,
+    "depth" : 0,
+    "evaluatedCommand" : {
+      "defineVariablesCommand" : {
+        "env" : {
+          "MAESTRO_FILENAME" : "diag-guest-home-overlays",
+          "MAESTRO_DEVICE_UDID" : "emulator-5554",
+          "MAESTRO_SHARD_ID" : "1",
+          "MAESTRO_SHARD_INDEX" : "0"
+        },
+        "optional" : false
+      }
+    }
+  }
+}, {
+  "command" : {
+    "applyConfigurationCommand" : {
+      "config" : {
+        "appId" : "fi.iwa.sakani",
+        "name" : "DIAG - guest Home overlay phase (read-only hold)"
+      },
+      "optional" : false
+    }
+  },
+  "metadata" : {
+    "status" : "COMPLETED",
+    "timestamp" : 1791200639998,
+    "duration" : 11,
+    "sequenceNumber" : 1,
+    "depth" : 0,
+    "evaluatedCommand" : {
+      "applyConfigurationCommand" : {
+        "config" : {
+          "appId" : "fi.iwa.sakani",
+          "name" : "DIAG - guest Home overlay phase (read-only hold)"
+        },
+        "optional" : false
+      }
+    }
+  }
+}, {
+  "command" : {
+    "launchAppCommand" : {
+      "appId" : "fi.iwa.sakani",
+      "clearState" : true,
+      "optional" : false
+    }
+  },
+  "metadata" : {
+    "status" : "COMPLETED",
+    "timestamp" : 1791200640026,
+    "duration" : 9990,
+    "sequenceNumber" : 2,
+    "depth" : 0,
+    "evaluatedCommand" : {
+      "launchAppCommand" : {
+        "appId" : "fi.iwa.sakani",
+        "clearState" : true,
+        "optional" : false
+      }
+    }
+  }
+}, {
+  "command" : {
+    "runFlowCommand" : {
+      "commands" : [ {
+        "defineVariablesCommand" : {
+          "env" : {
+            "ANCHOR" : "(?s).*Login / Sign up.*"
+          },
+          "optional" : false
+        }
+      }, {
+        "applyConfigurationCommand" : {
+          "config" : {
+            "appId" : "fi.iwa.sakani",
+            "name" : "Clear first-run and promo overlays"
+          },
+          "optional" : false
+        }
+      }, {
+        "repeatCommand" : {
+          "times" : "26",
+          "condition" : {
+            "notVisible" : {
+              "textRegex" : "${ANCHOR}",
+              "optional" : false
+            }
+          },
+          "commands" : [ {
+            "evalScriptCommand" : {
+              "scriptString" : "${output.handled = false}",
+              "optional" : false
+            }
+          }, {
+            "runFlowCommand" : {
+              "commands" : [ {
+                "runFlowCommand" : {
+                  "commands" : [ {
+                    "tapOnElement" : {
+                      "selector" : {
+                        "textRegex" : "Don.t allow",
+                        "optional" : false
+                      },
+                      "retryIfNoChange" : false,
+                      "waitUntilVisible" : false,
+                      "longPress" : false,
+                      "optional" : false
+                    }
+                  }, {
+                    "evalScriptCommand" : {
+                      "scriptString" : "${output.handled = true}",
+                      "optional" : false
+                    }
+                  }, {
+                    "waitForAnimationToEndCommand" : {
+                      "timeout" : "3000",
+                      "optional" : false
+                    }
+                  } ],
+                  "condition" : {
+                    "visible" : {
+                      "textRegex" : "Don.t allow",
+                      "optional" : false
+                    }
+                  },
+                  "optional" : false
+                }
+              }, {
+                "runFlowCommand" : {
+                  "commands" : [ {
+                    "tapOnElement" : {
+                      "selector" : {
+                        "textRegex" : "Skip",
+                        "optional" : false
+                      },
+                      "retryIfNoChange" : false,
+                      "waitUntilVisible" : false,
+                      "longPress" : false,
+                      "optional" : false
+                    }
+                  }, {
+                    "evalScriptCommand" : {
+                      "scriptString" : "${output.handled = true}",
+                      "optional" : false
+                    }
+                  }, {
+                    "waitForAnimationToEndCommand" : {
+                      "timeout" : "3000",
+                      "optional" : false
+                    }
+                  } ],
+                  "condition" : {
+                    "visible" : {
+                      "textRegex" : "Skip",
+                      "optional" : false
+                    }
+                  },
+                  "optional" : false
+                }
+              }, {
+                "runFlowCommand" : {
+                  "commands" : [ {
+                    "tapOnElement" : {
+                      "selector" : {
+                        "textRegex" : "Dismiss",
+                        "optional" : false
+                      },
+                      "retryIfNoChange" : false,
+                      "waitUntilVisible" : false,
+                      "longPress" : false,
+                      "optional" : false
+                    }
+                  }, {
+                    "evalScriptCommand" : {
+                      "scriptString" : "${output.handled = true}",
+                      "optional" : false
+                    }
+                  }, {
+                    "waitForAnimationToEndCommand" : {
+                      "timeout" : "3000",
+                      "optional" : false
+                    }
+                  } ],
+                  "condition" : {
+                    "visible" : {
+                      "textRegex" : "Dismiss",
+                      "optional" : false
+                    }
+                  },
+                  "optional" : false
+                }
+              }, {
+                "runFlowCommand" : {
+                  "commands" : [ {
+                    "runFlowCommand" : {
+                      "commands" : [ {
+                        "evalScriptCommand" : {
+                          "scriptString" : "${console.log('CLEAR-OVERLAYS OK-HANDLER: dismissing the ERROR dialog (there is something wrong / please try again later). If this line sits after a reservation, payment or signature step, the business outcome MUST be re-read from the product records before the run is called green.')}",
+                          "optional" : false
+                        }
+                      } ],
+                      "condition" : {
+                        "visible" : {
+                          "textRegex" : "There's something wrong. Please try again later!",
+                          "optional" : false
+                        }
+                      },
+                      "optional" : false
+                    }
+                  }, {
+                    "evalScriptCommand" : {
+                      "scriptString" : "${console.log('CLEAR-OVERLAYS OK-HANDLER: tapping Ok')}",
+                      "optional" : false
+                    }
+                  }, {
+                    "tapOnElement" : {
+                      "selector" : {
+                        "textRegex" : "Ok",
+                        "optional" : false
+                      },
+                      "retryIfNoChange" : false,
+                      "waitUntilVisible" : false,
+                      "longPress" : false,
+                      "optional" : false
+                    }
+                  }, {
+                    "evalScriptCommand" : {
+                      "scriptString" : "${output.handled = true}",
+                      "optional" : false
+                    }
+                  }, {
+                    "waitForAnimationToEndCommand" : {
+                      "timeout" : "3000",
+                      "optional" : false
+                    }
+                  } ],
+                  "condition" : {
+                    "visible" : {
+                      "textRegex" : "Ok",
+                      "optional" : false
+                    }
+                  },
+                  "optional" : false
+                }
+              }, {
+                "runFlowCommand" : {
+                  "commands" : [ {
+                    "backPressCommand" : {
+                      "optional" : false
+                    }
+                  }, {
+                    "evalScriptCommand" : {
+                      "scriptString" : "${output.handled = true}",
+                      "optional" : false
+                    }
+                  }, {
+                    "waitForAnimationToEndCommand" : {
+                      "timeout" : "3000",
+                      "optional" : false
+                    }
+                  } ],
+                  "condition" : {
+                    "visible" : {
+                      "textRegex" : "Marketplace Day",
+                      "optional" : false
+                    }
+                  },
+                  "optional" : false
+                }
+              }, {
+                "runFlowCommand" : {
+                  "commands" : [ {
+                    "backPressCommand" : {
+                      "optional" : false
+                    }
+                  }, {
+                    "evalScriptCommand" : {
+                      "scriptString" : "${output.handled = true}",
+                      "optional" : false
+                    }
+                  }, {
+                    "waitForAnimationToEndCommand" : {
+                      "timeout" : "3000",
+                      "optional" : false
+                    }
+                  } ],
+                  "condition" : {
+                    "visible" : {
+                      "textRegex" : "Start comparing properties",
+                      "optional" : false
+                    }
+                  },
+                  "optional" : false
+                }
+              }, {
+                "runFlowCommand" : {
+                  "commands" : [ {
+                    "backPressCommand" : {
+                      "optional" : false
+                    }
+                  }, {
+                    "evalScriptCommand" : {
+                      "scriptString" : "${output.handled = true}",
+                      "optional" : false
+                    }
+                  }, {
+                    "waitForAnimationToEndCommand" : {
+                      "timeout" : "3000",
+                      "optional" : false
+                    }
+                  } ],
+                  "condition" : {
+                    "visible" : {
+                      "textRegex" : "Go to the weekly (offer|deal)",
+                      "optional" : false
+                    }
+                  },
+                  "optional" : false
+                }
+              }, {
+                "runFlowCommand" : {
+                  "commands" : [ {
+                    "backPressCommand" : {
+                      "optional" : false
+                    }
+                  }, {
+                    "evalScriptCommand" : {
+                      "scriptString" : "${output.handled = true}",
+                      "optional" : false
+                    }
+                  }, {
+                    "waitForAnimationToEndCommand" : {
+                      "timeout" : "3000",
+                      "optional" : false
+                    }
+                  } ],
+                  "condition" : {
+                    "visible" : {
+                      "textRegex" : "Update email",
+                      "optional" : false
+                    }
+                  },
+                  "optional" : false
+                }
+              }, {
+                "runFlowCommand" : {
+                  "commands" : [ {
+                    "tapOnPointV2Command" : {
+                      "point" : "7%,9%",
+                      "retryIfNoChange" : false,
+                      "longPress" : false,
+                      "optional" : false
+                    }
+                  }, {
+                    "evalScriptCommand" : {
+                      "scriptString" : "${output.handled = true}",
+                      "optional" : false
+                    }
+                  }, {
+                    "waitForAnimationToEndCommand" : {
+                      "timeout" : "4000",
+                      "optional" : false
+                    }
+                  } ],
+                  "condition" : {
+                    "visible" : {
+                      "textRegex" : "Number and Email Already Linked",
+                      "optional" : false
+                    }
+                  },
+                  "optional" : false
+                }
+              }, {
+                "runFlowCommand" : {
+                  "commands" : [ {
+                    "runFlowCommand" : {
+                      "commands" : [ {
+                        "applyConfigurationCommand" : {
+                          "config" : {
+                            "appId" : "fi.iwa.sakani",
+                            "name" : "Answer the NPS survey with rating 5 if it is on screen"
+                          },
+                          "optional" : false
+                        }
+                      }, {
+                        "runFlowCommand" : {
+                          "commands" : [ {
+                            "runFlowCommand" : {
+                              "commands" : [ {
+                                "evalScriptCommand" : {
+                                  "scriptString" : "${output.npsCount = (output.npsCount || 0) + 1}",
+                                  "optional" : false
+                                }
+                              }, {
+                                "evalScriptCommand" : {
+                                  "scriptString" : "${console.log('NPS KNOWN DEFECT - answering with rating 5, occurrence ' + output.npsCount)}",
+                                  "optional" : false
+                                }
+                              }, {
+                                "tapOnElement" : {
+                                  "selector" : {
+                                    "textRegex" : "5",
+                                    "below" : {
+                                      "textRegex" : "(?s).*would you recommend benefiting from Sakani.*",
+                                      "optional" : false
+                                    },
+                                    "optional" : false
+                                  },
+                                  "retryIfNoChange" : false,
+                                  "waitUntilVisible" : false,
+                                  "longPress" : false,
+                                  "optional" : false
+                                }
+                              }, {
+                                "tapOnElement" : {
+                                  "selector" : {
+                                    "textRegex" : "Submit",
+                                    "optional" : false
+                                  },
+                                  "retryIfNoChange" : false,
+                                  "waitUntilVisible" : false,
+                                  "longPress" : false,
+                                  "optional" : false
+                                }
+                              }, {
+                                "repeatCommand" : {
+                                  "times" : "4",
+                                  "condition" : {
+                                    "notVisible" : {
+                                      "textRegex" : "Thank you for your feedback",
+                                      "optional" : false
+                                    }
+                                  },
+                                  "commands" : [ {
+                                    "waitForAnimationToEndCommand" : {
+                                      "timeout" : "3000",
+                                      "optional" : false
+                                    }
+                                  } ],
+                                  "optional" : false
+                                }
+                              }, {
+                                "runFlowCommand" : {
+                                  "commands" : [ {
+                                    "runFlowCommand" : {
+                                      "commands" : [ {
+                                        "takeScreenshotCommand" : {
+                                          "path" : "nps-rating-5-thank-you",
+                                          "optional" : false
+                                        }
+                                      } ],
+                                      "condition" : {
+                                        "visible" : {
+                                          "textRegex" : "Thank you for your feedback",
+                                          "optional" : false
+                                        }
+                                      },
+                                      "optional" : false
+                                    }
+                                  } ],
+                                  "condition" : {
+                                    "scriptCondition" : "${output.npsCount === 1}"
+                                  },
+                                  "optional" : false
+                                }
+                              } ],
+                              "condition" : {
+                                "notVisible" : {
+                                  "textRegex" : "(?s)(.*There.s something wrong.*|.*the service is down.*|Error!)",
+                                  "optional" : false
+                                }
+                              },
+                              "optional" : false
+                            }
+                          } ],
+                          "condition" : {
+                            "visible" : {
+                              "textRegex" : "(?s).*would you recommend benefiting from Sakani.*",
+                              "optional" : false
+                            }
+                          },
+                          "optional" : false
+                        }
+                      }, {
+                        "runFlowCommand" : {
+                          "commands" : [ {
+                            "evalScriptCommand" : {
+                              "scriptString" : "${console.log('NPS - closing the thank-you confirmation')}",
+                              "optional" : false
+                            }
+                          }, {
+                            "tapOnElement" : {
+                              "selector" : {
+                                "leftOf" : {
+                                  "textRegex" : "Rate our App",
+                                  "optional" : false
+                                },
+                                "optional" : false
+                              },
+                              "retryIfNoChange" : false,
+                              "waitUntilVisible" : false,
+                              "longPress" : false,
+                              "optional" : false
+                            }
+                          }, {
+                            "waitForAnimationToEndCommand" : {
+                              "timeout" : "4000",
+                              "optional" : false
+                            }
+                          } ],
+                          "condition" : {
+                            "visible" : {
+                              "textRegex" : "Thank you for your feedback",
+                              "optional" : false
+                            }
+                          },
+                          "optional" : false
+                        }
+                      } ],
+                      "sourceDescription" : "dismiss-nps.yaml",
+                      "config" : {
+                        "appId" : "fi.iwa.sakani",
+                        "name" : "Answer the NPS survey with rating 5 if it is on screen"
+                      },
+                      "optional" : false
+                    }
+                  }, {
+                    "evalScriptCommand" : {
+                      "scriptString" : "${output.handled = true}",
+                      "optional" : false
+                    }
+                  } ],
+                  "condition" : {
+                    "visible" : {
+                      "textRegex" : "(?s)(.*would you recommend benefiting from Sakani.*|Thank you for your feedback)",
+                      "optional" : false
+                    }
+                  },
+                  "optional" : false
+                }
+              }, {
+                "runFlowCommand" : {
+                  "commands" : [ {
+                    "tapOnElement" : {
+                      "selector" : {
+                        "textRegex" : "Maybe Later",
+                        "optional" : false
+                      },
+                      "retryIfNoChange" : false,
+                      "waitUntilVisible" : false,
+                      "longPress" : false,
+                      "optional" : false
+                    }
+                  }, {
+                    "evalScriptCommand" : {
+                      "scriptString" : "${output.handled = true}",
+                      "optional" : false
+                    }
+                  }, {
+                    "waitForAnimationToEndCommand" : {
+                      "timeout" : "3000",
+                      "optional" : false
+                    }
+                  } ],
+                  "condition" : {
+                    "visible" : {
+                      "textRegex" : "Maybe Later",
+                      "optional" : false
+                    }
+                  },
+                  "optional" : false
+                }
+              }, {
+                "runFlowCommand" : {
+                  "commands" : [ {
+                    "tapOnElement" : {
+                      "selector" : {
+                        "textRegex" : "Reject cookies",
+                        "optional" : false
+                      },
+                      "retryIfNoChange" : false,
+                      "waitUntilVisible" : false,
+                      "longPress" : false,
+                      "optional" : false
+                    }
+                  }, {
+                    "evalScriptCommand" : {
+                      "scriptString" : "${output.handled = true}",
+                      "optional" : false
+                    }
+                  }, {
+                    "waitForAnimationToEndCommand" : {
+                      "timeout" : "4000",
+                      "optional" : false
+                    }
+                  } ],
+                  "condition" : {
+                    "visible" : {
+                      "textRegex" : "Reject cookies",
+                      "optional" : false
+                    }
+                  },
+                  "optional" : false
+                }
+              } ],
+              "condition" : {
+                "visible" : {
+                  "textRegex" : "(?s)(?:Don.t allow|Skip|Dismiss|Ok|Marketplace Day|Start comparing properties|Go to the weekly (offer|deal)|Update email|Number and Email Already Linked|.*would you recommend benefiting from Sakani.*|Thank you for your feedback|Maybe Later|Reject cookies)",
+                  "optional" : false
+                }
+              },
+              "optional" : false
+            }
+          }, {
+            "runFlowCommand" : {
+              "commands" : [ {
+                "waitForAnimationToEndCommand" : {
+                  "timeout" : "5000",
+                  "optional" : false
+                }
+              } ],
+              "condition" : {
+                "scriptCondition" : "${output.handled !== true}"
+              },
+              "optional" : false
+            }
+          } ],
+          "optional" : false
+        }
+      }, {
+        "runFlowCommand" : {
+          "commands" : [ {
+            "runFlowCommand" : {
+              "commands" : [ {
+                "applyConfigurationCommand" : {
+                  "config" : {
+                    "appId" : "fi.iwa.sakani",
+                    "name" : "Answer the NPS survey with rating 5 if it is on screen"
+                  },
+                  "optional" : false
+                }
+              }, {
+                "runFlowCommand" : {
+                  "commands" : [ {
+                    "runFlowCommand" : {
+                      "commands" : [ {
+                        "evalScriptCommand" : {
+                          "scriptString" : "${output.npsCount = (output.npsCount || 0) + 1}",
+                          "optional" : false
+                        }
+                      }, {
+                        "evalScriptCommand" : {
+                          "scriptString" : "${console.log('NPS KNOWN DEFECT - answering with rating 5, occurrence ' + output.npsCount)}",
+                          "optional" : false
+                        }
+                      }, {
+                        "tapOnElement" : {
+                          "selector" : {
+                            "textRegex" : "5",
+                            "below" : {
+                              "textRegex" : "(?s).*would you recommend benefiting from Sakani.*",
+                              "optional" : false
+                            },
+                            "optional" : false
+                          },
+                          "retryIfNoChange" : false,
+                          "waitUntilVisible" : false,
+                          "longPress" : false,
+                          "optional" : false
+                        }
+                      }, {
+                        "tapOnElement" : {
+                          "selector" : {
+                            "textRegex" : "Submit",
+                            "optional" : false
+                          },
+                          "retryIfNoChange" : false,
+                          "waitUntilVisible" : false,
+                          "longPress" : false,
+                          "optional" : false
+                        }
+                      }, {
+                        "repeatCommand" : {
+                          "times" : "4",
+                          "condition" : {
+                            "notVisible" : {
+                              "textRegex" : "Thank you for your feedback",
+                              "optional" : false
+                            }
+                          },
+                          "commands" : [ {
+                            "waitForAnimationToEndCommand" : {
+                              "timeout" : "3000",
+                              "optional" : false
+                            }
+                          } ],
+                          "optional" : false
+                        }
+                      }, {
+                        "runFlowCommand" : {
+                          "commands" : [ {
+                            "runFlowCommand" : {
+                              "commands" : [ {
+                                "takeScreenshotCommand" : {
+                                  "path" : "nps-rating-5-thank-you",
+                                  "optional" : false
+                                }
+                              } ],
+                              "condition" : {
+                                "visible" : {
+                                  "textRegex" : "Thank you for your feedback",
+                                  "optional" : false
+                                }
+                              },
+                              "optional" : false
+                            }
+                          } ],
+                          "condition" : {
+                            "scriptCondition" : "${output.npsCount === 1}"
+                          },
+                          "optional" : false
+                        }
+                      } ],
+                      "condition" : {
+                        "notVisible" : {
+                          "textRegex" : "(?s)(.*There.s something wrong.*|.*the service is down.*|Error!)",
+                          "optional" : false
+                        }
+                      },
+                      "optional" : false
+                    }
+                  } ],
+                  "condition" : {
+                    "visible" : {
+                      "textRegex" : "(?s).*would you recommend benefiting from Sakani.*",
+                      "optional" : false
+                    }
+                  },
+                  "optional" : false
+                }
+              }, {
+                "runFlowCommand" : {
+                  "commands" : [ {
+                    "evalScriptCommand" : {
+                      "scriptString" : "${console.log('NPS - closing the thank-you confirmation')}",
+                      "optional" : false
+                    }
+                  }, {
+                    "tapOnElement" : {
+                      "selector" : {
+                        "leftOf" : {
+                          "textRegex" : "Rate our App",
+                          "optional" : false
+                        },
+                        "optional" : false
+                      },
+                      "retryIfNoChange" : false,
+                      "waitUntilVisible" : false,
+                      "longPress" : false,
+                      "optional" : false
+                    }
+                  }, {
+                    "waitForAnimationToEndCommand" : {
+                      "timeout" : "4000",
+                      "optional" : false
+                    }
+                  } ],
+                  "condition" : {
+                    "visible" : {
+                      "textRegex" : "Thank you for your feedback",
+                      "optional" : false
+                    }
+                  },
+                  "optional" : false
+                }
+              } ],
+              "sourceDescription" : "dismiss-nps.yaml",
+              "config" : {
+                "appId" : "fi.iwa.sakani",
+                "name" : "Answer the NPS survey with rating 5 if it is on screen"
+              },
+              "optional" : false
+            }
+          } ],
+          "condition" : {
+            "scriptCondition" : "${output.npsLeftToCaller !== true}"
+          },
+          "optional" : false
+        }
+      }, {
+        "runFlowCommand" : {
+          "commands" : [ {
+            "repeatCommand" : {
+              "times" : "6",
+              "condition" : {
+                "notVisible" : {
+                  "textRegex" : "${ANCHOR}",
+                  "optional" : false
+                }
+              },
+              "commands" : [ {
+                "assertConditionCommand" : {
+                  "condition" : {
+                    "visible" : {
+                      "textRegex" : "(?s)(?:${ANCHOR}|.*would you recommend benefiting from Sakani.*|Thank you for your feedback)",
+                      "optional" : false
+                    }
+                  },
+                  "timeout" : "120000",
+                  "optional" : false
+                }
+              }, {
+                "runFlowCommand" : {
+                  "commands" : [ {
+                    "applyConfigurationCommand" : {
+                      "config" : {
+                        "appId" : "fi.iwa.sakani",
+                        "name" : "Answer the NPS survey with rating 5 if it is on screen"
+                      },
+                      "optional" : false
+                    }
+                  }, {
+                    "runFlowCommand" : {
+                      "commands" : [ {
+                        "runFlowCommand" : {
+                          "commands" : [ {
+                            "evalScriptCommand" : {
+                              "scriptString" : "${output.npsCount = (output.npsCount || 0) + 1}",
+                              "optional" : false
+                            }
+                          }, {
+                            "evalScriptCommand" : {
+                              "scriptString" : "${console.log('NPS KNOWN DEFECT - answering with rating 5, occurrence ' + output.npsCount)}",
+                              "optional" : false
+                            }
+                          }, {
+                            "tapOnElement" : {
+                              "selector" : {
+                                "textRegex" : "5",
+                                "below" : {
+                                  "textRegex" : "(?s).*would you recommend benefiting from Sakani.*",
+                                  "optional" : false
+                                },
+                                "optional" : false
+                              },
+                              "retryIfNoChange" : false,
+                              "waitUntilVisible" : false,
+                              "longPress" : false,
+                              "optional" : false
+                            }
+                          }, {
+                            "tapOnElement" : {
+                              "selector" : {
+                                "textRegex" : "Submit",
+                                "optional" : false
+                              },
+                              "retryIfNoChange" : false,
+                              "waitUntilVisible" : false,
+                              "longPress" : false,
+                              "optional" : false
+                            }
+                          }, {
+                            "repeatCommand" : {
+                              "times" : "4",
+                              "condition" : {
+                                "notVisible" : {
+                                  "textRegex" : "Thank you for your feedback",
+                                  "optional" : false
+                                }
+                              },
+                              "commands" : [ {
+                                "waitForAnimationToEndCommand" : {
+                                  "timeout" : "3000",
+                                  "optional" : false
+                                }
+                              } ],
+                              "optional" : false
+                            }
+                          }, {
+                            "runFlowCommand" : {
+                              "commands" : [ {
+                                "runFlowCommand" : {
+                                  "commands" : [ {
+                                    "takeScreenshotCommand" : {
+                                      "path" : "nps-rating-5-thank-you",
+                                      "optional" : false
+                                    }
+                                  } ],
+                                  "condition" : {
+                                    "visible" : {
+                                      "textRegex" : "Thank you for your feedback",
+                                      "optional" : false
+                                    }
+                                  },
+                                  "optional" : false
+                                }
+                              } ],
+                              "condition" : {
+                                "scriptCondition" : "${output.npsCount === 1}"
+                              },
+                              "optional" : false
+                            }
+                          } ],
+                          "condition" : {
+                            "notVisible" : {
+                              "textRegex" : "(?s)(.*There.s something wrong.*|.*the service is down.*|Error!)",
+                              "optional" : false
+                            }
+                          },
+                          "optional" : false
+                        }
+                      } ],
+                      "condition" : {
+                        "visible" : {
+                          "textRegex" : "(?s).*would you recommend benefiting from Sakani.*",
+                          "optional" : false
+                        }
+                      },
+                      "optional" : false
+                    }
+                  }, {
+                    "runFlowCommand" : {
+                      "commands" : [ {
+                        "evalScriptCommand" : {
+                          "scriptString" : "${console.log('NPS - closing the thank-you confirmation')}",
+                          "optional" : false
+                        }
+                      }, {
+                        "tapOnElement" : {
+                          "selector" : {
+                            "leftOf" : {
+                              "textRegex" : "Rate our App",
+                              "optional" : false
+                            },
+                            "optional" : false
+                          },
+                          "retryIfNoChange" : false,
+                          "waitUntilVisible" : false,
+                          "longPress" : false,
+                          "optional" : false
+                        }
+                      }, {
+                        "waitForAnimationToEndCommand" : {
+                          "timeout" : "4000",
+                          "optional" : false
+                        }
+                      } ],
+                      "condition" : {
+                        "visible" : {
+                          "textRegex" : "Thank you for your feedback",
+                          "optional" : false
+                        }
+                      },
+                      "optional" : false
+                    }
+                  } ],
+                  "sourceDescription" : "dismiss-nps.yaml",
+                  "config" : {
+                    "appId" : "fi.iwa.sakani",
+                    "name" : "Answer the NPS survey with rating 5 if it is on screen"
+                  },
+                  "optional" : false
+                }
+              } ],
+              "optional" : false
+            }
+          }, {
+            "runFlowCommand" : {
+              "commands" : [ {
+                "applyConfigurationCommand" : {
+                  "config" : {
+                    "appId" : "fi.iwa.sakani",
+                    "name" : "Answer the NPS survey with rating 5 if it is on screen"
+                  },
+                  "optional" : false
+                }
+              }, {
+                "runFlowCommand" : {
+                  "commands" : [ {
+                    "runFlowCommand" : {
+                      "commands" : [ {
+                        "evalScriptCommand" : {
+                          "scriptString" : "${output.npsCount = (output.npsCount || 0) + 1}",
+                          "optional" : false
+                        }
+                      }, {
+                        "evalScriptCommand" : {
+                          "scriptString" : "${console.log('NPS KNOWN DEFECT - answering with rating 5, occurrence ' + output.npsCount)}",
+                          "optional" : false
+                        }
+                      }, {
+                        "tapOnElement" : {
+                          "selector" : {
+                            "textRegex" : "5",
+                            "below" : {
+                              "textRegex" : "(?s).*would you recommend benefiting from Sakani.*",
+                              "optional" : false
+                            },
+                            "optional" : false
+                          },
+                          "retryIfNoChange" : false,
+                          "waitUntilVisible" : false,
+                          "longPress" : false,
+                          "optional" : false
+                        }
+                      }, {
+                        "tapOnElement" : {
+                          "selector" : {
+                            "textRegex" : "Submit",
+                            "optional" : false
+                          },
+                          "retryIfNoChange" : false,
+                          "waitUntilVisible" : false,
+                          "longPress" : false,
+                          "optional" : false
+                        }
+                      }, {
+                        "repeatCommand" : {
+                          "times" : "4",
+                          "condition" : {
+                            "notVisible" : {
+                              "textRegex" : "Thank you for your feedback",
+                              "optional" : false
+                            }
+                          },
+                          "commands" : [ {
+                            "waitForAnimationToEndCommand" : {
+                              "timeout" : "3000",
+                              "optional" : false
+                            }
+                          } ],
+                          "optional" : false
+                        }
+                      }, {
+                        "runFlowCommand" : {
+                          "commands" : [ {
+                            "runFlowCommand" : {
+                              "commands" : [ {
+                                "takeScreenshotCommand" : {
+                                  "path" : "nps-rating-5-thank-you",
+                                  "optional" : false
+                                }
+                              } ],
+                              "condition" : {
+                                "visible" : {
+                                  "textRegex" : "Thank you for your feedback",
+                                  "optional" : false
+                                }
+                              },
+                              "optional" : false
+                            }
+                          } ],
+                          "condition" : {
+                            "scriptCondition" : "${output.npsCount === 1}"
+                          },
+                          "optional" : false
+                        }
+                      } ],
+                      "condition" : {
+                        "notVisible" : {
+                          "textRegex" : "(?s)(.*There.s something wrong.*|.*the service is down.*|Error!)",
+                          "optional" : false
+                        }
+                      },
+                      "optional" : false
+                    }
+                  } ],
+                  "condition" : {
+                    "visible" : {
+                      "textRegex" : "(?s).*would you recommend benefiting from Sakani.*",
+                      "optional" : false
+                    }
+                  },
+                  "optional" : false
+                }
+              }, {
+                "runFlowCommand" : {
+                  "commands" : [ {
+                    "evalScriptCommand" : {
+                      "scriptString" : "${console.log('NPS - closing the thank-you confirmation')}",
+                      "optional" : false
+                    }
+                  }, {
+                    "tapOnElement" : {
+                      "selector" : {
+                        "leftOf" : {
+                          "textRegex" : "Rate our App",
+                          "optional" : false
+                        },
+                        "optional" : false
+                      },
+                      "retryIfNoChange" : false,
+                      "waitUntilVisible" : false,
+                      "longPress" : false,
+                      "optional" : false
+                    }
+                  }, {
+                    "waitForAnimationToEndCommand" : {
+                      "timeout" : "4000",
+                      "optional" : false
+                    }
+                  } ],
+                  "condition" : {
+                    "visible" : {
+                      "textRegex" : "Thank you for your feedback",
+                      "optional" : false
+                    }
+                  },
+                  "optional" : false
+                }
+              } ],
+              "sourceDescription" : "dismiss-nps.yaml",
+              "config" : {
+                "appId" : "fi.iwa.sakani",
+                "name" : "Answer the NPS survey with rating 5 if it is on screen"
+              },
+              "optional" : false
+            }
+          }, {
+            "assertConditionCommand" : {
+              "condition" : {
+                "visible" : {
+                  "textRegex" : "${ANCHOR}",
+                  "optional" : false
+                }
+              },
+              "optional" : false
+            }
+          } ],
+          "condition" : {
+            "scriptCondition" : "${output.anchorOptional !== true}"
+          },
+          "optional" : false
+        }
+      } ],
+      "sourceDescription" : "../../../.maestro/subflows/clear-overlays.yaml",
+      "config" : {
+        "appId" : "fi.iwa.sakani",
+        "name" : "Clear first-run and promo overlays"
+      },
+      "optional" : false
+    }
+  },
+  "metadata" : {
+    "status" : "FAILED",
+    "timestamp" : 1791200650019,
+    "duration" : 39482,
+    "error" : { },
+    "sequenceNumber" : 3,
+    "depth" : 0,
+    "evaluatedCommand" : {
+      "runFlowCommand" : {
+        "commands" : [ {
+          "defineVariablesCommand" : {
+            "env" : {
+              "ANCHOR" : "(?s).*Login / Sign up.*"
+            },
+            "optional" : false
+          }
+        }, {
+          "applyConfigurationCommand" : {
+            "config" : {
+              "appId" : "fi.iwa.sakani",
+              "name" : "Clear first-run and promo overlays"
+            },
+            "optional" : false
+          }
+        }, {
+          "repeatCommand" : {
+            "times" : "26",
+            "condition" : {
+              "notVisible" : {
+                "textRegex" : "${ANCHOR}",
+                "optional" : false
+              }
+            },
+            "commands" : [ {
+              "evalScriptCommand" : {
+                "scriptString" : "${output.handled = false}",
+                "optional" : false
+              }
+            }, {
+              "runFlowCommand" : {
+                "commands" : [ {
+                  "runFlowCommand" : {
+                    "commands" : [ {
+                      "tapOnElement" : {
+                        "selector" : {
+                          "textRegex" : "Don.t allow",
+                          "optional" : false
+                        },
+                        "retryIfNoChange" : false,
+                        "waitUntilVisible" : false,
+                        "longPress" : false,
+                        "optional" : false
+                      }
+                    }, {
+                      "evalScriptCommand" : {
+                        "scriptString" : "${output.handled = true}",
+                        "optional" : false
+                      }
+                    }, {
+                      "waitForAnimationToEndCommand" : {
+                        "timeout" : "3000",
+                        "optional" : false
+                      }
+                    } ],
+                    "condition" : {
+                      "visible" : {
+                        "textRegex" : "Don.t allow",
+                        "optional" : false
+                      }
+                    },
+                    "optional" : false
+                  }
+                }, {
+                  "runFlowCommand" : {
+                    "commands" : [ {
+                      "tapOnElement" : {
+                        "selector" : {
+                          "textRegex" : "Skip",
+                          "optional" : false
+                        },
+                        "retryIfNoChange" : false,
+                        "waitUntilVisible" : false,
+                        "longPress" : false,
+                        "optional" : false
+                      }
+                    }, {
+                      "evalScriptCommand" : {
+                        "scriptString" : "${output.handled = true}",
+                        "optional" : false
+                      }
+                    }, {
+                      "waitForAnimationToEndCommand" : {
+                        "timeout" : "3000",
+                        "optional" : false
+                      }
+                    } ],
+                    "condition" : {
+                      "visible" : {
+                        "textRegex" : "Skip",
+                        "optional" : false
+                      }
+                    },
+                    "optional" : false
+                  }
+                }, {
+                  "runFlowCommand" : {
+                    "commands" : [ {
+                      "tapOnElement" : {
+                        "selector" : {
+                          "textRegex" : "Dismiss",
+                          "optional" : false
+                        },
+                        "retryIfNoChange" : false,
+                        "waitUntilVisible" : false,
+                        "longPress" : false,
+                        "optional" : false
+                      }
+                    }, {
+                      "evalScriptCommand" : {
+                        "scriptString" : "${output.handled = true}",
+                        "optional" : false
+                      }
+                    }, {
+                      "waitForAnimationToEndCommand" : {
+                        "timeout" : "3000",
+                        "optional" : false
+                      }
+                    } ],
+                    "condition" : {
+                      "visible" : {
+                        "textRegex" : "Dismiss",
+                        "optional" : false
+                      }
+                    },
+                    "optional" : false
+                  }
+                }, {
+                  "runFlowCommand" : {
+                    "commands" : [ {
+                      "runFlowCommand" : {
+                        "commands" : [ {
+                          "evalScriptCommand" : {
+                            "scriptString" : "${console.log('CLEAR-OVERLAYS OK-HANDLER: dismissing the ERROR dialog (there is something wrong / please try again later). If this line sits after a reservation, payment or signature step, the business outcome MUST be re-read from the product records before the run is called green.')}",
+                            "optional" : false
+                          }
+                        } ],
+                        "condition" : {
+                          "visible" : {
+                            "textRegex" : "There's something wrong. Please try again later!",
+                            "optional" : false
+                          }
+                        },
+                        "optional" : false
+                      }
+                    }, {
+                      "evalScriptCommand" : {
+                        "scriptString" : "${console.log('CLEAR-OVERLAYS OK-HANDLER: tapping Ok')}",
+                        "optional" : false
+                      }
+                    }, {
+                      "tapOnElement" : {
+                        "selector" : {
+                          "textRegex" : "Ok",
+                          "optional" : false
+                        },
+                        "retryIfNoChange" : false,
+                        "waitUntilVisible" : false,
+                        "longPress" : false,
+                        "optional" : false
+                      }
+                    }, {
+                      "evalScriptCommand" : {
+                        "scriptString" : "${output.handled = true}",
+                        "optional" : false
+                      }
+                    }, {
+                      "waitForAnimationToEndCommand" : {
+                        "timeout" : "3000",
+                        "optional" : false
+                      }
+                    } ],
+                    "condition" : {
+                      "visible" : {
+                        "textRegex" : "Ok",
+                        "optional" : false
+                      }
+                    },
+                    "optional" : false
+                  }
+                }, {
+                  "runFlowCommand" : {
+                    "commands" : [ {
+                      "backPressCommand" : {
+                        "optional" : false
+                      }
+                    }, {
+                      "evalScriptCommand" : {
+                        "scriptString" : "${output.handled = true}",
+                        "optional" : false
+                      }
+                    }, {
+                      "waitForAnimationToEndCommand" : {
+                        "timeout" : "3000",
+                        "optional" : false
+                      }
+                    } ],
+                    "condition" : {
+                      "visible" : {
+                        "textRegex" : "Marketplace Day",
+                        "optional" : false
+                      }
+                    },
+                    "optional" : false
+                  }
+                }, {
+                  "runFlowCommand" : {
+                    "commands" : [ {
+                      "backPressCommand" : {
+                        "optional" : false
+                      }
+                    }, {
+                      "evalScriptCommand" : {
+                        "scriptString" : "${output.handled = true}",
+                        "optional" : false
+                      }
+                    }, {
+                      "waitForAnimationToEndCommand" : {
+                        "timeout" : "3000",
+                        "optional" : false
+                      }
+                    } ],
+                    "condition" : {
+                      "visible" : {
+                        "textRegex" : "Start comparing properties",
+                        "optional" : false
+                      }
+                    },
+                    "optional" : false
+                  }
+                }, {
+                  "runFlowCommand" : {
+                    "commands" : [ {
+                      "backPressCommand" : {
+                        "optional" : false
+                      }
+                    }, {
+                      "evalScriptCommand" : {
+                        "scriptString" : "${output.handled = true}",
+                        "optional" : false
+                      }
+                    }, {
+                      "waitForAnimationToEndCommand" : {
+                        "timeout" : "3000",
+                        "optional" : false
+                      }
+                    } ],
+                    "condition" : {
+                      "visible" : {
+                        "textRegex" : "Go to the weekly (offer|deal)",
+                        "optional" : false
+                      }
+                    },
+                    "optional" : false
+                  }
+                }, {
+                  "runFlowCommand" : {
+                    "commands" : [ {
+                      "backPressCommand" : {
+                        "optional" : false
+                      }
+                    }, {
+                      "evalScriptCommand" : {
+                        "scriptString" : "${output.handled = true}",
+                        "optional" : false
+                      }
+                    }, {
+                      "waitForAnimationToEndCommand" : {
+                        "timeout" : "3000",
+                        "optional" : false
+                      }
+                    } ],
+                    "condition" : {
+                      "visible" : {
+                        "textRegex" : "Update email",
+                        "optional" : false
+                      }
+                    },
+                    "optional" : false
+                  }
+                }, {
+                  "runFlowCommand" : {
+                    "commands" : [ {
+                      "tapOnPointV2Command" : {
+                        "point" : "7%,9%",
+                        "retryIfNoChange" : false,
+                        "longPress" : false,
+                        "optional" : false
+                      }
+                    }, {
+                      "evalScriptCommand" : {
+                        "scriptString" : "${output.handled = true}",
+                        "optional" : false
+                      }
+                    }, {
+                      "waitForAnimationToEndCommand" : {
+                        "timeout" : "4000",
+                        "optional" : false
+                      }
+                    } ],
+                    "condition" : {
+                      "visible" : {
+                        "textRegex" : "Number and Email Already Linked",
+                        "optional" : false
+                      }
+                    },
+                    "optional" : false
+                  }
+                }, {
+                  "runFlowCommand" : {
+                    "commands" : [ {
+                      "runFlowCommand" : {
+                        "commands" : [ {
+                          "applyConfigurationCommand" : {
+                            "config" : {
+                              "appId" : "fi.iwa.sakani",
+                              "name" : "Answer the NPS survey with rating 5 if it is on screen"
+                            },
+                            "optional" : false
+                          }
+                        }, {
+                          "runFlowCommand" : {
+                            "commands" : [ {
+                              "runFlowCommand" : {
+                                "commands" : [ {
+                                  "evalScriptCommand" : {
+                                    "scriptString" : "${output.npsCount = (output.npsCount || 0) + 1}",
+                                    "optional" : false
+                                  }
+                                }, {
+                                  "evalScriptCommand" : {
+                                    "scriptString" : "${console.log('NPS KNOWN DEFECT - answering with rating 5, occurrence ' + output.npsCount)}",
+                                    "optional" : false
+                                  }
+                                }, {
+                                  "tapOnElement" : {
+                                    "selector" : {
+                                      "textRegex" : "5",
+                                      "below" : {
+                                        "textRegex" : "(?s).*would you recommend benefiting from Sakani.*",
+                                        "optional" : false
+                                      },
+                                      "optional" : false
+                                    },
+                                    "retryIfNoChange" : false,
+                                    "waitUntilVisible" : false,
+                                    "longPress" : false,
+                                    "optional" : false
+                                  }
+                                }, {
+                                  "tapOnElement" : {
+                                    "selector" : {
+                                      "textRegex" : "Submit",
+                                      "optional" : false
+                                    },
+                                    "retryIfNoChange" : false,
+                                    "waitUntilVisible" : false,
+                                    "longPress" : false,
+                                    "optional" : false
+                                  }
+                                }, {
+                                  "repeatCommand" : {
+                                    "times" : "4",
+                                    "condition" : {
+                                      "notVisible" : {
+                                        "textRegex" : "Thank you for your feedback",
+                                        "optional" : false
+                                      }
+                                    },
+                                    "commands" : [ {
+                                      "waitForAnimationToEndCommand" : {
+                                        "timeout" : "3000",
+                                        "optional" : false
+                                      }
+                                    } ],
+                                    "optional" : false
+                                  }
+                                }, {
+                                  "runFlowCommand" : {
+                                    "commands" : [ {
+                                      "runFlowCommand" : {
+                                        "commands" : [ {
+                                          "takeScreenshotCommand" : {
+                                            "path" : "nps-rating-5-thank-you",
+                                            "optional" : false
+                                          }
+                                        } ],
+                                        "condition" : {
+                                          "visible" : {
+                                            "textRegex" : "Thank you for your feedback",
+                                            "optional" : false
+                                          }
+                                        },
+                                        "optional" : false
+                                      }
+                                    } ],
+                                    "condition" : {
+                                      "scriptCondition" : "${output.npsCount === 1}"
+                                    },
+                                    "optional" : false
+                                  }
+                                } ],
+                                "condition" : {
+                                  "notVisible" : {
+                                    "textRegex" : "(?s)(.*There.s something wrong.*|.*the service is down.*|Error!)",
+                                    "optional" : false
+                                  }
+                                },
+                                "optional" : false
+                              }
+                            } ],
+                            "condition" : {
+                              "visible" : {
+                                "textRegex" : "(?s).*would you recommend benefiting from Sakani.*",
+                                "optional" : false
+                              }
+                            },
+                            "optional" : false
+                          }
+                        }, {
+                          "runFlowCommand" : {
+                            "commands" : [ {
+                              "evalScriptCommand" : {
+                                "scriptString" : "${console.log('NPS - closing the thank-you confirmation')}",
+                                "optional" : false
+                              }
+                            }, {
+                              "tapOnElement" : {
+                                "selector" : {
+                                  "leftOf" : {
+                                    "textRegex" : "Rate our App",
+                                    "optional" : false
+                                  },
+                                  "optional" : false
+                                },
+                                "retryIfNoChange" : false,
+                                "waitUntilVisible" : false,
+                                "longPress" : false,
+                                "optional" : false
+                              }
+                            }, {
+                              "waitForAnimationToEndCommand" : {
+                                "timeout" : "4000",
+                                "optional" : false
+                              }
+                            } ],
+                            "condition" : {
+                              "visible" : {
+                                "textRegex" : "Thank you for your feedback",
+                                "optional" : false
+                              }
+                            },
+                            "optional" : false
+                          }
+                        } ],
+                        "sourceDescription" : "dismiss-nps.yaml",
+                        "config" : {
+                          "appId" : "fi.iwa.sakani",
+                          "name" : "Answer the NPS survey with rating 5 if it is on screen"
+                        },
+                        "optional" : false
+                      }
+                    }, {
+                      "evalScriptCommand" : {
+                        "scriptString" : "${output.handled = true}",
+                        "optional" : false
+                      }
+                    } ],
+                    "condition" : {
+                      "visible" : {
+                        "textRegex" : "(?s)(.*would you recommend benefiting from Sakani.*|Thank you for your feedback)",
+                        "optional" : false
+                      }
+                    },
+                    "optional" : false
+                  }
+                }, {
+                  "runFlowCommand" : {
+                    "commands" : [ {
+                      "tapOnElement" : {
+                        "selector" : {
+                          "textRegex" : "Maybe Later",
+                          "optional" : false
+                        },
+                        "retryIfNoChange" : false,
+                        "waitUntilVisible" : false,
+                        "longPress" : false,
+                        "optional" : false
+                      }
+                    }, {
+                      "evalScriptCommand" : {
+                        "scriptString" : "${output.handled = true}",
+                        "optional" : false
+                      }
+                    }, {
+                      "waitForAnimationToEndCommand" : {
+                        "timeout" : "3000",
+                        "optional" : false
+                      }
+                    } ],
+                    "condition" : {
+                      "visible" : {
+                        "textRegex" : "Maybe Later",
+                        "optional" : false
+                      }
+                    },
+                    "optional" : false
+                  }
+                }, {
+                  "runFlowCommand" : {
+                    "commands" : [ {
+                      "tapOnElement" : {
+                        "selector" : {
+                          "textRegex" : "Reject cookies",
+                          "optional" : false
+                        },
+                        "retryIfNoChange" : false,
+                        "waitUntilVisible" : false,
+                        "longPress" : false,
+                        "optional" : false
+                      }
+                    }, {
+                      "evalScriptCommand" : {
+                        "scriptString" : "${output.handled = true}",
+                        "optional" : false
+                      }
+                    }, {
+                      "waitForAnimationToEndCommand" : {
+                        "timeout" : "4000",
+                        "optional" : false
+                      }
+                    } ],
+                    "condition" : {
+                      "visible" : {
+                        "textRegex" : "Reject cookies",
+                        "optional" : false
+                      }
+                    },
+                    "optional" : false
+                  }
+                } ],
+                "condition" : {
+                  "visible" : {
+                    "textRegex" : "(?s)(?:Don.t allow|Skip|Dismiss|Ok|Marketplace Day|Start comparing properties|Go to the weekly (offer|deal)|Update email|Number and Email Already Linked|.*would you recommend benefiting from Sakani.*|Thank you for your feedback|Maybe Later|Reject cookies)",
+                    "optional" : false
+                  }
+                },
+                "optional" : false
+              }
+            }, {
+              "runFlowCommand" : {
+                "commands" : [ {
+                  "waitForAnimationToEndCommand" : {
+                    "timeout" : "5000",
+                    "optional" : false
+                  }
+                } ],
+                "condition" : {
+                  "scriptCondition" : "${output.handled !== true}"
+                },
+                "optional" : false
+              }
+            } ],
+            "optional" : false
+          }
+        }, {
+          "runFlowCommand" : {
+            "commands" : [ {
+              "runFlowCommand" : {
+                "commands" : [ {
+                  "applyConfigurationCommand" : {
+                    "config" : {
+                      "appId" : "fi.iwa.sakani",
+                      "name" : "Answer the NPS survey with rating 5 if it is on screen"
+                    },
+                    "optional" : false
+                  }
+                }, {
+                  "runFlowCommand" : {
+                    "commands" : [ {
+                      "runFlowCommand" : {
+                        "commands" : [ {
+                          "evalScriptCommand" : {
+                            "scriptString" : "${output.npsCount = (output.npsCount || 0) + 1}",
+                            "optional" : false
+                          }
+                        }, {
+                          "evalScriptCommand" : {
+                            "scriptString" : "${console.log('NPS KNOWN DEFECT - answering with rating 5, occurrence ' + output.npsCount)}",
+                            "optional" : false
+                          }
+                        }, {
+                          "tapOnElement" : {
+                            "selector" : {
+                              "textRegex" : "5",
+                              "below" : {
+                                "textRegex" : "(?s).*would you recommend benefiting from Sakani.*",
+                                "optional" : false
+                              },
+                              "optional" : false
+                            },
+                            "retryIfNoChange" : false,
+                            "waitUntilVisible" : false,
+                            "longPress" : false,
+                            "optional" : false
+                          }
+                        }, {
+                          "tapOnElement" : {
+                            "selector" : {
+                              "textRegex" : "Submit",
+                              "optional" : false
+                            },
+                            "retryIfNoChange" : false,
+                            "waitUntilVisible" : false,
+                            "longPress" : false,
+                            "optional" : false
+                          }
+                        }, {
+                          "repeatCommand" : {
+                            "times" : "4",
+                            "condition" : {
+                              "notVisible" : {
+                                "textRegex" : "Thank you for your feedback",
+                                "optional" : false
+                              }
+                            },
+                            "commands" : [ {
+                              "waitForAnimationToEndCommand" : {
+                                "timeout" : "3000",
+                                "optional" : false
+                              }
+                            } ],
+                            "optional" : false
+                          }
+                        }, {
+                          "runFlowCommand" : {
+                            "commands" : [ {
+                              "runFlowCommand" : {
+                                "commands" : [ {
+                                  "takeScreenshotCommand" : {
+                                    "path" : "nps-rating-5-thank-you",
+                                    "optional" : false
+                                  }
+                                } ],
+                                "condition" : {
+                                  "visible" : {
+                                    "textRegex" : "Thank you for your feedback",
+                                    "optional" : false
+                                  }
+                                },
+                                "optional" : false
+                              }
+                            } ],
+                            "condition" : {
+                              "scriptCondition" : "${output.npsCount === 1}"
+                            },
+                            "optional" : false
+                          }
+                        } ],
+                        "condition" : {
+                          "notVisible" : {
+                            "textRegex" : "(?s)(.*There.s something wrong.*|.*the service is down.*|Error!)",
+                            "optional" : false
+                          }
+                        },
+                        "optional" : false
+                      }
+                    } ],
+                    "condition" : {
+                      "visible" : {
+                        "textRegex" : "(?s).*would you recommend benefiting from Sakani.*",
+                        "optional" : false
+                      }
+                    },
+                    "optional" : false
+                  }
+                }, {
+                  "runFlowCommand" : {
+                    "commands" : [ {
+                      "evalScriptCommand" : {
+                        "scriptString" : "${console.log('NPS - closing the thank-you confirmation')}",
+                        "optional" : false
+                      }
+                    }, {
+                      "tapOnElement" : {
+                        "selector" : {
+                          "leftOf" : {
+                            "textRegex" : "Rate our App",
+                            "optional" : false
+                          },
+                          "optional" : false
+                        },
+                        "retryIfNoChange" : false,
+                        "waitUntilVisible" : false,
+                        "longPress" : false,
+                        "optional" : false
+                      }
+                    }, {
+                      "waitForAnimationToEndCommand" : {
+                        "timeout" : "4000",
+                        "optional" : false
+                      }
+                    } ],
+                    "condition" : {
+                      "visible" : {
+                        "textRegex" : "Thank you for your feedback",
+                        "optional" : false
+                      }
+                    },
+                    "optional" : false
+                  }
+                } ],
+                "sourceDescription" : "dismiss-nps.yaml",
+                "config" : {
+                  "appId" : "fi.iwa.sakani",
+                  "name" : "Answer the NPS survey with rating 5 if it is on screen"
+                },
+                "optional" : false
+              }
+            } ],
+            "condition" : {
+              "scriptCondition" : "${output.npsLeftToCaller !== true}"
+            },
+            "optional" : false
+          }
+        }, {
+          "runFlowCommand" : {
+            "commands" : [ {
+              "repeatCommand" : {
+                "times" : "6",
+                "condition" : {
+                  "notVisible" : {
+                    "textRegex" : "${ANCHOR}",
+                    "optional" : false
+                  }
+                },
+                "commands" : [ {
+                  "assertConditionCommand" : {
+                    "condition" : {
+                      "visible" : {
+                        "textRegex" : "(?s)(?:${ANCHOR}|.*would you recommend benefiting from Sakani.*|Thank you for your feedback)",
+                        "optional" : false
+                      }
+                    },
+                    "timeout" : "120000",
+                    "optional" : false
+                  }
+                }, {
+                  "runFlowCommand" : {
+                    "commands" : [ {
+                      "applyConfigurationCommand" : {
+                        "config" : {
+                          "appId" : "fi.iwa.sakani",
+                          "name" : "Answer the NPS survey with rating 5 if it is on screen"
+                        },
+                        "optional" : false
+                      }
+                    }, {
+                      "runFlowCommand" : {
+                        "commands" : [ {
+                          "runFlowCommand" : {
+                            "commands" : [ {
+                              "evalScriptCommand" : {
+                                "scriptString" : "${output.npsCount = (output.npsCount || 0) + 1}",
+                                "optional" : false
+                              }
+                            }, {
+                              "evalScriptCommand" : {
+                                "scriptString" : "${console.log('NPS KNOWN DEFECT - answering with rating 5, occurrence ' + output.npsCount)}",
+                                "optional" : false
+                              }
+                            }, {
+                              "tapOnElement" : {
+                                "selector" : {
+                                  "textRegex" : "5",
+                                  "below" : {
+                                    "textRegex" : "(?s).*would you recommend benefiting from Sakani.*",
+                                    "optional" : false
+                                  },
+                                  "optional" : false
+                                },
+                                "retryIfNoChange" : false,
+                                "waitUntilVisible" : false,
+                                "longPress" : false,
+                                "optional" : false
+                              }
+                            }, {
+                              "tapOnElement" : {
+                                "selector" : {
+                                  "textRegex" : "Submit",
+                                  "optional" : false
+                                },
+                                "retryIfNoChange" : false,
+                                "waitUntilVisible" : false,
+                                "longPress" : false,
+                                "optional" : false
+                              }
+                            }, {
+                              "repeatCommand" : {
+                                "times" : "4",
+                                "condition" : {
+                                  "notVisible" : {
+                                    "textRegex" : "Thank you for your feedback",
+                                    "optional" : false
+                                  }
+                                },
+                                "commands" : [ {
+                                  "waitForAnimationToEndCommand" : {
+                                    "timeout" : "3000",
+                                    "optional" : false
+                                  }
+                                } ],
+                                "optional" : false
+                              }
+                            }, {
+                              "runFlowCommand" : {
+                                "commands" : [ {
+                                  "runFlowCommand" : {
+                                    "commands" : [ {
+                                      "takeScreenshotCommand" : {
+                                        "path" : "nps-rating-5-thank-you",
+                                        "optional" : false
+                                      }
+                                    } ],
+                                    "condition" : {
+                                      "visible" : {
+                                        "textRegex" : "Thank you for your feedback",
+                                        "optional" : false
+                                      }
+                                    },
+                                    "optional" : false
+                                  }
+                                } ],
+                                "condition" : {
+                                  "scriptCondition" : "${output.npsCount === 1}"
+                                },
+                                "optional" : false
+                              }
+                            } ],
+                            "condition" : {
+                              "notVisible" : {
+                                "textRegex" : "(?s)(.*There.s something wrong.*|.*the service is down.*|Error!)",
+                                "optional" : false
+                              }
+                            },
+                            "optional" : false
+                          }
+                        } ],
+                        "condition" : {
+                          "visible" : {
+                            "textRegex" : "(?s).*would you recommend benefiting from Sakani.*",
+                            "optional" : false
+                          }
+                        },
+                        "optional" : false
+                      }
+                    }, {
+                      "runFlowCommand" : {
+                        "commands" : [ {
+                          "evalScriptCommand" : {
+                            "scriptString" : "${console.log('NPS - closing the thank-you confirmation')}",
+                            "optional" : false
+                          }
+                        }, {
+                          "tapOnElement" : {
+                            "selector" : {
+                              "leftOf" : {
+                                "textRegex" : "Rate our App",
+                                "optional" : false
+                              },
+                              "optional" : false
+                            },
+                            "retryIfNoChange" : false,
+                            "waitUntilVisible" : false,
+                            "longPress" : false,
+                            "optional" : false
+                          }
+                        }, {
+                          "waitForAnimationToEndCommand" : {
+                            "timeout" : "4000",
+                            "optional" : false
+                          }
+                        } ],
+                        "condition" : {
+                          "visible" : {
+                            "textRegex" : "Thank you for your feedback",
+                            "optional" : false
+                          }
+                        },
+                        "optional" : false
+                      }
+                    } ],
+                    "sourceDescription" : "dismiss-nps.yaml",
+                    "config" : {
+                      "appId" : "fi.iwa.sakani",
+                      "name" : "Answer the NPS survey with rating 5 if it is on screen"
+                    },
+                    "optional" : false
+                  }
+                } ],
+                "optional" : false
+              }
+            }, {
+              "runFlowCommand" : {
+                "commands" : [ {
+                  "applyConfigurationCommand" : {
+                    "config" : {
+                      "appId" : "fi.iwa.sakani",
+                      "name" : "Answer the NPS survey with rating 5 if it is on screen"
+                    },
+                    "optional" : false
+                  }
+                }, {
+                  "runFlowCommand" : {
+                    "commands" : [ {
+                      "runFlowCommand" : {
+                        "commands" : [ {
+                          "evalScriptCommand" : {
+                            "scriptString" : "${output.npsCount = (output.npsCount || 0) + 1}",
+                            "optional" : false
+                          }
+                        }, {
+                          "evalScriptCommand" : {
+                            "scriptString" : "${console.log('NPS KNOWN DEFECT - answering with rating 5, occurrence ' + output.npsCount)}",
+                            "optional" : false
+                          }
+                        }, {
+                          "tapOnElement" : {
+                            "selector" : {
+                              "textRegex" : "5",
+                              "below" : {
+                                "textRegex" : "(?s).*would you recommend benefiting from Sakani.*",
+                                "optional" : false
+                              },
+                              "optional" : false
+                            },
+                            "retryIfNoChange" : false,
+                            "waitUntilVisible" : false,
+                            "longPress" : false,
+                            "optional" : false
+                          }
+                        }, {
+                          "tapOnElement" : {
+                            "selector" : {
+                              "textRegex" : "Submit",
+                              "optional" : false
+                            },
+                            "retryIfNoChange" : false,
+                            "waitUntilVisible" : false,
+                            "longPress" : false,
+                            "optional" : false
+                          }
+                        }, {
+                          "repeatCommand" : {
+                            "times" : "4",
+                            "condition" : {
+                              "notVisible" : {
+                                "textRegex" : "Thank you for your feedback",
+                                "optional" : false
+                              }
+                            },
+                            "commands" : [ {
+                              "waitForAnimationToEndCommand" : {
+                                "timeout" : "3000",
+                                "optional" : false
+                              }
+                            } ],
+                            "optional" : false
+                          }
+                        }, {
+                          "runFlowCommand" : {
+                            "commands" : [ {
+                              "runFlowCommand" : {
+                                "commands" : [ {
+                                  "takeScreenshotCommand" : {
+                                    "path" : "nps-rating-5-thank-you",
+                                    "optional" : false
+                                  }
+                                } ],
+                                "condition" : {
+                                  "visible" : {
+                                    "textRegex" : "Thank you for your feedback",
+                                    "optional" : false
+                                  }
+                                },
+                                "optional" : false
+                              }
+                            } ],
+                            "condition" : {
+                              "scriptCondition" : "${output.npsCount === 1}"
+                            },
+                            "optional" : false
+                          }
+                        } ],
+                        "condition" : {
+                          "notVisible" : {
+                            "textRegex" : "(?s)(.*There.s something wrong.*|.*the service is down.*|Error!)",
+                            "optional" : false
+                          }
+                        },
+                        "optional" : false
+                      }
+                    } ],
+                    "condition" : {
+                      "visible" : {
+                        "textRegex" : "(?s).*would you recommend benefiting from Sakani.*",
+                        "optional" : false
+                      }
+                    },
+                    "optional" : false
+                  }
+                }, {
+                  "runFlowCommand" : {
+                    "commands" : [ {
+                      "evalScriptCommand" : {
+                        "scriptString" : "${console.log('NPS - closing the thank-you confirmation')}",
+                        "optional" : false
+                      }
+                    }, {
+                      "tapOnElement" : {
+                        "selector" : {
+                          "leftOf" : {
+                            "textRegex" : "Rate our App",
+                            "optional" : false
+                          },
+                          "optional" : false
+                        },
+                        "retryIfNoChange" : false,
+                        "waitUntilVisible" : false,
+                        "longPress" : false,
+                        "optional" : false
+                      }
+                    }, {
+                      "waitForAnimationToEndCommand" : {
+                        "timeout" : "4000",
+                        "optional" : false
+                      }
+                    } ],
+                    "condition" : {
+                      "visible" : {
+                        "textRegex" : "Thank you for your feedback",
+                        "optional" : false
+                      }
+                    },
+                    "optional" : false
+                  }
+                } ],
+                "sourceDescription" : "dismiss-nps.yaml",
+                "config" : {
+                  "appId" : "fi.iwa.sakani",
+                  "name" : "Answer the NPS survey with rating 5 if it is on screen"
+                },
+                "optional" : false
+              }
+            }, {
+              "assertConditionCommand" : {
+                "condition" : {
+                  "visible" : {
+                    "textRegex" : "${ANCHOR}",
+                    "optional" : false
+                  }
+                },
+                "optional" : false
+              }
+            } ],
+            "condition" : {
+              "scriptCondition" : "${output.anchorOptional !== true}"
+            },
+            "optional" : false
+          }
+        } ],
+        "sourceDescription" : "../../../.maestro/subflows/clear-overlays.yaml",
+        "config" : {
+          "appId" : "fi.iwa.sakani",
+          "name" : "Clear first-run and promo overlays"
+        },
+        "optional" : false
+      }
+    }
+  }
+}, {
+  "command" : {
+    "defineVariablesCommand" : {
+      "env" : {
+        "ANCHOR" : "(?s).*Login / Sign up.*"
+      },
+      "optional" : false
+    }
+  },
+  "metadata" : {
+    "status" : "COMPLETED",
+    "timestamp" : 1791200650040,
+    "duration" : 0,
+    "sequenceNumber" : 4,
+    "depth" : 0,
+    "evaluatedCommand" : {
+      "defineVariablesCommand" : {
+        "env" : {
+          "ANCHOR" : "(?s).*Login / Sign up.*"
+        },
+        "optional" : false
+      }
+    }
+  }
+}, {
+  "command" : {
+    "applyConfigurationCommand" : {
+      "config" : {
+        "appId" : "fi.iwa.sakani",
+        "name" : "Clear first-run and promo overlays"
+      },
+      "optional" : false
+    }
+  },
+  "metadata" : {
+    "status" : "COMPLETED",
+    "timestamp" : 1791200650042,
+    "duration" : 0,
+    "sequenceNumber" : 5,
+    "depth" : 1,
+    "evaluatedCommand" : {
+      "applyConfigurationCommand" : {
+        "config" : {
+          "appId" : "fi.iwa.sakani",
+          "name" : "Clear first-run and promo overlays"
+        },
+        "optional" : false
+      }
+    }
+  }
+}, {
+  "command" : {
+    "repeatCommand" : {
+      "times" : "26",
+      "condition" : {
+        "notVisible" : {
+          "textRegex" : "${ANCHOR}",
+          "optional" : false
+        }
+      },
+      "commands" : [ {
+        "evalScriptCommand" : {
+          "scriptString" : "${output.handled = false}",
+          "optional" : false
+        }
+      }, {
+        "runFlowCommand" : {
+          "commands" : [ {
+            "runFlowCommand" : {
+              "commands" : [ {
+                "tapOnElement" : {
+                  "selector" : {
+                    "textRegex" : "Don.t allow",
+                    "optional" : false
+                  },
+                  "retryIfNoChange" : false,
+                  "waitUntilVisible" : false,
+                  "longPress" : false,
+                  "optional" : false
+                }
+              }, {
+                "evalScriptCommand" : {
+                  "scriptString" : "${output.handled = true}",
+                  "optional" : false
+                }
+              }, {
+                "waitForAnimationToEndCommand" : {
+                  "timeout" : "3000",
+                  "optional" : false
+                }
+              } ],
+              "condition" : {
+                "visible" : {
+                  "textRegex" : "Don.t allow",
+                  "optional" : false
+                }
+              },
+              "optional" : false
+            }
+          }, {
+            "runFlowCommand" : {
+              "commands" : [ {
+                "tapOnElement" : {
+                  "selector" : {
+                    "textRegex" : "Skip",
+                    "optional" : false
+                  },
+                  "retryIfNoChange" : false,
+                  "waitUntilVisible" : false,
+                  "longPress" : false,
+                  "optional" : false
+                }
+              }, {
+                "evalScriptCommand" : {
+                  "scriptString" : "${output.handled = true}",
+                  "optional" : false
+                }
+              }, {
+                "waitForAnimationToEndCommand" : {
+                  "timeout" : "3000",
+                  "optional" : false
+                }
+              } ],
+              "condition" : {
+                "visible" : {
+                  "textRegex" : "Skip",
+                  "optional" : false
+                }
+              },
+              "optional" : false
+            }
+          }, {
+            "runFlowCommand" : {
+              "commands" : [ {
+                "tapOnElement" : {
+                  "selector" : {
+                    "textRegex" : "Dismiss",
+                    "optional" : false
+                  },
+                  "retryIfNoChange" : false,
+                  "waitUntilVisible" : false,
+                  "longPress" : false,
+                  "optional" : false
+                }
+              }, {
+                "evalScriptCommand" : {
+                  "scriptString" : "${output.handled = true}",
+                  "optional" : false
+                }
+              }, {
+                "waitForAnimationToEndCommand" : {
+                  "timeout" : "3000",
+                  "optional" : false
+                }
+              } ],
+              "condition" : {
+                "visible" : {
+                  "textRegex" : "Dismiss",
+                  "optional" : false
+                }
+              },
+              "optional" : false
+            }
+          }, {
+            "runFlowCommand" : {
+              "commands" : [ {
+                "runFlowCommand" : {
+                  "commands" : [ {
+                    "evalScriptCommand" : {
+                      "scriptString" : "${console.log('CLEAR-OVERLAYS OK-HANDLER: dismissing the ERROR dialog (there is something wrong / please try again later). If this line sits after a reservation, payment or signature step, the business outcome MUST be re-read from the product records before the run is called green.')}",
+                      "optional" : false
+                    }
+                  } ],
+                  "condition" : {
+                    "visible" : {
+                      "textRegex" : "There's something wrong. Please try again later!",
+                      "optional" : false
+                    }
+                  },
+                  "optional" : false
+                }
+              }, {
+                "evalScriptCommand" : {
+                  "scriptString" : "${console.log('CLEAR-OVERLAYS OK-HANDLER: tapping Ok')}",
+                  "optional" : false
+                }
+              }, {
+                "tapOnElement" : {
+                  "selector" : {
+                    "textRegex" : "Ok",
+                    "optional" : false
+                  },
+                  "retryIfNoChange" : false,
+                  "waitUntilVisible" : false,
+                  "longPress" : false,
+                  "optional" : false
+                }
+              }, {
+                "evalScriptCommand" : {
+                  "scriptString" : "${output.handled = true}",
+                  "optional" : false
+                }
+              }, {
+                "waitForAnimationToEndCommand" : {
+                  "timeout" : "3000",
+                  "optional" : false
+                }
+              } ],
+              "condition" : {
+                "visible" : {
+                  "textRegex" : "Ok",
+                  "optional" : false
+                }
+              },
+              "optional" : false
+            }
+          }, {
+            "runFlowCommand" : {
+              "commands" : [ {
+                "backPressCommand" : {
+                  "optional" : false
+                }
+              }, {
+                "evalScriptCommand" : {
+                  "scriptString" : "${output.handled = true}",
+                  "optional" : false
+                }
+              }, {
+                "waitForAnimationToEndCommand" : {
+                  "timeout" : "3000",
+                  "optional" : false
+                }
+              } ],
+              "condition" : {
+                "visible" : {
+                  "textRegex" : "Marketplace Day",
+                  "optional" : false
+                }
+              },
+              "optional" : false
+            }
+          }, {
+            "runFlowCommand" : {
+              "commands" : [ {
+                "backPressCommand" : {
+                  "optional" : false
+                }
+              }, {
+                "evalScriptCommand" : {
+                  "scriptString" : "${output.handled = true}",
+                  "optional" : false
+                }
+              }, {
+                "waitForAnimationToEndCommand" : {
+                  "timeout" : "3000",
+                  "optional" : false
+                }
+              } ],
+              "condition" : {
+                "visible" : {
+                  "textRegex" : "Start comparing properties",
+                  "optional" : false
+                }
+              },
+              "optional" : false
+            }
+          }, {
+            "runFlowCommand" : {
+              "commands" : [ {
+                "backPressCommand" : {
+                  "optional" : false
+                }
+              }, {
+                "evalScriptCommand" : {
+                  "scriptString" : "${output.handled = true}",
+                  "optional" : false
+                }
+              }, {
+                "waitForAnimationToEndCommand" : {
+                  "timeout" : "3000",
+                  "optional" : false
+                }
+              } ],
+              "condition" : {
+                "visible" : {
+                  "textRegex" : "Go to the weekly (offer|deal)",
+                  "optional" : false
+                }
+              },
+              "optional" : false
+            }
+          }, {
+            "runFlowCommand" : {
+              "commands" : [ {
+                "backPressCommand" : {
+                  "optional" : false
+                }
+              }, {
+                "evalScriptCommand" : {
+                  "scriptString" : "${output.handled = true}",
+                  "optional" : false
+                }
+              }, {
+                "waitForAnimationToEndCommand" : {
+                  "timeout" : "3000",
+                  "optional" : false
+                }
+              } ],
+              "condition" : {
+                "visible" : {
+                  "textRegex" : "Update email",
+                  "optional" : false
+                }
+              },
+              "optional" : false
+            }
+          }, {
+            "runFlowCommand" : {
+              "commands" : [ {
+                "tapOnPointV2Command" : {
+                  "point" : "7%,9%",
+                  "retryIfNoChange" : false,
+                  "longPress" : false,
+                  "optional" : false
+                }
+              }, {
+                "evalScriptCommand" : {
+                  "scriptString" : "${output.handled = true}",
+                  "optional" : false
+                }
+              }, {
+                "waitForAnimationToEndCommand" : {
+                  "timeout" : "4000",
+                  "optional" : false
+                }
+              } ],
+              "condition" : {
+                "visible" : {
+                  "textRegex" : "Number and Email Already Linked",
+                  "optional" : false
+                }
+              },
+              "optional" : false
+            }
+          }, {
+            "runFlowCommand" : {
+              "commands" : [ {
+                "runFlowCommand" : {
+                  "commands" : [ {
+                    "applyConfigurationCommand" : {
+                      "config" : {
+                        "appId" : "fi.iwa.sakani",
+                        "name" : "Answer the NPS survey with rating 5 if it is on screen"
+                      },
+                      "optional" : false
+                    }
+                  }, {
+                    "runFlowCommand" : {
+                      "commands" : [ {
+                        "runFlowCommand" : {
+                          "commands" : [ {
+                            "evalScriptCommand" : {
+                              "scriptString" : "${output.npsCount = (output.npsCount || 0) + 1}",
+                              "optional" : false
+                            }
+                          }, {
+                            "evalScriptCommand" : {
+                              "scriptString" : "${console.log('NPS KNOWN DEFECT - answering with rating 5, occurrence ' + output.npsCount)}",
+                              "optional" : false
+                            }
+                          }, {
+                            "tapOnElement" : {
+                              "selector" : {
+                                "textRegex" : "5",
+                                "below" : {
+                                  "textRegex" : "(?s).*would you recommend benefiting from Sakani.*",
+                                  "optional" : false
+                                },
+                                "optional" : false
+                              },
+                              "retryIfNoChange" : false,
+                              "waitUntilVisible" : false,
+                              "longPress" : false,
+                              "optional" : false
+                            }
+                          }, {
+                            "tapOnElement" : {
+                              "selector" : {
+                                "textRegex" : "Submit",
+                                "optional" : false
+                              },
+                              "retryIfNoChange" : false,
+                              "waitUntilVisible" : false,
+                              "longPress" : false,
+                              "optional" : false
+                            }
+                          }, {
+                            "repeatCommand" : {
+                              "times" : "4",
+                              "condition" : {
+                                "notVisible" : {
+                                  "textRegex" : "Thank you for your feedback",
+                                  "optional" : false
+                                }
+                              },
+                              "commands" : [ {
+                                "waitForAnimationToEndCommand" : {
+                                  "timeout" : "3000",
+                                  "optional" : false
+                                }
+                              } ],
+                              "optional" : false
+                            }
+                          }, {
+                            "runFlowCommand" : {
+                              "commands" : [ {
+                                "runFlowCommand" : {
+                                  "commands" : [ {
+                                    "takeScreenshotCommand" : {
+                                      "path" : "nps-rating-5-thank-you",
+                                      "optional" : false
+                                    }
+                                  } ],
+                                  "condition" : {
+                                    "visible" : {
+                                      "textRegex" : "Thank you for your feedback",
+                                      "optional" : false
+                                    }
+                                  },
+                                  "optional" : false
+                                }
+                              } ],
+                              "condition" : {
+                                "scriptCondition" : "${output.npsCount === 1}"
+                              },
+                              "optional" : false
+                            }
+                          } ],
+                          "condition" : {
+                            "notVisible" : {
+                              "textRegex" : "(?s)(.*There.s something wrong.*|.*the service is down.*|Error!)",
+                              "optional" : false
+                            }
+                          },
+                          "optional" : false
+                        }
+                      } ],
+                      "condition" : {
+                        "visible" : {
+                          "textRegex" : "(?s).*would you recommend benefiting from Sakani.*",
+                          "optional" : false
+                        }
+                      },
+                      "optional" : false
+                    }
+                  }, {
+                    "runFlowCommand" : {
+                      "commands" : [ {
+                        "evalScriptCommand" : {
+                          "scriptString" : "${console.log('NPS - closing the thank-you confirmation')}",
+                          "optional" : false
+                        }
+                      }, {
+                        "tapOnElement" : {
+                          "selector" : {
+                            "leftOf" : {
+                              "textRegex" : "Rate our App",
+                              "optional" : false
+                            },
+                            "optional" : false
+                          },
+                          "retryIfNoChange" : false,
+                          "waitUntilVisible" : false,
+                          "longPress" : false,
+                          "optional" : false
+                        }
+                      }, {
+                        "waitForAnimationToEndCommand" : {
+                          "timeout" : "4000",
+                          "optional" : false
+                        }
+                      } ],
+                      "condition" : {
+                        "visible" : {
+                          "textRegex" : "Thank you for your feedback",
+                          "optional" : false
+                        }
+                      },
+                      "optional" : false
+                    }
+                  } ],
+                  "sourceDescription" : "dismiss-nps.yaml",
+                  "config" : {
+                    "appId" : "fi.iwa.sakani",
+                    "name" : "Answer the NPS survey with rating 5 if it is on screen"
+                  },
+                  "optional" : false
+                }
+              }, {
+                "evalScriptCommand" : {
+                  "scriptString" : "${output.handled = true}",
+                  "optional" : false
+                }
+              } ],
+              "condition" : {
+                "visible" : {
+                  "textRegex" : "(?s)(.*would you recommend benefiting from Sakani.*|Thank you for your feedback)",
+                  "optional" : false
+                }
+              },
+              "optional" : false
+            }
+          }, {
+            "runFlowCommand" : {
+              "commands" : [ {
+                "tapOnElement" : {
+                  "selector" : {
+                    "textRegex" : "Maybe Later",
+                    "optional" : false
+                  },
+                  "retryIfNoChange" : false,
+                  "waitUntilVisible" : false,
+                  "longPress" : false,
+                  "optional" : false
+                }
+              }, {
+                "evalScriptCommand" : {
+                  "scriptString" : "${output.handled = true}",
+                  "optional" : false
+                }
+              }, {
+                "waitForAnimationToEndCommand" : {
+                  "timeout" : "3000",
+                  "optional" : false
+                }
+              } ],
+              "condition" : {
+                "visible" : {
+                  "textRegex" : "Maybe Later",
+                  "optional" : false
+                }
+              },
+              "optional" : false
+            }
+          }, {
+            "runFlowCommand" : {
+              "commands" : [ {
+                "tapOnElement" : {
+                  "selector" : {
+                    "textRegex" : "Reject cookies",
+                    "optional" : false
+                  },
+                  "retryIfNoChange" : false,
+                  "waitUntilVisible" : false,
+                  "longPress" : false,
+                  "optional" : false
+                }
+              }, {
+                "evalScriptCommand" : {
+                  "scriptString" : "${output.handled = true}",
+                  "optional" : false
+                }
+              }, {
+                "waitForAnimationToEndCommand" : {
+                  "timeout" : "4000",
+                  "optional" : false
+                }
+              } ],
+              "condition" : {
+                "visible" : {
+                  "textRegex" : "Reject cookies",
+                  "optional" : false
+                }
+              },
+              "optional" : false
+            }
+          } ],
+          "condition" : {
+            "visible" : {
+              "textRegex" : "(?s)(?:Don.t allow|Skip|Dismiss|Ok|Marketplace Day|Start comparing properties|Go to the weekly (offer|deal)|Update email|Number and Email Already Linked|.*would you recommend benefiting from Sakani.*|Thank you for your feedback|Maybe Later|Reject cookies)",
+              "optional" : false
+            }
+          },
+          "optional" : false
+        }
+      }, {
+        "runFlowCommand" : {
+          "commands" : [ {
+            "waitForAnimationToEndCommand" : {
+              "timeout" : "5000",
+              "optional" : false
+            }
+          } ],
+          "condition" : {
+            "scriptCondition" : "${output.handled !== true}"
+          },
+          "optional" : false
+        }
+      } ],
+      "optional" : false
+    }
+  },
+  "metadata" : {
+    "status" : "FAILED",
+    "timestamp" : 1791200650044,
+    "duration" : 39441,
+    "error" : { },
+    "sequenceNumber" : 6,
+    "depth" : 1,
+    "evaluatedCommand" : {
+      "repeatCommand" : {
+        "times" : "26",
+        "condition" : {
+          "notVisible" : {
+            "textRegex" : "${ANCHOR}",
+            "optional" : false
+          }
+        },
+        "commands" : [ {
+          "evalScriptCommand" : {
+            "scriptString" : "${output.handled = false}",
+            "optional" : false
+          }
+        }, {
+          "runFlowCommand" : {
+            "commands" : [ {
+              "runFlowCommand" : {
+                "commands" : [ {
+                  "tapOnElement" : {
+                    "selector" : {
+                      "textRegex" : "Don.t allow",
+                      "optional" : false
+                    },
+                    "retryIfNoChange" : false,
+                    "waitUntilVisible" : false,
+                    "longPress" : false,
+                    "optional" : false
+                  }
+                }, {
+                  "evalScriptCommand" : {
+                    "scriptString" : "${output.handled = true}",
+                    "optional" : false
+                  }
+                }, {
+                  "waitForAnimationToEndCommand" : {
+                    "timeout" : "3000",
+                    "optional" : false
+                  }
+                } ],
+                "condition" : {
+                  "visible" : {
+                    "textRegex" : "Don.t allow",
+                    "optional" : false
+                  }
+                },
+                "optional" : false
+              }
+            }, {
+              "runFlowCommand" : {
+                "commands" : [ {
+                  "tapOnElement" : {
+                    "selector" : {
+                      "textRegex" : "Skip",
+                      "optional" : false
+                    },
+                    "retryIfNoChange" : false,
+                    "waitUntilVisible" : false,
+                    "longPress" : false,
+                    "optional" : false
+                  }
+                }, {
+                  "evalScriptCommand" : {
+                    "scriptString" : "${output.handled = true}",
+                    "optional" : false
+                  }
+                }, {
+                  "waitForAnimationToEndCommand" : {
+                    "timeout" : "3000",
+                    "optional" : false
+                  }
+                } ],
+                "condition" : {
+                  "visible" : {
+                    "textRegex" : "Skip",
+                    "optional" : false
+                  }
+                },
+                "optional" : false
+              }
+            }, {
+              "runFlowCommand" : {
+                "commands" : [ {
+                  "tapOnElement" : {
+                    "selector" : {
+                      "textRegex" : "Dismiss",
+                      "optional" : false
+                    },
+                    "retryIfNoChange" : false,
+                    "waitUntilVisible" : false,
+                    "longPress" : false,
+                    "optional" : false
+                  }
+                }, {
+                  "evalScriptCommand" : {
+                    "scriptString" : "${output.handled = true}",
+                    "optional" : false
+                  }
+                }, {
+                  "waitForAnimationToEndCommand" : {
+                    "timeout" : "3000",
+                    "optional" : false
+                  }
+                } ],
+                "condition" : {
+                  "visible" : {
+                    "textRegex" : "Dismiss",
+                    "optional" : false
+                  }
+                },
+                "optional" : false
+              }
+            }, {
+              "runFlowCommand" : {
+                "commands" : [ {
+                  "runFlowCommand" : {
+                    "commands" : [ {
+                      "evalScriptCommand" : {
+                        "scriptString" : "${console.log('CLEAR-OVERLAYS OK-HANDLER: dismissing the ERROR dialog (there is something wrong / please try again later). If this line sits after a reservation, payment or signature step, the business outcome MUST be re-read from the product records before the run is called green.')}",
+                        "optional" : false
+                      }
+                    } ],
+                    "condition" : {
+                      "visible" : {
+                        "textRegex" : "There's something wrong. Please try again later!",
+                        "optional" : false
+                      }
+                    },
+                    "optional" : false
+                  }
+                }, {
+                  "evalScriptCommand" : {
+                    "scriptString" : "${console.log('CLEAR-OVERLAYS OK-HANDLER: tapping Ok')}",
+                    "optional" : false
+                  }
+                }, {
+                  "tapOnElement" : {
+                    "selector" : {
+                      "textRegex" : "Ok",
+                      "optional" : false
+                    },
+                    "retryIfNoChange" : false,
+                    "waitUntilVisible" : false,
+                    "longPress" : false,
+                    "optional" : false
+                  }
+                }, {
+                  "evalScriptCommand" : {
+                    "scriptString" : "${output.handled = true}",
+                    "optional" : false
+                  }
+                }, {
+                  "waitForAnimationToEndCommand" : {
+                    "timeout" : "3000",
+                    "optional" : false
+                  }
+                } ],
+                "condition" : {
+                  "visible" : {
+                    "textRegex" : "Ok",
+                    "optional" : false
+                  }
+                },
+                "optional" : false
+              }
+            }, {
+              "runFlowCommand" : {
+                "commands" : [ {
+                  "backPressCommand" : {
+                    "optional" : false
+                  }
+                }, {
+                  "evalScriptCommand" : {
+                    "scriptString" : "${output.handled = true}",
+                    "optional" : false
+                  }
+                }, {
+                  "waitForAnimationToEndCommand" : {
+                    "timeout" : "3000",
+                    "optional" : false
+                  }
+                } ],
+                "condition" : {
+                  "visible" : {
+                    "textRegex" : "Marketplace Day",
+                    "optional" : false
+                  }
+                },
+                "optional" : false
+              }
+            }, {
+              "runFlowCommand" : {
+                "commands" : [ {
+                  "backPressCommand" : {
+                    "optional" : false
+                  }
+                }, {
+                  "evalScriptCommand" : {
+                    "scriptString" : "${output.handled = true}",
+                    "optional" : false
+                  }
+                }, {
+                  "waitForAnimationToEndCommand" : {
+                    "timeout" : "3000",
+                    "optional" : false
+                  }
+                } ],
+                "condition" : {
+                  "visible" : {
+                    "textRegex" : "Start comparing properties",
+                    "optional" : false
+                  }
+                },
+                "optional" : false
+              }
+            }, {
+              "runFlowCommand" : {
+                "commands" : [ {
+                  "backPressCommand" : {
+                    "optional" : false
+                  }
+                }, {
+                  "evalScriptCommand" : {
+                    "scriptString" : "${output.handled = true}",
+                    "optional" : false
+                  }
+                }, {
+                  "waitForAnimationToEndCommand" : {
+                    "timeout" : "3000",
+                    "optional" : false
+                  }
+                } ],
+                "condition" : {
+                  "visible" : {
+                    "textRegex" : "Go to the weekly (offer|deal)",
+                    "optional" : false
+                  }
+                },
+                "optional" : false
+              }
+            }, {
+              "runFlowCommand" : {
+                "commands" : [ {
+                  "backPressCommand" : {
+                    "optional" : false
+                  }
+                }, {
+                  "evalScriptCommand" : {
+                    "scriptString" : "${output.handled = true}",
+                    "optional" : false
+                  }
+                }, {
+                  "waitForAnimationToEndCommand" : {
+                    "timeout" : "3000",
+                    "optional" : false
+                  }
+                } ],
+                "condition" : {
+                  "visible" : {
+                    "textRegex" : "Update email",
+                    "optional" : false
+                  }
+                },
+                "optional" : false
+              }
+            }, {
+              "runFlowCommand" : {
+                "commands" : [ {
+                  "tapOnPointV2Command" : {
+                    "point" : "7%,9%",
+                    "retryIfNoChange" : false,
+                    "longPress" : false,
+                    "optional" : false
+                  }
+                }, {
+                  "evalScriptCommand" : {
+                    "scriptString" : "${output.handled = true}",
+                    "optional" : false
+                  }
+                }, {
+                  "waitForAnimationToEndCommand" : {
+                    "timeout" : "4000",
+                    "optional" : false
+                  }
+                } ],
+                "condition" : {
+                  "visible" : {
+                    "textRegex" : "Number and Email Already Linked",
+                    "optional" : false
+                  }
+                },
+                "optional" : false
+              }
+            }, {
+              "runFlowCommand" : {
+                "commands" : [ {
+                  "runFlowCommand" : {
+                    "commands" : [ {
+                      "applyConfigurationCommand" : {
+                        "config" : {
+                          "appId" : "fi.iwa.sakani",
+                          "name" : "Answer the NPS survey with rating 5 if it is on screen"
+                        },
+                        "optional" : false
+                      }
+                    }, {
+                      "runFlowCommand" : {
+                        "commands" : [ {
+                          "runFlowCommand" : {
+                            "commands" : [ {
+                              "evalScriptCommand" : {
+                                "scriptString" : "${output.npsCount = (output.npsCount || 0) + 1}",
+                                "optional" : false
+                              }
+                            }, {
+                              "evalScriptCommand" : {
+                                "scriptString" : "${console.log('NPS KNOWN DEFECT - answering with rating 5, occurrence ' + output.npsCount)}",
+                                "optional" : false
+                              }
+                            }, {
+                              "tapOnElement" : {
+                                "selector" : {
+                                  "textRegex" : "5",
+                                  "below" : {
+                                    "textRegex" : "(?s).*would you recommend benefiting from Sakani.*",
+                                    "optional" : false
+                                  },
+                                  "optional" : false
+                                },
+                                "retryIfNoChange" : false,
+                                "waitUntilVisible" : false,
+                                "longPress" : false,
+                                "optional" : false
+                              }
+                            }, {
+                              "tapOnElement" : {
+                                "selector" : {
+                                  "textRegex" : "Submit",
+                                  "optional" : false
+                                },
+                                "retryIfNoChange" : false,
+                                "waitUntilVisible" : false,
+                                "longPress" : false,
+                                "optional" : false
+                              }
+                            }, {
+                              "repeatCommand" : {
+                                "times" : "4",
+                                "condition" : {
+                                  "notVisible" : {
+                                    "textRegex" : "Thank you for your feedback",
+                                    "optional" : false
+                                  }
+                                },
+                                "commands" : [ {
+                                  "waitForAnimationToEndCommand" : {
+                                    "timeout" : "3000",
+                                    "optional" : false
+                                  }
+                                } ],
+                                "optional" : false
+                              }
+                            }, {
+                              "runFlowCommand" : {
+                                "commands" : [ {
+                                  "runFlowCommand" : {
+                                    "commands" : [ {
+                                      "takeScreenshotCommand" : {
+                                        "path" : "nps-rating-5-thank-you",
+                                        "optional" : false
+                                      }
+                                    } ],
+                                    "condition" : {
+                                      "visible" : {
+                                        "textRegex" : "Thank you for your feedback",
+                                        "optional" : false
+                                      }
+                                    },
+                                    "optional" : false
+                                  }
+                                } ],
+                                "condition" : {
+                                  "scriptCondition" : "${output.npsCount === 1}"
+                                },
+                                "optional" : false
+                              }
+                            } ],
+                            "condition" : {
+                              "notVisible" : {
+                                "textRegex" : "(?s)(.*There.s something wrong.*|.*the service is down.*|Error!)",
+                                "optional" : false
+                              }
+                            },
+                            "optional" : false
+                          }
+                        } ],
+                        "condition" : {
+                          "visible" : {
+                            "textRegex" : "(?s).*would you recommend benefiting from Sakani.*",
+                            "optional" : false
+                          }
+                        },
+                        "optional" : false
+                      }
+                    }, {
+                      "runFlowCommand" : {
+                        "commands" : [ {
+                          "evalScriptCommand" : {
+                            "scriptString" : "${console.log('NPS - closing the thank-you confirmation')}",
+                            "optional" : false
+                          }
+                        }, {
+                          "tapOnElement" : {
+                            "selector" : {
+                              "leftOf" : {
+                                "textRegex" : "Rate our App",
+                                "optional" : false
+                              },
+                              "optional" : false
+                            },
+                            "retryIfNoChange" : false,
+                            "waitUntilVisible" : false,
+                            "longPress" : false,
+                            "optional" : false
+                          }
+                        }, {
+                          "waitForAnimationToEndCommand" : {
+                            "timeout" : "4000",
+                            "optional" : false
+                          }
+                        } ],
+                        "condition" : {
+                          "visible" : {
+                            "textRegex" : "Thank you for your feedback",
+                            "optional" : false
+                          }
+                        },
+                        "optional" : false
+                      }
+                    } ],
+                    "sourceDescription" : "dismiss-nps.yaml",
+                    "config" : {
+                      "appId" : "fi.iwa.sakani",
+                      "name" : "Answer the NPS survey with rating 5 if it is on screen"
+                    },
+                    "optional" : false
+                  }
+                }, {
+                  "evalScriptCommand" : {
+                    "scriptString" : "${output.handled = true}",
+                    "optional" : false
+                  }
+                } ],
+                "condition" : {
+                  "visible" : {
+                    "textRegex" : "(?s)(.*would you recommend benefiting from Sakani.*|Thank you for your feedback)",
+                    "optional" : false
+                  }
+                },
+                "optional" : false
+              }
+            }, {
+              "runFlowCommand" : {
+                "commands" : [ {
+                  "tapOnElement" : {
+                    "selector" : {
+                      "textRegex" : "Maybe Later",
+                      "optional" : false
+                    },
+                    "retryIfNoChange" : false,
+                    "waitUntilVisible" : false,
+                    "longPress" : false,
+                    "optional" : false
+                  }
+                }, {
+                  "evalScriptCommand" : {
+                    "scriptString" : "${output.handled = true}",
+                    "optional" : false
+                  }
+                }, {
+                  "waitForAnimationToEndCommand" : {
+                    "timeout" : "3000",
+                    "optional" : false
+                  }
+                } ],
+                "condition" : {
+                  "visible" : {
+                    "textRegex" : "Maybe Later",
+                    "optional" : false
+                  }
+                },
+                "optional" : false
+              }
+            }, {
+              "runFlowCommand" : {
+                "commands" : [ {
+                  "tapOnElement" : {
+                    "selector" : {
+                      "textRegex" : "Reject cookies",
+                      "optional" : false
+                    },
+                    "retryIfNoChange" : false,
+                    "waitUntilVisible" : false,
+                    "longPress" : false,
+                    "optional" : false
+                  }
+                }, {
+                  "evalScriptCommand" : {
+                    "scriptString" : "${output.handled = true}",
+                    "optional" : false
+                  }
+                }, {
+                  "waitForAnimationToEndCommand" : {
+                    "timeout" : "4000",
+                    "optional" : false
+                  }
+                } ],
+                "condition" : {
+                  "visible" : {
+                    "textRegex" : "Reject cookies",
+                    "optional" : false
+                  }
+                },
+                "optional" : false
+              }
+            } ],
+            "condition" : {
+              "visible" : {
+                "textRegex" : "(?s)(?:Don.t allow|Skip|Dismiss|Ok|Marketplace Day|Start comparing properties|Go to the weekly (offer|deal)|Update email|Number and Email Already Linked|.*would you recommend benefiting from Sakani.*|Thank you for your feedback|Maybe Later|Reject cookies)",
+                "optional" : false
+              }
+            },
+            "optional" : false
+          }
+        }, {
+          "runFlowCommand" : {
+            "commands" : [ {
+              "waitForAnimationToEndCommand" : {
+                "timeout" : "5000",
+                "optional" : false
+              }
+            } ],
+            "condition" : {
+              "scriptCondition" : "${output.handled !== true}"
+            },
+            "optional" : false
+          }
+        } ],
+        "optional" : false
+      }
+    }
+  }
+}, {
+  "command" : {
+    "evalScriptCommand" : {
+      "scriptString" : "${output.handled = false}",
+      "optional" : false
+    }
+  },
+  "metadata" : {
+    "status" : "COMPLETED",
+    "timestamp" : 1791200655450,
+    "duration" : 26,
+    "sequenceNumber" : 7,
+    "depth" : 2,
+    "evaluatedCommand" : {
+      "evalScriptCommand" : {
+        "scriptString" : "${output.handled = false}",
+        "optional" : false
+      }
+    }
+  }
+}, {
+  "command" : {
+    "runFlowCommand" : {
+      "commands" : [ {
+        "runFlowCommand" : {
+          "commands" : [ {
+            "tapOnElement" : {
+              "selector" : {
+                "textRegex" : "Don.t allow",
+                "optional" : false
+              },
+              "retryIfNoChange" : false,
+              "waitUntilVisible" : false,
+              "longPress" : false,
+              "optional" : false
+            }
+          }, {
+            "evalScriptCommand" : {
+              "scriptString" : "${output.handled = true}",
+              "optional" : false
+            }
+          }, {
+            "waitForAnimationToEndCommand" : {
+              "timeout" : "3000",
+              "optional" : false
+            }
+          } ],
+          "condition" : {
+            "visible" : {
+              "textRegex" : "Don.t allow",
+              "optional" : false
+            }
+          },
+          "optional" : false
+        }
+      }, {
+        "runFlowCommand" : {
+          "commands" : [ {
+            "tapOnElement" : {
+              "selector" : {
+                "textRegex" : "Skip",
+                "optional" : false
+              },
+              "retryIfNoChange" : false,
+              "waitUntilVisible" : false,
+              "longPress" : false,
+              "optional" : false
+            }
+          }, {
+            "evalScriptCommand" : {
+              "scriptString" : "${output.handled = true}",
+              "optional" : false
+            }
+          }, {
+            "waitForAnimationToEndCommand" : {
+              "timeout" : "3000",
+              "optional" : false
+            }
+          } ],
+          "condition" : {
+            "visible" : {
+              "textRegex" : "Skip",
+              "optional" : false
+            }
+          },
+          "optional" : false
+        }
+      }, {
+        "runFlowCommand" : {
+          "commands" : [ {
+            "tapOnElement" : {
+              "selector" : {
+                "textRegex" : "Dismiss",
+                "optional" : false
+              },
+              "retryIfNoChange" : false,
+              "waitUntilVisible" : false,
+              "longPress" : false,
+              "optional" : false
+            }
+          }, {
+            "evalScriptCommand" : {
+              "scriptString" : "${output.handled = true}",
+              "optional" : false
+            }
+          }, {
+            "waitForAnimationToEndCommand" : {
+              "timeout" : "3000",
+              "optional" : false
+            }
+          } ],
+          "condition" : {
+            "visible" : {
+              "textRegex" : "Dismiss",
+              "optional" : false
+            }
+          },
+          "optional" : false
+        }
+      }, {
+        "runFlowCommand" : {
+          "commands" : [ {
+            "runFlowCommand" : {
+              "commands" : [ {
+                "evalScriptCommand" : {
+                  "scriptString" : "${console.log('CLEAR-OVERLAYS OK-HANDLER: dismissing the ERROR dialog (there is something wrong / please try again later). If this line sits after a reservation, payment or signature step, the business outcome MUST be re-read from the product records before the run is called green.')}",
+                  "optional" : false
+                }
+              } ],
+              "condition" : {
+                "visible" : {
+                  "textRegex" : "There's something wrong. Please try again later!",
+                  "optional" : false
+                }
+              },
+              "optional" : false
+            }
+          }, {
+            "evalScriptCommand" : {
+              "scriptString" : "${console.log('CLEAR-OVERLAYS OK-HANDLER: tapping Ok')}",
+              "optional" : false
+            }
+          }, {
+            "tapOnElement" : {
+              "selector" : {
+                "textRegex" : "Ok",
+                "optional" : false
+              },
+              "retryIfNoChange" : false,
+              "waitUntilVisible" : false,
+              "longPress" : false,
+              "optional" : false
+            }
+          }, {
+            "evalScriptCommand" : {
+              "scriptString" : "${output.handled = true}",
+              "optional" : false
+            }
+          }, {
+            "waitForAnimationToEndCommand" : {
+              "timeout" : "3000",
+              "optional" : false
+            }
+          } ],
+          "condition" : {
+            "visible" : {
+              "textRegex" : "Ok",
+              "optional" : false
+            }
+          },
+          "optional" : false
+        }
+      }, {
+        "runFlowCommand" : {
+          "commands" : [ {
+            "backPressCommand" : {
+              "optional" : false
+            }
+          }, {
+            "evalScriptCommand" : {
+              "scriptString" : "${output.handled = true}",
+              "optional" : false
+            }
+          }, {
+            "waitForAnimationToEndCommand" : {
+              "timeout" : "3000",
+              "optional" : false
+            }
+          } ],
+          "condition" : {
+            "visible" : {
+              "textRegex" : "Marketplace Day",
+              "optional" : false
+            }
+          },
+          "optional" : false
+        }
+      }, {
+        "runFlowCommand" : {
+          "commands" : [ {
+            "backPressCommand" : {
+              "optional" : false
+            }
+          }, {
+            "evalScriptCommand" : {
+              "scriptString" : "${output.handled = true}",
+              "optional" : false
+            }
+          }, {
+            "waitForAnimationToEndCommand" : {
+              "timeout" : "3000",
+              "optional" : false
+            }
+          } ],
+          "condition" : {
+            "visible" : {
+              "textRegex" : "Start comparing properties",
+              "optional" : false
+            }
+          },
+          "optional" : false
+        }
+      }, {
+        "runFlowCommand" : {
+          "commands" : [ {
+            "backPressCommand" : {
+              "optional" : false
+            }
+          }, {
+            "evalScriptCommand" : {
+              "scriptString" : "${output.handled = true}",
+              "optional" : false
+            }
+          }, {
+            "waitForAnimationToEndCommand" : {
+              "timeout" : "3000",
+              "optional" : false
+            }
+          } ],
+          "condition" : {
+            "visible" : {
+              "textRegex" : "Go to the weekly (offer|deal)",
+              "optional" : false
+            }
+          },
+          "optional" : false
+        }
+      }, {
+        "runFlowCommand" : {
+          "commands" : [ {
+            "backPressCommand" : {
+              "optional" : false
+            }
+          }, {
+            "evalScriptCommand" : {
+              "scriptString" : "${output.handled = true}",
+              "optional" : false
+            }
+          }, {
+            "waitForAnimationToEndCommand" : {
+              "timeout" : "3000",
+              "optional" : false
+            }
+          } ],
+          "condition" : {
+            "visible" : {
+              "textRegex" : "Update email",
+              "optional" : false
+            }
+          },
+          "optional" : false
+        }
+      }, {
+        "runFlowCommand" : {
+          "commands" : [ {
+            "tapOnPointV2Command" : {
+              "point" : "7%,9%",
+              "retryIfNoChange" : false,
+              "longPress" : false,
+              "optional" : false
+            }
+          }, {
+            "evalScriptCommand" : {
+              "scriptString" : "${output.handled = true}",
+              "optional" : false
+            }
+          }, {
+            "waitForAnimationToEndCommand" : {
+              "timeout" : "4000",
+              "optional" : false
+            }
+          } ],
+          "condition" : {
+            "visible" : {
+              "textRegex" : "Number and Email Already Linked",
+              "optional" : false
+            }
+          },
+          "optional" : false
+        }
+      }, {
+        "runFlowCommand" : {
+          "commands" : [ {
+            "runFlowCommand" : {
+              "commands" : [ {
+                "applyConfigurationCommand" : {
+                  "config" : {
+                    "appId" : "fi.iwa.sakani",
+                    "name" : "Answer the NPS survey with rating 5 if it is on screen"
+                  },
+                  "optional" : false
+                }
+              }, {
+                "runFlowCommand" : {
+                  "commands" : [ {
+                    "runFlowCommand" : {
+                      "commands" : [ {
+                        "evalScriptCommand" : {
+                          "scriptString" : "${output.npsCount = (output.npsCount || 0) + 1}",
+                          "optional" : false
+                        }
+                      }, {
+                        "evalScriptCommand" : {
+                          "scriptString" : "${console.log('NPS KNOWN DEFECT - answering with rating 5, occurrence ' + output.npsCount)}",
+                          "optional" : false
+                        }
+                      }, {
+                        "tapOnElement" : {
+                          "selector" : {
+                            "textRegex" : "5",
+                            "below" : {
+                              "textRegex" : "(?s).*would you recommend benefiting from Sakani.*",
+                              "optional" : false
+                            },
+                            "optional" : false
+                          },
+                          "retryIfNoChange" : false,
+                          "waitUntilVisible" : false,
+                          "longPress" : false,
+                          "optional" : false
+                        }
+                      }, {
+                        "tapOnElement" : {
+                          "selector" : {
+                            "textRegex" : "Submit",
+                            "optional" : false
+                          },
+                          "retryIfNoChange" : false,
+                          "waitUntilVisible" : false,
+                          "longPress" : false,
+                          "optional" : false
+                        }
+                      }, {
+                        "repeatCommand" : {
+                          "times" : "4",
+                          "condition" : {
+                            "notVisible" : {
+                              "textRegex" : "Thank you for your feedback",
+                              "optional" : false
+                            }
+                          },
+                          "commands" : [ {
+                            "waitForAnimationToEndCommand" : {
+                              "timeout" : "3000",
+                              "optional" : false
+                            }
+                          } ],
+                          "optional" : false
+                        }
+                      }, {
+                        "runFlowCommand" : {
+                          "commands" : [ {
+                            "runFlowCommand" : {
+                              "commands" : [ {
+                                "takeScreenshotCommand" : {
+                                  "path" : "nps-rating-5-thank-you",
+                                  "optional" : false
+                                }
+                              } ],
+                              "condition" : {
+                                "visible" : {
+                                  "textRegex" : "Thank you for your feedback",
+                                  "optional" : false
+                                }
+                              },
+                              "optional" : false
+                            }
+                          } ],
+                          "condition" : {
+                            "scriptCondition" : "${output.npsCount === 1}"
+                          },
+                          "optional" : false
+                        }
+                      } ],
+                      "condition" : {
+                        "notVisible" : {
+                          "textRegex" : "(?s)(.*There.s something wrong.*|.*the service is down.*|Error!)",
+                          "optional" : false
+                        }
+                      },
+                      "optional" : false
+                    }
+                  } ],
+                  "condition" : {
+                    "visible" : {
+                      "textRegex" : "(?s).*would you recommend benefiting from Sakani.*",
+                      "optional" : false
+                    }
+                  },
+                  "optional" : false
+                }
+              }, {
+                "runFlowCommand" : {
+                  "commands" : [ {
+                    "evalScriptCommand" : {
+                      "scriptString" : "${console.log('NPS - closing the thank-you confirmation')}",
+                      "optional" : false
+                    }
+                  }, {
+                    "tapOnElement" : {
+                      "selector" : {
+                        "leftOf" : {
+                          "textRegex" : "Rate our App",
+                          "optional" : false
+                        },
+                        "optional" : false
+                      },
+                      "retryIfNoChange" : false,
+                      "waitUntilVisible" : false,
+                      "longPress" : false,
+                      "optional" : false
+                    }
+                  }, {
+                    "waitForAnimationToEndCommand" : {
+                      "timeout" : "4000",
+                      "optional" : false
+                    }
+                  } ],
+                  "condition" : {
+                    "visible" : {
+                      "textRegex" : "Thank you for your feedback",
+                      "optional" : false
+                    }
+                  },
+                  "optional" : false
+                }
+              } ],
+              "sourceDescription" : "dismiss-nps.yaml",
+              "config" : {
+                "appId" : "fi.iwa.sakani",
+                "name" : "Answer the NPS survey with rating 5 if it is on screen"
+              },
+              "optional" : false
+            }
+          }, {
+            "evalScriptCommand" : {
+              "scriptString" : "${output.handled = true}",
+              "optional" : false
+            }
+          } ],
+          "condition" : {
+            "visible" : {
+              "textRegex" : "(?s)(.*would you recommend benefiting from Sakani.*|Thank you for your feedback)",
+              "optional" : false
+            }
+          },
+          "optional" : false
+        }
+      }, {
+        "runFlowCommand" : {
+          "commands" : [ {
+            "tapOnElement" : {
+              "selector" : {
+                "textRegex" : "Maybe Later",
+                "optional" : false
+              },
+              "retryIfNoChange" : false,
+              "waitUntilVisible" : false,
+              "longPress" : false,
+              "optional" : false
+            }
+          }, {
+            "evalScriptCommand" : {
+              "scriptString" : "${output.handled = true}",
+              "optional" : false
+            }
+          }, {
+            "waitForAnimationToEndCommand" : {
+              "timeout" : "3000",
+              "optional" : false
+            }
+          } ],
+          "condition" : {
+            "visible" : {
+              "textRegex" : "Maybe Later",
+              "optional" : false
+            }
+          },
+          "optional" : false
+        }
+      }, {
+        "runFlowCommand" : {
+          "commands" : [ {
+            "tapOnElement" : {
+              "selector" : {
+                "textRegex" : "Reject cookies",
+                "optional" : false
+              },
+              "retryIfNoChange" : false,
+              "waitUntilVisible" : false,
+              "longPress" : false,
+              "optional" : false
+            }
+          }, {
+            "evalScriptCommand" : {
+              "scriptString" : "${output.handled = true}",
+              "optional" : false
+            }
+          }, {
+            "waitForAnimationToEndCommand" : {
+              "timeout" : "4000",
+              "optional" : false
+            }
+          } ],
+          "condition" : {
+            "visible" : {
+              "textRegex" : "Reject cookies",
+              "optional" : false
+            }
+          },
+          "optional" : false
+        }
+      } ],
+      "condition" : {
+        "visible" : {
+          "textRegex" : "(?s)(?:Don.t allow|Skip|Dismiss|Ok|Marketplace Day|Start comparing properties|Go to the weekly (offer|deal)|Update email|Number and Email Already Linked|.*would you recommend benefiting from Sakani.*|Thank you for your feedback|Maybe Later|Reject cookies)",
+          "optional" : false
+        }
+      },
+      "optional" : false
+    }
+  },
+  "metadata" : {
+    "status" : "FAILED",
+    "timestamp" : 1791200655480,
+    "duration" : 33989,
+    "error" : { },
+    "sequenceNumber" : 8,
+    "depth" : 2,
+    "evaluatedCommand" : {
+      "runFlowCommand" : {
+        "commands" : [ {
+          "runFlowCommand" : {
+            "commands" : [ {
+              "tapOnElement" : {
+                "selector" : {
+                  "textRegex" : "Don.t allow",
+                  "optional" : false
+                },
+                "retryIfNoChange" : false,
+                "waitUntilVisible" : false,
+                "longPress" : false,
+                "optional" : false
+              }
+            }, {
+              "evalScriptCommand" : {
+                "scriptString" : "${output.handled = true}",
+                "optional" : false
+              }
+            }, {
+              "waitForAnimationToEndCommand" : {
+                "timeout" : "3000",
+                "optional" : false
+              }
+            } ],
+            "condition" : {
+              "visible" : {
+                "textRegex" : "Don.t allow",
+                "optional" : false
+              }
+            },
+            "optional" : false
+          }
+        }, {
+          "runFlowCommand" : {
+            "commands" : [ {
+              "tapOnElement" : {
+                "selector" : {
+                  "textRegex" : "Skip",
+                  "optional" : false
+                },
+                "retryIfNoChange" : false,
+                "waitUntilVisible" : false,
+                "longPress" : false,
+                "optional" : false
+              }
+            }, {
+              "evalScriptCommand" : {
+                "scriptString" : "${output.handled = true}",
+                "optional" : false
+              }
+            }, {
+              "waitForAnimationToEndCommand" : {
+                "timeout" : "3000",
+                "optional" : false
+              }
+            } ],
+            "condition" : {
+              "visible" : {
+                "textRegex" : "Skip",
+                "optional" : false
+              }
+            },
+            "optional" : false
+          }
+        }, {
+          "runFlowCommand" : {
+            "commands" : [ {
+              "tapOnElement" : {
+                "selector" : {
+                  "textRegex" : "Dismiss",
+                  "optional" : false
+                },
+                "retryIfNoChange" : false,
+                "waitUntilVisible" : false,
+                "longPress" : false,
+                "optional" : false
+              }
+            }, {
+              "evalScriptCommand" : {
+                "scriptString" : "${output.handled = true}",
+                "optional" : false
+              }
+            }, {
+              "waitForAnimationToEndCommand" : {
+                "timeout" : "3000",
+                "optional" : false
+              }
+            } ],
+            "condition" : {
+              "visible" : {
+                "textRegex" : "Dismiss",
+                "optional" : false
+              }
+            },
+            "optional" : false
+          }
+        }, {
+          "runFlowCommand" : {
+            "commands" : [ {
+              "runFlowCommand" : {
+                "commands" : [ {
+                  "evalScriptCommand" : {
+                    "scriptString" : "${console.log('CLEAR-OVERLAYS OK-HANDLER: dismissing the ERROR dialog (there is something wrong / please try again later). If this line sits after a reservation, payment or signature step, the business outcome MUST be re-read from the product records before the run is called green.')}",
+                    "optional" : false
+                  }
+                } ],
+                "condition" : {
+                  "visible" : {
+                    "textRegex" : "There's something wrong. Please try again later!",
+                    "optional" : false
+                  }
+                },
+                "optional" : false
+              }
+            }, {
+              "evalScriptCommand" : {
+                "scriptString" : "${console.log('CLEAR-OVERLAYS OK-HANDLER: tapping Ok')}",
+                "optional" : false
+              }
+            }, {
+              "tapOnElement" : {
+                "selector" : {
+                  "textRegex" : "Ok",
+                  "optional" : false
+                },
+                "retryIfNoChange" : false,
+                "waitUntilVisible" : false,
+                "longPress" : false,
+                "optional" : false
+              }
+            }, {
+              "evalScriptCommand" : {
+                "scriptString" : "${output.handled = true}",
+                "optional" : false
+              }
+            }, {
+              "waitForAnimationToEndCommand" : {
+                "timeout" : "3000",
+                "optional" : false
+              }
+            } ],
+            "condition" : {
+              "visible" : {
+                "textRegex" : "Ok",
+                "optional" : false
+              }
+            },
+            "optional" : false
+          }
+        }, {
+          "runFlowCommand" : {
+            "commands" : [ {
+              "backPressCommand" : {
+                "optional" : false
+              }
+            }, {
+              "evalScriptCommand" : {
+                "scriptString" : "${output.handled = true}",
+                "optional" : false
+              }
+            }, {
+              "waitForAnimationToEndCommand" : {
+                "timeout" : "3000",
+                "optional" : false
+              }
+            } ],
+            "condition" : {
+              "visible" : {
+                "textRegex" : "Marketplace Day",
+                "optional" : false
+              }
+            },
+            "optional" : false
+          }
+        }, {
+          "runFlowCommand" : {
+            "commands" : [ {
+              "backPressCommand" : {
+                "optional" : false
+              }
+            }, {
+              "evalScriptCommand" : {
+                "scriptString" : "${output.handled = true}",
+                "optional" : false
+              }
+            }, {
+              "waitForAnimationToEndCommand" : {
+                "timeout" : "3000",
+                "optional" : false
+              }
+            } ],
+            "condition" : {
+              "visible" : {
+                "textRegex" : "Start comparing properties",
+                "optional" : false
+              }
+            },
+            "optional" : false
+          }
+        }, {
+          "runFlowCommand" : {
+            "commands" : [ {
+              "backPressCommand" : {
+                "optional" : false
+              }
+            }, {
+              "evalScriptCommand" : {
+                "scriptString" : "${output.handled = true}",
+                "optional" : false
+              }
+            }, {
+              "waitForAnimationToEndCommand" : {
+                "timeout" : "3000",
+                "optional" : false
+              }
+            } ],
+            "condition" : {
+              "visible" : {
+                "textRegex" : "Go to the weekly (offer|deal)",
+                "optional" : false
+              }
+            },
+            "optional" : false
+          }
+        }, {
+          "runFlowCommand" : {
+            "commands" : [ {
+              "backPressCommand" : {
+                "optional" : false
+              }
+            }, {
+              "evalScriptCommand" : {
+                "scriptString" : "${output.handled = true}",
+                "optional" : false
+              }
+            }, {
+              "waitForAnimationToEndCommand" : {
+                "timeout" : "3000",
+                "optional" : false
+              }
+            } ],
+            "condition" : {
+              "visible" : {
+                "textRegex" : "Update email",
+                "optional" : false
+              }
+            },
+            "optional" : false
+          }
+        }, {
+          "runFlowCommand" : {
+            "commands" : [ {
+              "tapOnPointV2Command" : {
+                "point" : "7%,9%",
+                "retryIfNoChange" : false,
+                "longPress" : false,
+                "optional" : false
+              }
+            }, {
+              "evalScriptCommand" : {
+                "scriptString" : "${output.handled = true}",
+                "optional" : false
+              }
+            }, {
+              "waitForAnimationToEndCommand" : {
+                "timeout" : "4000",
+                "optional" : false
+              }
+            } ],
+            "condition" : {
+              "visible" : {
+                "textRegex" : "Number and Email Already Linked",
+                "optional" : false
+              }
+            },
+            "optional" : false
+          }
+        }, {
+          "runFlowCommand" : {
+            "commands" : [ {
+              "runFlowCommand" : {
+                "commands" : [ {
+                  "applyConfigurationCommand" : {
+                    "config" : {
+                      "appId" : "fi.iwa.sakani",
+                      "name" : "Answer the NPS survey with rating 5 if it is on screen"
+                    },
+                    "optional" : false
+                  }
+                }, {
+                  "runFlowCommand" : {
+                    "commands" : [ {
+                      "runFlowCommand" : {
+                        "commands" : [ {
+                          "evalScriptCommand" : {
+                            "scriptString" : "${output.npsCount = (output.npsCount || 0) + 1}",
+                            "optional" : false
+                          }
+                        }, {
+                          "evalScriptCommand" : {
+                            "scriptString" : "${console.log('NPS KNOWN DEFECT - answering with rating 5, occurrence ' + output.npsCount)}",
+                            "optional" : false
+                          }
+                        }, {
+                          "tapOnElement" : {
+                            "selector" : {
+                              "textRegex" : "5",
+                              "below" : {
+                                "textRegex" : "(?s).*would you recommend benefiting from Sakani.*",
+                                "optional" : false
+                              },
+                              "optional" : false
+                            },
+                            "retryIfNoChange" : false,
+                            "waitUntilVisible" : false,
+                            "longPress" : false,
+                            "optional" : false
+                          }
+                        }, {
+                          "tapOnElement" : {
+                            "selector" : {
+                              "textRegex" : "Submit",
+                              "optional" : false
+                            },
+                            "retryIfNoChange" : false,
+                            "waitUntilVisible" : false,
+                            "longPress" : false,
+                            "optional" : false
+                          }
+                        }, {
+                          "repeatCommand" : {
+                            "times" : "4",
+                            "condition" : {
+                              "notVisible" : {
+                                "textRegex" : "Thank you for your feedback",
+                                "optional" : false
+                              }
+                            },
+                            "commands" : [ {
+                              "waitForAnimationToEndCommand" : {
+                                "timeout" : "3000",
+                                "optional" : false
+                              }
+                            } ],
+                            "optional" : false
+                          }
+                        }, {
+                          "runFlowCommand" : {
+                            "commands" : [ {
+                              "runFlowCommand" : {
+                                "commands" : [ {
+                                  "takeScreenshotCommand" : {
+                                    "path" : "nps-rating-5-thank-you",
+                                    "optional" : false
+                                  }
+                                } ],
+                                "condition" : {
+                                  "visible" : {
+                                    "textRegex" : "Thank you for your feedback",
+                                    "optional" : false
+                                  }
+                                },
+                                "optional" : false
+                              }
+                            } ],
+                            "condition" : {
+                              "scriptCondition" : "${output.npsCount === 1}"
+                            },
+                            "optional" : false
+                          }
+                        } ],
+                        "condition" : {
+                          "notVisible" : {
+                            "textRegex" : "(?s)(.*There.s something wrong.*|.*the service is down.*|Error!)",
+                            "optional" : false
+                          }
+                        },
+                        "optional" : false
+                      }
+                    } ],
+                    "condition" : {
+                      "visible" : {
+                        "textRegex" : "(?s).*would you recommend benefiting from Sakani.*",
+                        "optional" : false
+                      }
+                    },
+                    "optional" : false
+                  }
+                }, {
+                  "runFlowCommand" : {
+                    "commands" : [ {
+                      "evalScriptCommand" : {
+                        "scriptString" : "${console.log('NPS - closing the thank-you confirmation')}",
+                        "optional" : false
+                      }
+                    }, {
+                      "tapOnElement" : {
+                        "selector" : {
+                          "leftOf" : {
+                            "textRegex" : "Rate our App",
+                            "optional" : false
+                          },
+                          "optional" : false
+                        },
+                        "retryIfNoChange" : false,
+                        "waitUntilVisible" : false,
+                        "longPress" : false,
+                        "optional" : false
+                      }
+                    }, {
+                      "waitForAnimationToEndCommand" : {
+                        "timeout" : "4000",
+                        "optional" : false
+                      }
+                    } ],
+                    "condition" : {
+                      "visible" : {
+                        "textRegex" : "Thank you for your feedback",
+                        "optional" : false
+                      }
+                    },
+                    "optional" : false
+                  }
+                } ],
+                "sourceDescription" : "dismiss-nps.yaml",
+                "config" : {
+                  "appId" : "fi.iwa.sakani",
+                  "name" : "Answer the NPS survey with rating 5 if it is on screen"
+                },
+                "optional" : false
+              }
+            }, {
+              "evalScriptCommand" : {
+                "scriptString" : "${output.handled = true}",
+                "optional" : false
+              }
+            } ],
+            "condition" : {
+              "visible" : {
+                "textRegex" : "(?s)(.*would you recommend benefiting from Sakani.*|Thank you for your feedback)",
+                "optional" : false
+              }
+            },
+            "optional" : false
+          }
+        }, {
+          "runFlowCommand" : {
+            "commands" : [ {
+              "tapOnElement" : {
+                "selector" : {
+                  "textRegex" : "Maybe Later",
+                  "optional" : false
+                },
+                "retryIfNoChange" : false,
+                "waitUntilVisible" : false,
+                "longPress" : false,
+                "optional" : false
+              }
+            }, {
+              "evalScriptCommand" : {
+                "scriptString" : "${output.handled = true}",
+                "optional" : false
+              }
+            }, {
+              "waitForAnimationToEndCommand" : {
+                "timeout" : "3000",
+                "optional" : false
+              }
+            } ],
+            "condition" : {
+              "visible" : {
+                "textRegex" : "Maybe Later",
+                "optional" : false
+              }
+            },
+            "optional" : false
+          }
+        }, {
+          "runFlowCommand" : {
+            "commands" : [ {
+              "tapOnElement" : {
+                "selector" : {
+                  "textRegex" : "Reject cookies",
+                  "optional" : false
+                },
+                "retryIfNoChange" : false,
+                "waitUntilVisible" : false,
+                "longPress" : false,
+                "optional" : false
+              }
+            }, {
+              "evalScriptCommand" : {
+                "scriptString" : "${output.handled = true}",
+                "optional" : false
+              }
+            }, {
+              "waitForAnimationToEndCommand" : {
+                "timeout" : "4000",
+                "optional" : false
+              }
+            } ],
+            "condition" : {
+              "visible" : {
+                "textRegex" : "Reject cookies",
+                "optional" : false
+              }
+            },
+            "optional" : false
+          }
+        } ],
+        "condition" : {
+          "visible" : {
+            "textRegex" : "(?s)(?:Don.t allow|Skip|Dismiss|Ok|Marketplace Day|Start comparing properties|Go to the weekly (offer|deal)|Update email|Number and Email Already Linked|.*would you recommend benefiting from Sakani.*|Thank you for your feedback|Maybe Later|Reject cookies)",
+            "optional" : false
+          }
+        },
+        "optional" : false
+      }
+    }
+  }
+}, {
+  "command" : {
+    "runFlowCommand" : {
+      "commands" : [ {
+        "tapOnElement" : {
+          "selector" : {
+            "textRegex" : "Don.t allow",
+            "optional" : false
+          },
+          "retryIfNoChange" : false,
+          "waitUntilVisible" : false,
+          "longPress" : false,
+          "optional" : false
+        }
+      }, {
+        "evalScriptCommand" : {
+          "scriptString" : "${output.handled = true}",
+          "optional" : false
+        }
+      }, {
+        "waitForAnimationToEndCommand" : {
+          "timeout" : "3000",
+          "optional" : false
+        }
+      } ],
+      "condition" : {
+        "visible" : {
+          "textRegex" : "Don.t allow",
+          "optional" : false
+        }
+      },
+      "optional" : false
+    }
+  },
+  "metadata" : {
+    "status" : "SKIPPED",
+    "timestamp" : 1791200660725,
+    "duration" : 2588,
+    "sequenceNumber" : 9,
+    "depth" : 3,
+    "evaluatedCommand" : {
+      "runFlowCommand" : {
+        "commands" : [ {
+          "tapOnElement" : {
+            "selector" : {
+              "textRegex" : "Don.t allow",
+              "optional" : false
+            },
+            "retryIfNoChange" : false,
+            "waitUntilVisible" : false,
+            "longPress" : false,
+            "optional" : false
+          }
+        }, {
+          "evalScriptCommand" : {
+            "scriptString" : "${output.handled = true}",
+            "optional" : false
+          }
+        }, {
+          "waitForAnimationToEndCommand" : {
+            "timeout" : "3000",
+            "optional" : false
+          }
+        } ],
+        "condition" : {
+          "visible" : {
+            "textRegex" : "Don.t allow",
+            "optional" : false
+          }
+        },
+        "optional" : false
+      }
+    }
+  }
+}, {
+  "command" : {
+    "runFlowCommand" : {
+      "commands" : [ {
+        "tapOnElement" : {
+          "selector" : {
+            "textRegex" : "Skip",
+            "optional" : false
+          },
+          "retryIfNoChange" : false,
+          "waitUntilVisible" : false,
+          "longPress" : false,
+          "optional" : false
+        }
+      }, {
+        "evalScriptCommand" : {
+          "scriptString" : "${output.handled = true}",
+          "optional" : false
+        }
+      }, {
+        "waitForAnimationToEndCommand" : {
+          "timeout" : "3000",
+          "optional" : false
+        }
+      } ],
+      "condition" : {
+        "visible" : {
+          "textRegex" : "Skip",
+          "optional" : false
+        }
+      },
+      "optional" : false
+    }
+  },
+  "metadata" : {
+    "status" : "COMPLETED",
+    "timestamp" : 1791200663317,
+    "duration" : 8544,
+    "sequenceNumber" : 10,
+    "depth" : 3,
+    "evaluatedCommand" : {
+      "runFlowCommand" : {
+        "commands" : [ {
+          "tapOnElement" : {
+            "selector" : {
+              "textRegex" : "Skip",
+              "optional" : false
+            },
+            "retryIfNoChange" : false,
+            "waitUntilVisible" : false,
+            "longPress" : false,
+            "optional" : false
+          }
+        }, {
+          "evalScriptCommand" : {
+            "scriptString" : "${output.handled = true}",
+            "optional" : false
+          }
+        }, {
+          "waitForAnimationToEndCommand" : {
+            "timeout" : "3000",
+            "optional" : false
+          }
+        } ],
+        "condition" : {
+          "visible" : {
+            "textRegex" : "Skip",
+            "optional" : false
+          }
+        },
+        "optional" : false
+      }
+    }
+  }
+}, {
+  "command" : {
+    "tapOnElement" : {
+      "selector" : {
+        "textRegex" : "Skip",
+        "optional" : false
+      },
+      "retryIfNoChange" : false,
+      "waitUntilVisible" : false,
+      "longPress" : false,
+      "optional" : false
+    }
+  },
+  "metadata" : {
+    "status" : "COMPLETED",
+    "timestamp" : 1791200663680,
+    "duration" : 5615,
+    "sequenceNumber" : 11,
+    "depth" : 4,
+    "evaluatedCommand" : {
+      "tapOnElement" : {
+        "selector" : {
+          "textRegex" : "Skip",
+          "optional" : false
+        },
+        "retryIfNoChange" : false,
+        "waitUntilVisible" : false,
+        "longPress" : false,
+        "optional" : false
+      }
+    }
+  }
+}, {
+  "command" : {
+    "evalScriptCommand" : {
+      "scriptString" : "${output.handled = true}",
+      "optional" : false
+    }
+  },
+  "metadata" : {
+    "status" : "COMPLETED",
+    "timestamp" : 1791200669297,
+    "duration" : 7,
+    "sequenceNumber" : 12,
+    "depth" : 4,
+    "evaluatedCommand" : {
+      "evalScriptCommand" : {
+        "scriptString" : "${output.handled = true}",
+        "optional" : false
+      }
+    }
+  }
+}, {
+  "command" : {
+    "waitForAnimationToEndCommand" : {
+      "timeout" : "3000",
+      "optional" : false
+    }
+  },
+  "metadata" : {
+    "status" : "COMPLETED",
+    "timestamp" : 1791200669307,
+    "duration" : 2552,
+    "sequenceNumber" : 13,
+    "depth" : 4,
+    "evaluatedCommand" : {
+      "waitForAnimationToEndCommand" : {
+        "timeout" : "3000",
+        "optional" : false
+      }
+    }
+  }
+}, {
+  "command" : {
+    "runFlowCommand" : {
+      "commands" : [ {
+        "tapOnElement" : {
+          "selector" : {
+            "textRegex" : "Dismiss",
+            "optional" : false
+          },
+          "retryIfNoChange" : false,
+          "waitUntilVisible" : false,
+          "longPress" : false,
+          "optional" : false
+        }
+      }, {
+        "evalScriptCommand" : {
+          "scriptString" : "${output.handled = true}",
+          "optional" : false
+        }
+      }, {
+        "waitForAnimationToEndCommand" : {
+          "timeout" : "3000",
+          "optional" : false
+        }
+      } ],
+      "condition" : {
+        "visible" : {
+          "textRegex" : "Dismiss",
+          "optional" : false
+        }
+      },
+      "optional" : false
+    }
+  },
+  "metadata" : {
+    "status" : "SKIPPED",
+    "timestamp" : 1791200671863,
+    "duration" : 7916,
+    "sequenceNumber" : 14,
+    "depth" : 3,
+    "evaluatedCommand" : {
+      "runFlowCommand" : {
+        "commands" : [ {
+          "tapOnElement" : {
+            "selector" : {
+              "textRegex" : "Dismiss",
+              "optional" : false
+            },
+            "retryIfNoChange" : false,
+            "waitUntilVisible" : false,
+            "longPress" : false,
+            "optional" : false
+          }
+        }, {
+          "evalScriptCommand" : {
+            "scriptString" : "${output.handled = true}",
+            "optional" : false
+          }
+        }, {
+          "waitForAnimationToEndCommand" : {
+            "timeout" : "3000",
+            "optional" : false
+          }
+        } ],
+        "condition" : {
+          "visible" : {
+            "textRegex" : "Dismiss",
+            "optional" : false
+          }
+        },
+        "optional" : false
+      }
+    }
+  }
+}, {
+  "command" : {
+    "runFlowCommand" : {
+      "commands" : [ {
+        "runFlowCommand" : {
+          "commands" : [ {
+            "evalScriptCommand" : {
+              "scriptString" : "${console.log('CLEAR-OVERLAYS OK-HANDLER: dismissing the ERROR dialog (there is something wrong / please try again later). If this line sits after a reservation, payment or signature step, the business outcome MUST be re-read from the product records before the run is called green.')}",
+              "optional" : false
+            }
+          } ],
+          "condition" : {
+            "visible" : {
+              "textRegex" : "There's something wrong. Please try again later!",
+              "optional" : false
+            }
+          },
+          "optional" : false
+        }
+      }, {
+        "evalScriptCommand" : {
+          "scriptString" : "${console.log('CLEAR-OVERLAYS OK-HANDLER: tapping Ok')}",
+          "optional" : false
+        }
+      }, {
+        "tapOnElement" : {
+          "selector" : {
+            "textRegex" : "Ok",
+            "optional" : false
+          },
+          "retryIfNoChange" : false,
+          "waitUntilVisible" : false,
+          "longPress" : false,
+          "optional" : false
+        }
+      }, {
+        "evalScriptCommand" : {
+          "scriptString" : "${output.handled = true}",
+          "optional" : false
+        }
+      }, {
+        "waitForAnimationToEndCommand" : {
+          "timeout" : "3000",
+          "optional" : false
+        }
+      } ],
+      "condition" : {
+        "visible" : {
+          "textRegex" : "Ok",
+          "optional" : false
+        }
+      },
+      "optional" : false
+    }
+  },
+  "metadata" : {
+    "status" : "SKIPPED",
+    "timestamp" : 1791200679781,
+    "duration" : 1154,
+    "sequenceNumber" : 15,
+    "depth" : 3,
+    "evaluatedCommand" : {
+      "runFlowCommand" : {
+        "commands" : [ {
+          "runFlowCommand" : {
+            "commands" : [ {
+              "evalScriptCommand" : {
+                "scriptString" : "${console.log('CLEAR-OVERLAYS OK-HANDLER: dismissing the ERROR dialog (there is something wrong / please try again later). If this line sits after a reservation, payment or signature step, the business outcome MUST be re-read from the product records before the run is called green.')}",
+                "optional" : false
+              }
+            } ],
+            "condition" : {
+              "visible" : {
+                "textRegex" : "There's something wrong. Please try again later!",
+                "optional" : false
+              }
+            },
+            "optional" : false
+          }
+        }, {
+          "evalScriptCommand" : {
+            "scriptString" : "${console.log('CLEAR-OVERLAYS OK-HANDLER: tapping Ok')}",
+            "optional" : false
+          }
+        }, {
+          "tapOnElement" : {
+            "selector" : {
+              "textRegex" : "Ok",
+              "optional" : false
+            },
+            "retryIfNoChange" : false,
+            "waitUntilVisible" : false,
+            "longPress" : false,
+            "optional" : false
+          }
+        }, {
+          "evalScriptCommand" : {
+            "scriptString" : "${output.handled = true}",
+            "optional" : false
+          }
+        }, {
+          "waitForAnimationToEndCommand" : {
+            "timeout" : "3000",
+            "optional" : false
+          }
+        } ],
+        "condition" : {
+          "visible" : {
+            "textRegex" : "Ok",
+            "optional" : false
+          }
+        },
+        "optional" : false
+      }
+    }
+  }
+}, {
+  "command" : {
+    "runFlowCommand" : {
+      "commands" : [ {
+        "backPressCommand" : {
+          "optional" : false
+        }
+      }, {
+        "evalScriptCommand" : {
+          "scriptString" : "${output.handled = true}",
+          "optional" : false
+        }
+      }, {
+        "waitForAnimationToEndCommand" : {
+          "timeout" : "3000",
+          "optional" : false
+        }
+      } ],
+      "condition" : {
+        "visible" : {
+          "textRegex" : "Marketplace Day",
+          "optional" : false
+        }
+      },
+      "optional" : false
+    }
+  },
+  "metadata" : {
+    "status" : "SKIPPED",
+    "timestamp" : 1791200680936,
+    "duration" : 1918,
+    "sequenceNumber" : 16,
+    "depth" : 3,
+    "evaluatedCommand" : {
+      "runFlowCommand" : {
+        "commands" : [ {
+          "backPressCommand" : {
+            "optional" : false
+          }
+        }, {
+          "evalScriptCommand" : {
+            "scriptString" : "${output.handled = true}",
+            "optional" : false
+          }
+        }, {
+          "waitForAnimationToEndCommand" : {
+            "timeout" : "3000",
+            "optional" : false
+          }
+        } ],
+        "condition" : {
+          "visible" : {
+            "textRegex" : "Marketplace Day",
+            "optional" : false
+          }
+        },
+        "optional" : false
+      }
+    }
+  }
+}, {
+  "command" : {
+    "runFlowCommand" : {
+      "commands" : [ {
+        "backPressCommand" : {
+          "optional" : false
+        }
+      }, {
+        "evalScriptCommand" : {
+          "scriptString" : "${output.handled = true}",
+          "optional" : false
+        }
+      }, {
+        "waitForAnimationToEndCommand" : {
+          "timeout" : "3000",
+          "optional" : false
+        }
+      } ],
+      "condition" : {
+        "visible" : {
+          "textRegex" : "Start comparing properties",
+          "optional" : false
+        }
+      },
+      "optional" : false
+    }
+  },
+  "metadata" : {
+    "status" : "FAILED",
+    "timestamp" : 1791200682856,
+    "duration" : 6598,
+    "error" : { },
+    "sequenceNumber" : 17,
+    "depth" : 3,
+    "evaluatedCommand" : {
+      "runFlowCommand" : {
+        "commands" : [ {
+          "backPressCommand" : {
+            "optional" : false
+          }
+        }, {
+          "evalScriptCommand" : {
+            "scriptString" : "${output.handled = true}",
+            "optional" : false
+          }
+        }, {
+          "waitForAnimationToEndCommand" : {
+            "timeout" : "3000",
+            "optional" : false
+          }
+        } ],
+        "condition" : {
+          "visible" : {
+            "textRegex" : "Start comparing properties",
+            "optional" : false
+          }
+        },
+        "optional" : false
+      }
+    }
+  }
+}, {
+  "command" : {
+    "backPressCommand" : {
+      "optional" : false
+    }
+  },
+  "metadata" : {
+    "status" : "FAILED",
+    "timestamp" : 1791200683667,
+    "duration" : 5740,
+    "error" : { },
+    "sequenceNumber" : 18,
+    "depth" : 4,
+    "evaluatedCommand" : {
+      "backPressCommand" : {
+        "optional" : false
+      }
+    }
+  }
+} ]

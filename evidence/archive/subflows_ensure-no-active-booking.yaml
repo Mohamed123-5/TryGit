@@ -1,0 +1,180 @@
+# Reusable helper — STAGE 0 cleanup: guarantee the account under test holds NO active booking
+# before a journey tries to create one.
+#
+# WHY THIS EXISTS
+# The Full Journey is not idempotent. Once it has reserved, the account holds an active
+# booking and the next run stops at "Active booking detected! You already have an active
+# booking." - three stages in, after a login and a full Explore traversal. This helper moves
+# that failure to the front of the run and resolves it through the product's own UI.
+#
+# CONTRACT
+#   Precondition  - the caller is authenticated and on a screen that shows the bottom tab bar.
+#   Postcondition - My Bookings -> Active is empty, verified, and the caller is back on a
+#                   tabbed screen.
+#   It cancels AT MOST the active bookings this account already held when it was called. The
+#   booking a journey creates AFTERWARDS is never touched, because this runs before it exists.
+#
+# SAFETY RULES ENCODED HERE
+#   * Only the ACTIVE tab is ever read. Completed and Cancelled bookings are never opened and
+#     never cancelled - the selectors below match "\nActive\n", which those states do not.
+#   * Cancellation goes through the normal UI: booking -> "Cancel booking" -> confirm ->
+#     reason -> confirm. There is no backend or API shortcut.
+#   * "No, return project" is the SAFE branch of the first dialog and is never tapped here;
+#     "Yes, cancel my booking" is the destructive one and is tapped deliberately, once.
+#   * Evidence is captured before and after: screenshots are taken of the active booking, of
+#     each cancellation screen, and of the empty Active tab afterwards.
+#   * The final assertion is on the product's own state (an empty Active tab), not on having
+#     reached the end of the steps. If cancellation is blocked or the UI has changed, this
+#     helper FAILS at a named step - it never returns "clean" to a caller that would then
+#     create a second booking on top of an existing one.
+#
+# COST OF CANCELLING
+# The first confirmation dialog states: "The booking fee is not refunded when you cancel the
+# booking". Cancelling here forfeits the booking fee of whatever booking the account already
+# held. That is the intended trade for a repeatable journey on a TEST account, and it is why
+# this helper is invoked explicitly by the caller rather than run implicitly by anything.
+appId: fi.iwa.sakani
+name: Ensure no active booking
+---
+# --- Read the current state from My Bookings -> Active.
+- tapOn: 'Account\s*Tab 4 of 4'
+- extendedWaitUntil:
+    visible: "My bookings"
+    timeout: 60000
+- tapOn: "My bookings"
+- extendedWaitUntil:
+    visible: "My Bookings"
+    timeout: 45000
+- tapOn: 'Active\s*Tab 2 of 4'
+- waitForAnimationToEnd:
+    timeout: 12000
+- takeScreenshot: cleanup-00-active-tab-before
+
+# --- The whole cleanup is conditional. On a clean account every step below is SKIPPED and
+# this helper costs one hierarchy read.
+#
+# The selector matches the booking card's own accessibility text, which carries the state on
+# its own line: "<project>\nActive\n...Unit code\n<code>...". A Cancelled or Completed card
+# renders "\nCancelled\n" / "\nCompleted\n" instead and cannot match this.
+- runFlow:
+    when:
+      visible: "(?s).*\nActive\n.*Unit code.*"
+    commands:
+      # Open the existing active booking and record what is about to be cancelled: the
+      # project name, unit type, unit code and status are all on this screen.
+      - tapOn: "(?s).*\nActive\n.*Unit code.*"
+      - extendedWaitUntil:
+          visible: "Booking Details"
+          timeout: 45000
+      - assertVisible: "(?s).*Unit type.*"
+      - assertVisible: "Invoice number"
+      - takeScreenshot: cleanup-01-booking-being-cancelled
+
+      # "Cancel booking" sits at the bottom of the booking detail.
+      - scrollUntilVisible:
+          element:
+            text: "Cancel booking"
+          direction: DOWN
+          timeout: 30000
+      - tapOn: "Cancel booking"
+
+      # First confirmation. Its own wording is asserted so this cannot fire against some
+      # other dialog that happens to carry a "Yes" button.
+      - extendedWaitUntil:
+          visible: "(?s).*booking fee is not refunded.*are you sure you want to cancel.*"
+          timeout: 30000
+      - assertVisible: "No, return project"
+      - takeScreenshot: cleanup-02-confirm-dialog
+      - tapOn: "Yes, cancel my booking"
+
+      # --- Cancellation reason. The product requires one and will not enable its confirm
+      # control until a reason is selected.
+      #
+      # "Relocation" is chosen from the eight listed reasons deliberately:
+      #   * it needs no free text, unlike "Other reason", so nothing is typed into the
+      #     account under test; and
+      #   * it is a customer-circumstance reason. The alternatives - "Unit price",
+      #     "Project location", "Project unit design", "Unit area", "Reject by bank" - would
+      #     each record a complaint about the product or the lender that is not true here,
+      #     and this helper cancels for automation hygiene, not because anything was wrong.
+      - extendedWaitUntil:
+          visible: "Reason for cancelling"
+          timeout: 45000
+      - takeScreenshot: cleanup-03-reason-screen
+      - assertVisible: "Relocation"
+      - tapOn: "Relocation"
+      - waitForAnimationToEnd:
+          timeout: 6000
+      - takeScreenshot: cleanup-03b-reason-selected
+
+      # "Confirm cancellation" is disabled until a reason is selected, so reaching it in an
+      # enabled state is itself the check that the tap above landed.
+      - tapOn: "Confirm cancellation"
+
+      # --- SECOND confirmation. The product asks twice, with different wording and different
+      # button labels each time: "Yes, cancel my booking" / "No, return project" on the first
+      # dialog, plain "Yes" / "No" on this one. Both are matched on their own text so neither
+      # can fire against the other.
+      - extendedWaitUntil:
+          visible: "(?s).*booking fee is not refunded.*"
+          timeout: 30000
+      - assertVisible: "No"
+      - takeScreenshot: cleanup-04-second-confirm
+      - tapOn: "Yes"
+
+      # Wait for the product's own confirmation rather than assuming the tap took. It names
+      # the unit and project it cancelled, which is the record of what this helper released.
+      - extendedWaitUntil:
+          visible: "(?s).*has been cancelled successfully.*"
+          timeout: 60000
+      - assertVisible: "Cancellation request submitted"
+      - takeScreenshot: cleanup-05-cancellation-confirmed
+
+      # --- Back to My Bookings for the verification below.
+      #
+      # The success screen is full-screen and offers "View booking" and "Reserve unit".
+      # NEITHER is tapped: "View booking" is recorded in the Full Journey as having dropped
+      # the app to the Android launcher, and "Reserve unit" would start a new reservation -
+      # the exact thing this helper exists to avoid doing by accident. A relaunch is the
+      # deterministic way back, and it also forces the bookings list to re-read from the
+      # server rather than showing the list this session had already cached.
+      - launchApp
+      - runFlow:
+          file: clear-overlays.yaml
+          env:
+            ANCHOR: 'Account\s*Tab 4 of 4'
+      - tapOn: 'Account\s*Tab 4 of 4'
+      - extendedWaitUntil:
+          visible: "My bookings"
+          timeout: 60000
+      - tapOn: "My bookings"
+      - extendedWaitUntil:
+          visible: "My Bookings"
+          timeout: 45000
+      - tapOn: 'Active\s*Tab 2 of 4'
+      - waitForAnimationToEnd:
+          timeout: 12000
+
+# --- THE POSTCONDITION, asserted on the product's own state.
+#
+# This runs on BOTH paths - the account that was already clean and the account that has just
+# been cleaned - so a caller can only ever continue past this helper with zero active
+# bookings. This is the line that makes the helper safe to call before a journey that books.
+#
+# The Active tab paints its tabs and filter chips BEFORE the list arrives, so a bare
+# assertion here can read an empty screen that is merely still loading and call it clean.
+# extendedWaitUntil polls for the empty-state message itself, which only renders once the
+# list has actually come back.
+- extendedWaitUntil:
+    visible: "(?s).*don.t have any active booking.*"
+    timeout: 60000
+- assertNotVisible: "(?s).*\nActive\n.*Unit code.*"
+- takeScreenshot: cleanup-06-active-tab-empty
+
+# --- Return the caller to a tabbed screen. My Bookings is full-screen and has no bottom
+# navigation, so a caller that went straight to "Explore" from here would fail on a missing
+# tab rather than on anything meaningful.
+- back
+- extendedWaitUntil:
+    visible: 'Explore\s*Tab 2 of 4'
+    timeout: 45000

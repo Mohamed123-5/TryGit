@@ -1,0 +1,4 @@
+appId: fi.iwa.sakani
+name: A4 same regex without dollar (false)
+---
+- assertTrue: ${/^x/.test("abc")}

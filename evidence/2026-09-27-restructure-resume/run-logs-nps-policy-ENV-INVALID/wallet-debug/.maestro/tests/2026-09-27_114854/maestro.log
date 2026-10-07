@@ -1,0 +1,39 @@
+11:48:54.879 [ INFO] maestro.cli.report.TestDebugReporter.logSystemInfo: Debug output path: D:\Automation\Maestro-Mobile\evidence\2026-09-27-restructure-resume\run-logs-nps-policy\wallet-debug\.maestro\tests\2026-09-27_114854
+11:48:54.882 [ INFO] MAESTRO.logSystemInfo: ---- System Info ----
+11:48:54.882 [ INFO] MAESTRO.logSystemInfo: Maestro Version: 2.9.0
+11:48:54.883 [ INFO] MAESTRO.logSystemInfo: CI: Undefined
+11:48:54.884 [ INFO] MAESTRO.logSystemInfo: OS Name: Windows 11
+11:48:54.884 [ INFO] MAESTRO.logSystemInfo: OS Version: 10.0
+11:48:54.884 [ INFO] MAESTRO.logSystemInfo: Architecture: amd64
+11:48:54.884 [ INFO] MAESTRO.logSystemInfo: Java Version: 26
+11:48:54.887 [ INFO] MAESTRO.logSystemInfo: Xcode Version: null
+11:48:54.890 [ INFO] MAESTRO.logSystemInfo: Flutter Version: Undefined
+11:48:54.893 [ INFO] MAESTRO.logSystemInfo: Flutter Channel: Undefined
+11:48:54.893 [ INFO] MAESTRO.logSystemInfo: ---------------------
+11:48:56.084 [ INFO] maestro.cli.command.TestCommand.runShardSuite: [shard 1] Selected device emulator-5554 using port 58765 with execution plan ExecutionPlan(flowsToRun=[D:\Automation\Maestro-Mobile\.maestro\regression-readonly\wallet.yaml], sequence=FlowSequence(flows=[], continueOnFailure=true), workspaceConfig=WorkspaceConfig(flows=null, includeTags=null, excludeTags=null, executionOrder=null, baselineBranch=null, notifications=null, disableRetries=false, platform=PlatformConfiguration(android=AndroidConfiguration(disableAnimations=false), ios=IOSConfiguration(disableAnimations=false, snapshotKeyHonorModalViews=null)), testOutputDir=null))
+11:48:56.192 [ERROR] maestro.cli.session.MaestroSessionManager.newSession$lambda$0: Failed to record heartbeat
+java.io.IOException: The process cannot access the file because another process has locked a portion of the file
+	at java.base/java.io.FileOutputStream.writeBytes(Native Method)
+	at java.base/java.io.FileOutputStream.write(FileOutputStream.java:332)
+	at kotlin.io.FilesKt__FileReadWriteKt.writeTextImpl(FileReadWrite.kt:160)
+	at kotlin.io.FilesKt__FileReadWriteKt.writeText(FileReadWrite.kt:145)
+	at kotlin.io.FilesKt__FileReadWriteKt.writeText$default(FileReadWrite.kt:144)
+	at maestro.cli.db.KeyValueStore.commit(KeyValueStore.kt:50)
+	at maestro.cli.db.KeyValueStore.set$lambda$3$lambda$2(KeyValueStore.kt:23)
+	at maestro.cli.db.KeyValueStore.withFileLock(KeyValueStore.kt:62)
+	at maestro.cli.db.KeyValueStore.set(KeyValueStore.kt:20)
+	at maestro.cli.session.SessionStore.heartbeat(SessionStore.kt:12)
+	at maestro.cli.session.MaestroSessionManager.newSession$lambda$0(MaestroSessionManager.kt:98)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:545)
+	at java.base/java.util.concurrent.FutureTask.runAndReset(FutureTask.java:371)
+	at java.base/java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:310)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1090)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:614)
+	at java.base/java.lang.Thread.run(Thread.java:1516)
+11:48:56.216 [DEBUG] io.micrometer.common.util.internal.logging.InternalLoggerFactory.newDefaultFactory: Using SLF4J as the default logging framework
+11:48:56.252 [ WARN] maestro.Maestro.isPackageInstalled: Failed to check if package dev.mobile.maestro is installed: shell command failed (exit 20): cmd: Can't find service: package
+
+11:48:56.252 [ WARN] maestro.Maestro.bestEffortUninstall: Failed to check or uninstall dev.mobile.maestro: shell command failed (exit 20): cmd: Can't find service: package
+
+11:48:56.276 [ WARN] maestro.Maestro.bestEffortUninstall: Failed to uninstall dev.mobile.maestro: cmd: Can't find service: package
+ (exit 20)

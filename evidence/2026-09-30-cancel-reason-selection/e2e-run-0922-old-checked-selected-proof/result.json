@@ -1,0 +1,17 @@
+{
+  "flow": "cancel-booking",
+  "file": ".maestro/e2e/cancel-booking.yaml",
+  "suite": "e2e",
+  "tags": [
+    "happy-path"
+  ],
+  "startedAt": "2026-09-30T06:22:06.013Z",
+  "durationMs": 212497,
+  "logPath": "report-dashboard/maestro-output/cancel-booking/maestro.log",
+  "status": "FAIL",
+  "exitCode": 1,
+  "failedSteps": 1,
+  "firstFailure": "CANCEL - the tapped reason does not report a selected/checked state... FAILED",
+  "envReason": null,
+  "npsAppearances": 0
+}

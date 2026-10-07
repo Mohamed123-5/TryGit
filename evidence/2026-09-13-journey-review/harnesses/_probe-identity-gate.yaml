@@ -1,0 +1,35 @@
+appId: fi.iwa.sakani
+name: PROBE - identity gate (sign in as LOGIN_ID, then require the session to be CLAIM_ID)
+env:
+  # Both required; no defaults. Positive test: LOGIN_ID == CLAIM_ID (must pass). Negative test:
+  # LOGIN_ID != CLAIM_ID (must FAIL at the profile ID assertion inside the helper).
+  #   maestro test -e LOGIN_ID=<id> -e CLAIM_ID=<id> .maestro/_probe-identity-gate.yaml
+  LOGIN_ID: '${typeof LOGIN_ID === "undefined" ? "" : String(LOGIN_ID)}'
+  CLAIM_ID: '${typeof CLAIM_ID === "undefined" ? "" : String(CLAIM_ID)}'
+---
+# READ-ONLY. Signs in and opens the profile. It opens no booking and no project, and it edits
+# nothing. It exercises subflows/verify-signed-in-account.yaml - the exact file full-journey.yaml
+# calls before STAGE 0 - so the gate is tested as shipped, not as a copy.
+- evalScript: ${console.log('IDENTITY PROBE LOGIN_ID = [' + LOGIN_ID + '] CLAIM_ID = [' + CLAIM_ID + ']')}
+- assertTrue: ${String(LOGIN_ID).length === 10 && String(CLAIM_ID).length === 10}
+- launchApp:
+    clearState: true
+- runFlow:
+    file: subflows/login.yaml
+    env:
+      NATIONAL_ID: ${LOGIN_ID}
+
+- tapOn: 'Account\s*Tab 4 of 4'
+- runFlow:
+    file: subflows/clear-overlays.yaml
+    env:
+      ANCHOR: "My bookings"
+- extendedWaitUntil:
+    visible: "My bookings"
+    timeout: 60000
+
+- runFlow:
+    file: subflows/verify-signed-in-account.yaml
+    env:
+      NATIONAL_ID: ${CLAIM_ID}
+- evalScript: "${console.log('IDENTITY PROBE RESULT: the signed-in profile shows CLAIM_ID = [' + CLAIM_ID + ']')}"

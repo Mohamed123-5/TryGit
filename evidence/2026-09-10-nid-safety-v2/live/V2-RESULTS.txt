@@ -1,0 +1,57 @@
+############ A. NEGATIVE: bad values must stop BEFORE launchApp ############
+  login.yaml             NATIONAL_ID=[] exit=1 launchApp=0 typed=nothing  -> STOPPED-BEFORE-APP
+  login.yaml             NATIONAL_ID=[12345] exit=1 launchApp=0 typed=nothing  -> STOPPED-BEFORE-APP
+  _explore.yaml          NATIONAL_ID=[abcdefghij] exit=1 launchApp=0 typed=nothing  -> STOPPED-BEFORE-APP
+  _nid-validation.yaml   NATIONAL_ID=[] exit=1 launchApp=0 typed=nothing  -> STOPPED-BEFORE-APP
+  _nid-validation.yaml   NATIONAL_ID=[12abcdefgh] exit=1 launchApp=0 typed=nothing  -> STOPPED-BEFORE-APP
+############ B. IDENTITY GATE probes (pure JS, exact journey gate line) ############
+  gate match     exit=0 (want 0) -> OK
+  gate mismatch  exit=1 (want 1) -> OK
+  gate missing   exit=1 (want 1) -> OK
+############ C. login.yaml - default user (regression validation) ############
+  exit=0
+  log: C:/Users/Mohammed Elkatry/.maestro/tests/2026-09-10_111820/maestro.log
+  resolved: TARGET NATIONAL_ID = [1000011485] 
+  typed: 123 abcdefghij 1000011485 
+  exact-ID assertions (textRegex):       2 textRegex=1000011485 
+  launchApp executed: 6
+  FAILED: 
+############ D. login.yaml - override -e NATIONAL_ID=1119880062 ############
+  exit=1
+  log: C:/Users/Mohammed Elkatry/.maestro/tests/2026-09-10_112143/maestro.log
+  resolved: TARGET NATIONAL_ID = [1119880062] 
+  typed: 123 abcdefghij 1119880062 
+  exact-ID assertions (textRegex):       2 textRegex=1119880062 
+  launchApp executed: 3
+  FAILED: Assert that "Maybe Later" is visible FAILED|
+############ E. Full Journey Stage-1 harness - override -e NATIONAL_ID=1000011487 (ends before STAGE 0) ############
+  exit=0
+  log: C:/Users/Mohammed Elkatry/.maestro/tests/2026-09-10_112616/maestro.log
+  resolved: TARGET NATIONAL_ID = [1000011487] 
+  typed: 1000011487 
+  exact-ID assertions (textRegex):       2 textRegex=1000011487 
+  launchApp executed: 3
+  FAILED: 
+  identity gate: COMPLETED 
+  eligibility: COMPLETED 
+  exit contract in this run: ran=1 skipped(opt-out)=1
+############ F. Account <-> Home navigation through clear-overlays (session of 1000011487) ############
+  exit=0
+  log: C:/Users/Mohammed Elkatry/.maestro/tests/2026-09-10_112904/maestro.log
+  EXECUTED taps:
+          4 Tap on "Account\s*Tab 4 of 4" COMPLETED
+          4 Tap on "Home\s*Tab 1 of 4" COMPLETED
+  executed taps on Submit / a 0-10 rating: 0
+  NPS met: 0 | drags executed: 0
+  NPS final sweep assertNotVisible:      12 COMPLETED 
+  exit contract (wait for caller ANCHOR): ran=12 skipped=0
+  FAILED: 
+############ G. _explore.yaml - override -e NATIONAL_ID=1000011487 (read-only My Bookings) ############
+  exit=1
+  log: C:/Users/Mohammed Elkatry/.maestro/tests/2026-09-10_113110/maestro.log
+  resolved: TARGET NATIONAL_ID = [1000011487] 
+  typed: 1000011487 
+  exact-ID assertions (textRegex):       2 textRegex=1000011487 
+  launchApp executed: 3
+  FAILED: Assert that "(?si)(Hello|Good (morning|afternoon|evening)),\s*\S.*" is visible FAILED|Run subflows/login.yaml FAILED|
+  bookings on screen (read-only):

@@ -1,0 +1,24 @@
+# Open the Account tab from an authenticated Home, surviving the NPS survey.
+#
+# WHY THIS EXISTS (27/09/2026). The known NPS product defect re-presents the survey within the gap
+# between two consecutive Maestro hierarchy reads, and on Home the sheet REPLACES the content
+# rather than covering it. So "clear overlays, then tap Account" is a race: the tab bar is briefly
+# there, and the sheet is back before the tap lands. account.yaml and wallet.yaml both died there.
+#
+# The state-driven "handle NPS -> tap -> prove destination -> retry" loop now lives in the generic
+# subflows/tap-until-destination.yaml (28/09/2026), so every flow uses one implementation; this
+# file only fixes the target to the Account tab. Behaviour is unchanged: at most 6 passes while
+# DESTINATION is absent, the survey handled on every pass by subflows/dismiss-nps.yaml, an optional
+# tap on the Account tab, and arrival proven by DESTINATION.
+#
+# CONTRACT
+#   DESTINATION - a selector that only the opened Account screen satisfies (e.g. "My bookings").
+#                 The caller keeps its own assertions; this helper proves arrival and nothing more.
+appId: fi.iwa.sakani
+name: Open the Account tab
+---
+- runFlow:
+    file: tap-until-destination.yaml
+    env:
+      TARGET: 'Account\s*Tab 4 of 4'
+      DESTINATION: ${DESTINATION}

@@ -1,0 +1,81 @@
+WARNING: Final field parent in class maestro.cli.command.TestCommand has been mutated reflectively by class picocli.CommandLine$Model$FieldBinding in unnamed module @2d9d4f9d (file:/D:/Automation-Tool/maestro/lib/picocli-4.6.3.jar)
+WARNING: Use --enable-final-field-mutation=ALL-UNNAMED to avoid a warning
+WARNING: Mutating final fields will be blocked in a future release unless final field mutation is enabled
+Running on Pixel_8
+ > Flow PRJ-001 Project opens Available Units list
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::arrayBaseOffset has been called by com.google.protobuf.UnsafeUtil$MemoryAccessor (file:/D:/Automation-Tool/maestro/lib/protobuf-java-3.21.9.jar)
+WARNING: Please consider reporting this to the maintainers of class com.google.protobuf.UnsafeUtil$MemoryAccessor
+WARNING: sun.misc.Unsafe::arrayBaseOffset will be removed in a future release
+Launch app "fi.iwa.sakani"... COMPLETED
+Wait for animation to end within 20000 ms... COMPLETED
+Repeat 4 times...
+  Run flow when "Skip" is visible...
+  Run flow when "Skip" is visible... SKIPPED
+  Run flow when "Dismiss" is visible...
+  Run flow when "Dismiss" is visible... SKIPPED
+  Run flow when "Ok" is visible...
+  Run flow when "Ok" is visible... SKIPPED
+  Run flow when "Marketplace Day" is visible...
+  Run flow when "Marketplace Day" is visible... SKIPPED
+  Run flow when "Start comparing properties" is visible...
+  Run flow when "Start comparing properties" is visible... SKIPPED
+  Wait for animation to end within 5000 ms... COMPLETED
+Repeat 4 times... COMPLETED
+Assert that "Explore\s*Tab 2 of 4" is visible... COMPLETED
+Tap on "Explore\s*Tab 2 of 4"... COMPLETED
+Assert that "Registered Interests" is visible... COMPLETED
+Run flow when "[Uu]nits\s*Tab 2 of 2" is not visible...
+  Tap on "(Construction Status|Ready Units|Readymade|Offplan|Land)"... COMPLETED
+  Wait for animation to end within 8000 ms... COMPLETED
+  Run flow when "Start searching" is visible...
+    Tap on "Buy"... COMPLETED
+    Tap on "Ready(made| Units)"... COMPLETED
+    Tap on "Start searching"... COMPLETED
+  Run flow when "Start searching" is visible... COMPLETED
+  Run flow when "Apply" is visible...
+  Run flow when "Apply" is visible... SKIPPED
+Run flow when "[Uu]nits\s*Tab 2 of 2" is not visible... COMPLETED
+Assert that "[Uu]nits\s*Tab 2 of 2" is visible... COMPLETED
+Assert that "Projects\s*Tab 1 of 2" is visible... COMPLETED
+Tap on "Projects\s*Tab 1 of 2"... COMPLETED
+Wait for animation to end within 10000 ms... COMPLETED
+Tap on Below "Projects\s*Tab 1 of 2"... COMPLETED
+Wait for animation to end within 8000 ms... COMPLETED
+Run flow when "Start comparing properties" is visible...
+  Press back... COMPLETED
+  Wait for animation to end within 5000 ms... COMPLETED
+Run flow when "Start comparing properties" is visible... COMPLETED
+Assert that "View units" is visible... COMPLETED
+Assert that "About this project" is visible... COMPLETED
+Assert that "(?s).*Prices start from.*" is visible... COMPLETED
+Assert that "\d+ - \d+" is visible... COMPLETED
+Assert that "(?s).*\d+ - \d+ m.*" is visible... COMPLETED
+Assert that "(?s).*available units.*" is visible... COMPLETED
+Tap on "View units"... COMPLETED
+Assert that "(?s).*Unit list.*" is visible... COMPLETED
+Assert that "Area size" is visible... COMPLETED
+Assert that "(Block|Bathroom)" is visible... FAILED
+
+Assertion is false: "(Block|Bathroom)" is visible
+
+Assertion '"(Block|Bathroom)" is visible' failed. Check the UI hierarchy in debug artifacts to verify the element state and properties.
+
+Possible causes:
+- Element selector may be incorrect - check if there are similar elements with slightly different names/properties.
+- Element may be temporarily unavailable due to loading state
+- This could be a real regression that needs to be addressed
+
+==== Debug output (logs & screenshots) ====
+
+C:\Users\Mohammed Elkatry\.maestro\tests\2026-09-22_094438
+??????????????????????????????????????????????????????????????????????????????????????????????????
+?                                                                                                ?
+?   Debug tests faster by easy access to test recordings, maestro logs, screenshots, and more.   ?
+?                                                                                                ?
+?   Run your flows on Maestro Cloud:                                                             ?
+?   maestro cloud app_file flows_folder/                                                         ?
+?                                                                                                ?
+??????????????????????????????????????????????????????????????????????????????????????????????????
+
+MAESTRO_EXIT=1

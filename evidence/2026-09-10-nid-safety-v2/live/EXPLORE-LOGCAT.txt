@@ -1,0 +1,39 @@
+===== G ATTEMPT 3 with logcat: _explore.yaml -e NATIONAL_ID=1000011487 (read-only) =====
+  exit=0
+  log: C:/Users/Mohammed Elkatry/.maestro/tests/2026-09-10_115132/maestro.log
+  resolved: TARGET NATIONAL_ID = [1000011487]  | typed: 1000011487  | exact-ID asserts:       2 textRegex=1000011487 
+  FAILED: 
+  Nafath Confirm tapped at: 11:52:42
+  final screen: "My Bookings" "Select" "All&#10;Tab 1 of 4" "Active&#10;Tab 2 of 4" 
+  bookings on screen (read-only):
+    مشروع  مساكن طيبة المدائن | Active | Paid | Unit Type | Apartment | Unit code | 01-01-050
+    مشروع  مساكن طيبة المدائن | Cancelled | Unit Type | Apartment | Unit code | 01-01-0504-99
+    مشروع  مساكن طيبة المدائن | Cancelled | Unit Type | Apartment | Unit code | 01-01-0504-99
+  booking count: 3
+  logcat lines captured: 6558
+  app-side log lines within ~60s after Confirm (flutter / errors / auth / http):
+    09-10 11:52:42.088 I/Maestro (30624): Skipping invisible child: android.view.accessibility.AccessibilityNodeInfo@9227; boundsInParent: Rect(0, 0 - 1080, 132); boundsInScreen: Rect(0, 0 - 108
+    09-10 11:52:42.226 I/Maestro (30624): Skipping invisible child: android.view.accessibility.AccessibilityNodeInfo@9227; boundsInParent: Rect(0, 0 - 1080, 132); boundsInScreen: Rect(0, 0 - 108
+    09-10 11:52:42.355 I/Maestro (30624): Skipping invisible child: android.view.accessibility.AccessibilityNodeInfo@9227; boundsInParent: Rect(0, 0 - 1080, 132); boundsInScreen: Rect(0, 0 - 108
+    09-10 11:52:42.555 I/Maestro (30624): Skipping invisible child: android.view.accessibility.AccessibilityNodeInfo@9227; boundsInParent: Rect(0, 0 - 1080, 132); boundsInScreen: Rect(0, 0 - 108
+    09-10 11:52:42.711 I/Maestro (30624): Skipping invisible child: android.view.accessibility.AccessibilityNodeInfo@9227; boundsInParent: Rect(0, 0 - 1080, 132); boundsInScreen: Rect(0, 0 - 108
+    09-10 11:52:42.922 I/Maestro (30624): Skipping invisible child: android.view.accessibility.AccessibilityNodeInfo@9227; boundsInParent: Rect(0, 0 - 1080, 132); boundsInScreen: Rect(0, 0 - 108
+    09-10 11:52:43.138 I/Maestro (30624): Skipping invisible child: android.view.accessibility.AccessibilityNodeInfo@9227; boundsInParent: Rect(0, 0 - 1080, 132); boundsInScreen: Rect(0, 0 - 108
+    09-10 11:52:43.320 I/Maestro (30624): Skipping invisible child: android.view.accessibility.AccessibilityNodeInfo@9227; boundsInParent: Rect(0, 0 - 1080, 132); boundsInScreen: Rect(0, 0 - 108
+    09-10 11:52:43.421 I/Maestro (30624): Skipping invisible child: android.view.accessibility.AccessibilityNodeInfo@9227; boundsInParent: Rect(0, 0 - 1080, 132); boundsInScreen: Rect(0, 0 - 108
+    09-10 11:52:43.524 I/Maestro (30624): Skipping invisible child: android.view.accessibility.AccessibilityNodeInfo@9227; boundsInParent: Rect(0, 0 - 1080, 132); boundsInScreen: Rect(0, 0 - 108
+    09-10 11:52:43.620 I/Maestro (30624): Skipping invisible child: android.view.accessibility.AccessibilityNodeInfo@9227; boundsInParent: Rect(0, 0 - 1080, 132); boundsInScreen: Rect(0, 0 - 108
+    09-10 11:52:43.741 I/Maestro (30624): Skipping invisible child: android.view.accessibility.AccessibilityNodeInfo@9227; boundsInParent: Rect(0, 0 - 1080, 132); boundsInScreen: Rect(0, 0 - 108
+    09-10 11:52:43.853 I/Maestro (30624): Skipping invisible child: android.view.accessibility.AccessibilityNodeInfo@9227; boundsInParent: Rect(0, 0 - 1080, 132); boundsInScreen: Rect(0, 0 - 108
+    09-10 11:52:44.386 I/Maestro (30624): Skipping invisible child: android.view.accessibility.AccessibilityNodeInfo@9227; boundsInParent: Rect(0, 0 - 1080, 132); boundsInScreen: Rect(0, 0 - 108
+    09-10 11:52:44.469 I/Maestro (30624): Skipping invisible child: android.view.accessibility.AccessibilityNodeInfo@9227; boundsInParent: Rect(0, 0 - 1080, 132); boundsInScreen: Rect(0, 0 - 108
+    09-10 11:52:44.603 I/Maestro (30624): Skipping invisible child: android.view.accessibility.AccessibilityNodeInfo@9227; boundsInParent: Rect(0, 0 - 1080, 132); boundsInScreen: Rect(0, 0 - 108
+    09-10 11:52:44.689 I/Maestro (30624): Skipping invisible child: android.view.accessibility.AccessibilityNodeInfo@9227; boundsInParent: Rect(0, 0 - 1080, 132); boundsInScreen: Rect(0, 0 - 108
+    09-10 11:52:44.770 I/Maestro (30624): Skipping invisible child: android.view.accessibility.AccessibilityNodeInfo@9227; boundsInParent: Rect(0, 0 - 1080, 132); boundsInScreen: Rect(0, 0 - 108
+    09-10 11:52:44.854 I/Maestro (30624): Skipping invisible child: android.view.accessibility.AccessibilityNodeInfo@9227; boundsInParent: Rect(0, 0 - 1080, 132); boundsInScreen: Rect(0, 0 - 108
+    09-10 11:52:44.986 I/Maestro (30624): Skipping invisible child: android.view.accessibility.AccessibilityNodeInfo@9227; boundsInParent: Rect(0, 0 - 1080, 132); boundsInScreen: Rect(0, 0 - 108
+    09-10 11:52:45.134 I/Maestro (30624): Skipping invisible child: android.view.accessibility.AccessibilityNodeInfo@9227; boundsInParent: Rect(0, 0 - 1080, 132); boundsInScreen: Rect(0, 0 - 108
+    09-10 11:52:45.252 I/Maestro (30624): Skipping invisible child: android.view.accessibility.AccessibilityNodeInfo@9227; boundsInParent: Rect(0, 0 - 1080, 132); boundsInScreen: Rect(0, 0 - 108
+    09-10 11:52:45.418 I/Maestro (30624): Skipping invisible child: android.view.accessibility.AccessibilityNodeInfo@9227; boundsInParent: Rect(0, 0 - 1080, 132); boundsInScreen: Rect(0, 0 - 108
+    09-10 11:52:45.584 I/Maestro (30624): Skipping invisible child: android.view.accessibility.AccessibilityNodeInfo@9227; boundsInParent: Rect(0, 0 - 1080, 132); boundsInScreen: Rect(0, 0 - 108
+    09-10 11:52:45.702 I/Maestro (30624): Skipping invisible child: android.view.accessibility.AccessibilityNodeInfo@9227; boundsInParent: Rect(0, 0 - 1080, 132); boundsInScreen: Rect(0, 0 - 108

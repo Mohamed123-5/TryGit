@@ -1,0 +1,80 @@
+# THE ONE implementation of NPS survey handling for the whole suite.
+#
+# POLICY (changed 28/09/2026 at the user's request): the NPS survey is ANSWERED WITH RATING 5 and
+# SUBMITTED, then its thank-you confirmation is closed and the caller continues immediately.
+# Closing the survey with its X / a drag is no longer the normal path: for account 1000011487 the
+# X-closed survey re-presented 3-30 s after every close - 61 closes in 32 minutes, Home never stably
+# reachable (evidence/2026-09-28-readonly-review/login-run2, login-run3). After a real rating-5
+# submission it did not come back for the whole 88 s it was watched
+# (evidence/2026-09-28-nps-rating-5-first-submission).
+#
+# The survey is still a KNOWN PRODUCT DEFECT and a flow must never fail or stop because it
+# appeared: this runs on EVERY appearance with no occurrence limit, and nothing here asserts.
+#
+# SELECTORS - ALL OBSERVED LIVE on PRE-4.7.6-1283 (first real submission, 28/09/2026), none guessed:
+#   survey      "(?s).*would you recommend benefiting from Sakani.*"   the question
+#   rating 5    "5"            the rating node's own label; restricted to the rating row BELOW the
+#                              question so no other "5" on screen can ever be tapped. Tapping it only
+#                              selects the rating - nothing is sent until Submit.
+#   submit      "Submit"       becomes active once a rating is selected
+#   confirmed   "Thank you for your feedback"   inside a "Rate our App" sheet
+#   close       the element LEFT OF "Rate our App" - the sheet's close X, an ImageView with no text,
+#               no accessibility label and no resource-id; this relation is its only stable handle.
+#
+# NEVER WHILE A PRODUCT ERROR IS SHOWING. This is only ever a survey recovery. A reservation,
+# payment or service-down error is a RESULT the caller must see, so with one on screen nothing is
+# tapped and the error is left for the caller to fail on. This guard is load-bearing.
+#
+# output.npsCount is INFORMATIONAL ONLY (evidence/reporting). Nothing reads it to decide a verdict.
+appId: fi.iwa.sakani
+name: Answer the NPS survey with rating 5 if it is on screen
+---
+- runFlow:
+    when:
+      visible: "(?s).*would you recommend benefiting from Sakani.*"
+    commands:
+      - runFlow:
+          when:
+            notVisible: '(?s)(.*There.s something wrong.*|.*the service is down.*|Error!)'
+          commands:
+            # Written without a ternary on purpose: "? " and ": " inside an unquoted YAML scalar
+            # are mapping syntax and fail to parse. `|| 0` needs neither.
+            - evalScript: ${output.npsCount = (output.npsCount || 0) + 1}
+            - evalScript: "${console.log('NPS KNOWN DEFECT - answering with rating 5, occurrence ' + output.npsCount)}"
+            - tapOn:
+                text: "5"
+                below:
+                  text: "(?s).*would you recommend benefiting from Sakani.*"
+            - tapOn: "Submit"
+            # Wait for the REAL confirmation. Bounded and non-failing: if it never shows, the caller
+            # carries on and the next call handles whatever is on screen.
+            - repeat:
+                times: 4
+                while:
+                  notVisible: "Thank you for your feedback"
+                commands:
+                  - waitForAnimationToEnd:
+                      timeout: 3000
+            # First occurrence in this flow: keep a picture of the confirmation as evidence.
+            - runFlow:
+                when:
+                  true: ${output.npsCount === 1}
+                commands:
+                  - runFlow:
+                      when:
+                        visible: "Thank you for your feedback"
+                      commands:
+                        - takeScreenshot: nps-rating-5-thank-you
+
+# The confirmation is closed wherever it is found - straight after the submission above, or left
+# over from an earlier call - and the caller continues at once.
+- runFlow:
+    when:
+      visible: "Thank you for your feedback"
+    commands:
+      - evalScript: "${console.log('NPS - closing the thank-you confirmation')}"
+      - tapOn:
+          leftOf: "Rate our App"
+          retryTapIfNoChange: false
+      - waitForAnimationToEnd:
+          timeout: 4000

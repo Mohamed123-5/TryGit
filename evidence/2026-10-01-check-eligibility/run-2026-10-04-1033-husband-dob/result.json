@@ -1,0 +1,18 @@
+{
+  "flow": "check elgibilty",
+  "file": ".maestro/e2e/check elgibilty.yaml",
+  "suite": "e2e",
+  "tags": [
+    "e2e",
+    "eligibility"
+  ],
+  "startedAt": "2026-10-04T07:33:51.834Z",
+  "durationMs": 424121,
+  "logPath": "report-dashboard/maestro-output/check elgibilty/maestro.log",
+  "status": "FAIL",
+  "exitCode": 1,
+  "failedSteps": 1,
+  "firstFailure": "RESULT - no eligibility result message on screen (another required page, or no result) - NOT a PASS... FAILED",
+  "envReason": null,
+  "npsAppearances": 0
+}

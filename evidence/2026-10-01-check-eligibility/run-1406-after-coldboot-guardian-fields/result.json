@@ -1,0 +1,18 @@
+{
+  "flow": "check elgibilty",
+  "file": ".maestro/e2e/check elgibilty.yaml",
+  "suite": "e2e",
+  "tags": [
+    "e2e",
+    "eligibility"
+  ],
+  "startedAt": "2026-10-01T11:06:24.703Z",
+  "durationMs": 459475,
+  "logPath": "report-dashboard/maestro-output/check elgibilty/maestro.log",
+  "status": "FAIL",
+  "exitCode": 1,
+  "failedSteps": 1,
+  "firstFailure": "SUBMIT - the form was not accepted (still on Step 3 - see the screen for the validation message)... FAILED",
+  "envReason": null,
+  "npsAppearances": 0
+}
